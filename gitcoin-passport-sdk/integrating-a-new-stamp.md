@@ -1,6 +1,6 @@
 # Integrating a new Stamp
 
-{% embed url="https://github.com/gitcoinco/dPopp" %}
+{% embed url="https://github.com/gitcoinco/passport" %}
 
 ### Implement a new IAM Provider
 
@@ -12,18 +12,18 @@ In the `app` package, each Provider is represented as a ProviderCard in `app/com
 
 ### Submit a PR
 
-To be added as a new Stamp Provider for the Gitcoin Passport, please submit a PR to [https://github.com/gitcoinco/dPopp](https://github.com/gitcoinco/dPopp) implementing the `iam` and `app` changes described above.
+To be added as a new Stamp Provider for the Gitcoin Passport, please submit a PR to [https://github.com/gitcoinco/passport](https://github.com/gitcoinco/passport) implementing the `iam` and `app` changes described above.
 
 
 
 For reference, here are past PRs implementing the current stamp providers:
 
-* [Google OAuth Stamp](https://github.com/gitcoinco/dPopp/pull/31)
-* [ENS Stamp](https://github.com/gitcoinco/dPopp/pull/71)
-* [Proof of Humanity Stamp](https://github.com/gitcoinco/dPopp/pull/75)
-* [Twitter OAuth Stamp](https://github.com/gitcoinco/dPopp/pull/87)
-* [POAP Stamp](https://github.com/gitcoinco/dPopp/pull/93)
-* [Facebook Stamp](https://github.com/gitcoinco/dPopp/pull/94)
-* [BrightId Stamp](https://github.com/gitcoinco/dPopp/pull/126)
+* [Google OAuth Stamp](https://github.com/gitcoinco/passport/pull/31)
+* [ENS Stamp](https://github.com/gitcoinco/passport/pull/71)
+* [Proof of Humanity Stamp](https://github.com/gitcoinco/passport/pull/75)
+* [Twitter OAuth Stamp](https://github.com/gitcoinco/passport/pull/87)
+* [POAP Stamp](https://github.com/gitcoinco/passport/pull/93)
+* [Facebook Stamp](https://github.com/gitcoinco/passport/pull/94)
+* [BrightId Stamp](https://github.com/gitcoinco/passport/pull/126)
 
 ****

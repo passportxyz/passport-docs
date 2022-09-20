@@ -2,14 +2,23 @@
 
 ## Production Passport Codebase
 
-{% embed url="https://github.com/gitcoinco/dPopp" %}
+{% embed url="https://github.com/gitcoinco/passport" %}
 The primary codebase for the Gitcoin Passport
 {% endembed %}
 
 ## Example Reader Application
 
-{% embed url="https://github.com/gitcoinco/passport-reader" %}
+{% embed url="https://github.com/gitcoinco/passport-sdk/tree/main/examples/example-passport-sdk-reader" %}
 An example app that shows how to interact with Gitcoin Passport SDK
+{% endembed %}
+
+## Example Scaffold-eth Passport Application
+
+{% embed url="https://github.com/farque65/Scaffold-eth-gitcoin-passport" %}
+An example scaffold-eth build that incorporates the following passport-sdks
+- passport-sdk-reader
+- passport-sdk-verifier
+- passport-sdk-scorer
 {% endembed %}
 
 
