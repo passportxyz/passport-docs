@@ -46,7 +46,7 @@ or import the bundle.&#x20;
 
 Score the contents of a Passport.&#x20;
 
-To add to your project, either add with npm or yarn, or download the .git repository and install the dependencies manually.&#x20;
+To add to your project, either add with npm or yarn, or download the Git repository and install the dependencies manually.&#x20;
 
 ```
 yarn add @gitcoinco/passport-sdk-scorer
