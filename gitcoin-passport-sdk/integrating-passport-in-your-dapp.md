@@ -12,22 +12,6 @@ In the **Getting Started** section, we went over how to install each of the Pass
 
 The Writer library allows an integrated dApp to write to an authenticated DID Passport stream in Ceramic.
 
-### Installing
-
-_View the source code for the_ [_Writer library_](https://github.com/gitcoinco/passport-sdk/tree/main/packages/writer)_._
-
-Install the Writer library using npm.
-
-`yarn add @gitcoinco/passport-sdk-writer`
-
-You can also download the Git repository and install dependencies manually.
-
-`yarn install`
-
-Then begin building by running the webpack.
-
-`yarn run webpack`
-
 ### Getting Started with the Writer library
 
 The below tutorial outlines how to:
@@ -335,15 +319,11 @@ Passes in an Ethereum address and returns the did:pkh and genesis IDX streams.
 
 `reader.getGenesis(address: string): Promise<CeramicGenesis | false>`
 
-``
-
 **getPassport**
 
 Passes in an Ethereum address and returns a fully hydrated Passport record, with all verifiable credentials.
 
 `reader.getPassport(address: string): Promise<CeramicPassport | Passport | false>`
-
-``
 
 **getPassportStream**
 
@@ -410,15 +390,11 @@ Pass in an Ethereum address and get back a Passport where each of the stamps inc
 
 `PassportVerifier.verifyPassport(address: string, passport?: Passport, additionalStampCheck?: (stamp: Stamp) => boolean): Promise<Passport>`
 
-``
-
 **verifyStamp**
 
 Pass in a stamp and get back a stamp with a verified: boolean field completed.
 
 `PassportVerifier.verifyStamp(address: string, stamp: Stamp, additionalStampCheck?: (stamp: Stamp) => boolean): Promise<Stamp>`
-
-``
 
 **verifyCredential**
 

@@ -18,11 +18,9 @@ The SDK is comprised of a set of libraries designed to help developers interact 
 
 Writes to an authenticated DIDs Passport stream in Ceramic.&#x20;
 
-You can install the Writer library using npm.
+You can install the Writer library using npm or yarn. You can also download the Git repository and install dependencies manually.
 
 `yarn add @gitcoinco/passport-sdk-writer`
-
-You can also download the Git repository and install dependencies manually.
 
 `yarn install`
 
@@ -48,13 +46,11 @@ or import the bundle.&#x20;
 
 Score the contents of a Passport.&#x20;
 
-To add to your project, either add with npm
+To add to your project, either add with npm or yarn, or download the .git repository and install the dependencies manually.&#x20;
 
 ```
 yarn add @gitcoinco/passport-sdk-scorer
 ```
-
-or download the .git repository and install the dependencies manually.&#x20;
 
 ```
 yarn install

@@ -1,5 +1,5 @@
 ---
-description: Help get involved in the Passport project
+description: Engage with Passport to help make decentralized identity a public good!
 ---
 
 # Getting involved
