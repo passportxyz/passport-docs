@@ -20,13 +20,17 @@ Writes to an authenticated DIDs Passport stream in Ceramic.&#x20;
 
 You can install the Writer library using npm or yarn. You can also download the Git repository and install dependencies manually.
 
-`yarn add @gitcoinco/passport-sdk-writer`
+```bash
+# install dependencies
 
-`yarn install`
+yarn add @gitcoinco/passport-sdk-writer
+yarn install
 
-Then, begin building by running webpack.
+# begin by running webpack
 
-`yarn run webpack`
+yarn run webpack
+
+```
 
 #### [Reader](https://github.com/gitcoinco/passport-sdk/tree/main/packages/reader)
 
@@ -48,17 +52,15 @@ Score the contents of a Passport.&#x20;
 
 To add to your project, either add with npm or yarn, or download the Git repository and install the dependencies manually.&#x20;
 
-```
+```bash
+# install dependencies
+
 yarn add @gitcoinco/passport-sdk-scorer
-```
 
-```
 yarn install
-```
 
-Then, run webpack.&#x20;
+# then run webpack
 
-```
 yarn run webpack
 ```
 
@@ -68,7 +70,11 @@ Shared types (used by other packages in the SDK).&#x20;
 
 To use this library, ensure `@gitcoinco/passport-sdk-types` is included as a package dependency. Then, import types like so :&#x20;
 
-`import { VerifiableCredential } from "@gitcoinco/passport-sdk-types"`
+```typescript
+// import sdk types
+
+import { VerifiableCredential } from "@gitcoinco/passport-sdk-types"
+```
 
 
 
@@ -86,7 +92,11 @@ With the Passport SDK it's not necessary to interact with Ceramic directly, but 
 
 ## Developing on Testnet
 
-We  recommend developers work with a testnet instance instance of  Passport when building with the SDK.
+We  recommend developers work with a testnet instance of  Passport when building with the SDK.
+
+
+
+We have an instance of the Passport app deployed and configured to interact with a Ceramic testnet node here:
 
 {% embed url="https://testnet.passport.gitcoin.co/" %}
 Testnet instance of the Gitcoin Passport
@@ -94,5 +104,5 @@ Testnet instance of the Gitcoin Passport
 
 This instance of the Passport app is configured to run on top of the Ceramic clay test-net, and is hosted at [https://ceramic.staging.dpopp.gitcoin.co](https://ceramic.staging.dpopp.gitcoin.co/).&#x20;
 
-Wallet signatures can still be made on Ethereum mainnet, but the underlying persistence will not be in production while using this instance of the Passport.
+Wallet signatures can still be made on Ethereum mainnet, but the underlying data will remain on the ceramic testnet.
 

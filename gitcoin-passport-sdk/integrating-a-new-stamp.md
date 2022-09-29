@@ -1,18 +1,26 @@
 # Integrating a new Stamp
 
-{% embed url="https://github.com/gitcoinco/dPopp" %}
-
 ### Implement a new IAM Provider
 
-In the `iam` package, all Provider implementations are in `iam/src/providers`. Providers must implement a `verify()` method that receives a proof payload, and verifies it. The verification process could involve requests to external servers, reading on-chain data from a smart contract, etc. The proof payload could contain an access token, a blockchain address, etc.
+In the `iam` package, all Provider implementations are in `iam/src/providers`.&#x20;
+
+Providers must implement a `verify()` method that receives a proof payload, and verifies it.&#x20;
+
+The verification process could involve requests to external servers, reading on-chain data from a smart contract, etc. The proof payload could contain an access token, a blockchain address, etc.
 
 ### Implement a new Provider Card in the Passport dapp
 
-In the `app` package, each Provider is represented as a ProviderCard in `app/components/ProviderCards`. Each Provider also has an entry in the `STAMP_PROVIDERS` constant in`app/config/providers` specifying the name, description, and icon. Each ProviderCard will implement custom logic for the Verify button, which should request and collect proof data from the user to be submitted to the IAM server. This process could involve initiating an OAuth flow, requesting a signed message from the user's wallet, etc.
+In the `app` package, each Provider is represented as a ProviderCard in `app/components/ProviderCards`.&#x20;
+
+Each Provider also has an entry in the `STAMP_PROVIDERS` constant in`app/config/providers` specifying the name, description, and icon.&#x20;
+
+Each ProviderCard will implement custom logic for the Verify button, which should request and collect proof data from the user to be submitted to the IAM server.&#x20;
+
+This process could involve initiating an OAuth flow, requesting a signed message from the user's wallet, etc.
 
 ### Submit a PR
 
-To be added as a new Stamp Provider for the Gitcoin Passport, please submit a PR to [https://github.com/gitcoinco/dPopp](https://github.com/gitcoinco/dPopp) implementing the `iam` and `app` changes described above.
+To be added as a new Stamp Provider for the Gitcoin Passport, please submit a PR to [https://github.com/gitcoinco/passport](https://github.com/gitcoinco/dPopp) implementing the `iam` and `app` changes described above.
 
 
 

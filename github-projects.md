@@ -2,14 +2,8 @@
 
 ## Production Passport Codebase
 
-{% embed url="https://github.com/gitcoinco/dPopp" %}
+{% embed url="https://github.com/gitcoinco/passport" %}
 The primary codebase for the Gitcoin Passport
-{% endembed %}
-
-## Example Reader Application
-
-{% embed url="https://github.com/gitcoinco/passport-reader" %}
-An example app that shows how to interact with Gitcoin Passport SDK
 {% endembed %}
 
 
