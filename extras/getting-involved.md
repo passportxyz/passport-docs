@@ -38,3 +38,11 @@ If you're just getting started, check out the documentation for integrating the 
 
 
 
+## DevRel and Tech Writers
+
+If you spot some areas to improve our docs this gitbook is mirrored in our github here: [https://github.com/gitcoinco/passport-docs](https://github.com/gitcoinco/passport-docs)\
+\
+We'd love to get your PRs incorporated and help make this SDK as usable and well documented as we can!
+
+
+
