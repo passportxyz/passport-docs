@@ -119,14 +119,14 @@ useEffect(() => {
 A user’s verifiable credentials can be retrieved from Gitcoin’s IAM server. There are two servers: a production server and a staging server.
 
 * Production Server: [https://passport-iam.gitcoin.co](https://passport-iam.gitcoin.co)
-* Staging Server:[https://staging.dpopp.gitcoin.co](https://staging.dpopp.gitcoin.co)
+* Staging Server:[https://testnet.passport.gitcoin.co](https://testnet.passport.gitcoin.co)
 
 The following code snippet explains the end to end process of retrieving verifiable credentials.
 
 ```typescript
 // Fetch a verifiable challenge credential to prove user owns their address
 export const fetchChallengeCredential = async (
-  iamUrl: string = "<https://staging.dpopp.gitcoin.co>",
+  iamUrl: string = "<https://testnet.passport.gitcoin.co>",
   payload: RequestPayload
 ): Promise<IssuedChallenge> => {
   // fetch challenge as a credential from API that fits the version, address and type (this credential has a short ttl)
@@ -147,7 +147,7 @@ export const fetchChallengeCredential = async (
 
 // Fetch a verifiableCredential
 export const fetchVerifiableCredential = async (
-  iamUrl: string = "<https://staging.dpopp.gitcoin.co>",
+  iamUrl: string = "<https://testnet.passport.gitcoin.co>",
   payload: RequestPayload,
   signer: { signMessage: (message: string) => Promise<string> } | undefined
 ): Promise<VerifiableCredentialRecord> => {
