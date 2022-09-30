@@ -21,8 +21,6 @@ An example scaffold-eth build that incorporates the following passport-sdks
 - passport-sdk-scorer
 {% endembed %}
 
-
-
 ## Ceramic Nodes
 
 Production Ceramic node, configured to communicate with the Ceramic main net is hosted at: [https://ceramic.passport-iam.gitcoin.co](https://ceramic.passport-iam.gitcoin.co)

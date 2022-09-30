@@ -12,22 +12,6 @@ In the **Getting Started** section, we went over how to install each of the Pass
 
 The Writer library allows an integrated dApp to write to an authenticated DID Passport stream in Ceramic.
 
-### Installing
-
-_View the source code for the_ [_Writer library_](https://github.com/gitcoinco/passport-sdk/tree/main/packages/writer)_._
-
-Install the Writer library using npm.
-
-`yarn add @gitcoinco/passport-sdk-writer`
-
-You can also download the Git repository and install dependencies manually.
-
-`yarn install`
-
-Then begin building by running the webpack.
-
-`yarn run webpack`
-
 ### Getting Started with the Writer library
 
 The below tutorial outlines how to:
@@ -39,7 +23,7 @@ The below tutorial outlines how to:
 
 At the end of this step, you’ll understand how to interact with Passport DIDs in your project’s verification process.
 
-```
+```typescript
 import {DID} from "dids";
 import {EthereumAuthProvider} from "@3id/connect";
 
@@ -83,7 +67,7 @@ To use the Passport properly, you’ll have to have a basic understanding of the
 
 The Provider component has to be added at the root of the application tree in order to use the hooks provided below. It can be used to provide a custom configuration for the [Self.ID](http://self.id) clients, authentication, state and UI options.
 
-```
+```typescript
 import {Provider} from '@self.id/framework'
 
 function App({children}) {
@@ -97,7 +81,7 @@ The useViewerConnection hook needs to be set up before a user’s authentic DID 
 
 This code snippet explains how to import the hook and use it to connect to a Ceramic stream to retrieve a DID.
 
-```
+```typescript
 import {useViewerConnection} from "@self.id/framework";
 
 const [viewerConnection, connectCeramic, disconnectCeramic] = useViewerConnection();
@@ -139,7 +123,7 @@ A user’s verifiable credentials can be retrieved from Gitcoin’s IAM server. 
 
 The following code snippet explains the end to end process of retrieving verifiable credentials.
 
-```
+```typescript
 // Fetch a verifiable challenge credential to prove user owns their address
 export const fetchChallengeCredential = async (
   iamUrl: string = "<https://testnet.passport.gitcoin.co>",
@@ -213,7 +197,7 @@ With Passport, projects also have the ability to issue their own verifiable cred
 
 Here’s an example of how to create a verifiable credential from SpruceID’s DIDKit.
 
-```
+```typescript
 import * as DIDKit from "@spruceid/didkit-wasm-node";
 
 const key = process.env.ISSUER_KEY || DIDKit.generateEd25519Key();
@@ -305,9 +289,11 @@ Reader allows an integrated dApp to read from any Passport stream on Ceramic.
 
 ### Getting Started
 
-To setup the Reader library, import the library and construct a passportReader instance. Then, pass in a ceramic node URL and networkId that points at Gitcoin’s main Ceramic node.
+To set up the Reader library, import the library and construct a passport reader instance.&#x20;
 
-```
+Then, pass in a ceramic node URL and network ID that points toty Gitcoin’s main Ceramic node.
+
+```typescript
 // add to your project as a module
 import PassportReader from "@gitcoinco/passport-sdk-reader"
 
@@ -325,9 +311,7 @@ const passport = await reader.getPassport("0x0...");
 
 ### Reader Methods
 
-Setting up the passportReader instance enables several read-only methods that allow you to get to the content of a Gitcoin Passport.
-
-
+Setting up the passport reader instance enables several read-only methods that allow you to get to the content of a Gitcoin Passport.
 
 **getGenesis**
 
@@ -335,21 +319,17 @@ Passes in an Ethereum address and returns the did:pkh and genesis IDX streams.
 
 `reader.getGenesis(address: string): Promise<CeramicGenesis | false>`
 
-``
-
 **getPassport**
 
 Passes in an Ethereum address and returns a fully hydrated Passport record, with all verifiable credentials.
 
 `reader.getPassport(address: string): Promise<CeramicPassport | Passport | false>`
 
-``
-
 **getPassportStream**
 
 Passes in a Ceramic DID and returns a raw Passport stream record. This is a shallow copy of Passport that needs to have its stamps hydrated.
 
-`eader.getPassportStream(address: string): Promise<CeramicPassport | false>`
+`reader.getPassportStream(address: string): Promise<CeramicPassport | false>`
 
 ## Verify the contents of a Passport
 
@@ -359,7 +339,7 @@ Verifier allows an integrated dApp to verify the contents of a Passport. This is
 
 1. To set up verifier, import the library as a module or import the bundle, then construct a passportVerifier instance.
 
-```
+```typescript
 // import as a module
 import PassportVerifier from "@gitcoinco/passport-sdk-verifier";
 
@@ -369,20 +349,25 @@ import PassportVerifier from "@gitcoinco/passport-sdk-verifier";
 
 2\. Create a new instance pointing at the community clay node on the Ceramic mainnet, along with the criteria you wish to score against.
 
-```
+```typescript
 const verifier = new PassportVerifier();
 ```
 
 3\. Verify all stamps held in a Passport
 
-```
+```typescript
 const passport = await verifier.verifyPassport("0x0...");
 ```
 
-Getting started on a browser may require additional steps. You may need to asynchronously load `@gitcoinco/passport-sdk-verifier` before loading the package. Here’s an example in NextJS.
+{% hint style="info" %}
+Getting started on a browser may require additional steps.&#x20;
 
-```
-// NextJS Example
+You may need to asynchronously load `@gitcoinco/passport-sdk-verifier` before loading the package.&#x20;
+{% endhint %}
+
+Next Js Example
+
+```typescript
 const [verifier, setVerifier] = useState();
 
 useEffect(() => {
@@ -402,29 +387,41 @@ useEffect(() => {
 
 After the PassportVerifier instance is created, read-only methods for verifying the content of a Gitcoin Passport are exposed.
 
-
-
 **verifyPassport**
 
 Pass in an Ethereum address and get back a Passport where each of the stamps includes a verified: boolean field.
 
-`PassportVerifier.verifyPassport(address: string, passport?: Passport, additionalStampCheck?: (stamp: Stamp) => boolean): Promise<Passport>`
+{% code overflow="wrap" %}
+```typescript
 
-``
+PassportVerifier.verifyPassport(address: string, passport?: Passport, additionalStampCheck?: (stamp: Stamp) => boolean): Promise<Passport>
+
+```
+{% endcode %}
 
 **verifyStamp**
 
 Pass in a stamp and get back a stamp with a verified: boolean field completed.
 
-`PassportVerifier.verifyStamp(address: string, stamp: Stamp, additionalStampCheck?: (stamp: Stamp) => boolean): Promise<Stamp>`
+{% code overflow="wrap" %}
+```typescript
 
-``
+PassportVerifier.verifyStamp(address: string, stamp: Stamp, additionalStampCheck?: (stamp: Stamp) => boolean): Promise<Stamp>
+
+```
+{% endcode %}
 
 **verifyCredential**
 
 Pass in a Verifiable Credential and get back a boolean.
 
-`PassportVerifier.verifyCredential(credential: VerifiableCredential): Promise<boolean>`
+{% code overflow="wrap" %}
+```typescript
+
+PassportVerifier.verifyCredential(credential: VerifiableCredential): Promise<boolean>
+
+```
+{% endcode %}
 
 ## Evaluate the contents of a Passport
 
@@ -437,7 +434,8 @@ After importing the library, construct a `passportScorer` instance to specify th
 1. **Import the PassportScorer as a module or bundle.** `import PassportScorer from "@gitcoinco/passport-sdk-scorer"` _or_ \*\*\*\*`<script src="./dist/scorer.bundle.js" type="script/javascript"/>`
 2. **Create a new instance that defines the criteria you wish to score against.**
 
-```
+```typescript
+
 const scorer = new PassportScorer([
     {
         provider: "BrightID",
@@ -445,28 +443,26 @@ const scorer = new PassportScorer([
         score: 0.5
     }
 ]);
+
 ```
 
-&#x20;3\.  **Get the score for a specific wallet address.** `const score = await scorer.getScore("0x0...");`
+&#x20;3\.  **Get the score for a specific wallet address.**&#x20;
+
+```typescript
+
+const score = await scorer.getScore("0x0...");
+
+```
 
 This instance exposes read-only methods to score the content of a Gitcoin Passport.
 
 To get a score for a wallet address based on the scoring criteria of this instance, as well as any additional checks, use the `getScore` method.
 
-`PassportScorer.getScore(address: string, passport?: Passport, additionalStampCheck?: (stamp: Stamp) => boolean): Promise<number>`
+{% code overflow="wrap" %}
+```typescript
 
-## Import Verifiable Credentials from Passport
+PassportScorer.getScore(address: string, passport?: Passport, additionalStampCheck?: (stamp: Stamp) => boolean): Promise<number>
 
-This library works in tandem with the over five to store shared types for the Passport SDK, allowing a dApp to import verifiable credentials from Passport.
+```
+{% endcode %}
 
-### Install
-
-`@gitcoinco/passport-sdk-types` must be included as a package dependency.
-
-### Import Types
-
-`import { VerifiableCredential } from "@gitcoinco/passport-sdk-types”`
-
-{% hint style="warning" %}
-**Watch this space:** We will be releasing an example app integrating the SDK shortly
-{% endhint %}
