@@ -10,33 +10,15 @@ description: Overview of the Gitcoin Passport Projects and SDK
 The Passport SDK
 {% endembed %}
 
-The SDK is comprised of a set of libraries designed to help developers interact with the Gitcoin Passport. Your setup process will vary based on how involved you are with the SDK. Reader is the least involved library, while writer is the most involved. This section explains how to install each of the libraries with npm. To learn more about using them in your dApp, progress to the integration section.
+The SDK comprises a set of libraries designed to help developers interact with the Gitcoin Passport. This section explains how to install each of the libraries with npm. To learn more about using them in your dApp, progress to the integration section.
 
 ### Packages
-
-#### [Writer ](https://github.com/gitcoinco/passport-sdk/tree/main/packages/writer)
-
-Writes to an authenticated DIDs Passport stream in Ceramic.&#x20;
-
-You can install the Writer library using npm or yarn. You can also download the Git repository and install dependencies manually.
-
-```bash
-# install dependencies
-
-yarn add @gitcoinco/passport-sdk-writer
-yarn install
-
-# begin by running webpack
-
-yarn run webpack
-
-```
 
 #### [Reader](https://github.com/gitcoinco/passport-sdk/tree/main/packages/reader)
 
 Reads from any Passport stream (on Ceramic).&#x20;
 
-To get started, import the library and construct a passportReader instance.&#x20;
+To get started, import the library and construct a `passportReader` instance.&#x20;
 
 You can add to your project as a module
 
@@ -47,6 +29,10 @@ or import the bundle.&#x20;
 `<script src="./dist/reader.bundle.js" type="script/javascript"/>`
 
 #### [Scorer](https://github.com/gitcoinco/passport-sdk/tree/main/packages/scorer)
+
+{% hint style="info" %}
+Based on initial user feedback, most communities will benefit from using the Scoring API under development rather than building a weighted scorer with the SDK. **Please check back in on progress**, and consider using the Scoping API as a first place to begin experimenting with Passport scoring.
+{% endhint %}
 
 Score the contents of a Passport.&#x20;
 
@@ -62,6 +48,28 @@ yarn install
 # then run webpack
 
 yarn run webpack
+```
+
+#### [Writer ](https://github.com/gitcoinco/passport-sdk/tree/main/packages/writer)
+
+{% hint style="warning" %}
+The Writer is scheduled to be deprecated. Please consider building stamp integrations into the Passport App at [https://github.com/gitcoinco/passport](https://github.com/gitcoinco/passport)
+{% endhint %}
+
+Writes to an authenticated DIDs Passport stream in Ceramic.&#x20;
+
+You can install the Writer library using npm or yarn. You can also download the Git repository and install dependencies manually.
+
+```bash
+# install dependencies
+
+yarn add @gitcoinco/passport-sdk-writer
+yarn install
+
+# begin by running webpack
+
+yarn run webpack
+
 ```
 
 #### [Types](https://github.com/gitcoinco/passport-sdk/tree/main/packages/types)
@@ -86,13 +94,13 @@ Gitcoin Passport and the Passport SDK are built on top of the Ceramic Network fo
 Ceramic Documentation
 {% endembed %}
 
-With the Passport SDK it's not necessary to interact with Ceramic directly, but you may find it helpful for debugging, or just general understanding of the system.
+With the Passport SDK, it's not necessary to interact with Ceramic directly, but you may find it helpful for debugging or just a general understanding of the system.
 
 
 
 ## Developing on Testnet
 
-We  recommend developers work with a testnet instance of  Passport when building with the SDK.
+We recommend developers work with a testnet instance of  Passport when building with the SDK.
 
 
 
@@ -102,7 +110,7 @@ We have an instance of the Passport app deployed and configured to interact with
 Testnet instance of the Gitcoin Passport
 {% endembed %}
 
-This instance of the Passport app is configured to run on top of the Ceramic clay test-net, and is hosted at [https://ceramic.staging.dpopp.gitcoin.co](https://ceramic.staging.dpopp.gitcoin.co/).&#x20;
+This instance of the Passport app is configured to run on top of the Ceramic clay testnet and is hosted at [https://ceramic.staging.dpopp.gitcoin.co](https://ceramic.staging.dpopp.gitcoin.co/).&#x20;
 
-Wallet signatures can still be made on Ethereum mainnet, but the underlying data will remain on the ceramic testnet.
+Wallet signatures can still be made on the Ethereum mainnet, but the underlying data will remain on the ceramic testnet.
 
