@@ -28,7 +28,7 @@ Once connected you'll have a variety of stamps available to you that you can col
 
 Each Stamp flow is unique, but the underlying flow is similar:&#x20;
 
-* The Passport app will guide your through connecting to the various identity providers (i.e. OAUTH with Google). In each flow you will be asked to grant the Passport app access to some your account data.&#x20;
+* The Passport app will guide you through connecting to the various identity providers (i.e. OAUTH with Google). In each flow you will be asked to grant the Passport app access to some your account data.&#x20;
 * Once connected, the Passport app will communicate with our IAM server to issue a signed Verifiable Credential. This credential represents your ownership of that connected account, and allows others to know that your passport is the unique owner of that account you connected to.
 * The Verifiable Credential will be saved into your Passport, and will be available to any 3rd party app where you present your passport
 

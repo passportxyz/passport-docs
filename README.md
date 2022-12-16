@@ -39,7 +39,7 @@ Help your community credibly self-declare their membership in a trustless enviro
 
 Interested in integrating Passport into your dApp? Check out our **integration guide** to learn how to work with our SDK and join the #passport-builders channel in the Gitcoin Discord to connect with a like-minded community of developers.
 
-You can also connect with like-minded builders passionate about sybil resistance by joining the [Passport Builders channel](https://discord.gg/JWRbPbr6) in the Gitcoin Discord. Connect with the Gitcoin engineering team and the open-source community to get the support you need when building with Passport.&#x20;
+You can also connect with like-minded builders passionate about sybil resistance by joining the [Passport Builders channel](https://discord.gg/gitcoin) in the Gitcoin Discord. Connect with the Gitcoin engineering team and the open-source community to get the support you need when building with Passport.&#x20;
 
 ### Identity Providers
 
