@@ -33,17 +33,19 @@ Digital democracy, play to earn games, and professional reputation tools are all
 
 Help your community credibly self-declare their membership in a trustless environment, prevent bad actors from interfering with your governance processes, and evaluate the trustworthiness of potential contributors. Passport allows you to customize the weight our algorithm gives to different stamps when calculating the cost of forging a citizen’s identity to your community’s needs. For example, a developer DAO can weigh a Github verification more highly.
 
-## Get Involved&#x20;
+## Build with Passport
 
-### App Developers
+### Project Owners & App Developers
 
-Interested in integrating Passport into your dApp? Check out our **integration guide** to learn how to work with our SDK and join the #passport-builders channel in the Gitcoin Discord to connect with a like-minded community of developers.
+Interested in integrating Passport into your dApp? Check out our [**integration guide**](gitcoin-passport-sdk/integrating-passport-in-your-dapp.md) to learn how to work with our SDK and join our [**Telegram group dedicated to helping you integrate Passport**](https://t.me/+2ILnaexYeEI0MWUx).
 
-You can also connect with like-minded builders passionate about sybil resistance by joining the [Passport Builders channel](https://discord.gg/gitcoin) in the Gitcoin Discord. Connect with the Gitcoin engineering team and the open-source community to get the support you need when building with Passport.&#x20;
+You can also connect with like-minded builders passionate about sybil resistance by joining the [**Passport Builders channel**](https://discord.gg/gitcoin) **** in the Gitcoin Discord.
+
+Both our Telegram and Discord channel will connect you with the Gitcoin Passport engineering team, who are happy to support you.
 
 ### Identity Providers
 
-If you’re an identity provider interested in integrating with Gitcoin Passport, check out **integrating a new stamp** to learn more.
+If you’re an identity provider (e.g. BrightID, POAP, Twitter) interested in integrating with Gitcoin Passport, check out [**integrating a new stamp**](gitcoin-passport-sdk/integrating-a-new-stamp.md) to learn more.
 
 ### Scoring Providers
 
