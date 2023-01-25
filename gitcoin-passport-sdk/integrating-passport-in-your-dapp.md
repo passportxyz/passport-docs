@@ -2,9 +2,9 @@
 description: How to use Gitcoin Passport in your application
 ---
 
-# Integrating Passport in your DApp
+# Integrating Passport in your dApp
 
-In the **Getting Started** section, we went over how to install each of the Passport libraries. Now, we'll go over the basic usages of each of the libraries so you can get the identity solution you need for your dApp.&#x20;
+In the **Getting Started** section, we went over how to install each of the Passport libraries. Now, we'll go over the basic usages of each of the libraries so you can get the identity solution you need for your dApp.
 
 ### I need to…
 
@@ -63,7 +63,7 @@ await passportWriter.addStamp(newStamp);
 
 To use the Passport properly, you’ll have to have a basic understanding of the Ceramic framework. Unfamiliar with Ceramic? You can check out their documentation [here](https://developers.ceramic.network/reference/self-id/modules/framework/).
 
-1. **Configure  the Ceramic Provider**
+1. **Configure the Ceramic Provider**
 
 The Provider component has to be added at the root of the application tree in order to use the hooks provided below. It can be used to provide a custom configuration for the [Self.ID](http://self.id) clients, authentication, state and UI options.
 
@@ -75,7 +75,7 @@ function App({children}) {
 }
 ```
 
-2\.  **Retrieve a user’s authenticated DID**
+2\. **Retrieve a user’s authenticated DID**
 
 The useViewerConnection hook needs to be set up before a user’s authentic DID can be located.
 
@@ -289,7 +289,7 @@ Reader allows an integrated dApp to read from any Passport stream on Ceramic.
 
 ### Getting Started
 
-To set up the Reader library, import the library and construct a passport reader instance.&#x20;
+To set up the Reader library, import the library and construct a passport reader instance.
 
 Then, pass in a ceramic node URL and network ID that points toty Gitcoin’s main Ceramic node.
 
@@ -360,9 +360,9 @@ const passport = await verifier.verifyPassport("0x0...");
 ```
 
 {% hint style="info" %}
-Getting started on a browser may require additional steps.&#x20;
+Getting started on a browser may require additional steps.
 
-You may need to asynchronously load `@gitcoinco/passport-sdk-verifier` before loading the package.&#x20;
+You may need to asynchronously load `@gitcoinco/passport-sdk-verifier` before loading the package.
 {% endhint %}
 
 Next Js Example
@@ -393,9 +393,7 @@ Pass in an Ethereum address and get back a Passport where each of the stamps inc
 
 {% code overflow="wrap" %}
 ```typescript
-
 PassportVerifier.verifyPassport(address: string, passport?: Passport, additionalStampCheck?: (stamp: Stamp) => boolean): Promise<Passport>
-
 ```
 {% endcode %}
 
@@ -405,9 +403,7 @@ Pass in a stamp and get back a stamp with a verified: boolean field completed.
 
 {% code overflow="wrap" %}
 ```typescript
-
 PassportVerifier.verifyStamp(address: string, stamp: Stamp, additionalStampCheck?: (stamp: Stamp) => boolean): Promise<Stamp>
-
 ```
 {% endcode %}
 
@@ -417,9 +413,7 @@ Pass in a Verifiable Credential and get back a boolean.
 
 {% code overflow="wrap" %}
 ```typescript
-
 PassportVerifier.verifyCredential(credential: VerifiableCredential): Promise<boolean>
-
 ```
 {% endcode %}
 
@@ -435,7 +429,6 @@ After importing the library, construct a `passportScorer` instance to specify th
 2. **Create a new instance that defines the criteria you wish to score against.**
 
 ```typescript
-
 const scorer = new PassportScorer([
     {
         provider: "BrightID",
@@ -443,15 +436,12 @@ const scorer = new PassportScorer([
         score: 0.5
     }
 ]);
-
 ```
 
-&#x20;3\.  **Get the score for a specific wallet address.**&#x20;
+3\. **Get the score for a specific wallet address.**
 
 ```typescript
-
 const score = await scorer.getScore("0x0...");
-
 ```
 
 This instance exposes read-only methods to score the content of a Gitcoin Passport.
@@ -460,9 +450,6 @@ To get a score for a wallet address based on the scoring criteria of this instan
 
 {% code overflow="wrap" %}
 ```typescript
-
 PassportScorer.getScore(address: string, passport?: Passport, additionalStampCheck?: (stamp: Stamp) => boolean): Promise<number>
-
 ```
 {% endcode %}
-

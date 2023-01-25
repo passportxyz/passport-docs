@@ -1,3 +1,7 @@
+---
+description: This page explains how to create you own Passport as a web3 citizen.
+---
+
 # Creating your Passport
 
 ## Creating your Passport

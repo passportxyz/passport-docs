@@ -2,14 +2,14 @@
 description: Engage with Passport to help make decentralized identity a public good!
 ---
 
-# Getting involved
+# Getting Involved
 
 ## Identity Providers
 
 If you're an identity provider and want to integrate with the Gitcoin Passport check out the documentation for Integrating a new stamp into the Passport.
 
-{% content-ref url="../gitcoin-passport-sdk/integrating-a-new-stamp.md" %}
-[integrating-a-new-stamp.md](../gitcoin-passport-sdk/integrating-a-new-stamp.md)
+{% content-ref url="../for-identity-providers/integrating-a-new-stamp.md" %}
+[integrating-a-new-stamp.md](../for-identity-providers/integrating-a-new-stamp.md)
 {% endcontent-ref %}
 
 ## Scoring Providers

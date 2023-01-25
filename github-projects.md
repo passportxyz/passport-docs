@@ -1,4 +1,10 @@
-# Github Projects
+---
+description: >-
+  This page links to a few Github repositories relevant to developers seeking to
+  integrate Passport to protect their community.
+---
+
+# Passport Github Projects
 
 ## Production Passport Codebase
 
@@ -16,13 +22,10 @@ An example app that shows how to interact with Gitcoin Passport SDK
 
 {% embed url="https://github.com/farque65/Scaffold-eth-gitcoin-passport" %}
 An example scaffold-eth build that incorporates the following passport-sdks
-- passport-sdk-reader
-- passport-sdk-verifier
-- passport-sdk-scorer
 {% endembed %}
 
 ## Ceramic Nodes
 
 Production Ceramic node, configured to communicate with the Ceramic main net is hosted at: [https://ceramic.passport-iam.gitcoin.co](https://ceramic.passport-iam.gitcoin.co)
 
-Staging Ceramic node, configured to communicate with the Ceramic clay-testnet  is hosted at: [https://ceramic.staging.dpopp.gitcoin.co](https://ceramic.staging.dpopp.gitcoin.co/)
+Staging Ceramic node, configured to communicate with the Ceramic clay-testnet is hosted at: [https://ceramic.staging.dpopp.gitcoin.co](https://ceramic.staging.dpopp.gitcoin.co/)

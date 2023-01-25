@@ -1,8 +1,10 @@
 ---
-description: Common questions for Users of the Gitcoin Passport
+description: >-
+  Questions commonly asked by web3 citizens who have or are looking to create a
+  Passport (to prove their humanity or build their decentralized identity)
 ---
 
-# FAQ
+# FAQ for Passport Holders
 
 <details>
 

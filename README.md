@@ -1,11 +1,13 @@
 ---
 description: >-
-  Gitcoin Passport is an identity aggregation dApp built on the Ceramic Network.
-  Users can collect various identity attestations, called "stamps", from web2
-  and web3 authenticators all in one place.
+  Gitcoin Passport makes sybil defense easy for project owners, and empowers
+  internet citizens to prove their humanity and build their decentralized
+  identity.
 ---
 
 # Gitcoin Passport
+
+_**Gitcoin Passport is a sybil resistance protocol and identity aggregation dApp built on the Ceramic Network. Users can collect various identity attestations, called "stamps", from web2 and web3 authenticators all in one place.**_
 
 ## Why did we make Gitcoin Passport? 🛂
 
@@ -69,7 +71,7 @@ _Both our Telegram and Discord channel will connect you with the Gitcoin Passpor
 
 Passport is on its way to becoming the go-to solution for projects to protect their communities, and the identity aggregator internet citizens trust most to access the best and most trustworthy experiences in web3.
 
-_If you’re an identity provider (e.g. BrightID, POAP, Twitter) interested in integrating with Passport so that users can collect your stamps to prove their identity and reputation, check out_ [_**integrating a new stamp**_](gitcoin-passport-sdk/integrating-a-new-stamp.md) _to learn how._&#x20;
+_If you’re an identity provider (e.g. BrightID, POAP, Twitter) interested in integrating with Passport so that users can collect your stamps to prove their identity and reputation, check out_ [_**integrating a new stamp**_](for-identity-providers/integrating-a-new-stamp.md) _to learn how._&#x20;
 
 ###
 
