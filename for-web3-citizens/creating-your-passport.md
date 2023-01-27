@@ -50,15 +50,7 @@ If you have questions about the privacy of your data, check out our FAQ:
 
 ## Presenting your Passport
 
-When you arrive at an app you'll be prompted to connect your wallet.&#x20;
-
-{% hint style="success" %}
-Be sure to use the same wallet that you used to create your passport.
-{% endhint %}
-
-The integration after that is app dependent. On the Trust Bonus page of your Gitcoin profile (if you're logged in gitcoin.co/trust ) you'll connect your passport, see the score that would be awarded to your passport, and be given the choice to save that score to your Gitcoin profile.
-
-That's it!&#x20;
+See [**Presenting Your Passport**](presenting-your-passport.md) **** to learn about when you might be asked to present your Passport.
 
 
 

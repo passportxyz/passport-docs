@@ -1,8 +1,10 @@
 ---
-description: How to use Gitcoin Passport in your application
+description: >-
+  This page walks you through how to integrate the Passport SDK into your dApp,
+  so you can keep out bots and bad actors
 ---
 
-# Integrating Passport in your dApp
+# How to Passport-Gate Your Project (by Integrating the Passport SDK)
 
 In the **Getting Started** section, we went over how to install each of the Passport libraries. Now, we'll go over the basic usages of each of the libraries so you can get the identity solution you need for your dApp.
 

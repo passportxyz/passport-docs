@@ -1,7 +1,7 @@
 # Table of contents
 
 * [Gitcoin Passport](README.md)
-* [Understanding the Integration Flow of an Individual Passport](passport-lifecycle.md)
+* [Understanding How Passport-Gated Projects Validate User Identity](passport-lifecycle.md)
 * [Passport Github Projects](github-projects.md)
 
 ## FOR WEB3 CITIZENS
@@ -12,9 +12,9 @@
 
 ## FOR PROJECT OWNERS: Gitcoin Passport SDK <a href="#gitcoin-passport-sdk" id="gitcoin-passport-sdk"></a>
 
+* [Glossary of Major Concepts](gitcoin-passport-sdk/major-concepts.md)
 * [Getting Started with the Passport SDK](gitcoin-passport-sdk/getting-started.md)
-* [Major Concepts](gitcoin-passport-sdk/major-concepts.md)
-* [Integrating Passport in your dApp](gitcoin-passport-sdk/integrating-passport-in-your-dapp.md)
+* [How to Passport-Gate Your Project (by Integrating the Passport SDK)](gitcoin-passport-sdk/integrating-passport-in-your-dapp.md)
 
 ## FOR IDENTITY PROVIDERS
 

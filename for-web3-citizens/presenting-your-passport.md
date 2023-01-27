@@ -1,21 +1,30 @@
 ---
 description: >-
-  Gitcoin has integrated the Gitcoin Passport to power its Trust Bonus score,
-  enabling users to have their matching weight in Quadratic Funding boosted by
-  presenting a Passport with many Stamps.
+  As a web3 citizen, you will present your Passport to get access to more
+  trustworthy experiences on web3.
 ---
 
 # Presenting your Passport
 
-The Passport project is only useful if there are places that accept your passport and read it!
+Here are some examples of why having your own Passport—with many stamps collected—may come in handy:
+
+* If an **event organizer** uses Passport to gate access to their event, then this event might only allow people with certain stamps in their Passport.
+* If a **grants program manager** integrates Passport into their Quadratic Funding-powered grants program like Gitcoin Grants, this program might only offer a matching funds multiple to donors with a Passport over a certain score
+* If a **community organizer** gates a sub-community with Passport, this might mean that only community members that have earned a certain set of stamps through meaningful participation in the community may get access to the **sub-community**.&#x20;
+* If the **developer** **of an online marketplace** uses Passport to gate their marketplace, this might mean it has a high cost of forgery bar for buyers and sellers, which may increase trust and reduce fraud between parties.
+* If the **developer of an online polling service** uses Passport to gate polls, this might mean that you can trust the results more, since they might be less tampered with bot manipulation.
+
+When you arrive to a Passport-gated app, you'll be prompted to connect your wallet. The app will use your address to fetch information about your Passport, including what stamps it has.
+
+{% hint style="success" %}
+Be sure to use the same wallet that you used to create your passport.
+{% endhint %}
+
+
+
+## Presenting Your Passport to the Example Passport Reader
 
 The Gitcoin Passport provides an example reader application to help you get started, check that out at https://example-passport-reader.gitcoin.co and the repo for that at [https://github.com/gitcoinco/passport-reader/](https://github.com/gitcoinco/passport-reader/)
-
-Gitcoin also integrates the passport to power the Gitcoin Trust Bonus, the Trust Bonus flow is available on your profile, or once logged in, visit [https://gitcoin.co/trust](https://gitcoin.co/trust)
-
-
-
-## Using the Example Passport Reader
 
 Upon arriving on the passport reader app you'll be prompted to connect your wallet.&#x20;
 

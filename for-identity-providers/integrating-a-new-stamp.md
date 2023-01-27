@@ -1,5 +1,7 @@
 ---
-description: Here's
+description: >-
+  This is an overview for leaders of services like POAP and BrightID to
+  understand how they can become a Stamp Provider for Passport
 ---
 
 # Integrating a new Stamp

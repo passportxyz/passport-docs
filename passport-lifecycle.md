@@ -4,7 +4,7 @@ description: >-
   trustworthiness of a potential user who wants to get access to the project
 ---
 
-# Understanding the Integration Flow of an Individual Passport
+# Understanding How Passport-Gated Projects Validate User Identity
 
 _At its core, a Passport is a self-sovereign data collection built on the Ceramic Network, created in line with the Decentralized Identifier (DID) and Verifiable Credential (VC) specifications._&#x20;
 
@@ -12,7 +12,7 @@ _This data is intended for broad interoperability for any system that wishes to 
 
 _The Gitcoin Passport team continually expands what stamps Passport holders can collect. Stamps represent a web3 citizen's participation in various groups and communities._
 
-## The Passport Integration Flow
+## How A Passport-Gated Project Validates A User's Identity
 
 **Below is an example of how a project—that has integrated with Gitcoin Passport and requires users to have a particular set of stamps (VCs) to interact with their system—would review a potential user's Passport.**
 

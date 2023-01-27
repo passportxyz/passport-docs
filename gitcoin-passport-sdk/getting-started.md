@@ -1,8 +1,8 @@
 ---
-description: Overview of the Gitcoin Passport Projects and SDK
+description: This page provides an overview of the Gitcoin Passport SDK
 ---
 
-# Getting Started
+# Getting Started with the Passport SDK
 
 ## The Gitcoin Passport SDK
 
