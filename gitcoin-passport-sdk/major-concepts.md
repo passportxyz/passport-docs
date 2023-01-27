@@ -9,7 +9,7 @@ description: >-
 
 ### Passport Protocol
 
-When we talk about the "Passport Protocol," we are talking about the data and smart contract layer which enables project owners and developers to [gate](major-concepts.md#passport-gating) their project, and for web3 citizens to create their own Passport to build their decentralized identity and access Passport-gated projects.
+When we talk about the "Passport Protocol", we are talking about the infrastructure which enables project owners and developers to [gate](major-concepts.md#passport-gating) their project, and for web3 citizens to create their own Passport to build their decentralized identity and access Passport-gated projects.
 
 There will be three ways for projects to integrate the Protocol to gate their:
 

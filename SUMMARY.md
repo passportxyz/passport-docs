@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Gitcoin Passport](README.md)
+* [Gitcoin Passport: A Quick Overview](README.md)
 * [Understanding How Passport-Gated Projects Validate User Identity](passport-lifecycle.md)
 * [Passport Github Projects](github-projects.md)
 
