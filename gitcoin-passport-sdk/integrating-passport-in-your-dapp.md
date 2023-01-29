@@ -293,7 +293,7 @@ Reader allows an integrated dApp to read from any Passport stream on Ceramic.
 
 To set up the Reader library, import the library and construct a passport reader instance.
 
-Then, pass in a ceramic node URL and network ID that points toty Gitcoin’s main Ceramic node.
+Then, pass in a ceramic node URL and network ID that points to Gitcoin’s main Ceramic node.
 
 ```typescript
 // add to your project as a module
