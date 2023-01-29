@@ -15,7 +15,7 @@ _**Gitcoin Passport was designed to make sybil resistance easy.**_
 
 Many systems, like Gitcoin Grants, assume each participant is a unique human, and offer rewards for these participants. This makes them vulnerable to sybil attacks, where a bad actor creates a large number of pseudonymous identities to subvert the service’s reputation system, gain a disproportionate amount of influence, and direct rewards to extractors.
 
-Credible identity verification and reputation mechanisms are essential to combat this. Applications liked BrightID, ENS, and POAP each help suggest whether an account is associated with a real human, but they are only truly powerful when they compose with each other.
+Credible identity verification and reputation mechanisms are essential to combat this. Applications like BrightID, ENS, and POAP each help suggest whether an account is associated with a real human, but they are only truly powerful when they compose with each other.
 
 But projects need a way to evaluate these disparate "identity providers" altogether.
 
