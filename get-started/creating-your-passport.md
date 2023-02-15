@@ -1,8 +1,8 @@
 ---
-description: This page explains how to create you own Passport as a web3 citizen.
+description: This page explains how to create your own Passport.
 ---
 
-# Creating your Passport
+# Creating your Gitcoin Passport
 
 ## Creating your Passport
 
@@ -12,7 +12,7 @@ Visit the Gitcoin Passport app at [passport.gitcoin.co](https://passport.gitcoin
 The Passport App
 {% endembed %}
 
-When you arrive at the passport app you'll be prompted to connect your ethereum wallet.
+When you arrive at the passport app you'll be prompted to connect your Ethereum wallet.
 
 {% hint style="success" %}
 Your Passport is associated to your Ethereum address, so be sure to connect a wallet you use regularly.
@@ -44,8 +44,8 @@ Each Stamp flow is unique, but the underlying flow is similar:&#x20;
 
 If you have questions about the privacy of your data, check out our FAQ:
 
-{% content-ref url="faq.md" %}
-[faq.md](faq.md)
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
 {% endcontent-ref %}
 
 ## Presenting your Passport

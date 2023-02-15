@@ -1,12 +1,12 @@
 ---
 description: >-
   This page explains how Gitcoin Passport enables a project to verify the
-  trustworthiness of a potential user who wants to get access to the project
+  trustworthiness of a potential user who wants to access a project.
 ---
 
-# Understanding How Passport-Gated Projects Validate User Identity
+# How it works
 
-_At its core, a Passport is a self-sovereign data collection built on the Ceramic Network, created in line with the Decentralized Identifier (DID) and Verifiable Credential (VC) specifications._&#x20;
+_Gitcoin Passport is a self-sovereign data collection built on the Ceramic Network, created in line with the Decentralized Identifier (DID) and Verifiable Credential (VC) specifications_.&#x20;
 
 _This data is intended for broad interoperability for any system that wishes to issue or consume VCs to establish the ‘personhood’ of an individual through their direct ownership of multiple accounts (Twitter, BrightID), or web3 assets (ENS)._
 
@@ -18,26 +18,22 @@ _The Gitcoin Passport team continually expands what stamps Passport holders can 
 
 #### STEP 1: Load a user's Passport&#x20;
 
-Upon arriving at this app, the user is prompted to connect their passport. The user signs a message in their wallet that controls their Passport, granting the app access to public key, and the app can lookup their DID (https://github.com/w3c-ccg/did-pkh).&#x20;
+Upon arriving at this app, the user is prompted to connect their Passport. The user signs a message in their wallet that controls their Passport, granting the app access to public key, and the app can lookup their DID (https://github.com/w3c-ccg/did-pkh).&#x20;
 
-The app then attempts to fetch the Passport data from Ceramic. (see the **** [**SDK Reader**](gitcoin-passport-sdk/getting-started.md#reader))
+The app then attempts to fetch the Passport data from Ceramic. (see the **** [**SDK Reader**](../gitcoin-passport-sdk/passport-sdk/getting-started.md#reader))
 
 * If no passport is found, continue to [Step 2](passport-lifecycle.md#step-2-direct-user-to-create-or-manage-their-passport)
-*   If a passport is found, continue to [Step 3](passport-lifecycle.md#step-3-score-the-users-passport)
-
-    ####
+* If a passport is found, continue to [Step 3](passport-lifecycle.md#step-3-score-the-users-passport)
 
 #### STEP 2: Direct user to create or manage their Passport
 
 If the user does not have a passport or does not hold enough stamps to meet that app's needs, the user should be directed to the Gitcoin Passport app at [passport.gitcoin.co](https://passport.gitcoin.co/).
 
 {% hint style="info" %}
-Gitcoin's instance of the Passport app has integrated the identity and verification stamps necessary for building their Gitcoin Trust Bonus. The Trust Bonus incentivises users to provide multiple stamps as evidence that they are a single user, and in reward are given increasing weight to their matching abilities in the Quadratic Funding mechanism used by Gitcoin Grants.
+Gitcoin's instance of the Passport app has integrated the identity and verification stamps necessary for building their Gitcoin Trust Bonus. The Trust Bonus incentivizes users to provide multiple stamps as evidence that they are a single user, and in reward are given increasing weight to their matching abilities in the Quadratic Funding mechanism used by Gitcoin Grants.
 {% endhint %}
 
 Once connected to the Passport application, users sign a message granting the app control of their Ceramic stream. New users will have a blank passport created, and existing users will see their passport data and existing stamps. They can then continue managing their passport, linking new services and claiming stamps to enrich their verifiable online identity.
-
-
 
 #### STEP 3: Validate and score the user's Passport
 
@@ -45,7 +41,7 @@ When a passport has been loaded, the app can validate the stamps, calculate a sc
 
 The integrating app should adhere to this process to ensure they aren’t being presented passports with invalid VCs, that VCs were issued by trusted servers.
 
-
+After collection, stamps expire after 90 days, so some maintenance is necessary.&#x20;
 
 **STEP 4: Grant or deny the user access**
 
