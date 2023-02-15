@@ -5,37 +5,37 @@ description: >-
   lower-level libraries.
 ---
 
-# Major Concepts
+# Glossary of Major Concepts
 
 ### Passport Protocol
 
-When we talk about the "Passport Protocol", we are talking about the infrastructure which enables project owners and developers to [gate](major-concepts.md#passport-gating) their projects, and for web3 citizens to create their own Passports to build their decentralized identity and access Passport-gated projects.
+When we talk about the "Passport Protocol", we are talking about the infrastructure which enables project owners and developers to [gate](major-concepts.md#passport-gating) their project, and for web3 citizens to create their own Passport to build their decentralized identity and access Passport-gated projects.
 
-There are three ways projects can use Passport:
+There will be three ways for projects to integrate the Protocol to gate their:
 
-* The [Gitcoin Scorer API](https://app.gitbook.com/o/Aqbtj6s4OkLaygileCka/s/ttgfRNVjO2DcVvUNyst9/\~/changes/31/gitcoin-passport-sdk/scorer-api/\~/comments/ShtmZJpx8ConO0SXe5xV?context=post) (Preferred)
-* [The Passport SDK](passport-sdk/getting-started.md) (Will be deprecated soon)
-* On-chain scores (on the roadmap)
+* ****[**The Passport SDK**](getting-started.md)
+* The API (in development, more documentation on this soon)
+* On-chain scores (on the development roadmap)
 
 Web3 citizens interface with the Passport Protocol through the Passport holder dApp at [passport.gitcoin.co](https://passport.gitcoin.co/).
 
 ### Passport-Gating
 
-This is a shorthand for noting that a project has integrated the [Passport Protocol](major-concepts.md#passport-protocol) (e.g. SDK or Scorer API) for the purpose of screening accounts to keep out bots, bad actors, or simply real people who don't meet a certain threshold of trustworthiness.
+This is a shorthand for noting that a project has integrated the [Passport Protocol](major-concepts.md#passport-protocol) (e.g. SDK) for the purpose of screening accounts to keep out bots, bad actors, or simply real people who don't meet a certain threshold of trustworthiness.
 
 Usage:
 
 * "I like how this project gated its community with Gitcoin Passport. I'm going to ask the project owner for their gating algorithm, so I can use it for inspiration."
-* "Some examples of Passport-gated dApps include Snapshot, Bankless Academy, and Gitcoin Grants."
+* "Some examples of Passport-gated dApps include: Snapshot, Bankless Academy, and Gitcoin Grants."
 * "Because this community is gated with Gitcoin Passport, it is able to ask for pieces of proof of not just identity via services like BrightID, but also reputation via services like POAP."
 
-See **** [**How to Passport-Gate Your Project**](passport-sdk/integrating-passport-in-your-dapp.md) to learn how to gate your project.
+See **** [**How to Passport-Gate Your Project**](integrating-passport-in-your-dapp.md) to learn how to gate your project.
 
 ### Stamps&#x20;
 
-Stamps are the key identity verification mechanism of Gitcoin Passport. A stamp is a verifiable credential from an identity provider that is collected in a Passport. Stamps are provided by a variety of web2 and web3 identity authenticators including Google, Facebook, BrightID, ENS, and Proof of Humanity. They do not store any personally identifiable information, only the verifiable credential issued by the identity authenticator.
+Stamps are the key identity verification mechanism of Gitcoin Passport. A stamp is a verifiable credential from an identity provider that is collected in a Passport. Stamps are provided by a variety of web2 and web3 identity authenticators including Google, Facebook, BrightID, ENS, and Proof of Humanity. Stamps given out by particular communities are a functionality that is under development. They do not store any personally identifiable information, only the verifiable credential issued by the identity authenticator.
 
-Passport aggregates stamps and assigns each stamp a different weight according to the needs of a particular community. This weight is used to calculate the cost of forgery of an identity, a score which reflects the credibility of a potential participant’s online identity. For example, a community for developers could assign a greater weight to a GitHub stamp, resulting in higher scores for those who have the Github stamp in their Passport.
+Passport aggregates stamps and assigns each stamp a different weight according to the needs of a particular community. This weight is used to calculate the cost of forgery of an identity, a score which reflects the credibility of a potential participant’s online identity. For example, a community for developers could assign a greater weight to a Github stamp, resulting in higher scores for those who have Github stamps.
 
 ### Streams
 
@@ -45,13 +45,13 @@ Passport identity data is stored as a decentralized data stream on Ceramic. Stre
 
 Reader is a library in the Passport SDK which allows an integrated dApp to read any Passport stream on Ceramic. A Passport stream contains all the identity data for a single user in a way that can be accessed across chains. Reader is how your dApp or community can view data on the verifiable credentials stored in a user’s Passport stamps without making personally identifiable information visible or accessible: it accesses the identity information stored on the Ceramic network and allows you to use it in your verification process.
 
-**Learn more about this library in the**[ **"How to Passport-Gate Your Project"**](passport-sdk/integrating-passport-in-your-dapp.md) **page.**
+**Learn more about this library in the**[ **"How to Passport-Gate Your Project"**](integrating-passport-in-your-dapp.md) **page.**
 
 ### Verifier
 
 Verifier is a library in the Passport SDK that confirms the contents of a given Passport and ensures that each verifiable credential was issued correctly. In the broader Passport evaluation process, Verifier comes before Scorer.
 
-**Learn more about this library in the**[ **"How to Passport-Gate Your Project"**](passport-sdk/integrating-passport-in-your-dapp.md) **page.**
+**Learn more about this library in the**[ **"How to Passport-Gate Your Project"**](integrating-passport-in-your-dapp.md) **page.**
 
 ### **Scorer**
 
@@ -80,7 +80,7 @@ So when you're scoring, you will probably want to store the hashes and dedupe th
 
 {% endhint %}
 
-**Learn more about this library in the** [**"How to Passport-Gate Your Project"**](passport-sdk/integrating-passport-in-your-dapp.md) **page.**
+**Learn more about this library in the** [**"How to Passport-Gate Your Project"**](integrating-passport-in-your-dapp.md) **page.**
 
 ### Writer
 
@@ -90,6 +90,6 @@ Writer essentially allows you to create a new data stream to store someone’s i
 
 With Writer, you can issue your own verifiable credentials as well as retrieve someone’s DID from the Ceramic Network. This complements other libraries in the Passport SDK, such as Reader and Scorer, which focus specifically on assessing stamps.
 
-**Learn more about this library in the** [**"How to Passport-Gate Your Project"**](passport-sdk/integrating-passport-in-your-dapp.md) **page.**
+**Learn more about this library in the** [**"How to Passport-Gate Your Project"**](integrating-passport-in-your-dapp.md) **page.**
 
 ****

@@ -1,10 +1,10 @@
 ---
 description: >-
-  As a Web3 Citizen, Passport gives you access to more trustworthy experiences
-  on web3.
+  As a web3 citizen, you will present your Passport to get access to more
+  trustworthy experiences on web3.
 ---
 
-# Presenting your Gitcoin Passport
+# Presenting your Passport
 
 Here are some examples of why having your own Passport—with many stamps collected—may come in handy:
 
@@ -19,6 +19,8 @@ When you arrive to a Passport-gated app, you'll be prompted to connect your wall
 {% hint style="success" %}
 Be sure to use the same wallet that you used to create your passport.
 {% endhint %}
+
+
 
 ## Presenting Your Passport to the Example Passport Reader
 
