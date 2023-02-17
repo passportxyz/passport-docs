@@ -1,25 +1,35 @@
 # Table of contents
 
-* [Gitcoin Passport: A Quick Overview](README.md)
-* [Understanding How Passport-Gated Projects Validate User Identity](passport-lifecycle.md)
-* [Passport Github Projects](github-projects.md)
+## OVERVIEW
 
-## FOR WEB3 CITIZENS
+* [Using the Passport Docs](README.md)
+* [Why Gitcoin Passport?](overview/readme.md)
+* [Who is Gitcoin Passport for?](overview/presenting-your-passport.md)
 
-* [Creating your Passport](for-web3-citizens/creating-your-passport.md)
-* [Presenting your Passport](for-web3-citizens/presenting-your-passport.md)
-* [FAQ for Passport Holders](for-web3-citizens/faq.md)
+## GET STARTED
 
-## FOR PROJECT OWNERS: Gitcoin Passport SDK <a href="#gitcoin-passport-sdk" id="gitcoin-passport-sdk"></a>
+* [How it works](get-started/how-it-works.md)
+* [Creating your Gitcoin Passport](get-started/creating-your-passport.md)
+* [Presenting your Gitcoin Passport](get-started/presenting-your-passport.md)
+* [FAQ for Passport Holders](get-started/faq.md)
 
-* [Glossary of Major Concepts](gitcoin-passport-sdk/major-concepts.md)
-* [Getting Started with the Passport SDK](gitcoin-passport-sdk/getting-started.md)
-* [How to Passport-Gate Your Project (by Integrating the Passport SDK)](gitcoin-passport-sdk/integrating-passport-in-your-dapp.md)
+## BUILDING WITH PASSPORT
 
-## FOR IDENTITY PROVIDERS
+* [Quick Start Guide](building-with-passport/quick-start-guide.md)
+* [Major Concepts](building-with-passport/major-concepts.md)
+* [Scorer API](building-with-passport/scorer-api/README.md)
+  * [API Access](building-with-passport/scorer-api/api-access.md)
+  * [Status and error codes](building-with-passport/scorer-api/status-and-error-codes.md)
+  * [Endpoint Definition](building-with-passport/scorer-api/endpoint-definition.md)
+* [Passport SDK](building-with-passport/passport-sdk/README.md)
+  * [Getting Started with the Passport SDK](building-with-passport/passport-sdk/getting-started.md)
+  * [How to Passport-Gate Your Project (by Integrating the Passport SDK)](building-with-passport/passport-sdk/integrating-passport-in-your-dapp.md)
 
-* [Integrating a new Stamp](for-identity-providers/integrating-a-new-stamp.md)
+## STAMPS
 
-## Extras
+* [Creating a new Stamp](stamps/integrating-a-new-stamp.md)
 
-* [Getting Involved](extras/getting-involved.md)
+## Getting Involved
+
+* [Getting Involved](getting-involved/getting-involved.md)
+* [Passport Github Projects](getting-involved/passport-github-projects.md)

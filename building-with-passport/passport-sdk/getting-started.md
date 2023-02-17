@@ -28,7 +28,7 @@ or import the bundle.&#x20;
 
 `<script src="./dist/reader.bundle.js" type="script/javascript"/>`
 
-#### [Scorer](https://github.com/gitcoinco/passport-sdk/tree/main/packages/scorer)
+#### [Scorer API](https://github.com/gitcoinco/passport-sdk/tree/main/packages/scorer)
 
 {% hint style="info" %}
 Based on initial user feedback, most communities will benefit from using the Scoring API under development rather than building a weighted scorer with the SDK. **Please check back in on progress**, and consider using the Scoping API as a first place to begin experimenting with Passport scoring.
