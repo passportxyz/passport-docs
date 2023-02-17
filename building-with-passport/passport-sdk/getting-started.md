@@ -96,21 +96,3 @@ Ceramic Documentation
 
 With the Passport SDK, it's not necessary to interact with Ceramic directly, but you may find it helpful for debugging or just a general understanding of the system.
 
-
-
-## Developing on Testnet
-
-We recommend developers work with a testnet instance of  Passport when building with the SDK.
-
-
-
-We have an instance of the Passport app deployed and configured to interact with a Ceramic testnet node here:
-
-{% embed url="https://testnet.passport.gitcoin.co/" %}
-Testnet instance of the Gitcoin Passport
-{% endembed %}
-
-This instance of the Passport app is configured to run on top of the Ceramic clay testnet and is hosted at [https://ceramic.staging.dpopp.gitcoin.co](https://ceramic.staging.dpopp.gitcoin.co/).&#x20;
-
-Wallet signatures can still be made on the Ethereum mainnet, but the underlying data will remain on the ceramic testnet.
-
