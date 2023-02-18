@@ -4,17 +4,17 @@ In this guide, you'll learn how to build a gated application with Next.js and Gi
 
 We'll be using the Gitcoin Passport API to do this. The API enables everything you need to easily build sybil resistance into your web or mobile application.
 
-To follow this tutorial, you'll first need to visit [https://scorer.gitcoin.co/](https://scorer.gitcoin.co/). Here, you'll create both an API key as well as a community.
+To follow this tutorial, you'll first need to visit [https://scorer.gitcoin.co/](https://scorer.gitcoin.co/). Here, you'll create both an API key as well as a Community.
 
-The community will be the group of users for your app.
+The Community will be where you declare the scoring mechanism for your app.
 
 #### Application flow
 
-How this application will work.
+How this sample application will work.
 
-1. When the user visits the app, they will be asked to connect their wallet
-2. Once they've connected, we'll fetch their passport score from the Gitcoin scorer API
-3. If their score meets the threshold, we'll show the secret message
+1. When the user visits the sample app, they will be asked to connect their wallet
+2. Once they've connected, we'll fetch their passport score from the Gitcoin Scorer API
+3. If their score meets the threshold that was set, we'll show the secret message
 4. If the score does not meet the threshold, we'll let them know to increase their score.
 5. If they do not yet have their passport configured, we'll ask them to configure and submit their passport.
 
@@ -22,9 +22,9 @@ This is similar to how you might use Gitcoin passport in a real-world applicatio
 
 #### API Endpoints
 
-The API endpoint we'll be using is`https://api.scorer.gitcoin.co/`, you can view the API details at [https://api.scorer.gitcoin.co/docs#/](https://api.scorer.gitcoin.co/docs#/).
+The API endpoint we'll be using is`https://api.scorer.gitcoin.co/`, you can view interactive API details at [https://api.scorer.gitcoin.co/docs#/](https://api.scorer.gitcoin.co/docs#/).
 
-When sending a request to the scorer API, the API key must be included as a header like this:
+When sending a request to the Scorer API, the API key must be included as a header like this:
 
 ```json
 {

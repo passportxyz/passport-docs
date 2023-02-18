@@ -21,9 +21,9 @@
   * [API Access](building-with-passport/scorer-api/api-access.md)
   * [Status and error codes](building-with-passport/scorer-api/status-and-error-codes.md)
   * [Endpoint Definition](building-with-passport/scorer-api/endpoint-definition.md)
-* [Passport SDK](building-with-passport/passport-sdk/README.md)
-  * [Getting Started with the Passport SDK](building-with-passport/passport-sdk/getting-started.md)
-  * [How to Passport-Gate Your Project (by Integrating the Passport SDK)](building-with-passport/passport-sdk/integrating-passport-in-your-dapp.md)
+* [Passport SDK (deprecated)](building-with-passport/passport-sdk-deprecated/README.md)
+  * [Getting Started with the Passport SDK](building-with-passport/passport-sdk-deprecated/getting-started.md)
+  * [How to Passport-Gate Your Project (by Integrating the Passport SDK)](building-with-passport/passport-sdk-deprecated/integrating-passport-in-your-dapp.md)
 
 ## STAMPS
 

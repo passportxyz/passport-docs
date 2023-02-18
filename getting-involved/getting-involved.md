@@ -32,8 +32,8 @@ Come find us on Discord [https://gitcoin.co/discord](https://gitcoin.co/discord)
 
 If you're just getting started, check out the documentation for integrating the passport into your App
 
-{% content-ref url="../building-with-passport/passport-sdk/integrating-passport-in-your-dapp.md" %}
-[integrating-passport-in-your-dapp.md](../building-with-passport/passport-sdk/integrating-passport-in-your-dapp.md)
+{% content-ref url="../building-with-passport/passport-sdk-deprecated/integrating-passport-in-your-dapp.md" %}
+[integrating-passport-in-your-dapp.md](../building-with-passport/passport-sdk-deprecated/integrating-passport-in-your-dapp.md)
 {% endcontent-ref %}
 
 

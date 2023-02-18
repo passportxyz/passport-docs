@@ -10,7 +10,7 @@ description: >-
 
 <summary>What data is stored in my Passport</summary>
 
-The only information in your passport is the Decentralized Identifier (DID) associated with your Ethereum address and the Verifiable Credentials (VCs) issued for each service you connect to your passport.
+The only information in your passport is the Decentralized Identifier (DID) associated with your Ethereum address and the Verifiable Credentials (VCs) issued for each service you connect to your passport. No identifiable details are stored in your passport as we encrypt the account details when creating your VCs.
 
 You can inspect the data yourself in the Gitcoin Passport by clicking the `</> Passport JSON` button in the upper right of the Passport dashboard.
 

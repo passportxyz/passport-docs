@@ -12,6 +12,7 @@ Here are some examples of why having your own Passport—with many stamps collec
 * If a **grants program manager** integrates Passport into their Quadratic Funding-powered grants program like Gitcoin Grants, this program might only offer matching funds multiple to donors with a Passport over a certain score
 * If a **community organizer** gates a sub-community with Passport, this might mean that only community members that have earned a certain set of stamps through meaningful participation in the community may get access to the **sub-community**.&#x20;
 * If the **developer** **of an online marketplace** uses Passport to gate their marketplace, this might mean it has a high cost of forgery bar for buyers and sellers, which may increase trust and reduce fraud between parties.
+* If an a**irdrop experience** wants to ensure their airdrop is not being farmed, they would require Gitcoin Passport to complete the airdrop claim experience.
 * If the **developer of an online polling service** uses Passport to gate polls, this might mean that you can trust the results more, since they might be less tampered with bot manipulation.
 
 When you arrive at a Passport-gated app, you'll be prompted to connect your wallet. The app will use your address to fetch information about your Passport, including what stamps it has.
@@ -20,9 +21,7 @@ When you arrive at a Passport-gated app, you'll be prompted to connect your wall
 Be sure to use the same wallet that you used to create your passport.
 {% endhint %}
 
-## Presenting Your Passport to the Example Passport Reader
-
-The Gitcoin Passport provides an example reader application to help you get started, check that out at https://example-passport-reader.gitcoin.co and the repo for that at [https://github.com/gitcoinco/passport-reader/](https://github.com/gitcoinco/passport-reader/)
+## Presenting Your Passport to the Passport Reader
 
 Upon arriving on the passport reader app you'll be prompted to connect your wallet.&#x20;
 
