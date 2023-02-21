@@ -6,11 +6,11 @@ description: >-
 
 # API Access
 
-The [Scorer API](https://www.scorer.gitcoin.co/) provides programmatic access to a wallet's Passport score. Once you have your API key, you need to include it with each request you make to the API. This allows Gitcoin to identify your app and verify that you are authorized to access the API.
+The [Scorer API](https://scorer.gitcoin.co/) provides programmatic access to a wallet's Passport score. Once you have your API key, you need to include it with each request you make to the API. This allows Gitcoin to identify your app and verify that you are authorized to access the API.
 
 ### Getting Your API Key
 
-1. Log in to [scorer.gitcoin.co](https://www.scorer.gitcoin.co/): Go to [scorer.gitcoin.co](https://www.scorer.gitcoin.co/) and log in to your account by connecting your wallet.
+1. Log in to [scorer.gitcoin.co](https://scorer.gitcoin.co/): Go to [scorer.gitcoin.co](https://scorer.gitcoin.co/) and log in to your account by connecting your wallet.
 2. Navigate to the API Keys section: After logging in, go to the "API Keys" section.
 3. Generate an API key: Click on the "+ Create a Key" button to generate a unique API key for your account.
 4. Store your X-API key securely: Store your X-API key in a secure place, as it will be used to access the scorer API.
@@ -23,10 +23,10 @@ By using communities, you can manage specific parameter settings and log traffic
 
 ### Getting your Community ID
 
-1. Log in to [scorer.gitcoin.co](https://www.scorer.gitcoin.co/): Go to [scorer.gitcoin.co](https://www.scorer.gitcoin.co/) and log in to your account by connecting your wallet.
+1. Log in to [scorer.gitcoin.co](https://scorer.gitcoin.co/): Go to [scorer.gitcoin.co](https://scorer.gitcoin.co/) and log in to your account by connecting your wallet.
 2. Navigate to the Communities section: After logging in, go to the "Communities" section
 3. Create a Community: Click on the "+ Create a Community" button and input a community name and description.
-4. Click on the newly created community and you will see the community ID in the page URL i.e [https://www.scorer.gitcoin.co/dashboard/community/](https://www.scorer.gitcoin.co/dashboard/community/39){community id}
+4. Click on the newly created community and you will see the community ID in the page URL i.e [https://scorer.gitcoin.co/dashboard/community/](https://scorer.gitcoin.co/dashboard/community/39){community id}
 
 ### Using Your X-API Key
 
