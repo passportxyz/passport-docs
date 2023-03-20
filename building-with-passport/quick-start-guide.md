@@ -131,9 +131,9 @@ const SIGNING_MESSAGE_URI = 'https://api.scorer.gitcoin.co/registry/signing-mess
 // score needed to see hidden message
 const thresholdNumber = 20
 
-const headers = API_KEY ? ({
+const headers = APIKEY ? ({
   'Content-Type': 'application/json',
-  'X-API-Key': API_KEY
+  'X-API-Key': APIKEY
 }) : undefined
 
 declare global {
@@ -162,7 +162,7 @@ export default function Passport() {
   // here we deal with any local state we need to manage
   const [address, setAddress] = useState<string>('')
   const [connected, setConnected] = useState<boolean>(false)
-  const [score, setScore] = useState<string>('')jaa
+  const [score, setScore] = useState<string>('')
   const [noScoreMessage, setNoScoreMessage] = useState<string>('')
 
   /* todo check user's connection when the app loads */
@@ -296,13 +296,13 @@ useEffect(() => {
   checkConnection()
   async function checkConnection() {
     try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const provider = new ethers.BrowserProvider(window.ethereum)
       const accounts = await provider.listAccounts()
       // if the user is connected, set their account and fetch their score
       if (accounts && accounts[0]) {
         setConnected(true)
-        setAddress(accounts[0])
-        checkPassport(accounts[0])
+        setAddress(accounts[0].address)
+        checkPassport(accounts[0].address)
       }
     } catch (err) {
       console.log('not connected...')
@@ -346,8 +346,8 @@ Add the following 2 functions after the `checkPassport` function:
     try {
       // call the API to get the signing message and the nonce
       const { message, nonce } = await getSigningMessage()
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const signer = provider.getSigner()
+      const provider = new ethers.BrowserProvider(window.ethereum)
+      const signer = await provider.getSigner()
       // ask the user to sign the message
       const signature = await signer.signMessage(message)
       
