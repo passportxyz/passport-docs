@@ -11,12 +11,12 @@ To follow this tutorial, you'll first need to visit [https://scorer.gitcoin.co/]
 How this sample application will work.
 
 1. When the user visits the sample app, they will be asked to connect their wallet
-2. Once they've connected, we'll fetch their passport score from the Gitcoin Scorer API
+2. Once they've connected, we'll fetch their Passport score from the Gitcoin Scorer API
 3. If their score meets the threshold that was set, we'll show the secret message
 4. If the score does not meet the threshold, we'll let them know to increase their score.
-5. If they do not yet have their passport configured, we'll ask them to configure and submit their passport.
+5. If they do not yet have their Passport configured, we'll ask them to configure and submit their Passport.
 
-This is similar to how you might use Gitcoin passport in a real-world application.
+This is similar to how you might use Gitcoin Passport in a real-world application.
 
 #### API Endpoints
 
@@ -43,13 +43,13 @@ https://api.scorer.gitcoin.co/registry/score/${SCORERID}/${address}
 
 2. Getting the signing message and nonce
 
-This returns the signing message and nonce required in the request for submitting a passport.
+This returns the signing message and nonce required in the request for submitting a Passport.
 
 ```
 https://api.scorer.gitcoin.co/registry/signing-message
 ```
 
-3. Submitting a passport
+3. Submitting a Passport
 
 Once the user has signed the message, we'll send a new request to this endpoint along with the address, SCORER ID, signature, and nonce.
 
@@ -122,7 +122,7 @@ import { ethers } from 'ethers'
 const APIKEY = process.env.NEXT_PUBLIC_GC_API_KEY
 const SCORERID = process.env.NEXT_PUBLIC_GC_SCORER_ID
 
-// endpoint for submitting passport
+// endpoint for submitting Passport
 const SUBMIT_PASSPORT_URI = 'https://api.scorer.gitcoin.co/registry/submit-passport'
 // endpoint for getting the signing message
 const SIGNING_MESSAGE_URI = 'https://api.scorer.gitcoin.co/registry/signing-message'
@@ -150,8 +150,8 @@ In this step, we'll be doing the following:
 1. Creating local state variables
 2. Returning the UI for the app
    1. If the user is not yet connected, we show them a connect button
-   2. Once they are connected, we will show them a button to submit their passport
-   3. If the user is connected their score will be fetched, and if they've submitted their passport they will be able to view their score.
+   2. Once they are connected, we will show them a button to submit their Passport
+   3. If the user is connected their score will be fetched, and if they've submitted their Passport they will be able to view their score.
 
 Next, add the following below the imports:
 
@@ -167,18 +167,18 @@ export default function Passport() {
   
   /* todo connect user's wallet */
 
-  /* todo check user's passport */
+  /* todo check user's Passport */
 
   /* todo get signing message from API */
 
-  /* todo submit passport for scoring */
+  /* todo submit Passport for scoring */
 
   return (
     /* this is the UI for the app */
     <div style={styles.main}>
       <h1 style={styles.heading}>Gitcoin Passport Scorer 🫶</h1>
-      <p style={styles.configurePassport}>Configure your passport <a style={styles.linkStyle} target="_blank" href="https://passport.gitcoin.co/#/dashboard">here</a></p>
-      <p style={styles.configurePassport}>Once you've added more stamps to your passport, submit your passport again to recalculate your score.</p>
+      <p style={styles.configurePassport}>Configure your Passport <a style={styles.linkStyle} target="_blank" href="https://passport.gitcoin.co/#/dashboard">here</a></p>
+      <p style={styles.configurePassport}>Once you've added more stamps to your Passport, submit your Passport again to recalculate your score.</p>
 
       <div style={styles.buttonContainer}>
       {
@@ -189,7 +189,7 @@ export default function Passport() {
       {
         score && (
           <div>
-            <h1>Your passport score is {score} 🎉</h1>
+            <h1>Your Passport score is {score} 🎉</h1>
             <div style={styles.hiddenMessageContainer}>
               {
                 Number(score) >= thresholdNumber && (
@@ -209,7 +209,7 @@ export default function Passport() {
         connected && (
           <div style={styles.buttonContainer}>
             <button style={styles.buttonStyle} onClick={submitPassport}>Submit Passport</button>
-            <button style={styles.buttonStyle} onClick={() => checkPassport()}>Check passport score</button>
+            <button style={styles.buttonStyle} onClick={() => checkPassport()}>Check Passport score</button>
           </div>
         )
       }
@@ -247,13 +247,13 @@ async function connect() {
 }
 ```
 
-#### Checking the user's passport score
+#### Checking the user's Passport score
 
 In this step, we'll be doing the following:
 
 1. Create a function to call the Gitcoin Scorer API to get the user's score, passing in the Scorer ID and the user's address as request parameters.
 2. If the user has a score, we set it in the local state.
-3. If the user does not yet have a score, we set a message to be displayed to them asking them to create stamps and submit their passport.
+3. If the user does not yet have a score, we set a message to be displayed to them asking them to create stamps and submit their Passport.
 
 Add the following code below the `useState` hooks:
 
@@ -274,8 +274,8 @@ async function checkPassport(currentAddress = address) {
       setScore(roundedScore.toString())
     } else {
       // if the user has no score, display a message letting them know to submit thier passporta
-      console.log('No score available, please add stamps to your passport and then resubmit.')
-      setNoScoreMessage('No score available, please submit your passport after you have added some stamps.')
+      console.log('No score available, please add stamps to your Passport and then resubmit.')
+      setNoScoreMessage('No score available, please submit your Passport after you have added some stamps.')
     }
   } catch (err) {
     console.log('error: ', err)
@@ -309,16 +309,16 @@ useEffect(() => {
 }, [])
 ```
 
-#### Submitting their passport
+#### Submitting their Passport
 
-The last piece of functionality we need to implement will be to allow a user to submit their passport for scoring.
+The last piece of functionality we need to implement will be to allow a user to submit their Passport for scoring.
 
 In this step, we'll be doing the following:
 
 1. Creating an API call to get the signing message from the Gitcoin Passport API
 2. We can then prompt the user with the signing message to sign a transaction
-3. Once the transaction is signed, we can send the signed message along with other parameters in a separate API call to submit their passport
-4. When submitting the passport, we include the following parameters
+3. Once the transaction is signed, we can send the signed message along with other parameters in a separate API call to submit their Passport
+4. When submitting the Passport, we include the following parameters
    1. Wallet address
    2. Scorer ID
    3. Signature
