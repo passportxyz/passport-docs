@@ -4,9 +4,7 @@ In this guide, you'll learn how to build a gated application with Next.js and Gi
 
 We'll be using the Gitcoin Passport API to do this. The API enables everything you need to easily build sybil resistance into your web or mobile application.
 
-To follow this tutorial, you'll first need to visit [https://scorer.gitcoin.co/](https://scorer.gitcoin.co/). Here, you'll create both an API key as well as a Community.
-
-The Community will be where you declare the scoring mechanism for your app.
+To follow this tutorial, you'll first need to visit [https://scorer.gitcoin.co/](https://scorer.gitcoin.co/). Here, you'll create both an API key as well as a Scorer. The Scorer will be where you declare the scoring mechanism for your app.
 
 #### Application flow
 
@@ -22,7 +20,7 @@ This is similar to how you might use Gitcoin passport in a real-world applicatio
 
 #### API Endpoints
 
-The API endpoint we'll be using is`https://api.scorer.gitcoin.co/`, you can view interactive API details at [https://api.scorer.gitcoin.co/docs#/](https://api.scorer.gitcoin.co/docs#/).
+The API endpoint we'll be using is `https://api.scorer.gitcoin.co/`, you can view interactive API details at [https://api.scorer.gitcoin.co/docs#/](https://api.scorer.gitcoin.co/docs#/).
 
 When sending a request to the Scorer API, the API key must be included as a header like this:
 
@@ -40,7 +38,7 @@ There are 3 main API endpoints we'll be using.
 This endpoint just returns the score for any given address.
 
 ```
-https://api.scorer.gitcoin.co/registry/score/${COMMUNITYID}/${address}
+https://api.scorer.gitcoin.co/registry/score/${SCORERID}/${address}
 ```
 
 2. Getting the signing message and nonce
@@ -53,7 +51,7 @@ https://api.scorer.gitcoin.co/registry/signing-message
 
 3. Submitting a passport
 
-Once the user has signed the message, we'll send a new request to this endpoint along with the address, Community ID, signature, and nonce.
+Once the user has signed the message, we'll send a new request to this endpoint along with the address, SCORER ID, signature, and nonce.
 
 ```
 https://api.scorer.gitcoin.co/registry/submit-passport
@@ -67,7 +65,7 @@ const response = await fetch(SUBMIT_PASSPORT_URI, {
   headers,
   body: JSON.stringify({
     address,
-    community: COMMUNITYID,
+    scorer: SCORERID,
     signature,
     nonce
   })
@@ -96,11 +94,11 @@ Next, change to the new directory and install `ethers`:
 npm install ethers
 ```
 
-Now, create a new file named `.env.local` and set the Gitcoin API Key and Community ID values:
+Now, create a new file named `.env.local` and set the Gitcoin API Key and Scorer ID values:
 
 ```
 NEXT_PUBLIC_GC_API_KEY=<your-api-key>
-NEXT_PUBLIC_GC_COMMUNITY_ID=<your-community-id>
+NEXT_PUBLIC_GC_SCORER_ID=<your-scorer-id>
 ```
 
 ### Imports and configuration
@@ -111,7 +109,7 @@ In this step, we'll be doing the following:
 
 1. Importing the [`ethers.js`](https://docs.ethers.org/v5/) library to interact with the user's EVM wallet
 2. Importing the `useState` and `useEffect` hooks from React to store local state and run some code after rendering
-3. Configuring variables for the Gitcoin Passport API Key, Community ID, API endpoints, and the point configuration for the app (the `thresholdNumber`)
+3. Configuring variables for the Gitcoin Passport API Key, Scorer ID, API endpoints, and the point configuration for the app (the `thresholdNumber`)
 4. Creating a variable to hold the header information that will be sent with the API calls
 
 Add the following code to `app/page.tsx`:
@@ -122,7 +120,7 @@ import { useState, useEffect } from 'react'
 import { ethers } from 'ethers'
 
 const APIKEY = process.env.NEXT_PUBLIC_GC_API_KEY
-const COMMUNITYID = process.env.NEXT_PUBLIC_GC_COMMUNITY_ID
+const SCORERID = process.env.NEXT_PUBLIC_GC_SCORER_ID
 
 // endpoint for submitting passport
 const SUBMIT_PASSPORT_URI = 'https://api.scorer.gitcoin.co/registry/submit-passport'
@@ -253,7 +251,7 @@ async function connect() {
 
 In this step, we'll be doing the following:
 
-1. Create a function to call the Gitcoin scorer API to get the user's score, passing in the Community ID and the user's address as request parameters.
+1. Create a function to call the Gitcoin Scorer API to get the user's score, passing in the Scorer ID and the user's address as request parameters.
 2. If the user has a score, we set it in the local state.
 3. If the user does not yet have a score, we set a message to be displayed to them asking them to create stamps and submit their passport.
 
@@ -264,7 +262,7 @@ async function checkPassport(currentAddress = address) {
   setScore('')
   setNoScoreMessage('')
   // 
-  const GET_PASSPORT_SCORE_URI = `https://api.scorer.gitcoin.co/registry/score/${COMMUNITYID}/${currentAddress}`
+  const GET_PASSPORT_SCORE_URI = `https://api.scorer.gitcoin.co/registry/score/${SCORERID}/${currentAddress}`
   try {
     const response = await fetch(GET_PASSPORT_SCORE_URI, {
       headers
@@ -322,7 +320,7 @@ In this step, we'll be doing the following:
 3. Once the transaction is signed, we can send the signed message along with other parameters in a separate API call to submit their passport
 4. When submitting the passport, we include the following parameters
    1. Wallet address
-   2. Community ID
+   2. Scorer ID
    3. Signature
    4. Nonce
 
@@ -357,7 +355,7 @@ Add the following 2 functions after the `checkPassport` function:
         headers,
         body: JSON.stringify({
           address,
-          community: COMMUNITYID,
+          scorer: SCORERID,
           signature,
           nonce
         })
