@@ -1,6 +1,6 @@
 # Endpoint Definition
 
-To use the Gitcoin Scorer API to score an Ethereum address, you need to have an account set up, a community configured, and your API keys. See our [**API Access**](api-access.md) guide if you haven't already done so.
+To use the Gitcoin Scorer API to score an Ethereum address, you need to have an account set up, a scorer configured, and your API keys. See our [**API Access**](api-access.md) guide if you haven't already done so.
 
 This page will walk you through interacting with the specific endpoints you'll need to integrate with the Scorer API. But the API does more! For more details, check out the [API documentation](https://api.scorer.gitcoin.co/docs).
 
@@ -47,7 +47,7 @@ To submit an ETH address for scoring, developers need to make an API call to the
 | Name      | Type | Required | Description                                                                                      |
 | --------- | ---- | -------- | ------------------------------------------------------------------------------------------------ |
 | address   | Text | True     | The wallet address                                                                               |
-| community | Text | True     | The community ID                                                                                 |
+| scorer    | Text | True     | The scorer ID                                                                                    |
 | signature | Text | False    | Signature received from the wallet                                                               |
 | nonce     | Text | False    | Nonce generated in the signing message. This is needed for requiring a signature before scoring. |
 
@@ -59,7 +59,7 @@ curl --request POST 'https://api.scorer.gitcoin.co/registry/submit-passport' \
   --header 'Content-Type: application/json' \
   --data-raw '{
     "address": "{Wallet address}",
-    "community": "{Community ID}",
+    "scorer": "{Scorer ID}",
     "signature": "",
     "nonce": "{Nonce}"
   }'
@@ -81,15 +81,15 @@ curl --request POST 'https://api.scorer.gitcoin.co/registry/submit-passport' \
 
 ### Get Scores
 
-Used to retrieve the score for an ETH address that has already been submitted or for addresses for a community.
+Used to retrieve the score for an ETH address that has already been submitted or for addresses for a scorer.
 
 To request the score of a single address:
 
-> * /registry/score/{community\_id}/{address}  -  to retrieve the score for a specific address
+> * /registry/score/{scorer\_id}/{address}  -  to retrieve the score for a specific address
 
 {% code title="Sample request" overflow="wrap" %}
 ```
-curl --request GET 'https://api.scorer.gitcoin.co/registry/score/{community_id}/{address}' \
+curl --request GET 'https://api.scorer.gitcoin.co/registry/score/{scorer_id}/{address}' \
     --header 'X-API-KEY: {API KEY}' \
     --header 'Accept: application/json' \
     --header 'Content-Type: application/json'
@@ -109,13 +109,13 @@ curl --request GET 'https://api.scorer.gitcoin.co/registry/score/{community_id}/
 ```
 {% endcode %}
 
-To request the scores for a community of addresses:
+To request the scores for a list of addresses:
 
-> /registry/score/{community\_id}  -  to retrieve the score for a list of addresses in the community
+> /registry/score/{scorer\_id}  -  to retrieve the score for a list of addresses in the scorer
 
 {% code title="Sample request" overflow="wrap" %}
 ```
-curl --location --request GET 'https://api.scorer.gitcoin.co/registry/score/{community_id}' \
+curl --location --request GET 'https://api.scorer.gitcoin.co/registry/score/{scorer_id}' \
 --header 'X-API-KEY: {API KEY}' \
 --header 'Accept: application/json' \
 --header 'Content-Type: application/json'

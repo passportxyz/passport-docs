@@ -39,7 +39,7 @@ All errors are returned in the form of JSON with a detail explaining the error
 | Invalid nonce                              | The nonce used in the submit passport API request could not be verified          |
 | Address does not match signature           | The signer could not be verified                                                 |
 | Invalid limit                              | The page limit of the Get Scores API request is greater than 1000                |
-| Unable to get score for provided community | Unable to validate that the community belongs to the account holding the API key |
+| Unable to get score for provided scorer ID | Unable to validate that the scorer ID belongs to the account holding the API key |
 | Unauthorized                               | X-API-Key was not specified in the header or an invalid X-API-Key was provided   |
 | Internal Server Error                      | Something went wrong on our end (this is rare)                                   |
 
