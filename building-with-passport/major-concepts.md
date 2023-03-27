@@ -13,7 +13,7 @@ When we talk about the "Passport Protocol", we are talking about the infrastruct
 
 There will be three ways for projects to integrate with the Protocol and gate their project:
 
-* The [Gitcoin Scorer API](https://app.gitbook.com/o/Aqbtj6s4OkLaygileCka/s/ttgfRNVjO2DcVvUNyst9/\~/changes/31/gitcoin-passport-sdk/scorer-api/\~/comments/ShtmZJpx8ConO0SXe5xV?context=post) (Preferred method)
+* The [Gitcoin Scorer API](scorer-api/) (Preferred method)
 * [The Passport SDK](passport-sdk-deprecated/getting-started.md) (Will be deprecated soon)
 * On-chain scores (coming soon)
 
