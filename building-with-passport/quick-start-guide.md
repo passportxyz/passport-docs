@@ -75,7 +75,7 @@ const response = await fetch(SUBMIT_PASSPORT_URI, {
   headers,
   body: JSON.stringify({
     address,
-    scorer: SCORER_ID,
+    scorer_id: SCORER_ID,
     signature,
     nonce
   })
@@ -365,7 +365,7 @@ async function submitPassport() {
       headers,
       body: JSON.stringify({
         address,
-        scorer: SCORER_ID,
+        scorer_id: SCORER_ID,
         signature,
         nonce
       })
