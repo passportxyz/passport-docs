@@ -29,7 +29,7 @@ Usage:
 * "Some examples of Passport-gated dApps include: Snapshot, Bankless Academy, and Gitcoin Grants."
 * "Because this community is gated with Gitcoin Passport, it is able to ask for pieces of proof of not just identity via services like BrightID, but also reputation via services like POAP."
 
-See **** the[ **Quick Start Guide**](quick-start-guide.md) **** to learn how to gate your project.
+See the[ **Quick Start Guide**](quick-start-guide.md) to learn how to gate your project.
 
 ### Stamps&#x20;
 
@@ -88,4 +88,3 @@ With Writer, you can issue your own verifiable credentials as well as retrieve s
 
 **Learn more about this library in the** [**"How to Passport-Gate Your Project (by Integrating the Passport SDK)"**](passport-sdk-deprecated/integrating-passport-in-your-dapp.md) **page.**
 
-****

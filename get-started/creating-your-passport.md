@@ -50,7 +50,7 @@ If you have questions about the privacy of your data, check out our FAQ:
 
 ## Presenting your Passport
 
-See [**Presenting Your Passport**](presenting-your-passport.md) **** to learn about when you might be asked to present your Passport.
+See [**Presenting Your Passport**](presenting-your-passport.md) to learn about when you might be asked to present your Passport.
 
 
 
