@@ -85,7 +85,7 @@ Used to retrieve the score for an ETH address that has already been submitted or
 
 To request the score of a single address:
 
-> * /registry/score/{scorer\_id}/{address}  -  to retrieve the score for a specific address
+> * /registry/score/{scorer\_id}/{address} - to retrieve the score for a specific address
 
 {% code title="Sample request" overflow="wrap" %}
 ```
@@ -111,7 +111,7 @@ curl --request GET 'https://api.scorer.gitcoin.co/registry/score/{scorer_id}/{ad
 
 To request the scores for a list of addresses:
 
-> /registry/score/{scorer\_id}  -  to retrieve the score for a list of addresses in the scorer
+> /registry/score/{scorer\_id} - to retrieve the score for a list of addresses in the scorer
 
 {% code title="Sample request" overflow="wrap" %}
 ```
@@ -139,8 +139,6 @@ curl --location --request GET 'https://api.scorer.gitcoin.co/registry/score/{sco
 }
 ```
 {% endcode %}
-
-
 
 ### Get Stamps
 
@@ -176,6 +174,38 @@ curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}' \
 ```
 {% endcode %}
 
+####
 
+#### Get Stamps
 
+Use this endpoint to fetch the passport for a specific address
 
+This endpoint will return a CursorPaginatedStampCredentialResponse.
+
+To request the stamps owned by a single address:
+
+> * /registry/stamps/{address}
+
+{% code title="Sample request" overflow="wrap" %}
+```
+curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}' \
+    --header 'X-API-KEY: {API KEY}' \
+    --header 'Accept: application/json' \
+    --header 'Content-Type: application/json'
+```
+{% endcode %}
+
+{% code title="Sample response" overflow="wrap" %}
+```json
+{
+  "next": "string",
+  "prev": "string",
+  "items": [
+    {
+      "version": "string",
+      "credential": {}
+    }
+  ]
+}
+```
+{% endcode %}
