@@ -139,3 +139,43 @@ curl --location --request GET 'https://api.scorer.gitcoin.co/registry/score/{sco
 }
 ```
 {% endcode %}
+
+
+
+### Get Stamps
+
+Use this endpoint to fetch the passport for a specific address
+
+This endpoint will return a CursorPaginatedStampCredentialResponse.
+
+To request the stamps owned by a single address:
+
+> * /registry/stamps/{address}
+
+{% code title="Sample request" overflow="wrap" %}
+```
+curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}' \
+    --header 'X-API-KEY: {API KEY}' \
+    --header 'Accept: application/json' \
+    --header 'Content-Type: application/json'
+```
+{% endcode %}
+
+{% code title="Sample response" overflow="wrap" %}
+```json
+{
+  "next": "string",
+  "prev": "string",
+  "items": [
+    {
+      "version": "string",
+      "credential": {}
+    }
+  ]
+}
+```
+{% endcode %}
+
+
+
+
