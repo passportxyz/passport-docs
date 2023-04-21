@@ -67,7 +67,7 @@ const response = await fetch(SUBMIT_PASSPORT_URI, {
   headers,
   body: JSON.stringify({
     address,
-    community: COMMUNITYID,
+    scorer_id: SCORER_ID,
     signature,
     nonce
   })
@@ -341,26 +341,25 @@ Add the following 2 functions after the `checkPassport` function:
     }
   }
 
-  async function submitPassport() {
-    setNoScoreMessage('')
-    try {
-      // call the API to get the signing message and the nonce
-      const { message, nonce } = await getSigningMessage()
-      const provider = new ethers.BrowserProvider(window.ethereum)
-      const signer = await provider.getSigner()
-      // ask the user to sign the message
-      const signature = await signer.signMessage(message)
-      
-      // call the API, sending the signing message, the signature, and the nonce
-      const response = await fetch(SUBMIT_PASSPORT_URI, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-          address,
-          community: COMMUNITYID,
-          signature,
-          nonce
-        })
+async function submitPassport() {
+  setNoScoreMessage('')
+  try {
+    // call the API to get the signing message and the nonce
+    const { message, nonce } = await getSigningMessage()
+    const provider = new ethers.BrowserProvider(window.ethereum)
+    const signer = await provider.getSigner()
+    // ask the user to sign the message
+    const signature = await signer.signMessage(message)
+    
+    // call the API, sending the signing message, the signature, and the nonce
+    const response = await fetch(SUBMIT_PASSPORT_URI, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        address,
+        scorer_id: SCORER_ID,
+        signature,
+        nonce
       })
 
       const data = await response.json()
