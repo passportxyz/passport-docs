@@ -13,6 +13,7 @@
 * [Presenting your Gitcoin Passport](get-started/presenting-your-passport.md)
 * [FAQ for Passport Holders](get-started/faq.md)
 * [Reading Passport stamps](get-started/reading-passport-stamps.md)
+* [Deduplicating stamps](get-started/deduplicating-stamps.md)
 
 ## BUILDING WITH PASSPORT
 
