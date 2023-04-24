@@ -6,6 +6,12 @@ You'll be using [Next.js](https://nextjs.org/) and the [Gitcoin Passport Scorer 
 
 To follow this tutorial, you'll first need to visit [https://scorer.gitcoin.co/](https://scorer.gitcoin.co/). Here, you'll create both an API key and a Scorer.
 
+### Video walkthrough
+
+This video walks through all the steps described on this page.
+
+{% embed url="https://youtu.be/bfkalDSvRDc" %}
+
 ### Creating a Scorer
 
 First, click `Sign in with Ethereum`. A prompt will appear to connect your wallet. In this guide we will use Metamask, but the principles are the same for all the wallet options. You will have to unlock your wallet and sign a message to access the scorer app.
