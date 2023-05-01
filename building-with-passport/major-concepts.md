@@ -40,7 +40,7 @@ See the Quick Start Guide to learn how to gate your project.
 
 ### Stamps
 
-Stamps are the key identity verification mechanism of Gitcoin Passport. A stamp is a verifiable credential from an identity provider that is collected in a Passport. Stamps are provided by a variety of web2 and web3 identity authenticators including Google, Facebook, BrightID, ENS, and Proof of Humanity. Custom stamps for particular communities are under development. Stamps do not store any personally identifiable information, only the verifiable credential issued by the identity authenticator.
+Stamps are the key identity verification mechanism of Gitcoin Passport. A stamp is a collection of one or more [verifiable credentials](major-concepts.md#verifiable-credentials-vcs) from an identity provider that is collected in a Passport. Stamps are provided by a variety of web2 and web3 identity authenticators including Google, Facebook, BrightID, ENS, and Proof of Humanity. Custom stamps for particular communities are under development. Stamps do not store any personally identifiable information, only the verifiable credentials issued by the identity authenticator.
 
 Passport aggregates stamps and assigns each stamp a different weight according to the needs of a particular community. This weight is used to calculate the cost of forgery of an identity, a score which reflects the credibility of a potential participant’s online identity. For example, a community for developers could assign a greater weight to a Github stamp, resulting in higher scores for those who have Github stamps.
 
@@ -80,6 +80,14 @@ The code snippet below shows a single stamp. This particular stamp proves owners
     }
     }
 ```
+
+###
+
+### Verifiable credentials (VCs)
+
+Each stamp is composed of one or more "verifiable credential". These credentials are individual pieces of evidence that can be tested in order to issue a stamp. For example, the Github stamp includes VCs for several different properties of a user's Github account, including the Github OAuth (i.e. can the user sign in to the account) and the number of followers, forks and stars the user has accumulated. Together, these VCs comprise the Github Passport stamp.
+
+###
 
 ### Duplication of Stamps
 

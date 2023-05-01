@@ -16,7 +16,7 @@ Overview of how the Gitcoin Passport technology works, how a new Passport DID is
 
 Major concepts to know when developing with Gitcoin Passport, and a guide to how to use our Scorer API to verify identity.&#x20;
 
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><a href="building-with-passport/quick-start-guide.md"><strong>Quick Start Guide</strong></a></td><td></td><td></td><td><a href="building-with-passport/quick-start-guide.md">quick-start-guide.md</a></td></tr><tr><td><a href="building-with-passport/major-concepts/"><strong>Major Concepts</strong></a></td><td></td><td></td><td><a href="building-with-passport/major-concepts/">major-concepts</a></td></tr><tr><td><a href="building-with-passport/scorer-api/"><strong>Scorer API</strong></a></td><td></td><td></td><td><a href="building-with-passport/scorer-api/">scorer-api</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><a href="building-with-passport/quick-start-guide.md"><strong>Quick Start Guide</strong></a></td><td></td><td></td><td><a href="building-with-passport/quick-start-guide.md">quick-start-guide.md</a></td></tr><tr><td><a href="building-with-passport/major-concepts.md"><strong>Major Concepts</strong></a></td><td></td><td></td><td><a href="building-with-passport/major-concepts.md">major-concepts.md</a></td></tr><tr><td><a href="building-with-passport/scorer-api/"><strong>Scorer API</strong></a></td><td></td><td></td><td><a href="building-with-passport/scorer-api/">scorer-api</a></td></tr></tbody></table>
 
 
 
