@@ -5,6 +5,7 @@
 * [Using the Passport Docs](README.md)
 * [Why Gitcoin Passport?](overview/readme.md)
 * [Who is Gitcoin Passport for?](overview/presenting-your-passport.md)
+* [When to use Gitcoin Passport](overview/when-to-use-gitcoin-passport.md)
 
 ## GET STARTED
 
