@@ -12,17 +12,17 @@
 * [Creating your Gitcoin Passport](get-started/creating-your-passport.md)
 * [Presenting your Gitcoin Passport](get-started/presenting-your-passport.md)
 * [FAQ for Passport Holders](get-started/faq.md)
-* [Reading Passport stamps](get-started/reading-passport-stamps.md)
-* [Deduplicating stamps](get-started/deduplicating-stamps.md)
 
 ## BUILDING WITH PASSPORT
 
 * [Quick Start Guide](building-with-passport/quick-start-guide.md)
-* [Major Concepts](building-with-passport/major-concepts.md)
+* [Major Concepts](building-with-passport/major-concepts/README.md)
+  * [Deduplicating stamps](building-with-passport/major-concepts/deduplicating-stamps.md)
 * [Scorer API](building-with-passport/scorer-api/README.md)
   * [API Access](building-with-passport/scorer-api/api-access.md)
   * [Status and error codes](building-with-passport/scorer-api/status-and-error-codes.md)
   * [Endpoint Definition](building-with-passport/scorer-api/endpoint-definition.md)
+  * [Reading Passport stamps](building-with-passport/scorer-api/reading-passport-stamps.md)
 * [Passport SDK (deprecated)](building-with-passport/passport-sdk-deprecated/README.md)
   * [Getting Started with the Passport SDK](building-with-passport/passport-sdk-deprecated/getting-started.md)
   * [How to Passport-Gate Your Project (by Integrating the Passport SDK)](building-with-passport/passport-sdk-deprecated/integrating-passport-in-your-dapp.md)

@@ -14,7 +14,7 @@ An [HTTP GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) req
 /registry/stamps/{address}
 ```
 
-The response will be in the form of a [`CursorPaginatedStampCredentialResponse`](../building-with-passport/scorer-api/endpoint-definition.md), which is a JSON object of the following format:
+The response will be in the form of a [`CursorPaginatedStampCredentialResponse`](endpoint-definition.md), which is a JSON object of the following format:
 
 ```json
 {
@@ -33,7 +33,7 @@ The `credential` field will be populated with the stamps.
 
 
 
-**Note** that to be able to retrieve the stamps using this endpoint, the Passport _must already have been submitted_ to the registry using the `registry/submit-passport` endpoint, which in turn requires a message returned from the `registry/signing-message` endpoint to be signed by the Passport holder's Ethereum account. This is possible using raw API requests but requires offline message signing. It is more commonly built into the flow of an app using a package such as `ethers.js`. There are instructions for how to do this in the [Quick Start](../building-with-passport/quick-start-guide.md) guide.
+**Note** that to be able to retrieve the stamps using this endpoint, the Passport _must already have been submitted_ to the registry using the `registry/submit-passport` endpoint, which in turn requires a message returned from the `registry/signing-message` endpoint to be signed by the Passport holder's Ethereum account. This is possible using raw API requests but requires offline message signing. It is more commonly built into the flow of an app using a package such as `ethers.js`. There are instructions for how to do this in the [Quick Start](../quick-start-guide.md) guide.
 
 
 
