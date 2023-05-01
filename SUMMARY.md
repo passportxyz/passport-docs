@@ -36,3 +36,7 @@
 * [Style Guide](getting-involved/style-guide.md)
 * [Getting Involved](getting-involved/getting-involved.md)
 * [Passport Github Projects](getting-involved/passport-github-projects.md)
+
+## Case Studies
+
+* [Bankless Academy](case-studies/bankless-academy.md)
