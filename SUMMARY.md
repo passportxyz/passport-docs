@@ -10,6 +10,7 @@
 
 * [How it works](get-started/how-it-works.md)
 * [Creating your Gitcoin Passport](get-started/creating-your-passport.md)
+* [Collecting stamps](get-started/collecting-stamps.md)
 * [Presenting your Gitcoin Passport](get-started/presenting-your-passport.md)
 * [FAQ for Passport Holders](get-started/faq.md)
 
