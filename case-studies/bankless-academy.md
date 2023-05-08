@@ -4,7 +4,7 @@ description: A Gitcoin Passport case study
 
 # Bankless Academy
 
-![](../.gitbook/assets/bankless.jpg)
+<figure><img src="../.gitbook/assets/bankless.jpg" alt=""><figcaption></figcaption></figure>
 
 by [Rohit Malekar](https://go.gitcoin.co/blog/author/rohit-malekar)
 
