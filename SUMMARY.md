@@ -2,7 +2,8 @@
 
 ## OVERVIEW
 
-* [Using the Passport Docs](README.md)
+* [Introducing Gitcoin Passport](README.md)
+* [Using the Passport Docs](<README (1).md>)
 * [Why Gitcoin Passport?](overview/readme.md)
 * [Who is Gitcoin Passport for?](overview/presenting-your-passport.md)
 * [When to use Gitcoin Passport](overview/when-to-use-gitcoin-passport.md)

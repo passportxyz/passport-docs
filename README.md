@@ -1,35 +1,20 @@
----
-description: Explore our guides and examples of how to integrate with Gitcoin Passport
----
+# Introducing Gitcoin Passport
 
-# Using the Passport Docs
+Gitcoin Passport is an identity verification application. It enables you to collect [verifiable credentials](https://decentralized-id.com/web-standards/w3c/wg/vc/verifiable-credentials/) that prove your identity and trustworthiness without exposing personally identifying information. Apps and organizations can then use your Passport to coordinate your rights and responsibilities.
 
-### Get Started&#x20;
+To coordinate and scale an open internet, we need tools like Gitcoin Passport to enable successful and trustworthy collective decision-making that is not vulnerable to bots and bad actors.
 
-Overview of how the Gitcoin Passport technology works, how a new Passport DID is created, and how Passports are evaluated and scored when users present them.&#x20;
-
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><a href="get-started/how-it-works.md"><strong>How Gitcoin Passport Works</strong></a></td><td></td><td></td><td><a href="get-started/how-it-works.md">how-it-works.md</a></td></tr><tr><td><a href="get-started/creating-your-passport.md"><strong>Creating a new Gitcoin Passport</strong></a></td><td></td><td></td><td><a href="get-started/creating-your-passport.md">creating-your-passport.md</a></td></tr><tr><td><a href="get-started/presenting-your-passport.md"><strong>Presenting a new Gitcoin Passport</strong></a></td><td></td><td></td><td></td></tr></tbody></table>
+**Gitcoin Passport is your citizenship pass for the decentralized internet.**
 
 
 
-### Building with Passports
-
-Major concepts to know when developing with Gitcoin Passport, and a guide to how to use our Scorer API to verify identity.&#x20;
-
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><a href="building-with-passport/quick-start-guide.md"><strong>Quick Start Guide</strong></a></td><td></td><td></td><td><a href="building-with-passport/quick-start-guide.md">quick-start-guide.md</a></td></tr><tr><td><a href="building-with-passport/major-concepts.md"><strong>Major Concepts</strong></a></td><td></td><td></td><td><a href="building-with-passport/major-concepts.md">major-concepts.md</a></td></tr><tr><td><a href="building-with-passport/scorer-api/"><strong>Scorer API</strong></a></td><td></td><td></td><td><a href="building-with-passport/scorer-api/">scorer-api</a></td></tr></tbody></table>
+<figure><img src=".gitbook/assets/passport-hero.png" alt=""><figcaption></figcaption></figure>
 
 
 
-### Integrate a new Stamp
+Navigate these docs using the menu in the left hand sidebar. You can start by visiting [**Using the Passport docs**](<README (1).md>) for guidance.
 
-Overview of how to add custom identity verification requirements.&#x20;
+Alternatively, you can skip straight to learning more about how [**Gitcoin Passport works**](get-started/how-it-works.md)**,** or start participating right away by following the instructions on the [**Create your Gitcoin passport**](get-started/creating-your-passport.md) page.
 
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><a href="stamps/integrating-a-new-stamp.md"><strong>Guide to creating a new stamp</strong></a></td><td></td><td></td><td><a href="stamps/integrating-a-new-stamp.md">integrating-a-new-stamp.md</a></td></tr></tbody></table>
+If you are a developer, you can build Gitcoin Passport into your app now - our [**Quick Start guide**](building-with-passport/quick-start-guide.md) will get you started.
 
-
-
-### Get Involved
-
-How to work with exciting projects in the Gitcoin Passport builder community.&#x20;
-
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><a href="getting-involved/getting-involved.md"><strong>Getting started with the community</strong></a></td><td></td><td></td><td><a href="getting-involved/getting-involved.md">getting-involved.md</a></td></tr><tr><td><a href="getting-involved/passport-github-projects.md"><strong>Sample Passport Projects</strong></a></td><td></td><td></td><td><a href="getting-involved/passport-github-projects.md">passport-github-projects.md</a></td></tr></tbody></table>
