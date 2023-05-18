@@ -26,6 +26,8 @@
   * [Status and error codes](building-with-passport/scorer-api/status-and-error-codes.md)
   * [Endpoint Definition](building-with-passport/scorer-api/endpoint-definition.md)
   * [Reading Passport stamps](get-started/reading-passport-stamps.md)
+* [Integration Guides](building-with-passport/integration-guides/README.md)
+  * [Integrating stamps and scorers](building-with-passport/integration-guides/integrating-stamps-and-scorers.md)
 * [Passport SDK (deprecated)](building-with-passport/passport-sdk-deprecated/README.md)
   * [Getting Started with the Passport SDK](building-with-passport/passport-sdk-deprecated/getting-started.md)
   * [How to Passport-Gate Your Project (by Integrating the Passport SDK)](building-with-passport/passport-sdk-deprecated/integrating-passport-in-your-dapp.md)
