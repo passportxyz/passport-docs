@@ -24,7 +24,7 @@ To see what each stamp looks like, scroll down to the stamps section. When you a
 
 The "Passport Protocol" refers to the infrastructure that enables web3 citizens to create their own Passport, prove their decentralized identity and access Passport-gated projects. It is all the tooling that enables developers to build Passport gating into their apps.
 
-Web3 citizens interface with the Passport Protocol through the Passport holder dApp at passport.gitcoin.co. Developers can use the [Scorer API](https://api.scorer.gitcoin.co) to easily integrate Gitcoin Passport into their apps.
+Web3 citizens interface with the Passport Protocol through the Passport holder dApp at passport.gitcoin.co. Developers can use the [Scorer API](https://api.scorer.gitcoin.co/docs) to easily integrate Gitcoin Passport into their apps.
 
 ### Passport-Gating
 
