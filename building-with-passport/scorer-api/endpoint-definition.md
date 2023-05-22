@@ -44,12 +44,12 @@ To submit an ETH address for scoring, developers need to make an API call to the
 
 #### Payload
 
-| Name      | Type | Required | Description                                                                                      |
-| --------- | ---- | -------- | ------------------------------------------------------------------------------------------------ |
-| address   | Text | True     | The wallet address                                                                               |
-| scorer    | Text | True     | The scorer ID                                                                                    |
-| signature | Text | False    | Signature received from the wallet                                                               |
-| nonce     | Text | False    | Nonce generated in the signing message. This is needed for requiring a signature before scoring. |
+| Name       | Type | Required | Description                                                                                      |
+| ---------- | ---- | -------- | ------------------------------------------------------------------------------------------------ |
+| address    | Text | True     | The wallet address                                                                               |
+| scorer\_id | Text | True     | The scorer ID                                                                                    |
+| signature  | Text | False    | Signature received from the wallet                                                               |
+| nonce      | Text | False    | Nonce generated in the signing message. This is needed for requiring a signature before scoring. |
 
 {% code title="Sample request" overflow="wrap" %}
 ```
@@ -59,7 +59,7 @@ curl --request POST 'https://api.scorer.gitcoin.co/registry/submit-passport' \
   --header 'Content-Type: application/json' \
   --data-raw '{
     "address": "{Wallet address}",
-    "scorer": "{Scorer ID}",
+    "scorer_id": "{Scorer ID}",
     "signature": "",
     "nonce": "{Nonce}"
   }'
