@@ -28,7 +28,7 @@ Web3 citizens interface with the Passport Protocol through the Passport holder d
 
 ### Passport-Gating
 
-"Passport gating" means integrating the Passport Protocol (e.g. Gitcoin Scorer API) into an app for the purpose of screening accounts to keep out bots, bad actors, or simply real people who don't meet a certain threshold of trustworthiness.
+"Passport gating" means integrating the Passport Protocol ed instances of e.gf. and into an app for the purpose of screening accounts to keep out bots, bad actors, or simply real people who don't meet a certain threshold of trustworthiness.
 
 **Usage:**
 
@@ -85,22 +85,21 @@ The code snippet below shows a single stamp. This particular stamp proves owners
 
 ### Verifiable credentials (VCs)
 
-Each stamp is composed of one or more "verifiable credential". These credentials are individual pieces of evidence that can be tested in order to issue a stamp. For example, the Github stamp includes VCs for several different properties of a user's Github account, including the Github OAuth (i.e. can the user sign in to the account) and the number of followers, forks and stars the user has accumulated. Together, these VCs comprise the Github Passport stamp.
+Each stamp is composed of one or more "verifiable credential". These credentials are individual pieces of evidence that can be tested in order to issue a stamp. For example, the Github stamp includes VCs for several different properties of a user's Github account, including the Github OAuth (can the user sign in to the account) and the number of followers, forks and stars the user has accumulated. Together, these VCs comprise the Github Passport stamp.
 
 ###
 
 ### Duplication of Stamps
 
-The Passport itself does not require a unique underlying account to issue a VC. This means that any number of wallets can create Passports that link to the same underlying identity.
+The Passport itself does not require a unique underlying account to issue a VC. This means that any number of wallets can create Passports that link to the same underlying identity. While it is fine for an honest user to have multiple Passports, for example to maintain different user profiles (for example "home" and "work") it is not acceptable to use the same credential multiple times to influence a single outcome. Passport is built to support contextual identity so you can maintain Passports that you use within specific communities. It's also important for recoverability that stamps are not bound to a single Ethereum address - otherwise losing access to your wallet means losing the ability to prove your identity using the stamps that had previously been tied to it.
 
-The choice here is twofold:
+To enable users to maintain distinct personas is different communities, but simultaneously prevent dishonest multiplication of stamps we have added a `hash` field to the Passport stamps.
 
-* Binding a stamp to a wallet creates recoverability issues. What if you lose access to your wallet? The underlying stamp would be lost with it, and you wouldn't be able to link your identity providers to a new wallet
-* We have built Passport to support contextual identity, you may have a passport that you use within one community, and another you use elsewhere.
+This `hash` is a unique identifier that is generated for all VCs issued by the Gitcoin server. It allows a stamp to be uniquely identified, so a particular app can check that it has only been used once, while preserving anonymity.
 
-Because multiple passports may use the same underlying service for generating a stamp we have added the hash field into our stamps. This hash is a unique identifier that is generated for all VCs issues by the Gitcoin IAM, and provides a unique identifier for the underlying account while preserving anonymity.
+As a developer, you don't need to implement any logic for deduplicating stamps if you use the default scorer. The deduplication is done server-side. However, if you are building a custom scorer you may want to store the hashes and deduplicate stamps yourself to prevent users from submitting the same set of stamps in multiple Passports.
 
-As a developer, you will probably want to store the hashes and dedupe the stamps you are considering in your scoring process to avoid folks submitting the same stamp attached to multiple passports.
+More details about Passport deduplication can be found on our [Deduplicating Stamps](../get-started/deduplicating-stamps.md) page.
 
 ### Streams
 
