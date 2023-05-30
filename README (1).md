@@ -10,7 +10,7 @@ You can navigate these docs using the sidebar menu, or use the links below to go
 
 ### Learn More
 
-<table data-view="cards"><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td><a href="building-with-passport/major-concepts.md"><mark style="color:blue;"><strong>Major Concepts</strong></mark></a></td><td></td><td>Understand the main concepts underpinning Gitcoin Passport</td></tr><tr><td><a href="get-started/how-it-works.md"><mark style="color:blue;"><strong>How Passport works</strong></mark></a></td><td></td><td>Learn the basics of how Passport works under the hood</td></tr><tr><td><a href="overview/presenting-your-passport.md"><mark style="color:blue;"><strong>Who Passport is for</strong></mark></a></td><td></td><td>Discover who benefits from Gitcoin Passport</td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td><a href="building-with-passport/major-concepts.md"><mark style="color:blue;"><strong>Major Concepts</strong></mark></a></td><td></td><td>Understand the main concepts underpinning Gitcoin Passport</td></tr><tr><td><a href="building-with-passport/how-it-works.md"><mark style="color:blue;"><strong>How Passport works</strong></mark></a></td><td></td><td>Learn the basics of how Passport works under the hood</td></tr><tr><td><a href="overview/presenting-your-passport.md"><mark style="color:blue;"><strong>Who Passport is for</strong></mark></a></td><td></td><td>Discover who benefits from Gitcoin Passport</td></tr></tbody></table>
 
 ### Start using Passport&#x20;
 

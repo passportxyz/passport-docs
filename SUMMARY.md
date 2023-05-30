@@ -10,7 +10,6 @@
 
 ## GET STARTED
 
-* [How it works](get-started/how-it-works.md)
 * [Creating your Gitcoin Passport](get-started/creating-your-passport.md)
 * [Collecting stamps](get-started/collecting-stamps.md)
 * [Presenting your Gitcoin Passport](get-started/presenting-your-passport.md)
@@ -19,6 +18,7 @@
 ## BUILDING WITH PASSPORT
 
 * [Quick Start Guide](building-with-passport/quick-start-guide.md)
+* [How Passport works](building-with-passport/how-it-works.md)
 * [Major Concepts](building-with-passport/major-concepts.md)
   * [Deduplicating stamps](get-started/deduplicating-stamps.md)
 * [Scorer API](building-with-passport/scorer-api/README.md)
