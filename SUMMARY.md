@@ -33,7 +33,7 @@
   * [Getting Started with the Passport SDK](building-with-passport/passport-sdk-deprecated/getting-started.md)
   * [How to Passport-Gate Your Project (by Integrating the Passport SDK)](building-with-passport/passport-sdk-deprecated/integrating-passport-in-your-dapp.md)
 
-## STAMPS
+## Stamps
 
 * [Creating a new Stamp](stamps/integrating-a-new-stamp.md)
 
