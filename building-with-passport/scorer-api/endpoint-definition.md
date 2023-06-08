@@ -1,33 +1,47 @@
 # Endpoint Definition
 
-To use the Gitcoin Scorer API to score an Ethereum address, you need to have an account set up, a scorer configured, and your API keys. See our [**API Access**](api-access.md) guide if you haven't already done so.
+To use the Gitcoin Scorer API to score an Ethereum address, you need to have a Scorer app configured, an associated Scorer ID, and your API keys.&#x20;
 
-This page will walk you through interacting with the specific endpoints you'll need to integrate with the Scorer API. But the API does more! For more details, check out the [API documentation](https://api.scorer.gitcoin.co/docs).
+Learn more about these credentials from our [API Access](api-access.md) guide.
 
-### Getting a Wallet's Passport Score
+### Available endpoints
 
-To submit an Ethereum wallet address for scoring, follow these steps:
+To get a Passport score from an ETH address, follow these steps:
 
-1. Retrieve a challenge message from the scorer.
-2. Have the user sign the challenge.
-3. Submit the Ethereum address and the signed challenge to the scorer.
+1. **Optional:** [Retrieve a signing message from the Scorer](endpoint-definition.md#retrieve-a-signing-message)\
+   `GET /registry/signing-message`
+2. [Submit the Ethereum address to the Scorer](endpoint-definition.md#submit-for-scoring)\
+   `POST /registry/submit-passport`
+3. [Retrieve the Passport score for one or multiple addresses](endpoint-definition.md#get-scores)\
+   `GET /registry/score/{scorer_id}/{address}`\
+   `GET /registry/score/{scorer_id}`
 
-### Signing Message
+You can also receive the specific Stamps data:&#x20;
 
-> * GET /registry/signing-message
+* [Receive Stamps connected to one or multiple submitted Passports\
+  ](endpoint-definition.md#get-stamps)`GET /registry/stamps/{address}`
+* [Receive all Stamps available in Passport](endpoint-definition.md#get-stamps-metadata) \[Beta]\
+  `GET /registry/stamp-metadata`
 
-This endpoint returns a message verifying the agreement to submit your wallet address in order to score the passport and a nonce that will be used to verify the authenticity of the signed message. This endpoint is necessary if you want to require a signature while scoring.
+
+
+### Retrieve a signing message
+
+This endpoint returns a message verifying the agreement to submit a wallet address for scoring, and a `nonce` that can be used to verify the authenticity of the signed message.&#x20;
+
+You don't need to get a signature from this endpoint, but you do need a signature from the wallet you are scoring that proves that the user owns the wallet.&#x20;
+
+> GET /registry/signing-message
 
 {% code title="Sample request" overflow="wrap" %}
 ```sh
 curl --location \
     --request GET 'https://api.scorer.gitcoin.co/registry/signing-message' \
-    --header 'X-API-KEY: {API KEY}' \
-    --header 'Accept: application/json'
+    --header 'X-API-KEY: {API KEY}'
 ```
 {% endcode %}
 
-{% code title="Sample response (200 OK)" overflow="wrap" lineNumbers="true" %}
+{% code title="Sample response" overflow="wrap" lineNumbers="true" %}
 ```json
 {
     "message": "I hereby agree to submit my address in order to score my associated Gitcoin Passport from Ceramic.\n\nNonce: {Nonce}\n",
@@ -36,37 +50,21 @@ curl --location \
 ```
 {% endcode %}
 
-### Submit Passport
 
-To submit an ETH address for scoring, developers need to make an API call to the following endpoint
 
-> * POST /registry/submit-passport
+### Submit for scoring
 
-#### Payload
+Before receiving a Passport score, developers need to submit an Ethereum address to their Scorer.
 
-| Name       | Type | Required | Description                                                                                      |
-| ---------- | ---- | -------- | ------------------------------------------------------------------------------------------------ |
-| address    | Text | True     | The wallet address                                                                               |
-| scorer\_id | Text | True     | The scorer ID                                                                                    |
-| signature  | Text | False    | Signature received from the wallet                                                               |
-| nonce      | Text | False    | Nonce generated in the signing message. This is needed for requiring a signature before scoring. |
+To do so, developers need to POST the relevant Ethereum address and their Scorer ID to this endpoint.&#x20;
 
-{% code title="Sample request" overflow="wrap" %}
-```
-curl --request POST 'https://api.scorer.gitcoin.co/registry/submit-passport' \
-  --header 'X-API-KEY: {API KEY}' \
-  --header 'Accept: application/json' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-    "address": "{Wallet address}",
-    "scorer_id": "{Scorer ID}",
-    "signature": "",
-    "nonce": "{Nonce}"
-  }'
-```
-{% endcode %}
+> POST /registry/submit-passport
 
-{% code title="Sample Response (200 OK)" overflow="wrap" lineNumbers="true" %}
+#### JSON body parameters
+
+<table><thead><tr><th width="174">Name</th><th width="99">Type</th><th width="106">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>address</code></td><td>Text</td><td>Yes</td><td>The wallet address</td></tr><tr><td><code>scorer_id</code></td><td>Text</td><td>Yes</td><td>The Scorer ID</td></tr><tr><td><code>signature</code></td><td>Text</td><td>No</td><td>Signature received from the wallet</td></tr><tr><td><code>nonce</code></td><td>Text</td><td>No</td><td>Nonce generated in the signing message. This is needed for requiring a signature before scoring.</td></tr></tbody></table>
+
+{% code title="Sample Response" overflow="wrap" lineNumbers="true" %}
 ```json
 {
     "address": "{address}",
@@ -79,46 +77,36 @@ curl --request POST 'https://api.scorer.gitcoin.co/registry/submit-passport' \
 ```
 {% endcode %}
 
-### Get Scores
 
-Used to retrieve the score for an ETH address that has already been submitted or for addresses for a scorer.
 
-To request the score of a single address:
+### Get scores
 
-> * /registry/score/{scorer\_id}/{address} - to retrieve the score for a specific address
+You must submit any Passports you'd like to request a score for via the Submit for scoring endpoint before successfully receiving their scores via these endpoints.
+
+Use these endpoints to retrieve the score for one Ethereum address, or all Ethereum addresses that have been submitted to a Scorer.&#x20;
+
+\
+To request the score of a specified address:
+
+> GET /registry/score/{scorer\_id}/{address}
 
 {% code title="Sample request" overflow="wrap" %}
 ```
 curl --request GET 'https://api.scorer.gitcoin.co/registry/score/{scorer_id}/{address}' \
-    --header 'X-API-KEY: {API KEY}' \
-    --header 'Accept: application/json' \
-    --header 'Content-Type: application/json'
+    --header 'X-API-KEY: {API KEY}'
 ```
 {% endcode %}
 
-{% code title="Sample response" overflow="wrap" %}
-```json
-{
-    "address": "{address}",
-    "score": "{score}",
-    "status": "DONE",
-    "last_score_timestamp": "2023-02-03T12:08:21.735838+00:00",
-    "evidence": null,
-    "error": null
-}
-```
-{% endcode %}
 
-To request the scores for a list of addresses:
 
-> /registry/score/{scorer\_id} - to retrieve the score for a list of addresses in the scorer
+To request the scores for all addresses that have been submitted to a Scorer:
+
+> GET /registry/score/{scorer\_id}
 
 {% code title="Sample request" overflow="wrap" %}
 ```
 curl --location --request GET 'https://api.scorer.gitcoin.co/registry/score/{scorer_id}' \
---header 'X-API-KEY: {API KEY}' \
---header 'Accept: application/json' \
---header 'Content-Type: application/json'
+--header 'X-API-KEY: {API KEY}'
 ```
 {% endcode %}
 
@@ -133,29 +121,39 @@ curl --location --request GET 'https://api.scorer.gitcoin.co/registry/score/{sco
             "last_score_timestamp": "{timestamp}",
             "evidence": null,
             "error": null
+        },
+        {
+            "address": "{wallet}",
+            "score": "{score}",
+            "status": "DONE",
+            "last_score_timestamp": "{timestamp}",
+            "evidence": null,
+            "error": null
         }
     ],
-    "count": 1
+    "count": 2
 }
 ```
 {% endcode %}
+
+
 
 ### Get Stamps
 
-Use this endpoint to fetch the passport for a specific address
+Use this endpoint to request all Stamps that have been connected to an Ethereum address.&#x20;
 
-This endpoint will return a CursorPaginatedStampCredentialResponse.
+If you would like to retrieve the metadata for all available Stamps, please use the [Get Stamps metadata](endpoint-definition.md#get-stamps-metadata) endpoint.&#x20;
 
-To request the stamps owned by a single address:
+> GET /registry/stamps/{address}
 
-> * /registry/stamps/{address}
+#### Query parameters
+
+<table><thead><tr><th width="225">Name</th><th width="105.33333333333331">Required</th><th></th></tr></thead><tbody><tr><td><code>include_metadata</code></td><td>No</td><td>[Beta] Returns optional <code>metadata</code> object with additional details about connected Stamps.</td></tr></tbody></table>
 
 {% code title="Sample request" overflow="wrap" %}
 ```
-curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}' \
-    --header 'X-API-KEY: {API KEY}' \
-    --header 'Accept: application/json' \
-    --header 'Content-Type: application/json'
+curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?include_metadata=true' \
+    --header 'X-API-KEY: {API KEY}'
 ```
 {% endcode %}
 
@@ -167,45 +165,54 @@ curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}' \
   "items": [
     {
       "version": "string",
-      "credential": {}
+      "credential": {},
+      "metadata": {}
     }
   ]
 }
 ```
 {% endcode %}
 
-####
 
-#### Get Stamps
 
-Use this endpoint to fetch the passport for a specific address
+### Get Stamps metadata
 
-This endpoint will return a CursorPaginatedStampCredentialResponse.
+Use this endpoint to request all Stamps available on Passport.&#x20;
 
-To request the stamps owned by a single address:
+If you would like to retrieve just the Stamps that are connected to a specified Ethereum address, please use the [Get Stamps](endpoint-definition.md#get-stamps) endpoint.
 
-> * /registry/stamps/{address}
+> GET /registry/stamp-metadata
 
 {% code title="Sample request" overflow="wrap" %}
 ```
-curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}' \
-    --header 'X-API-KEY: {API KEY}' \
-    --header 'Accept: application/json' \
-    --header 'Content-Type: application/json'
+curl --request GET 'https://api.scorer.gitcoin.co/registry/stamp-metadata' \
+    --header 'X-API-KEY: {API KEY}'
 ```
 {% endcode %}
 
 {% code title="Sample response" overflow="wrap" %}
 ```json
-{
-  "next": "string",
-  "prev": "string",
-  "items": [
-    {
-      "version": "string",
-      "credential": {}
-    }
-  ]
-}
+[
+  {
+    "id": "string",
+    "icon": "string",
+    "name": "string",
+    "description": "string",
+    "connectMessage": "string",
+    "groups": [
+      {
+        "name": "string",
+        "stamps": [
+          {
+            "name": "string",
+            "description": "string",
+            "hash": "string"
+          }
+        ]
+      }
+    ]
+  }
+]
 ```
 {% endcode %}
+
