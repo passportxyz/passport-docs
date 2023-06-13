@@ -175,7 +175,7 @@ curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?incl
 
 
 
-### Get Stamps metadata
+### Get Stamps metadata \[Beta]
 
 Use this endpoint to request all Stamps available on Passport.&#x20;
 

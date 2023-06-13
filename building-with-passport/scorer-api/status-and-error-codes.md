@@ -7,8 +7,6 @@ description: >-
 
 # Status and error codes
 
-More detailed information about the API endpoints and errror and status codes can be found at the OpenAPI documentation for the Scorer API: [https://api.scorer.gitcoin.co/docs](https://api.scorer.gitcoin.co/docs)
-
 ### HTTP Status codes <a href="#errors-http-status-codes" id="errors-http-status-codes"></a>
 
 | Code | Title                 | Description                     |
@@ -28,7 +26,7 @@ All errors are returned in the form of JSON with a detail explaining the error
 
 > Example error response.
 
-```
+```json
   {
     "detail": "string"
   }
@@ -36,11 +34,11 @@ All errors are returned in the form of JSON with a detail explaining the error
 
 | Error Detail                               | Description                                                                      |
 | ------------------------------------------ | -------------------------------------------------------------------------------- |
-| Invalid nonce                              | The nonce used in the submit passport API request could not be verified          |
+| Invalid nonce                              | The `nonce` used in the submit Scorer API request could not be verified          |
 | Address does not match signature           | The signer could not be verified                                                 |
-| Invalid limit                              | The page limit of the Get Scores API request is greater than 1000                |
-| Unable to get score for provided scorer ID | Unable to validate that the scorer ID belongs to the account holding the API key |
-| Unauthorized                               | X-API-Key was not specified in the header or an invalid X-API-Key was provided   |
-| Internal Server Error                      | Something went wrong on our end (this is rare)                                   |
+| Invalid limit                              | The page limit of the Get Scorer API request is greater than 1000                |
+| Unable to get score for provided Scorer ID | Unable to validate that the Scorer ID belongs to the account holding the API key |
+| Unauthorized                               | `X-API-Key` was not specified in the header or an invalid API key was provided   |
+| Internal Server Error                      | Something went wrong on our end                                                  |
 
-More detailed information about the API endpoints and errror and status codes can be found at the OpenAPI documentation for the Scorer API: [https://api.scorer.gitcoin.co/docs](https://api.scorer.gitcoin.co/docs)
+More detailed information about the API endpoints and error and status codes can be found in the OpenAPI documentation for the Scorer API: [https://api.scorer.gitcoin.co/docs](https://api.scorer.gitcoin.co/docs)

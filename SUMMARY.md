@@ -26,7 +26,7 @@
   * [API Access](building-with-passport/scorer-api/api-access.md)
   * [Status and error codes](building-with-passport/scorer-api/status-and-error-codes.md)
   * [Endpoint Definition](building-with-passport/scorer-api/endpoint-definition.md)
-  * [Reading Passport stamps](get-started/reading-passport-stamps.md)
+  * [Reading Passport Stamps](get-started/reading-passport-stamps.md)
 * [Integration guides](building-with-passport/integration-guides/README.md)
   * [Gating access with Passport scores](building-with-passport/integration-guides/gating-access-with-passport-scores.md)
   * [Integrating stamps and scorers](building-with-passport/integration-guides/integrating-stamps-and-scorers.md)
