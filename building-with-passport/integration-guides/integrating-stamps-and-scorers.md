@@ -1,8 +1,8 @@
 ---
-description: This tutorial introduces stamp and score management for your app
+description: This tutorial introduces Stamp and score management for your app
 ---
 
-# Integrating stamps and scorers
+# Integrating Stamps and Scorers
 
 Gitcoin Passport can be used to automatically gate applications, but it can also be used as a powerful tool for supporting human decision makers by providing trust information in the app's UI. Instead of blocking access using a score threshold, Gitcoin Passport can display trust information about users connected to an app to other users, enabling better informed interactions.
 
@@ -12,18 +12,18 @@ There are several apps designed for allocating funding within DAOs. A common mod
 
 However, there have been examples of impersonators joining teams, pretending to be one of the legitimate contributors and getting allocated tokens. This is a way attackers can steal from honest participants. Without some additional information, it is hard to know that you are allocating tokens to a real contributor and not an impersonator.
 
-A Gitcoin Passport scorer integration is a solution to this problem. By showing the Passport score and stamps for each user in the app, it is easier to identify the honest participant from their dishonest double. When faced with two instances of one contributor that you want to allocate tokens to, you might check to see which one has a certain community-specific stamp in their Passport as evidence that they are the real team member.
+A Gitcoin Passport Scorer integration is a solution to this problem. By showing the Passport score and Stamps for each user in the app, it is easier to identify the honest participant from their dishonest double. When faced with two instances of one contributor that you want to allocate tokens to, you might check to see which one has a certain community-specific Stamp in their Passport as evidence that they are the real team member.
 
-Note, however, that it is possible for someone to be an impersonator and _also_ have a high Passport score. This is why a scorer integration is more about giving additional evidence, or context, to choices than it is about automated, binary decision making.
+Note, however, that it is possible for someone to be an impersonator and _also_ have a high Passport score. This is why a Scorer integration is more about giving additional evidence, or context, to choices than it is about automated, binary decision making.
 
-Let's see how an integration like this is built using the Passport Scorer API...
+Let's see how an integration like this is built using the Passport Scorer API.
 
-## Integrating a scorer
+## Integrating a Scorer
 
 ### Create your API key and Scorer
 
 1. Create your API key by going to [Gitcoin Passport Scorer](https://scorer.gitcoin.co) and clicking on the "API Keys" section. Copy the key somewhere safe.
-2. Click the `+ Scorer` button to create a new scorer. Give your scorer a name and a short description, then click Continue. You will be presented with several options for the type of scorer to create. This is because the Passport stamps can be weighted in different ways depending upon the intended use case. Choose `Sybil Prevention` as the Scorer type and `Unique Humanity` for the scoring mechanism. Make a note of the `ScorerID`.
+2. Click the `+ Scorer` button to create a new Scorer. Give your Scorer a name and a short description, then click Continue. You will be presented with several options for the type of Scorer to create. This is because the Passport Stamps can be weighted in different ways depending upon the intended use case. Choose `Sybil Prevention` as the Scorer type and `Unique Humanity` for the scoring mechanism. Make a note of the `ScorerID`.
 
 If you need more details on creating a Scorer or an API key, you can revisit the [Quick Start guide](../quick-start-guide.md).
 
@@ -63,9 +63,7 @@ This tutorial will also use [Chakra-UI](https://chakra-ui.com/) for styling, so 
 npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
 ```
 
-
-
-Now, create a new file in `passport-app`/ and add the following to set the Passport API Key and Scorer ID values (if you need a reminder of how to get the API key and scorer values, revisit the Quick Start guide):
+Now, create a new file in `passport-app`/ and add the following to set the Passport API Key and Scorer ID values (if you need a reminder of how to get the API key and Scorer values, revisit the Quick Start guide):
 
 ```sh
 NEXT_PUBLIC_GC_API_KEY=<your-api-key>
@@ -74,9 +72,7 @@ NEXT_PUBLIC_GC_SCORER_ID=<your-scorer-id>
 
 Save this file as `.env.local`.&#x20;
 
-Replace the contents of `app/page.tsx` with the following boilerplate code (this includes all the very basic logic to render a page and connect a wallet to the app, but none of the logic required to check a user passport - we will add this step by step in this tutorial):
-
-
+Replace the contents of `app/page.tsx` with the following boilerplate code (this includes all the very basic logic to render a page and connect a wallet to the app, but none of the logic required to check a user Passport - we will add this step by step in this tutorial):
 
 ```tsx
 'use client'
@@ -200,7 +196,7 @@ export default function Passport() {
     <div style={styles.main}>
       <ChakraProvider>
         <Heading as='h1' size='4xl' noOfLines={1}>Are you a trusted user?</Heading>
-        <Text as='b'>If you have a score above 20, a Github stamp AND a Lens stamp, you are a trusted user!</Text>
+        <Text as='b'>If you have a score above 20, a Github Stamp AND a Lens Stamp, you are a trusted user!</Text>
         <Stack spacing={3} direction='row' align='center' marginTop={30}>
           <Button colorScheme='teal' variant='outline' onClick={connect}>Connect</Button>
           <Button colorScheme='teal' variant='outline' onClick={submitPassport}>Submit Passport</Button>
@@ -210,8 +206,6 @@ export default function Passport() {
   )
 }
 ```
-
-
 
 You can start this app now by navigating your terminal to the project directory (`passport-app`) and running `npm run dev`. Then, navigate your browser to `localhost:3000`. You will see a basic app load in the browser, with buttons that enable you to connect your wallet and submit your passport to the registry. You can go ahead and test that the `Connect` and `Submit Passport` buttons are working as expected.
 
@@ -223,7 +217,7 @@ The rest of the tutorial will build upon this basic app by adding functions and 
 
 ### Checking a Passport
 
-In this tutorial you will learn how to create a more advanced scorer integration that will determine whether connected users are trusted or untrusted according to a combination of their score and ownership of specific stamps.&#x20;
+In this tutorial you will learn how to create a more advanced Scorer integration that will determine whether connected users are trusted or untrusted according to a combination of their score and ownership of specific stamps.&#x20;
 
 The boilerplate code already provides buttons the users can click to connect their wallet and submit their Passport to the registry. We won't cover these functions again in this tutorial, so please note that a wallet connection and submitted Passport are required for calls to the Scorer API to return useful responses.
 
@@ -249,8 +243,8 @@ async function getPassportScore(currentAddress: string) {
       const roundedScore = Math.round(passportData.score * 100) / 100
       return roundedScore
     } else {
-      // if the user has no score, display a message letting them know to submit thier passporta
-      console.log('No score available, please add stamps to your passport and then resubmit.')
+      // if the user has no score, display a message letting them know to submit thier passport
+      console.log('No score available, please add Stamps to your passport and then resubmit.')
     }
   } catch (err) {
     console.log('error: ', err)
@@ -258,9 +252,9 @@ async function getPassportScore(currentAddress: string) {
 }
 ```
 
-### **Retrieving stamps**
+### **Retrieving Stamps**
 
-Next we want to retrieve the user's stamps by calling the `/registry/stamps` API endpoint. The following function requests a user's Passport stamp data from that endpoint and prints it to the console. If no score exists it prints a warning to the console.
+Next we want to retrieve the user's Stamps by calling the `/registry/stamps` endpoint. The following function requests a user's Passport Stamp data from that endpoint and prints it to the console. If no score exists it prints a warning to the console.
 
 ```tsx
 async function getPassportStamps(currentAddress: string) {
@@ -282,7 +276,7 @@ We can invoke the function on the click of a button by adding the following to t
 <pre class="language-html"><code class="lang-html"><strong>&#x3C;Button colorScheme='teal' variant='outline' onClick={() => getPassportStamps(address)}>Check Stamps&#x3C;/Button>
 </strong></code></pre>
 
-If we run the app using `npm run dev`, connect a wallet that has some stamps and click the `Check Stamps` button, the following information will be displayed in the console. In this example there are 33 credentials in the array, with one expanded as an example - the length of the `items` array will depend upon how many verified credentials the Passport holds.
+If we run the app using `npm run dev`, connect a wallet that has some Stamps and click the `Check Stamps` button, the following information will be displayed in the console. In this example there are 33 credentials in the array, with one expanded as an example - the length of the `items` array will depend upon how many verified credentials the Passport holds.
 
 ```json
 stamp data: 
@@ -311,11 +305,11 @@ prev: null
 <prototype>: Object { … }
 ```
 
-Printing this object to the console isn't particularly useful to us, but seeing the object structure in this way demonstrates that the API call is working correctly and gives us information we can use to parse the stamp data effectively.
+Printing this object to the console isn't particularly useful to us, but seeing the object structure in this way demonstrates that the API call is working correctly and gives us information we can use to parse the Stamp data effectively.
 
-### **Handling stamp data**
+### **Handling Stamp data**
 
-There is a lot of information contained in the object returned from `/registry/stamps` - for most use-cases only a subset of the data is useful. We might, for example, only be interested in the stamp `provider`, and not the granular details of the credential expiry, proof etc. We can parse this information out of each item in the array.
+There is a lot of information contained in the object returned from `/registry/stamps` - for most use-cases only a subset of the data is useful. We might, for example, only be interested in the Stamp `provider`, and not the granular details of the credential expiry, proof etc. We can parse this information out of each item in the array.
 
 Let's just try to parse out the useful information first. We'll do this in a separate function, so let's replace our `console.log()` statement with a some simple code that parses out the `provider` for each of the user's stamps as a `string` and adds it to an `Array`. We'll print this array to the console to check we only have the `provider` strings.
 
@@ -361,7 +355,7 @@ Clicking the `Check Stamps` button will now display the following in the console
 
 Now, for our actual app we want to **return the array** to use elsewhere instead of just printing it to the console, so **replace** `console.log(stampProviderArray)` with `return stampProviderArray`.\*
 
-### Tracking the stamps and score in state
+### Tracking the Stamps and score in state
 
 The two functions, `getPassportScore()` and `getPassportStamps()` return data that we want to keep track of in our app so that we can use it to make decisions about the trustworthiness of a user. This means we need a way to track this data in the app's state and functions that access that state to make some calculations.
 
@@ -385,7 +379,7 @@ interface UserStruct {
 }
 ```
 
-The `UserStruct` interface has fields for the user's address, score and stamp providers as well as a unique identifier. Notice that we also defined the type of the `stampProviders` field to be an array of `Stamp` - this is a new struct we haven't defined yet. We need instances of `Stamp` to contain the name of each stamp provider with a unique identifier. Add the following interface to the code just above the `UserStruct`:
+The `UserStruct` interface has fields for the user's address, score and Stamp providers as well as a unique identifier. Notice that we also defined the type of the `stampProviders` field to be an array of `Stamp` - this is a new struct we haven't defined yet. We need instances of `Stamp` to contain the name of each Stamp provider with a unique identifier. Add the following interface to the code just above the `UserStruct`:
 
 ```tsx
 interface Stamp {
@@ -402,7 +396,7 @@ const [userInfo, setUserInfo] = useState<Array<UserStruct>>([])
 
 Now, we can update `checkPassport()` to create a new `UserStruct` from the values returned from the Passport API calls, plus the user address and a unique ID calculated by adding 1 to the current length of the `userInfo` array. This new `UserStruct` is added to the `userInfo` array using the `setUserInfo` method.
 
-Remember, before constructing the `UserStruct` we have to parse the stamp providers into an array of `Stamps` that can be passed to the `UserStruct`'s `stampProviders` field.
+Remember, before constructing the `UserStruct` we have to parse the Stamp providers into an array of `Stamps` that can be passed to the `UserStruct`'s `stampProviders` field.
 
 We also want to add a condition to prevent repeatedly adding the same user to the `userInfo` array, so we can wrap the call to `setUserInfo` in a simple `if` statement to check whether the user already exists.
 
@@ -429,13 +423,13 @@ async function checkPassport(currentAddress = address) {
 }
 ```
 
-Now each user's stamps and score are tracked in custom structs in our application's state.
+Now each user's Stamps and score are tracked in custom structs in our application's state.
 
-### **Using the stamp and score data**
+### **Using the Stamp and score data**
 
 Now we can use the state data to make decisions about each user. Maybe we just want a quick way to tell whether a connected user meets some specific requirements. Let's create a simple example where we display a list of connected addresses that are trusted because their passport meets some requirements. This means the users of our app can see a real-time list of addresses that meet the eligibility criteria and can use this to help pick out the honest users.
 
-Let's set some arbitrary requirements. If the user has a Lens stamp **and** an ENS stamp **and** a Github stamp, **and** their Passport score is greater than 20, then they are considered trusted and their address is displayed in the browser.
+Let's set some arbitrary requirements. If the user has a Lens Stamp **and** an ENS Stamp **and** a Github Stamp, **and** their Passport score is greater than 20, then they are considered trusted and their address is displayed in the browser.
 
 So far, we have set up a state variable to collect all the connected users. We want a subset of those users that meet our eligibility requirements. We can achieve this by calling `filter` on the `userInfo` array. We'll filter on our trust criteria by checking the `stampProviders` and `score` fields of each `UserStruct` in `userInfo` and return the filtered array:
 
@@ -530,9 +524,9 @@ Now, in our UI, we can add a button that calls this function. This button can re
 <Button colorScheme='teal' variant='outline' onClick={updateShowTrusted}>Check Users</Button>
 ```
 
-Let's also add a way to show which specific stamps the connected user owns. We might not always need to know this, so we'll hide it behind a checkbox - this way a user can see at a glance whether the user is trusted but also get more granular information if they need it.
+Let's also add a way to show which specific Stamps the connected user owns. We might not always need to know this, so we'll hide it behind a checkbox - this way a user can see at a glance whether the user is trusted but also get more granular information if they need it.
 
-We can start by defining a function, just like `updateShowTrusted` that acts like a boolean switch, but this time it will toggle displaying the connected user's stamps.
+We can start by defining a function, just like `updateShowTrusted` that acts like a boolean switch, but this time it will toggle displaying the connected user's Stamps.
 
 ```tsx
 const updateShowStamps = () => {
@@ -555,7 +549,7 @@ const [showStamps, setShowStamps] = useState<boolean>(false)
 And add a checkbox to the UI that calls `updateShowStamp` when it is checked (you can add this after the `Button` elements inside the`<Stack> </Stack>` tags):
 
 ```tsx
-<Checkbox colorScheme='telegram' onChange={updateShowStamps}>Show stamps</Checkbox>
+<Checkbox colorScheme='telegram' onChange={updateShowStamps}>Show Stamps</Checkbox>
 ```
 
 The final step is to update the UI code so that the data is actually displayed when the appropriate buttons and checkbox are activated.
@@ -573,7 +567,7 @@ Immediately below the block of UI code wrapped in `Stack` tags, we can add the f
 
 This element contains two conditional rendering statements. They check whether `showTrusted` is `true` and if so, they render a title and the contents of `trustedUsers` (our filtered list of users that pass the trust criteria) to the browser.
 
-Immediately after that `div` element, we can add the following code which displays the user's stamps if the `Show Stamps` checkbox is activated:
+Immediately after that `div` element, we can add the following code which displays the user's Stamps if the `Show Stamps` checkbox is activated:
 
 ```tsx
 {showStamps &&
@@ -582,7 +576,7 @@ Immediately after that `div` element, we can add the following code which displa
   </SimpleGrid>}
 ```
 
-jkNow, if you run your app locally using `npm run dev` you will be able to connect your wallet, submit your passport and check whether you pass the trust criteria. If you do, your address will be rendered to the screen. If you check the `Show Stamps` box, all your stamps will be shown in the browser.
+jkNow, if you run your app locally using `npm run dev` you will be able to connect your wallet, submit your passport and check whether you pass the trust criteria. If you do, your address will be rendered to the screen. If you check the `Show Stamps` box, all your Stamps will be shown in the browser.
 
 <figure><img src="../../.gitbook/assets/trusted-user-app.png" alt=""><figcaption><p>the app running with a single user</p></figcaption></figure>
 
@@ -604,7 +598,7 @@ Now when the app starts, it will instantiate the `userInfo` state variable with 
 
 We can do a quick sanity check and run the app and click `Check Users` - we will see those two addresses listed.
 
-With our current rendering logic, the `Show Stamps` checkbox will list all the stamps from all the users in one large list - we won't actually be able to tell who has which stamp. To solve this, we can simply add the first few characters of each user address to each stamp so we can map stamps to owners. To do this, replace the final lines (where we define a `SimpleGrid` element) in the UI code with the following:
+With our current rendering logic, the `Show Stamps` checkbox will list all the Stamps from all the users in one large list - we won't actually be able to tell who has which Stamp. To solve this, we can simply add the first few characters of each user address to each Stamp so we can map Stamps to owners. To do this, replace the final lines (where we define a `SimpleGrid` element) in the UI code with the following:
 
 ```tsx
 <SimpleGrid columns={3} spacing='10px' marginTop={30}>
@@ -612,7 +606,7 @@ With our current rendering logic, the `Show Stamps` checkbox will list all the s
 </SimpleGrid>}
 ```
 
-Now, when we follow through our connect -> submit -> check users -> show stamps flow, we will see something like the following:
+Now, when we follow through our connect -> submit -> check users -> show Stamps flow, we will see something like the following:
 
 <figure><img src="../../.gitbook/assets/trusted-user-app-2.png" alt=""><figcaption><p>The app working with multiple users</p></figcaption></figure>
 
@@ -620,6 +614,6 @@ Now, when we follow through our connect -> submit -> check users -> show stamps 
 
 ## Summary
 
-OK! We have built a simple app that allows users to connect their wallets and trusted addresses that meet the score and stamp criteria are displayed in the browser!&#x20;
+We have built a simple app that allows users to connect their wallets and trusted addresses that meet the score and Stamp criteria are displayed in the browser!&#x20;
 
-Of course the app we created here has the bare minimum functionality required to demonstrate score and stamp management, but the concepts explained here can be used to create more complex apps that use the stamp and score criteria to support human decision making or more complex automated processes.
+Of course the app we created here has the bare minimum functionality required to demonstrate score and Stamp management, but the concepts explained here can be used to create more complex apps that use the Stamp and score criteria to support human decision making or more complex automated processes.

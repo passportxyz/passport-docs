@@ -6,11 +6,11 @@ description: How to retrieve, handle and display Stamp metadata in a simple Next
 
 <figure><img src="../../.gitbook/assets/stamp-logo-examples.png" alt=""><figcaption></figcaption></figure>
 
-Gitcoin Passport Stamps show that a user has achieved certain milestones on chain or through some web2 service. It is common for these Stamps to be used to generate a score on the Gitcoin server to indicate a user's trustworthiness. It is also possible to retrieve the actual Stamps instead of the score. This enables developers to use their own algorithms to generate scores, or to make decisions based on ownership of specific Stamps or groups of Stamps.
+Gitcoin Passport Stamps show that a user has achieved certain milestones on-chain or through some web2 service. It is common for these Stamps to be used to generate a score on the Gitcoin server to indicate a user's trustworthiness. It is also possible to retrieve the actual Stamps instead of the score. This enables developers to use their own algorithms to generate scores, or to make decisions based on ownership of specific Stamps or groups of Stamps.
 
 In many cases app developers can serve their users better with additional information about the Stamps outside of just the verifiable credential and Stamp name. A simple example is access to a standardized icon image so that the Stamp can be displayed consistently across many applications.
 
-For this reason, there are two ways to access Stamp metadata using the Gitcoin Passport API.
+For this reason, there are two ways to access Stamp metadata using the [Gitcoin Passport API](working-with-stamp-metadata.md#api-endpoints).
 
 On this page, you will **learn how to use the Stamp metadata API endpoints** to retrieve Stamp metadata.
 

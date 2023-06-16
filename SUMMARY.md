@@ -29,7 +29,7 @@
   * [Reading Passport Stamps](get-started/reading-passport-stamps.md)
 * [Integration guides](building-with-passport/integration-guides/README.md)
   * [Gating access with Passport scores](building-with-passport/integration-guides/gating-access-with-passport-scores.md)
-  * [Integrating stamps and scorers](building-with-passport/integration-guides/integrating-stamps-and-scorers.md)
+  * [Integrating Stamps and Scorers](building-with-passport/integration-guides/integrating-stamps-and-scorers.md)
   * [Working with Stamp metadata](building-with-passport/integration-guides/working-with-stamp-metadata.md)
 * [Passport SDK (deprecated)](building-with-passport/passport-sdk-deprecated/README.md)
   * [Getting Started with the Passport SDK](building-with-passport/passport-sdk-deprecated/getting-started.md)
