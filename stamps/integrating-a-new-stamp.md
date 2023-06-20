@@ -546,9 +546,68 @@ yarn start
 
 Finally, having seen your app running successfully, you can raise a pull request against the Gitcoin Passport GitHub repository. This will make the changes you have made to support your app part of the canonical public Stamp repository. However, before this happens your changes will be reviewed by the Passport team who may request changes.
 
+When you raise a pull request, it is important to include the following checklist. This helps you to verify that all the necessary steps have been taken to create your Stamp, and also helps the reviewers of the pull request check your work and merge it faster.
+
+<pre class="language-markdown" data-overflow="wrap"><code class="lang-markdown">## Stamp Provider &#x3C;provider name here>
+
+- [ ] The Stamp provider name is globally unique (and should not have been used previously). This is because the provider name will be included in the record used  to create the Stamp hash:
+- [ ] The implementation has been unit tested
+- [ ] Verification payload
+    ```json
+    valid: true / false,
+    record: {
+       ... // Unique payload identifying user
+    }
+    ```
+<strong>- [ ] The attribute `valid` is false if the Stamp verification fails
+</strong>- [ ] The record must contain the following attributes:
+    - 1 or more attributes uniquely identifying the user:
+        - An ETH address - it should always be lower case (not checksummed)
+        - An email (in case of Google for example)
+        - The users unique ID (like for Facebook, Twitter, Github)        
+- [ ] The payload should never contain a field named `pii`
+    - This field is reserved for internal use
+</code></pre>
+
+You can use the code snippet above as a template - copy and paste it into your pull request and tick the boxes to show that each item has been completed.
+
+The following is an example of a pull request that uses a similar checklist: [Integrate Phi Stamp in Passport](https://github.com/gitcoinco/passport/issues/1233#top)
 
 
-### 7. See some examples
+
+### 7. Note on context and cache
+
+It is important to understand the difference between context and cache, and for you to use them appropriately when developing your Stamp. They both refer to holding information in memory.&#x20;
+
+**`Context`** is used to pass the results of expensive operations performed during the verification process for a specific Stamp between calls to `verify` within each provider. This is the expected way for Stamps to handle their data.&#x20;
+
+_`Context` should be used wherever possible, in preference to using the `cache`._&#x20;
+
+The `cache` exists to support unusual or complex authentication mechanisms that cannot work within the`context` logic. The **`cache`** is used to store data between multiple HTTP requests, for example if data stored in the `App-bindings` request needs to be referenced in a `/verify` request. This may occur when objects need to be shared across multiple `Providers`. In this case, the caching _**must**_ be done using the caching mechanism defined in `platforms/src/utils/cache.ts`.
+
+If the cache is used, its payload should be moved to `context` and then the cache should be explicitly cleared.
+
+The following example shows the `cache` mechanism being used correctly. &#x20;
+
+```typescript
+const loadTwitterCache = (token: string): TwitterCache => loadCacheSession(token, "Twitter");
+
+// retrieve the instantiated Client shared between Providers
+export const getAuthClient = async (sessionKey: string, code: string, context: TwitterContext): Promise<Client> => {
+  if (!context.twitter?.authClient) {
+    const session = loadTwitterCache(sessionKey);
+    const { oauthUser } = session;
+
+    if (!context.twitter) context.twitter = {};
+    context.twitter.authClient = new Client(oauthUser);
+
+    clearCacheSession(sessionKey, "Twitter");
+  }
+  return context.twitter.authClient;
+};
+```
+
+### 8. See some examples
 
 It might be helpful to look at some past examples of pull requests that add Stamps to the Passport GitHub repository. Browse the examples below to see exactly how others have gone about it:
 
