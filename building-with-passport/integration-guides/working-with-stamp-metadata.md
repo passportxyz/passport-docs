@@ -16,6 +16,8 @@ On this page, you will **learn how to use the Stamp metadata API endpoints** to 
 
 You can follow this walk-through to build a simple app that allows a user to connect their wallet and display their Stamps to the browser, using information provided in the Stamp metadata.
 
+You need an API key to follow this tutorial. See [API access](../scorer-api/api-access.md) for instructions.
+
 ### API endpoints
 
 There are two API endpoints that can be used to query Stamp metadata.&#x20;
@@ -32,11 +34,11 @@ You can also retrieve the Stamps owned by a particular address and instruct the 
 /registry/stamps/{address}?_include_metadata=true
 ```
 
-You can test this out using an HTTP tool such as curl. You will need to replace `<your-api-key>` with your [API key](../scorer-api/api-access.md) in the request header, as well as `<your-address>` with your wallet address in order to access these endpoints.
+You can test this out using an HTTP tool such as curl. You will need to replace {`your-api-key}` with your API key in the request header, as well as {`your-address}` with your wallet address in order to access these endpoints.
 
 ```sh
-curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/<your-address>?include_metadata=true' \
-  --header 'X-API-KEY: <your-api-key>'
+curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{your-address}?include_metadata=true' \
+  --header 'X-API-KEY: {your-api-key}'
 ```
 
 ### Metadata structure
@@ -111,14 +113,6 @@ For the `/registry/stamps/{address}?_include_metadata=true` endpoint, these meta
 ```
 
 When you use this Stamp object in your app, you will extract only the data you actually need.
-
-### Create your API key and Scorer
-
-Create your API key by going to [Gitcoin Passport Scorer](http://scorer.gitcoin.co) and clicking on the "API Keys" section. Copy the key somewhere safe.
-
-Click the `+ Scorer` button to create a new scorer. Give your scorer a name and a short description, then click Continue. You will be presented with several options for the type of scorer to create. This is because the Passport stamps can be weighted in different ways depending upon the intended use case. Choose Sybil Prevention as the Scorer type and Unique Humanity for the scoring mechanism. Make a note of the `ScorerID`.
-
-If you need more details on creating a Scorer or an API key, you can revisit the [Quick Start guide](../quick-start-guide.md).
 
 ### Setting up a basic app
 

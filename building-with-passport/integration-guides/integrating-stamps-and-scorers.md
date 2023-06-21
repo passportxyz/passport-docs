@@ -20,12 +20,7 @@ Let's see how an integration like this is built using the Passport Scorer API.
 
 ## Integrating a Scorer
 
-### Create your API key and Scorer
-
-1. Create your API key by going to [Gitcoin Passport Scorer](https://scorer.gitcoin.co) and clicking on the "API Keys" section. Copy the key somewhere safe.
-2. Click the `+ Scorer` button to create a new Scorer. Give your Scorer a name and a short description, then click Continue. You will be presented with several options for the type of Scorer to create. This is because the Passport Stamps can be weighted in different ways depending upon the intended use case. Choose `Sybil Prevention` as the Scorer type and `Unique Humanity` for the scoring mechanism. Make a note of the `ScorerID`.
-
-If you need more details on creating a Scorer or an API key, you can revisit the [Quick Start guide](../quick-start-guide.md).
+You need a Scorer ID and an API key to follow this tutorial. Instructions for creating these can be found on the [API access](../scorer-api/api-access.md) page.
 
 ### Setting up a basic app
 

@@ -8,13 +8,12 @@ description: >-
 
 In this guide, you'll learn how to gate an application using Gitcoin passport. Specifically, you will:
 
-* Create a Scorer and API key
 * Fetch a score using the Gitcoin Passport API
 * Examine best practices for retrieving Passport scores
 * Implement gating so that some content is only available to users with scores above a threshold
 * Redirect users to instructions for improving their Passport scores
 
-To follow this tutorial, you'll need [Next.js](https://nextjs.org/), [Node](https://nodejs.org/en), and [Chakra-UI](https://chakra-ui.com/) installed on your machine. We will also be using the [Gitcoin Passport API](https://api.scorer.gitcoin.co/docs#/).
+To follow this tutorial, you'll need [Next.js](https://nextjs.org/), [Node](https://nodejs.org/en), and [Chakra-UI](https://chakra-ui.com/) installed on your machine. We will also be using the [Gitcoin Passport API](../scorer-api/).
 
 {% hint style="info" %}
 This tutorial is a more detailed version of a video tutorial put together by Nader Dabit.\
@@ -25,50 +24,11 @@ Check out his video and related sample code at the following links:\
 [Sample code](https://gist.github.com/dabit3/10f93a001d75a1b44e5ec2001b33e4f6)
 {% endhint %}
 
-### Creating a Scorer
-
-To start, you will need to create a Passport Scorer and API key. Your app will make requests to the Scorer, which then calculates Passport scores using the Gitcoin server and returns the results.
-
-To create your Scorer, go to [scorer.gitcoin.co](https://www.scorer.gitcoin.co/).
-
-Click `Sign in with Ethereum`. A prompt will appear to connect your wallet. In this guide we will use MetaMask, but the principles are the same for all the wallet options. You will have to unlock your wallet and sign a message to access the Scorer app.
-
-Clicking "Sign-In" in your wallet gives you access to the Scorer app. There are two options available in the scorer app: Scorer and API Keys.
-
-We'll start by creating a new Scorer. A Scorer is an instance of an algorithm that generates a score from the Stamps in a Passport. To get started, click the `+ Scorer` button.
-
-Give your Scorer a name and a short description, then click `Continue`.
-
-You will be presented with several options for the type of Scorer to create. This is because Passport Stamps can be weighted in different ways depending upon the intended use case. In this example, we want to use the Passport to identify Sybils. For the Scorer type, choose **Sybil Prevention**.
-
-There are two options currently active for the Sybil prevention model to run in the Scorer.&#x20;
-
-* `Unique Humanity` - Returns a score between 0-100 that indicates how likely it is that a passport is owned by an honest user
-* `Unique Humanity (binary)` - Returns a 0 or 1 depending on whether the Passport is flagged as a likely Sybil.
-
-For this guide, choose the **Unique Humanity** scoring mechanism:
-
-![Unique Humanity](https://arweave.net/P6eKM-crq8LVGCtjpVZR9RLuiR35F7Jc-6mBXGxMHJY)
-
-Click `Create Scorer`. Your scorer will be added to your dashboard. Note that it has a `Scorer ID`, which you will need later.
-
-### Creating an API key
-
-The Scorer app has a tab labelled `API Keys`. Open that tab and click the `+ API Key` button.
-
-You will be prompted to give the API key a name and then click `Create`.
-
-Your key will be added to your dashboard. The key itself is the sequence of characters to the right of the key name that looks something like this:
-
-`kXPtlSOq.6q7V6fgg2nVICVla00nc2NyIqildHyf7`.
-
-Save this key somewhere safe and secure, such as in an encrypted password manager or key store.
-
-You'll need both the Scorer ID and the API key to complete the rest of the steps in this guide.
+You will need a Scorer and API key to follow this tutorial. Instructions for obtaining these are available on the [API access](../scorer-api/api-access.md) page.
 
 ### App outline
 
-Now that you have a Scorer ID and an API Key, you can move on to building your app. The app we will build will be an educational site where users can learn about web3 and DAOs, and then if - and only if - their Passport score is above a threshold, they can uncover the secret information required to join our example Passport DAO.
+The app we will build will be an educational site where users can learn about web3 and DAOs, and then if - and only if - their Passport score is above a threshold, they can uncover the secret information required to join our example Passport DAO.
 
 The app will work as follows:
 
@@ -82,46 +42,7 @@ This simple example demonstrates the principles you would use to gate a real app
 
 The app will be built using [Next.js](https://nextjs.org/) and will make use of several of the Scorer API endpoints.
 
-### API endpoints
 
-The base URL for the API endpoints we'll be using is `https://api.scorer.gitcoin.co/`. There are several API endpoints that can be accessed by extending this base URL. You can browse the API details at [api.scorer.gitcoin.co/docs](https://api.scorer.gitcoin.co/docs).&#x20;
-
-The endpoints that return data about a specific passport are all invoked using the HTTP GET method. The endpoint to submit a passport uses HTTP POST method. In either case, some specific header information is required, including the content type (which is always `application/json`) and the Scorer API key.
-
-When making any request to the Scorer API, you will want to include the following in your header, making sure to replace `{API_KEY}` with the one you created earlier:
-
-```json
-{
-  'Content-Type': 'application/json',
-  'X-API-Key': '{API_KEY}'
-} 
-```
-
-There are three main API endpoints you'll use to build this app:
-
-#### Getting the score for an address
-
-This endpoint simply returns the Passport score for the address provided in the request.
-
-```sh
-https://api.scorer.gitcoin.co/registry/score/${SCORER_ID}/${address}
-```
-
-#### Getting the signing message and nonce
-
-Users are required to sign a message in order to connect their Passport to the app. This endpoint is used to generate the appropriate message for them to sign.
-
-```sh
-https://api.scorer.gitcoin.co/registry/signing-message
-```
-
-#### Submitting the passport
-
-Once the user has signed the message, we'll send a new request to this endpoint along with the address, Scorer ID, signature, and nonce.
-
-```sh
-https://api.scorer.gitcoin.co/registry/submit-passport
-```
 
 ### Setting up the app
 
