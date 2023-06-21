@@ -6,7 +6,7 @@ description: Walk-through tutorials for integrating Gitcoin Passport into your a
 
 This section includes several tutorials for integrating Gitcoin Passport into your apps.&#x20;
 
-* [Gate access to certain content](gating-access-with-passport-scores.md)
+* [Gating access with Passport scores](gating-access-with-passport-scores.md)
 * [Retrieve Passport data and display it to your UI](integrating-stamps-and-scorers.md)
 * [How to retrieve, handle and display Stamp metadata in a simple app](working-with-stamp-metadata.md)
 * Use Passport to determine who receives a token airdrop (coming soon)

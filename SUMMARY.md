@@ -17,12 +17,12 @@
 
 ## BUILDING WITH PASSPORT
 
-* [Quick Start Guide](building-with-passport/quick-start-guide.md)
+* [Quick Start](building-with-passport/quick-start-guide.md)
 * [How Passport works](building-with-passport/how-it-works.md)
 * [Major Concepts](building-with-passport/major-concepts.md)
   * [Deduplicating stamps](get-started/deduplicating-stamps.md)
   * [On-chain Passports](building-with-passport/major-concepts/on-chain-passports.md)
-* [Scorer API](building-with-passport/scorer-api/README.md)
+* [Passport API](building-with-passport/scorer-api/README.md)
   * [API Access](building-with-passport/scorer-api/api-access.md)
   * [Status and error codes](building-with-passport/scorer-api/status-and-error-codes.md)
   * [Endpoint Definition](building-with-passport/scorer-api/endpoint-definition.md)

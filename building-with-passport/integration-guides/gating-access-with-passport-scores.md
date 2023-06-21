@@ -14,7 +14,16 @@ In this guide, you'll learn how to gate an application using Gitcoin passport. S
 * Implement gating so that some content is only available to users with scores above a threshold
 * Redirect users to instructions for improving their Passport scores
 
-To follow this tutorial, you'll need [Next.js](https://nextjs.org/), [Node](https://nodejs.org/en), and [Chakra-UI](https://chakra-ui.com/) installed on your machine. We will also be using the [Gitcoin Passport Scorer API](https://api.scorer.gitcoin.co/docs#/).
+To follow this tutorial, you'll need [Next.js](https://nextjs.org/), [Node](https://nodejs.org/en), and [Chakra-UI](https://chakra-ui.com/) installed on your machine. We will also be using the [Gitcoin Passport API](https://api.scorer.gitcoin.co/docs#/).
+
+{% hint style="info" %}
+This tutorial is a more detailed version of a video tutorial put together by Nader Dabit.\
+Check out his video and related sample code at the following links:\
+\
+[Build Your First Sybil-Resistant Web App with Gitcoin Passport & Next.js](https://www.youtube.com/watch?v=bfkalDSvRDc)
+
+[Sample code](https://gist.github.com/dabit3/10f93a001d75a1b44e5ec2001b33e4f6)
+{% endhint %}
 
 ### Creating a Scorer
 
