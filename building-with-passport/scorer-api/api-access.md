@@ -15,6 +15,8 @@ The [Scorer API](https://www.scorer.gitcoin.co/) provides programmatic access to
 3. **Generate an API key:** Click on the "+ Create a Key" button to generate a unique API key for your account.
 4. **Store your API key securely:** Store your API key in a secure place, as it will be used to access the Scorer API.
 
+
+
 ### Scorers and Scorer ID
 
 A Scorer is an individual object with a unique ID that is associated with your account. If you are using the Gitcoin Scorer API in multiple applications, you can set up separate communities for each one. This allows you to customize the scoring rules for each application and deduplicate any identical Passport VCs that are submitted to the same application.
@@ -40,7 +42,7 @@ There are two options currently active for the Sybil prevention model to run in 
 
 <figure><img src="../../.gitbook/assets/scorer-use-case.png" alt=""><figcaption><p>Selecting a use case</p></figcaption></figure>
 
-<figure><img src="https://arweave.net/P6eKM-crq8LVGCtjpVZR9RLuiR35F7Jc-6mBXGxMHJY" alt=""><figcaption><p>Selecting the scorer type</p></figcaption></figure>
+<figure><img src="https://arweave.net/P6eKM-crq8LVGCtjpVZR9RLuiR35F7Jc-6mBXGxMHJY" alt=""><figcaption><p>Selecting the Scorer type</p></figcaption></figure>
 
 ### Next step
 

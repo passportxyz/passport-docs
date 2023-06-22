@@ -1,10 +1,39 @@
+---
+description: Reference documentation for each of the Gitcoin Passport API endpoints.
+---
+
 # Endpoint Definition
 
-To use the Gitcoin Scorer API to score an Ethereum address, you need to have a Scorer app configured, an associated Scorer ID, and your API keys.&#x20;
+The Passport API enables developers to retrieve Passport scores and Stamp metadata for users who have created a Gitcoin Passport.&#x20;
 
-Learn more about these credentials from our [API Access](api-access.md) guide.
+## Authentication
 
-### Available endpoints
+To access the Gitcoin Passport API, you will need a [Scorer ID and an API key](api-access.md).&#x20;
+
+To make a successful request, you will need to include your API key in the "Authorization" header of each API request. The header should have the following format:
+
+```
+"X-API-KEY: {API_key}"
+```
+
+Replace `{API_key}` with your API key. For example, if you were using cURL, your request might look something like this:
+
+```bash
+curl --request GET 'https://api.scorer.gitcoin.co/registry/signing-message' \
+    --header 'X-API-KEY: VwUi___.0yQU1HIAE4hLEMkVs___'
+```
+
+## Rate limits
+
+Your API key will allow you to make up to a certain number of requests to any of the endpoints included on this page during a certain period of time.&#x20;
+
+You will start off with Tier 1, and will need to [request higher rate limits](https://forms.gle/bteHxCAVBdiv5Ttm7) if necessary.&#x20;
+
+<table><thead><tr><th width="135">Tier</th><th>Rate limit</th></tr></thead><tbody><tr><td>Tier 1</td><td>125 requests per 15 minutes</td></tr><tr><td>Tier 2</td><td>350 requests per 15 minutes</td></tr><tr><td>Tier 3</td><td>2000 requests per 15 minutes</td></tr><tr><td>Tier 4</td><td>2000+ requests per 15 minutes</td></tr></tbody></table>
+
+
+
+## Available endpoints
 
 To get a Passport score from an ETH address, follow these steps:
 
@@ -23,8 +52,6 @@ You can also receive the specific Stamps data:&#x20;
 * [Receive all Stamps available in Passport](endpoint-definition.md#get-stamps-metadata) \[Beta]\
   `GET /registry/stamp-metadata`
 
-
-
 ### Retrieve a signing message
 
 This endpoint returns a message verifying the agreement to submit a wallet address for scoring, and a `nonce` that can be used to verify the authenticity of the signed message.&#x20;
@@ -35,8 +62,7 @@ You don't need to get a signature from this endpoint, but you do need a signatur
 
 {% code title="Sample request" overflow="wrap" %}
 ```sh
-curl --location \
-    --request GET 'https://api.scorer.gitcoin.co/registry/signing-message' \
+curl --request GET 'https://api.scorer.gitcoin.co/registry/signing-message' \
     --header 'X-API-KEY: {API KEY}'
 ```
 {% endcode %}
@@ -91,7 +117,7 @@ To request the score of a specified address:
 > GET /registry/score/{scorer\_id}/{address}
 
 {% code title="Sample request" overflow="wrap" %}
-```
+```bash
 curl --request GET 'https://api.scorer.gitcoin.co/registry/score/{scorer_id}/{address}' \
     --header 'X-API-KEY: {API KEY}'
 ```
@@ -103,12 +129,9 @@ To request the scores for all addresses that have been submitted to a Scorer:
 
 > GET /registry/score/{scorer\_id}
 
-{% code title="Sample request" overflow="wrap" %}
-```
-curl --location --request GET 'https://api.scorer.gitcoin.co/registry/score/{scorer_id}' \
---header 'X-API-KEY: {API KEY}'
-```
-{% endcode %}
+<pre class="language-bash" data-title="Sample request" data-overflow="wrap"><code class="lang-bash"><strong>curl --request GET 'https://api.scorer.gitcoin.co/registry/score/{scorer_id}' \
+</strong>  --header 'X-API-KEY: {API KEY}'
+</code></pre>
 
 {% code title="Sample response" overflow="wrap" lineNumbers="true" %}
 ```json
@@ -151,7 +174,7 @@ If you would like to retrieve the metadata for all available Stamps, please use 
 <table><thead><tr><th width="225">Name</th><th width="105.33333333333331">Required</th><th></th></tr></thead><tbody><tr><td><code>include_metadata</code></td><td>No</td><td>[Beta] Returns optional <code>metadata</code> object with additional details about connected Stamps.</td></tr></tbody></table>
 
 {% code title="Sample request" overflow="wrap" %}
-```
+```bash
 curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?include_metadata=true' \
     --header 'X-API-KEY: {API KEY}'
 ```
@@ -184,7 +207,7 @@ If you would like to retrieve just the Stamps that are connected to a specified 
 > GET /registry/stamp-metadata
 
 {% code title="Sample request" overflow="wrap" %}
-```
+```bash
 curl --request GET 'https://api.scorer.gitcoin.co/registry/stamp-metadata' \
     --header 'X-API-KEY: {API KEY}'
 ```
