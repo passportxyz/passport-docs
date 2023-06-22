@@ -1,7 +1,3 @@
----
-description: Reference documentation for each of the Gitcoin Passport API endpoints.
----
-
 # Endpoint Definition
 
 The Passport API enables developers to retrieve Passport scores and Stamp metadata for users who have created a Gitcoin Passport.&#x20;
@@ -62,7 +58,8 @@ You don't need to get a signature from this endpoint, but you do need a signatur
 
 {% code title="Sample request" overflow="wrap" %}
 ```sh
-curl --request GET 'https://api.scorer.gitcoin.co/registry/signing-message' \
+curl --request GET \
+    --url https://api.scorer.gitcoin.co/registry/signing-message \
     --header 'X-API-KEY: {API KEY}'
 ```
 {% endcode %}
@@ -84,13 +81,39 @@ Before receiving a Passport score, developers need to submit an Ethereum address
 
 To do so, developers need to POST the relevant Ethereum address and their Scorer ID to this endpoint.&#x20;
 
+There are two different values that deliver with the `status` field:
+
+* `PROCESSING` - Continue to poll for the results using the [GET scores](endpoint-definition.md#get-scores) endpoint until the `DONE` status is returned. `score` field will return as `null`.
+* `DONE` - The Scorer has completed scoring the specified Passport. `score` field will return with Passport score.
+
 > POST /registry/submit-passport
 
 #### JSON body parameters
 
 <table><thead><tr><th width="174">Name</th><th width="99">Type</th><th width="106">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>address</code></td><td>Text</td><td>Yes</td><td>The wallet address</td></tr><tr><td><code>scorer_id</code></td><td>Text</td><td>Yes</td><td>The Scorer ID</td></tr><tr><td><code>signature</code></td><td>Text</td><td>No</td><td>Signature received from the wallet</td></tr><tr><td><code>nonce</code></td><td>Text</td><td>No</td><td>Nonce generated in the signing message. This is needed for requiring a signature before scoring.</td></tr></tbody></table>
 
-{% code title="Sample Response" overflow="wrap" lineNumbers="true" %}
+{% code title="Sample request" overflow="wrap" %}
+```bash
+curl --request POST \
+  --url https://api.scorer.gitcoin.co/registry/submit-passport \
+  --header 'X-API-KEY: {API KEY}' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "address": "{ADDRESS}",
+    "scorer_id": "{SCORER ID}",
+    "signature": "{SIGNATURE - OPTIONAL)",
+    "nonce": "{NONCE - OPTIONAL}"
+  }'
+```
+{% endcode %}
+
+#### **Sample responses**
+
+The name in the parenthesis represents what type of Scorer you are using. To learn more, please visit our [API Access](api-access.md#types-of-scorers) page.&#x20;
+
+{% tabs %}
+{% tab title="PROCESSING" %}
+{% code overflow="wrap" lineNumbers="true" %}
 ```json
 {
     "address": "{address}",
@@ -102,8 +125,43 @@ To do so, developers need to POST the relevant Ethereum address and their Scorer
 }
 ```
 {% endcode %}
+{% endtab %}
 
+{% tab title="DONE (Unique Humanity)" %}
+{% code overflow="wrap" lineNumbers="true" %}
+```json
+{
+    "address": "{address}",
+    "score": "{score}",
+    "status": "DONE",
+    "last_score_timestamp": "{timestamp}",
+    "evidence": null,
+    "error": null
+}
+```
+{% endcode %}
+{% endtab %}
 
+{% tab title="DONE (Unique Humanity: Binary)" %}
+{% code overflow="wrap" lineNumbers="true" %}
+```json
+{
+    "address": "{address}",
+    "score": "{score}",
+    "status": "DONE",
+    "last_score_timestamp": "{timestamp}",
+    "evidence": {
+        "type": "ThresholdScoreCheck",
+        "success": true,
+        "rawScore": "{score}",
+        "threshold": "15.00000"
+    },
+    "error": null
+}
+```
+{% endcode %}
+{% endtab %}
+{% endtabs %}
 
 ### Get scores
 
@@ -111,27 +169,26 @@ You must submit any Passports you'd like to request a score for via the Submit f
 
 Use these endpoints to retrieve the score for one Ethereum address, or all Ethereum addresses that have been submitted to a Scorer.&#x20;
 
-\
-To request the score of a specified address:
+#### To request the score of a specified address
 
 > GET /registry/score/{scorer\_id}/{address}
 
 {% code title="Sample request" overflow="wrap" %}
 ```bash
-curl --request GET 'https://api.scorer.gitcoin.co/registry/score/{scorer_id}/{address}' \
+curl --request GET \
+    --url https://api.scorer.gitcoin.co/registry/score/{scorer_id}/{address} \
     --header 'X-API-KEY: {API KEY}'
 ```
 {% endcode %}
 
-
-
-To request the scores for all addresses that have been submitted to a Scorer:
+#### To request the scores for all addresses that have been submitted to a Scorer
 
 > GET /registry/score/{scorer\_id}
 
-<pre class="language-bash" data-title="Sample request" data-overflow="wrap"><code class="lang-bash"><strong>curl --request GET 'https://api.scorer.gitcoin.co/registry/score/{scorer_id}' \
-</strong>  --header 'X-API-KEY: {API KEY}'
-</code></pre>
+<pre class="language-bash" data-title="Sample request" data-overflow="wrap"><code class="lang-bash"><strong>curl --request GET \
+</strong><strong>    --url https://api.scorer.gitcoin.co/registry/score/{scorer_id} \
+</strong><strong>    --header 'X-API-KEY: {API KEY}'
+</strong></code></pre>
 
 {% code title="Sample response" overflow="wrap" lineNumbers="true" %}
 ```json
@@ -175,7 +232,8 @@ If you would like to retrieve the metadata for all available Stamps, please use 
 
 {% code title="Sample request" overflow="wrap" %}
 ```bash
-curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?include_metadata=true' \
+curl --request GET \
+    --url 'https://api.scorer.gitcoin.co/registry/stamps/{address}?include_metadata=true' \
     --header 'X-API-KEY: {API KEY}'
 ```
 {% endcode %}
@@ -208,7 +266,8 @@ If you would like to retrieve just the Stamps that are connected to a specified 
 
 {% code title="Sample request" overflow="wrap" %}
 ```bash
-curl --request GET 'https://api.scorer.gitcoin.co/registry/stamp-metadata' \
+curl --request GET \
+    --url https://api.scorer.gitcoin.co/registry/stamp-metadata \
     --header 'X-API-KEY: {API KEY}'
 ```
 {% endcode %}
