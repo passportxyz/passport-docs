@@ -98,7 +98,7 @@ You should use [conscious language](https://github.com/conscious-lang/conscious-
 
 **Jargon**
 
-You should try to avoid jargon wherever possible. This helkps to create a friendly tone and prevents readers from being intimidated by unfamiliar terminology.
+You should try to avoid jargon wherever possible. This helps to create a friendly tone and prevents readers from being intimidated by unfamiliar terminology.
 
 **Acronyms**
 

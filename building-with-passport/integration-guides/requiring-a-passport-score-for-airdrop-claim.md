@@ -1,0 +1,395 @@
+---
+description: >-
+  Explore this detailed guide, demonstrating how you can effectively utilize
+  Passport scores to guard against Sybil attacks on an airdrop.
+---
+
+# Requiring a Passport score for airdrop claim
+
+Airdrops are a prevalent token distribution method, attracting 'airdrop farmers' who generate numerous accounts to amass tokens. This guide demonstrates using Passport scores to shield your airdrop from such harmful practices.
+
+This guide will cover the following topics:
+
+* Fetching Passport scores from the Passport API
+* Using Passport scores to regulate access to an airdrop
+
+{% hint style="info" %}
+Before we delve into this, it's important to note that there are a few preliminary steps you need to complete. Please ensure that these prerequisites are met before proceeding with the guide.
+
+1. You have created a Passport Scorer and received a Scorer ID
+2. You have an API key
+{% endhint %}
+
+If you haven't completed the preliminary steps above please refer to [API Access](https://docs.passport.gitcoin.co/building-with-passport/scorer-api/api-access) first. Once you're done with that, return here and continue with this walkthrough.
+
+### App Overview
+
+We will be rebuilding many of the components and API endpoints of the [airdrop example app](https://github.com/gitcoinco/passport-scorer/tree/main/examples/airdrop). A [live version](https://airdrop-five.vercel.app/) of the app exists which you can visit to get a feel for how everything will fit together in the end.
+
+Below is a diagram showing a high-level overview of how the app functions and interacts with the Passport API.
+
+<figure><img src="../../.gitbook/assets/Passport Airdrop.png" alt=""><figcaption></figcaption></figure>
+
+&#x20;The basic flow is as follows:
+
+1. Define eligibility criteria for the airdrop, such as app interaction, Discord membership, or holding a specific token quantity. This serves as the main criteria for receiving the airdrop while a Passport score serves as an additional security measure.
+2. Retrieve the user's Passport score.
+3. Confirm the score exceeds a threshold indicative of legitimate user behavior.
+4. Add the user's address into the airdrop database.
+
+Now that we understand what we will be building let's jump into some code.
+
+We will be building everything within the context of a [Next.js](https://nextjs.org/) app. We will also use [RainbowKit](https://www.rainbowkit.com/docs/installation) and [wagmi](https://wagmi.sh/) for wallet connection and blockchain helper methods.
+
+You can run one of the following commands to initialize a Next.js app with RainbowKit and wagmi preinstalled.
+
+```sh
+npm init @rainbow-me/rainbowkit@latest
+# or
+pnpm create @rainbow-me/rainbowkit@latest
+# or
+yarn create @rainbow-me/rainbowkit
+```
+
+Create a `.env.local` file at the root of your directory and add your API key and Scorer ID to it. Make sure the env variable for your Scorer ID is `NEXT_PUBLIC_SCORER_ID`; this will ensure the variable is accessible to the frontend.&#x20;
+
+<pre class="language-python"><code class="lang-python"><strong># .env.local
+</strong><strong>
+</strong><strong>SCORER_API_KEY="YOUR API KEY"
+</strong>NEXT_PUBLIC_SCORER_ID=119
+</code></pre>
+
+Now that we have our app scaffolded let's start building out the basic front-end and backend components we will need.
+
+### 1. Fetch and sign a message and nonce
+
+Passport allows a message and nonce to be submitted when scoring a Passport. This allows us to request permission from the user and send their approval along with our score request.
+
+We set up an API endpoint that our front-end can make requests to. We do this so we can keep our `SCORER_API_KEY` from being exposed.
+
+```javascript
+// pages/api/scorer-message.js
+
+const axios = require("axios");
+
+export default async function handler(req, res) {
+  // This endpoint will call /registry/signing-message and return the message that needs to be signed by the user
+  //  as well as the nonce that should be submitted to /registry/submit-passport
+  
+  const messageAndNonce = await fetchMessageAndNonce();
+  res.status(200).json(messageAndNonce);
+}
+
+async function fetchMessageAndNonce() {
+  const axiosSigningMessageConfig = {
+    headers: {
+      "X-API-KEY": process.env.SCORER_API_KEY,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+  const { data } = await axios.get(
+    "https://api.scorer.gitcoin.co/registry/signing-message",
+    axiosSigningMessageConfig
+  );
+  return data;
+}
+```
+
+Next our front-end can make a request to the above endpoint to fetch the message and nonce.
+
+```javascript
+// components/AirDrop.js
+
+// Fetch a message and nonce for the user to sign
+// This will run on the frontend whenever a user requests to be added to the airdrop.
+const scorerMessageResponse = await axios.get("/api/scorer-message");
+if (scorerMessageResponse.status !== 200) {
+  console.error("failed to fetch scorer message");
+  return;
+}
+
+// Set the nonce on state, as we will need to use this later.
+setNonce(scorerMessageResponse.data.nonce);
+```
+
+We now have the necessary data for the user to sign. We can leverage wagmi's `useSignMessage` method to prompt the user to sign.
+
+```javascript
+// components/AirDrop.js
+
+import { useSignMessage } from "wagmi";
+
+const { signMessage } = useSignMessage({
+  async onSuccess(data, variables) {
+  // Verify the message was signed properly.
+  const address = verifyMessage(variables.message, data);
+  
+  // Function continues in the next steps...
+}
+```
+
+Finally, we call the `signMessage` function when a user requests to be added to the airdrop.
+
+```jsx
+// components/AirDrop.js
+
+<button onClick={() => signMessage(scorerMessageResponse.data.message)}>
+  Add to airdrop
+</button>
+```
+
+### 2. Submit a user's address for scoring
+
+Before we can fetch a user's Passport score we must submit their address for scoring.
+
+We again set up an API endpoint that our front end can make requests to. We do this so we can keep our `SCORER_API_KEY` from being exposed.
+
+```javascript
+// pages/api/submit-passport.js
+
+const axios = require("axios");
+
+export default async function handler(req, res) {
+  // The frontend sends in which address we should score and what Passport Scorer
+  //  we should use as well as a signature and nonce.
+  const { address, scorerId, signature, nonce } = req.body;
+  
+  // This is a good place to do some initial eligiblity checks. 
+  // If the user does not meet the minimum criteria we can short circuit the process
+  // of checking their Passport score.
+  meetsMinimumEligibility(address)
+  
+  const data = await submitPassport(address, scorerId, signature, nonce);
+  res.status(200).json(data);
+}
+
+async function meetsMinimumEligibility(address) {
+  // Check that this address has interacted with your protocol within the airdrop window.
+  // OR
+  // Check that the address holds a specific NFT or token
+  // Etc...
+}
+
+async function submitPassport(address, scorerId, signature, nonce) {
+  const submitPassportConfig = {
+    headers: {
+      "X-API-KEY": process.env.SCORER_API_KEY,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+
+  // This is the body that will be sent to the Passport API for scoring
+  const submitPassportData = {
+    address: address,
+    scorer_id: scorerId
+    signature: signature,
+    nonce: nonce
+  };
+  
+  const { data } = await axios.post(
+    "https://api.scorer.gitcoin.co/registry/submit-passport",
+    submitPassportData,
+    submitPassportConfig
+  );
+  
+  // The returned data will look like this
+  // {
+  //  "address": "{address}",
+  //  "score": null,
+  //  "status": "PROCESSING",
+  //  "last_score_timestamp": "2023-02-03T12:08:21.735838+00:00",
+  //  "evidence": null,
+  //  "error": null
+  // }
+  // Which we will return to the front end. The front end will then poll
+  // for the users score while the status is PROCESSING
+  
+  return data;
+}
+```
+
+Now that we have a secure endpoint set up, we can make a request to it from our front-end. We do this right after we verify the signed message in the same `onSuccess` function from step 1.
+
+```javascript
+// components/AirDrop.js
+
+import { useSignMessage } from "wagmi";
+
+const { signMessage } = useSignMessage({
+  async onSuccess(data, variables) {
+    // Verify signature when sign message succeeds
+    const address = verifyMessage(variables.message, data);
+    
+    const submitResponse = await axios.post("/api/submit-passport", {
+      address: address, // Required: The user's address you'd like to score.
+      community: process.env.NEXT_PUBLIC_SCORER_ID, // Required: get this from one of your scorers in the Scorer API dashboard https://scorer.gitcoin.co/
+      signature: data, // Optional: The signature of the message returned in Step #1
+      nonce: nonce, // Optional: The nonce returned in Step #1
+    });
+  
+    console.log("submitResponse: ", submitResponse);
+ }
+}
+```
+
+We are now ready to fetch the user's Passport score.
+
+### 3. Fetch a user's Passport score
+
+Now that we've submitted the user's Passport for scoring we can poll for their score. Once again we will create an endpoint for our front-end to query to avoid exposing our `SCORER_API_KEY`.
+
+```javascript
+// pages/api/airdrop/add/[scorer_id]/[address].js
+
+const axios = require("axios");
+
+export default async function handler(req, res) {
+  const { address, scorer_id: scorerId } = req.query;
+  const data = await fetchScore(address, scorerId);
+
+  res.status(200).json(data);
+}
+
+async function fetchScore(address, scorerId) {
+  const getScoreConfig = {
+    headers: {
+      "X-API-KEY": process.env.SCORER_API_KEY,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+  const { data } = await axios.get(
+    `https://api.scorer.gitcoin.co/registry/score/${scorerId}/${address}`,
+    getScoreConfig
+  );
+  
+  // Again the returned data will look like this.
+  // {
+  //  "address": "{address}",
+  //  "score": "1.5272",
+  //  "status": "DONE",
+  //  "last_score_timestamp": "2023-02-03T12:08:21.735838+00:00",
+  //  "evidence": null,
+  //  "error": null
+  // }
+  
+  // However, this time the status should be "DONE" and the score should be present.
+  // If the status is still "PROCESSING" the frontend should sleep for a few seconds
+  // and retry the request.
+
+  return data;
+}
+```
+
+We now have a secure endpoint for our front-end to query. We make the request to it inside the same `onSuccess` method.
+
+```javascript
+const { signMessage } = useSignMessage({
+  async onSuccess(data, variables) {
+    // Verify signature when sign message succeeds
+    const address = verifyMessage(variables.message, data);
+    
+    const submitResponse = await axios.post("/api/submit-passport", {
+      address: address, // Required: The user's address you'd like to score.
+      community: process.env.NEXT_PUBLIC_SCORER_ID, // Required: get this from one of your Scorers in the Passport API dashboard https://scorer.gitcoin.co/
+      signature: data, // Optional: The signature of the message returned in Step #1
+      nonce: nonce, // Optional: The nonce returned in Step #1
+    });
+  
+    console.log("submitResponse: ", submitResponse);
+    
+    const scoreResponse = await axios.get(
+        `/api/airdrop/add/${process.env.NEXT_PUBLIC_SCORER_ID}/${address}`
+      );
+
+    console.log("scoreResponse: ", scoreResponse);
+    
+    // Make sure to check the status
+    if (scoreResponse.data.status === "ERROR") {
+      // Handle the error and return.
+      return;
+    } else if (scoreResponse.data.status === "PROCESSING") {
+      // Sleep a few seconds and make the request again.
+    }
+    
+    // If we make it here the score has been successfully retrieved and we are
+    // ready to use it.
+  }
+}
+```
+
+We've completed the first three steps and have a user's Passport score. We now need to use this score to determine if they are an airdrop farmer or a legitimate user.
+
+### 4. Ensure the user's score is above the threshold
+
+We want to ensure that our user's Unique Humanity score is greater than 20. This gives us the best chance of filtering out airdrop farmers while still allowing legitimate users to claim their tokens.
+
+```javascript
+function isUserEligible(score) {
+  if (score > 20) {
+    return true
+  }
+  return false
+}
+```
+
+Leveraging Passport makes this process straightforward. We simply verify that the user's score surpasses the threshold of 20, if it does, they are permitted to claim the airdrop.
+
+### 5. Allow the user to claim their airdrop
+
+This can be handled in a number of ways.
+
+1. We can add the user's address and score to a database, then after we've collected all the addresses, we can calculate the Merkle root which we set in our airdrop distribution contract.
+2. We can allow the user to directly claim their tokens once we have verified they have met the minimum criteria and their Passport score is above our threshold. This would require us to distribute a unique signature for each user that allows them to call the `claim` function on our airdrop contract.
+
+We will be using the first method.
+
+All we need to do now is store the user's address and score in our database. We can use whatever database we want, SQLite, Postgres, MongoDB, etc.
+
+Once we have our list of addresses that have met the minimum criteria for eligibility, we calculate the Merkle root of that list.
+
+```javascript
+// pages/api/admin/merkle.js
+
+const merkle = require("merkle");
+const CryptoJS = require("crypto-js");
+import db from "../../../db";
+
+export default async function handler(req, res) {
+  const rows = await db.select("*").from("airdrop_addresses");
+
+  const addresses = rows.map((r) => r.address);
+  const merkleRoot = calculateMerkleRoot(addresses);
+
+  res.status(200).json(merkleRoot);
+}
+
+function calculateMerkleRoot(addresses) {
+  // Hash the addresses using the SHA-256 algorithm
+  const hashedAddresses = addresses.map((address) =>
+    CryptoJS.SHA256(address).toString(CryptoJS.enc.Hex)
+  );
+
+  // Create a Merkle tree with the hashed addresses
+  const tree = merkle("sha256").sync(hashedAddresses);
+
+  // Return the Merkle root
+  return tree.root();
+}
+
+```
+
+Now we can set this root on our Merkle Distributor smart contract and eligible users can claim their token distributions.
+
+#### Conclusion
+
+In this guide we've done the following:
+
+1. Submitted a user's address to the Passport API for scoring
+2. Fetched their Passport score
+3. Used their score to determine if they are eligible for the airdrop
+4. Stored this information for later use in a Merkle distributor or other airdrop distribution method
+
+Adding Passport protection to your airdrop serves as a last line of defense against airdrop farmers and helps real users receive the most benefit while punishing bad actors.
