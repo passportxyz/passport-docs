@@ -24,7 +24,14 @@ Check out his video and related sample code at the following links:\
 [Sample code](https://gist.github.com/dabit3/10f93a001d75a1b44e5ec2001b33e4f6)
 {% endhint %}
 
-You will need a Scorer and API key to follow this tutorial. Instructions for obtaining these are available on the [API access](../scorer-api/api-access.md) page.
+{% hint style="info" %}
+Before we delve into this, it's important to note that there are a few preliminary steps you need to complete. Please ensure that these prerequisites are met before proceeding with the guide.
+
+1. You have created a Passport Scorer and received a Scorer ID
+2. You have an API key
+{% endhint %}
+
+If you haven't completed the preliminary steps above please refer to [API Access](https://docs.passport.gitcoin.co/building-with-passport/scorer-api/api-access) first. Once you're done with that, return here and continue with this walkthrough.
 
 ### App outline
 

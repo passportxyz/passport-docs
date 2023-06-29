@@ -16,7 +16,14 @@ On this page, you will **learn how to use the Stamp metadata API endpoints** to 
 
 You can follow this walk-through to build a simple app that allows a user to connect their wallet and display their Stamps to the browser, using information provided in the Stamp metadata.
 
-You need an API key to follow this tutorial. See [API access](../scorer-api/api-access.md) for instructions.
+{% hint style="info" %}
+Before we delve into this, it's important to note that there are a few preliminary steps you need to complete. Please ensure that these prerequisites are met before proceeding with the guide.
+
+1. You have created a Passport Scorer and received a Scorer ID
+2. You have an API key
+{% endhint %}
+
+If you haven't completed the preliminary steps above please refer to [API Access](https://docs.passport.gitcoin.co/building-with-passport/scorer-api/api-access) first. Once you're done with that, return here and continue with this walkthrough.
 
 ### API endpoints
 
