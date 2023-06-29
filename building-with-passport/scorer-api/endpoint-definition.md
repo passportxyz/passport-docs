@@ -27,6 +27,14 @@ You will start off with Tier 1, and will need to [request higher rate limits](ht
 
 <table><thead><tr><th width="135">Tier</th><th>Rate limit</th></tr></thead><tbody><tr><td>Tier 1</td><td>125 requests per 15 minutes</td></tr><tr><td>Tier 2</td><td>350 requests per 15 minutes</td></tr><tr><td>Tier 3</td><td>2000 requests per 15 minutes</td></tr><tr><td>Tier 4</td><td>2000+ requests per 15 minutes</td></tr></tbody></table>
 
+## Timeouts
+
+The load balancer for all Passport API endpoints has a timeout of 60 seconds. This means that if a request to one of these endpoints does not receive a response within 60 seconds, the request will be aborted.
+
+If your request times out, you should set up retry logic by calling the API again after a short delay, typically increasing the delay for each subsequent retry.
+
+However, it is important to mention that you should not implement retry logic when making requests to the [Submit for scoring](endpoint-definition.md#submit-for-scoring) endpoint. Even if your request times out, the scoring process should still be in progress.
+
 
 
 ## Available endpoints
