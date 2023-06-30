@@ -86,8 +86,8 @@ The response from this endpoint should look as follows:
 
 ```json
 {
-  "address": "0x21c1010e11c3cda823d6fa3aebf08e6b2836e5f7",
-  "score": "26.26.573997110",
+  "address": "0x2C1E111d7C3adc823B5fA3af3f07EB62831C3c5",
+  "score": "26.573997110",
   "status": "DONE",
   "last_score_timestamp": "2023-06-21T09:24:16.827006+00:00",
   "evidence": null,
