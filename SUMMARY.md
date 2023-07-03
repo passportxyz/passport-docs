@@ -20,6 +20,7 @@
 * [Quick Start](building-with-passport/quick-start-guide.md)
 * [How Passport works](building-with-passport/how-it-works.md)
 * [Major Concepts](building-with-passport/major-concepts.md)
+  * [Data dictionary](building-with-passport/major-concepts/data-dictionary.md)
   * [Deduplicating stamps](get-started/deduplicating-stamps.md)
   * [On-chain Passports](building-with-passport/major-concepts/on-chain-passports.md)
 * [Passport API](building-with-passport/scorer-api/README.md)

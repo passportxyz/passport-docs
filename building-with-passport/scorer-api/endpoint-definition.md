@@ -35,6 +35,10 @@ If your request times out, you should set up retry logic by calling the API agai
 
 However, it is important to mention that you should not implement retry logic when making requests to the [Submit for scoring](endpoint-definition.md#submit-for-scoring) endpoint. Even if your request times out, the scoring process should still be in progress.
 
+## Data dictionary
+
+We have put together a [data dictionary](../major-concepts/data-dictionary.md) that you can use to better understand each field that delivers with the response payloads from the Passport API endpoints.
+
 
 
 ## Available endpoints
