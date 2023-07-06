@@ -1,25 +1,25 @@
 ---
 description: >-
   This document outlines the steps required to obtain an API key and Scorer ID
-  to access the Gitcoin Scorer API.
+  to access the Gitcoin Passport API.
 ---
 
 # API Access
 
-The [Scorer API](https://www.scorer.gitcoin.co/) provides programmatic access to a wallet's Passport score. Once you have your API key, you need to include it with each request you make to the API. This allows Gitcoin to identify your app and verify that you are authorized to access the API.
+The Passport API provides programmatic access to a wallet's Passport score. Once you have your API key, you need to include it with each request you make to the API. This allows Gitcoin to identify your app and verify that you are authorized to access the API.
 
 ### Getting Your API Key
 
-1. **Log in to** [**scorer.gitcoin.co**](https://www.scorer.gitcoin.co/)**:** Go to [scorer.gitcoin.co](https://www.scorer.gitcoin.co/) and log in to your account by connecting your wallet.
+1. **Log in to the** [**developer portal**](https://scorer.gitcoin.co)**:** Go to [scorer.gitcoin.co](https://www.scorer.gitcoin.co/) and log in to your account by connecting your wallet.
 2. **Navigate to the API Keys section:** After logging in, go to the "API Keys" section.
 3. **Generate an API key:** Click on the "+ Create a Key" button to generate a unique API key for your account.
-4. **Store your API key securely:** Store your API key in a secure place, as it will be used to access the Scorer API.
+4. **Store your API key securely:** Store your API key in a secure place, as it will be used to access the Passport API.
 
 
 
 ### Scorers and Scorer ID
 
-A Scorer is an individual object with a unique ID that is associated with your account. If you are using the Gitcoin Scorer API in multiple applications, you can set up separate communities for each one. This allows you to customize the scoring rules for each application and deduplicate any identical Passport VCs that are submitted to the same application.
+A Scorer is an individual object with a unique ID that is associated with your account. If you are using the Gitcoin Passport API in multiple applications, you can set up separate communities for each one. This allows you to customize the scoring rules for each application and deduplicate any identical Passport VCs that are submitted to the same application.
 
 By using communities, you can manage specific parameter settings and log traffic for your Passport-enabled applications. This can help you ensure that the identity verification functionality is working correctly and meets the needs of your stakeholders.
 
