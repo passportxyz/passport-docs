@@ -16,9 +16,13 @@ A Gitcoin Passport Scorer integration is a solution to this problem. By showing 
 
 Note, however, that it is possible for someone to be an impersonator and _also_ have a high Passport score. This is why a Scorer integration is more about giving additional evidence, or context, to choices than it is about automated, binary decision making.
 
-Let's see how an integration like this is built using the Passport Scorer API.
+You can find the code from this tutorial in the following GitHub repo:
 
-## Integrating a Scorer
+{% embed url="https://github.com/gitcoinco/passport-scorer/tree/main/examples/check-trusted-user-app" %}
+
+Let's see how an integration like this is built using the Passport API.
+
+### Prerequisites
 
 {% hint style="info" %}
 Before we delve into this, it's important to note that there are a few preliminary steps you need to complete. Please ensure that these prerequisites are met before proceeding with the guide.
@@ -27,7 +31,9 @@ Before we delve into this, it's important to note that there are a few prelimina
 2. You have an API key
 {% endhint %}
 
-If you haven't completed the preliminary steps above please refer to [API Access](https://docs.passport.gitcoin.co/building-with-passport/scorer-api/api-access) first. Once you're done with that, return here and continue with this walkthrough.
+If you haven't completed the preliminary steps above please refer to [API Access](https://docs.passport.gitcoin.co/building-with-passport/scorer-api/api-access) first. Once you're done with that, return here and continue with this walkthrough
+
+## Integrating a Scorer
 
 ### Setting up a basic app
 

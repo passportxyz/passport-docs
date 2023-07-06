@@ -13,6 +13,16 @@ This guide will cover the following topics:
 * Fetching Passport scores from the Passport API
 * Using Passport scores to regulate access to an airdrop
 
+You can find the code from this tutorial in the following GitHub repo:
+
+{% @github-files/github-code-block url="https://github.com/gitcoinco/passport-scorer/tree/main/examples/airdrop" %}
+
+You can also check out a working version of this app at the following link:
+
+{% embed url="https://airdrop-five.vercel.app/" %}
+
+### Prerequisites
+
 {% hint style="info" %}
 Before we delve into this, it's important to note that there are a few preliminary steps you need to complete. Please ensure that these prerequisites are met before proceeding with the guide.
 
@@ -24,11 +34,11 @@ If you haven't completed the preliminary steps above please refer to [API Access
 
 ### App Overview
 
-We will be rebuilding many of the components and API endpoints of the [airdrop example app](https://github.com/gitcoinco/passport-scorer/tree/main/examples/airdrop). A [live version](https://airdrop-five.vercel.app/) of the app exists which you can visit to get a feel for how everything will fit together in the end.
+We will be rebuilding many of the components and API endpoints of the [airdrop example app](https://github.com/gitcoinco/passport-scorer/tree/main/examples/airdrop).
 
 Below is a diagram showing a high-level overview of how the app functions and interacts with the Passport API.
 
-<figure><img src="../../.gitbook/assets/Passport Airdrop.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Passport Airdrop (1).png" alt=""><figcaption></figcaption></figure>
 
 &#x20;The basic flow is as follows:
 

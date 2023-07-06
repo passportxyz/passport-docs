@@ -16,11 +16,7 @@ This section includes several tutorials for integrating Gitcoin Passport into yo
 
 ## Where to start
 
-To take your very first steps into building apps with Gitcoin Passport, you can visit the [Quick Start guide](../quick-start-guide.md).&#x20;
-
-If you want to go deeper into gating access using Passport scores and learn about best practices for Passport scoring, visit [Gating access with Passport scores](gating-access-with-passport-scores.md).
-
-To learn how to work with individual stamps and use stamp and scorer data in your app's UI, read the [Integrating stamps and scorers](integrating-stamps-and-scorers.md) guide.
+To take your very first steps into building apps with Gitcoin Passport, you can visit either the [API access](../scorer-api/api-access.md) page, followed by the [Quick Start guide](../quick-start-guide.md).&#x20;
 
 
 

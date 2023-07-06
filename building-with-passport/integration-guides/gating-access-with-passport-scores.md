@@ -13,8 +13,6 @@ In this guide, you'll learn how to gate an application using Gitcoin passport. S
 * Implement gating so that some content is only available to users with scores above a threshold
 * Redirect users to instructions for improving their Passport scores
 
-To follow this tutorial, you'll need [Next.js](https://nextjs.org/), [Node](https://nodejs.org/en), and [Chakra-UI](https://chakra-ui.com/) installed on your machine. We will also be using the [Gitcoin Passport API](../scorer-api/).
-
 {% hint style="info" %}
 This tutorial is a more detailed version of a video tutorial put together by Nader Dabit.\
 Check out his video and related sample code at the following links:\
@@ -23,6 +21,10 @@ Check out his video and related sample code at the following links:\
 
 [Sample code](https://gist.github.com/dabit3/10f93a001d75a1b44e5ec2001b33e4f6)
 {% endhint %}
+
+### Prerequisites
+
+To follow this tutorial, you'll need [Next.js](https://nextjs.org/), [Node](https://nodejs.org/en), and [Chakra-UI](https://chakra-ui.com/) installed on your machine. We will also be using the [Gitcoin Passport API](../scorer-api/).
 
 {% hint style="info" %}
 Before we delve into this, it's important to note that there are a few preliminary steps you need to complete. Please ensure that these prerequisites are met before proceeding with the guide.
@@ -36,6 +38,12 @@ If you haven't completed the preliminary steps above please refer to [API Access
 ### App outline
 
 The app we will build will be an educational site where users can learn about web3 and DAOs, and then if - and only if - their Passport score is above a threshold, they can uncover the secret information required to join our example Passport DAO.
+
+You can find the code from this tutorial in the following GitHub repo:
+
+{% embed url="https://github.com/gitcoinco/passport-scorer/tree/main/examples/passport-gated-content-app" %}
+Example code
+{% endembed %}
 
 The app will work as follows:
 

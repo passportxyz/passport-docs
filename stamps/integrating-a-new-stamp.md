@@ -6,33 +6,33 @@ description: >-
 
 # Creating a new Stamp
 
-***
+Creating a new Stamp involved defining verification logic and adding configuration details to our existing Stamp infrastructure.
 
-***
+We have a standardized format for Stamps and this page will help you to understand all the information you need to provide. The process begins by creating your own copy of our GitHub repository. The instructions on this page will walk you through how to change the codebase to support your Stamp and submit the changes back to the Passport team.&#x20;
 
-***
+
 
 ### 1. Fork the Passport GitHub repository
 
-***
+Whether you want to create an EVM or a non-EVM Stamp, the process begins by forking the Passport GitHub repository. Clone your fork and navigating to the `platforms` directory.
 
-***
+Here is our [GitHub repository](https://github.com/gitcoinco/passport).
 
-***
+This is the [`platforms` directory](https://github.com/gitcoinco/passport/tree/main/platforms), located at `passport/platforms.`
 
-***
+
 
 ### 2. Create new files
 
-***
+Adding a Stamp requires you to create some new files inside the `platforms/src` directory. Inside `platforms/src` create a new directory and name it according to your Stamp. In the test here we will use the word `example.`
 
-***
+For example, the following would be an appropriate command for a bash user:
 
 ```bash
 cd platforms/src && mkdir example
 ```
 
-***
+Inside `example`,  create the following subdirectories and files:
 
 ```bash
 # files to create inside platforms/src/example:
@@ -47,7 +47,7 @@ cd platforms/src && mkdir example
   
 ```
 
-***
+Each of the files you just created has a distinct purpose, as described in the following table:
 
 | file                          | purpose                                                                                   |
 | ----------------------------- | ----------------------------------------------------------------------------------------- |
@@ -58,15 +58,15 @@ cd platforms/src && mkdir example
 | index.ts                      | Exports the providers, config and app bindings                                            |
 |                               |                                                                                           |
 
-***
+You will also need to update some information in existing files in `platforms/src` but for now we can focus on adding the right information to these newly created files. For the `App-bindings.ts` file specifically, the instructions are slightly different for EVM and non-EVM Stamps.
 
 #### `App-bindings.ts`
 
-***
+Updating `App-bindings.ts` is slightly different depending upon whether you are creating an EVM Stamp or a non-EVM Stamp.
 
-***
+_**What is an EVM Stamp?**_
 
-***
+Some Stamps rely upon the Ethereum Virtual Machine (EVM) while some rely upon OAuth to determine ownership. If your Stamp represents some web3 native credential such as ownership of a digital asset (for example, ETH, some ERC20 token, NFT or POAP) or on-chain activity (for example, certain transaction) that can be verified by querying the blockchain, then your Stamp is an EVM Stamp. If your Stamp relies on ownership of some web2 account that your users login to, then it is a non-EVM Stamp.
 
 #### `EVM Stamps`
 
@@ -163,7 +163,7 @@ export const providers: Provider[] = [new <ProviderClass>()]
 
 #### `index.ts`
 
-***
+Copy and paste the following code into `index.ts` replacing `<EXAMPLE>` with your Stamp name. This code is used to export the providers, provider config data and app bindings.
 
 ```typescript
 //index.ts
@@ -172,7 +172,7 @@ export { ProviderConfig, PlatformDetails, providers } from "./Providers-config";
 export { <EXAMPLE>Provider
 ```
 
-***
+
 
 #### `Providers/example.ts`
 
