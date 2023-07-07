@@ -12,6 +12,8 @@ description: >-
 
 [How Gitcoin Passport Protects Testnet Funds: A Case Study with PoWFaucet](https://www.gitcoin.co/blog/gitcoin-passport-powfaucet)
 
+[Building Reputation on {r}elinkd - A Gitcoin Passport Case Study](https://www.gitcoin.co/blog/building-reputation-on-r-elinkd)
+
 
 
 ## Use cases
