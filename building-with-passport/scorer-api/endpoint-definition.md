@@ -2,7 +2,7 @@
 
 The Passport API enables developers to retrieve Passport scores and Stamp metadata for users who have created a Gitcoin Passport.&#x20;
 
-You can also experiment with this API using our ['try it live' tool](https://api.scorer.gitcoin.co/docs) and adding your API keys via the 'Authorize' button.
+You can also experiment with the Passport API using our [API playground tool](https://api.scorer.gitcoin.co/docs) and adding your API keys via the 'Authorize' button.
 
 ## Authentication
 

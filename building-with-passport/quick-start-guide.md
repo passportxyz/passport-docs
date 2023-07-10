@@ -11,7 +11,7 @@ This page will get you up and running with the Passport API. You will come away 
 
 To follow this quick start, you'll first need to visit [scorer.gitcoin.co](https://scorer.gitcoin.co/), where you'll create an API key, a Scorer, and an associated Scorer ID. Learn more about this process on our [API access page](scorer-api/api-access.md).
 
-You can also experiment with this API using our ['try it live' tool](https://api.scorer.gitcoin.co/docs) and adding your API keys via the 'Authorize' button.
+You can also experiment with the Passport API using our [API playground tool](https://api.scorer.gitcoin.co/docs) and adding your API keys via the 'Authorize' button.
 
 
 
