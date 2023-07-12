@@ -123,7 +123,7 @@ curl --request POST \
 
 #### **Sample responses**
 
-The name in the parenthesis represents what type of Scorer you are using. To learn more, please visit our [API Access](api-access.md#types-of-scorers) page.&#x20;
+The name in the parenthesis represents what [type of Scorer](https://docs.passport.gitcoin.co/building-with-passport/scorer-api/api-access#types-of-scorers) you are using.&#x20;
 
 {% tabs %}
 {% tab title="PROCESSING" %}
