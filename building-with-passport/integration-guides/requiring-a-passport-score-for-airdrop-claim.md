@@ -38,7 +38,7 @@ We will be rebuilding many of the components and API endpoints of the [airdrop e
 
 Below is a diagram showing a high-level overview of how the app functions and interacts with the Passport API.
 
-<figure><img src="../../.gitbook/assets/Passport Airdrop (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Passport Airdrop.png" alt=""><figcaption></figcaption></figure>
 
 &#x20;The basic flow is as follows:
 
