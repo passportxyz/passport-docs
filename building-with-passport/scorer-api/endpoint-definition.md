@@ -37,6 +37,44 @@ If your request times out, you should set up retry logic by calling the API agai
 
 However, it is important to mention that you should not implement retry logic when making requests to the [Submit for scoring](endpoint-definition.md#submit-for-scoring) endpoint. Even if your request times out, the scoring process should still be in progress.
 
+## Pagination
+
+Some requests are likely to return a large amount of data. You can paginate it by adding `?limit=<x>`, where `x` is the number of elements of the dataset you wish to return in each response, to the end of the request. This instructs the server to only send x "pages" of the response.&#x20;
+
+For the Stamps endpoint, `x` refers to the number of Stamp objects to return in each response. The full request to the Stamp endpoint, including the pagination instruction and headers, could look as follows:
+
+<pre class="language-bash"><code class="lang-bash">curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?limit=3' \
+<strong>  --header 'X-API-KEY: {API-KEY}'
+</strong></code></pre>
+
+In this example, the API will return three Stamps in each response.
+
+To help you navigate, the returned data includes values in the `prev` and `next` fields. These are endpoint URLs with pre-filled query parameters you can use to retrieve the previous or next chunk of data. Note that if you request a `limit` of 3, your `next` value is also going to have a `limit` of 3. For example, if the response contains Stamps 4, 5 and 6, the URL in `prev` will return Stamps 1, 2, and 3. The URL in `next` will return Stamps 7, 8, and 9.
+
+This is what a response looks like with the `next` and `prev` fields. Notice these fields values are endpoint URLs.
+
+```json
+{
+  "next": "https://api.scorer.gitcoin.co/registry/stamps/{address}?token=bmVw%4dFNQ9fM3TcxMTcD%3D&limit=3",
+  "prev": "https://api.scorer.gitcoin.co/registry/stamps/{address}?token=c9fMTcHJlTcwdlxMNQ%3D%3D&limit=3",
+  "items": [
+    {
+      "version": "1.0.0",
+      "credential": {...}
+    }
+  ]
+}
+```
+
+To retrieve the next page of results you can use the URL provided in the `next` field, in this case:
+
+```bash
+curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?token=bmVw%4dFNQ9fM3TcxMTcD%3D&limit=3' \
+  --header 'X-API-KEY: {API-key}'
+```
+
+
+
 ## Data dictionary
 
 We have put together a [data dictionary](../major-concepts/data-dictionary.md) that you can use to better understand each field that delivers with the response payloads from the Passport API endpoints.
@@ -242,7 +280,9 @@ If you would like to retrieve the metadata for all available Stamps, please use 
 
 #### Query parameters
 
-<table><thead><tr><th width="225">Name</th><th width="105.33333333333331">Required</th><th></th></tr></thead><tbody><tr><td><code>include_metadata</code></td><td>No</td><td>[Beta] Returns optional <code>metadata</code> object with additional details about connected Stamps.</td></tr></tbody></table>
+<table><thead><tr><th width="225">Name</th><th width="105.33333333333331">Required</th><th></th></tr></thead><tbody><tr><td><code>include_metadata</code></td><td>No</td><td>[Beta] Returns optional <code>metadata</code> object with additional details about connected Stamps.</td></tr><tr><td><code>limit</code></td><td>No</td><td>Paginates response, providing the given number of Stamps per page (For example, use <code>limit=3</code> to request three Stamps)<br><br>Learn more about <a href="endpoint-definition.md#pagination">pagination</a>.</td></tr></tbody></table>
+
+
 
 {% code title="Sample request" overflow="wrap" %}
 ```bash

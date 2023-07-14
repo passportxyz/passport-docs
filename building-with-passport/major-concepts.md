@@ -121,6 +121,24 @@ The Boolean Unique Humanity Verification mechanism is aimed at preventing bot/sy
 
 The algorithm used to calculate Passport scores is transparent and easily auditable. The exact formula used to calculate the score is available in the Gitcoin Scorer code base, and the scoring weight of each stamp is determined by Gitcoin's data scientists based on the identities of users in previous Gitcoin Grants rounds and other Gitcoin Passport use cases. By using these scoring mechanisms, developers can ensure that only unique humans are able to participate in their applications while still preserving the privacy of users.
 
+
+
+### Pagination (API)
+
+Some API requests might return large amounts of data. For example, the data returned from `/registry/stamps` returns information about every individual Stamp owned by a given address, possibly including all the associated metadata too. It can be convenient to break this data up into more manageable pieces. The way to do this is using API pagination.&#x20;
+
+By adding a query to the API request, you can receive chunks of the data. Take, for example, the following request to the Stamp registry:
+
+```
+curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/<address>?include_metadata=true
+```
+
+This request could return a large amount of data if the given address owns a lot of Stamps. In this case, it could be useful to paginate the response, which means the API will return a subset of the total data. You can do this by adding `&limit=x` to the API request, where `x` is the number of elements (in this example, Stamp objects) to return in each response.
+
+More detail, including an explanation of how to navigate paginated responses, is provided on the [API endpoint definition page](scorer-api/endpoint-definition.md).
+
+
+
 ### Sybil
 
 A Sybil is a fake user. Many applications require confidence that each of their users represents a real human individual rather than a bot or an impersonator. However, users can try to create multiple personas that they use to access a service, gaining more than their fair share or reward or influence. Each of these dishonest personas is known as a Sybil. Take voting for example; if a user can create ten accounts and convince a platform that they are all valid, then they have multiplied their influence over the outcome of the vote by 10x. Gitcoin Passport is an anti-Sybil tool because it makes it harder for attackers to convince platforms that these Sybil accounts represent genuine users.
