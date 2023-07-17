@@ -1,12 +1,12 @@
 ---
-description: Content for platform integrator ecosystem partners
+description: Content for platform integrators and their ecosystem partners
 ---
 
 # Platform Integrator concepts
 
-This page is for platforms who integrate with Gitcoin Passport and make its sybil-resisting functionality available to their ecosystem partners and organizations.&#x20;
+This page is for platforms who integrate with Gitcoin Passport and make its sybil-resisting functionality available to their ecosystem partners.&#x20;
 
-On this page, you will learn what types of attack Gitcoin Passport can protect you from, see examples of existing platform integrations, understand integration best-practices and identify the key information your users need to know.
+On this page, you will learn what types of attack Gitcoin Passport can protect against, see examples of existing platform integrations, understand integration best-practices and identify the key information your users need to know.
 
 ### Audience definitions
 
@@ -16,7 +16,7 @@ First off, some audience definitions:
 2. **Ecosystem partners:** Organizations or apps who use the platforms built by Platform Integrators.&#x20;
 3. **End-users:** People who are engaging with the ecosystem partner's content or programs within the platform.
 
-We'll use [Snapshot](https://snapshot.org/#/) as an example. Snapshot is an off-chain voting platform that allows DAOs, DeFi protocols, or NFT communities to participate in the decentralized governance. Within the Snapshot platform, Optimism Collective allows users to vote on proposals using the Snapshot technology.&#x20;
+We'll use [Snapshot](https://snapshot.org/#/) as an example. Snapshot is an off-chain voting platform that allows DAOs, DeFi protocols, or NFT communities to participate in decentralized governance. Within the Snapshot platform, Optimism Collective allows users to vote on proposals using Snapshot's technology.&#x20;
 
 In this situation, Snapshot would be a platform integrator, Optimism Collective would be an ecosystem partner, and the users submitting and voting on proposals are end-users.&#x20;
 
@@ -24,7 +24,7 @@ In this situation, Snapshot would be a platform integrator, Optimism Collective 
 
 ### What are Sybils and why should you care?
 
-Sybils are fake users. They can negatively affect your platform in several ways. There are several ways that users can become incentivized to create Sybil accounts, for example to receive a reward multiple times, or have additional influence over a vote. They prevent you from efficiently allocating power and/or capital among your community by capturing it for some dishonest person or group. Without some form of Sybil defense, you have no way to tell whether the users showing up to your application really represent individual human users or whether they are actually bots or fake accounts.
+Sybils are fake users that can negatively affect your platform and ecosystem partners. There are several ways that users can become incentivized to create Sybil accounts, for example to receive a reward multiple times, or have additional influence over a vote. They prevent you from efficiently allocating power and/or capital among your community by capturing it for some dishonest person or group. Without some form of Sybil defense, you have no way to tell whether the users showing up to your application really represent individual human users or whether they are actually bots or fake accounts.
 
 
 
@@ -60,9 +60,9 @@ The score is the sum of weights assigned to the user's Stamps. It is possible to
 2. You do not have to handle complications such as [Stamp deduplication](../major-concepts.md#duplication-of-stamps) - the server does this for you.
 3. You can follow our simple [integration guides](../integration-guides/) to quickly and easily start defending your app from Sybils!
 
-You might want to use Stamp data instead of a Passport score. For example, a few specific Stamps might be particularly important to you (maybe you decide that having >50 Github followers is a hard requirement to access your platform). In this case you can access your user's Stamp collection and confirm ownership of individual Stamps.
+While utilizing the Passport score is a best practice, you could also use Stamp data in addition to the Passport score, or just use Stamp data to gate access. For example, a few specific Stamps might be particularly important to you (maybe you decide that having >50 Github followers is a hard requirement to access your platform). In this case you can access your user's Stamp collection and confirm ownership of individual Stamps.
 
-Finally, you might not necessarily want to automatically gate access based on Passport scores or stamps. Perhaps you simply want to display Stamp and score information about each user, so you can make real-time decisions based on user's trustworthiness. For example, you might have to determine an honest user from several impersonator accounts. Quick access to Stamp and score data would give you a strong signal about who is the genuine user. There is a guide for displaying Stamp and score data in your app's UI [here](../integration-guides/#integrating-stamps-and-scores)!
+Finally, you might not necessarily want to automatically gate access based on Passport scores or Stamps. Perhaps you want to display Stamp and score information about each user so platform administrators or end users can make real-time decisions based on the user's trustworthiness or reputation. For example, you might have to determine an honest user from several impersonator accounts. Quick access to Stamp and score data would give you a strong signal about who is the genuine user. There is a guide for displaying Stamp and score data in your app's UI [here](../integration-guides/#integrating-stamps-and-scores)!
 
 Read more on [How Passport works](../how-it-works.md).
 
@@ -79,6 +79,8 @@ If integrated properly, ecosystem partners utilizing a platform's services will 
 For example, an ecosystem partner runs a forum and voting platform in addition to their main application. Integrating Passport across all these platforms gives them confidence that your whole organization is protected to the same standard, with the same configuration.&#x20;
 
 A Passport integration is straightforward, flexible and configurable to ecosystem partners' needs depending on how a platform integrator builds the integration. You can easily set global configurations that are standard across all platforms and partners, or you could tailor your Sybil defenses to each platform, so that you can have stricter controls for more sensitive services.&#x20;
+
+You can learn more about these benefits by reading our [blog post about our partnership with Guild.xyz](https://www.gitcoin.co/blog/guild-xyz-and-gitcoin-passport-partner).
 
 
 
