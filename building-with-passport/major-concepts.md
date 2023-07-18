@@ -6,9 +6,9 @@ description: These are the concepts you need to know to understand Gitcoin Passp
 
 ### Passports
 
-The example below shows the JSON data format for a Gitcoin Passport. This is an example of a Decentralized Identifier (DID), as defined in the [W3c documentation](https://w3c.github.io/did-core/#a-simple-example). Each passport contains a field named `stamps`. This is a array where your stamps are stored.
+The example below shows the JSON data format for a Gitcoin Passport. This is an example of a Decentralized Identifier (DID), as defined in the [W3c documentation](https://w3c.github.io/did-core/#a-simple-example). Each passport contains a field named `stamps`. This is a array where your Stamps are stored.
 
-To see what each stamp looks like, scroll down to the stamps section. When you add stamps to your passport, they are pushed into this array. The entire Passport (DID) object is stored on the Ceramic network and associated with your Ethereum address.
+To see what each Stamp looks like, scroll down to the Stamps section. When you add Stamps to your passport, they are pushed into this array. The entire Passport (DID) object is stored on the Ceramic network and associated with your Ethereum address.
 
 ```
 {
@@ -24,7 +24,9 @@ To see what each stamp looks like, scroll down to the stamps section. When you a
 
 The "Passport Protocol" refers to the infrastructure that enables web3 citizens to create their own Passport, prove their decentralized identity and access Passport-gated projects. It is all the tooling that enables developers to build Passport gating into their apps.
 
-Web3 citizens interface with the Passport Protocol through the Passport holder dApp at passport.gitcoin.co. Developers can use the [Scorer API](https://api.scorer.gitcoin.co/docs) to easily integrate Gitcoin Passport into their apps.
+Web3 citizens interface with the Passport Protocol through the Passport holder dApp at [passport.gitcoin.co](https://passport.gitcoin.co). Developers can use the [Passport API](https://api.scorer.gitcoin.co/docs) to easily integrate Gitcoin Passport into their apps.
+
+
 
 ### Passport-Gating
 
@@ -36,15 +38,17 @@ Web3 citizens interface with the Passport Protocol through the Passport holder d
 * "Some examples of Passport-gated dApps include: Snapshot, Bankless Academy, and Gitcoin Grants."
 * "Because this community is gated with Gitcoin Passport, it is able to ask for pieces of proof of not just identity via services like BrightID, but also reputation via services like POAP."
 
-See the Quick Start Guide to learn how to gate your project.
+See our [tutorials](integration-guides/) to learn how to gate your project.
+
+
 
 ### Stamps
 
-Stamps are the key identity verification mechanism of Gitcoin Passport. A stamp is a collection of one or more [verifiable credentials](major-concepts.md#verifiable-credentials-vcs) from an identity provider that is collected in a Passport. Stamps are provided by a variety of web2 and web3 identity authenticators including Google, Facebook, BrightID, ENS, and Proof of Humanity. Custom stamps for particular communities are under development. Stamps do not store any personally identifiable information, only the verifiable credentials issued by the identity authenticator.
+Stamps are the key identity verification mechanism of Gitcoin Passport. A Stamp is a collection of one or more [verifiable credentials](major-concepts.md#verifiable-credentials-vcs) from an identity provider that is collected in a Passport. Stamps are provided by a variety of web2 and web3 identity authenticators including Google, Facebook, BrightID, ENS, and Proof of Humanity. Custom Stamps for particular communities are under development. Stamps do not store any personally identifiable information, only the verifiable credentials issued by the identity authenticator.
 
-Passport aggregates stamps and assigns each stamp a different weight according to the needs of a particular community. This weight is used to calculate the cost of forgery of an identity, a score which reflects the credibility of a potential participant’s online identity. For example, a community for developers could assign a greater weight to a Github stamp, resulting in higher scores for those who have Github stamps.
+Passport aggregates Stamps and assigns each Stamp a different weight according to the needs of a particular community. This weight is used to calculate the cost of forgery of an identity, a score which reflects the credibility of a potential participant’s online identity. For example, a community for developers could assign a greater weight to a Github Stamp, resulting in higher scores for those who have Github Stamps.
 
-The code snippet below shows a single stamp. This particular stamp proves ownership of a Discord account. The stamps array in the Gitcoin passport object contains multiple instances of this data structure representing each different passport stamp. All the stamps conform to this specific format inherited from [https://www.w3.org/2018/credentials/v1](https://www.w3.org/2018/credentials/v1).
+The code snippet below shows a single Stamp. This particular Stamp proves ownership of a Discord account. The Stamps array in the Gitcoin passport object contains multiple instances of this data structure representing each different passport Stamp. All the Stamps conform to this specific format inherited from [https://www.w3.org/2018/credentials/v1](https://www.w3.org/2018/credentials/v1).
 
 ```json
 {
@@ -85,41 +89,65 @@ The code snippet below shows a single stamp. This particular stamp proves owners
 
 ### Verifiable credentials (VCs)
 
-Each stamp is composed of one or more "verifiable credential". These credentials are individual pieces of evidence that can be tested in order to issue a stamp. For example, the Github stamp includes VCs for several different properties of a user's Github account, including the Github OAuth (can the user sign in to the account) and the number of followers, forks and stars the user has accumulated. Together, these VCs comprise the Github Passport stamp.
+Each Stamp is composed of one or more "verifiable credential". These credentials are individual pieces of evidence that can be tested in order to issue a Stamp. For example, the Github Stamp includes VCs for several different properties of a user's Github account, including the Github OAuth (can the user sign in to the account) and the number of followers, forks and stars the user has accumulated. Together, these VCs comprise the Github Passport Stamp.
 
-###
+
+
+### Ethereum
+
+Ethereum is a blockchain network. It is secured using a proof-of-stake based consensus mechanism and contains an embedded computer that allows apps to be built on top of it. Discrete units of executable code living on the Ethereum blockchain are known as smart contracts. Read more on Ethereum at [ethereum.org](https://ethereum.org). &#x20;
+
+
+
+### Ethereum address
+
+Ethereum users interact with the network using an account. An account is really a pair of keys. One key is known as the 'private key' which is used to sign and send transactions. The other is the 'public key', which is used to create a unique address used to identify a particular user. In Gitcoin Passport, users' Ethereum addresses are used to identify which Stamps they own. Their private keys are used to demonstrate ownership of that address.
+
+
+
+### Hash
+
+A hash is the result of applying a hash function to some data. A hash function takes some data and returns a unique string of characters of fixed length (the hash). The hash function is deterministic, meaning the same data will always return the same hash, but it is extremely difficult to recover the original data from the hash. This makes the hash useful for efficiently validating data.
+
+
 
 ### Duplication of Stamps
 
-The Passport itself does not require a unique underlying account to issue a VC. This means that any number of wallets can create Passports that link to the same underlying identity. While it is fine for an honest user to have multiple Passports, for example to maintain different user profiles (for example "home" and "work") it is not acceptable to use the same credential multiple times to influence a single outcome. Passport is built to support contextual identity so you can maintain Passports that you use within specific communities. It's also important for recoverability that stamps are not bound to a single Ethereum address - otherwise losing access to your wallet means losing the ability to prove your identity using the stamps that had previously been tied to it.
+The Passport itself does not require a unique underlying account to issue a VC. This means that any number of wallets can create Passports that link to the same underlying identity. While it is fine for an honest user to have multiple Passports, for example to maintain different user profiles (for example "home" and "work") it is not acceptable to use the same credential multiple times to influence a single outcome. Passport is built to support contextual identity so you can maintain Passports that you use within specific communities. It's also important for recoverability that Stamps are not bound to a single Ethereum address - otherwise losing access to your wallet means losing the ability to prove your identity using the Stamps that had previously been tied to it.
 
-To enable users to maintain distinct personas is different communities, but simultaneously prevent dishonest multiplication of stamps we have added a `hash` field to the Passport stamps.
+To enable users to maintain distinct personas is different communities, but simultaneously prevent dishonest multiplication of Stamps we have added a `hash` field to the Passport Stamps.
 
-This `hash` is a unique identifier that is generated for all VCs issued by the Gitcoin server. It allows a stamp to be uniquely identified, so a particular app can check that it has only been used once, while preserving anonymity.
+This `hash` is a unique identifier that is generated for all VCs issued by the Gitcoin server. It allows a Stamp to be uniquely identified, so a particular app can check that it has only been used once, while preserving anonymity.
 
-As a developer, you don't need to implement any logic for deduplicating stamps if you use the default scorer. The deduplication is done server-side. However, if you are building a custom scorer you may want to store the hashes and deduplicate stamps yourself to prevent users from submitting the same set of stamps in multiple Passports.
+As a developer, you don't need to implement any logic for deduplicating Stamps if you use the default scorer. The deduplication is done server-side. However, if you are building a custom scorer you may want to store the hashes and deduplicate Stamps yourself to prevent users from submitting the same set of Stamps in multiple Passports.
 
 More details about Passport deduplication can be found on our [Deduplicating Stamps](../get-started/deduplicating-stamps.md) page.
+
+
 
 ### Streams
 
 Passport identity data is stored as a decentralized data stream on Ceramic. Streams are individual instances of state on the Ceramic network. They are mutable and can only be altered after receiving a transaction signed by the account that owns it. These data streams are what allow Passport data to be interoperable and portable across multiple chains and dApps.
 
+
+
 ### Scorer
 
-A Scorer is an instance of a scoring algorithm. Gitcoin Passport provides the Scorer API that provides a straightforward way for developers to interact with the Passport Protocol, including adding Passports to a registry and calculating the Passport score isng a scoring algorithm.
+A Scorer is an instance of a scoring algorithm. The Passport API that offers a straightforward way for developers to interact with the Passport Protocol, including adding Passports to a registry and calculating the Passport score using a scoring algorithm.
+
+
 
 ### Scoring Mechanisms
 
-To evaluate the unique humanity of users in web3 applications, Gitcoin has devised two scoring mechanisms - Gradual Unique Humanity Verification and Boolean Unique Humanity Verification. These mechanisms consider multiple stamps connected to a Passport holder, such as verified Twitter and Google accounts, possession of GTC or ETH, and previous participation in Gitcoin Grants. Each stamp is assigned a weight based on its significance in assessing the unique humanity of the Passport holder. These weights are used as inputs to an algorithm that calculates a Passport score for the holder. The weights are defined in the [Passport Github](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin\_passport\_weights.py).
+To evaluate the unique humanity of users in web3 applications, Gitcoin has devised two scoring mechanisms - Gradual Unique Humanity Verification and Boolean Unique Humanity Verification. These mechanisms consider multiple Stamps connected to a Passport holder, such as verified Twitter and Google accounts, possession of GTC or ETH, and previous participation in Gitcoin Grants. Each Stamp is assigned a weight based on its significance in assessing the unique humanity of the Passport holder. These weights are used as inputs to an algorithm that calculates a Passport score for the holder. The weights are defined in the [Passport Github](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin\_passport\_weights.py).
 
 The approach for scoring is designed to focus on interactions across a wide range of technology platforms, where the global maxima for a Passport score is quite high, making it unrealistic for real humans to achieve a perfect score. Nevertheless, these scores can still be used to grant access to partial rights, features, and other benefits to Passport holders based on their score. For instance, developers may offer access to a web app to users with a score above a particular threshold, or provide special features to power users with scores above a certain level.
 
 The Gradual Unique Humanity Verification mechanism allows developers to assign partial rights to users based on their unique humanity score. For example, a user with a score of 30/100 may receive 30% of a full testnet ETH faucet payment, while a user with a score of 45/100 may have their votes multiplied by 45/100. Developers can customize the gradual weights in various ways to tailor their application.
 
-The Boolean Unique Humanity Verification mechanism is aimed at preventing bot/sybil attacks and safeguarding user privacy. It involves asking users to verify a particular set of stamps, each with a specific significance in assessing their unique humanity. Users are deemed unique humans if they meet or exceed the predetermined threshold of verified stamps that reach a combined score above a certain threshold.
+The Boolean Unique Humanity Verification mechanism is aimed at preventing bot/sybil attacks and safeguarding user privacy. It involves asking users to verify a particular set of Stamps, each with a specific significance in assessing their unique humanity. Users are deemed unique humans if they meet or exceed the predetermined threshold of verified Stamps that reach a combined score above a certain threshold.
 
-The algorithm used to calculate Passport scores is transparent and easily auditable. The exact formula used to calculate the score is available in the Gitcoin Scorer code base, and the scoring weight of each stamp is determined by Gitcoin's data scientists based on the identities of users in previous Gitcoin Grants rounds and other Gitcoin Passport use cases. By using these scoring mechanisms, developers can ensure that only unique humans are able to participate in their applications while still preserving the privacy of users.
+The algorithm used to calculate Passport scores is transparent and easily auditable. The exact formula used to calculate the score is available in the Gitcoin Scorer code base, and the scoring weight of each Stamp is determined by Gitcoin's data scientists based on the identities of users in previous Gitcoin Grants rounds and other Gitcoin Passport use cases. By using these scoring mechanisms, developers can ensure that only unique humans are able to participate in their applications while still preserving the privacy of users.
 
 
 
@@ -130,7 +158,7 @@ Some API requests might return large amounts of data. For example, the data retu
 By adding a query to the API request, you can receive chunks of the data. Take, for example, the following request to the Stamp registry:
 
 ```
-curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/<address>?include_metadata=true
+curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?include_metadata=true
 ```
 
 This request could return a large amount of data if the given address owns a lot of Stamps. In this case, it could be useful to paginate the response, which means the API will return a subset of the total data. You can do this by adding `&limit=x` to the API request, where `x` is the number of elements (in this example, Stamp objects) to return in each response.

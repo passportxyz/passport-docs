@@ -11,7 +11,7 @@
 ## GET STARTED
 
 * [Creating your Gitcoin Passport](get-started/creating-your-passport.md)
-* [Collecting stamps](get-started/collecting-stamps.md)
+* [Collecting Stamps](get-started/collecting-stamps.md)
 * [Presenting your Gitcoin Passport](get-started/presenting-your-passport.md)
 * [FAQ for Passport Holders](get-started/faq.md)
 
@@ -21,7 +21,7 @@
 * [How Passport works](building-with-passport/how-it-works.md)
 * [Major Concepts](building-with-passport/major-concepts.md)
   * [Data dictionary](building-with-passport/major-concepts/data-dictionary.md)
-  * [Deduplicating stamps](get-started/deduplicating-stamps.md)
+  * [Deduplicating Stamps](get-started/deduplicating-stamps.md)
   * [On-chain Passports](building-with-passport/major-concepts/on-chain-passports.md)
   * [Platform Integrator concepts](building-with-passport/major-concepts/platform-integrator-concepts.md)
 * [Passport API](building-with-passport/scorer-api/README.md)
