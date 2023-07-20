@@ -22,7 +22,7 @@ In this situation, Snapshot would be a platform integrator, Optimism Collective 
 
 Here are some examples and their Passport use cases:
 
-<table data-header-hidden><thead><tr><th width="177">Platform Integrator</th><th>Ecosystem Partner</th><th>End user</th><th>Why the Platform integrating Gitcoin Passport is a win for everyone</th></tr></thead><tbody><tr><td>Snapshot</td><td>DAOs and other groups that need a proposal and voting system</td><td>DAO contributors and other voters</td><td>Voting outcomes that bias towards real democracy and less so algorithmic manipulation</td></tr><tr><td>Guild</td><td>Guild admins</td><td>Guild members</td><td>Rewards going to unique humans instead of bots and Sybils</td></tr><tr><td>Galxe</td><td>Community engagement campaign creators</td><td>People who want to earn rewards by participating in campaigns </td><td>Rewards going to unique humans instead of bots and Sybils</td></tr></tbody></table>
+<table><thead><tr><th width="177">Platform Integrator</th><th>Ecosystem Partner</th><th>End user</th><th>Why the Platform integrating Gitcoin Passport is a win for everyone</th></tr></thead><tbody><tr><td>Snapshot</td><td>DAOs and other groups that need a proposal and voting system</td><td>DAO contributors and other voters</td><td>Voting outcomes that bias towards real democracy and less so algorithmic manipulation</td></tr><tr><td>Guild</td><td>Guild admins</td><td>Guild members</td><td>Rewards going to unique humans instead of bots and Sybils</td></tr><tr><td>Galxe</td><td>Community engagement campaign creators</td><td>People who want to earn rewards by participating in campaigns </td><td>Rewards going to unique humans instead of bots and Sybils</td></tr></tbody></table>
 
 
 
