@@ -6,7 +6,7 @@ description: Content for platform integrators and their ecosystem partners
 
 This page is for platforms who integrate with Gitcoin Passport and make its sybil-resisting functionality available to their ecosystem partners.&#x20;
 
-On this page, you will learn what types of attack Gitcoin Passport can protect against, see examples of existing platform integrations, understand integration best-practices and identify the key information your users need to know.
+On this page, you will learn what types of attacks Gitcoin Passport can protect against, see examples of existing platform integrations, understand integration best-practices and identify the key information your users need to know.
 
 ### Audience definitions
 
@@ -24,13 +24,13 @@ In this situation, Snapshot would be a platform integrator, Optimism Collective 
 
 ### What are Sybils and why should you care?
 
-Sybils are fake users that can negatively affect your platform and ecosystem partners. There are several ways that users can become incentivized to create Sybil accounts, for example to receive a reward multiple times, or have additional influence over a vote. They prevent you from efficiently allocating power and/or capital among your community by capturing it for some dishonest person or group. Without some form of Sybil defense, you have no way to tell whether the users showing up to your application really represent individual human users or whether they are actually bots or fake accounts.
+Sybil attacks describe the abuse of a digital network by creating many illegitimate virtual personas. There are several ways that users can become incentivized to create Sybil accounts, for example to receive a reward multiple times, or have additional influence over a vote. They prevent you from efficiently allocating power and/or capital among your community by capturing it for some dishonest person or group. Without some form of Sybil defense, you have no way to tell whether the users showing up to your application really represent individual human users or whether they are actually bots or fake accounts.
 
 
 
 ### What is Sybil defense?
 
-Sybil defense is a catch-all term for any actions that minimize the effect of Sybils. Typically, Sybil defense involves filtering out users that can't provide sufficient evidence that they are real human individuals. The more effective the Sybil defence, the more confident you can be that your users are real, and the more effectively you can distribute rewards, votes and other forms of capital and agency to your community.
+Sybil defense is a catch-all term for any actions that minimize the effect of Sybils. Typically, Sybil defense involves filtering out users that can't provide sufficient evidence that they are real human individuals. The more effective the Sybil defense, the more confident you can be that your users are real, and the more effectively you can distribute rewards, votes and other forms of capital and agency to your community.
 
 Gitcoin Passport is a Sybil defense tool. It provides everything you need to check the personhood of your users without invading their privacy.
 
@@ -60,7 +60,7 @@ The score is the sum of weights assigned to the user's Stamps. It is possible to
 2. You do not have to handle complications such as [Stamp deduplication](../major-concepts.md#duplication-of-stamps) - the server does this for you.
 3. You can follow our simple [integration guides](../integration-guides/) to quickly and easily start defending your app from Sybils!
 
-While utilizing the Passport score is a best practice, you could also use Stamp data in addition to the Passport score, or just use Stamp data to gate access. For example, a few specific Stamps might be particularly important to you (maybe you decide that having >50 Github followers is a hard requirement to access your platform). In this case you can access your user's Stamp collection and confirm ownership of individual Stamps.
+While utilizing the Passport score is a best practice, you could also use Stamp data in addition to the Passport score, or just use Stamp data to gate access. For example, a few specific Stamps might be particularly important to you (maybe you decide that having a Github account for over 180 days is a hard requirement to access your platform). In this case you can access your user's Stamp collection and confirm ownership of individual Stamps.
 
 Finally, you might not necessarily want to automatically gate access based on Passport scores or Stamps. Perhaps you want to display Stamp and score information about each user so platform administrators or end users can make real-time decisions based on the user's trustworthiness or reputation. For example, you might have to determine an honest user from several impersonator accounts. Quick access to Stamp and score data would give you a strong signal about who is the genuine user. There is a guide for displaying Stamp and score data in your app's UI [here](../integration-guides/#integrating-stamps-and-scores)!
 
