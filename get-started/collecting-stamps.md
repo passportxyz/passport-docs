@@ -26,11 +26,13 @@ Although each individual Stamp has a unique verification process, the underlying
 **Good to know:** Some Identity providers have their own verification process that can take some time to complete. But once you're verified there, collecting the Stamp for that service should be quick.
 {% endhint %}
 
-
-
 ## Reverifying your Stamps
 
 If you are a returning user your Passport information will automatically be retrieved and displayed in the Passport app. You will be presented with the option to "one-click verify" your existing Stamps. This automatically renews all your Stamps, preventing them from expiring and requiring manual reverification. However, if you do not log in and reverify for 90 days your Stamps will expire and require fresh verification to confirm the details they hold are still accurate.
+
+{% hint style="info" %}
+**Good to know:** Stamps can be added and removed from the Stamp registry. You can create your own Stamp that is relevant to your own specific use-case. However, it is also possible for Stamps to be removed (for example, if some update makes verification impossible). You should be aware of this if you rely upon specific Stamps in your application.
+{% endhint %}
 
 
 

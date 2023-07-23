@@ -85,7 +85,13 @@ The code snippet below shows a single Stamp. This particular Stamp proves owners
     }
 ```
 
-###
+
+
+> **Note!** Stamps are frequently added to the Passport service - anyone can [propose a Stamp](../stamps/integrating-a-new-stamp.md)!&#x20;
+>
+> However, they can also be removed, for example if the verification stops working.
+>
+> The weights assigned to individual Stamps in the Passport scoring app can also change if re-weighting is likely to improve the overall Sybil defence efficacy of the Scorer.
 
 ### Verifiable credentials (VCs)
 
@@ -134,6 +140,8 @@ Passport identity data is stored as a decentralized data stream on Ceramic. Stre
 ### Scorer
 
 A Scorer is an instance of a scoring algorithm. The Passport API that offers a straightforward way for developers to interact with the Passport Protocol, including adding Passports to a registry and calculating the Passport score using a scoring algorithm.
+
+The Scorer assigns a score to a Passport by summing weights assigned to individual Stamps. Please note that the weights assigned to individual Stamps can change over time in order to provide the best Sybil defence. You can also implement your own scoring algorithm using Stamp data.&#x20;
 
 
 

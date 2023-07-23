@@ -107,6 +107,10 @@ Some platforms will find that they have specific needs that are not met by the s
 
 
 
+> **Note!** The weights assigned to individual Stamps in the Passport scoring app are also likely to change if re-weighting is likely to improve the overall Sybil defence efficacy of the Scorer. You can also implement your own scoring algorithm if the default weights aren't right for your use-case.
+
+
+
 ### Use cases
 
 Gitcoin Passport is already protecting many real world applications! There are several use case articles on the [Gitcoin blog](https://www.gitcoin.co/blog-2/tag/case-studies) where you can read about how various apps have integrated Passport.&#x20;

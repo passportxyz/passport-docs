@@ -35,7 +35,7 @@ Explore our [Creating your Passport](../get-started/creating-your-passport.md) a
 
 #### 3: Validate and score the user's Passport
 
-Once a Passport has been connected, the app can verify the stamps, calculate a score and decide if the user has the necessary stamps to continue into the system. The verification step is extremely important - it checks that the stamps have been issued by a trusted provider. The verification of the VCs is done using the Passport API. Right now, Gitcoin is the only trusted issuer of these VCs. We expect to enable a process for becoming a trusted issuer soon.
+Once a Passport has been connected, the app can verify the stamps, calculate a score and decide if the user has the necessary stamps to continue into the system. The verification step is extremely important - it checks that the stamps have been issued by a trusted provider. The verification of the VCs is done using the Passport API. Right now, Gitcoin is the only trusted issuer of these VCs. We expect to enable a process for becoming a trusted issuer soon. The scoring algorithm sums the weights of all the individual Stamps owned by a Passport. These weights are set by Gitcoin (see [this file](https://github.com/gitcoinco/passport-scorer/blob/43833b4d68a4c20abe6bc99af78dab119b84b9a2/api/scorer/settings/gitcoin\_passport\_weights.py#L4)) and can change over time as the algorithm is refined for better Sybil defence.
 
 #### STEP 4: Grant or deny the user access
 

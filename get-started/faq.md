@@ -56,5 +56,28 @@ Only you can write into your passport. This is important, you grant access to ap
 
 </details>
 
+<details>
+
+<summary>How are scores calculated? Can the algorithm change?</summary>
+
+The Gitcoin Passport server implements a scoring algorithm that sums the weights of all the individual Stamps owned by an address. The weights are assigned by Gitcoin developers and can be found on the [Gitcoin Github](https://github.com/gitcoinco/passport-scorer/blob/43833b4d68a4c20abe6bc99af78dab119b84b9a2/api/scorer/settings/gitcoin\_passport\_weights.py#L4).&#x20;
+
+\
+These weights can change if Gitcoin developers find that different weights offer overall better Sybil defence. If the weights aren't right for your use-case, you are always free to implement your own scoring algorithm using Stamp data retrieved from the [Passport API](../building-with-passport/scorer-api/) (just remember you need to consider [Stamp deduplication](deduplicating-stamps.md)).
 
 
+
+There will also be additional scoring mechanisms available via the Scorer app in the future.
+
+</details>
+
+<details>
+
+<summary>Is the set of Stamps fixed?</summary>
+
+No.\
+Stamps can be added and removed from the Stamp registry.&#x20;
+
+You can [add a Stamp](../stamps/integrating-a-new-stamp.md) for your community. This means it is possible that you could have to update your gating algorithm if a Stamp you rely on gets removed. We will always give notice and support users affected by changing Stamps.
+
+</details>
