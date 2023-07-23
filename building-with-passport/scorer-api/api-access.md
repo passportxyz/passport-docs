@@ -37,7 +37,7 @@ When you create your Scorer you will be presented with several options for the S
 
 There are two options currently active for the Sybil prevention model to run in the Scorer.&#x20;
 
-* `Unique Humanity` - Returns a score between 0-100 that indicates how likely it is that a passport is owned by an honest user
+* `Unique Humanity` - Returns a score between 0-100 that indicates how likely it is that a Passport is owned by an honest user
 * `Unique Humanity (binary)` - Returns a 0 or 1 depending on whether the Passport is flagged as a likely Sybil. Currently, the threshold for a passing score is set to 20.&#x20;
 
 <figure><img src="../../.gitbook/assets/scorer-use-case.png" alt=""><figcaption><p>Selecting a use case</p></figcaption></figure>

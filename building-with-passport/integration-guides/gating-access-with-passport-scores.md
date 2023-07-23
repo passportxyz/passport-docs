@@ -53,7 +53,7 @@ The app will work as follows:
 * If their score meets a threshold, the fourth tab will contain instructions and links that will enable them to join the DAO.
 * If the score does not meet the threshold, we'll withold the instructions and instead the tab will contain instructions for increasing their Passport score.
 
-This simple example demonstrates the principles you would use to gate a real app using Gitcoin passport.
+This simple example demonstrates the principles you would use to gate a real app using Gitcoin Passport.
 
 The app will be built using [Next.js](https://nextjs.org/) and will make use of several of the Scorer API endpoints.
 
@@ -361,7 +361,7 @@ You can skip the Passport submission and retrieve the raw Stamp data to apply yo
 
 The way Passport submission works is to first retrieve a message using the Passport API's `signing-message` method. The user then signs this message using their Ethereum wallet, and sends the signed message back to the server using the Passport API's `submit-passport` method.
 
-The boilerplate code already assigns the necessary API endpoints to the variables `SIGNING_MESSAGE_URI` and `SUBMIT_PASSPORT_URI`. The following code snippet shows how to write two functions: one to grab the message to sign (`getSigningMessage`), and one to take that message, sign it, and return it (`submitPassport`). Successfully executing this logic adds the user's address to the Passport registry and triggers the server to calculate a score based on the stamps present in the owner's Passport. A step-by-step explanation of each function is provided in comments in the code snippet.
+The boilerplate code already assigns the necessary API endpoints to the variables `SIGNING_MESSAGE_URI` and `SUBMIT_PASSPORT_URI`. The following code snippet shows how to write two functions: one to grab the message to sign (`getSigningMessage`), and one to take that message, sign it, and return it (`submitPassport`). Successfully executing this logic adds the user's address to the Passport registry and triggers the server to calculate a score based on the Stamps present in the owner's Passport. A step-by-step explanation of each function is provided in comments in the code snippet.
 
 Paste the following code into your application below your `checkConnection()` function.
 
@@ -601,9 +601,9 @@ if (roundedScore > thresholdNumber) {
 }
 ```
 
-Currently, user scores are only retrieved when the user clicks the "get score" button, but really we would like it to be automatic. Delete the `get score` button from the UI. Now, you can invoke the `getScore()` function inside the `submitPassport()` function so that when a user submits their passport, the score is calculated and the values of `score` and `isAboveThreshold` are all updated in the app's state in a single click.
+Currently, user scores are only retrieved when the user clicks the "get score" button, but really we would like it to be automatic. Delete the `get score` button from the UI. Now, you can invoke the `getScore()` function inside the `submitPassport()` function so that when a user submits their Passport, the score is calculated and the values of `score` and `isAboveThreshold` are all updated in the app's state in a single click.
 
-Simply add `getScore()` to `submitPassport()` immediately after `console.log('data:', data)` and before the `catch` statement. Since your `submit passport` button is now doing more than just submitting the passport, it might be better to give it a more general name. For consistency with the "Connect Wallet" button, you can update the button text to "Connect Passport".
+Simply add `getScore()` to `submitPassport()` immediately after `console.log('data:', data)` and before the `catch` statement. Since your S`ubmit Passport` button is now doing more than just submitting the Passport, it might be better to give it a more general name. For consistency with the "Connect Wallet" button, you can update the button text to "Connect Passport".
 
 ### Displaying the score
 
@@ -668,7 +668,7 @@ const ContentBelowThreshold = ({ score }) => {
             <p>You can go to the <Link href="https://passport.gitcoin.co" color='teal.500' isExternal>Passport App </Link> and add more Stamps to your Passport.</p>
             <p>When you have enough Stamps to generate a score above 20, you can come back and join our DAO!</p>
             <br />
-            <p>In the meantime you can read our <Link href="https://docs.gitcoin.co" color='teal.500' isExternal> awesome documentation </Link> to learn more about Gitcoin passport</p>
+            <p>In the meantime you can read our <Link href="https://docs.gitcoin.co" color='teal.500' isExternal> awesome documentation </Link> to learn more about Gitcoin Passport</p>
         </>
     )
 }
@@ -713,7 +713,7 @@ This tutorial walked you through building a basic Passport-gated application. Yo
 * How to connect a user's Ethereum wallet to your application and store their address in your app's state
 * How to submit a Passport to the Gitcoin Passport registry using the Passport API
 * How to retrieve a user's Passport score using the Passport API
-* How to use the score to conditionally render some content ("passport gating")
+* How to use the score to conditionally render some content ("Passport gating")
 
 ### Further Reading
 

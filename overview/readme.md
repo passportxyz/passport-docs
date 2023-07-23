@@ -4,7 +4,7 @@ description: Gitcoin Passport was designed to make sybil resistance easy.
 
 # Why Gitcoin Passport?
 
-**Gitcoin Passport is a sybil resistance protocol and identity aggregation dApp built on the Ceramic Network. Users can collect various identity attestations, called "stamps", from web2 and web3 authenticators all in one place.**
+**Gitcoin Passport is a sybil resistance protocol and identity aggregation dApp built on the Ceramic Network. Users can collect various identity attestations, called "Stamps", from web2 and web3 authenticators all in one place.**
 
 Many systems, like Gitcoin Grants, assume each participant is a unique human, and offer rewards for these participants. This makes them vulnerable to sybil attacks, where a bad actor creates a large number of pseudonymous identities to subvert the service’s reputation system, gain a disproportionate amount of influence, and direct rewards towards extractors.
 

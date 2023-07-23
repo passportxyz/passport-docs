@@ -257,7 +257,7 @@ interface Stamp {
 }
 ```
 
-This `Stamp` type had fields for the Stamp `id` (a unique number used to make arrays of this type iterable), a `name` which corresponds to the specific credential the Stamp relates to (not the provider, who can issue many credentials), and an `icon` which is a URL linking to an image to be used to represent the stamp provider.
+This `Stamp` type had fields for the Stamp `id` (a unique number used to make arrays of this type iterable), a `name` which corresponds to the specific credential the Stamp relates to (not the provider, who can issue many credentials), and an `icon` which is a URL linking to an image to be used to represent the Stamp provider.
 
 Next, you can make a request to the `registry/stamps/{address}` endpoint, remembering to include the `include_metadata=true` qualifier. In Typescript, this can be achieved as follows:
 
@@ -269,7 +269,7 @@ const data = await response.json()
 
 This will send an HTTP request to the endpoint, using the connected wallet's address in the URL. The response is received in JSON format, as shown earlier in the `Metadata Structure` section.
 
-However, to make use of this data you also have to parse the JSON and extract the useful pieces of information into an instance of the `Stamp` type. You can do this by iterating over all the stamps. For each stamp, you can extract the `name` and `icon` data and create a unique id using a straight-forward counter that increments in each loop. These elements can be added to a `Stamp` in each iteration, and each `Stamp` appended to an array you can call `StampDataArray`.
+However, to make use of this data you also have to parse the JSON and extract the useful pieces of information into an instance of the `Stamp` type. You can do this by iterating over all the Stamps. For each Stamp, you can extract the `name` and `icon` data and create a unique id using a straight-forward counter that increments in each loop. These elements can be added to a `Stamp` in each iteration, and each `Stamp` appended to an array you can call `StampDataArray`.
 
 ```tsx
 const stampDataArray = []

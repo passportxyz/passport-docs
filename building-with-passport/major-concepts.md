@@ -8,7 +8,7 @@ description: These are the concepts you need to know to understand Gitcoin Passp
 
 The example below shows the JSON data format for a Gitcoin Passport. This is an example of a Decentralized Identifier (DID), as defined in the [W3c documentation](https://w3c.github.io/did-core/#a-simple-example). Each passport contains a field named `stamps`. This is a array where your Stamps are stored.
 
-To see what each Stamp looks like, scroll down to the Stamps section. When you add Stamps to your passport, they are pushed into this array. The entire Passport (DID) object is stored on the Ceramic network and associated with your Ethereum address.
+To see what each Stamp looks like, scroll down to the Stamps section. When you add Stamps to your Passport, they are pushed into this array. The entire Passport (DID) object is stored on the Ceramic network and associated with your Ethereum address.
 
 ```
 {
@@ -30,7 +30,7 @@ Web3 citizens interface with the Passport Protocol through the Passport holder d
 
 ### Passport-Gating
 
-"Passport gating" means integrating the Passport Protocol ed instances of e.gf. and into an app for the purpose of screening accounts to keep out bots, bad actors, or simply real people who don't meet a certain threshold of trustworthiness.
+"Passport gating" means integrating the Passport Protocol into an app for the purpose of screening accounts to keep out bots, bad actors, or simply real people who don't meet a certain threshold of trustworthiness.
 
 **Usage:**
 

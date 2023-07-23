@@ -16,7 +16,7 @@ First off, some audience definitions:
 2. **Ecosystem partners:** Organizations or apps who use the platforms built by Platform Integrators.&#x20;
 3. **End-users:** People who are engaging with the ecosystem partner's content or programs within the platform.
 
-We'll use [Snapshot](https://snapshot.org/#/) as an example. Snapshot is an off-chain voting platform that allows DAOs, DeFi protocols, or NFT communities to participate in decentralized governance. Within the Snapshot platform, Optimism Collective allows users to vote on proposals using Snapshot's technology.&#x20;
+We'll use [Snapshot](https://snapshot.org/#/) as an example. Snapshot is an offchain voting platform that allows DAOs, DeFi protocols, or NFT communities to participate in decentralized governance. Within the Snapshot platform, Optimism Collective allows users to vote on proposals using Snapshot's technology.&#x20;
 
 In this situation, Snapshot would be a platform integrator, Optimism Collective would be an ecosystem partner, and the users submitting and voting on proposals are end-users.&#x20;
 
@@ -82,7 +82,7 @@ If integrated properly, ecosystem partners utilizing a platform's services will 
 
 For example, an ecosystem partner runs a forum and voting platform in addition to their main application. Integrating Passport across all these platforms gives them confidence that your whole organization is protected to the same standard, with the same configuration.&#x20;
 
-A Passport integration is straightforward, flexible and configurable to ecosystem partners' needs depending on how a platform integrator builds the integration. You can easily set global configurations that are standard across all platforms and partners, or you could tailor your Sybil defenses to each platform, so that you can have stricter controls for more sensitive services.&#x20;
+A Passport integration is straightforward, flexible and configurable to ecosystem partners' needs depending on how a platform integrator builds the integration. You can easily set global configurations that are standard across all platforms and partners, or you could tailor your Sybil defences to each platform, so that you can have stricter controls for more sensitive services.&#x20;
 
 You can learn more about these benefits by reading our [blog post about our partnership with Guild.xyz](https://www.gitcoin.co/blog/guild-xyz-and-gitcoin-passport-partner).
 

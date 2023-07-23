@@ -24,25 +24,21 @@ Check out the documentation on Passport scoring in our SDK to get started
 
 ## App Builders
 
-If you have an app that has integrated the Passport let us know! We're happy to offer support and would love to hear about your experience building with the SDK
+If you have an app that has integrated the Passport let us know! We're happy to offer support and would love to hear about your experience building with the Passport API
 
 Come find us on Discord [https://gitcoin.co/discord](https://gitcoin.co/discord) in the 🛠[passport-builders channel](https://discord.com/channels/562828676480237578/986222591096279040)
 
 
 
-If you're just getting started, check out the documentation for integrating the passport into your App
-
-{% content-ref url="../building-with-passport/passport-sdk-deprecated/integrating-passport-in-your-dapp.md" %}
-[integrating-passport-in-your-dapp.md](../building-with-passport/passport-sdk-deprecated/integrating-passport-in-your-dapp.md)
-{% endcontent-ref %}
+If you're just getting started, check out our [integration guides](../building-with-passport/integration-guides/)!
 
 
 
 ## DevRel and Tech Writers
 
-If you spot some areas to improve our docs this gitbook is mirrored in our github here: [https://github.com/gitcoinco/passport-docs](https://github.com/gitcoinco/passport-docs)\
+If you spot some areas to improve our docs this Gitbook is mirrored in our Github here: [https://github.com/gitcoinco/passport-docs](https://github.com/gitcoinco/passport-docs)\
 \
-We'd love to get your PRs incorporated and help make this SDK as usable and well documented as we can!
+We'd love to get your PRs incorporated and help make this documentation as comprehensive and accessible as possible!
 
 
 

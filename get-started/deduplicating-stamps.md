@@ -18,7 +18,7 @@ Deduplication ensures that a user can only associate an individual Stamp to one 
 
 ### Do you need to handle deduplication in your app?
 
-If your app uses a Gitcoin passport default Scorer, then deduplication is already handled server-side. When you request a score through the API, we calculate scores after already deduplicating Stamps, meaning you don't have to implement any deduplication logic yourself.
+If your app uses a Gitcoin Passport default Scorer, then deduplication is already handled server-side. When you request a score through the API, we calculate scores after already deduplicating Stamps, meaning you don't have to implement any deduplication logic yourself.
 
 However, if you are using your own custom scoring mechanism based on Stamp data, you will have to implement deduplication for yourself. Each Stamp has a `hash` field that can be used as a unique identifer. You can store hashes and compare them across all your users' Passports to ensure they are not being used multiple times. Our Scorer uses a Last-In-First-Out mechanism to handle duplicates, but you might want to use your own algorithm in your custom Scorer.
 

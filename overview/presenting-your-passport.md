@@ -10,7 +10,7 @@ description: Learn how our different user personas benefit from Gitcoin Passport
 
 Passport makes it easy for you to collect different pieces of your identity on the internet—from social media sites like Twitter and Facebook to online verification tools like BrightID and Proof of Humanity—into a single place that showcases that you are a trustworthy person who deserves access to digital experiences.
 
-The more pieces of evidence of your identity and reputation, aka "[stamps](../building-with-passport/major-concepts.md#stamps)", that you collect, the easier it is for project and community leaders to trust that you are who you say you are. Your stamps are aggregated into a Passport score which can be used by apps to control access to their content. You can always improve your score by collecting more stamps.
+The more pieces of evidence of your identity and reputation, aka "[Stamps](../building-with-passport/major-concepts.md#stamps)", that you collect, the easier it is for project and community leaders to trust that you are who you say you are. Your stamps are aggregated into a Passport score which can be used by apps to control access to their content. You can always improve your score by collecting more stamps.
 
 
 
@@ -26,7 +26,7 @@ Integrating Passport protects your community with a "gate" that raises the cost 
 
 "Passport-gating" your project gives your users an opportunity to verify their humanity and reputation—including their group membership, cultural background, and expertise. Users have full control over what they share at every step of the way and do not need to expose their personal data.
 
-Integrating Passport also empowers you to experiment with new mechanisms for governance and accreditation, by enabling you to create new [stamps](../building-with-passport/major-concepts.md#stamps) that you award your users and members for completing certain actions.
+Integrating Passport also empowers you to experiment with new mechanisms for governance and accreditation, by enabling you to create new [Stamps](../building-with-passport/major-concepts.md#stamps) that you award your users and members for completing certain actions.
 
 Gitcoin provides battle-tested defaults for verifying accounts. However,  Passport will soon allow you to create your own scoring algorithm that gives custom weights to different stamps (aka pieces of evidence for a real identity). For example, a developer DAO can weigh a Github verification more highly than a social DAO, which may instead care more if their members have a lot of social media followers.
 

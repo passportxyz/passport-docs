@@ -21,7 +21,7 @@ The below tutorial outlines how to:
 * connect a wallet
 * create and authenticate a DID construct a new instance of Writer
 * create a new Passport belonging to a user or retrieve their existing decentralized identity data from Ceramic, and
-* add a stamp to a Passport belonging to a specific user.
+* add a Stamp to a Passport belonging to a specific user.
 
 At the end of this step, you’ll understand how to interact with Passport DIDs in your project’s verification process.
 
@@ -53,7 +53,7 @@ const passport = (await passportWriter.loader.load(passportStreamID)).content;
 // Get the Passport belonging to testDID
 const testDIDPassport = await passportWriter.getPassport();
 
-// Add a stamp to the Passport belonging to testDID
+// Add a Stamp to the Passport belonging to testDID
 const newStamp = {
     provider: "An Identity Provider",
     credential: {...a Verifiable Credential...}
@@ -355,7 +355,7 @@ import PassportVerifier from "@gitcoinco/passport-sdk-verifier";
 const verifier = new PassportVerifier();
 ```
 
-3\. Verify all stamps held in a Passport
+3\. Verify all Stamps held in a Passport
 
 ```typescript
 const passport = await verifier.verifyPassport("0x0...");
@@ -391,7 +391,7 @@ After the PassportVerifier instance is created, read-only methods for verifying 
 
 **verifyPassport**
 
-Pass in an Ethereum address and get back a Passport where each of the stamps includes a verified: boolean field.
+Pass in an Ethereum address and get back a Passport where each of the Stamps includes a verified: boolean field.
 
 {% code overflow="wrap" %}
 ```typescript
@@ -401,7 +401,7 @@ PassportVerifier.verifyPassport(address: string, passport?: Passport, additional
 
 **verifyStamp**
 
-Pass in a stamp and get back a stamp with a verified: boolean field completed.
+Pass in a Stamp and get back a Stamp with a verified: boolean field completed.
 
 {% code overflow="wrap" %}
 ```typescript

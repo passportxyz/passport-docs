@@ -10,7 +10,7 @@ Creating a new Stamp involved defining verification logic and adding configurati
 
 We have a standardized format for Stamps and this page will help you to understand all the information you need to provide. The process begins by creating your own copy of our GitHub repository. The instructions on this page will walk you through how to change the codebase to support your Stamp and submit the changes back to the Passport team.&#x20;
 
-
+***
 
 ### 1. Fork the Passport GitHub repository
 
@@ -20,7 +20,7 @@ Here is our [GitHub repository](https://github.com/gitcoinco/passport).
 
 This is the [`platforms` directory](https://github.com/gitcoinco/passport/tree/main/platforms), located at `passport/platforms.`
 
-
+***
 
 ### 2. Create new files
 
@@ -66,7 +66,7 @@ Updating `App-bindings.ts` is slightly different depending upon whether you are 
 
 _**What is an EVM Stamp?**_
 
-Some Stamps rely upon the Ethereum Virtual Machine (EVM) while some rely upon OAuth to determine ownership. If your Stamp represents some web3 native credential such as ownership of a digital asset (for example, ETH, some ERC20 token, NFT or POAP) or on-chain activity (for example, certain transaction) that can be verified by querying the blockchain, then your Stamp is an EVM Stamp. If your Stamp relies on ownership of some web2 account that your users login to, then it is a non-EVM Stamp.
+Some Stamps rely upon the Ethereum Virtual Machine (EVM) while some rely upon OAuth to determine ownership. If your Stamp represents some web3 native credential such as ownership of a digital asset (for example, ETH, some ERC20 token, NFT or POAP) or onchain activity (for example, certain transaction) that can be verified by querying the blockchain, then your Stamp is an EVM Stamp. If your Stamp relies on ownership of some web2 account that your users login to, then it is a non-EVM Stamp.
 
 #### `EVM Stamps`
 
@@ -172,7 +172,7 @@ export { ProviderConfig, PlatformDetails, providers } from "./Providers-config";
 export { <EXAMPLE>Provider
 ```
 
-
+***
 
 #### `Providers/example.ts`
 

@@ -1,4 +1,4 @@
-# Passport SDK
+# Passport SDK (deprecated)
 
 ## The Gitcoin Passport SDK
 
@@ -6,7 +6,7 @@
 
 {% embed url="https://github.com/gitcoinco/passport-sdk" %}
 
-The Gitcoin Passport SDsK is comprised of a set of libraries distributed on npm to help developers interact with Passport data living on [Ceramic](https://ceramic.network/).
+The Gitcoin Passport SDK is comprised of a set of libraries distributed on npm to help developers interact with Passport data living on [Ceramic](https://ceramic.network/).
 
 For more information on [Gitcoin Passport](https://app.gitbook.com/o/Aqbtj6s4OkLaygileCka/s/ttgfRNVjO2DcVvUNyst9/) or to interact with a live instance, please visit [passport.gitcoin.co](https://passport.gitcoin.co/).
 

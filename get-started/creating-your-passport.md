@@ -25,12 +25,12 @@ When you arrive you'll see an option to "Sign in With Ethereum". This allows you
 When you click "Sign in with Ethereum" you will be prompted to connect your wallet.
 
 {% hint style="success" %}
-Your Passport is associated with your Ethereum address, so be sure to connect a wallet you use regularly. This will allow you to accrue stamps as you participate in Web3!
+Your Passport is associated with your Ethereum address, so be sure to connect a wallet you use regularly. This will allow you to accrue Stamps as you participate in Web3!
 {% endhint %}
 
 With your wallet connected, you'll be prompted to sign a message. Signing a message is a way of proving that you are the owner of a particular address and that you authorize some action. In this case, you are allowing the app to sign in with your Ethereum account and access your data on Ceramic.
 
-If this is your first time using the Passport app, you will get a new Passport created for you. You won't have any stamps yet, but you are now ready to start collecting them and generating a Passport score.
+If this is your first time using the Passport app, you will get a new Passport created for you. You won't have any Stamps yet, but you are now ready to start collecting them and generating a Passport score.
 
 Next head to [**Collecting Stamps**](collecting-stamps.md) to start proving your identity!
 

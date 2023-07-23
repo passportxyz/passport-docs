@@ -36,7 +36,7 @@ The app is built using [Next.js](https://nextjs.org/), [Chakra-ui](https://chakr
 
 ### Integrating Stamps and scores
 
-This tutorial will guide you through building a simple app that shows whether a user is "trusted" or not based upon their Passport score and ownership of specific stamps. Multiple users can connect to the app and the stamps they own are displayed in the app's UI.&#x20;
+This tutorial will guide you through building a simple app that shows whether a user is "trusted" or not based upon their Passport score and ownership of specific Stamps. Multiple users can connect to the app and the Stamps they own are displayed in the app's UI.&#x20;
 
 The app is built using [Next.js](https://nextjs.org/), [Chakra-ui](https://chakra-ui.com/), and [ethers](https://docs.ethers.org/v5/).
 

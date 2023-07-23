@@ -215,7 +215,7 @@ export default function Passport() {
 }
 ```
 
-You can start this app now by navigating your terminal to the project directory (`passport-app`) and running `npm run dev`. Then, navigate your browser to `localhost:3000`. You will see a basic app load in the browser, with buttons that enable you to connect your wallet and submit your passport to the registry. You can go ahead and test that the `Connect` and `Submit Passport` buttons are working as expected.
+You can start this app now by navigating your terminal to the project directory (`passport-app`) and running `npm run dev`. Then, navigate your browser to `localhost:3000`. You will see a basic app load in the browser, with buttons that enable you to connect your wallet and submit your Passport to the registry. You can go ahead and test that the `Connect` and `Submit Passport` buttons are working as expected.
 
 Your app should look like this:
 
@@ -231,7 +231,7 @@ The boilerplate code already provides buttons the users can click to connect the
 
 ### **Retrieving a score**
 
-We want to display a user's trust status in the app's UI. Their trust status will be determined by their Passport score and ownership of specific stamps. The weights applied to each Stamp can be found in the [Passport Github](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin\_passport\_weights.py).
+We want to display a user's trust status in the app's UI. Their trust status will be determined by their Passport score and ownership of specific Stamps. The weights applied to each Stamp can be found in the [Passport Github](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin\_passport\_weights.py).
 
 The first step is to retrieve their Passport score by calling the `/registry/score/${SCORER_ID}/${address}` API endpoint.&#x20;
 
@@ -435,7 +435,7 @@ Now each user's Stamps and score are tracked in custom structs in our applicatio
 
 ### **Using the Stamp and score data**
 
-Now we can use the state data to make decisions about each user. Maybe we just want a quick way to tell whether a connected user meets some specific requirements. Let's create a simple example where we display a list of connected addresses that are trusted because their passport meets some requirements. This means the users of our app can see a real-time list of addresses that meet the eligibility criteria and can use this to help pick out the honest users.
+Now we can use the state data to make decisions about each user. Maybe we just want a quick way to tell whether a connected user meets some specific requirements. Let's create a simple example where we display a list of connected addresses that are trusted because their Passport meets some requirements. This means the users of our app can see a real-time list of addresses that meet the eligibility criteria and can use this to help pick out the honest users.
 
 Let's set some arbitrary requirements. If the user has a Lens Stamp **and** an ENS Stamp **and** a Github Stamp, **and** their Passport score is greater than 20, then they are considered trusted and their address is displayed in the browser.
 
@@ -584,7 +584,7 @@ Immediately after that `div` element, we can add the following code which displa
   </SimpleGrid>}
 ```
 
-jkNow, if you run your app locally using `npm run dev` you will be able to connect your wallet, submit your passport and check whether you pass the trust criteria. If you do, your address will be rendered to the screen. If you check the `Show Stamps` box, all your Stamps will be shown in the browser.
+Now, if you run your app locally using `npm run dev` you will be able to connect your wallet, submit your Passport and check whether you pass the trust criteria. If you do, your address will be rendered to the screen. If you check the `Show Stamps` box, all your Stamps will be shown in the browser.
 
 <figure><img src="../../.gitbook/assets/trusted-user-app.png" alt=""><figcaption><p>the app running with a single user</p></figcaption></figure>
 

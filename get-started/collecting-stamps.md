@@ -6,7 +6,7 @@ description: How to add Stamps to your Passport
 
 **Congratulations on creating your Gitcoin Passport!**
 
-Now that you have your Passport you can start collecting evidence that you are a real individual human. This is done using sStamps.
+Now that you have your Passport you can start collecting evidence that you are a real individual human. This is done using Stamps.
 
 [Stamps](../building-with-passport/major-concepts.md#stamps) are proof of ownership or activity on other platforms. Collecting these Stamps together in one place allows Gitcoin Passport to aggregate your online identity in one place. The more Stamps you collect, the stronger your evidence and the more access and influence you will have across the web.
 

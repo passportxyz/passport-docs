@@ -53,7 +53,7 @@ yarn run webpack
 #### [Writer ](https://github.com/gitcoinco/passport-sdk/tree/main/packages/writer)
 
 {% hint style="warning" %}
-The Writer is scheduled to be deprecated. Please consider building stamp integrations into the Passport App at [https://github.com/gitcoinco/passport](https://github.com/gitcoinco/passport)
+The Writer is scheduled to be deprecated. Please consider building Stamp integrations into the Passport App at [https://github.com/gitcoinco/passport](https://github.com/gitcoinco/passport)
 {% endhint %}
 
 Writes to an authenticated DIDs Passport stream in Ceramic.&#x20;

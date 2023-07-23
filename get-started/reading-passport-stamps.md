@@ -8,7 +8,7 @@ It is common for apps to retrieve a score based upon Passport Stamps but there a
 
 The Gitcoin Scorer API exposes an endpoint specifically for this purpose.
 
-An HTTP GET request to the [Get Stamps](../building-with-passport/scorer-api/endpoint-definition.md#get-stamps) endpoint will return a list of each stamp owned by a given address:
+An HTTP GET request to the [Get Stamps](../building-with-passport/scorer-api/endpoint-definition.md#get-stamps) endpoint will return a list of each Stamp owned by a given address:
 
 The response is a JSON object of the following format:
 
