@@ -22,7 +22,7 @@
 * [Major Concepts](building-with-passport/major-concepts.md)
   * [Data dictionary](building-with-passport/major-concepts/data-dictionary.md)
   * [Deduplicating Stamps](get-started/deduplicating-stamps.md)
-  * [Onchain Passports](building-with-passport/major-concepts/onchain-passports.md)
+  * [Onchain Passports](building-with-passport/major-concepts/on-chain-passports.md)
   * [Platform Integrator concepts](building-with-passport/major-concepts/platform-integrator-concepts.md)
 * [Passport API](building-with-passport/scorer-api/README.md)
   * [API Access](building-with-passport/scorer-api/api-access.md)

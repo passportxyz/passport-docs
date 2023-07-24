@@ -73,7 +73,14 @@ curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?toke
   --header 'X-API-KEY: {API-key}'
 ```
 
+You can also use the `offset` parameter to retrieve data from a given location in a paginated API response. The offset value given identifies the first element in the response you want to retrieve. For example, passing `offset=5` means the response will skip the first 5 elements and start at element 6 of the returned data. You can combine this with `limit` to get specific chunks of data, for example to retrieve objects 6 - 10, you could pass `offset=5&limit=5`.
 
+Here's what that would look like in practice, retrieving the 6th to 10th Stamps for a given address:
+
+```bash
+curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?offset=5&limit=5' \
+  --header 'X-API-KEY: {API-key}' 
+```
 
 ## Data dictionary
 
@@ -280,7 +287,7 @@ If you would like to retrieve the metadata for all available Stamps, please use 
 
 #### Query parameters
 
-<table><thead><tr><th width="225">Name</th><th width="105.33333333333331">Required</th><th></th></tr></thead><tbody><tr><td><code>include_metadata</code></td><td>No</td><td>[Beta] Returns optional <code>metadata</code> object with additional details about connected Stamps.</td></tr><tr><td><code>limit</code></td><td>No</td><td>Paginates response, providing the given number of Stamps per page (For example, use <code>limit=3</code> to request three Stamps)<br><br>Learn more about <a href="endpoint-definition.md#pagination">pagination</a>.</td></tr></tbody></table>
+<table><thead><tr><th width="225">Name</th><th width="105.33333333333331">Required</th><th></th></tr></thead><tbody><tr><td><code>include_metadata</code></td><td>No</td><td>[Beta] Returns optional <code>metadata</code> object with additional details about connected Stamps.</td></tr><tr><td><code>limit</code></td><td>No</td><td>Paginates response, providing the given number of Stamps per page (For example, use <code>limit=3</code> to request three Stamps)<br><br>Learn more about <a href="endpoint-definition.md#pagination">pagination</a>.</td></tr><tr><td><code>offset</code></td><td>No</td><td>For a paginated response, <code>offset</code> determines the Stamp object at which the response should start. <br><br>Learn more about <a href="endpoint-definition.md#pagination">pagination</a>.</td></tr></tbody></table>
 
 
 
