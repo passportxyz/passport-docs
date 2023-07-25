@@ -75,6 +75,8 @@ curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?toke
 
 You can also use the `offset` parameter to retrieve data from a given location in a paginated API response. The offset value given identifies the first element in the response you want to retrieve. For example, passing `offset=5` means the response will skip the first 5 elements and start at element 6 of the returned data. You can combine this with `limit` to get specific chunks of data, for example to retrieve objects 6 - 10, you could pass `offset=5&limit=5`.
 
+
+
 Here's what that would look like in practice, retrieving the 6th to 10th Stamps for a given address:
 
 ```bash
@@ -244,6 +246,12 @@ curl --request GET \
 
 > GET /registry/score/{scorer\_id}
 
+#### Query parameters
+
+<table><thead><tr><th width="225">Name</th><th width="105.33333333333331">Required</th><th></th></tr></thead><tbody><tr><td><code>last_score_timestamp_gt</code></td><td>No</td><td>Filters response to only those scores submitted to the given Scorer instance *after* the given timestamp.<br><br>Format: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a></td></tr><tr><td><code>last_score_timestamp_gte</code></td><td>No</td><td>Filters response to only those scores submitted to the given Scorer instance *after or at* the given timestamp.<br><br>Format: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a></td></tr><tr><td><code>limit</code></td><td>No</td><td>Paginates response, providing the given number of response elements per page.<br><br>Learn more about <a href="endpoint-definition.md#pagination">pagination</a>.</td></tr></tbody></table>
+
+
+
 <pre class="language-bash" data-title="Sample request" data-overflow="wrap"><code class="lang-bash"><strong>curl --request GET \
 </strong><strong>    --url https://api.scorer.gitcoin.co/registry/score/{scorer_id} \
 </strong><strong>    --header 'X-API-KEY: {API KEY}'
@@ -274,6 +282,21 @@ curl --request GET \
 }
 ```
 {% endcode %}
+
+
+
+You can also add a query to return all the scores for a given address for a certain time period. This can be useful if you want to filter your responses so that it only returns scores that have been _updated since your last request._&#x20;
+
+The two possible query parameters are `last_score_timestamp_gt` and `last_score_timestamp_gte`. The difference between the two is that `_gt` (standing for 'greater than') returns updated scores that were created by your scorer instance strictly _after_ the given time, whereas `_gte` (standing for 'greater than or equal') returns updated scores after or at the same time as the given time.&#x20;
+
+The argument should be provided in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
+
+For example:
+
+<pre class="language-bash" data-title="Sample request" data-overflow="wrap"><code class="lang-bash"><strong>curl --request GET \
+</strong><strong>    --url https://api.scorer.gitcoin.co/registry/score/{scorer_id}?address={address}?last_score_timestamp_get=2023-07-20T19%3A54%3A44.463335%2B00%3A00 \
+</strong><strong>    --header 'X-API-KEY: {API KEY}'
+</strong></code></pre>
 
 
 
