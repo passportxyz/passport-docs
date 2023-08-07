@@ -10,7 +10,7 @@ This section includes several tutorials for integrating Gitcoin Passport into yo
 * [Retrieve Passport data and display it to your UI](integrating-stamps-and-scorers.md)
 * [How to retrieve, handle and display Stamp metadata in a simple app](working-with-stamp-metadata.md)
 * [Requiring a Passport score for airdrop claim](requiring-a-passport-score-for-airdrop-claim.md)
-* Build smart contract applications that use Passport data (coming soon)
+* [Integrating onchain Stamp data using smart contracts](integrating-onchain-stamp-data.md)
 
 
 
@@ -66,5 +66,17 @@ This app is built using [Next.js](https://nextjs.org/), [RainbowKit](https://www
 
 {% content-ref url="requiring-a-passport-score-for-airdrop-claim.md" %}
 [requiring-a-passport-score-for-airdrop-claim.md](requiring-a-passport-score-for-airdrop-claim.md)
+{% endcontent-ref %}
+
+
+
+### How to integrate onchain Passport data using smart contracts
+
+This tutorial will guide you how to show different content to users depending on their Passport data, all pulled from the blockchain.
+
+The app is built using [Next.js](https://nextjs.org/), [Chakra-ui](https://chakra-ui.com/), and [ethers](https://docs.ethers.org/v5/).
+
+{% content-ref url="integrating-onchain-stamp-data.md" %}
+[integrating-onchain-stamp-data.md](integrating-onchain-stamp-data.md)
 {% endcontent-ref %}
 

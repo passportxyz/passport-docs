@@ -4,7 +4,9 @@ description: Rationale and sneak-peek at on-chain Passport data
 
 # Onchain Passports
 
-:rotating\_light: **Onchain stamps are not available yet, but they are coming soon!** :rotating\_light:
+First off, you can learn more about retrieving onchain Passport data by working through the following tutorial:
+
+[Integrating onchain Stamp data](../integration-guides/integrating-onchain-stamp-data.md)
 
 ### Why would we want Stamps to be onchain?
 
