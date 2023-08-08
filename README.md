@@ -8,11 +8,11 @@ To coordinate and scale an open internet, we need tools like Gitcoin Passport to
 
 
 
-<figure><img src="../public/passport-hero.png" alt=""><figcaption></figcaption></figure>
+![](../public/passport-hero.png)
 
 
 
-Navigate these docs using the menu in the left hand sidebar. You can start by visiting [**Using the Passport docs**](<README (1).md>) for guidance.
+Navigate these docs using the menu in the left-hand sidebar. You can start by visiting [**Using the Passport docs**](<README (1).md>) for guidance.
 
 Alternatively, you can skip straight to learning more about how [**Gitcoin Passport works**](building-with-passport/how-it-works.md)**,** or start participating right away by following the instructions on the [**Create your Gitcoin passport**](get-started/creating-your-passport.md) page.
 
