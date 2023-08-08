@@ -1,11 +1,10 @@
 {
-    "index": "Welcome",
-    "building-with-passport": "Building with Passport",
-    "case-studies": "Case Studies",
     "get-started": "Get Started",
-    "getting-involved": "Getting Involved",
     "overview": "Overview",
+    "building-with-passport": "Building with Passport",
     "stamps": "Stamps",
+    "case-studies": "Case Studies",
+    "getting-involved": "Getting Involved",
     "index": {
         "title": "Home",
         "type": "page"
