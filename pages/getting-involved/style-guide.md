@@ -174,7 +174,7 @@ Images can be embedded in pages using standard markdown notation:
 
 `![alt text](path-to-image)`
 
-You should save the image into the `/assets` folder and use the relative path to it in the link, rather than linking to an external resource. Any images that require aknowledgements must have them included clearly in the image caption or in text immediately beneath the image. Do not add any images that would break copyright.
+You should save the image into the `/public` folder and use the relative path to it in the link, rather than linking to an external resource. Any images that require aknowledgements must have them included clearly in the image caption or in text immediately beneath the image. Do not add any images that would break copyright.
 
 ### Styles for Users
 

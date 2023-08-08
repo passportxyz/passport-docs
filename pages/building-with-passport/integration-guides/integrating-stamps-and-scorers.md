@@ -219,7 +219,7 @@ You can start this app now by navigating your terminal to the project directory 
 
 Your app should look like this:
 
-<figure><img src="../../.gitbook/assets/trusted-user-app-pt1.png" alt=""><figcaption><p>Your boilerplate app should look like this</p></figcaption></figure>
+![](../public/trusted-user-app-pt1.png)
 
 The rest of the tutorial will build upon this basic app by adding functions and UI code to `app/page.tsx`.
 
@@ -586,7 +586,7 @@ Immediately after that `div` element, we can add the following code which displa
 
 Now, if you run your app locally using `npm run dev` you will be able to connect your wallet, submit your Passport and check whether you pass the trust criteria. If you do, your address will be rendered to the screen. If you check the `Show Stamps` box, all your Stamps will be shown in the browser.
 
-<figure><img src="../../.gitbook/assets/trusted-user-app.png" alt=""><figcaption><p>the app running with a single user</p></figcaption></figure>
+![]()../public/trusted-user-app.png)
 
 ### Multiple users
 
@@ -616,7 +616,7 @@ With our current rendering logic, the `Show Stamps` checkbox will list all the S
 
 Now, when we follow through our connect -> submit -> check users -> show Stamps flow, we will see something like the following:
 
-<figure><img src="../../.gitbook/assets/trusted-user-app-2.png" alt=""><figcaption><p>The app working with multiple users</p></figcaption></figure>
+![](../public/trusted-user-app-2.png)
 
 
 

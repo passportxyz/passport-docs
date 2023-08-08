@@ -4,7 +4,7 @@ description: A Gitcoin Passport case study
 
 # Bankless Academy
 
-<figure><img src="../.gitbook/assets/bankless.jpg" alt=""><figcaption></figcaption></figure>
+![](../public/bankless.jpg)
 
 by [Rohit Malekar](https://go.gitcoin.co/blog/author/rohit-malekar)
 
@@ -32,7 +32,7 @@ As an example, the first lessons only require two stamps, which a user should ea
 
 Further into the Explorer journey, new lessons will require stronger levels of verification from web3 platforms such as ENS, Bright ID, or Proof of Humanity.
 
-### ![](../.gitbook/assets/bankless2.jpg)
+### ![](../public/bankless2.jpg)
 
 ### A curated view of community stamps
 
@@ -40,17 +40,17 @@ The Gitcoin Passport & Bankless Academy team worked together to build a filtered
 
 
 
-![](../.gitbook/assets/bankless3.jpg)
+![](../public/bankless3.jpg)
 
 ### The results
 
 The following chart depicts an analysis of the Bankless Academy badge holders before and after adopting Gitcoin Passport, along with a comparison with similar web3 learning platforms that offer credentials for course completion.
 
-![](../.gitbook/assets/bankless4.png)
+![](../public/bankless4.png)
 
 A community using Gitcoin Passport can verify a participant’s credentials with a customizable algorithm that weights different stamps based on the community’s entry criteria–essentially allowing communities to create a customizable “entry visa” with their participation requirements. To claim a Bankless Academy badge today, a user must hold at least two Gitcoin Passport stamps (equivalent to a Gitcoin Passport score of 3.0). Implementing this requirement shows a multifold increase in the average Gitcoin Passport score of badge holders in Bankless Academy compared to data before enabling this mechanism. The difference is also evident when compared with other platforms that offer credentials to users for course completions.
 
-![](../.gitbook/assets/bankless5.png)
+![](../public/bankless5.png)
 
 Along with Gitcoin Passport stamps, the team analyzed the effectiveness of using a Passport scoring service to allocate rewards based on scores assigned retroactively to wallets submitted in a sample. With two stamps alone, Bankless Academy has seen a fivefold increase in the average Gitcoin Passport score of participants achieving Bankless rewards. Hopefully, with a small redesign of this Passport implementation, that number should increase. The team plans to re-assess which stamps are used and which are best suited for the Bankless community ethos. There is also an opportunity to build a custom stamp-weighing system for the best results as part of the next steps.
 
@@ -60,7 +60,7 @@ Integrating with Gitcoin Passport sets a precedent for Bankless’ Proof-of-Know
 
 To quote the Bankless team, “the stronger you are on Sybil resistance, the stronger the value of your community.” Gitcoin Passport is a high utility open source identity, and Sybil defense Lego is one of the first in its composable solutions to help communities build their value.
 
-![](../.gitbook/assets/bankless6.jpg)
+![](../public/bankless6.jpg)
 
 When communities gate their projects with this defense, and more users create their Passport, they collectively help build the decentralized "Web3 Sybil Defense Flywheel", making Passport faster and more reliable. Together, we can make web3 a more trustworthy space to be in.
 

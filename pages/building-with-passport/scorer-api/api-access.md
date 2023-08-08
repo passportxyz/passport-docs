@@ -40,7 +40,7 @@ There are two options currently active for the Sybil prevention model to run in 
 * `Unique Humanity` - Returns a score between 0-100 that indicates how likely it is that a Passport is owned by an honest user
 * `Unique Humanity (binary)` - Returns a 0 or 1 depending on whether the Passport is flagged as a likely Sybil. Currently, the threshold for a passing score is set to 20.&#x20;
 
-<figure><img src="../../.gitbook/assets/scorer-use-case.png" alt=""><figcaption><p>Selecting a use case</p></figcaption></figure>
+![](../public/scorer-use-case.png)
 
 <figure><img src="https://arweave.net/P6eKM-crq8LVGCtjpVZR9RLuiR35F7Jc-6mBXGxMHJY" alt=""><figcaption><p>Selecting the Scorer type</p></figcaption></figure>
 

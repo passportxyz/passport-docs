@@ -491,11 +491,11 @@ The app looks as follows:
 
 
 
-<figure><img src="../../.gitbook/assets/Screenshot from 2023-08-04 10-17-11 (1).png" alt=""><figcaption><p>Tab 3 if the user has onchain Stamps</p></figcaption></figure>
+<figure><img src="../public/Screenshot from 2023-08-04 10-17-11 (1).png" alt=""><figcaption><p>Tab 3 if the user has onchain Stamps</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/Screenshot from 2023-08-04 10-17-16 (1).png" alt=""><figcaption><p>Tab 4 if the user has onchain Stamps</p></figcaption></figure>
+<figure><img src="../public/Screenshot from 2023-08-04 10-17-16 (1).png" alt=""><figcaption><p>Tab 4 if the user has onchain Stamps</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/Screenshot from 2023-08-04 10-17-19 (1).png" alt=""><figcaption><p>Tab 5 if the user has onchain Stamps</p></figcaption></figure>
+<figure><img src="../public/Screenshot from 2023-08-04 10-17-19 (1).png" alt=""><figcaption><p>Tab 5 if the user has onchain Stamps</p></figcaption></figure>
 
 
 

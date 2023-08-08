@@ -20,7 +20,7 @@ The Passport App
 
 When you arrive you'll see an option to "Sign in With Ethereum". This allows you to sign in without having to hand over any data to any central organization - your wallet uses your cryptographic keys to prove you own the account.
 
-<figure><img src="../.gitbook/assets/passport-homepage.png" alt=""><figcaption><p>The Gitcoin Passport app homepage</p></figcaption></figure>
+![](../public/passport-homepage.png)
 
 When you click "Sign in with Ethereum" you will be prompted to connect your wallet.
 
