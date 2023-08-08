@@ -73,12 +73,12 @@ This will create a new directory called `passport-app` and populate it with seve
 ```sh
 npx create-next-app passport-onchain-app
 
-✔ Would you like to use TypeScript? … Yes
-✔ Would you like to use ESLint? … Yes
-✔ Would you like to use Tailwind CSS? … No
-✔ Would you like to use `src/` directory? … No
-✔ Would you like to use experimental `app/` directory with this project? …Yes
-✔ What import alias would you like configured? … @/*
+✔ Would you like to use TypeScript? …  Yes
+✔ Would you like to use ESLint? …  Yes
+✔ Would you like to use Tailwind CSS? … No 
+✔ Would you like to use `src/` directory? …  Yes
+✔ Would you like to use App Router? (recommended)  Yes
+✔ Would you like to customize the default import alias? … No 
 ```
 
 
@@ -232,9 +232,13 @@ import { GITCOIN_PASSPORT_WEIGHTS } from './stamp-weights';
 
 The imported elements from `./abis` are contract ABIs (application binary interfaces). These are `json` objects that define the functions available in a smart contract. To create an instance of a contract, you need both the ABI and the address the contract is deployed to. You will need to create a file in the `src/app` folder called `abis.ts` and populate it with the information located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/abis.ts). &#x20;
 
-The imported elements from `./providerInfo` define details about the Stamp providers, including the schema for decoding the Attestation into a useable format - more on that later. Again, create a file in the `src/app` folder called `providerInfo.ts` and populate it with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/providerInfo.ts).
+The imported elements from `./providerInfo` define details about the Stamp providers, including the schema for decoding the Attestation into a useable format - more on that later. Again, create a file in the `src/app` folder called `providerInfo.ts` and populate it with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/providerInfo.ts).&#x20;
 
 The elements imported from `./stamp-weights` is a list of weights for each Stamp used to create a Passport score. In the 'web2' model for Gitcoin Passport this is done server-side, but here we will implement our own scoring algorithm using onchain Stamps. Again, create a file in the `src/app` folder called `stamp-weights.ts` and populate it with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/stamp-weights.ts).
+
+{% hint style="info" %}
+Note that the information in `providerInfo.ts` and `stamp-weights.ts` need to stay consistent with Gitcoin - you can check the up-to-date list of stamp weights[ in this Github file](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin\_passport\_weights.py). The Bitmap mapping can be found in [this Github file](https://github.com/gitcoinco/passport/blob/main/iam/src/static/providerBitMapInfo.json). You could also create your own weightings if you want to implement your own scoring algorithm. The source of truth for the `PROVIDER_ID` is in [this Github file](https://github.com/gitcoinco/passport/blob/901c868323fed5c0b5f5fbad52023c96e1d620a4/types/src/index.d.ts#L229).&#x20;
+{% endhint %}
 
 The elements imported from `tab-contents` are components used to build the UI. This file should also be located in the `src/app` folder, called `tab-contents.tsx`, and should be populated with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/tab-contents.tsx).
 
