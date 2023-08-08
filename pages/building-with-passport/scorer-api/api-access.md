@@ -42,7 +42,7 @@ There are two options currently active for the Sybil prevention model to run in 
 
 ![](../public/scorer-use-case.png)
 
-<figure><img src="https://arweave.net/P6eKM-crq8LVGCtjpVZR9RLuiR35F7Jc-6mBXGxMHJY" alt=""><figcaption><p>Selecting the Scorer type</p></figcaption></figure>
+![Selecting the Scorer type](https://arweave.net/P6eKM-crq8LVGCtjpVZR9RLuiR35F7Jc-6mBXGxMHJY)
 
 ### Next step
 
