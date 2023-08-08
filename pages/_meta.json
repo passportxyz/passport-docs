@@ -5,5 +5,9 @@
     "get-started": "Get Started",
     "getting-involved": "Getting Involved",
     "overview": "Overview",
-    "stamps": "Stamps"
+    "stamps": "Stamps",
+    "index": {
+        "title": "Home",
+        "type": "page"
+    }
 }

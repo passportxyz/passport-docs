@@ -4,7 +4,7 @@ description: How to retrieve, handle and display Stamp metadata in a simple Next
 
 # Working with Stamp metadata
 
-<figure><img src="../../.gitbook/assets/stamp-logo-examples.png" alt=""><figcaption></figcaption></figure>
+![](../public/stamp-logo-examples.png)
 
 Gitcoin Passport Stamps show that a user has achieved certain milestones on-chain or through some web2 service. It is common for these Stamps to be used to generate a score on the Gitcoin server to indicate a user's trustworthiness. It is also possible to retrieve the actual Stamps instead of the score. This enables developers to use their own algorithms to generate scores, or to make decisions based on ownership of specific Stamps or groups of Stamps.
 
@@ -387,7 +387,7 @@ The app will start and you can access in your browser at `http://localhost:3000`
 
 When you connect your app and click `Show Stamps` your app will look as follows (assuming you actually have some Stamps associated with your address). The tooltip feature is demonstrated for a Github stamp.
 
-<figure><img src="../../.gitbook/assets/stamp-collector-app-showing-stamps.png" alt=""><figcaption><p>The Gitcoin Stamp collector app</p></figcaption></figure>
+![](../public/stamp-collector-app-showing-stamps.png)
 
 ### Summary
 

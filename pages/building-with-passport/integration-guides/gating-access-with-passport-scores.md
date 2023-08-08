@@ -694,7 +694,7 @@ Time to test out your app - start the app using `npm run dev` and click to conne
 
 Here's what your user sees if their Passport score is greater than 20:
 
-<figure><img src="../../.gitbook/assets/app-success.png" alt=""><figcaption><p>The app giving access to secret content to users that pass your eligibility gate</p></figcaption></figure>
+<figure><img src="../public/app-success.png" alt=""><figcaption><p>The app giving access to secret content to users that pass your eligibility gate</p></figcaption></figure>
 
 
 
@@ -702,7 +702,7 @@ Here's what your user sees if their Passport score is greater than 20:
 
 Here is what your user sees if their Passport Score is lower than 20:
 
-<figure><img src="../../.gitbook/assets/app-failure.png" alt=""><figcaption><p>The app redirecting users that do not pass your eligibility gate</p></figcaption></figure>
+<figure><img src="../public/app-failure.png" alt=""><figcaption><p>The app redirecting users that do not pass your eligibility gate</p></figcaption></figure>
 
 ### Summary
 

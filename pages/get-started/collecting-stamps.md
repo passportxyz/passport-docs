@@ -14,7 +14,7 @@ When you sign in to the[ Gitcoin Passport app](https://passport.gitcoin.co) you 
 
 As you repeat the process for more Stamps, you will see your score updating.
 
-<figure><img src="../.gitbook/assets/stamps-page.png" alt=""><figcaption><p>The Gitcoin Passport Stamps page</p></figcaption></figure>
+![](../public/stamps-page.png)
 
 Although each individual Stamp has a unique verification process, the underlying flow is similar:&#x20;
 

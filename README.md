@@ -8,7 +8,7 @@ To coordinate and scale an open internet, we need tools like Gitcoin Passport to
 
 
 
-<figure><img src=".gitbook/assets/passport-hero.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../public/passport-hero.png" alt=""><figcaption></figcaption></figure>
 
 
 
