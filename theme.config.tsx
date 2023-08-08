@@ -1,8 +1,9 @@
 import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
+import passportLogo from './components/logo'
 
 const config: DocsThemeConfig = {
-  logo: <span>Gitcoin Passport</span>,
+  logo: passportLogo,
   project: {
     link: 'https://passport.gitcoin.co/',
   },

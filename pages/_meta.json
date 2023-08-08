@@ -1,4 +1,5 @@
 {
+    "introduction": "Introduction",
     "get-started": "Get Started",
     "overview": "Overview",
     "building-with-passport": "Building with Passport",
@@ -6,7 +7,11 @@
     "case-studies": "Case Studies",
     "getting-involved": "Getting Involved",
     "index": {
-        "title": "Home",
+        "title": "Contents",
+        "type": "page"
+    },
+    "introduction": {
+        "title": "Introduction to Passport",
         "type": "page"
     }
 }
