@@ -1,8 +1,7 @@
     {
-        "index": "Contents",
-        "introduction": "Introduction",
-        "get-started": "Get Started",
+        "index": "Introduction",
         "overview": "Overview",
+        "get-started": "Get Started",
         "building-with-passport": "Building with Passport",
         "stamps": "Stamps",
         "case-studies": "Case Studies",
@@ -18,5 +17,9 @@
             "type": "page",
             "href": "https://scorer.gitcoin.co/",
             "newWindow": true
+        },
+        "contents": {
+            "title": "Contents",
+            "type": "page"
         }
     }
