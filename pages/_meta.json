@@ -1,17 +1,22 @@
-{
-    "introduction": "Introduction",
-    "get-started": "Get Started",
-    "overview": "Overview",
-    "building-with-passport": "Building with Passport",
-    "stamps": "Stamps",
-    "case-studies": "Case Studies",
-    "getting-involved": "Getting Involved",
-    "index": {
-        "title": "Contents",
-        "type": "page"
-    },
-    "introduction": {
-        "title": "Introduction to Passport",
-        "type": "page"
+    {
+        "index": "Contents",
+        "introduction": "Introduction",
+        "get-started": "Get Started",
+        "overview": "Overview",
+        "building-with-passport": "Building with Passport",
+        "stamps": "Stamps",
+        "case-studies": "Case Studies",
+        "getting-involved": "Getting Involved",
+        "passport-app_link": {
+            "title": "Passport App",
+            "type": "page",
+            "href": "https://passport.gitcoin.co/",
+            "newWindow": true
+        },
+        "developer_portal_link": {
+            "title": "Developer Portal",
+            "type": "page",
+            "href": "https://scorer.gitcoin.co/",
+            "newWindow": true
+        }
     }
-}
