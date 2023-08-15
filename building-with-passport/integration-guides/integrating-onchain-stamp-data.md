@@ -144,6 +144,7 @@ export default function Passport() {
   const [hasStamps, setHasStamps] = useState<boolean>(false)
   const [stamps, setStamps] = useState<Array<Stamp>>([])
   const [score, setScore] = useState<Number>(0)
+  const [network, setNetwork] = useState<string>('')
 
   useEffect(() => {
     checkConnection()
@@ -161,9 +162,10 @@ export default function Passport() {
     try {
       globalThis.provider = new ethers.BrowserProvider(window.ethereum)
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+      const network = await provider.getNetwork()
       setAddress(accounts[0])
       setConnected(true)
-      console.log("connected via button")
+      setNetwork(network.chainId.toString())
     } catch (err) {
       console.log('error connecting...')
     }
@@ -185,6 +187,11 @@ export default function Passport() {
         <Flex minWidth='max-content' alignItems='right' gap='2' justifyContent='right'>
           <Button colorScheme='teal' variant='outline' onClick={connect}>Connect</Button>
         </Flex>
+        <div>
+          {connected && <p>✅ Wallet connected</p>}
+          {connected && network == "84531" && <p>✅ network: BaseGoerli</p>}
+          {connected && network != "84531" && <p>🔴 Please switch to BaseGoerli network</p>}
+        </div>
         <br />
         <br />
         <br />
@@ -206,7 +213,9 @@ There are some parts of this boilerplate code that might look unfamiliar even if
 
 First, the `provider` field is being assigned as a global variable. The `provider` is a connection to the blockchain. In this app, the connection is made by inheriting network configuration from your wallet. If you are using Metamask with default settings, your connection will be via Infura to whichever network your wallet is connected to. If you have a wallet pointing to your own node's RPC provider, it will use that. The reason `provider` is assigned to a global variable is so that it can be captured during the wallet connection but later it can be passed as an argument when you create instances of the smart contracts.
 
-Seconds, there are two contract addresses defined immediately below the import statements:
+The `chainID` for the network you are connected to is requested from the `provider` too and the value is stored in the app's state. This is used in the UI to warn the user if they are connected to a network other than Base Goerli. There are two statuses presented in the UI - one that confirms that the user is connected and one that either confirms the wallet is connected to Base Goerli or warns the user they are connected to the wrong network.
+
+Second, there are two contract addresses defined immediately below the import statements:
 
 ```typescript
 const resolverContractAddress = "0xc0fF118369894100b652b5Bb8dF5A2C3d7b2E343";
