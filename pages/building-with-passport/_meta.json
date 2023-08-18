@@ -1,6 +1,9 @@
 {
     "index": "Introduction",
-    "tutorials": "Tutorials",
+    "getting-access": "Getting access",
+    "major-concepts": "Major concepts",
     "api-reference": "API reference",
+    "quick-start-guide": "Quick start guide",
+    "tutorials": "Tutorials",
     "passport-sdk-deprecated": "Passport SDK (deprecated)"
 }
