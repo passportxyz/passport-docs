@@ -1,7 +1,7 @@
 {
-  "name": "biosnicar-docs",
+  "name": "passport-docs",
   "version": "0.0.1",
-  "description": "BioSNICAR documentation",
+  "description": "Passport documentation",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,17 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jmcook1186/biosnicar-website.git"
+    "url": "git+https://github.com/"
   },
-  "author": "Joseph Cook",
+  "author": "Gitcoin passport DevRel",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jmcook1186/biosnicar-website"
+    "url": "https://github.com/"
   },
-  "homepage": "https://github.com/jmcook1186/biosnicar-website#readme",
+  "homepage": "https://github.com/",
   "dependencies": {
     "next": "^13.0.6",
-    "nextra": "latest",
+    "nextra": "^2.11.0",
     "nextra-theme-docs": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -27,5 +27,13 @@
   "devDependencies": {
     "@types/node": "18.11.10",
     "typescript": "^4.9.3"
+  },
+  "dependenciesMeta": {
+    "nextra": {
+      "injected": true
+    },
+    "nextra-theme-docs": {
+      "injected": true
+    }
   }
 }

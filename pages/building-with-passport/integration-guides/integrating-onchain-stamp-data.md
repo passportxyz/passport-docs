@@ -217,6 +217,7 @@ The `chainID` for the network you are connected to is requested from the `provid
 
 Second, there are two contract addresses defined immediately below the import statements:
 
+
 ```typescript
 const resolverContractAddress = "0xc0fF118369894100b652b5Bb8dF5A2C3d7b2E343";
 const EasContractAddress = "0xAcfE09Fd03f7812F022FBf636700AdEA18Fd2A7A"
@@ -317,6 +318,10 @@ The `Attestation` is returned in the form of an object with the following struct
 ```
 
 The individual Stamp data is embedded in this object, but it is encoded according to the `Attestation` schema and arrives as a hex-encoded string. This means the next step is decoding the `Attestation`.
+
+**Note** You can also check your attestations using the [Ethereum Attestation Service explorer](https://base-goerli.easscan.org). Note that the explorer is deployed on separate subdomains for each network (e.g. for Optimism the URL is [optimism.easscan.org](https://optimism.easscan.org/)) There, you can search for your address and see your `Attestations` in the browser. You can also search for the [Passport Attestation Schema](https://base-goerli.easscan.org/schema/view/0xe496278adc2c09ec93f23f59fdfb015ca7aae61260fbfa07f6d46eef9cf707b8)) or the [Gitcoin attester contract](https://goerli.basescan.org/address/0x5bbbc733e12f50e6834c40a90066f2f9ffb820e0). The links in this note direct to the relevant resources for the Base Goerli network.
+
+
 
 ### Decoding the Attestation
 
