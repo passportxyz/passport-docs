@@ -1,10 +1,4 @@
----
-description: >-
-  This document outlines the steps required to obtain an API key and Scorer ID
-  to access the Gitcoin Passport API.
----
-
-# API Access
+# Getting Access: Scorer ID and API Key
 
 The Passport API provides programmatic access to a wallet's Passport score. Once you have your API key, you need to include it with each request you make to the API. This allows Gitcoin to identify your app and verify that you are authorized to access the API.
 
@@ -14,7 +8,6 @@ The Passport API provides programmatic access to a wallet's Passport score. Once
 2. **Navigate to the API Keys section:** After logging in, go to the "API Keys" section.
 3. **Generate an API key:** Click on the "+ Create a Key" button to generate a unique API key for your account.
 4. **Store your API key securely:** Store your API key in a secure place, as it will be used to access the Passport API.
-
 
 
 ### Scorers and Scorer ID
@@ -40,7 +33,7 @@ There are two options currently active for the Sybil prevention model to run in 
 * `Unique Humanity` - Returns a score between 0-100 that indicates how likely it is that a Passport is owned by an honest user
 * `Unique Humanity (binary)` - Returns a 0 or 1 depending on whether the Passport is flagged as a likely Sybil. Currently, the threshold for a passing score is set to 20.&#x20;
 
-![](../public/scorer-use-case.png)
+![](public/scorer-use-case.png)
 
 ![Selecting the Scorer type](https://arweave.net/P6eKM-crq8LVGCtjpVZR9RLuiR35F7Jc-6mBXGxMHJY)
 
@@ -48,14 +41,9 @@ There are two options currently active for the Sybil prevention model to run in 
 
 Review one of the following pages to learn how you can use your Scorer, Scorer ID, and API key.&#x20;
 
-{% content-ref url="../quick-start-guide.md" %}
-[quick-start-guide.md](../quick-start-guide.md)
-{% endcontent-ref %}
 
-{% content-ref url="../integration-guides/" %}
-[integration-guides](../integration-guides/)
-{% endcontent-ref %}
+[Quick Start](quick-start-guide)
 
-{% content-ref url="endpoint-definition.md" %}
-[endpoint-definition.md](endpoint-definition.md)
-{% endcontent-ref %}
+[Tutorials](tutorials)
+
+[API reference](api-reference)

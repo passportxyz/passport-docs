@@ -1,8 +1,4 @@
----
-description: Engage with Passport to help make decentralized identity a public good!
----
-
-# Getting Involved
+# How to contribute
 
 ## Identity Providers
 
