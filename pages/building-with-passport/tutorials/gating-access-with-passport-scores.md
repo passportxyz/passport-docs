@@ -13,25 +13,24 @@ In this guide, you'll learn how to gate an application using Gitcoin passport. S
 * Implement gating so that some content is only available to users with scores above a threshold
 * Redirect users to instructions for improving their Passport scores
 
-{% hint style="info" %}
-This tutorial is a more detailed version of a video tutorial put together by Nader Dabit.\
-Check out his video and related sample code at the following links:\
-\
+
+This tutorial is a more detailed version of a video tutorial put together by Nader Dabit.
+Check out his video and related sample code at the following links:
+
 [Build Your First Sybil-Resistant Web App with Gitcoin Passport & Next.js](https://www.youtube.com/watch?v=bfkalDSvRDc)
 
 [Sample code](https://gist.github.com/dabit3/10f93a001d75a1b44e5ec2001b33e4f6)
-{% endhint %}
+
 
 ### Prerequisites
 
 To follow this tutorial, you'll need [Next.js](https://nextjs.org/), [Node](https://nodejs.org/en), and [Chakra-UI](https://chakra-ui.com/) installed on your machine. We will also be using the [Gitcoin Passport API](../scorer-api/).
 
-{% hint style="info" %}
+
 Before we delve into this, it's important to note that there are a few preliminary steps you need to complete. Please ensure that these prerequisites are met before proceeding with the guide.
 
 1. You have created a Passport Scorer and received a Scorer ID
 2. You have an API key
-{% endhint %}
 
 If you haven't completed the preliminary steps above please refer to [API Access](https://docs.passport.gitcoin.co/building-with-passport/scorer-api/api-access) first. Once you're done with that, return here and continue with this walkthrough.
 
@@ -39,11 +38,7 @@ If you haven't completed the preliminary steps above please refer to [API Access
 
 The app we will build will be an educational site where users can learn about web3 and DAOs, and then if - and only if - their Passport score is above a threshold, they can uncover the secret information required to join our example Passport DAO.
 
-You can find the code from this tutorial in the following GitHub repo:
-
-{% embed url="https://github.com/gitcoinco/passport-scorer/tree/main/examples/passport-gated-content-app" %}
-Example code
-{% endembed %}
+You can find the code from this tutorial in this [GitHub repo](https://github.com/gitcoinco/passport-scorer/tree/main/examples/passport-gated-content-app).
 
 The app will work as follows:
 
@@ -355,9 +350,7 @@ Well done - your users can now connect their Ethereum wallet to your app. If the
 
 To use Gitcoin Passport, a user has to submit their Passport to the registry. This is a database of Passports linked to an Ethereum address that have been submitted for scoring. Part of the data that is passed along with a request to add a Passport to the registry is the `Scorer-Id` which is used to link your app to a specific instance of the `Scorer` you created earlier. This data together links your user's address to a specific collection of Stamps and an instance of a Scorer to use to calculate a Passport score. Therefore, this is a necessary step for integrating Passport into your app if you want to use Gitcoin Passport's default Scorer and calculate the score server-side. The weights applied to each Stamp can be found in the [Passport Github](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin\_passport\_weights.py).
 
-{% hint style="info" %}
 You can skip the Passport submission and retrieve the raw Stamp data to apply your own scoring algorithm.&#x20;
-{% endhint %}
 
 The way Passport submission works is to first retrieve a message using the Passport API's `signing-message` method. The user then signs this message using their Ethereum wallet, and sends the signed message back to the server using the Passport API's `submit-passport` method.
 
@@ -694,15 +687,12 @@ Time to test out your app - start the app using `npm run dev` and click to conne
 
 Here's what your user sees if their Passport score is greater than 20:
 
-["The app giving access to secret content to users that pass your eligibility gate"](../public/app-success.png)
-
-
-
+["The app giving access to secret content to users that pass your eligibility gate"](public/app-success.png)
 
 
 Here is what your user sees if their Passport Score is lower than 20:
 
-![](../public/app-failure.png)
+![](public/app-failure.png)
 
 ### Summary
 

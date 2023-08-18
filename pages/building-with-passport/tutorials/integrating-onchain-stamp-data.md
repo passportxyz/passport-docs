@@ -17,17 +17,14 @@ Specifically, you will:
 
 To follow this tutorial, you'll need [Next.js](https://nextjs.org/), [Node](https://nodejs.org/en), and [Chakra-UI](https://chakra-ui.com/) installed on your machine. You will be using the [BaseGoerli](https://chainlist.org/chain/84531) test network - you will need to import this network into your wallet. Some familiarity with smart contracts is recommended.
 
-{% hint style="info" %}
 This app uses a blockchain, rather than Gitcoin's database server, as a backend. This means you **do not need an API key or Scorer ID,** but you do need to have a browser wallet that can connect to the BaseGoerli test network.
-{% endhint %}
+
 
 ### App outline
 
 The app we will build will be a webpage where users can connect their wallet to check their onchain credentials.&#x20;
 
-You can find the code from this tutorial in the following GitHub repo:
-
-{% embed url="https://github.com/jmcook1186/passport-onchain-stamps-app/tree/main" %}
+You can find the code from this tutorial in this [GitHub repo](https://github.com/jmcook1186/passport-onchain-stamps-app/tree/main).
 
 The app will work as follows:
 
@@ -496,11 +493,11 @@ You can navigate to `localhost:3000` to try it out!
 The app looks as follows:
 
 
-![](../public/Screenshot from 2023-08-04 10-17-11 (1).png)
+![](public/Screenshot from 2023-08-04 10-17-11 (1).png)
 
-![](../public/Screenshot from 2023-08-04 10-17-16 (1).png)
+![](public/Screenshot from 2023-08-04 10-17-16 (1).png)
 
-![](../public/Screenshot from 2023-08-04 10-17-19 (1).png)
+![](public/Screenshot from 2023-08-04 10-17-19 (1).png)
 
 
 ### Summary

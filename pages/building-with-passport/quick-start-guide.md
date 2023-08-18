@@ -31,9 +31,7 @@ There are two basic steps to retrieving a Passport score. First, you submit a Pa
 
 Once this is done, you can retrieve the score for that address in a separate request.
 
-{% hint style="info" %}
 Note that submitting the Passport is _**only required for scoring using the Gitcoin server**_. It is not required for retrieving Stamp data.
-{% endhint %}
 
 #### **Submitting a Passport**
 
@@ -54,7 +52,6 @@ curl -X POST 'https://api.scorer.gitcoin.co/registry/submit-passport' \
 
 The response from this endpoint should look as follows:
 
-{% code overflow="wrap" %}
 ```json
 {
   "address": "0x2C1E111d7C3adc823B5fA3af3f07EB62831C3c5",
@@ -65,7 +62,6 @@ The response from this endpoint should look as follows:
   "error": null
 }
 ```
-{% endcode %}
 
 This response indicates that the address was successfully submitted and that its score is being calculated on the server.
 
@@ -98,7 +94,6 @@ The response from this endpoint should look as follows:
 ```
 
 The score is provided in the `score` field in the returned object.
-
 
 
 ### Next Steps

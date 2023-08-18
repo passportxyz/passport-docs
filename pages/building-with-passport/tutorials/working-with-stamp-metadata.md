@@ -4,7 +4,7 @@ description: How to retrieve, handle and display Stamp metadata in a simple Next
 
 # Working with Stamp metadata
 
-![](../public/stamp-logo-examples.png)
+![](public/stamp-logo-examples.png)
 
 Gitcoin Passport Stamps show that a user has achieved certain milestones on-chain or through some web2 service. It is common for these Stamps to be used to generate a score on the Gitcoin server to indicate a user's trustworthiness. It is also possible to retrieve the actual Stamps instead of the score. This enables developers to use their own algorithms to generate scores, or to make decisions based on ownership of specific Stamps or groups of Stamps.
 
@@ -16,18 +16,14 @@ On this page, you will **learn how to use the Stamp metadata API endpoints** to 
 
 You can follow this walk-through to build a simple app that allows a user to connect their wallet and display their Stamps to the browser, using information provided in the Stamp metadata.
 
-You can find the code from this tutorial in the following GitHub repo:
-
-{% @github-files/github-code-block url="https://github.com/gitcoinco/passport-scorer/tree/main/examples/stamp-collector" %}
+You can find the code from this tutorial in this [GitHub repo](https://github.com/gitcoinco/passport-scorer/tree/main/examples/stamp-collector):
 
 ### Prerequisites
 
-{% hint style="info" %}
 Before we delve into this, it's important to note that there are a few preliminary steps you need to complete. Please ensure that these prerequisites are met before proceeding with the guide.
 
 1. You have created a Passport Scorer and received a Scorer ID
 2. You have an API key
-{% endhint %}
 
 If you haven't completed the preliminary steps above please refer to [API Access](https://docs.passport.gitcoin.co/building-with-passport/scorer-api/api-access) first. Once you're done with that, return here and continue with this walkthrough.
 
@@ -387,7 +383,7 @@ The app will start and you can access in your browser at `http://localhost:3000`
 
 When you connect your app and click `Show Stamps` your app will look as follows (assuming you actually have some Stamps associated with your address). The tooltip feature is demonstrated for a Github stamp.
 
-![](../public/stamp-collector-app-showing-stamps.png)
+![](public/stamp-collector-app-showing-stamps.png)
 
 ### Summary
 
