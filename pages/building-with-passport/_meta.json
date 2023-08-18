@@ -1,5 +1,6 @@
 {
-    "integration-guides": "Integration Guides",
-    "scorer-api": "Scorer API",
+    "index": "Introduction",
+    "tutorials": "Tutorials",
+    "api-reference": "API reference",
     "passport-sdk-deprecated": "Passport SDK (deprecated)"
 }

@@ -1,4 +1,4 @@
-# Integration Guides
+# Tutorials
 
 This section includes several tutorials for integrating Gitcoin Passport into your apps.&#x20;
 
