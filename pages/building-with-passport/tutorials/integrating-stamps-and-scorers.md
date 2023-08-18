@@ -16,20 +16,18 @@ A Gitcoin Passport Scorer integration is a solution to this problem. By showing 
 
 Note, however, that it is possible for someone to be an impersonator and _also_ have a high Passport score. This is why a Scorer integration is more about giving additional evidence, or context, to choices than it is about automated, binary decision making.
 
-You can find the code from this tutorial in the following GitHub repo:
-
-{% embed url="https://github.com/gitcoinco/passport-scorer/tree/main/examples/check-trusted-user-app" %}
+You can find the code from this tutorial in this [GitHub repo](https://github.com/gitcoinco/passport-scorer/tree/main/examples/check-trusted-user-app):
 
 Let's see how an integration like this is built using the Passport API.
 
 ### Prerequisites
 
-{% hint style="info" %}
+
 Before we delve into this, it's important to note that there are a few preliminary steps you need to complete. Please ensure that these prerequisites are met before proceeding with the guide.
 
 1. You have created a Passport Scorer and received a Scorer ID
 2. You have an API key
-{% endhint %}
+
 
 If you haven't completed the preliminary steps above please refer to [API Access](https://docs.passport.gitcoin.co/building-with-passport/scorer-api/api-access) first. Once you're done with that, return here and continue with this walkthrough
 
@@ -219,7 +217,7 @@ You can start this app now by navigating your terminal to the project directory 
 
 Your app should look like this:
 
-![](../public/trusted-user-app-pt1.png)
+![](public/trusted-user-app-pt1.png)
 
 The rest of the tutorial will build upon this basic app by adding functions and UI code to `app/page.tsx`.
 
@@ -586,7 +584,7 @@ Immediately after that `div` element, we can add the following code which displa
 
 Now, if you run your app locally using `npm run dev` you will be able to connect your wallet, submit your Passport and check whether you pass the trust criteria. If you do, your address will be rendered to the screen. If you check the `Show Stamps` box, all your Stamps will be shown in the browser.
 
-![]()../public/trusted-user-app.png)
+![]()public/trusted-user-app.png)
 
 ### Multiple users
 
@@ -616,7 +614,7 @@ With our current rendering logic, the `Show Stamps` checkbox will list all the S
 
 Now, when we follow through our connect -> submit -> check users -> show Stamps flow, we will see something like the following:
 
-![](../public/trusted-user-app-2.png)
+![](public/trusted-user-app-2.png)
 
 
 
