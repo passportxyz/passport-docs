@@ -206,6 +206,8 @@ There are some parts of this boilerplate code that might look unfamiliar even if
 
 First, the `provider` field is being assigned as a global variable. The `provider` is a connection to the blockchain. In this app, the connection is made by inheriting network configuration from your wallet. If you are using Metamask with default settings, your connection will be via Infura to whichever network your wallet is connected to. If you have a wallet pointing to your own node's RPC provider, it will use that. The reason `provider` is assigned to a global variable is so that it can be captured during the wallet connection but later it can be passed as an argument when you create instances of the smart contracts.
 
+The chainID for the network you are connected to is requested from the provider too and the value is stored in the app's state. This is used in the UI to warn the user if they are connected to a network other than Base Goerli. There are two statuses presented in the UI - one that confirms that the user is connected and one that either confirms the wallet is connected to Base Goerli or warns the user they are connected to the wrong network.
+
 Seconds, there are two contract addresses defined immediately below the import statements:
 
 ```typescript
@@ -304,6 +306,10 @@ The `Attestation` is returned in the form of an object with the following struct
 ```
 
 The individual Stamp data is embedded in this object, but it is encoded according to the `Attestation` schema and arrives as a hex-encoded string. This means the next step is decoding the `Attestation`.
+
+**Note** You can also check your attestations using the [Ethereum Attestation Service explorer](https://base-goerli.easscan.org). Note that the explorer is deployed on separate subdomains for each network (e.g. for Optimism the URL is [optimism.easscan.org](https://optimism.easscan.org/)) There, you can search for your address and see your `Attestations` in the browser. You can also search for the [Passport Attestation Schema](https://base-goerli.easscan.org/schema/view/0xe496278adc2c09ec93f23f59fdfb015ca7aae61260fbfa07f6d46eef9cf707b8)) or the [Gitcoin attester contract](https://goerli.basescan.org/address/0x5bbbc733e12f50e6834c40a90066f2f9ffb820e0). The links in this note direct to the relevant resources for the Base Goerli network.
+
+
 
 ### Decoding the Attestation
 
