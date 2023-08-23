@@ -361,11 +361,9 @@ const verifier = new PassportVerifier();
 const passport = await verifier.verifyPassport("0x0...");
 ```
 
-{% hint style="info" %}
-Getting started on a browser may require additional steps.
-
+**Getting started on a browser may require additional steps.**
 You may need to asynchronously load `@gitcoinco/passport-sdk-verifier` before loading the package.
-{% endhint %}
+
 
 Next Js Example
 
@@ -393,31 +391,30 @@ After the PassportVerifier instance is created, read-only methods for verifying 
 
 Pass in an Ethereum address and get back a Passport where each of the Stamps includes a verified: boolean field.
 
-{% code overflow="wrap" %}
+
 ```typescript
 PassportVerifier.verifyPassport(address: string, passport?: Passport, additionalStampCheck?: (stamp: Stamp) => boolean): Promise<Passport>
 ```
-{% endcode %}
+
 
 **verifyStamp**
 
 Pass in a Stamp and get back a Stamp with a verified: boolean field completed.
 
-{% code overflow="wrap" %}
+
 ```typescript
 PassportVerifier.verifyStamp(address: string, stamp: Stamp, additionalStampCheck?: (stamp: Stamp) => boolean): Promise<Stamp>
 ```
-{% endcode %}
+
 
 **verifyCredential**
 
 Pass in a Verifiable Credential and get back a boolean.
 
-{% code overflow="wrap" %}
+
 ```typescript
 PassportVerifier.verifyCredential(credential: VerifiableCredential): Promise<boolean>
 ```
-{% endcode %}
 
 ## Evaluate the contents of a Passport
 
@@ -450,8 +447,8 @@ This instance exposes read-only methods to score the content of a Gitcoin Passpo
 
 To get a score for a wallet address based on the scoring criteria of this instance, as well as any additional checks, use the `getScore` method.
 
-{% code overflow="wrap" %}
+
 ```typescript
 PassportScorer.getScore(address: string, passport?: Passport, additionalStampCheck?: (stamp: Stamp) => boolean): Promise<number>
 ```
-{% endcode %}
+

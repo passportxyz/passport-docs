@@ -15,9 +15,5 @@
             "type": "page",
             "href": "https://scorer.gitcoin.co/",
             "newWindow": true
-        },
-        "contents": {
-            "title": "Contents",
-            "type": "page"
         }
     }

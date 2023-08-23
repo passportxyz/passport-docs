@@ -1,4 +1,3 @@
-import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 import passportLogo from './components/logo'
 
@@ -14,8 +13,7 @@ const config: DocsThemeConfig = {
   footer: {
     text: 'Gitcoin passport documentation',
   },
-  faviconGlyph: "/public/favicon.svg"
-
+  faviconGlyph: "/public/favicon.svg",
 }
 
 export default config
