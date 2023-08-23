@@ -6,9 +6,7 @@ description: This page provides an overview of the Gitcoin Passport SDK
 
 ## The Gitcoin Passport SDK
 
-{% embed url="https://github.com/gitcoinco/passport-sdk" %}
-The Passport SDK
-{% endembed %}
+[The Passport SDK](https://github.com/gitcoinco/passport-sdk)
 
 The SDK comprises a set of libraries designed to help developers interact with the Gitcoin Passport. This section explains how to install each of the libraries with npm. To learn more about using them in your dApp, progress to the integration section.
 
@@ -30,9 +28,7 @@ or import the bundle.&#x20;
 
 #### [Scorer API](https://github.com/gitcoinco/passport-sdk/tree/main/packages/scorer)
 
-{% hint style="info" %}
 Based on initial user feedback, most communities will benefit from using the Scoring API under development rather than building a weighted scorer with the SDK. **Please check back in on progress**, and consider using the Scoping API as a first place to begin experimenting with Passport scoring.
-{% endhint %}
 
 Score the contents of a Passport.&#x20;
 
@@ -52,9 +48,8 @@ yarn run webpack
 
 #### [Writer ](https://github.com/gitcoinco/passport-sdk/tree/main/packages/writer)
 
-{% hint style="warning" %}
-The Writer is scheduled to be deprecated. Please consider building Stamp integrations into the Passport App at [https://github.com/gitcoinco/passport](https://github.com/gitcoinco/passport)
-{% endhint %}
+**The Writer is scheduled to be deprecated. Please consider building Stamp integrations into the Passport App at [https://github.com/gitcoinco/passport](https://github.com/gitcoinco/passport)**
+
 
 Writes to an authenticated DIDs Passport stream in Ceramic.&#x20;
 
@@ -90,9 +85,7 @@ import { VerifiableCredential } from "@gitcoinco/passport-sdk-types"
 
 Gitcoin Passport and the Passport SDK are built on top of the Ceramic Network for data persistence. If you're new to Ceramic, check out their documents to get familiarized with the basics:
 
-{% embed url="https://developers.ceramic.network/learn/welcome/" %}
-Ceramic Documentation
-{% endembed %}
+[Ceramic Documentation](https://developers.ceramic.network/learn/welcome/)
 
 With the Passport SDK, it's not necessary to interact with Ceramic directly, but you may find it helpful for debugging or just a general understanding of the system.
 
