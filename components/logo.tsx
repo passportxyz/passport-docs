@@ -15,4 +15,4 @@ const passportLogo = () => {
   )
 }
 
-export default (passportLogo)
+export { passportLogo }
