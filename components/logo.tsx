@@ -5,7 +5,6 @@ import config from '../theme.config'
 
 const passportLogo = () => {
   const theme = useTheme()
-  console.log(useTheme().theme)
   if (theme.theme === 'dark') {
     return (
       <svg width="267" height="45" viewBox="0 0 267 68" fill="none" xmlns="http://www.w3.org/2000/svg">
