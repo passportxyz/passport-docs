@@ -1,6 +1,6 @@
 # Introduction
 
-If you’re interested in setting up a Gitcoin Passport and connecting Stamps to it, head to our [support knowledge base](https://support.gitcoin.co/gitcoin-knowledge-base/gitcoin-passport/what-is-gitcoin-passport) for more info.
+If you’re interested in setting up a Gitcoin Passport and connecting Stamps to it, head to our [support site](https://support.gitcoin.co/gitcoin-knowledge-base/gitcoin-passport/what-is-gitcoin-passport) for more info.
 
 ## What is Passport?
 
@@ -39,18 +39,18 @@ It facilitates:
 | Retrieval of Stamps linked to Passports     | `GET /registry/stamps/{address}`            |
 | Retrieval of all available Stamps           | `GET /registry/stamp-metadata`              |
 
-## Gating Content with Passport
+## Protecting Content with Passport
 
-An excellent use case for Passport is to gate access to special content. To make this happen, we'll need to:
+An excellent [use case](use-cases) for Passport is to gate access to special content. To make this happen, we'll need to:
 
-- Set up a Passport Scorer and API key
-- Visit the API Access page to learn how to set up your Scorer and API key
-- Submit the user’s address for scoring
-- Make a POST request to /registry/submit-passport
-- Fetch the user’s Passport score
-- Make a GET request to /registry/score/{scorer_id}/{address}
-- Verify that their score is above a certain threshold. The score that is returned from step #3 will vary depending on the type of Scorer you set up (Unique Humanity vs Unique Humanity Binary, etc.)
-- Provide access to the gated content
+1. Set up a Passport Scorer and API key
+2. Visit the API Access page to learn how to set up your Scorer and API key
+3. Submit the user’s address for scoring
+4. Make a POST request to /registry/submit-passport
+5. Fetch the user’s Passport score
+6. Make a GET request to /registry/score/{scorer_id}/{address}
+6. Verify that their score is above a certain threshold. The score that is returned from step #3 will vary depending on the type of Scorer you set up (Unique Humanity vs Unique Humanity Binary, etc.)
+7. Provide access to the gated content
 
 At this point if the user’s score was above your threshold you can provide them with access to the gated content.
 
