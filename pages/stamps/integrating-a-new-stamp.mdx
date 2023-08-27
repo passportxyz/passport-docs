@@ -16,7 +16,7 @@ This is the [`platforms` directory](https://github.com/gitcoinco/passport/tree/m
 
 ***
 
-### 2. Create new files
+### 2. Create new files\{}
 
 Adding a Stamp requires you to create some new files inside the `platforms/src` directory. Inside `platforms/src` create a new directory and name it according to your Stamp. In the test here we will use the word `example.`
 
@@ -69,10 +69,10 @@ The new Stamp is exported as a class extending the `Platform` class.
 
 ```typescript
 //App-bindings.ts - EVM
-import { AppContext, ProviderPayload } from "../types";
-import { Platform } from "../utils/platform";
+import \{ AppContext, ProviderPayload } from "../types";
+import \{ Platform } from "../utils/platform";
 
-export class <EXAMPLE> extends Platform {
+export class <EXAMPLE> extends Platform \{
     platformId = "<EXAMPLE>";
     path = "<EXAMPLE>";
     clientId: string = null;
@@ -80,13 +80,13 @@ export class <EXAMPLE> extends Platform {
     isEVM = true;
     // if the Stamp requires extra information to be displayed to the user, add
     // here
-    banner = {
+    banner = \{
         heading:
         "Your Stamp heading here"
     };
 
-    async getProviderPayload(appContext: AppContext): Promise<ProviderPayload> {
-        const result = await Promise.resolve({});
+    async getProviderPayload(appContext: AppContext): Promise<ProviderPayload> \{
+        const result = await Promise.resolve(\{});
         return result;
     }
 }
@@ -100,21 +100,21 @@ The new Stamp is exported as a class extending the `Platform` class.
 
 ```typescript
 //App-bindings.ts - OAuth
-import { PlatformOptions } from "../types";
-import { Platform } from "../utils/platform";
-export class <EXAMPLE> extends Platform {
+import \{ PlatformOptions } from "../types";
+import \{ Platform } from "../utils/platform";
+export class <EXAMPLE> extends Platform \{
     platformId = "<EXAMPLE>";
     path = "<EXAMPLE>";
     clientId: string = null;
     redirectUri: string = null;
 
-constructor(options: platformOptions = {}) {
+constructor(options: platformOptions = \{}) \{
     super();
     this.clientId = options.clientId as string;
     this.redirectUri = options.redirectUri as string;
 }
 
-async getOauthUrl(state: string): Promise<string> {
+async getOauthUrl(state: string): Promise<string> \{
     const <EXAMPLE>Url = await Promise.resolve(
         `<EXAMPLE> URL`
     );
@@ -129,10 +129,10 @@ Copy the following code into `Providers-config.ts` replacing `<EXAMPLE>` with yo
 
 ```typescript
 //Providers-config.ts
-import { PlatformSpec, PlatformGroupSpec, Provider } from "../types";
-import { <EXAMPLE>Provider } from <ProviderFile>
+import \{ PlatformSpec, PlatformGroupSpec, Provider } from "../types";
+import \{ <EXAMPLE>Provider } from <ProviderFile>
 
-export const PlatformDetails: PlatformSpec = {
+export const PlatformDetails: PlatformSpec = \{
     icon: "./assets/<EXAMPLE>StampIcon.svg",
     platform: "<EXAMPLE>",
     name: "<EXAMPLE>",
@@ -141,10 +141,10 @@ export const PlatformDetails: PlatformSpec = {
     };
     
 export const ProviderConfig: PlatformGroupSpec[] = [
-    {
+    \{
     platformGroup: "Name of the Stamp platform group",
     providers: [
-        {
+        \{
         title: "Title of the provider",
         name: "<EXAMPLE>",
         },
@@ -161,18 +161,18 @@ Copy and paste the following code into `index.ts` replacing `<EXAMPLE>` with you
 
 ```typescript
 //index.ts
-export { <EXAMPLE>Platform } from "./App-Bindings";
-export { ProviderConfig, PlatformDetails, providers } from "./Providers-config";
-export { <EXAMPLE>Provider }
+export \{ <EXAMPLE>Platform } from "./App-Bindings";
+export \{ ProviderConfig, PlatformDetails, providers } from "./Providers-config";
+export \{ <EXAMPLE>Provider }
 ```
 
 ***
 
 #### `Providers/example.ts`
 
-{% hint style="info" %}
+\{% hint style="info" %}
 _Remember your file name will not be "example.ts" - it will be your stamp name. Some existing examples include "google.ts", "EthErc20Possession.ts" and "github.ts"._
-{% endhint %}
+\{% endhint %}
 
 This is where the hard work is done, because it is in this file that you will define your custom verification logic. The code will vary between applications depending on precisely what information is being verified. The verification could include communication with API servers, blockchain nodes or RPC providers, smart contracts or other external resources. We can walk through an example here, but bear in mind that you will have to adapt to your specific use case.
 
@@ -182,14 +182,14 @@ Let's look at the Ethereum activity Stamp. This is an EVM Stamp that checks whet
 // EthErc20Possession.ts
 
 // ----- Types
-import type { Provider, ProviderOptions } from "../../types";
-import type { RequestPayload, VerifiedPayload } from "@gitcoin/passport-types";
+import type \{ Provider, ProviderOptions } from "../../types";
+import type \{ RequestPayload, VerifiedPayload } from "@gitcoin/passport-types";
 
 // ----- Ethers library
-import { Contract } from "ethers";
-import { formatUnits } from "@ethersproject/units";
+import \{ Contract } from "ethers";
+import \{ formatUnits } from "@ethersproject/units";
 // ----- RPC Getter
-import { getRPCProvider } from "../../utils/signer";
+import \{ getRPCProvider } from "../../utils/signer";
 
 /*
 Eth ERC20 Possession Provider can be used to check a greater than balance for ethereum or any other EVM token (ERC20).
@@ -208,7 +208,7 @@ export async function getTokenBalance(
   tokenContractAddress: string,
   decimalNumber: number,
   payload: RequestPayload
-): Promise<number> {
+): Promise<number> \{
   // define a provider using the rpc url
   const staticProvider = getRPCProvider(payload);
   // load Token contract
@@ -219,7 +219,7 @@ export async function getTokenBalance(
   return parseFloat(balanceFormatted);
 }
 
-export async function getEthBalance(address: string, payload: RequestPayload): Promise<number> {
+export async function getEthBalance(address: string, payload: RequestPayload): Promise<number> \{
   // define a provider using the rpc url
   const staticProvider = getRPCProvider(payload);
   const ethBalance = await staticProvider?.getBalance(address);
@@ -228,7 +228,7 @@ export async function getEthBalance(address: string, payload: RequestPayload): P
   return parseFloat(balanceFormatted);
 }
 
-export type ethErc20PossessionProviderOptions = {
+export type ethErc20PossessionProviderOptions = \{
   threshold: number;
   recordAttribute: string;
   contractAddress: string;
@@ -237,12 +237,12 @@ export type ethErc20PossessionProviderOptions = {
 };
 
 // Export an Eth ERC20 Possessions Provider. This is intended to be a generic implementation that should be extended
-export class EthErc20PossessionProvider implements Provider {
+export class EthErc20PossessionProvider implements Provider \{
   // The type will be determined dynamically, from the options passed in to the constructor
   type = "";
 
   // Options can be set here and/or via the constructor
-  _options: ethErc20PossessionProviderOptions = {
+  _options: ethErc20PossessionProviderOptions = \{
     threshold: 1,
     recordAttribute: "",
     contractAddress: "",
@@ -251,40 +251,40 @@ export class EthErc20PossessionProvider implements Provider {
   };
 
   // construct the provider instance with supplied options
-  constructor(options: ProviderOptions = {}) {
-    this._options = { ...this._options, ...options };
-    this.type = `${this._options.recordAttribute}#${this._options.threshold}`;
+  constructor(options: ProviderOptions = \{}) \{
+    this._options = \{ ...this._options, ...options };
+    this.type = `$\{this._options.recordAttribute}#$\{this._options.threshold}`;
   }
 
   // verify that the proof object contains valid === "true"
-  async verify(payload: RequestPayload): Promise<VerifiedPayload> {
-    const { address } = payload;
+  async verify(payload: RequestPayload): Promise<VerifiedPayload> \{
+    const \{ address } = payload;
     let valid = false;
     let amount = 0;
 
-    try {
-      if (this._options.contractAddress.length > 0) {
+    try \{
+      if (this._options.contractAddress.length > 0) \{
         amount = await getTokenBalance(address, this._options.contractAddress, this._options.decimalNumber, payload);
-      } else {
+      } else \{
         amount = await getEthBalance(address, payload);
       }
-    } catch (e) {
-      return {
+    } catch (e) \{
+      return \{
         valid: false,
         error: [this._options.error],
       };
-    } finally {
+    } finally \{
       valid = amount >= this._options.threshold;
     }
-    return {
+    return \{
       valid,
       record: valid
-        ? {
+        ? \{
             // store the address into the proof records
             address,
-            [this._options.recordAttribute]: `${this._options.threshold}`,
+            [this._options.recordAttribute]: `$\{this._options.threshold}`,
           }
-        : {},
+        : \{},
     };
   }
 }
@@ -343,7 +343,7 @@ import * as <EXAMPLE> from "./<EXAMPLE>";
 ...
 
 // Order of this array determines order in the Passport UI
-const platforms: Record<string, PlatformConfig> = {
+const platforms: Record<string, PlatformConfig> = \{
   Twitter,
   Ens,
   <EXAMPLE>,
@@ -377,7 +377,7 @@ In this file you will import the Stamp from `@gitcoin/passport-platforms` again.
 ```
 //ceramicContext.tsx
 ...
-import {
+import \{
 Brightid,
 Coinbase,
 ...,
@@ -385,7 +385,7 @@ Coinbase,
 } = stampPlatforms;
 export const platforms = new Map<PLATFORM_ID, PlatformProps>();
 ...
-platforms.set("<EXAMPLE>", {
+platforms.set("<EXAMPLE>", \{
 platform: new <EXAMPLE>.<EXAMPLE>Platform() \,
 platformGroupSpec: <EXAMPLE>.ProviderConfig,
 });
@@ -463,28 +463,28 @@ In this file you will find an instance of the `Fargate` service assigned to the 
 
 ```typescript
 //index.ts
-const service = new awsx.ecs.FargateService("dpopp-iam", {
+const service = new awsx.ecs.FargateService("dpopp-iam", \{
   cluster,
   ...,
-  taskDefinitionArgs: {
-    containers: {
-      iam: {
+  taskDefinitionArgs: \{
+    containers: \{
+      iam: \{
       ...,
       secrets: [
-        {
+        \{
           name: " <EXAMPLE>_CLIENT_ID ",
           valueFrom:
-          `${IAM_SERVER_SSM_ARN}: <EXAMPLE>_CLIENT_ID:: `,
+          `$\{IAM_SERVER_SSM_ARN}: <EXAMPLE>_CLIENT_ID:: `,
         },
-        {
+        \{
           name: " <EXAMPLE>_CLIENT_SECRET ",
           valueFrom:
-          `${IAM_SERVER_SSM_ARN}: <EXAMPLE>_CLIENT_SECRET:: `,
+          `$\{IAM_SERVER_SSM_ARN}: <EXAMPLE>_CLIENT_SECRET:: `,
         },
-        {
+        \{
           name: " <EXAMPLE>_CALLBACK ",
           valueFrom:
-          `${IAM_SERVER_SSM_ARN}: <EXAMPLE>_CALLBACK:: `,
+          `$\{IAM_SERVER_SSM_ARN}: <EXAMPLE>_CALLBACK:: `,
         },
       ],
     }
@@ -531,17 +531,17 @@ Finally, having seen your app running successfully, you can raise a pull request
 
 When you raise a pull request, it is important to include the following checklist. This helps you to verify that all the necessary steps have been taken to create your Stamp, and also helps the reviewers of the pull request check your work and merge it faster.
 
-<pre class="language-markdown" data-overflow="wrap"><code class="lang-markdown">## Stamp Provider &#x3C;provider name here>
+```
+## Stamp Provider <provider name here>
 
 - [ ] The Stamp provider name is globally unique (and should not have been used previously). This is because the provider name will be included in the record used  to create the Stamp hash:
 - [ ] The implementation has been unit tested
 - [ ] Verification payload
-    ```json
+    json
     valid: true / false,
-    record: {
+    record: \{
        ... // Unique payload identifying user
     }
-    ```
 <strong>- [ ] The attribute `valid` is false if the Stamp verification fails
 </strong>- [ ] The record must contain the following attributes:
     - 1 or more attributes uniquely identifying the user:
@@ -551,6 +551,7 @@ When you raise a pull request, it is important to include the following checklis
 - [ ] The payload should never contain a field named `pii`
     - This field is reserved for internal use
 </code></pre>
+```
 
 You can use the code snippet above as a template - copy and paste it into your pull request and tick the boxes to show that each item has been completed.
 
@@ -576,12 +577,12 @@ The following example shows the `cache` mechanism being used correctly. &#x20;
 const loadTwitterCache = (token: string): TwitterCache => loadCacheSession(token, "Twitter");
 
 // retrieve the instantiated Client shared between Providers
-export const getAuthClient = async (sessionKey: string, code: string, context: TwitterContext): Promise<Client> => {
-  if (!context.twitter?.authClient) {
+export const getAuthClient = async (sessionKey: string, code: string, context: TwitterContext): Promise<Client> => \{
+  if (!context.twitter?.authClient) \{
     const session = loadTwitterCache(sessionKey);
-    const { oauthUser } = session;
+    const \{ oauthUser } = session;
 
-    if (!context.twitter) context.twitter = {};
+    if (!context.twitter) context.twitter = \{};
     context.twitter.authClient = new Client(oauthUser);
 
     clearCacheSession(sessionKey, "Twitter");

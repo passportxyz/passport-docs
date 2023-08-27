@@ -1,10 +1,6 @@
----
-description: Content for platform integrators and their ecosystem partners
----
-
 # Platform Integrator concepts
 
-This page is for platforms who integrate with Gitcoin Passport and make its sybil-resisting functionality available to their ecosystem partners.&#x20;
+This page is for platforms who integrate with Gitcoin Passport and make its sybil-resisting functionality available to their ecosystem partners.
 
 On this page, you will learn what types of attacks Gitcoin Passport can protect against, see examples of existing platform integrations, understand integration best-practices and identify the key information your users need to know.
 
@@ -12,18 +8,21 @@ On this page, you will learn what types of attacks Gitcoin Passport can protect 
 
 First off, some audience definitions:
 
-1. **Platform Integrator:** An application that integrates with Passport and makes the functionality available to their ecosystem partners.&#x20;
-2. **Ecosystem partners:** Organizations or apps who use the platforms built by Platform Integrators.&#x20;
+1. **Platform Integrator:** An application that integrates with Passport and makes the functionality available to their ecosystem partners.
+2. **Ecosystem partners:** Organizations or apps who use the platforms built by Platform Integrators.
 3. **End-users:** People who are engaging with the ecosystem partner's content or programs within the platform.
 
-We'll use [Snapshot](https://snapshot.org/#/) as an example. Snapshot is an offchain voting platform that allows DAOs, DeFi protocols, or NFT communities to participate in decentralized governance. Within the Snapshot platform, Optimism Collective allows users to vote on proposals using Snapshot's technology.&#x20;
+We'll use [Snapshot](https://snapshot.org/#/) as an example. Snapshot is an offchain voting platform that allows DAOs, DeFi protocols, or NFT communities to participate in decentralized governance. Within the Snapshot platform, Optimism Collective allows users to vote on proposals using Snapshot's technology.
 
-In this situation, Snapshot would be a platform integrator, Optimism Collective would be an ecosystem partner, and the users submitting and voting on proposals are end-users.&#x20;
+In this situation, Snapshot would be a platform integrator, Optimism Collective would be an ecosystem partner, and the users submitting and voting on proposals are end-users.
 
 Here are some examples and their Passport use cases:
 
-<table><thead><tr><th width="177">Platform Integrator</th><th>Ecosystem Partner</th><th>End user</th><th>Why the Platform integrating Gitcoin Passport is a win for everyone</th></tr></thead><tbody><tr><td>Snapshot</td><td>DAOs and other groups that need a proposal and voting system</td><td>DAO contributors and other voters</td><td>Voting outcomes that bias towards real democracy and less so algorithmic manipulation</td></tr><tr><td>Guild</td><td>Guild admins</td><td>Guild members</td><td>Rewards going to unique humans instead of bots and Sybils</td></tr><tr><td>Galxe</td><td>Community engagement campaign creators</td><td>People who want to earn rewards by participating in campaigns </td><td>Rewards going to unique humans instead of bots and Sybils</td></tr></tbody></table>
-
+| Platform Integrator | Ecosystem Partner                                            | End user                                                      | Why the Platform integrating Gitcoin Passport is a win for everyone                   |
+| ------------------- | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Snapshot            | DAOs and other groups that need a proposal and voting system | DAO contributors and other voters                             | Voting outcomes that bias towards real democracy and less so algorithmic manipulation |
+| Guild               | Guild admins                                                 | Guild members                                                 | Rewards going to unique humans instead of bots and Sybils                             |
+| Galxe               | Community engagement campaign creators                       | People who want to earn rewards by participating in campaigns | Rewards going to unique humans instead of bots and Sybils                             |
 
 
 ### What are Sybils and why should you care?
@@ -44,7 +43,7 @@ Read more about Sybil defense on the [Gitcoin blog](https://www.gitcoin.co/passp
 
 ### Why Gitcoin Passport?
 
-Gitcoin Passport aggregates evidence of personhood from across web2 and web3, makes it available via a simple API, and does so while preserving user's privacy. Application developers and platform owners benefit from easy integration and flexibility to choose what evidence is most important to them, and how high their threshold for evidence should be. Users benefit from a simple UI that guides them along a simple path to collecting Passport Stamps and presenting them to apps, requiring only an Ethereum account to get started.&#x20;
+Gitcoin Passport aggregates evidence of personhood from across web2 and web3, makes it available via a simple API, and does so while preserving user's privacy. Application developers and platform owners benefit from easy integration and flexibility to choose what evidence is most important to them, and how high their threshold for evidence should be. Users benefit from a simple UI that guides them along a simple path to collecting Passport Stamps and presenting them to apps, requiring only an Ethereum account to get started.
 
 Integrating Gitcoin Passport into an application is a powerful and flexible way to add Sybil defense to your application that is straightforward for developers and users alike. Importantly, Gitcoin Passport is flexible so you can configure your own Sybil defenses to your own specification, ensuring you get the best protection for your particular use case.
 
@@ -54,11 +53,11 @@ Read more on [why you should use Gitcoin Passport](platform-integrator-concepts.
 
 ### How to integrate Gitcoin Passport into your platform
 
-The most common way platforms use Gitcoin Passport is to use Passport scores or specific combinations of Stamps to control access to some content or function. This can be handled in just a few simple functions in your app.&#x20;
+The most common way platforms use Gitcoin Passport is to use Passport scores or specific combinations of Stamps to control access to some content or function. This can be handled in just a few simple functions in your app.
 
-We have detailed guides demonstrating various Passport integrations. After you have integrated Passport into your app, your users can connect their Ethereum wallet, and the app can make an API call to the Gitcoin server to retrieve the user's Stamps and Passport score.&#x20;
+We have detailed guides demonstrating various Passport integrations. After you have integrated Passport into your app, your users can connect their Ethereum wallet, and the app can make an API call to the Gitcoin server to retrieve the user's Stamps and Passport score.
 
-The score is the sum of weights assigned to the user's Stamps. It is possible to create custom algorithms for scoring Passports from raw Stamp data, but using Gitcoin's server is considered best practice for several reasons:&#x20;
+The score is the sum of weights assigned to the user's Stamps. It is possible to create custom algorithms for scoring Passports from raw Stamp data, but using Gitcoin's server is considered best practice for several reasons:
 
 1. You benefit from [Stamp weights](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin\_passport\_weights.py) that have been assigned by Gitcoin data scientists.
 2. You do not have to handle complications such as [Stamp deduplication](../major-concepts.md#duplication-of-stamps) - the server does this for you.
@@ -78,11 +77,11 @@ Start building using our [Integration guides](../integration-guides/).[ ](../how
 
 It would be helpful to understand the [audience definitions](platform-integrator-concepts.md#audience-definitions) in the introduction of this page when reading this section.
 
-If integrated properly, ecosystem partners utilizing a platform's services will be able to utilize Passport functionality to ensure that their content or programs are minimally affected by Sybils.&#x20;
+If integrated properly, ecosystem partners utilizing a platform's services will be able to utilize Passport functionality to ensure that their content or programs are minimally affected by Sybils.
 
-For example, an ecosystem partner runs a forum and voting platform in addition to their main application. Integrating Passport across all these platforms gives them confidence that your whole organization is protected to the same standard, with the same configuration.&#x20;
+For example, an ecosystem partner runs a forum and voting platform in addition to their main application. Integrating Passport across all these platforms gives them confidence that your whole organization is protected to the same standard, with the same configuration.
 
-A Passport integration is straightforward, flexible and configurable to ecosystem partners' needs depending on how a platform integrator builds the integration. You can easily set global configurations that are standard across all platforms and partners, or you could tailor your Sybil defences to each platform, so that you can have stricter controls for more sensitive services.&#x20;
+A Passport integration is straightforward, flexible and configurable to ecosystem partners' needs depending on how a platform integrator builds the integration. You can easily set global configurations that are standard across all platforms and partners, or you could tailor your Sybil defences to each platform, so that you can have stricter controls for more sensitive services.
 
 You can learn more about these benefits by reading our [blog post about our partnership with Guild.xyz](https://www.gitcoin.co/blog/guild-xyz-and-gitcoin-passport-partner).
 
@@ -90,13 +89,13 @@ You can learn more about these benefits by reading our [blog post about our part
 
 ### What does this look like for end users?
 
-End users benefit from a very straightforward verification process and proof of personhood they can use across web3. Gitcoin Passport is a very widely used Sybil defense tool that your users can set up once and then use to identify themselves to all kinds of apps and services.&#x20;
+End users benefit from a very straightforward verification process and proof of personhood they can use across web3. Gitcoin Passport is a very widely used Sybil defense tool that your users can set up once and then use to identify themselves to all kinds of apps and services.
 
 Your end users can follow this simple guide to set up their Passport:
 
-1. To get started, you must have an Ethereum wallet.&#x20;
-2. Then, you can visit the [Passport app](https://passport.gitcoin.co/).&#x20;
-3. There, you can sign in with Ethereum and connect Stamps to your Passport in a few clicks.&#x20;
+1. To get started, you must have an Ethereum wallet.
+2. Then, you can visit the [Passport app](https://passport.gitcoin.co/).
+3. There, you can sign in with Ethereum and connect Stamps to your Passport in a few clicks.
 4. When they want to utilize a tool that is Passport-gated, you can sign a message and provide access to the platform provider to read your Stamp and score data.
 
 
@@ -113,7 +112,7 @@ Some platforms will find that they have specific needs that are not met by the s
 
 ### Use cases
 
-Gitcoin Passport is already protecting many real world applications! There are several use case articles on the [Gitcoin blog](https://www.gitcoin.co/blog-2/tag/case-studies) where you can read about how various apps have integrated Passport.&#x20;
+Gitcoin Passport is already protecting many real world applications! There are several use case articles on the [Gitcoin blog](https://www.gitcoin.co/blog-2/tag/case-studies) where you can read about how various apps have integrated Passport.
 
 Some examples include:
 
