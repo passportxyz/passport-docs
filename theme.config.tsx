@@ -11,7 +11,7 @@ const config: DocsThemeConfig = {
   },
   docsRepositoryBase: 'https://github.com/gitcoinco/passport-docs',
   footer: {
-    text: 'Gitcoin passport documentation',
+    text: 'Gitcoin Passport docs',
   },
   faviconGlyph: "public/favicon.png",
 }
