@@ -1,4 +1,4 @@
-# Endpoint Definition
+# API Reference
 
 The Passport API enables developers to retrieve Passport scores and Stamp metadata for users who have created a Gitcoin Passport.&#x20;
 
