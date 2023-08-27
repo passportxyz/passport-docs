@@ -1,6 +1,4 @@
----
-description: How to read Stamps from a Passport
----
+import { Callout } from 'nextra/components'
 
 # Reading Passport Stamps
 
@@ -27,15 +25,14 @@ The response is a JSON object of the following format:
 
 The `credential` field will be populated with each connected Stamp.
 
-{% hint style="info" %}
+<Callout type="info">
 To be able to retrieve Stamps using this endpoint, you should have a signed message verifying that the user owns the specified wallet (you can use the [retrieve a signing message](../building-with-passport/scorer-api/endpoint-definition.md#retrieve-a-signing-message) endpoint for this step), and make sure the address has been submitted to your Scorer using the [submit for scoring](../building-with-passport/scorer-api/endpoint-definition.md#submit-for-scoring) endpoint.&#x20;
-{% endhint %}
-
+</Callout>
 
 
 Example request using [Curl:](https://curl.se)
 
-```bash
+```bash filename="Sample request" copy
 curl -X GET "https://api.scorer.gitcoin.co/registry/stamps/0x..." \
  -H 'accept: application/json' \
  -H 'X-API-Key: Zs....'
@@ -43,7 +40,7 @@ curl -X GET "https://api.scorer.gitcoin.co/registry/stamps/0x..." \
 
 For a Passport with just one Stamp (Google account) the following data will be returned:
 
-```json
+```json filename="Sample response"
 {"next": null, "prev": null, "items": [
     {"version": "1.0.0", "credential": 
         {"type": ["VerifiableCredential"], "proof": {"jws": "eyJhbGciOiJFZERTQSIsImNyaXQiOlsiYjY0Il0sImI2NCI6ZmFsc2V9..sgcMRAONRMogvfaP_MOzy7TfTgmMPiXcErIsIKap-nPnOuTGNSkhGDtxWFl4Mp6uuYnecRDkmxBmS5iDNCMGDA", 
@@ -64,5 +61,5 @@ For a Passport with just one Stamp (Google account) the following data will be r
                 "provider": "Google"
             }
         }
-    }, 
+    } 
 ```
