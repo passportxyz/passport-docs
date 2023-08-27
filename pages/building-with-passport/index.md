@@ -30,12 +30,14 @@ Passport is a versatile and valuable tool for managing access, promoting transpa
 The Passport API serves as a powerful tool for developers, offering access to Passport scores and Stamps.
 
 It facilitates:
-- Retrieval of signing messages `GET /registry/signing-message`
-- Submitting Passports for scoring `POST /registry/submit-passport`
-- Retrieval of scores for one or multiple addresses `GET /registry/score/{scorer_id}/{address}` `GET /registry/score/{scorer_id}`
-- Retrieval of Stamps linked to Passports `GET /registry/stamps/{address}`
-- Retrieval of all Stamps available in the Passport system `GET /registry/stamp-metadata`
-
+| Endpoint action                             | Endpoint                                    |
+| ------------------------------------------- | ------------------------------------------- |
+| Retrieval of signing messages               | `GET /registry/signing-message`             |
+| Submitting Passports for scoring            | `POST /registry/submit-passport`            |
+| Retrieval of scores for one address         | `GET /registry/score/{scorer_id}/{address}` |
+| Retrieval of scores for multiple addresses  | `GET /registry/score/{scorer_id}`           |
+| Retrieval of Stamps linked to Passports     | `GET /registry/stamps/{address}`            |
+| Retrieval of all available Stamps           | `GET /registry/stamp-metadata`              |
 
 ## Gating Content with Passport
 
