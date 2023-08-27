@@ -1,9 +1,3 @@
----
-description: >-
-  This is an overview for leaders of services like POAP and BrightID to
-  understand how they can become a Stamp Provider for Passport
----
-
 # Creating a new Stamp
 
 Creating a new Stamp involved defining verification logic and adding configuration details to our existing Stamp infrastructure.
@@ -44,7 +38,6 @@ Inside `example`,  create the following subdirectories and files:
   App-Bindings.ts
   index.ts
   Providers-config.ts
-  
 ```
 
 Each of the files you just created has a distinct purpose, as described in the following table:
@@ -101,7 +94,7 @@ export class <EXAMPLE> extends Platform {
 
 #### Non-EVM Stamps
 
-Copy the following code into the file, replacing `<EXAMPLE>` with your Stamp name. Note that for non-EVM Stamps the `PlatformOptions`type is imported from `"../types"` and the`Platform` class is imported from `"../utils/platform".`
+Copy the following code into the file, replacing `<EXAMPLE>` with your Stamp name. Note that for non-EVM Stamps the `PlatformOptions` type is imported from `"../types"` and the `Platform` class is imported from `"../utils/platform".`
 
 The new Stamp is exported as a class extending the `Platform` class.
 
@@ -155,6 +148,7 @@ export const ProviderConfig: PlatformGroupSpec[] = [
         title: "Title of the provider",
         name: "<EXAMPLE>",
         },
+    ]
     },
 ];
 
@@ -169,7 +163,7 @@ Copy and paste the following code into `index.ts` replacing `<EXAMPLE>` with you
 //index.ts
 export { <EXAMPLE>Platform } from "./App-Bindings";
 export { ProviderConfig, PlatformDetails, providers } from "./Providers-config";
-export { <EXAMPLE>Provider
+export { <EXAMPLE>Provider }
 ```
 
 ***
@@ -357,14 +351,9 @@ const platforms: Record<string, PlatformConfig> = {
 };
 
 export default platforms;
-
 ```
 
-
-
 Next navigate into `types`. The file you need to update is `types/src/index.d.ts`. You will add the new Stamp's Platform ID and Provider ID to the bottom of their respective union types (`PLATFORM_ID` and `PROVIDER_ID`).
-
-
 
 ```typescript
 //index.d.ts
@@ -383,9 +372,9 @@ export type PROVIDER_ID =
 
 #### `app/context/ceramicContext.tsx`
 
-In this file you will import the Stamp from `@gitcoin/passport-platforms` again. Then create and add the Stamp to the platforms map by adding it to the bottom of the existing list of platforms.&#x20;
+In this file you will import the Stamp from `@gitcoin/passport-platforms` again. Then create and add the Stamp to the platforms map by adding it to the bottom of the existing list of platforms.
 
-```typescript
+```
 //ceramicContext.tsx
 ...
 import {
@@ -397,16 +386,12 @@ Coinbase,
 export const platforms = new Map<PLATFORM_ID, PlatformProps>();
 ...
 platforms.set("<EXAMPLE>", {
-platform: new <EXAMPLE>.<EXAMPLE>Platform(),
+platform: new <EXAMPLE>.<EXAMPLE>Platform() \,
 platformGroupSpec: <EXAMPLE>.ProviderConfig,
 });
 ```
 
-
-
 The final thing to do in the `app` package is to save a copy of your Stamp's icon, in `.svg` format, to the `app/public/assets` directory.
-
-
 
 The rest of the files only need to be updated **if your app has new environment variables** that need to be added to the infrastructure, app or `iam` packages. If, for example, your Stamp can be verified using the Etherscan or Alchemy keys that are already made available through Gitcoin, then you can skip straight past these updates.
 
@@ -435,8 +420,6 @@ _ID
 NEXT_PUBLIC_PASSPORT_<EXAMPLE>_CALLBACK=http://localhost:300
 0/
 ```
-
-
 
 Net we will update some files in the `iam` package. This is where the IAM authority is configured which is responsible for issuing `verifiableCredentials`. These verifiable credentials are issued based on a successful response from the `verify()` function for each Stamp. You defined your verification logic in a `verify()` function in [this earlier step](integrating-a-new-stamp.md#providers-example.ts).
 
@@ -610,14 +593,10 @@ export const getAuthClient = async (sessionKey: string, code: string, context: T
 ### 8. See some examples
 
 It might be helpful to look at some past examples of pull requests that add Stamps to the Passport GitHub repository. Browse the examples below to see exactly how others have gone about it:
-
-[Hypercert Stamp](https://github.com/gitcoinco/passport/pull/1298/files)
-
-[Guildxyz Stamp](https://github.com/gitcoinco/passport/pull/1224/files)
-
-[Coinbase Stamp](https://github.com/gitcoinco/passport/pull/1049/files)
-
-[Phi Stamp](https://github.com/gitcoinco/passport/pull/1232/files)
+* [Hypercert Stamp](https://github.com/gitcoinco/passport/pull/1298/files)
+* [Guildxyz Stamp](https://github.com/gitcoinco/passport/pull/1224/files)
+* [Coinbase Stamp](https://github.com/gitcoinco/passport/pull/1049/files)
+* [Phi Stamp](https://github.com/gitcoinco/passport/pull/1232/files)
 
 
 
