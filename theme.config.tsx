@@ -9,7 +9,7 @@ const config: DocsThemeConfig = {
   chat: {
     link: 'https://discord.gg/gitcoin',
   },
-  docsRepositoryBase: 'https://github.com/gitcoinco/passport-docs',
+  docsRepositoryBase: 'https://github.com/gitcoinco/passport-docs/tree/main',
   footer: {
     text: 'Gitcoin Passport docs',
   },
