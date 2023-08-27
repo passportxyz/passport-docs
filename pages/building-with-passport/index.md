@@ -56,9 +56,9 @@ At this point if the user’s score was above your threshold you can provide the
 
 To begin your development journey with Passport API, follow these steps:
 
-- Get access to the API
-- Get to Hello World with the API
-- Review the API Reference to get to know the available endpoints
-- Choose a tutorial that best matches your use case. Review the example code and integrate. 
+- [Get access to the API](/building-with-passport/getting-access)
+- [Get to "Hello World" with the API](/building-with-passport/quick-start-guide)
+- [Review the API Reference to get to know the available endpoints](/building-with-passport/api-reference)
+- [Choose a tutorial that best matches your use case. Review the example code and integrate](/building-with-passport/tutorials)
 
 By following these steps, you'll be well-equipped to start developing with Passport API and make the most of its features.

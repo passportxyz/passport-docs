@@ -33,7 +33,7 @@ Once this is done, you can retrieve the score for that address in a separate req
 
 Note that submitting the Passport is _**only required for scoring using the Gitcoin server**_. It is not required for retrieving Stamp data.
 
-#### **Submitting a Passport**
+#### Submitting a Passport
 
 The following endpoint is used to submit a Passport.
 
@@ -100,4 +100,4 @@ The score is provided in the `score` field in the returned object.
 
 Now you have seen how to retrieve a Passport score from the Gitcoin server, you can start building this into your apps.&#x20;
 
-You can explore the [Integration guides](integration-guides/) to learn how to use Passport scores to control access to certain content, retrieve Stamp data and metadata from the API, and how to display Passport information in your app's UI.
+You can explore the [tutorials](/building-with-passport/tutorials) to learn how to use Passport scores to control access to certain content, retrieve Stamp data and metadata from the API, and how to display Passport information in your app's UI.
