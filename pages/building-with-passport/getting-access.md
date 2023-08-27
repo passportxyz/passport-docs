@@ -28,10 +28,10 @@ By using communities, you can manage specific parameter settings and log traffic
 
 When you create your Scorer you will be presented with several options for the Scorer type. This is because Passport Stamps can be weighted in different ways depending upon the intended use case. **Sybil Prevention** is the most commonly used.
 
-There are two options currently active for the Sybil prevention model to run in the Scorer.&#x20;
+There are two options currently active for the Sybil prevention model to run in the Scorer.
 
 * `Unique Humanity` - Returns a score between 0-100 that indicates how likely it is that a Passport is owned by an honest user
-* `Unique Humanity (binary)` - Returns a 0 or 1 depending on whether the Passport is flagged as a likely Sybil. Currently, the threshold for a passing score is set to 20.&#x20;
+* `Unique Humanity (binary)` - Returns a 0 or 1 depending on whether the Passport is flagged as a likely Sybil. Currently, the threshold for a passing score is set to 20.
 
 ![](public/scorer-use-case.png)
 
@@ -39,11 +39,7 @@ There are two options currently active for the Sybil prevention model to run in 
 
 ### Next step
 
-Review one of the following pages to learn how you can use your Scorer, Scorer ID, and API key.&#x20;
-
-
-[Quick Start](quick-start-guide)
-
-[Tutorials](tutorials)
-
-[API reference](api-reference)
+Review one of the following pages to learn how you can use your Scorer, Scorer ID, and API key.
+- [Get to "Hello World" with the API](/building-with-passport/quick-start-guide)
+- [Review the API Reference to get to know the available endpoints](/building-with-passport/api-reference)
+- [Choose a tutorial that best matches your use case. Review the example code and integrate](/building-with-passport/tutorials)
