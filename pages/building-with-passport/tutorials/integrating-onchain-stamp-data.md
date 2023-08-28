@@ -4,7 +4,7 @@ description: This tutorial demonstrates how to use onchain Stamps in your applic
 
 # Integrating onchain Stamp data
 
-In this tutorial, you'll learn how to show different content to users depending on their Passport data. Here, the Stamp data will be retrieved from the blockchain.&#x20;
+In this tutorial, you'll learn how to show different content to users depending on their Passport data. Here, the Stamp data will be retrieved from the blockchain.
 
 Specifically, you will:
 
@@ -22,7 +22,7 @@ This app uses a blockchain, rather than Gitcoin's database server, as a backend.
 
 ### App outline
 
-The app we will build will be a webpage where users can connect their wallet to check their onchain credentials.&#x20;
+The app we will build will be a webpage where users can connect their wallet to check their onchain credentials.
 
 You can find the code from this tutorial in this [GitHub repo](https://github.com/jmcook1186/passport-onchain-stamps-app/tree/main).
 
@@ -38,9 +38,9 @@ The app will be built using [Next.js](https://nextjs.org/).
 
 ### Smart contract logic
 
-To understand this app, it is necessary to understand how the Gitcoin Passport smart contract stack is organized. The Gitcoin Passport smart contracts build on top of [EAS (Ethereum Attestation Service)](https://attest.sh/), using Attestations as the foundational building blocks.&#x20;
+To understand this app, it is necessary to understand how the Gitcoin Passport smart contract stack is organized. The Gitcoin Passport smart contracts build on top of [EAS (Ethereum Attestation Service)](https://attest.sh/), using Attestations as the foundational building blocks.
 
-Attestations are digital records that are cryptographically signed by some trusted attester. In this case, Gitcoin signs to verify that a user has a Stamp. Attestations conform to schema. Schema are predefined structures for Attestations that ensure all the necessary data are included when an Attestation is created, and that it can be decoded and verified easily.&#x20;
+Attestations are digital records that are cryptographically signed by some trusted attester. In this case, Gitcoin signs to verify that a user has a Stamp. Attestations conform to schema. Schema are predefined structures for Attestations that ensure all the necessary data are included when an Attestation is created, and that it can be decoded and verified easily.
 
 Gitcoin has an attester contract that allows trusted Gitcoin addresses to create attestations, confirming to the schema, that demonstrate that a user owns some set of Stamps. The attestation contains all the necessary metadata about those Stamps. The `Attestation` has a unique identifier (`uuid`) that connects all this data to the user's specific address.
 
@@ -51,7 +51,7 @@ So your flow is:
 * get user address
 * pass user address to resolver contract, returning a unique attestation identifier (`uuid`)
 * pass the `uuid` to the EAS contract, returning an `Attestation`
-* decode and unpack the `Attestation,` returning the user's Stamp data&#x20;
+* decode and unpack the `Attestation,` returning the user's Stamp data
 
 ### Setting up the app
 
@@ -104,7 +104,7 @@ Since the data you will work with is all available on a public blockchain, there
 
 Now that the app is set up, you can begin building. The code that controls what is rendered in the browser is contained in `src/app/page.tsx`. When you created your project, `create-next-app` saved a version of `page.tsx` with some default code. You can delete all the code in `page.tsx` and replace it with this boilerplate:
 
-````typescript
+```typescript
 'use client'
 import { useState, useEffect } from 'react'
 import { ethers } from 'ethers'
@@ -195,11 +195,10 @@ export default function Passport() {
   )
 }
 ```
-````
 
 
 
-There are some parts of this boilerplate code that might look unfamiliar even if you have been through the other [tutorials](./) on this site. This is because there is some specific set up required to use smart contracts on the backend.
+There are some parts of this boilerplate code that might look unfamiliar even if you have been through the other [tutorials](/building-with-passport/tutorials) on this site. This is because there is some specific set up required to use smart contracts on the backend.
 
 First, the `provider` field is being assigned as a global variable. The `provider` is a connection to the blockchain. In this app, the connection is made by inheriting network configuration from your wallet. If you are using Metamask with default settings, your connection will be via Infura to whichever network your wallet is connected to. If you have a wallet pointing to your own node's RPC provider, it will use that. The reason `provider` is assigned to a global variable is so that it can be captured during the wallet connection but later it can be passed as an argument when you create instances of the smart contracts.
 
@@ -212,14 +211,14 @@ const resolverContractAddress = "0xc0fF118369894100b652b5Bb8dF5A2C3d7b2E343";
 const EasContractAddress = "0xAcfE09Fd03f7812F022FBf636700AdEA18Fd2A7A"
 ```
 
-These are the addresses on the BaseGoerli blockchain where the relevant contracts are stored. The two contracts you need for your app are the `resolver` contract and the `EAS` contract.&#x20;
+These are the addresses on the BaseGoerli blockchain where the relevant contracts are stored. The two contracts you need for your app are the `resolver` contract and the `EAS` contract.
 
-* The `resolver` contract is where you can request a `uuid` for an address.&#x20;
+* The `resolver` contract is where you can request a `uuid` for an address.
 * The `EAS` contract is where you can pass a `uuid` and receive an `Attestation`.
 
 #### Additional files
 
-There are several elements being loaded into the app from local files. In this section, we will describe how to set these up. If you are building this app along with this tutorial as opposed to just using the example app, you will need to create these files and add the proper code to them, referenced in the links.&#x20;
+There are several elements being loaded into the app from local files. In this section, we will describe how to set these up. If you are building this app along with this tutorial as opposed to just using the example app, you will need to create these files and add the proper code to them, referenced in the links.
 
 These are the additional files that we will be creating:
 
@@ -229,7 +228,7 @@ import { PROVIDER_ID, providerBitMapInfo, DecodedProviderInfo } from "./provider
 import { GITCOIN_PASSPORT_WEIGHTS } from './stamp-weights';
 ```
 
-The imported elements from `./abis` are contract ABIs (application binary interfaces). These are `json` objects that define the functions available in a smart contract. To create an instance of a contract, you need both the ABI and the address the contract is deployed to. You will need to create a file in the `src/app` folder called `abis.ts` and populate it with the information located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/abis.ts). &#x20;
+The imported elements from `./abis` are contract ABIs (application binary interfaces). These are `json` objects that define the functions available in a smart contract. To create an instance of a contract, you need both the ABI and the address the contract is deployed to. You will need to create a file in the `src/app` folder called `abis.ts` and populate it with the information located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/abis.ts). 
 
 The imported elements from `./providerInfo` define details about the Stamp providers, including the schema for decoding the Attestation into a useable format - more on that later. Again, create a file in the `src/app` folder called `providerInfo.ts` and populate it with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/providerInfo.ts).
 
@@ -254,7 +253,7 @@ async function getUuid() {
 
 It is also a good idea to add some error handling here, as it is possible that your connected user hasn't migrated any Stamps onchain yet, and may not have a `uuid` associated with their address. In this case, the returned `uuid` would be equal to the 32-byte hex encoded representation of 0:
 
-`0x0000000000000000000000000000000000000000000000000000000000000000`&#x20;
+`0x0000000000000000000000000000000000000000000000000000000000000000`
 
 Here, you can simply log a warning to console if the return value is zero.
 
@@ -277,7 +276,7 @@ If the user does have onchain Stamps, the returned value will be some non-zero 3
 
 ### Getting an Attestation
 
-Now you have a `uuid` you can use it to retrieve an `Attestation`. This is done using the `EasContract`. This is the EAS registry that associates `Attestations` with `uuid`s.  The flow is the same as for `getUuid()` - you instantiate the relevant contract and call a function on it. In this case you instantiate the `EasContract` and call its `getAttestation()` function, passing the `uuid`.&#x20;
+Now you have a `uuid` you can use it to retrieve an `Attestation`. This is done using the `EasContract`. This is the EAS registry that associates `Attestations` with `uuid`s.  The flow is the same as for `getUuid()` - you instantiate the relevant contract and call a function on it. In this case you instantiate the `EasContract` and call its `getAttestation()` function, passing the `uuid`.
 
 ```typescript
 async function getAttestation(uuid: string) {
@@ -312,7 +311,7 @@ The individual Stamp data is embedded in this object, but it is encoded accordin
 
 Decoding the `Attestation` means isolating and interpreting specific chunks of the `Attestation`s `data` field and assigning them to fields in a new `struct` defined according to the `Attestation` schema.
 
-Thankfully, there are some pre-built tools that can help with this decoding. First, the `SchemaEncoder` object imported from the `eas-sdk`. You can create an instance of the `SchemaEncoder` using the Gitcoin Passport `Attestation` schema, and then use its `decodeData()` function to parse the encoded data in the `Attestation` into a new `struct` of type `SchemaDecodedItem.`&#x20;
+Thankfully, there are some pre-built tools that can help with this decoding. First, the `SchemaEncoder` object imported from the `eas-sdk`. You can create an instance of the `SchemaEncoder` using the Gitcoin Passport `Attestation` schema, and then use its `decodeData()` function to parse the encoded data in the `Attestation` into a new `struct` of type `SchemaDecodedItem.`
 
 Here's what that process looks like:
 
@@ -412,7 +411,7 @@ Well done!  at this point you have implemented all the logic required to retriev
 
 ### Calculating a score
 
-Passport scores are calculated by summing weights assigned to each specific Stamp. Gitcoin have defined a list of Stamp weights that are used when scoring is done on the Gitcoin server. In this app, you will use the same weights to calculate a score from the onchain Stamps. The weights themselves are defined in the `stamp-weights.ts` file that you are already importing in the boilerplate code.&#x20;
+Passport scores are calculated by summing weights assigned to each specific Stamp. Gitcoin have defined a list of Stamp weights that are used when scoring is done on the Gitcoin server. In this app, you will use the same weights to calculate a score from the onchain Stamps. The weights themselves are defined in the `stamp-weights.ts` file that you are already importing in the boilerplate code.
 
 To create a score, you need to write a function that iterates over your list of Stamp names, looks up each name in the stamp weights data, and adds that weight to as cumulative sum. The sum after you have iterated over all the available Stamps becomes your Passport score. This can be achieved with the following function that you can paste into your app:
 
@@ -446,7 +445,7 @@ Now you have implemented all the logic required to retrieve and decode onchain S
 
 Now you have all your app functions defined, you need to determine when and how they are executed. There is an ordering of functions implied by the return types and arguments of each function - some functions take the outputs of others as inputs.
 
-The following function executed each function in turn, wrapped in some basic error handling:&#x20;
+The following function executed each function in turn, wrapped in some basic error handling:
 
 ```typescript
 async function queryPassport() {

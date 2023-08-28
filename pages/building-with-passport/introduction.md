@@ -23,11 +23,11 @@ Developers can integrate Passport in a variety of different programs and apps in
 
 Passport is a versatile and valuable tool for managing access, promoting transparency, and establishing trust within different web3 environments. 
 
-[Learn more about Passport use cases](overview/use-cases).
+[Learn more about Passport use cases](../overview/use-cases).
 
 ## Passport API Overview
 
-The Passport API serves as a powerful tool for developers, offering access to Passport scores and Stamps.
+The Passport API serves as a powerful tool for developers, offering access to Passport scores and Stamps. You can learn more about each of the following endpoints via our [API reference](api-reference).
 
 It facilitates:
 | Endpoint action                             | Endpoint                                    |
@@ -41,7 +41,7 @@ It facilitates:
 
 ## Protecting Content with Passport
 
-An excellent [use case](use-cases) for Passport is to gate access to special content. To make this happen, we'll need to:
+An excellent [use case](../overview/use-cases) for Passport is to gate access to special content. To make this happen, we'll need to:
 
 1. Set up a Passport Scorer and API key
 2. Visit the API Access page to learn how to set up your Scorer and API key
@@ -58,9 +58,9 @@ At this point if the user’s score was above your threshold you can provide the
 
 To begin your development journey with Passport API, follow these steps:
 
-- [Get access to the API](/building-with-passport/getting-access)
-- [Get to "Hello World" with the API](/building-with-passport/quick-start-guide)
-- [Review the API Reference to get to know the available endpoints](/building-with-passport/api-reference)
-- [Choose a tutorial that best matches your use case. Review the example code and integrate](/building-with-passport/tutorials)
+- [Get access to the API](getting-access)
+- [Get to "Hello World" with the API](quick-start-guide)
+- [Review the API Reference to get to know the available endpoints](api-reference)
+- [Choose a tutorial that best matches your use case. Review the example code and integrate](tutorials)
 
 By following these steps, you'll be well-equipped to start developing with Passport API and make the most of its features.

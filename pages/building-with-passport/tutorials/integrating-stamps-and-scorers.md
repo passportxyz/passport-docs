@@ -29,7 +29,7 @@ Before we delve into this, it's important to note that there are a few prelimina
 2. You have an API key
 
 
-If you haven't completed the preliminary steps above please refer to [API Access](https://docs.passport.gitcoin.co/building-with-passport/scorer-api/api-access) first. Once you're done with that, return here and continue with this walkthrough
+If you haven't completed the preliminary steps above please refer to our [getting access guide](../getting-access) first. Once you're done with that, return here and continue with this walkthrough.
 
 ## Integrating a Scorer
 

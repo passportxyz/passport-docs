@@ -1,8 +1,4 @@
----
-description: >-
-  A walkthrough tutorial showing how you can use Passport scores to control
-  access to certain content
----
+import { Cards, Card } from 'nextra/components'
 
 # Gating access with Passport scores
 
@@ -17,9 +13,10 @@ In this guide, you'll learn how to gate an application using Gitcoin passport. S
 This tutorial is a more detailed version of a video tutorial put together by Nader Dabit.
 Check out his video and related sample code at the following links:
 
-[Build Your First Sybil-Resistant Web App with Gitcoin Passport & Next.js](https://www.youtube.com/watch?v=bfkalDSvRDc)
-
-[Sample code](https://gist.github.com/dabit3/10f93a001d75a1b44e5ec2001b33e4f6)
+<Cards>
+  <Card title="Build Your First Sybil-Resistant Web App with Gitcoin Passport & Next.js" href="https://www.youtube.com/watch?v=bfkalDSvRDc" />
+  <Card title="Sample code" href="https://gist.github.com/dabit3/10f93a001d75a1b44e5ec2001b33e4f6" />
+</Cards>
 
 
 ### Prerequisites
@@ -32,7 +29,7 @@ Before we delve into this, it's important to note that there are a few prelimina
 1. You have created a Passport Scorer and received a Scorer ID
 2. You have an API key
 
-If you haven't completed the preliminary steps above please refer to [API Access](https://docs.passport.gitcoin.co/building-with-passport/scorer-api/api-access) first. Once you're done with that, return here and continue with this walkthrough.
+If you haven't completed the preliminary steps above please refer to our [getting access guide](../getting-access) first. Once you're done with that, return here and continue with this walkthrough.
 
 ### App outline
 
@@ -350,7 +347,7 @@ Well done - your users can now connect their Ethereum wallet to your app. If the
 
 To use Gitcoin Passport, a user has to submit their Passport to the registry. This is a database of Passports linked to an Ethereum address that have been submitted for scoring. Part of the data that is passed along with a request to add a Passport to the registry is the `Scorer-Id` which is used to link your app to a specific instance of the `Scorer` you created earlier. This data together links your user's address to a specific collection of Stamps and an instance of a Scorer to use to calculate a Passport score. Therefore, this is a necessary step for integrating Passport into your app if you want to use Gitcoin Passport's default Scorer and calculate the score server-side. The weights applied to each Stamp can be found in the [Passport Github](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin\_passport\_weights.py).
 
-You can skip the Passport submission and retrieve the raw Stamp data to apply your own scoring algorithm.&#x20;
+You can skip the Passport submission and retrieve the raw Stamp data to apply your own scoring algorithm.
 
 The way Passport submission works is to first retrieve a message using the Passport API's `signing-message` method. The user then signs this message using their Ethereum wallet, and sends the signed message back to the server using the Passport API's `submit-passport` method.
 
@@ -464,7 +461,7 @@ PASSPORT SCORE = 26.57
 
 It is recommended to use the Gitcoin Passport default Scorer. For now, this is the only option for server-side score calculations, but you can choose whether you wish the server to return an integer value (0-100) or return a Boolean (0 or 1). This is selected when you create the instance of the Scorer at [scorer.gitcoin.co](https://www.scorer.gitcoin.co/).
 
-If you choose to return an integer value, you can make your own choice about what threshold score to use to gate your content. In this tutorial, you are receiving an integer value from the Scorer API and thresholding it in the app. The threshold is hardcoded into the app with a value of 20. This is thought to be a pretty good general purpose threshold, but you can choose to raise the threshold if you want to be more stringent, or lower it to be more lenient. Picking the right threshold is application-specific and might require some experimentation to get it just right.&#x20;
+If you choose to return an integer value, you can make your own choice about what threshold score to use to gate your content. In this tutorial, you are receiving an integer value from the Scorer API and thresholding it in the app. The threshold is hardcoded into the app with a value of 20. This is thought to be a pretty good general purpose threshold, but you can choose to raise the threshold if you want to be more stringent, or lower it to be more lenient. Picking the right threshold is application-specific and might require some experimentation to get it just right.
 
 If you choose to return a binary value, the Gitcoin server will still calculate the Passport score using the exact same algorithm, but it will threshold it server-side and return a 0 if the user's score is below the built-in threshold of 15, or a 1 if the user's score exceeds this threshold.
 
