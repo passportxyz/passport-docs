@@ -423,7 +423,7 @@ NEXT_PUBLIC_PASSPORT_<EXAMPLE>_CALLBACK=http://localhost:300
 0/
 ```
 
-Net we will update some files in the `iam` package. This is where the IAM authority is configured which is responsible for issuing `verifiableCredentials`. These verifiable credentials are issued based on a successful response from the `verify()` function for each Stamp. You defined your verification logic in a `verify()` function in [this earlier step](integrating-a-new-stamp.md#providers-example.ts).
+Net we will update some files in the `iam` package. This is where the IAM authority is configured which is responsible for issuing `verifiableCredentials`. These verifiable credentials are issued based on a successful response from the `verify()` function for each Stamp. You defined your verification logic in a `verify()` function in [this earlier step](#providers-example.ts).
 
 All you need to do in the `iam` package is update the environment variables so that the necessary data for your Stamp is available. In the next section we will configure the `infra` package so that these environment variables, and those created earlier, are instantiated and provided as context to a remote server responsible for doing the actual Stamp issuance.
 

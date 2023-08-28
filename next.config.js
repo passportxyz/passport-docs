@@ -74,8 +74,8 @@ const withNextra = require('nextra')({
                 permanent: true
             },
             {
-                source: '/building-with-passport/quick-start-guide',
-                destination: '/building-with-passport/quick-start',
+                source: '/building-with-passport/quick-start',
+                destination: '/building-with-passport/quick-start-guide',
                 permanent: true
             },
             {
@@ -101,6 +101,11 @@ const withNextra = require('nextra')({
             {
                 source: '/building-with-passport/integration-guides/requiring-a-passport-score-for-airdrop-claim',
                 destination: '/building-with-passport/tutorials/requiring-a-passport-score-for-airdrop-claim',
+                permanent: true
+            },
+            {
+                source: '/building-with-passport/integration-guides/integrating-onchain-stamp-data',
+                destination: '/building-with-passport/tutorials/integrating-onchain-stamp-data',
                 permanent: true
             },
             {

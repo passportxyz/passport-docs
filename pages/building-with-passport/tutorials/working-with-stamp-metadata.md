@@ -10,7 +10,7 @@ Gitcoin Passport Stamps show that a user has achieved certain milestones on-chai
 
 In many cases app developers can serve their users better with additional information about the Stamps outside of just the verifiable credential and Stamp name. A simple example is access to a standardized icon image so that the Stamp can be displayed consistently across many applications.
 
-For this reason, there are two ways to access Stamp metadata using the [Gitcoin Passport API](working-with-stamp-metadata.md#api-endpoints).
+For this reason, there are two ways to access Stamp metadata using the [Passport API](#api-endpoints).
 
 On this page, you will **learn how to use the Stamp metadata API endpoints** to retrieve Stamp metadata.
 
@@ -25,11 +25,11 @@ Before we delve into this, it's important to note that there are a few prelimina
 1. You have created a Passport Scorer and received a Scorer ID
 2. You have an API key
 
-If you haven't completed the preliminary steps above please refer to [API Access](https://docs.passport.gitcoin.co/building-with-passport/scorer-api/api-access) first. Once you're done with that, return here and continue with this walkthrough.
+If you haven't completed the preliminary steps above please refer to our [getting access guide](../getting-access) first. Once you're done with that, return here and continue with this walkthrough.
 
 ### API endpoints
 
-There are two API endpoints that can be used to query Stamp metadata.&#x20;
+There are two API endpoints that can be used to query Stamp metadata.
 
 If you want to see the metadata for **all** available Stamps (the full set of possible Stamps, not only those that a user actually owns) you can use:
 
@@ -78,7 +78,7 @@ The metadata for every Stamp follows this basic format:
 ]
 ```
 
-The `/registry/stamp_metadata` endpoint simply returns an array of these metadata objects.&#x20;
+The `/registry/stamp_metadata` endpoint simply returns an array of these metadata objects.
 
 For the `/registry/stamps/{address}?_include_metadata=true` endpoint, these metadata objects are bundled into the credential data object. For an individual Stamp, the complete data object looks as follows:
 

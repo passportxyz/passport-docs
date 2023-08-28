@@ -92,7 +92,7 @@ curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?offs
 
 ## Data dictionary
 
-We have put together a [data dictionary](../major-concepts/data-dictionary.md) that you can use to better understand each field that delivers with the response payloads from the Passport API endpoints.
+We have put together a [data dictionary](/building-with-passport/major-concepts/data-dictionary) that you can use to better understand each field that delivers with the response payloads from the Passport API endpoints.
 
 
 
@@ -100,19 +100,19 @@ We have put together a [data dictionary](../major-concepts/data-dictionary.md) t
 
 To get a Passport score from an ETH address, follow these steps:
 
-1. **Optional:** [Retrieve a signing message from the Scorer](endpoint-definition.md#retrieve-a-signing-message)\
+1. **Optional:** [Retrieve a signing message from the Scorer](#retrieve-a-signing-message)\
    `GET /registry/signing-message`
-2. [Submit the Ethereum address to the Scorer](endpoint-definition.md#submit-for-scoring)\
+2. [Submit the Ethereum address to the Scorer](#submit-for-scoring)\
    `POST /registry/submit-passport`
-3. [Retrieve the Passport score for one or multiple addresses](endpoint-definition.md#get-scores)\
+3. [Retrieve the Passport score for one or multiple addresses](#get-scores)\
    `GET /registry/score/{scorer_id}/{address}`\
    `GET /registry/score/{scorer_id}`
 
 You can also receive the specific Stamps data:
 
 * [Receive Stamps connected to one or multiple submitted Passports\
-  ](endpoint-definition.md#get-stamps)`GET /registry/stamps/{address}`
-* [Receive all Stamps available in Passport](endpoint-definition.md#get-stamps-metadata) \[Beta]\
+  ](#get-stamps)`GET /registry/stamps/{address}`
+* [Receive all Stamps available in Passport](#get-stamps-metadata) \[Beta]\
   `GET /registry/stamp-metadata`
 
 ### Retrieve a signing message
@@ -171,9 +171,9 @@ curl --request POST \
   }'
 ```
 
-#### **Sample responses**
+#### Sample responses
 
-The name in the parenthesis represents what [type of Scorer](https://docs.passport.gitcoin.co/building-with-passport/scorer-api/api-access#types-of-scorers) you are using.
+The name in the parenthesis represents what [type of Scorer](/building-with-passport/getting-access#types-of-scorers) you are using.
 
 ```json filename="Sample response: PROCESSING"
 {
@@ -213,13 +213,11 @@ The name in the parenthesis represents what [type of Scorer](https://docs.passpo
 }
 ```
 
-### Get scores
+### Get score of a single address
 
-You must submit any Passports you'd like to request a score for via the Submit for scoring endpoint before successfully receiving their scores via these endpoints.
+You must submit any Passports you'd like to request a score for via the [Submit for scoring](#submit-for-scoring) endpoint before successfully receiving a score via this endpoints.
 
-Use these endpoints to retrieve the score for one Ethereum address, or all Ethereum addresses that have been submitted to a Scorer.
-
-#### To request the score of a specified address
+Use this endpoint to retrieve the score for one Ethereum address. You can use the [multiple address](#get-scores-of-all-submitted-addresses) endpoint if you have more than one address submitted to a Scorer.
 
 > GET /registry/score/{scorer\_id}/{address}
 
@@ -229,8 +227,26 @@ curl --request GET \
     --header 'X-API-KEY: {API KEY}'
 ```
 
+```json filename="Sample response"
+{
+  "items": [
+      {
+          "address": "{wallet}",
+          "score": "{score}",
+          "status": "DONE",
+          "last_score_timestamp": "{timestamp}",
+          "evidence": null,
+          "error": null
+      }
+  ]
+}        
+```
 
-#### To request the scores for all addresses that have been submitted to a Scorer
+### Get scores of all submitted addresses
+
+You must submit any Passports you'd like to request a score for via the [Submit for scoring](#submit-for-scoring) endpoint before successfully receiving their scores via this endpoints.
+
+Use this endpoint to retrieve the score for one Ethereum address. You can use the [single address](#get-score-of-a-single-address) endpoint if you'd like to request a score for one address.
 
 > GET /registry/score/{scorer\_id}
 
@@ -240,8 +256,8 @@ curl --request GET \
 | -------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `last_score_timestamp_gt`  | No       | Filters response to only those scores submitted to the given Scorer instance \*after\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)               |
 | `last_score_timestamp_gte` | No       | Filters response to only those scores submitted to the given Scorer instance \*after or at\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)         |
-| `limit`                    | No       | Paginates response, providing the given number of response elements per page. Learn more about [pagination](/building-with-passport/scorer-api/endpoint-definition#pagination).                      |
-| `offset`                   | No       | For a paginated response, `offset` determines the Stamp object at which the response should start. Learn more about [pagination](/building-with-passport/scorer-api/endpoint-definition#pagination). |
+| `limit`                    | No       | Paginates response, providing the given number of response elements per page. Learn more about [pagination](#pagination).                                                                            |
+| `offset`                   | No       | For a paginated response, `offset` determines the Stamp object at which the response should start. Learn more about [pagination](#pagination).                                                       |
 
 
 ```bash filename="Sample request" copy
@@ -293,16 +309,16 @@ curl --request GET \
 
 Use this endpoint to request all Stamps that have been connected to an Ethereum address.
 
-If you would like to retrieve the metadata for all available Stamps, please use the [Get Stamps metadata](endpoint-definition.md#get-stamps-metadata) endpoint.
+If you would like to retrieve the metadata for all available Stamps, please use the [Get Stamps metadata](#get-stamps-metadata) endpoint.
 
 > GET /registry/stamps/{address}
 
 #### Query parameters
 
-| Name               | Required | Text                                                                                                                                                                                                                     |
-| ------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `include_metadata` | No       | [Beta] Returns optional `metadata` object with additional details about connected Stamps.                                                                                                                                |
-| `limit`            | No       | Paginates response, providing the given number of Stamps per page (For example, use `limit=3` to request three Stamps) Learn more about [pagination](/building-with-passport/scorer-api/endpoint-definition#pagination). |
+| Name               | Required | Text                                                                                                                                                               |
+| ------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `include_metadata` | No       | [Beta] Returns optional `metadata` object with additional details about connected Stamps.                                                                          |
+| `limit`            | No       | Paginates response, providing the given number of Stamps per page (For example, use `limit=3` to request three Stamps) Learn more about [pagination](#pagination). |
 
 
 ```bash filename="Sample request" copy
@@ -329,7 +345,7 @@ curl --request GET \
 
 Use this endpoint to request all Stamps available on Passport.
 
-If you would like to retrieve just the Stamps that are connected to a specified Ethereum address, please use the [Get Stamps](endpoint-definition.md#get-stamps) endpoint.
+If you would like to retrieve just the Stamps that are connected to a specified Ethereum address, please use the [Get Stamps](#get-stamps) endpoint.
 
 > GET /registry/stamp-metadata
 

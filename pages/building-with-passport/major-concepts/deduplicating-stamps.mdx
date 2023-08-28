@@ -8,7 +8,7 @@ description: >-
 
 ### Why is deduplication necessary?
 
-Stamp deduplication is a crucial feature that prevents users from amplifying their influence over some specific outcome by submitting the same Stamps across multiple Passports.&#x20;
+Stamp deduplication is a crucial feature that prevents users from amplifying their influence over some specific outcome by submitting the same Stamps across multiple Passports.
 
 It is important for users to be able to hold multiple Passports representing different user profiles that might be used to as identification in specific communities. However, without deduplication logic, this could allow users to repeatedly attach the same Stamps to multiple Passports, fooling an app into treating each Passport as a real, verified human.
 
@@ -28,7 +28,7 @@ However, if you are using your own custom scoring mechanism based on Stamp data,
 
 Passport handles the issue of Stamp duplication by automatically identifying and eliminating duplicate Stamps. This prevents users from using the same credentials to verify their Stamps and identity across multiple Gitcoin Passports. This ensures that each user in an application has a unique and consistent digital identity.
 
-By default, the Gitcoin Passport API uses a **Last In, First Out (LIFO)** Stamp deduplication method.&#x20;
+By default, the Gitcoin Passport API uses a **Last In, First Out (LIFO)** Stamp deduplication method.
 
 This means that, in a given scoring instance, if a Passport holder submits a Stamp that has already been submitted by another user, the _duplicate_ Stamp is ignored and not counted towards the score.
 
@@ -46,5 +46,5 @@ The scores assigned to Passports will not change once they are issued. This mean
 
 ### Summary
 
-The LIFO deduplication strategy has several benefits for Passport holders and developers. It ensures that each Passport holder (i.e. Ethereum address) is assessed based on their unique set of Stamps, and that no one receives an unfair advantage due to having the same Stamp as another Passport holder within a given scoring instance. This means that for applications using the Passport API, there will be no double-counting of Stamps within the app, ensuring a fair and accurate assessment of each user’s unique identity.&#x20;
+The LIFO deduplication strategy has several benefits for Passport holders and developers. It ensures that each Passport holder (in other words, Ethereum address) is assessed based on their unique set of Stamps, and that no one receives an unfair advantage due to having the same Stamp as another Passport holder within a given scoring instance. This means that for applications using the Passport API, there will be no double-counting of Stamps within the app, ensuring a fair and accurate assessment of each user’s unique identity.
 

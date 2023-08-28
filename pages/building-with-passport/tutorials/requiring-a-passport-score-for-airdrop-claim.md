@@ -25,7 +25,7 @@ Before we delve into this, it's important to note that there are a few prelimina
 1. You have created a Passport Scorer and received a Scorer ID
 2. You have an API key
 
-If you haven't completed the preliminary steps above please refer to [API Access](https://docs.passport.gitcoin.co/building-with-passport/scorer-api/api-access) first. Once you're done with that, return here and continue with this walkthrough.
+If you haven't completed the preliminary steps above please refer to our [getting access guide](../getting-access) first. Once you're done with that, return here and continue with this walkthrough.
 
 ### App Overview
 
@@ -35,7 +35,7 @@ Below is a diagram showing a high-level overview of how the app functions and in
 
 ![](public/Passport Airdrop.png)
 
-&#x20;The basic flow is as follows:
+The basic flow is as follows:
 
 1. Define eligibility criteria for the airdrop, such as app interaction, Discord membership, or holding a specific token quantity. This serves as the main criteria for receiving the airdrop while a Passport score serves as an additional security measure.
 2. Retrieve the user's Passport score.
@@ -56,13 +56,14 @@ pnpm create @rainbow-me/rainbowkit@latest
 yarn create @rainbow-me/rainbowkit
 ```
 
-Create a `.env.local` file at the root of your directory and add your API key and Scorer ID to it. Make sure the env variable for your Scorer ID is `NEXT_PUBLIC_SCORER_ID`; this will ensure the variable is accessible to the frontend.&#x20;
+Create a `.env.local` file at the root of your directory and add your API key and Scorer ID to it. Make sure the env variable for your Scorer ID is `NEXT_PUBLIC_SCORER_ID`; this will ensure the variable is accessible to the frontend.
 
-<pre class="language-python"><code class="lang-python"><strong># .env.local
-</strong><strong>
-</strong><strong>SCORER_API_KEY="YOUR API KEY"
-</strong>NEXT_PUBLIC_SCORER_ID=119
-</code></pre>
+```javascript
+# .env.local
+
+SCORER_API_KEY="YOUR API KEY"
+NEXT_PUBLIC_SCORER_ID=119
+```
 
 Now that we have our app scaffolded let's start building out the basic front-end and backend components we will need.
 

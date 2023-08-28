@@ -1,3 +1,5 @@
+import { Callout } from 'nextra/components'
+
 # Key Terms
 
 ### Passports
@@ -6,7 +8,7 @@ The example below shows the JSON data format for a Gitcoin Passport. This is an 
 
 To see what each Stamp looks like, scroll down to the Stamps section. When you add Stamps to your Passport, they are pushed into this array. The entire Passport (DID) object is stored on the Ceramic network and associated with your Ethereum address.
 
-```
+```json
 {
 	"issuanceDate": null,
 	"expiryDate": null,
@@ -20,7 +22,7 @@ To see what each Stamp looks like, scroll down to the Stamps section. When you a
 
 The "Passport Protocol" refers to the infrastructure that enables web3 citizens to create their own Passport, prove their decentralized identity and access Passport-gated projects. It is all the tooling that enables developers to build Passport gating into their apps.
 
-Web3 citizens interface with the Passport Protocol through the Passport holder dApp at [passport.gitcoin.co](https://passport.gitcoin.co). Developers can use the [Passport API](https://api.scorer.gitcoin.co/docs) to easily integrate Gitcoin Passport into their apps.
+Web3 citizens interface with the Passport Protocol through the Passport holder dApp at [passport.gitcoin.co](https://passport.gitcoin.co). Developers can use the [Passport API](../building-with-passport/introduction) to easily integrate Gitcoin Passport into their apps.
 
 
 
@@ -34,13 +36,13 @@ Web3 citizens interface with the Passport Protocol through the Passport holder d
 * "Some examples of Passport-gated dApps include: Snapshot, Bankless Academy, and Gitcoin Grants."
 * "Because this community is gated with Gitcoin Passport, it is able to ask for pieces of proof of not just identity via services like BrightID, but also reputation via services like POAP."
 
-See our [tutorials](integration-guides/) to learn how to gate your project.
+See our [tutorials](../building-with-passport/tutorials) to learn how to gate your project.
 
 
 
 ### Stamps
 
-Stamps are the key identity verification mechanism of Gitcoin Passport. A Stamp is a collection of one or more [verifiable credentials](major-concepts.md#verifiable-credentials-vcs) from an identity provider that is collected in a Passport. Stamps are provided by a variety of web2 and web3 identity authenticators including Google, Facebook, BrightID, ENS, and Proof of Humanity. Custom Stamps for particular communities are under development. Stamps do not store any personally identifiable information, only the verifiable credentials issued by the identity authenticator.
+Stamps are the key identity verification mechanism of Gitcoin Passport. A Stamp is a collection of one or more [verifiable credentials](#verifiable-credentials-vcs) from an identity provider that is collected in a Passport. Stamps are provided by a variety of web2 and web3 identity authenticators including Google, Facebook, BrightID, ENS, and Proof of Humanity. Custom Stamps for particular communities are under development. Stamps do not store any personally identifiable information, only the verifiable credentials issued by the identity authenticator.
 
 Passport aggregates Stamps and assigns each Stamp a different weight according to the needs of a particular community. This weight is used to calculate the cost of forgery of an identity, a score which reflects the credibility of a potential participant’s online identity. For example, a community for developers could assign a greater weight to a Github Stamp, resulting in higher scores for those who have Github Stamps.
 
@@ -82,12 +84,13 @@ The code snippet below shows a single Stamp. This particular Stamp proves owners
 ```
 
 
+<Callout type="info">
+Stamps are frequently added to the Passport service - anyone can [propose a Stamp](../stamps/integrating-a-new-stamp)!
 
-> **Note!** Stamps are frequently added to the Passport service - anyone can [propose a Stamp](../stamps/integrating-a-new-stamp.md)!&#x20;
->
-> However, they can also be removed, for example if the verification stops working.
->
-> The weights assigned to individual Stamps in the Passport scoring app can also change if re-weighting is likely to improve the overall Sybil defence efficacy of the Scorer.
+However, they can also be removed, for example if the verification stops working.
+
+The weights assigned to individual Stamps in the Passport scoring app can also change if re-weighting is likely to improve the overall Sybil defence efficacy of the Scorer.
+</Callout>
 
 ### Verifiable credentials (VCs)
 
@@ -97,7 +100,7 @@ Each Stamp is composed of one or more "verifiable credential". These credentials
 
 ### Ethereum
 
-Ethereum is a blockchain network. It is secured using a proof-of-stake based consensus mechanism and contains an embedded computer that allows apps to be built on top of it. Discrete units of executable code living on the Ethereum blockchain are known as smart contracts. Read more on Ethereum at [ethereum.org](https://ethereum.org). &#x20;
+Ethereum is a blockchain network. It is secured using a proof-of-stake based consensus mechanism and contains an embedded computer that allows apps to be built on top of it. Discrete units of executable code living on the Ethereum blockchain are known as smart contracts. Read more on Ethereum at [ethereum.org](https://ethereum.org). 
 
 
 
@@ -123,7 +126,7 @@ This `hash` is a unique identifier that is generated for all VCs issued by the G
 
 As a developer, you don't need to implement any logic for deduplicating Stamps if you use the default scorer. The deduplication is done server-side. However, if you are building a custom scorer you may want to store the hashes and deduplicate Stamps yourself to prevent users from submitting the same set of Stamps in multiple Passports.
 
-More details about Passport deduplication can be found on our [Deduplicating Stamps](../get-started/deduplicating-stamps.md) page.
+More details about Passport deduplication can be found on our [Deduplicating Stamps](../building-with-passport/major-concepts/deduplicating-stamps) page.
 
 
 
@@ -137,7 +140,7 @@ Passport identity data is stored as a decentralized data stream on Ceramic. Stre
 
 A Scorer is an instance of a scoring algorithm. The Passport API that offers a straightforward way for developers to interact with the Passport Protocol, including adding Passports to a registry and calculating the Passport score using a scoring algorithm.
 
-The Scorer assigns a score to a Passport by summing weights assigned to individual Stamps. Please note that the weights assigned to individual Stamps can change over time in order to provide the best Sybil defence. You can also implement your own scoring algorithm using Stamp data.&#x20;
+The Scorer assigns a score to a Passport by summing weights assigned to individual Stamps. Please note that the weights assigned to individual Stamps can change over time in order to provide the best Sybil defence. You can also implement your own scoring algorithm using Stamp data.
 
 
 
@@ -157,17 +160,17 @@ The algorithm used to calculate Passport scores is transparent and easily audita
 
 ### Pagination (API)
 
-Some API requests might return large amounts of data. For example, the data returned from `/registry/stamps` returns information about every individual Stamp owned by a given address, possibly including all the associated metadata too. It can be convenient to break this data up into more manageable pieces. The way to do this is using API pagination.&#x20;
+Some API requests might return large amounts of data. For example, the data returned from `/registry/stamps` returns information about every individual Stamp owned by a given address, possibly including all the associated metadata too. It can be convenient to break this data up into more manageable pieces. The way to do this is using API pagination.
 
 By adding a query to the API request, you can receive chunks of the data. Take, for example, the following request to the Stamp registry:
 
-```
-curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?include_metadata=true
+```bash
+curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?include_metadata=true'
 ```
 
 This request could return a large amount of data if the given address owns a lot of Stamps. In this case, it could be useful to paginate the response, which means the API will return a subset of the total data. You can do this by adding `&limit=x` to the API request, where `x` is the number of elements (in this example, Stamp objects) to return in each response.
 
-More detail, including an explanation of how to navigate paginated responses, is provided on the [API endpoint definition page](scorer-api/endpoint-definition.md).
+More detail, including an explanation of how to navigate paginated responses, is provided in the [API reference](../building-with-passport/api-reference).
 
 
 
