@@ -1,7 +1,3 @@
----
-description: This tutorial demonstrates how to use onchain Stamps in your application.
----
-
 # Integrating onchain Stamp data
 
 In this tutorial, you'll learn how to show different content to users depending on their Passport data. Here, the Stamp data will be retrieved from the blockchain.
@@ -213,6 +209,9 @@ The `chainID` for the network you are connected to is requested from the `provid
 
 Second, there are two contract addresses defined immediately below the import statements:
 
+The chainID for the network you are connected to is requested from the provider too and the value is stored in the app's state. This is used in the UI to warn the user if they are connected to a network other than Base Goerli. There are two statuses presented in the UI - one that confirms that the user is connected and one that either confirms the wallet is connected to Base Goerli or warns the user they are connected to the wrong network.
+
+Seconds, there are two contract addresses defined immediately below the import statements:
 
 ```typescript
 const resolverContractAddress = "0xc0fF118369894100b652b5Bb8dF5A2C3d7b2E343";
