@@ -33,17 +33,17 @@ module.exports = withNextra({
         },
         {
             source: '/overview/introducing-gitcoin-passport',
-            destination: '/index.html',
+            destination: '/',
             permanent: true
         },
         {
             source: '/overview/readme',
-            destination: '/index.html',
+            destination: '/',
             permanent: true
         },
         {
             source: '/overview/presenting-your-passport',
-            destination: '/index.html',
+            destination: '/',
             permanent: true
         },
         {
@@ -122,13 +122,18 @@ module.exports = withNextra({
             permanent: true
         },
         {
+            source: '/building-with-passport/passport-sdk-deprecated',
+            destination: '/building-with-passport/introduction',
+            permanent: true
+        },
+        {
             source: '/building-with-passport/passport-sdk-deprecated/getting-started',
-            destination: '/building-with-passport/passport-sdk-deprecated',
+            destination: '/building-with-passport/introduction',
             permanent: true
         },
         {
             source: '/building-with-passport/passport-sdk-deprecated/integrating-passport-in-your-dapp',
-            destination: '/building-with-passport/passport-sdk-deprecated',
+            destination: '/building-with-passport/introduction',
             permanent: true
         },
         {
