@@ -104,16 +104,17 @@ To get a Passport score from an ETH address, follow these steps:
    `GET /registry/signing-message`
 2. [Submit the Ethereum address to the Scorer](#submit-for-scoring)\
    `POST /registry/submit-passport`
-3. [Retrieve the Passport score for one or multiple addresses](#get-scores)\
-   `GET /registry/score/{scorer_id}/{address}`\
+3. [Retrieve the Passport score for a single address](#get-score-of-a-single-address)\
+   `GET /registry/score/{scorer_id}/{address}`
+4. [Retrieve the Passport scores of all submitted addresses](#get-scores-of-all-submitted-addresses)\
    `GET /registry/score/{scorer_id}`
 
 You can also receive the specific Stamps data:
 
-* [Receive Stamps connected to one or multiple submitted Passports\
-  ](#get-stamps)`GET /registry/stamps/{address}`
+* [Receive Stamps connected to one or multiple submitted Passports](#get-stamps)\
+   `GET /registry/stamps/{address}`
 * [Receive all Stamps available in Passport](#get-stamps-metadata) \[Beta]\
-  `GET /registry/stamp-metadata`
+   `GET /registry/stamp-metadata`
 
 ### Retrieve a signing message
 
@@ -144,7 +145,7 @@ To do so, developers need to POST the relevant Ethereum address and their Scorer
 
 There are two different values that deliver with the `status` field:
 
-* `PROCESSING` - Continue to poll for the results using the [GET scores](endpoint-definition.md#get-scores) endpoint until the `DONE` status is returned. `score` field will return as `null`.
+* `PROCESSING` - Continue to poll for the results using the [GET scores](#get-score-of-a-single-address) endpoint until the `DONE` status is returned. `score` field will return as `null`.
 * `DONE` - The Scorer has completed scoring the specified Passport. `score` field will return with Passport score.
 
 > POST /registry/submit-passport

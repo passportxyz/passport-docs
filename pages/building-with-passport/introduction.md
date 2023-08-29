@@ -38,6 +38,7 @@ It facilitates:
 | Retrieval of scores for multiple addresses  | `GET /registry/score/{scorer_id}`           |
 | Retrieval of Stamps linked to Passports     | `GET /registry/stamps/{address}`            |
 | Retrieval of all available Stamps           | `GET /registry/stamp-metadata`              |
+| Retreival of community staking amounts      | `GET /registry/gtc-stake/{address}`         |
 
 ## Protecting Content with Passport
 
