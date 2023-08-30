@@ -1,0 +1,19 @@
+    {
+        "index": "Home",
+        "overview": "Overview",
+        "building-with-passport": "Building with Passport",
+        "stamps": "Creating new Stamps",
+        "community": "Community",
+        "passport-app_link": {
+            "title": "Passport App",
+            "type": "page",
+            "href": "https://passport.gitcoin.co/",
+            "newWindow": true
+        },
+        "developer_portal_link": {
+            "title": "Developer Portal",
+            "type": "page",
+            "href": "https://scorer.gitcoin.co/",
+            "newWindow": true
+        }
+    }
