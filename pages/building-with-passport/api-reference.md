@@ -109,12 +109,18 @@ To get a Passport score from an ETH address, follow these steps:
 4. [Retrieve the Passport scores of all submitted addresses](#get-scores-of-all-submitted-addresses)\
    `GET /registry/score/{scorer_id}`
 
-You can also receive the specific Stamps data:
+Use the following endpoints to receive Stamps data:
 
 * [Receive Stamps connected to one or multiple submitted Passports](#get-stamps)\
    `GET /registry/stamps/{address}`
 * [Receive all Stamps available in Passport](#get-stamps-metadata) \[Beta]\
    `GET /registry/stamp-metadata`
+
+Use the following endpoint to receive staking information
+
+* [Receive GTC staking amounts](#receive-gtc-staking-amounts)
+   `GET /registry/gtc-stake/{address}`
+
 
 ### Retrieve a signing message
 
@@ -378,4 +384,47 @@ curl --request GET \
     ]
   }
 ]
+```
+
+### Receive GTC staking amounts
+
+This endpoint returns both self (`stakes`) and community (`xstakeAggregates`) staking amounts for a specified address. It also breaks down staking amounts based on round ID. 
+
+> GET /registry/gtc-stake/{address}
+
+```bash filename="Sample request" copy
+curl --request GET \
+    --url https://api.scorer.gitcoin.co/registry/gtc-stake/{address} \
+    --header 'X-API-KEY: {API KEY}'
+```
+
+```json filename="Sample response"
+{
+  "users": [
+    {
+      "stakes": [
+        {
+          "stake": "string",
+          "round": {
+            "id": "string"
+          }
+        },
+        {
+          "stake": "string",
+          "round": {
+            "id": "string"
+          }
+        }
+      ],
+      "xstakeAggregates": [
+        {
+          "total": "string",
+          "round": {
+            "id": "string"
+          }
+        }
+      ]
+    }
+  ]
+}
 ```
