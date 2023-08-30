@@ -52,9 +52,9 @@ const CustomHead: React.FC = () => (
     <meta name="og:image" content="https://docs.passport.gitcoin.co/social-card.png" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.png" type="image/png" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EDEYF2MWC5"></script>
     <NextScript>
     {/* Add the Google Analytics script */}
+    <Script async src="https://www.googletagmanager.com/gtag/js?id=G-EDEYF2MWC5"></Script>
     <Script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-EDEYF2MWC5"
