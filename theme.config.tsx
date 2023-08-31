@@ -37,9 +37,12 @@ const config: DocsThemeConfig = {
     link: 'https://discord.gg/gitcoin',
   },
   docsRepositoryBase: 'https://github.com/gitcoinco/passport-docs/tree/main',
-  footer: {
-    text: 'Gitcoin Passport docs',
-  }
+  footer: { component: null },
+  useNextSeoProps() {
+    return {
+      titleTemplate: "%s – Gitcoin Passport",
+    };
+  },
 };
 
 const CustomHead: React.FC = () => (
