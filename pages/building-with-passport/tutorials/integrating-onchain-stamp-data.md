@@ -502,12 +502,11 @@ You can navigate to `localhost:3000` to try it out!
 
 The app looks as follows:
 
+![](public/onchain-stamp-explorer-1.png)
 
-![](public/Screenshot from 2023-08-04 10-17-11 (1).png)
+![](public/onchain-stamp-explorer-2.png)
 
-![](public/Screenshot from 2023-08-04 10-17-16 (1).png)
-
-![](public/Screenshot from 2023-08-04 10-17-19 (1).png)
+![](public/onchain-stamp-explorer-3.png)
 
 
 ### Summary
