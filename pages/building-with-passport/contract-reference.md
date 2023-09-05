@@ -63,7 +63,7 @@ sequenceDiagram
 
 ### GitcoinAttester
 
-The attester is an ownable smart contract that includes a function for forwarding Attestation data to the `EAS`` contract. There is an allow-list of verified senders that can call the `submitAttestations` function - currently only Gitcoin is on the list. Addresses on the allow-list can add or remove other addresses from the allow-list and set the address for the EAS contract.
+The attester is an ownable smart contract that includes a function for forwarding Attestation data to the `EAS` contract. There is an allow-list of verified senders that can call the `submitAttestations` function - currently only Gitcoin is on the list. Addresses on the allow-list can add or remove other addresses from the allow-list and set the address for the EAS contract.
 
 ### GitcoinVerifier
 
