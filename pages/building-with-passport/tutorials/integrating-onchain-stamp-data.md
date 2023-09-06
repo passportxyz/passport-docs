@@ -36,6 +36,8 @@ The app will be built using [Next.js](https://nextjs.org/).
 
 To understand this app, it is necessary to understand how the Gitcoin Passport smart contract stack is organized. The Gitcoin Passport smart contracts build on top of [EAS (Ethereum Attestation Service)](https://attest.sh/), using Attestations as the foundational building blocks.
 
+You can read the [contract reference](../contract-reference) page for a primer on how the contracts work.
+
 Attestations are digital records that are cryptographically signed by some trusted attester. In this case, Gitcoin signs to verify that a user has a Stamp. Attestations conform to schema. Schema are predefined structures for Attestations that ensure all the necessary data are included when an Attestation is created, and that it can be decoded and verified easily.
 
 Gitcoin has an attester contract that allows trusted Gitcoin addresses to create attestations, confirming to the schema, that demonstrate that a user owns some set of Stamps. The attestation contains all the necessary metadata about those Stamps. The `Attestation` has a unique identifier (`uuid`) that connects all this data to the user's specific address.
@@ -199,7 +201,7 @@ export default function Passport() {
 }
 ```
 
-
+**Note** that you can swap out the contract addresses if you want to run an app on a different network. You can check all the deployed contrac addresses on the [contract reference page](../contract-reference)
 
 There are some parts of this boilerplate code that might look unfamiliar even if you have been through the other [tutorials](/building-with-passport/tutorials) on this site. This is because there is some specific set up required to use smart contracts on the backend.
 
