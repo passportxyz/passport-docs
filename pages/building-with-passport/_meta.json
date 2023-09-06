@@ -1,9 +1,9 @@
 {
     "introduction": "Introduction",
-    "getting-access": "Getting access",
-    "quick-start-guide": "Quick start",
+    "getting-access": "Getting Access",
+    "quick-start-guide": "Quick Start",
     "tutorials": "Tutorials",
-    "major-concepts": "Major concepts",
-    "api-reference": "API reference",
-    "contract-reference": "Contract reference"
+    "major-concepts": "Major Concepts",
+    "api-reference": "API Reference",
+    "contract-reference": "Contract Reference"
 }
