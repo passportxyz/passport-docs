@@ -41,8 +41,8 @@ const config: DocsThemeConfig = {
   useNextSeoProps() {
     return {
       titleTemplate: "%s – Gitcoin Passport",
-    };
-  },
+    }
+  }
 };
 
 const CustomHead: React.FC = () => (
@@ -74,6 +74,6 @@ const CustomHead: React.FC = () => (
     ></Script>
   </NextScript>
   </>
-);
+)
 
 export default { ...config, head: CustomHead };
