@@ -9,6 +9,8 @@ Specifically, you will:
 * Conditionally display a user's Passport data depending on their onchain data.
 * Redirect users to instructions for improving their Passport scores and getting their Stamps onchain.
 
+You can learn more about Passport's smart contracts via our [contract reference page](../contract-reference).
+
 ### Prerequisites
 
 To follow this tutorial, you'll need [Next.js](https://nextjs.org/), [Node](https://nodejs.org/en), and [Chakra-UI](https://chakra-ui.com/) installed on your machine. You will be using the [BaseGoerli](https://chainlist.org/chain/84531) test network - you will need to import this network into your wallet. Some familiarity with smart contracts is recommended.
@@ -35,6 +37,8 @@ The app will be built using [Next.js](https://nextjs.org/).
 ### Smart contract logic
 
 To understand this app, it is necessary to understand how the Gitcoin Passport smart contract stack is organized. The Gitcoin Passport smart contracts build on top of [EAS (Ethereum Attestation Service)](https://attest.sh/), using Attestations as the foundational building blocks.
+
+You can read the [contract reference](../contract-reference) page for a primer on how the contracts work.
 
 Attestations are digital records that are cryptographically signed by some trusted attester. In this case, Gitcoin signs to verify that a user has a Stamp. Attestations conform to schema. Schema are predefined structures for Attestations that ensure all the necessary data are included when an Attestation is created, and that it can be decoded and verified easily.
 
@@ -199,7 +203,7 @@ export default function Passport() {
 }
 ```
 
-
+**Note** that you can swap out the contract addresses if you want to run an app on a different network. You can check all the deployed contrac addresses on the [contract reference page](../contract-reference)
 
 There are some parts of this boilerplate code that might look unfamiliar even if you have been through the other [tutorials](/building-with-passport/tutorials) on this site. This is because there is some specific set up required to use smart contracts on the backend.
 
@@ -237,13 +241,11 @@ import { GITCOIN_PASSPORT_WEIGHTS } from './stamp-weights';
 
 The imported elements from `./abis` are contract ABIs (application binary interfaces). These are `json` objects that define the functions available in a smart contract. To create an instance of a contract, you need both the ABI and the address the contract is deployed to. You will need to create a file in the `src/app` folder called `abis.ts` and populate it with the information located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/abis.ts). 
 
-The imported elements from `./providerInfo` define details about the Stamp providers, including the schema for decoding the Attestation into a useable format - more on that later. Again, create a file in the `src/app` folder called `providerInfo.ts` and populate it with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/providerInfo.ts).&#x20;
+The imported elements from `./providerInfo` define details about the Stamp providers, including the schema for decoding the Attestation into a useable format - more on that later. Again, create a file in the `src/app` folder called `providerInfo.ts` and populate it with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/providerInfo.ts).
 
 The elements imported from `./stamp-weights` is a list of weights for each Stamp used to create a Passport score. In the 'web2' model for Gitcoin Passport this is done server-side, but here we will implement our own scoring algorithm using onchain Stamps. Again, create a file in the `src/app` folder called `stamp-weights.ts` and populate it with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/stamp-weights.ts).
 
-{% hint style="info" %}
-Note that the information in `providerInfo.ts` and `stamp-weights.ts` need to stay consistent with Gitcoin - you can check the up-to-date list of stamp weights[ in this Github file](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin\_passport\_weights.py). The Bitmap mapping can be found in [this Github file](https://github.com/gitcoinco/passport/blob/main/iam/src/static/providerBitMapInfo.json). You could also create your own weightings if you want to implement your own scoring algorithm. The source of truth for the `PROVIDER_ID` is in [this Github file](https://github.com/gitcoinco/passport/blob/901c868323fed5c0b5f5fbad52023c96e1d620a4/types/src/index.d.ts#L229).&#x20;
-{% endhint %}
+**Note** that the information in `providerInfo.ts` and `stamp-weights.ts` need to stay consistent with Gitcoin - you can check the up-to-date list of stamp weights[ in this Github file](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin\_passport\_weights.py). The Bitmap mapping can be found in [this Github file](https://github.com/gitcoinco/passport/blob/main/iam/src/static/providerBitMapInfo.json). You could also create your own weightings if you want to implement your own scoring algorithm. The source of truth for the `PROVIDER_ID` is in [this Github file](https://github.com/gitcoinco/passport/blob/901c868323fed5c0b5f5fbad52023c96e1d620a4/types/src/index.d.ts#L229).
 
 The elements imported from `tab-contents` are components used to build the UI. This file should also be located in the `src/app` folder, called `tab-contents.tsx`, and should be populated with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/tab-contents.tsx).
 

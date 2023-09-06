@@ -25,20 +25,37 @@ Passport is a versatile and valuable tool for managing access, promoting transpa
 
 [Learn more about Passport use cases](../overview/use-cases).
 
-## Passport API Overview
+
+## Retrieving Passport Data
+
+### Passport API
 
 The Passport API serves as a powerful tool for developers, offering access to Passport scores and Stamps. You can learn more about each of the following endpoints via our [API reference](api-reference).
 
 It facilitates:
-| Endpoint action                             | Endpoint                                    |
-| ------------------------------------------- | ------------------------------------------- |
-| Retrieval of signing messages               | `GET /registry/signing-message`             |
-| Submitting Passports for scoring            | `POST /registry/submit-passport`            |
-| Retrieval of scores for one address         | `GET /registry/score/{scorer_id}/{address}` |
-| Retrieval of scores for multiple addresses  | `GET /registry/score/{scorer_id}`           |
-| Retrieval of Stamps linked to Passports     | `GET /registry/stamps/{address}`            |
-| Retrieval of all available Stamps           | `GET /registry/stamp-metadata`              |
-| Retreival of community staking amounts      | `GET /registry/gtc-stake/{address}`         |
+
+| Endpoint action                            | Endpoint                                    |
+| ------------------------------------------ | ------------------------------------------- |
+| Retrieval of signing messages              | `GET /registry/signing-message`             |
+| Submitting Passports for scoring           | `POST /registry/submit-passport`            |
+| Retrieval of scores for one address        | `GET /registry/score/{scorer_id}/{address}` |
+| Retrieval of scores for multiple addresses | `GET /registry/score/{scorer_id}`           |
+| Retrieval of Stamps linked to Passports    | `GET /registry/stamps/{address}`            |
+| Retrieval of all available Stamps          | `GET /registry/stamp-metadata`              |
+| Retreival of community staking amounts     | `GET /registry/gtc-stake/{address}`         |
+
+### Smart contracts
+
+Gitcoin Passport also has a smart contract stack that allows the following:
+- Users to migrate their Stamps onchain
+- Developers to query a user's Stamps directly from the blockchain
+
+This means that Stamp data is available natively to other smart contracts and that no authorization or interactions with centralized servers are needed to query Stamp data.
+
+Currently, Stamps are available on [OP Mainnet](https://chainlist.org/chain/10) and the [Base Goerli](https://chainlist.org/chain/84531) test network.
+
+You can read more about [onchain Passports](./major-concepts/onchain-passports) or get building with our [onchain Stamp tutorial](tutorials/integrating-onchain-stamp-data).
+
 
 ## Protecting Content with Passport
 
