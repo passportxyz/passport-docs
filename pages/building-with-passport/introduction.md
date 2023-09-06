@@ -46,9 +46,15 @@ It facilitates:
 
 ### Smart contracts
 
-Gitcoin passport also has a smart contract stack that allows users to migrate their Stamps onchain and developers to query a user's Stamps directly from the blockchain. This means that Stamp data is available natively to other smart contracts and that no authorization or interactions with centralized servers are needed to query Stamp data. Currently, Stamps are available on [OP Mainnet](https://chainlist.org/chain/10) and the [Base Goerli](https://chainlist.org/chain/84531) test network.
+Gitcoin Passport also has a smart contract stack that allows the following:
+- Users to migrate their Stamps onchain
+- Developers to query a user's Stamps directly from the blockchain
 
-You can read more about [onchain Passports](./major-concepts/onchain-passports) or get building with our [onchain Stamp integration guide](tutorials/integrating-onchain-stamp-data).
+This means that Stamp data is available natively to other smart contracts and that no authorization or interactions with centralized servers are needed to query Stamp data.
+
+Currently, Stamps are available on [OP Mainnet](https://chainlist.org/chain/10) and the [Base Goerli](https://chainlist.org/chain/84531) test network.
+
+You can read more about [onchain Passports](./major-concepts/onchain-passports) or get building with our [onchain Stamp tutorial](tutorials/integrating-onchain-stamp-data).
 
 
 ## Protecting Content with Passport
