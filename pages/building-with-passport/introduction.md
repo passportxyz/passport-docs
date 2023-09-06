@@ -46,7 +46,7 @@ It facilitates:
 
 ### Smart contracts
 
-Gitcoin Passport also has a smart contract stack that allows the following:
+Gitcoin Passport also has a [smart contract stack](contract-reference) that allows the following:
 - Users to migrate their Stamps onchain
 - Developers to query a user's Stamps directly from the blockchain
 
