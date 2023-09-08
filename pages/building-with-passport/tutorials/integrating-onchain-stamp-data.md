@@ -9,7 +9,7 @@ Specifically, you will:
 * Conditionally display a user's Passport data depending on their onchain data.
 * Redirect users to instructions for improving their Passport scores and getting their Stamps onchain.
 
-You can learn more about Passport's smart contracts via our [contract reference page](../contract-reference).
+You can learn more about Passport's available smart contracts and the typical developer flow via our [contract reference page](../contract-reference).
 
 ### Prerequisites
 

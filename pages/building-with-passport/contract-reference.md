@@ -2,6 +2,10 @@
 
 The Gitcoin smart contract stack allows developers to pull Stamp data directly from the blockchain rather than having to make requests to a centralized server. The smart contract stack is built on top of the Ethereum Attestation Service. This page will outline the smart contract stack and provide all the deployment details you need to integrate onchain Stamp data in your app. 
 
+We also discuss the onchain use cases in the following resources:
+* [Tutorial: Building an app using onchain Passport data](tutorials/integrating-onchain-stamp-data)
+* [Why build with onchain Passport](major-concepts/onchain-passports)
+
 
 ## Overview
 
