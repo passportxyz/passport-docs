@@ -31,7 +31,7 @@ const config: DocsThemeConfig = {
     </div>
   ),
   project: {
-    link: 'https://passport.gitcoin.co/',
+    link: 'https://github.com/gitcoinco/passport-docs',
   },
   chat: {
     link: 'https://discord.gg/gitcoin',
