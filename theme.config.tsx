@@ -1,5 +1,7 @@
 import { DocsThemeConfig } from 'nextra-theme-docs'
 import NextScript from "next/script";
+import { useRouter } from 'next/router'
+import { useConfig } from 'nextra-theme-docs'
 import Script from 'next/script'
 
 const config: DocsThemeConfig = {
@@ -45,16 +47,24 @@ const config: DocsThemeConfig = {
   }
 };
 
-const CustomHead: React.FC = () => (
-  <>
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@gitcoinpassport" />
-    <meta name="twitter:image" content="https://docs.passport.gitcoin.co/social-card.png" />
-    <meta name="og:title" content="Gitcoin Passport"  />
-    <meta name="og:description" content="Gitcoin Passport — Sybil Defense. Made Simple."  />
-    <meta name="og:image" content="https://docs.passport.gitcoin.co/social-card.png" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.png" type="image/png" />
+const CustomHead: React.FC = () => {
+  const { asPath, defaultLocale, locale } = useRouter()
+  const { frontMatter } = useConfig()
+  const url = 'https://docs.passport.gitcoin.co' + (defaultLocale === locale ? asPath : `/${locale}${asPath}`)
+  
+  return (
+    <>
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:site" content="@gitcoinpassport" />
+      <meta name="twitter:image" content="https://docs.passport.gitcoin.co/social-card.png" />
+
+      <meta property="og:url" content={url} />
+      <meta property="og:title" content={frontMatter.title || 'Gitcoin Passport'}  />
+      <meta property="og:description" content={frontMatter.description || 'Gitcoin Passport — Sybil Defense. Made Simple'}  />
+      <meta name="og:image" content="https://docs.passport.gitcoin.co/social-card.png" />
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      <link rel="icon" href="/favicon.png" type="image/png" />
+    
     <NextScript>
     {/* Add the Google Analytics script */}
     <Script async src="https://www.googletagmanager.com/gtag/js?id=G-EDEYF2MWC5"></Script>
@@ -75,5 +85,6 @@ const CustomHead: React.FC = () => (
   </NextScript>
   </>
 )
+}
 
 export default { ...config, head: CustomHead };
