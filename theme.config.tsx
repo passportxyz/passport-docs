@@ -55,12 +55,14 @@ const CustomHead: React.FC = () => {
   return (
     <>
       <meta name="twitter:card" content="summary" />
+      <meta name="twitter:title" content={frontMatter.title || 'Gitcoin Passport'} />
+      <meta name="twitter:description" content='Gitcoin Passport — Sybil Defense. Made Simple'  />
       <meta name="twitter:site" content="@gitcoinpassport" />
       <meta name="twitter:image" content="https://docs.passport.gitcoin.co/social-card.png" />
 
       <meta property="og:url" content={url} />
       <meta property="og:title" content={frontMatter.title || 'Gitcoin Passport'}  />
-      <meta property="og:description" content={frontMatter.description || 'Gitcoin Passport — Sybil Defense. Made Simple'}  />
+      <meta property="og:description" content='Gitcoin Passport — Sybil Defense. Made Simple' />
       <meta name="og:image" content="https://docs.passport.gitcoin.co/social-card.png" />
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <link rel="icon" href="/favicon.png" type="image/png" />
