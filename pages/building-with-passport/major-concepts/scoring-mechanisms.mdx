@@ -20,7 +20,7 @@ The intended use for this is that an app can set a threshold that can be used to
 that your users have to have a Passport score of 20 to access your platform. A threshold of 20 is generally considered to be a sensible default for removing
 bots and fake users from your application. You can choose to be more or less lenient depending on your specific use case.
 
-With the Unique Humanity Sorer, the threshold is not applied for you on the server. You receive a numeric value to apply as you see fit.
+With the Unique Humanity Scorer, the threshold is not applied for you on the server. You receive a numeric value to apply as you see fit.
 
 ### Unique humanity (binary)
 
@@ -52,7 +52,7 @@ the Gitcoin server or onchain Stamps. An example of client-side custom scoring i
 ## Stamp deduplication
 
 Scoring algorithms have to include some logic to remove multiple copies of the same Stamp being used multiple times on the same Scoring instance. 
-On the Gitcoin server, the Stamp that was seen *first* is treated as valid, and any duplicates that are used in other wallets later are ignored in a process known as 'deduplication'.
+On the Gitcoin server, the Stamp that was seen *first* is treated as valid, and any duplicates that are used in other wallets later are ignored in a process known as '[deduplication](/building-with-passport/major-concepts/deduplicating-stamps)'.
 
 If you use a built-in Scorer, deduplication is handled for you on the Gitcoin server. However, if you choose to implement some custom algorithm, you should also
 implement a custom deduplication algorithm. The `hash` of each Stamp is provided to enable you to identify individual instances of each Stamp. 
