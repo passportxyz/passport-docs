@@ -44,6 +44,9 @@ Stamps are unique to scoring instances. For example, one user uses Passport hold
 
 The scores assigned to Passports will not change once they are issued. This means that there is no need to recalculate Passport scores or synchronize them again in case of duplicate Stamp submissions. Once a score is assigned to a Passport, it remains fixed and can be relied upon for future verifications, even if a duplicate Stamp is submitted by a new Passport. This makes the scoring process more efficient and streamlined, which is particularly important for large and complex applications that score a high volume of verifiable credentials.
 
+Also note that because Stamp deduplication is achieved using a 'last in, first out' model, it is possible for Passports with identical Stamps to return different scores from different Scorers. The reason is that if the identical passports A and B are submitted to Scorer 1 in the order `A,B`, the returned score could be different to the same Passports submitted to Scorer 2 in the order `B,A`, because different instances of duplicate Stamps would be removed.
+
+
 ### Summary
 
 The LIFO deduplication strategy has several benefits for Passport holders and developers. It ensures that each Passport holder (in other words, Ethereum address) is assessed based on their unique set of Stamps, and that no one receives an unfair advantage due to having the same Stamp as another Passport holder within a given scoring instance. This means that for applications using the Passport API, there will be no double-counting of Stamps within the app, ensuring a fair and accurate assessment of each user’s unique identity.
