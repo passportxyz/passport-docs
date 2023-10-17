@@ -1,8 +1,8 @@
 import { DocsThemeConfig } from 'nextra-theme-docs'
 import NextScript from "next/script";
-import { useRouter } from 'next/router'
-import { useConfig } from 'nextra-theme-docs'
-import Script from 'next/script'
+import { useRouter } from 'next/router';
+import { useConfig } from 'nextra-theme-docs';
+import { GoogleAnalytics } from 'nextjs-google-analytics';
 
 const config: DocsThemeConfig = {
   logo: (
@@ -51,42 +51,25 @@ const CustomHead: React.FC = () => {
   const { asPath, defaultLocale, locale } = useRouter()
   const { frontMatter } = useConfig()
   const url = 'https://docs.passport.gitcoin.co' + (defaultLocale === locale ? asPath : `/${locale}${asPath}`)
-  
+
   return (
     <>
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:title" content={frontMatter.title || 'Gitcoin Passport'} />
-      <meta name="twitter:description" content='Gitcoin Passport — Sybil Defense. Made Simple'  />
+      <meta name="twitter:description" content='Gitcoin Passport — Sybil Defense. Made Simple' />
       <meta name="twitter:site" content="@gitcoinpassport" />
       <meta name="twitter:image" content="https://docs.passport.gitcoin.co/social-card.png" />
 
       <meta property="og:url" content={url} />
-      <meta property="og:title" content={frontMatter.title || 'Gitcoin Passport'}  />
+      <meta property="og:title" content={frontMatter.title || 'Gitcoin Passport'} />
       <meta property="og:description" content='Gitcoin Passport — Sybil Defense. Made Simple' />
       <meta name="og:image" content="https://docs.passport.gitcoin.co/social-card.png" />
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <link rel="icon" href="/favicon.png" type="image/png" />
-    
-    <NextScript>
-    {/* Add the Google Analytics script */}
-    <Script async src="https://www.googletagmanager.com/gtag/js?id=G-EDEYF2MWC5"></Script>
-    <Script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-EDEYF2MWC5"
-    ></Script>
-    <Script
-      dangerouslySetInnerHTML={{
-        __html: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-EDEYF2MWC5');
-        `,
-      }}
-    ></Script>
-  </NextScript>
-  </>
-)
+      <GoogleAnalytics trackPageViews />
+
+    </>
+  )
 }
 
 export default { ...config, head: CustomHead };
