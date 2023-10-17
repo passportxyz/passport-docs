@@ -259,12 +259,12 @@ Use this endpoint to retrieve the score for one Ethereum address. You can use th
 
 #### Query parameters
 
-| Name                       | Required | Text                                                                                                                                                                                                 |
-| -------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `last_score_timestamp_gt`  | No       | Filters response to only those scores submitted to the given Scorer instance \*after\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)               |
-| `last_score_timestamp_gte` | No       | Filters response to only those scores submitted to the given Scorer instance \*after or at\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)         |
-| `limit`                    | No       | Paginates response, providing the given number of response elements per page. Learn more about [pagination](#pagination).                                                                            |
-| `offset`                   | No       | For a paginated response, `offset` determines the Stamp object at which the response should start. Learn more about [pagination](#pagination).                                                       |
+| Name                       | Required | Text                                                                                                                                                                                         |
+| -------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `last_score_timestamp_gt`  | No       | Filters response to only those scores submitted to the given Scorer instance \*after\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)       |
+| `last_score_timestamp_gte` | No       | Filters response to only those scores submitted to the given Scorer instance \*after or at\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) |
+| `limit`                    | No       | Paginates response, providing the given number of response elements per page. Learn more about [pagination](#pagination).                                                                    |
+| `offset`                   | No       | For a paginated response, `offset` determines the Stamp object at which the response should start. Learn more about [pagination](#pagination).                                               |
 
 
 ```bash filename="Sample request" copy
@@ -310,6 +310,9 @@ curl --request GET \
     --url https://api.scorer.gitcoin.co/registry/score/{scorer_id}?address={address}?last_score_timestamp_get=2023-07-20T19%3A54%3A44.463335%2B00%3A00 \
     --header 'X-API-KEY: {API KEY}'
 ```
+
+
+Also note that because Stamp deduplication is achieved using a 'last in, first out' model, it is possible for Passports with identical Stamps to return different scores from different Scorers. The reason is that if the identical passports A and B are submitted to Scorer 1 in the order `A,B`, the returned score could be different to the same Passports submitted to Scorer 2 in the order `B,A`, because different instances of duplicate Stamps would be removed.
 
 
 ### Get Stamps
