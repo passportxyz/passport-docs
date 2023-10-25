@@ -2,9 +2,11 @@
 description: This tutorial introduces client-side scoring 
 ---
 
-# Custom scoring
+# Building a custom, client-side scorer
 
-Gitcoin Passport offers eevral scoring algorithms that can be executed on the Gitcoin servers, such that a numeric score for a Passport can be requested from the Passport API. However, this means you are restricted to Gitcoin's algorithm and Gitcoin's opinion about the relative weighting assigned to each individual Stamp. This might not be apopropriate for all use cases. For example, you might have a string preference for certain Stamps that are particularly relevant to your community that you want to weight more strongly in the scoring, or perhaps you have a great idea for a completely new algorithm that you want to implement to gate your app.
+Gitcoin Passport offers several scoring algorithms that can be executed on the Gitcoin servers, such that a numeric score for a Passport can be requested from the Passport API. However, this means you are restricted to Gitcoin's algorithm and Gitcoin's opinion about the relative weighting assigned to each individual Stamp. This might not be appropriate for all use cases. 
+
+For example, you might have a string preference for certain Stamps that are particularly relevant to your community that you want to weight more strongly in the scoring, or perhaps you have a great idea for a completely new algorithm that you want to implement to gate your app.
 
 This tutorial will walk you through developing a custom scorer for your app.
 
@@ -21,30 +23,32 @@ If you haven't completed the preliminary steps above please refer to our [gettin
 
 ### Setting up a basic app
 
-This tutorial wil build on the [Stamp Collector app](./TBC) tutorial. You should revisit that tutorial to build the foundations upon which this tutorial will build. You will use that app as a starting point and add scoring functionality on top. Follow the instructions in that tutorial to get the app up and running.
+This tutorial will build on the [Stamp Collector app](./TBC) tutorial. You should revisit that tutorial to build the foundations upon which this tutorial will build. You will use that app as a starting point and add scoring functionality on top. Follow the instructions in that tutorial to get the app up and running.
 
-You can start the app now by navigating your terminal to the project root directory and running `npm run dev`. Then, navigate your browser to `localhost:3000`. You will see the app load in the browser, with buttons that enable you to connect your wallet and scheck your Stamps. You can go ahead and test that the `Connect Wallet` and `Show Stamps` buttons are working as expected.
+You can start the app now by navigating your terminal to the project root directory and running `npm run dev`. Then, navigate your browser to `localhost:3000`. You will see the app load in the browser, with buttons that enable you to connect your wallet and check your Stamps. You can go ahead and test that the `Connect Wallet` and `Show Stamps` buttons are working as expected.
 
 The rest of the tutorial will build upon this basic app by adding functions and UI code to `app/page.tsx`.
 
 ### Stamps
 
-The app queries the Passport APIs `registry/stamps` endpoint to retrieve alk the Stamps owned by the connected user. The `getStamps()` function parses the full response and extracts the `icon`, `id` and `stamp` data into a `Stamp` object with the followign structure:
+The app queries the Passport APIs `registry/stamps` endpoint to retrieve all the Stamps owned by the connected user. The `getStamps()` function parses the full response and extracts the `icon`, `id`, and `stamp` data into a `Stamp` object with the following structure:
 
+```json
 interface Stamp {
   id: number
   stamp: string
   icon: string
 }
+```
 
-This information is stored ina  state variable, `stampArray`. This is all the information you need from the Gitcoin API.
+This information is stored in a state variable, `stampArray`. This is all the information you need from the Passport API.
 
 ### Scorers
 
-The Gitcoin scoring algorithm is a simple sum of weights assigned to each Stamp. The weights are provided in a file on the [Gitcoin Github](https://github.com/gitcoinco/passport-scorer/blob/a013ca89ca11a22c72b384da913f73274bb8fa05/api/scorer/settings/gitcoin_passport_weights.py#L3).
-Each weight is a decimal number associated with a specific Stamp name. The scoring algorithm simply iterates over the Stamp names for the Stamps owned by an address, retrieves the associated weights, and adds the together. The result is the user's Passport score.
+The Gitcoin Passport scoring algorithm is a simple sum of weights assigned to each Stamp. The weights are provided in a file on the [Gitcoin Github](https://github.com/gitcoinco/passport-scorer/blob/a013ca89ca11a22c72b384da913f73274bb8fa05/api/scorer/settings/gitcoin_passport_weights.py#L3).
+Each weight is a decimal number associated with a specific Stamp name. The scoring algorithm simply iterates over the Stamp names for the Stamps owned by an address, retrieves the associated weights, and adds them together. The result is the user's Passport score.
 
-#### The Gitcoin scorer
+#### The Gitcoin Scorer
 
 You can re-implement the Gitcoin scoring algorithm easily in your app. Start by adding a file containing the Gitcoin Passport Stamp weights to your `app` directory. Copy the contents of [this file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/stamp-weights.ts) and paste it into a new file `app/stamp-weights.ts`.
 
@@ -61,7 +65,7 @@ const [score, setScore] = useState<number>()
 const [showScore, setShowScore] = useState<boolean>(false)
 ```
 
-Now, you can create a function to calculate the score. Name the function `calculateGitcoinScore()` to diferentiate from a custom scorer you will create later. Inside, iterate over the `Stamps` in `stampArray`. Extract the name (the `stamp` field) from each `Stamp` and use it to look up the weight in `GITCOIN_PASSPORT_WEIGHTS`. Then add thos together and log it to the console.
+Now, you can create a function to calculate the score. Name the function `calculateGitcoinScore()` to differentiate from a custom scorer you will create later. Inside, iterate over the `Stamps` in `stampArray`. Extract the name (the `stamp` field) from each `Stamp` and use it to look up the weight in `GITCOIN_PASSPORT_WEIGHTS`. Then add those together and log it to the console.
 
 ```ts
   function calculateGitcoinScore() {
@@ -115,7 +119,7 @@ Finally, conditionally render your `Score` component if `showScore` is toggled O
 {showScore && <Score />}
 ```
 
-Now when you click the `Get Score` button in your UI, the sentence `Your score is X` is dsiplayed under your Stamp collection! You can check this against the scire given to you by the Gitcoin Passport app!
+Now when you click the `Get Score` button in your UI, the sentence `Your score is X` is displayed under your Stamp collection! You can check this against the score given to you by the Gitcoin Passport app!
 
 #### Custom weights
 
@@ -160,7 +164,7 @@ Next create a new function, `getCustomScore`. To update the score from a sum to 
   }
 ```
 
-Now create a `CustomScore` compoennt:
+Now create a `CustomScore` component:
 
 ```ts
 const CustomScore = () => {
@@ -193,7 +197,11 @@ Now your app has buttons to show the Stamps, get a Gitcoin score and get your cu
 
 ## Deduplication
 
-Please note that scoring on the Gitcoin server includes Stamp deduplication. This means the server automatically detects when the same instance of a Stamp has been submitted more than once to a specific Scorer instance and ignores any duplicates. While it is out of scope for this tutorial, you should implement your own deduplication to accompany a custom scorer. This requires logging the hashes of Stamps and checking that each hash is unique to each individual user.
+Please note that scoring on the Gitcoin server includes Stamp deduplication. This means the server automatically detects when the same instance of a Stamp has been submitted more than once to a specific Scorer instance and ignores any duplicates. 
+
+***While it is out of scope for this tutorial, you should implement your own deduplication to accompany a custom scorer.***
+
+This requires logging the hashes of Stamps and checking that each hash is unique to each individual user.
 
 ## Next Steps
 
