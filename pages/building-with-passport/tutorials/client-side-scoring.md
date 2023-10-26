@@ -23,7 +23,7 @@ If you haven't completed the preliminary steps above please refer to our [gettin
 
 ### Setting up a basic app
 
-This tutorial will build on the [Stamp Collector app](./TBC) tutorial. You should revisit that tutorial to build the foundations upon which this tutorial will build. You will use that app as a starting point and add scoring functionality on top. Follow the instructions in that tutorial to get the app up and running.
+This tutorial will build on the [Stamp Collector app](./working-with-stamp-metadata.md) tutorial. You should revisit that tutorial to build the foundations upon which this tutorial will build. You will use that app as a starting point and add scoring functionality on top. Follow the instructions in that tutorial to get the app up and running.
 
 You can start the app now by navigating your terminal to the project root directory and running `npm run dev`. Then, navigate your browser to `localhost:3000`. You will see the app load in the browser, with buttons that enable you to connect your wallet and check your Stamps. You can go ahead and test that the `Connect Wallet` and `Show Stamps` buttons are working as expected.
 
@@ -33,7 +33,7 @@ The rest of the tutorial will build upon this basic app by adding functions and 
 
 The app queries the Passport APIs `registry/stamps` endpoint to retrieve all the Stamps owned by the connected user. The `getStamps()` function parses the full response and extracts the `icon`, `id`, and `stamp` data into a `Stamp` object with the following structure:
 
-```json
+```ts
 interface Stamp {
   id: number
   stamp: string
