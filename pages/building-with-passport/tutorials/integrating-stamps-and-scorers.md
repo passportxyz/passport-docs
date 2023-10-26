@@ -54,7 +54,6 @@ npx create-next-app passport-app
 ✔ Would you like to use `src/` directory with this project? … No
 ✔ Would you like to use experimental `app/` directory with this project? …Yes
 ✔ What import alias would you like configured? … @/*
-
 ```
 
 Next, change to the new `passport-app` directory and install `ethers`:
