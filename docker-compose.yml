@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  app:
+    container_name: gitcoin_passport_docs
+    build: .
+    image: node:18
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    command: tail -f /dev/null
+    environment:
+      - NODE_ENV=development

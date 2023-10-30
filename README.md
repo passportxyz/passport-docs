@@ -6,11 +6,7 @@ To coordinate and scale an open internet, we need tools like Gitcoin Passport to
 
 **Gitcoin Passport is your citizenship pass for the decentralized internet.**
 
-
-
 ![](../public/passport-hero.png)
-
-
 
 Navigate these docs using the menu in the left-hand sidebar. You can start by visiting [**Using the Passport docs**](<README (1).md>) for guidance.
 
@@ -18,3 +14,19 @@ Alternatively, you can skip straight to learning more about how [**Gitcoin Passp
 
 If you are a developer, you can build Gitcoin Passport into your app now - our [**Quick Start guide**](building-with-passport/quick-start-guide.md) will get you started.
 
+## Local Docker Environment
+
+To spin up your local development environment:
+
+```
+make up
+```
+
+To ssh in and build (separate terminal):
+
+```
+make in
+npm run dev
+```
+
+Access via http://localhost:3000
