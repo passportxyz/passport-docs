@@ -2,7 +2,6 @@ import { DocsThemeConfig } from 'nextra-theme-docs'
 import NextScript from "next/script";
 import { useRouter } from 'next/router';
 import { useConfig } from 'nextra-theme-docs';
-import { GoogleAnalytics } from 'nextjs-google-analytics';
 
 const config: DocsThemeConfig = {
   logo: (
@@ -66,7 +65,6 @@ const CustomHead: React.FC = () => {
       <meta name="og:image" content="https://docs.passport.gitcoin.co/social-card.png" />
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <link rel="icon" href="/favicon.png" type="image/png" />
-      <GoogleAnalytics trackPageViews />
 
     </>
   )
