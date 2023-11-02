@@ -16,6 +16,7 @@ export const logPageView = () => {
   ReactGA.pageview(window.location.pathname);
 };
 
+
 const config: DocsThemeConfig = {
   logo: (
     <div style={{ height: 40, display: "flex", gap: 8, alignItems: "end" }}>
