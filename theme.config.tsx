@@ -3,7 +3,18 @@ import NextScript from "next/script";
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useConfig } from "nextra-theme-docs";
-import { GoogleAnalytics } from "nextjs-google-analytics";
+import ReactGA from "react-ga";
+
+const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
+export const initGA = () => {
+  ReactGA.initialize(gaMeasurementId);
+};
+
+export const logPageView = () => {
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
+};
 
 const config: DocsThemeConfig = {
   logo: (
@@ -104,7 +115,26 @@ const CustomHead: React.FC = () => {
   const url =
     "https://docs.passport.gitcoin.co" +
     (defaultLocale === locale ? asPath : `/${locale}${asPath}`);
-  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
+  const router = useRouter();
+
+  useEffect(() => {
+    initGA(); // Initialize Google Analytics
+    logPageView();
+
+    // Function to handle route changes
+    const handleRouteChange = (url) => {
+      logPageView();
+    };
+
+    // Add the event listeners
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    // Cleanup the event listeners on component unmount
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, []);
 
   useEffect(() => {
     if (!gaMeasurementId) {
@@ -144,7 +174,6 @@ const CustomHead: React.FC = () => {
       />
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <link rel="icon" href="/favicon.png" type="image/png" />
-      {gaMeasurementId && <GoogleAnalytics trackPageViews />}
     </>
   );
 };
