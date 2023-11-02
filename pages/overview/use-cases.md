@@ -6,7 +6,9 @@ Gitcoin Passport’s developer platform enables several key use cases:
 * *Weigh user activities based on Passport score*
 * *Improve Passport’s user experience*
 
-## Protect access: Rewards
+## Passport use cases
+
+### Protect access: Rewards
 
 *Sub use cases*
 * Quadratic funding matching donation pools
@@ -27,7 +29,7 @@ Active integrators
 * [Shapeshift](https://www.gitcoin.co/blog/protecting-shapeshifts-op-rewards-program-a-case-study)
 * [Linea](https://www.gitcoin.co/blog/lineas-human-first-campaign-using-gitcoin-passport)
 
-## Protect access: Governance
+### Protect access: Governance
 
 *Sub use cases*
 * Submitting proposals
@@ -39,7 +41,7 @@ Active integrators
 * [Discourse](https://www.gitcoin.co/blog/protect-discourse-forum-from-bots-sybils-with-gitcoin-passport)
 * Snapshot
 
-## Protect access: Communications
+### Protect access: Communications
 
 *Sub use cases*
 * Provide specific roles and permissions
@@ -53,7 +55,7 @@ Active integrators
 * Collab.land
 * Metaforo
 
-## Protect access: Marketplace
+### Protect access: Marketplace
 
 Sub use cases
 * NFTs
@@ -62,7 +64,7 @@ Sub use cases
 
 You’ve got a marketplace that is free and open for users to create and sell content. However, you’ve recently had a string of Sybils creating low-quality projects, or trying to unfairly buy all of the inventory for high-quality projects. Let Passport help to protect these. #PassportCanFixThat
 
-## Prove reputation
+### Prove reputation
 
 Sub use cases
 * Demonstrate user trustworthiness
@@ -75,18 +77,18 @@ Active integrators
 * Rarimo
 * Sismo
 
-## Weigh user activities according to score
+### Weigh user activities according to score
 
 You have functionality where users help to select which content or ideas are prioritized on your platform. Let the proven humans with a strong Passport score have a heavier weight in deciding this content. 
 
 Active integrators
 * Gitcoin Grants
 
-## Improve the Passport experience
+3## Improve the Passport experience
 
 Passport is the premier solution for Sybil defense. Help us further our goals by building solutions that help to improve the user experience for people using or building on top of Passport. 
 
-## Other community programs
+### Other community programs
 
 We’re very interested in unique use cases that utilize the Passport developer products. 
 
