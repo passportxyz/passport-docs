@@ -3,17 +3,24 @@ import NextScript from "next/script";
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useConfig } from "nextra-theme-docs";
-import ReactGA from "react-ga";
+import TagManager from "react-gtm-module";
 
-const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const tagManagerArgs = {
+  gtmId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+};
 
 export const initGA = () => {
-  ReactGA.initialize(gaMeasurementId);
+  TagManager.initialize(tagManagerArgs);
 };
 
 export const logPageView = () => {
-  ReactGA.set({ page: window.location.pathname });
-  ReactGA.pageview(window.location.pathname);
+  TagManager.dataLayer({
+    dataLayer: {
+      event: "pageview",
+      pagePath: window.location.pathname,
+      pageTitle: document.title,
+    },
+  });
 };
 
 const config: DocsThemeConfig = {
@@ -134,12 +141,6 @@ const CustomHead: React.FC = () => {
     return () => {
       router.events.off("routeChangeStart", handleRouteChange);
     };
-  }, []);
-
-  useEffect(() => {
-    if (!gaMeasurementId) {
-      console.warn("Google Analytics Measurement ID is not set.");
-    }
   }, []);
 
   return (
