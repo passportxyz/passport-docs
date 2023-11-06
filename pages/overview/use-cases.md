@@ -10,18 +10,20 @@ Gitcoin Passport’s developer platform enables several key use cases:
 
 ### Protect access: Rewards
 
-*Sub use cases*
+**Sub use cases**
 * Quadratic funding matching donation pools
 * NFTs 
 * Airdrops
 * Faucets
+* Quests
 * Special access
 
+**Description**
 One of the primary reasons why Sybils exist is to take advantage of community rewards programs. Whether you’re offering NFTs, airdrops, faucets, or other incentives programs, you want to make sure that your rewards are going to just those humans that deserve it. 
 
 By protecting access to Passport holders that have a score over a certain threshold, you are ensuring that your community rewards programs are properly distributed. 
 
-Active integrators
+**Active integrators**
 * Gitcoin Grants
 * [Bankless Academy](https://www.gitcoin.co/blog/bankless-academy-a-gitcoin-passport-case-study)
 * [CyberConnect](https://www.gitcoin.co/blog/gitcoin-passoort-cyberconnect-case-study)
@@ -31,25 +33,27 @@ Active integrators
 
 ### Protect access: Governance
 
-*Sub use cases*
+**Sub use cases**
 * Submitting proposals
 * Voting
 
+**Description**
 Running a DAO is hard enough without Sybils submitting proposals and influencing a vote in their favor. You can prevent this by protecting access to your governance platforms using Passport. 
 
-Active integrators
+**Active integrators**
 * [Discourse](https://www.gitcoin.co/blog/protect-discourse-forum-from-bots-sybils-with-gitcoin-passport)
 * Snapshot
 
 ### Protect access: Communications
 
-*Sub use cases*
+**Sub use cases**
 * Provide specific roles and permissions
 * Block unwanted inbounds
 
+**Description**
 Tired of low-quality inbounds or contributions to a communication channel? Protect access to certain channels, roles, or actions within your communications platform to ensure your users have high-quality interactions.
 
-Active integrators
+**Active integrators**
 * [Discourse](https://www.gitcoin.co/blog/protect-discourse-forum-from-bots-sybils-with-gitcoin-passport)
 * [Guild](https://www.gitcoin.co/blog/guild-xyz-and-gitcoin-passport-partner)
 * Collab.land
@@ -57,35 +61,39 @@ Active integrators
 
 ### Protect access: Marketplace
 
-Sub use cases
+**Sub use cases**
 * NFTs
 * Concert tickets
 * Other products and services
 
+**Description**
+**Description**
 You’ve got a marketplace that is free and open for users to create and sell content. However, you’ve recently had a string of Sybils creating low-quality projects, or trying to unfairly buy all of the inventory for high-quality projects. Let Passport help to protect these. #PassportCanFixThat
 
 ### Prove reputation
 
-Sub use cases
+**Sub use cases**
 * Demonstrate user trustworthiness
 * Prove user activity on web2/3
 
 There are many situations where a user would benefit from being able to judge for themselves whether another user is trustworthy or not. By displaying Passport scores and verified Stamps, you can help your users make better decisions about who they interact with on the web. 
 
-Active integrators
+**Active integrators**
 * [{R}elinked](https://www.gitcoin.co/blog/building-reputation-on-r-elinkd)
 * Rarimo
 * Sismo
 
 ### Weigh user activities according to score
 
+**Description**
 You have functionality where users help to select which content or ideas are prioritized on your platform. Let the proven humans with a strong Passport score have a heavier weight in deciding this content. 
 
-Active integrators
+**Active integrators**
 * Gitcoin Grants
 
-3## Improve the Passport experience
+### Improve the Passport experience
 
+**Description**
 Passport is the premier solution for Sybil defense. Help us further our goals by building solutions that help to improve the user experience for people using or building on top of Passport. 
 
 ### Other community programs
