@@ -154,6 +154,10 @@ There are two different values that deliver with the `status` field:
 * `PROCESSING` - Continue to poll for the results using the [GET scores](#get-score-of-a-single-address) endpoint until the `DONE` status is returned. `score` field will return as `null`.
 * `DONE` - The Scorer has completed scoring the specified Passport. `score` field will return with Passport score.
 
+#### Refreshing scores
+
+The score displayed in the Passport app is refreshed automatically, whenever the user makes any change to their Passport. However, API users may find the scores returned by the API sometimes differs from the score displayed in the app. If this happens, refresh the Passport score by making a POST request to `submit-passport`.
+
 > POST /registry/submit-passport
 
 #### JSON body parameters
@@ -249,6 +253,9 @@ curl --request GET \
 }        
 ```
 
+> API users may find the scores returned by `registry/score` sometimes differs from the score displayed in the app. If this happens, simply refresh the Passport score by making a POST request to `submit-passport`.
+
+
 ### Get scores of all submitted addresses
 
 You must submit any Passports you'd like to request a score for via the [Submit for scoring](#submit-for-scoring) endpoint before successfully receiving their scores via this endpoints.
@@ -259,12 +266,12 @@ Use this endpoint to retrieve the score for one Ethereum address. You can use th
 
 #### Query parameters
 
-| Name                       | Required | Text                                                                                                                                                                                                 |
-| -------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `last_score_timestamp_gt`  | No       | Filters response to only those scores submitted to the given Scorer instance \*after\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)               |
-| `last_score_timestamp_gte` | No       | Filters response to only those scores submitted to the given Scorer instance \*after or at\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)         |
-| `limit`                    | No       | Paginates response, providing the given number of response elements per page. Learn more about [pagination](#pagination).                                                                            |
-| `offset`                   | No       | For a paginated response, `offset` determines the Stamp object at which the response should start. Learn more about [pagination](#pagination).                                                       |
+| Name                       | Required | Text                                                                                                                                                                                         |
+| -------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `last_score_timestamp_gt`  | No       | Filters response to only those scores submitted to the given Scorer instance \*after\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)       |
+| `last_score_timestamp_gte` | No       | Filters response to only those scores submitted to the given Scorer instance \*after or at\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) |
+| `limit`                    | No       | Paginates response, providing the given number of response elements per page. Learn more about [pagination](#pagination).                                                                    |
+| `offset`                   | No       | For a paginated response, `offset` determines the Stamp object at which the response should start. Learn more about [pagination](#pagination).                                               |
 
 
 ```bash filename="Sample request" copy
