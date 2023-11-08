@@ -189,7 +189,13 @@ The name in the parenthesis represents what [type of Scorer](/building-with-pass
     "status": "PROCESSING",
     "last_score_timestamp": "2023-02-03T12:08:21.735838+00:00",
     "evidence": null,
-    "error": null
+    "error": null,
+    "stamp_scores": {
+      "Ens": "2.2",
+      "NFT": "0.69",
+      "Google": "2.25"
+      ...
+    }
 }
 ```
 
@@ -200,7 +206,13 @@ The name in the parenthesis represents what [type of Scorer](/building-with-pass
     "status": "DONE",
     "last_score_timestamp": "{timestamp}",
     "evidence": null,
-    "error": null
+    "error": null,
+    "stamp_scores": {
+      "Ens": "2.2",
+      "NFT": "0.69",
+      "Google": "2.25"
+      ...
+    }
 }
 ```
 
@@ -216,7 +228,13 @@ The name in the parenthesis represents what [type of Scorer](/building-with-pass
         "rawScore": "{score}",
         "threshold": "15.00000"
     },
-    "error": null
+    "error": null,
+    "stamp_scores": {
+      "Ens": "2.2",
+      "NFT": "0.69",
+      "Google": "2.25"
+      ...
+    }
 }
 ```
 
@@ -243,7 +261,13 @@ curl --request GET \
           "status": "DONE",
           "last_score_timestamp": "{timestamp}",
           "evidence": null,
-          "error": null
+          "error": null,
+          "stamp_scores": {
+            "Ens": "2.2",
+            "NFT": "0.69",
+            "Google": "2.25"
+            ...
+          }
       }
   ]
 }        
@@ -259,12 +283,12 @@ Use this endpoint to retrieve the score for one Ethereum address. You can use th
 
 #### Query parameters
 
-| Name                       | Required | Text                                                                                                                                                                                                 |
-| -------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `last_score_timestamp_gt`  | No       | Filters response to only those scores submitted to the given Scorer instance \*after\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)               |
-| `last_score_timestamp_gte` | No       | Filters response to only those scores submitted to the given Scorer instance \*after or at\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)         |
-| `limit`                    | No       | Paginates response, providing the given number of response elements per page. Learn more about [pagination](#pagination).                                                                            |
-| `offset`                   | No       | For a paginated response, `offset` determines the Stamp object at which the response should start. Learn more about [pagination](#pagination).                                                       |
+| Name                       | Required | Text                                                                                                                                                                                         |
+| -------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `last_score_timestamp_gt`  | No       | Filters response to only those scores submitted to the given Scorer instance \*after\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)       |
+| `last_score_timestamp_gte` | No       | Filters response to only those scores submitted to the given Scorer instance \*after or at\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) |
+| `limit`                    | No       | Paginates response, providing the given number of response elements per page. Learn more about [pagination](#pagination).                                                                    |
+| `offset`                   | No       | For a paginated response, `offset` determines the Stamp object at which the response should start. Learn more about [pagination](#pagination).                                               |
 
 
 ```bash filename="Sample request" copy
@@ -282,7 +306,13 @@ curl --request GET \
             "status": "DONE",
             "last_score_timestamp": "{timestamp}",
             "evidence": null,
-            "error": null
+            "error": null,
+            "stamp_scores": {
+              "Ens": "2.2",
+              "NFT": "0.69",
+              "Google": "2.25"
+              ...
+            }
         },
         {
             "address": "{wallet}",
@@ -290,7 +320,13 @@ curl --request GET \
             "status": "DONE",
             "last_score_timestamp": "{timestamp}",
             "evidence": null,
-            "error": null
+            "error": null,
+            "stamp_scores": {
+              "Ens": "2.2",
+              "NFT": "0.69",
+              "Google": "2.25"
+              ...
+            }
         }
     ],
     "count": 2
