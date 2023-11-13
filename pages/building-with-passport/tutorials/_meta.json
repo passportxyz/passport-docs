@@ -4,5 +4,6 @@
     "working-with-stamp-metadata": "Working with Stamp metadata",
     "requiring-a-passport-score-for-airdrop-claim": "Requiring a Passport score for airdrop claim",
     "integrating-onchain-stamp-data": "Integrating onchain Stamp data",
-    "client-side-scoring": "Custom client-side Passport scoring"
+    "client-side-scoring": "Custom client-side Passport scoring",
+    "scoring-thresholds": "Scoring thresholds"
 }
