@@ -15,5 +15,11 @@
         "type": "page",
         "href": "https://scorer.gitcoin.co/",
         "newWindow": true
+    },
+    "blog_link": {
+        "title": "Blog",
+        "type": "page",
+        "href": "https://www.gitcoin.co/blog/tag/gitcoin-passport",
+        "newWindow": true
     }
 }
