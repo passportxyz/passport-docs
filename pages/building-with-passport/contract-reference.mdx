@@ -1,6 +1,10 @@
+import { Callout } from 'nextra/components'
+
 # Contract Reference
 
-The Gitcoin smart contract stack allows developers to pull Stamp data directly from the blockchain rather than having to make requests to a centralized server. The smart contract stack is built on top of the Ethereum Attestation Service. This page will outline the smart contract stack and provide all the deployment details you need to integrate onchain Stamp data in your app. 
+The Gitcoin smart contract stack allows developers to pull Stamp data directly from the blockchain rather than having to make requests to a centralized server. The smart contract stack is built on top of the Ethereum Attestation Service. 
+
+This page will outline the Gitcoin Passport smart contract stack and provide all the deployment details you need to integrate onchain Stamp data in your app. 
 
 We also discuss the onchain use cases in the following resources:
 * [Tutorial: Building an app using onchain Passport data](tutorials/integrating-onchain-stamp-data)
@@ -9,26 +13,15 @@ We also discuss the onchain use cases in the following resources:
 
 ## Overview
 
-The flow of information through the smart contract stack is as follows:
+Attestations are digital records that are cryptographically signed by some trusted attester. In this case, Gitcoin signs to verify that a user has a Stamp, which is then accessible to developers who can access this data from the smart contract.
 
-To add Stamps to the blockchain:
+This page is broken into three sections below:
+* [How Gitcoin adds Passport metadata to the blockchain](#how-gitcoin-adds-passport-metadata-to-the-blockchain)
+* [How you can query for onchain Passport metadata](#how-you-can-query-for-onchain-passport-metadata)
+* [Contract addresses](#contract-addresses)
+* [Schema](#schema)
 
-- A user decides to migrate their Stamps onchain using the Passport app
-- The Passport app requests a list of verified Stamps fromm the Gitcoin IAM server
-- The Passport app then requests the `GitcoinVerifier` contract to create an Attestation containing the verified Stamps
-- The Attestation is passed from the `GitcoinVerifier` contract to the `GitcoinAttester` contract where the sender address is verified and then the Attestation is forwarded to the `EAS` contract.
-- The EAS contract adds the Attestation to the blockchain and assigns it a unique identifier known as a `UID`.
-- The EAS contract sends the user address and UID to the `Resolver` contract, where it is stored.
-
-To query onchain Stamps:
-
-- A request is sent to the `Resolver` contract passing the user address
-- The `Resolver` contract returns a `UID`
-- The `UID` is passed to the `EAS` contract
-- The `EAS` contract returns an encoded Attestation
-- The user decodes the Attestation and extracts the Stamp data
-
-This is summarized in the following diagram:
+Here is a summarized diagram to help illustrate both of these processes:
 
 ```mermaid
 sequenceDiagram
@@ -63,15 +56,25 @@ sequenceDiagram
     App-->>User : display onchain status
 ```
 
-## Contract descriptions
 
-### GitcoinAttester
+## How Gitcoin adds Stamps to the blockchain
 
-The attester is an ownable smart contract that includes a function for forwarding Attestation data to the `EAS` contract. There is an allow-list of verified senders that can call the `submitAttestations` function - currently only Gitcoin is on the list. Addresses on the allow-list can add or remove other addresses from the allow-list and set the address for the EAS contract.
+Gitcoin has an attester contract that allows trusted Gitcoin addresses to create attestations, confirming to the schema, that demonstrate that a user owns some set of Stamps, and contains all the necessary metadata about those Stamps. The `Attestation` has a unique identifier (`uuid`) that connects all this data to the user's specific address.
 
-### GitcoinVerifier
+This is the flow Gitcoin uses:
 
-The verifier validatea the Passport data that a user wants to bring onchain. The validation is performed by checking the EIP-712 signature for the data that is sent in by the Passport app. The EIP-712 signature will be created by the Passport IAM Service which is the same service that issues the Stamps (verifiable credentials) for the Passport applications.
+1. A user decides to migrate their Stamps onchain using the Passport app
+2. The Passport app requests a list of verified Stamps from the Gitcoin IAM server
+3. The Passport app then requests the `GitcoinVerifier` contract to create an Attestation containing the verified Stamps
+4. The Attestation is passed from the `GitcoinVerifier` contract to the `GitcoinAttester` contract where the sender address is verified and then the Attestation is forwarded to the `EAS` contract.
+5. The EAS contract adds the Attestation to the blockchain and assigns it a unique identifier known as a `UID`.
+6. The EAS contract sends the user address and UID to the `Resolver` contract, where it is stored.
+
+### Private Gitcoin contracts
+
+#### GitcoinVerifier contract
+
+The verifier validates the Passport data that a user wants to bring onchain. The validation is performed by checking the EIP-712 signature for the data that is sent in by the Passport app. The EIP-712 signature will be created by the Passport IAM Service which is the same service that issues the Stamps (verifiable credentials) for the Passport applications.
 
 The flow when the user triggers the process to bring their data onchain from the Passport app is the following:
 
@@ -80,13 +83,13 @@ The flow when the user triggers the process to bring their data onchain from the
 - The Passport App will call the GitcoinVerifier function verifyAndAttest
 - The signature of the data will be validated, and validation passes the function submitAttestations(MultiAttestationRequest[] calldata multiAttestationRequest) and the GitcoinAttester will be called to write the data to the EAS protocol
 
-#### Fee
+##### Fee
 
 A small fee is collected by the verifier each time data is written onchain. When the `verifyAndAttest` method in the `GitcoinAttester` contract is called, it will check if the expected amount of ETH has been sent to the smart contract, and will revert if not.
 
 The amount of the fee is determined by the IAM server, and it is the equivalent of 2 USD in ETH. The fee is part of the data structure that is signed with the EIP-712 procedure, so that it cannot be changed during the process of writing Stamps onchain.
 
-#### Replay protection
+##### Replay protection
 
 In order to prevent against replay attacks, the Passport structure that is passed in the `verifyAndAttest` function call must contain a transaction counter (known as a nonce).
 
@@ -94,16 +97,43 @@ This nonce is unique per recipient. The nonce will start from 0, and it will be 
 
 The Passport structure must contain the correct (the next) nonce for the recipient, in order for the call to `verifyAndAttest` to succeed. It will be reverted otherwise.
 
-### GitcoinResolver
+#### GitcoinAttester contract
 
-The `GitcoinResolver` contract is used to track map Attestations to user addresses.
+The attester is an ownable smart contract that includes a function for forwarding Attestation data to the `EAS` contract. There is an allow-list of verified senders that can call the `submitAttestations` function - currently only Gitcoin is on the list. Addresses on the allow-list can add or remove other addresses from the allow-list and set the address for the EAS contract.
 
-The Attestations are stored in a mapping where the Attestation is stored as raw bytes (allowing Attestations with any schema to be included).
+## How you can query for onchain Passport data
+
+<Callout type="info">
+Please note that you we've only released smart contracts that enable you to request onchain Stamp data. The Gitcoin team is actively working on a new smart contract that will deliver Passport score data. 
+
+We provide instructions for how you can generate a Passport score using Stamp data and weights in the following tutorial:
+[Building an app using onchain Passport data](tutorials/integrating-onchain-stamp-data)
+</Callout>
+
+This is the flow that you will use to request onchain Passport data:
+
+1. A request is sent to the `Resolver` contract passing the user address
+2. The `Resolver` contract returns a `UID`
+3. The `UID` is passed to the `EAS` contract
+4. The `EAS` contract returns an encoded `Attestation`
+5. The user decodes the `Attestation` and extracts the Stamp data
+
+### Publicly available contracts
+
+#### GitcoinResolver contract
+
+The `GitcoinResolver` contract is used to request a `UID` for an address.
+
+The Attestations are stored in a mapping, where the Attestation is stored as raw bytes (allowing Attestations with any schema to be included).
 
 In order to ensure the integrity of the data that the contract stores, the resolver smart contract shall only validate and store date from trusted sources:
 
 - a trusted EAS contract
 - a trusted Attester
+
+#### EAS contract
+
+The `EAS` contract is where you can pass the `UID`received from the `GitcoinResolver` contract to receive an `Attestation`.
 
 ## Contract addresses
 
@@ -111,7 +141,6 @@ The entire Gitcoin smart contract stack is currently deployed on two blockchains
 Optimism Mainnet is a **'live' Ethereum layer-2 network**, meaning it secures real assets, transaction gas is paid in real ETH and there are real world consequences! 
 
 Base Goerli is a **test network**, meaning the tokens there have no real world value and it can be used as a safe sandbox for developing your apps.
-
 
 ### Optimism Mainnet
 
@@ -133,7 +162,6 @@ The Optimism chain ID is [10](https://chainlist.org/chain/10).
 | -------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
 | passport | 0xd7b8c4ffa4c9fd1ecb3f6db8201e916a8d7dba11f161c1b0b5ccf44ceb8e2a39 | [EasScan](https://optimism.easscan.org/schema/view/0xd7b8c4ffa4c9fd1ecb3f6db8201e916a8d7dba11f161c1b0b5ccf44ceb8e2a39) |
 | score    | 0x6ab5d34260fca0cfcf0e76e96d439cace6aa7c3c019d7c4580ed52c6845e9c89 | [EasScan](https://optimism.easscan.org/schema/view/0x6ab5d34260fca0cfcf0e76e96d439cace6aa7c3c019d7c4580ed52c6845e9c89) |
-
 
 
 ### Base Goerli
@@ -175,15 +203,3 @@ new SchemaEncoder(
 - `expirationDates`: UNIX timestamp for the expiration date of a specific Stamp
 - `providerMapversion`: indicates the version of the `providers` bitmap that should be used to decode the Attestation
 
-
-### Score
-
-```
-new SchemaEncoder(
-  "uint256 score,uint32 scorer_id,uint8 score_decimals"
-);
-```
-
-- `score`: an unsigned integer representing the user's Passport score
-- `scorer_id`: the ID for the scorer that issued the score
-- `score_decimals`: the number of decimals in `score`
