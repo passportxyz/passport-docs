@@ -1,0 +1,45 @@
+# Scoring thresholds
+
+A very common [use case](../../overview/use-cases.md) for Gitcoin Passport is gating access based on Passport scores.
+In order to do this, application owners have to determine a cutoff for users that are, and are not, allowed to access some content or function.
+Typically, this cutoff is a certain Passport score above which users are allowed access; otherwise they are blocked. 
+This is known as the **threshold score**.
+
+## Gitcoin's Scorer
+
+The `Unique Humanity (binary)` Scorer provided on the Passport app applies a threshold to users' Passport scores.
+This is how the Scorer is able to return a binary Sybil/non-Sybil response. 
+
+The algorithm adds up the weights of each Stamp owned by each user and compares the result to a pre-defined threshold value.
+Each users score either exceeds that threshold or it doesn't, making it possible to assign them a binary score.
+
+**The threshold used by the Gitcoin app is 20**. 
+
+This is designed to be an effective default threshold value for general-purpose use.
+
+Gitcoin data scientists use datasets of known Sybils and known humans to analyze how credentials are used by good and bad actors, and what threshold most effectively separates the two groups.
+However, it is important to note that it is not a perfect system. Not all Sybils will be eliminated at that threshold. 
+On the other hand, higher thresholds might create excessively high barriers to entry that eliminate honest human users.
+
+## Trade-offs
+
+Choosing a threshold is always a balance between eliminating bad actors on the one hand, and making your application useable for honest humans on the other.
+A very high threshold will be more effective at eliminating Sybils because the time, effort and possibly money expended to meet the threshold are greater. 
+This means it is less economically viable for bad actors to create large numbers of fake accounts. 
+However, your honest users also have to meet those same criteria. 
+If they are too onerous or difficult, your honest users might be unable or unwilling to participate. 
+Therefore, there is always a balance to strike between widening honest participation and reducing dishonest participation.
+Where the right balance lies will differ from project to project. The Gitcoin default of 20 is thought to be a good all round starting point.
+
+|Unique Humanity score  | Effectiveness at eliminating Sybils  | Risk of screening out real users  |
+|---------------|---------------|---------------|
+| 20 | Effective | Low |
+| 25 | More effective  | Medium  |
+|30 | Most effective  | High |
+
+
+By implementing your own Scorer, you can tweak the entry requirements to your application more finely. 
+Not only can you change the threshold, but you can upweight or downweight certain Stamps that are particularly strong signals for your specific use-case.
+You could even have certain Stamps as absolute requirements, or use a combination of required Stamps and an overall score threshold.
+
+Learn more about custom Scorers in our [tutorial](../tutorials/client-side-scoring.md).
