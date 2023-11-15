@@ -1,14 +1,14 @@
 # Scoring thresholds
 
-A very common use case for Gitcoin Passport is gating access based on Passport scores.
+A very common [use case](../../overview/use-cases.md) for Gitcoin Passport is gating access based on Passport scores.
 In order to do this, application owners have to determine a cutoff for users that are, and are not, allowed to access some content or function.
-Typically, this cutoff is a certain passport score above which users are allowed access; otherwise they are blocked. 
+Typically, this cutoff is a certain Passport score above which users are allowed access; otherwise they are blocked. 
 This is known as the **threshold score**.
 
-## Gitcoin's scorer
+## Gitcoin's Scorer
 
-The `Unique Humanity (binary)` scorer provided on the Passport app applies a threshold to users' Passport scores.
-This is how the scorer is able to return a binary Sybil/non-Sybil response. 
+The `Unique Humanity (binary)` Scorer provided on the Passport app applies a threshold to users' Passport scores.
+This is how the Scorer is able to return a binary Sybil/non-Sybil response. 
 
 The algorithm adds up the weights of each Stamp owned by each user and compares the result to a pre-defined threshold value.
 Each users score either exceeds that threshold or it doesn't, making it possible to assign them a binary score.
@@ -17,7 +17,7 @@ Each users score either exceeds that threshold or it doesn't, making it possible
 
 This is designed to be an effective default threshold value for general-purpose use.
 
-Gitcoin data scientists use datasets of known Sybils and known humans to analyze how credentials are used by good and bad actors, and what threshold msot effectively separates the two groups.
+Gitcoin data scientists use datasets of known Sybils and known humans to analyze how credentials are used by good and bad actors, and what threshold most effectively separates the two groups.
 However, it is important to note that it is not a perfect system. Not all Sybils will be eliminated at that threshold. 
 On the other hand, higher thresholds might create excessively high barriers to entry that eliminate honest human users.
 
@@ -38,8 +38,8 @@ Where the right balance lies will differ from project to project. The Gitcoin de
 |30 | Most effective  | High |
 
 
-By implementing your own scorer, you can tweak the entry requirements to your application more finely. 
+By implementing your own Scorer, you can tweak the entry requirements to your application more finely. 
 Not only can you change the threshold, but you can upweight or downweight certain Stamps that are particularly strong signals for your specific use-case.
 You could even have certain Stamps as absolute requirements, or use a combination of required Stamps and an overall score threshold.
 
-Learn more about custom scorers in our [tutorial](../tutorials/client-side-scoring.md).
+Learn more about custom Scorers in our [tutorial](../tutorials/client-side-scoring.md).
