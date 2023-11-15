@@ -15,12 +15,6 @@ We also discuss the onchain use cases in the following resources:
 
 Attestations are digital records that are cryptographically signed by some trusted attester. In this case, Gitcoin signs to verify that a user has a Stamp, which is then accessible to developers who can access this data from the smart contract.
 
-This page is broken into three sections below:
-* [How Gitcoin adds Passport metadata to the blockchain](#how-gitcoin-adds-passport-metadata-to-the-blockchain)
-* [How you can query for onchain Passport metadata](#how-you-can-query-for-onchain-passport-metadata)
-* [Contract addresses](#contract-addresses)
-* [Schema](#schema)
-
 Here is a summarized diagram to help illustrate both of these processes:
 
 ```mermaid
@@ -55,6 +49,14 @@ sequenceDiagram
     deactivate Verifier
     App-->>User : display onchain status
 ```
+
+## Table of contents
+
+This page is broken into several sections:
+* [How Gitcoin adds Passport metadata to the blockchain](#how-gitcoin-adds-passport-metadata-to-the-blockchain)
+* [How you can query for onchain Passport metadata](#how-you-can-query-for-onchain-passport-metadata)
+* [Contract addresses](#contract-addresses)
+* [Schema](#schema)
 
 
 ## How Gitcoin adds Stamps to the blockchain
