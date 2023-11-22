@@ -1,0 +1,75 @@
+# Attestation schema
+
+Onchain Passports use Attestations to verify that a particular address owns specific Stamps.
+Ultimately, an Attestation is just a piece of data with a cryptographic signature. 
+
+The data follows a known structure, known as a 'schema'. The  schema is critical because it ensures the signing participant
+knows what they are signing, and provides a uniform data layout that enables users to decode the Attestations.
+
+The schema is *the layout of information being attested*. 
+The signature is the proof that a known, trusted verifier has seen the data and attested that it is truthful.
+
+This page explains the schema used for Gitcoin Passport Attestations and Passport Score Attestations.
+
+## Passport Attestation schema
+
+### Overview
+
+The raw schema looks as follows:
+
+```
+uint256[] providers, bytes32[] hashes, uint64[] issuanceDates, uint64[] expirationDates, uint16 providerMapVersion
+```
+
+Notice that the types for all these fields are numerical types or raw bytes. 
+This is because the human-readable information is compressed and encoded before being added to the attestation.
+
+### Fields
+
+The fields are as follows:
+
+- `providers`: a u256 that is actually a bitmap where each position maps to a provider name. The mapping is made available offchain.
+- `hashes`: an ordered array of elements, with each element being 32 raw bytes. Each element in the array is a 32-byte hash that maps to a known Stamp. A provider might have multiple Stamps that each have a hash. The mapping is made available offchain.
+- `issuanceDates`: an ordered array of elements, with each element being 32 raw bytes. Each element represents the UNIX timestamp when the Stamp was verified.
+- `expirationDates`: an ordered array of elements, with each element being 32 raw bytes. Each element represents the UNIX timestamp when the Stamp expires.
+- `providerMapVersion`: an unsigned integer specifying which version of the `providers` mapping the Attestation conforms to. This allows updates as providers are added and removed from the canonical set.
+
+
+## Passport Score schema
+
+The raw schema looks as follows:
+
+```
+uint256 score, uint32 scorer_id, uint8 score_decimals
+```
+
+### Fields
+
+The fields are as follows:
+
+- `score`: the user's Passport score as an unsigned integer
+- `scorer_id`: the ID number for the specific Scorer instance that issued the `score`
+- `score_decimals`: number of decimals in `score`, similar to how ETH is divided into 1e18 Wei. 
+
+## Decoding Attestations
+
+The schema is used to encode and decode Attestations. 
+From a raw attestation, you can extract the data that belongs to each field in the schema using an ABI decode method (such as `abi.decode` in Solidity, `abiCoder.decode()` in Ethers, etc) as follows:
+
+```
+// Decode the attestion output
+(providers, hashes, issuanceDates, expirationDates, providerMapVersion) = abi.decode(
+  attestation.data,
+  (uint256[], bytes32[], uint64[], uint64[], uint16)
+);
+```
+
+You then need to apply some logic to the decoded data to extract actionable insights.
+
+For example, you should extract the position indexes of each `1` value in the `providers` bitmap, then look up the `Providers` at those same indexes in the providers mapping, found on the [Gitcoin Github](https://github.com/gitcoinco/eas-proxy/blob/main/deployments/providerBitMapInfo.json).
+
+You may also wish to extract each value from `hashes` and find the matching entry in the Stamps mapping to determine which specific Stamps the Attestation contains.
+
+Similarly, you can determine the current time and check whether it is before or after the `expirationDates` for each Stamp.
+
+You can see an example of how to do this in a Nextjs app in our [onchain Passports tutorial](./tutorials/integrating-onchain-stamp-data).
