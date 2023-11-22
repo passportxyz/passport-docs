@@ -107,8 +107,9 @@ In order to ensure the integrity of the data that the contract stores, the resol
 
 ## Contract addresses
 
-The entire Gitcoin smart contract stack is currently deployed on two blockchains: Optimism Mainnet and Base Goerli.
-Optimism Mainnet is a **'live' Ethereum layer-2 network**, meaning it secures real assets, transaction gas is paid in real ETH and there are real world consequences! 
+The entire Gitcoin smart contract stack is currently deployed on Optimism Mainnet, Linea and Base Goerli.
+
+Optimism Mainnet and Linea are **'live' Ethereum layer-2 networks**, meaning it secures real assets, transaction gas is paid in real ETH and there are real world consequences! 
 
 Base Goerli is a **test network**, meaning the tokens there have no real world value and it can be used as a safe sandbox for developing your apps.
 
@@ -133,6 +134,37 @@ The Optimism chain ID is [10](https://chainlist.org/chain/10).
 | -------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
 | passport | 0xd7b8c4ffa4c9fd1ecb3f6db8201e916a8d7dba11f161c1b0b5ccf44ceb8e2a39 | [EasScan](https://optimism.easscan.org/schema/view/0xd7b8c4ffa4c9fd1ecb3f6db8201e916a8d7dba11f161c1b0b5ccf44ceb8e2a39) |
 | score    | 0x6ab5d34260fca0cfcf0e76e96d439cace6aa7c3c019d7c4580ed52c6845e9c89 | [EasScan](https://optimism.easscan.org/schema/view/0x6ab5d34260fca0cfcf0e76e96d439cace6aa7c3c019d7c4580ed52c6845e9c89) |
+
+
+### Linea
+
+The Linea chain ID is [59144](https://chainlist.org/chain/59144).
+
+#### Contracts
+
+| contract                   | address                                    | link                                                                                         |
+| -------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| issuer                     | 0x4B70C4308ea49d17FD946dDacD6884e8e1e18B56 | [Lineascan](https://lineascan.build/address/0x4b70c4308ea49d17fd946ddacd6884e8e1e18b56)      |
+| EAS                        | 0xaEF4103A04090071165F78D45D83A0C0782c2B2a | [Lineascan](https://lineascan.build/address/0xaef4103a04090071165f78d45d83a0c0782c2b2a#code) |
+| GitcoinVeraxPortal         | 0xCAa9E817f02486cE076560B77A86235Ef91c5d5D | [Lineascan](https://lineascan.build/address/0xCAa9E817f02486cE076560B77A86235Ef91c5d5D)      |
+| GitcoinResolver            | 0x0a774AECE542a1A819107Eb3a06E9D515C67257a | [Lineascan](https://lineascan.build/address/0x0a774AECE542a1A819107Eb3a06E9D515C67257a)      |
+| GitcoinVerifier            | 0xc94aBf0292Ac04AAC18C251d9C8169a8dd2BBbDC | [Lineascan](https://lineascan.build/address/0xc94aBf0292Ac04AAC18C251d9C8169a8dd2BBbDC)      |
+| GitcoinAttester            | 0xBC778313E52b1184A15D163b5d3a72AEF8d510A2 | [Lineascan](https://lineascan.build/address/0xBC778313E52b1184A15D163b5d3a72AEF8d510A2)      |
+| Verax Attestation registry | 0x3de3893aa4Cdea029e84e75223a152FD08315138 | [Lineascan](https://lineascan.build/address/0x3de3893aa4Cdea029e84e75223a152FD08315138)      |
+
+#### EAS Schema
+
+| schema   | uid                                                                | link                                                                                                                |
+| -------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| passport | 0x69b9d63ff6b161097cb4930e197a722bcf423f832d4e4cd3692449d5a1e1319f | [EasScan](https://linea.easscan.org/schema/view/0x69b9d63ff6b161097cb4930e197a722bcf423f832d4e4cd3692449d5a1e1319f) |
+| score    | 0x4da1eaac6346b8b79a705e3898a308062ca607f56c07762ef7b7ff8a7661843c | [EasScan](https://linea.easscan.org/schema/view/0x4da1eaac6346b8b79a705e3898a308062ca607f56c07762ef7b7ff8a7661843c) |
+
+#### Verax schema
+
+| schema   | uid                                                                |
+| -------- | ------------------------------------------------------------------ |
+| passport | 0x501e6fcade7e3483d0ae7fcfebb732907ebda12b209f5116e52c02697062a50e |
+| score    | 0x01f031da36192c34057c764239eb77bb6ec8ebfb808f72a7bb172f37a5bec31f |
 
 
 
