@@ -36,13 +36,7 @@ The app will be built using [Next.js](https://nextjs.org/).
 
 ### Smart contract logic
 
-To understand this app, it is necessary to understand how the Gitcoin Passport smart contract stack is organized. The Gitcoin Passport smart contracts build on top of [EAS (Ethereum Attestation Service)](https://attest.sh/), using Attestations as the foundational building blocks.
-
-You can read the [contract reference](../contract-reference) page for a primer on how the contracts work.
-
-Attestations are digital records that are cryptographically signed by some trusted attester. In this case, Gitcoin signs to verify that a user has a Stamp. Attestations conform to schema. Schema are predefined structures for Attestations that ensure all the necessary data are included when an Attestation is created, and that it can be decoded and verified easily.
-
-Gitcoin has an attester contract that allows trusted Gitcoin addresses to create attestations, confirming to the schema, that demonstrate that a user owns some set of Stamps. The attestation contains all the necessary metadata about those Stamps. The `Attestation` has a unique identifier (`uuid`) that connects all this data to the user's specific address.
+To understand this app, it is necessary to understand how the Gitcoin Passport smart contract stack is organized. The Gitcoin Passport smart contracts build on top of [EAS (Ethereum Attestation Service)](https://attest.sh/), using Attestations as the foundational building blocks. You can read the [contract reference](../contract-reference) page for a primer on how the contracts work.
 
 As an app builder, you are interested in retrieving the Attestation for a given address. To do this you use the Resolver contract. This accepts an address and returns the associated `uuid` that you can then pass to the EAS contract to retrieve the attestation, which you can then decode and use in your app.
 
@@ -203,7 +197,7 @@ export default function Passport() {
 }
 ```
 
-**Note** that you can swap out the contract addresses if you want to run an app on a different network. You can check all the deployed contrac addresses on the [contract reference page](../contract-reference)
+**Note** that you can swap out the contract addresses if you want to run an app on a different network. You can check all the deployed contract addresses on the [contract reference page](../contract-reference)
 
 There are some parts of this boilerplate code that might look unfamiliar even if you have been through the other [tutorials](/building-with-passport/tutorials) on this site. This is because there is some specific set up required to use smart contracts on the backend.
 
@@ -212,10 +206,6 @@ First, the `provider` field is being assigned as a global variable. The `provide
 The `chainID` for the network you are connected to is requested from the `provider` too and the value is stored in the app's state. This is used in the UI to warn the user if they are connected to a network other than Base Goerli. There are two statuses presented in the UI - one that confirms that the user is connected and one that either confirms the wallet is connected to Base Goerli or warns the user they are connected to the wrong network.
 
 Second, there are two contract addresses defined immediately below the import statements:
-
-The chainID for the network you are connected to is requested from the provider too and the value is stored in the app's state. This is used in the UI to warn the user if they are connected to a network other than Base Goerli. There are two statuses presented in the UI - one that confirms that the user is connected and one that either confirms the wallet is connected to Base Goerli or warns the user they are connected to the wrong network.
-
-Seconds, there are two contract addresses defined immediately below the import statements:
 
 ```typescript
 const resolverContractAddress = "0xc0fF118369894100b652b5Bb8dF5A2C3d7b2E343";
