@@ -8,7 +8,7 @@ Gitcoin Passport’s developer platform enables several key use cases:
 
 ## Passport use cases
 
-![](../../public/protect-rewardspng.png)
+![protecting assets](../../public/protect-rewardspng.png)
 
 #### Sub use cases
 * Quadratic funding matching donation pools
@@ -32,7 +32,7 @@ By protecting access to Passport holders that have a score over a certain thresh
 * [Linea](https://www.gitcoin.co/blog/lineas-human-first-campaign-using-gitcoin-passport)
 
 
-![](../../public/protect-governance.png)
+![protecting governance](../../public/protect-governance.png)
 
 #### Sub use cases
 * Submitting proposals
@@ -46,7 +46,7 @@ Running a DAO is hard enough without Sybils submitting proposals and influencing
 * Snapshot
 
 
-![](../../public/protect-communication.png)
+![protecting communications](../../public/protect-communication.png)
 
 #### Sub use cases
 * Provide specific roles and permissions
@@ -62,7 +62,7 @@ Tired of low-quality inbounds or contributions to a communication channel? Prote
 * Metaforo
 
 
-![](../../public/protect-marketplace.png)
+![protecting a marketplace](../../public/protect-marketplace.png)
 
 #### Sub use cases
 * NFTs
@@ -73,7 +73,7 @@ Tired of low-quality inbounds or contributions to a communication channel? Prote
 You’ve got a marketplace that is free and open for users to create and sell content. However, you’ve recently had a string of Sybils creating low-quality projects, or trying to unfairly buy all of the inventory for high-quality projects. Let Passport help to protect these. #PassportCanFixThat
 
 
-![](../../public/prove-reputation.png)
+![proving reputation](../../public/prove-reputation.png)
 
 #### Sub use cases
 * Demonstrate user trustworthiness
@@ -86,7 +86,7 @@ There are many situations where a user would benefit from being able to judge fo
 * Rarimo
 * Sismo
 
-![](../../public/weigh-activities.png)
+![weighing activities](../../public/weigh-activities.png)
 
 #### Description
 You have functionality where users help to select which content or ideas are prioritized on your platform. Let the proven humans with a strong Passport score have a heavier weight in deciding this content. 
@@ -94,7 +94,7 @@ You have functionality where users help to select which content or ideas are pri
 #### Active integrators
 * Gitcoin Grants
 
-![](../../public/improve%20experience.png)
+![improving UX](../../public/improve%20experience.png)
 
 #### Description
 Passport is the premier solution for Sybil defense. Help us further our goals by building solutions that help to improve the user experience for people using or building on top of Passport. 
