@@ -28,7 +28,12 @@ Passport is a versatile and valuable tool for managing access, promoting transpa
 
 ## Retrieving Passport Data
 
-Passport data can be retrieved in two ways. The first is to use the Passport API which retrieves Stamp data associated with aspecific address from the Gitcoin server. The alternative is to use Gitcoin;s smarft contract stack, in which case you are interacting with a blockchain rather than Gitcoin's servers. Read more details about each of these optiuons below:
+Passport data can be retrieved in two ways. 
+
+* The Passport API retrieves Stamp data associated with a specific address from the Gitcoin server. 
+* Passport's smart contract stack interacts with a blockchain rather than Gitcoin's server. 
+
+Read more details about each of these options below:
 
 ### Passport API
 
