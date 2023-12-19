@@ -5,5 +5,6 @@
     "tutorials": "Tutorials",
     "major-concepts": "Major Concepts",
     "api-reference": "API Reference",
-    "contract-reference": "Contract Reference"
+    "contract-reference": "Contract Reference",
+    "attestation-schema": "Attestation schema"
 }
