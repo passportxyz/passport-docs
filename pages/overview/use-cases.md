@@ -8,6 +8,8 @@ Gitcoin Passport’s developer platform enables several key use cases:
 
 ## Passport use cases
 
+![protecting assets](../../public/protect-rewardspng.png)
+
 ### Protect access: Rewards
 
 #### Sub use cases
@@ -24,12 +26,15 @@ One of the primary reasons why Sybils exist is to take advantage of community re
 By protecting access to Passport holders that have a score over a certain threshold, you are ensuring that your community rewards programs are properly distributed. 
 
 #### Active integrators
-* Gitcoin Grants
+* [Gitcoin Grants](https://www.gitcoin.co/grants-stack)
 * [Bankless Academy](https://www.gitcoin.co/blog/bankless-academy-a-gitcoin-passport-case-study)
 * [CyberConnect](https://www.gitcoin.co/blog/gitcoin-passoort-cyberconnect-case-study)
 * [Galxe](https://www.gitcoin.co/blog/gitcoin-passport-galxe)
 * [Shapeshift](https://www.gitcoin.co/blog/protecting-shapeshifts-op-rewards-program-a-case-study)
 * [Linea](https://www.gitcoin.co/blog/lineas-human-first-campaign-using-gitcoin-passport)
+
+
+![protecting governance](../../public/protect-governance.png)
 
 ### Protect access: Governance
 
@@ -43,6 +48,9 @@ Running a DAO is hard enough without Sybils submitting proposals and influencing
 #### Active integrators
 * [Discourse](https://www.gitcoin.co/blog/protect-discourse-forum-from-bots-sybils-with-gitcoin-passport)
 * Snapshot
+
+
+![protecting communications](../../public/protect-communication.png)
 
 ### Protect access: Communications
 
@@ -59,6 +67,9 @@ Tired of low-quality inbounds or contributions to a communication channel? Prote
 * Collab.land
 * Metaforo
 
+
+![protecting a marketplace](../../public/protect-marketplace.png)
+
 ### Protect access: Marketplace
 
 #### Sub use cases
@@ -68,6 +79,9 @@ Tired of low-quality inbounds or contributions to a communication channel? Prote
 
 #### Description
 You’ve got a marketplace that is free and open for users to create and sell content. However, you’ve recently had a string of Sybils creating low-quality projects, or trying to unfairly buy all of the inventory for high-quality projects. Let Passport help to protect these. #PassportCanFixThat
+
+
+![proving reputation](../../public/prove-reputation.png)
 
 ### Prove reputation
 
@@ -82,6 +96,8 @@ There are many situations where a user would benefit from being able to judge fo
 * Rarimo
 * Sismo
 
+![weighing activities](../../public/weigh-activities.png)
+
 ### Weigh user activities according to score
 
 #### Description
@@ -89,6 +105,8 @@ You have functionality where users help to select which content or ideas are pri
 
 #### Active integrators
 * Gitcoin Grants
+
+![improving UX](../../public/improve%20experience.png)
 
 ### Improve the Passport experience
 
@@ -103,11 +121,11 @@ Please feel free to reach out to us on [Discord > #Passport-Dev-Support to bounc
 
 ## Use cases by audience
 
-| Who you are                            | Use Case                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Event Organizer                        | Passport-gate access to an event, only allowing people with certain Stamps in their Passport to attend. <br/><br/>[Tutorial](../building-with-passport/tutorials/integrating-stamps-and-scorers)                                                                                                                                                                                                                                                                                                                                                                       |
-| Grants program manager                 | Integrate Passport into a quadratic funding (QF) program (such as Gitcoin Grants) and only offer matching funds to donors with a Passport score over a certain threshold. <br/><br/>[Tutorial](../building-with-passport/tutorials/integrating-stamps-and-scorers)                                                                                                                                                                                                                                                                                                     |
-| Community organizer                    | Gate a sub-community with Passport, only allowing access to members that have earned a certain set of Stamps through meaningful participation in the community. <br/><br/>[Tutorial](../building-with-passport/tutorials/integrating-stamps-and-scorers). <br/><br/> Enable community members to prove to other members that they are trustworthy by displaying connected Stamps on their profile. <br/><br/>[Tutorial](../building-with-passport/tutorials/working-with-stamp-metadata)                                                                               |
-| Developer of an online marketplace     | Use Passport to gate their marketplace and only allow access to or distribute funds to trusted users, aiming to reduce fraud on the platform. <br/><br/>[Tutorial](../building-with-passport/tutorials/gating-access-with-passport-scores)                                                                                                                                                                                                                                                                                                                             |
-| Airdrop experience manager             | Require users to have certain Stamps or a score above a threshold to exclude airdrop farmers. <br/><br/>[Tutorial](../building-with-passport/tutorials/requiring-a-passport-score-for-airdrop-claim)                                                                                                                                                                                                                                                                                                                                                                   |
-| Developer of an online polling service | Use Passport to gate polls by requiring participants to have a score over a certain threshold to prevent bot manipulation and increase the trustworthiness of your results. <br/><br/>[Tutorial](../building-with-passport/tutorials/gating-access-with-passport-scores)                                                                                                                                                                                                                                                                                               |
+| Who you are                            | Use Case                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Event Organizer                        | Passport-gate access to an event, only allowing people with certain Stamps in their Passport to attend. <br/><br/>[Tutorial](../building-with-passport/tutorials/integrating-stamps-and-scorers)                                                                                                                                                                                                                                                                                         |
+| Grants program manager                 | Integrate Passport into a quadratic funding (QF) program (such as Gitcoin Grants) and only offer matching funds to donors with a Passport score over a certain threshold. <br/><br/>[Tutorial](../building-with-passport/tutorials/integrating-stamps-and-scorers)                                                                                                                                                                                                                       |
+| Community organizer                    | Gate a sub-community with Passport, only allowing access to members that have earned a certain set of Stamps through meaningful participation in the community. <br/><br/>[Tutorial](../building-with-passport/tutorials/integrating-stamps-and-scorers). <br/><br/> Enable community members to prove to other members that they are trustworthy by displaying connected Stamps on their profile. <br/><br/>[Tutorial](../building-with-passport/tutorials/working-with-stamp-metadata) |
+| Developer of an online marketplace     | Use Passport to gate their marketplace and only allow access to or distribute funds to trusted users, aiming to reduce fraud on the platform. <br/><br/>[Tutorial](../building-with-passport/tutorials/gating-access-with-passport-scores)                                                                                                                                                                                                                                               |
+| Airdrop experience manager             | Require users to have certain Stamps or a score above a threshold to exclude airdrop farmers. <br/><br/>[Tutorial](../building-with-passport/tutorials/requiring-a-passport-score-for-airdrop-claim)                                                                                                                                                                                                                                                                                     |
+| Developer of an online polling service | Use Passport to gate polls by requiring participants to have a score over a certain threshold to prevent bot manipulation and increase the trustworthiness of your results. <br/><br/>[Tutorial](../building-with-passport/tutorials/gating-access-with-passport-scores)                                                                                                                                                                                                                 |
