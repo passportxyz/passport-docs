@@ -47,6 +47,8 @@ So your flow is:
 * pass the `uuid` to the EAS contract, returning an `Attestation`
 * decode and unpack the `Attestation,` returning the user's Stamp data
 
+Thankfully, there is now an onchaion shortcut to executing all this logicv. The `decoder` contract exposes an API that allows you to simply pass in an address and retrieve the decoded data, rather than having to execute the steps outlined above. Behind the scenes, the same logic is being followed, but you can abstract it away by itneracting with the `decoder` contract.
+
 ### Setting up the app
 
 We'll create an app using [Next.js](https://nextjs.org/). We can bootstrap using `create-next-app`. This automatically creates all the necessary subdirectories, configuration and boilerplate code required to get us building as quickly as possible.
@@ -71,7 +73,6 @@ npx create-next-app passport-onchain-app
 ✔ Would you like to use App Router? (recommended)  Yes
 ✔ Would you like to customize the default import alias? … No 
 ```
-
 
 
 Next, change your working directory to the new `my-passport-app` directory and install `ethers`:
@@ -102,16 +103,12 @@ Now that the app is set up, you can begin building. The code that controls what 
 'use client'
 import { useState, useEffect } from 'react'
 import { ethers } from 'ethers'
-import { BigNumber } from "@ethersproject/bignumber";
 import { ChakraProvider, Flex, Heading, Button } from '@chakra-ui/react'
 import { TabLayout } from './tab-contents'
-import { Attestation, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
-import { resolverAbi, EasAbi } from "./abis";
-import { PROVIDER_ID, providerBitMapInfo, DecodedProviderInfo } from "./providerInfo";
 import { GITCOIN_PASSPORT_WEIGHTS } from './stamp-weights';
 
-const resolverContractAddress = "0xc0fF118369894100b652b5Bb8dF5A2C3d7b2E343";
-const EasContractAddress = "0xAcfE09Fd03f7812F022FBf636700AdEA18Fd2A7A"
+const decoderContractAddress = "0xa652BE6A92c7efbBfEEf6b67eEF10A146AAA8ADc";
+const abi = require('./PassportDecoderABI.json')
 
 declare global {
   interface Window {
@@ -177,6 +174,7 @@ export default function Passport() {
       <ChakraProvider>
         <Flex minWidth='max-content' alignItems='right' gap='2' justifyContent='right'>
           <Button colorScheme='teal' variant='outline' onClick={connect}>Connect</Button>
+          <Button colorScheme='teal' variant='outline' onClick={queryPassport}>Query Passport</Button>
         </Flex>
         <div>
           {connected && <p>✅ Wallet connected</p>}
@@ -195,6 +193,7 @@ export default function Passport() {
     </div >
   )
 }
+
 ```
 
 **Note** that you can swap out the contract addresses if you want to run an app on a different network. You can check all the deployed contract addresses on the [contract reference page](../contract-reference)
@@ -208,206 +207,57 @@ The `chainID` for the network you are connected to is requested from the `provid
 Second, there are two contract addresses defined immediately below the import statements:
 
 ```typescript
-const resolverContractAddress = "0xc0fF118369894100b652b5Bb8dF5A2C3d7b2E343";
-const EasContractAddress = "0xAcfE09Fd03f7812F022FBf636700AdEA18Fd2A7A"
+const decoderContractAddress = "0xa652BE6A92c7efbBfEEf6b67eEF10A146AAA8ADc";
+const abi = require('./PassportDecoderABI.json')
 ```
 
-These are the addresses on the BaseGoerli blockchain where the relevant contracts are stored. The two contracts you need for your app are the `resolver` contract and the `EAS` contract.
+This is the addresses on the BaseGoerli blockchain where the `decoder` contract is stored. The `abi` is a formatted set of function signatures that allow the contract bytecode to be decoded and instantiated in your app.
 
-* The `resolver` contract is where you can request a `uuid` for an address.
-* The `EAS` contract is where you can pass a `uuid` and receive an `Attestation`.
-
-#### Additional files
-
-There are several elements being loaded into the app from local files. In this section, we will describe how to set these up. If you are building this app along with this tutorial as opposed to just using the example app, you will need to create these files and add the proper code to them, referenced in the links.
-
-These are the additional files that we will be creating:
+You will also need to load a file containing the weights for individual Stamps so you can calculate a Passport score.
 
 ```typescript
-import { resolverAbi, EasAbi } from "./abis";
-import { PROVIDER_ID, providerBitMapInfo, DecodedProviderInfo } from "./providerInfo";
 import { GITCOIN_PASSPORT_WEIGHTS } from './stamp-weights';
 ```
 
-The imported elements from `./abis` are contract ABIs (application binary interfaces). These are `json` objects that define the functions available in a smart contract. To create an instance of a contract, you need both the ABI and the address the contract is deployed to. You will need to create a file in the `src/app` folder called `abis.ts` and populate it with the information located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/abis.ts). 
-
-The imported elements from `./providerInfo` define details about the Stamp providers, including the schema for decoding the Attestation into a useable format - more on that later. Again, create a file in the `src/app` folder called `providerInfo.ts` and populate it with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/providerInfo.ts).
-
 The elements imported from `./stamp-weights` is a list of weights for each Stamp used to create a Passport score. In the 'web2' model for Gitcoin Passport this is done server-side, but here we will implement our own scoring algorithm using onchain Stamps. Again, create a file in the `src/app` folder called `stamp-weights.ts` and populate it with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/stamp-weights.ts).
 
-**Note** that the information in `providerInfo.ts` and `stamp-weights.ts` need to stay consistent with Gitcoin - you can check the up-to-date list of stamp weights[ in this Github file](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin\_passport\_weights.py). The Bitmap mapping can be found in [this Github file](https://github.com/gitcoinco/passport/blob/main/iam/src/static/providerBitMapInfo.json). You could also create your own weightings if you want to implement your own scoring algorithm. The source of truth for the `PROVIDER_ID` is in [this Github file](https://github.com/gitcoinco/passport/blob/901c868323fed5c0b5f5fbad52023c96e1d620a4/types/src/index.d.ts#L229).
+**Note** that the information in `stamp-weights.ts` needs to stay consistent with Gitcoin - you can check the up-to-date list of stamp weights[ in this Github file](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin\_passport\_weights.py). 
 
 The elements imported from `tab-contents` are components used to build the UI. This file should also be located in the `src/app` folder, called `tab-contents.tsx`, and should be populated with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/tab-contents.tsx).
 
-
-
 Otherwise, the `create-next-app` boilerplate code is quite standard. There is a `connect()` function that instantiates the `provider` by grabbing network configuration from your browser wallet (make sure you are connected to BaseGoerli) and a `checkConnection()` function wrapped in `useEffect` that automatically triggers a connection when the page is first loaded.
 
-### Getting a UUID
+### Getting Paspsort data
 
-The first step in retrieving onchain Stamp data is querying the UUID associated with your user's address in the `resolver` contract. You can start by defining a function, `getUuid()`.  The first action to take inside `getUuid()` is to instantiate the `resolverContract`. You can do this using `ethers.Contract()` passing the contract address, it's ABI and the `provider` as arguments. Then, you can call the contract's `passports()` function, passing the connected user's address. This will return a `uuid` that you can assign to a new `const`, as follows:
+Getting Passport data requires instantiating the `decoder` contract and calling its `getpassport` function. The `ethers` library provides everythign we need to instantiate the contract. Create a contract using `new etheres.Contract()` passing the contract address, ABI and the provider object as arguments. One complication is that the ABI is divided up into sections specific to each chain where the contract has been deployed, so you actually need to pass a specifier with the hex-encoded chain-ID too - for BaseGoerli this is `0x1a4`.
 
-```typescript
-async function getUuid() {
-  const resolverContract: ethers.Contract = new ethers.Contract(resolverContractAddress, resolverAbi, provider)
-  const uuid = await resolverContract.passports(address)
-}
-```
+Once the contractinstance exists, you can simply call `getPassport` passing in the user address, which is stored in your app's state. If the function call returns some stamp data, you can set the `hasStampData` flag to `true` and return the data.
 
-It is also a good idea to add some error handling here, as it is possible that your connected user hasn't migrated any Stamps onchain yet, and may not have a `uuid` associated with their address. In this case, the returned `uuid` would be equal to the 32-byte hex encoded representation of 0:
-
-`0x0000000000000000000000000000000000000000000000000000000000000000`
-
-Here, you can simply log a warning to console if the return value is zero.
-
-Your `getUuid()` function will look as follows:
-
-```typescript
-async function getUuid() {
-  const resolverContract: ethers.Contract = new ethers.Contract(resolverContractAddress, resolverAbi, provider)
-  const uuid = await resolverContract.passports(address)
-  console.log(uuid)
-  if (uuid == "0x0000000000000000000000000000000000000000000000000000000000000000") {
-    (console.log("The submitted address does not have Passport data onchain!"))
-  } else {
-    return uuid
+```ts
+async function getPassportInfo() {
+  const decoderContract: ethers.Contract = new ethers.Contract(decoderContractAddress, new ethers.Interface(abi['0x1a4']), provider)
+  const passportInfo: [] = await decoderContract.getPassport(address) // test address '0x85fF01cfF157199527528788ec4eA6336615C989'
+  if (passportInfo.length > 1) {
+    setHasStamps(true)
   }
+  return passportInfo
 }
 ```
-
-If the user does have onchain Stamps, the returned value will be some non-zero 32-byte hex string.
-
-### Getting an Attestation
-
-Now you have a `uuid` you can use it to retrieve an `Attestation`. This is done using the `EasContract`. This is the EAS registry that associates `Attestations` with `uuid`s.  The flow is the same as for `getUuid()` - you instantiate the relevant contract and call a function on it. In this case you instantiate the `EasContract` and call its `getAttestation()` function, passing the `uuid`.
-
-```typescript
-async function getAttestation(uuid: string) {
-  const EasContract: ethers.Contract = new ethers.Contract(EasContractAddress, EasAbi, provider)
-  const attestation = await EasContract.getAttestation(uuid)
-  return attestation
-}
-```
-
-The `Attestation` is returned in the form of an object with the following structure:
-
-```bash
-"uid": "0x0e9f4e1ecda9c93aa53914b2f4fc4844b33068b28f8aed6b7a4f488084647ad4"
-"schema":"0xb32dc5bea1673f9adede5b96abdcf0f79354c9e3bbb4f8b1e678b07138d2ec02"
-"time":1690828108n
-"expirationTime":0n
-"revocationTime":0n
-"refUID":"0x0000000000000000000000000000000000000000000000000000000000000000"
-"recipient":"0xC79ABB54e4824Cdb65C71f2eeb2D7f2db5dA1fB8"
-"attester":"0x5bbBC733E12f50e6834c40A90066F2f9FFb820e0"
-"revocable":true
-"data":"0x00000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000e0000000000000000000000000000000000000000000000000000000000000026000000000000000000000000000000000000000000000000000000000000003e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000c01f83800000000000000000000000000000000000000000000000000000000000000000000bfa5a2bdfeb8568d805d0ec5d0cacee1942d32db8b035dd5e76324fa998c2454c68f856c137d03394ae23982d1ac02f6166182fb1c62bc8d695e4d9fa4e38520630ec8e5b24e98dbbc6968f250c74f0d67e1dcf4d872479ead284a4845c2bcdb5a2a3bf715af346613ecd6538097993c96e5d2484157a94f0cfe185348fad1aef5277c9e0fa252a8b136a31890ce81cb3383ed617178a4da85408d0a30a182544f1e63da51d1d25a24b32dab40c1acce87ec5ea22a11614e07bcae03194ec77959a58dbc0ba6fbf3fea1bad5cef5fa00ab55764c85896d2f3ae1dc418a28ec8c8cb758a0fa4add1b710030c6e826a3b1f830ae56af551e696ff7dd158fc25fc406e48b2221130c1251a3ab9bcd0917f6a9a3799477bd238a35482266bbea6890aee6a898063a23c587f592cd3c56ed879c7b6d113c67f8a256fd727288d0a2cbfeeaecaa5d52376214d17524258a2f744e1533352c633431395ec3686ab6ebfcb000000000000000000000000000000000000000000000000000000000000000b0000000000000000000000000000000000000000000000000000000064bad1d60000000000000000000000000000000000000000000000000000000064bad1d60000000000000000000000000000000000000000000000000000000064bad1d60000000000000000000000000000000000000000000000000000000064bad1e10000000000000000000000000000000000000000000000000000000064bad1e10000000000000000000000000000000000000000000000000000000064bad1e10000000000000000000000000000000000000000000000000000000064bad1e20000000000000000000000000000000000000000000000000000000064bad1e30000000000000000000000000000000000000000000000000000000064bad1e400000000000000000000000000000000000000000000000000000000647a3c1600000000000000000000000000000000000000000000000000000000647a3c17000000000000000000000000000000000000000000000000000000000000000b00000000000000000000000000000000000000000000000000000000653178d600000000000000000000000000000000000000000000000000000000653178d600000000000000000000000000000000000000000000000000000000653178d600000000000000000000000000000000000000000000000000000000653178e100000000000000000000000000000000000000000000000000000000653178e100000000000000000000000000000000000000000000000000000000653178e100000000000000000000000000000000000000000000000000000000653178e200000000000000000000000000000000000000000000000000000000653178e300000000000000000000000000000000000000000000000000000000653178e40000000000000000000000000000000000000000000000000000000064f0e3160000000000000000000000000000000000000000000000000000000064f0e317"
-```
-
-The individual Stamp data is embedded in this object, but it is encoded according to the `Attestation` schema and arrives as a hex-encoded string. This means the next step is decoding the `Attestation`.
-
-**Note** You can also check your attestations using the [Ethereum Attestation Service explorer](https://base-goerli.easscan.org). Note that the explorer is deployed on separate subdomains for each network (e.g. for Optimism the URL is [optimism.easscan.org](https://optimism.easscan.org/)) There, you can search for your address and see your `Attestations` in the browser. You can also search for the [Passport Attestation Schema](https://base-goerli.easscan.org/schema/view/0xe496278adc2c09ec93f23f59fdfb015ca7aae61260fbfa07f6d46eef9cf707b8)) or the [Gitcoin attester contract](https://goerli.basescan.org/address/0x5bbbc733e12f50e6834c40a90066f2f9ffb820e0). The links in this note direct to the relevant resources for the Base Goerli network.
-
-
-
-### Decoding the Attestation
-
-Decoding the `Attestation` means isolating and interpreting specific chunks of the `Attestation`s `data` field and assigning them to fields in a new `struct` defined according to the `Attestation` schema.
-
-Thankfully, there are some pre-built tools that can help with this decoding. First, the `SchemaEncoder` object imported from the `eas-sdk`. You can create an instance of the `SchemaEncoder` using the Gitcoin Passport `Attestation` schema, and then use its `decodeData()` function to parse the encoded data in the `Attestation` into a new `struct` of type `SchemaDecodedItem.`
-
-Here's what that process looks like:
-
-```typescript
-const schemaEncoder = new SchemaEncoder(
-  "uint256[] providers,bytes32[] hashes,uint64[] issuanceDates,uint64[] expirationDates,uint16 providerMapVersion"
-);
-const decodedData = schemaEncoder.decodeData(attestation.data)
-```
-
-
-
-Next, you want to isolate the pieces of data you are actually interested in, and pull those out into their own `const`. In this app, you are working with the raw Stamp data, specifically the `providers` field. The data in `providers` defines precisely which Stamp is attested to for the specific user. This data is provided as a bitmap, where each position in the bitmap corresponds to a specific Stamp. Ownership of a specific Stamp is indicated with a 1 in the appropriate index, whereas a 0 indicates that the user _does not_ own that specific Stamp. The following line of code pulls the `providers` bitmap out of the decoded `Attestation` object.
-
-```typescript
-const providers = decodedData.find((data) => data.name === "providers")?.value.value as BigNumber[];
-```
-
-Now you need to decode the bitmap by identifying the positions of any 1s and looking up the Stamp info associated with that position. The mapping from bitmap to specific Stamp data is defined in a `json` object called `providerBitmapInfo` which you have already imported from `./providerInfo.ts`.
-
-This also requires defining a new `struct` to receive the `provider` data into (`onChainProviderInfo`), and a `map` and `filter` function that extracts the bitmap elements, grabs the associated data from the `providerBitmapInfo` file, decodes it and assigns the result to instances of `onChainProviderInfo` and pushes each instance into an array. Altogether, this looks as follows:
-
-```typescript
-type DecodedProviderInfo = {
-    providerName: PROVIDER_ID;
-    providerNumber: number;
-  };
-  const onChainProviderInfo: DecodedProviderInfo[] = providerBitMapInfo
-    .map((info) => {
-      const providerMask = BigNumber.from(1).shl(info.bit);
-      const currentProvidersBitmap = providers[info.index];
-      if (currentProvidersBitmap && !providerMask.and(currentProvidersBitmap).eq(BigNumber.from(0))) {
-        return {
-          providerName: info.name,
-          providerNumber: info.index * 256 + info.bit,
-        };
-      }
-    })
-    .filter((provider): provider is DecodedProviderInfo => provider !== undefined);
-```
-
-All this decoding logic can be wrapped up into a single function, `decodeAttestation()`. This function should take in the `Attestation` as an argument and return an array of Stamp provider data. The full function looks as follows (you can paste this into your app):
-
-```typescript
-async function decodeAttestation(attestation: Attestation) {
-    const schemaEncoder = new SchemaEncoder(
-      "uint256[] providers,bytes32[] hashes,uint64[] issuanceDates,uint64[] expirationDates,uint16 providerMapVersion"
-    );
-    const decodedData = schemaEncoder.decodeData(attestation.data)
-    const providers = decodedData.find((data) => data.name === "providers")?.value.value as BigNumber[];
-    type DecodedProviderInfo = {
-      providerName: PROVIDER_ID;
-      providerNumber: number;
-    };
-    const onChainProviderInfo: DecodedProviderInfo[] = providerBitMapInfo
-      .map((info) => {
-        const providerMask = BigNumber.from(1).shl(info.bit);
-        const currentProvidersBitmap = providers[info.index];
-        if (currentProvidersBitmap && !providerMask.and(currentProvidersBitmap).eq(BigNumber.from(0))) {
-          return {
-            providerName: info.name,
-            providerNumber: info.index * 256 + info.bit,
-          };
-        }
-      })
-      .filter((provider): provider is DecodedProviderInfo => provider !== undefined);
-
-    return onChainProviderInfo
-  }
-```
-
 
 
 ### Extracting Stamps
 
-At this point you have functions that grab a `uuid` from an address, an `Attestation` from a `uuid`, decode the `Attestation` and create an array of decoded data for each `provider` for each Stamp owned by the user. Next, you can simply extract the Stamp name from each of the decoded `provider` data, yielding an array of the names of the Stamps the user owns.
-
-Notice that the boilerplate code includes some predefined state variables, including `stamps` and `hasStamps`. These are for tracking the user's Stamps. `stamps` is an array that will contain the names of the `stamps` owned by the user, and `hasStamps` is a simple Boolean that is `true` if the user owns some Stamps, and `false` if the user has no Stamps. These will be used later to render information in the UI.
-
-The next step is to write a function to extract the Stamp names from the `provider` data into an array, and then set the values of the state variables `stamps` and `hasStamps`. The following code snippet contains that function - you can paste it into your app:
+The next step is to write a function to extract the Stamp names from `passportData` into an array, and then set the values of the state variables `stamps`. The following code snippet contains that function - you can paste it into your app:
 
 ```typescript
-function getStamps(onChainProviderInfo: DecodedProviderInfo[]) {
-    const stamps: Array<Stamp> = []
-    onChainProviderInfo.forEach(toArray)
-    function toArray(item: any, index: number) {
-      let s = { id: index, stamp: item.providerName }
-      stamps.push(s)
-    }
-    setStamps(stamps)
-    setHasStamps(stamps.length > 0)
-    return stamps
+async function getStamps(passportInfo: []) {
+  var stamps: Stamp[] = [];
+  for (var i = 0; i < passportInfo.length; i++) {
+    stamps.push({ id: i, stamp: passportInfo[i][0] })
   }
+  setStamps(stamps)
+  return stamps
+}
 ```
 
 Well done!  at this point you have implemented all the logic required to retrieve the list of Stamps owned by your connected user! For some apps, this might be all you need - you can simply display the contents of `stamps` to show which Stamps are owned by the user.
@@ -420,26 +270,22 @@ To create a score, you need to write a function that iterates over your list of 
 
 ```typescript
 function calculate_score(stampData: Array<Stamp>) {
-    let i = 0
-    var scores: Array<number> = []
-    var score = 0;
-    while (i < stampData.length) {
-      let id = stampData[i].stamp
-      if (GITCOIN_PASSPORT_WEIGHTS.hasOwnProperty(id)) {
-        try {
-          let temp_score = GITCOIN_PASSPORT_WEIGHTS[id]
-          scores.push(parseFloat(temp_score))
-        } catch {
-          console.log("element cannot be added to cumulative score")
-        }
-      }
-      i++;
+  let i = 0
+  var scores: Array<number> = []
+  let names = stampData.map(entry => entry.stamp);
+
+  names.forEach(name => {
+    if (GITCOIN_PASSPORT_WEIGHTS.hasOwnProperty(name)) {
+      let key = name as keyof Object;
+      let value = GITCOIN_PASSPORT_WEIGHTS[key].toString();
+      scores.push(parseFloat(value))
     }
-    for (let i = 0; i < scores.length; i++) {
-      score += scores[i]
-    }
-    return score
-  }
+  })
+
+  const totalScore = scores.reduce((acc, currentScore) => acc + currentScore, 0)
+
+  return totalScore
+}
 ```
 
 Now you have implemented all the logic required to retrieve and decode onchain Stamps and calculate a score in your app!
@@ -452,25 +298,18 @@ The following function executed each function in turn, wrapped in some basic err
 
 ```typescript
 async function queryPassport() {
-    try {
-      const uuid = await getUuid()
-      const att = await getAttestation(uuid)
-      console.log("attestation: ", att)
-      const onChainProviderInfo = await decodeAttestation(att)
-      const stampData = getStamps(onChainProviderInfo)
-      const scoreData = calculate_score(stampData)
-      setScore(scoreData)
-    } catch {
-      console.log("error decoding data - you might not have any data onchain!")
-    }
-  }
+  const passportInfo = await getPassportInfo()
+  const stamps = await getStamps(passportInfo);
+  const score = calculate_score(stamps)
+  setScore(score)
+}
 ```
 
 Now, all you have to do is call `queryPassport()` to execute all the necessary logic to retrieve `stamps` and `score`.
 
 ### Stamps and scores in the UI
 
-The boilerplate code includes a basic UI that pull sin components from `tab-contents.tsx`. This will render five tabs to the webpage, each containing different information. This component can take your `stamp` and `score` data and render differently depending on their values. This is already handled in the boilerplate UI. What is not yet implemented is a way to trigger the `queryPassport()` function. You can add a button for this. Right below the existing `Button` component, inside the `Flex` tags, you can add the following:
+The boilerplate code includes a basic UI that pulls in components from `tab-contents.tsx`. This will render five tabs to the webpage, each containing different information. This component can take your `stamp` and `score` data and render differently depending on their values. This is already handled in the boilerplate UI. What is not yet implemented is a way to trigger the `queryPassport()` function. You can add a button for this. Right below the existing `Button` component, inside the `Flex` tags, you can add the following:
 
 ```html
 <Button colorScheme='teal' variant='outline' onClick={queryPassport}>Query Passport</Button>
