@@ -193,7 +193,7 @@ And finally add the conditional rendering to the UI code:
 
 Now your app has buttons to show the Stamps, get a Gitcoin score and get your custom score. All this information will be displayed in the app's UI.
 
-![](../../../public/custom-scorer.png)
+![](../../../../public/custom-scorer.png)
 
 ## Deduplication
 
