@@ -218,16 +218,16 @@ The elements imported from `tab-contents` are components used to build the UI. T
 
 Otherwise, the `create-next-app` boilerplate code is quite standard. There is a `connect()` function that instantiates the `provider` by grabbing network configuration from your browser wallet (make sure you are connected to BaseGoerli) and a `checkConnection()` function wrapped in `useEffect` that automatically triggers a connection when the page is first loaded.
 
-### Getting Paspsort data
+### Getting Passport data
 
-Getting Passport data requires instantiating the `decoder` contract and calling its `getpassport` function. The `ethers` library provides everythign we need to instantiate the contract. Create a contract using `new etheres.Contract()` passing the contract address, ABI and the provider object as arguments. One complication is that the ABI is divided up into sections specific to each chain where the contract has been deployed, so you actually need to pass a specifier with the hex-encoded chain-ID too - for BaseGoerli this is `0x1a4`.
+Getting Passport data requires instantiating the `decoder` contract and calling its `getPassport` function. The `ethers` library provides everything we need to instantiate the contract. Create a contract using `new ethers.Contract()` passing the contract address, ABI and the provider object as arguments. One complication is that the ABI is divided up into sections specific to each chain where the contract has been deployed, so you actually need to pass a specifier with the hex-encoded chain ID too - for BaseGoerli this is `0x1a4`.
 
-Once the contractinstance exists, you can simply call `getPassport` passing in the user address, which is stored in your app's state. If the function call returns some stamp data, you can set the `hasStampData` flag to `true` and return the data.
+Once the contract instance exists, you can simply call `getPassport` passing in the user address, which is stored in your app's state. If the function call returns some Stamp data, you can set the `hasStampData` flag to `true` and return the data.
 
 ```ts
 async function getPassportInfo() {
   const decoderContract: ethers.Contract = new ethers.Contract(decoderContractAddress, new ethers.Interface(abi['0x1a4']), provider)
-  const passportInfo: [] = await decoderContract.getPassport(address) // test address '0x85fF01cfF157199527528788ec4eA6336615C989'
+  const passportInfo: [] = await decoderContract.getPassport(address)
   if (passportInfo.length > 1) {
     setHasStamps(true)
   }
@@ -235,10 +235,9 @@ async function getPassportInfo() {
 }
 ```
 
-
 ### Extracting Stamps
 
-The next step is to write a function to extract the Stamp names from `passportData` into an array, and then set the values of the state variables `stamps`. The following code snippet contains that function - you can paste it into your app:
+The next step is to write a function to extract the Stamp names from `passportData` into an array and then set the values of the state variables `stamps`. The following code snippet contains that function - you can paste it into your app:
 
 ```typescript
 async function getStamps(passportInfo: []) {
@@ -257,7 +256,7 @@ Well done!  at this point you have implemented all the logic required to retriev
 
 Passport scores are calculated by summing weights assigned to each specific Stamp. Gitcoin have defined a list of Stamp weights that are used when scoring is done on the Gitcoin server. In this app, you will use the same weights to calculate a score from the onchain Stamps. The weights themselves are defined in the `stamp-weights.ts` file that you are already importing in the boilerplate code.
 
-To create a score, you need to write a function that iterates over your list of Stamp names, looks up each name in the stamp weights data, and adds that weight to as cumulative sum. The sum after you have iterated over all the available Stamps becomes your Passport score. This can be achieved with the following function that you can paste into your app:
+To create a score, you need to write a function that iterates over your list of Stamp names, looks up each name in the stamp weights data, and adds that weight to a cumulative sum. The sum after you have iterated over all the available Stamps becomes your Passport score. This can be achieved with the following function that you can paste into your app:
 
 ```typescript
 function calculate_score(stampData: Array<Stamp>) {
