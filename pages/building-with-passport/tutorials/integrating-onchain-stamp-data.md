@@ -36,18 +36,9 @@ The app will be built using [Next.js](https://nextjs.org/).
 
 ### Smart contract logic
 
-To understand this app, it is necessary to understand how the Gitcoin Passport smart contract stack is organized. The Gitcoin Passport smart contracts build on top of [EAS (Ethereum Attestation Service)](https://attest.sh/), using Attestations as the foundational building blocks. You can read the [contract reference](../contract-reference) page for a primer on how the contracts work.
+The Gitcoin Passport smart contracts build on top of [EAS (Ethereum Attestation Service)](https://attest.sh/), using Attestations as the foundational building blocks. You can read the [contract reference](../contract-reference) page for a primer on how the contracts work.
 
-As an app builder, you are interested in retrieving the Attestation for a given address. To do this you use the Resolver contract. This accepts an address and returns the associated `uuid` that you can then pass to the EAS contract to retrieve the attestation, which you can then decode and use in your app.
-
-So your flow is:
-
-* get user address
-* pass user address to resolver contract, returning a unique attestation identifier (`uuid`)
-* pass the `uuid` to the EAS contract, returning an `Attestation`
-* decode and unpack the `Attestation,` returning the user's Stamp data
-
-Thankfully, there is now an onchaion shortcut to executing all this logicv. The `decoder` contract exposes an API that allows you to simply pass in an address and retrieve the decoded data, rather than having to execute the steps outlined above. Behind the scenes, the same logic is being followed, but you can abstract it away by itneracting with the `decoder` contract.
+The `decoder` contract exposes an API that allows you to simply pass in an address and retrieve the decoded data, rather than having to rawAttestations and decode client-side.
 
 ### Setting up the app
 
