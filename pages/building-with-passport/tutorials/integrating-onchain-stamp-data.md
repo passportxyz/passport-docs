@@ -244,6 +244,116 @@ async function getPassportInfo() {
 }
 ```
 
+### Getting an Attestation
+
+Now you have a `uuid` you can use it to retrieve an `Attestation`. This is done using the `EasContract`. This is the EAS registry that associates `Attestations` with `uuid`s.  The flow is the same as for `getUuid()` - you instantiate the relevant contract and call a function on it. In this case you instantiate the `EasContract` and call its `getAttestation()` function, passing the `uuid`.
+
+```typescript
+async function getAttestation(uuid: string) {
+  const EasContract: ethers.Contract = new ethers.Contract(EasContractAddress, EasAbi, provider)
+  const attestation = await EasContract.getAttestation(uuid)
+  return attestation
+}
+```
+
+The `Attestation` is returned in the form of an object with the following structure:
+
+```bash
+"uid": "0x0e9f4e1ecda9c93aa53914b2f4fc4844b33068b28f8aed6b7a4f488084647ad4"
+"schema":"0xb32dc5bea1673f9adede5b96abdcf0f79354c9e3bbb4f8b1e678b07138d2ec02"
+"time":1690828108n
+"expirationTime":0n
+"revocationTime":0n
+"refUID":"0x0000000000000000000000000000000000000000000000000000000000000000"
+"recipient":"0xC79ABB54e4824Cdb65C71f2eeb2D7f2db5dA1fB8"
+"attester":"0x5bbBC733E12f50e6834c40A90066F2f9FFb820e0"
+"revocable":true
+"data":"0x00000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000e0000000000000000000000000000000000000000000000000000000000000026000000000000000000000000000000000000000000000000000000000000003e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000c01f83800000000000000000000000000000000000000000000000000000000000000000000bfa5a2bdfeb8568d805d0ec5d0cacee1942d32db8b035dd5e76324fa998c2454c68f856c137d03394ae23982d1ac02f6166182fb1c62bc8d695e4d9fa4e38520630ec8e5b24e98dbbc6968f250c74f0d67e1dcf4d872479ead284a4845c2bcdb5a2a3bf715af346613ecd6538097993c96e5d2484157a94f0cfe185348fad1aef5277c9e0fa252a8b136a31890ce81cb3383ed617178a4da85408d0a30a182544f1e63da51d1d25a24b32dab40c1acce87ec5ea22a11614e07bcae03194ec77959a58dbc0ba6fbf3fea1bad5cef5fa00ab55764c85896d2f3ae1dc418a28ec8c8cb758a0fa4add1b710030c6e826a3b1f830ae56af551e696ff7dd158fc25fc406e48b2221130c1251a3ab9bcd0917f6a9a3799477bd238a35482266bbea6890aee6a898063a23c587f592cd3c56ed879c7b6d113c67f8a256fd727288d0a2cbfeeaecaa5d52376214d17524258a2f744e1533352c633431395ec3686ab6ebfcb000000000000000000000000000000000000000000000000000000000000000b0000000000000000000000000000000000000000000000000000000064bad1d60000000000000000000000000000000000000000000000000000000064bad1d60000000000000000000000000000000000000000000000000000000064bad1d60000000000000000000000000000000000000000000000000000000064bad1e10000000000000000000000000000000000000000000000000000000064bad1e10000000000000000000000000000000000000000000000000000000064bad1e10000000000000000000000000000000000000000000000000000000064bad1e20000000000000000000000000000000000000000000000000000000064bad1e30000000000000000000000000000000000000000000000000000000064bad1e400000000000000000000000000000000000000000000000000000000647a3c1600000000000000000000000000000000000000000000000000000000647a3c17000000000000000000000000000000000000000000000000000000000000000b00000000000000000000000000000000000000000000000000000000653178d600000000000000000000000000000000000000000000000000000000653178d600000000000000000000000000000000000000000000000000000000653178d600000000000000000000000000000000000000000000000000000000653178e100000000000000000000000000000000000000000000000000000000653178e100000000000000000000000000000000000000000000000000000000653178e100000000000000000000000000000000000000000000000000000000653178e200000000000000000000000000000000000000000000000000000000653178e300000000000000000000000000000000000000000000000000000000653178e40000000000000000000000000000000000000000000000000000000064f0e3160000000000000000000000000000000000000000000000000000000064f0e317"
+```
+
+The individual Stamp data is embedded in this object, but it is encoded according to the `Attestation` schema and arrives as a hex-encoded string. This means the next step is decoding the `Attestation`.
+
+**Note** You can also check your attestations using the [Ethereum Attestation Service explorer](https://base-goerli.easscan.org). Note that the explorer is deployed on separate subdomains for each network (e.g. for Optimism the URL is [optimism.easscan.org](https://optimism.easscan.org/), for Linea it is [linea.easscan.org](https://linea.easscan.org/)) There, you can search for your address and see your `Attestations` in the browser. You can also search for the [Passport Attestation Schema](https://base-goerli.easscan.org/schema/view/0xe496278adc2c09ec93f23f59fdfb015ca7aae61260fbfa07f6d46eef9cf707b8)) or the [Gitcoin attester contract](https://goerli.basescan.org/address/0x5bbbc733e12f50e6834c40a90066f2f9ffb820e0). The links in this note direct to the relevant resources for the Base Goerli network.
+
+
+
+### Decoding the Attestation
+
+Decoding the `Attestation` means isolating and interpreting specific chunks of the `Attestation`s `data` field and assigning them to fields in a new `struct` defined according to the `Attestation` schema.
+
+Thankfully, there are some pre-built tools that can help with this decoding. First, the `SchemaEncoder` object imported from the `eas-sdk`. You can create an instance of the `SchemaEncoder` using the Gitcoin Passport `Attestation` schema, and then use its `decodeData()` function to parse the encoded data in the `Attestation` into a new `struct` of type `SchemaDecodedItem.`
+
+Here's what that process looks like:
+
+```typescript
+const schemaEncoder = new SchemaEncoder(
+  "uint256[] providers,bytes32[] hashes,uint64[] issuanceDates,uint64[] expirationDates,uint16 providerMapVersion"
+);
+const decodedData = schemaEncoder.decodeData(attestation.data)
+```
+
+
+
+Next, you want to isolate the pieces of data you are actually interested in, and pull those out into their own `const`. In this app, you are working with the raw Stamp data, specifically the `providers` field. The data in `providers` defines precisely which Stamp is attested to for the specific user. This data is provided as a bitmap, where each position in the bitmap corresponds to a specific Stamp. Ownership of a specific Stamp is indicated with a 1 in the appropriate index, whereas a 0 indicates that the user _does not_ own that specific Stamp. The following line of code pulls the `providers` bitmap out of the decoded `Attestation` object.
+
+```typescript
+const providers = decodedData.find((data) => data.name === "providers")?.value.value as BigNumber[];
+```
+
+Now you need to decode the bitmap by identifying the positions of any 1s and looking up the Stamp info associated with that position. The mapping from bitmap to specific Stamp data is defined in a `json` object called `providerBitmapInfo` which you have already imported from `./providerInfo.ts`.
+
+This also requires defining a new `struct` to receive the `provider` data into (`onChainProviderInfo`), and a `map` and `filter` function that extracts the bitmap elements, grabs the associated data from the `providerBitmapInfo` file, decodes it and assigns the result to instances of `onChainProviderInfo` and pushes each instance into an array. Altogether, this looks as follows:
+
+```typescript
+type DecodedProviderInfo = {
+    providerName: PROVIDER_ID;
+    providerNumber: number;
+  };
+  const onChainProviderInfo: DecodedProviderInfo[] = providerBitMapInfo
+    .map((info) => {
+      const providerMask = BigNumber.from(1).shl(info.bit);
+      const currentProvidersBitmap = providers[info.index];
+      if (currentProvidersBitmap && !providerMask.and(currentProvidersBitmap).eq(BigNumber.from(0))) {
+        return {
+          providerName: info.name,
+          providerNumber: info.index * 256 + info.bit,
+        };
+      }
+    })
+    .filter((provider): provider is DecodedProviderInfo => provider !== undefined);
+```
+
+All this decoding logic can be wrapped up into a single function, `decodeAttestation()`. This function should take in the `Attestation` as an argument and return an array of Stamp provider data. The full function looks as follows (you can paste this into your app):
+
+```typescript
+async function decodeAttestation(attestation: Attestation) {
+    const schemaEncoder = new SchemaEncoder(
+      "uint256[] providers,bytes32[] hashes,uint64[] issuanceDates,uint64[] expirationDates,uint16 providerMapVersion"
+    );
+    const decodedData = schemaEncoder.decodeData(attestation.data)
+    const providers = decodedData.find((data) => data.name === "providers")?.value.value as BigNumber[];
+    type DecodedProviderInfo = {
+      providerName: PROVIDER_ID;
+      providerNumber: number;
+    };
+    const onChainProviderInfo: DecodedProviderInfo[] = providerBitMapInfo
+      .map((info) => {
+        const providerMask = BigNumber.from(1).shl(info.bit);
+        const currentProvidersBitmap = providers[info.index];
+        if (currentProvidersBitmap && !providerMask.and(currentProvidersBitmap).eq(BigNumber.from(0))) {
+          return {
+            providerName: info.name,
+            providerNumber: info.index * 256 + info.bit,
+          };
+        }
+      })
+      .filter((provider): provider is DecodedProviderInfo => provider !== undefined);
+
+    return onChainProviderInfo
+  }
+```
+
+
 
 ### Extracting Stamps
 
