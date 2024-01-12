@@ -73,52 +73,57 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/scorer-api/api-access',
-            destination: '/building-with-passport/getting-access',
+            destination: '/building-with-passport/passport-api/getting-access',
             permanent: true
         },
         {
             source: '/building-with-passport/quick-start',
-            destination: '/building-with-passport/quick-start-guide',
+            destination: '/building-with-passport/passport-api/quick-start-guide',
             permanent: true
         },
         {
             source: '/building-with-passport/integration-guides',
-            destination: '/building-with-passport/tutorials',
+            destination: '/building-with-passport/passport-api/tutorials',
             permanent: true
         },
         {
             source: '/building-with-passport/integration-guides/gating-access-with-passport-scores',
-            destination: '/building-with-passport/tutorials/gating-access-with-passport-scores',
+            destination: '/building-with-passport/passport-api/tutorials/gating-access-with-passport-scores',
             permanent: true
         },
         {
             source: '/building-with-passport/integration-guides/integrating-stamps-and-scorers',
-            destination: '/building-with-passport/tutorials/integrating-stamps-and-scorers',
+            destination: '/building-with-passport/passport-api/tutorials/integrating-stamps-and-scorers',
             permanent: true
         },
         {
             source: '/building-with-passport/integration-guides/working-with-stamp-metadata',
-            destination: '/building-with-passport/tutorials/working-with-stamp-metadata',
+            destination: '/building-with-passport/passport-api/tutorials/working-with-stamp-metadata',
             permanent: true
         },
         {
             source: '/building-with-passport/integration-guides/requiring-a-passport-score-for-airdrop-claim',
-            destination: '/building-with-passport/tutorials/requiring-a-passport-score-for-airdrop-claim',
+            destination: '/building-with-passport/passport-api/tutorials/requiring-a-passport-score-for-airdrop-claim',
             permanent: true
         },
         {
             source: '/building-with-passport/integration-guides/integrating-onchain-stamp-data',
-            destination: '/building-with-passport/tutorials/integrating-onchain-stamp-data',
+            destination: '/building-with-passport/smart-contracts/integrating-onchain-stamp-data',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/tutorials/integrating-onchain-stamp-data',
+            destination: '/building-with-passport/smart-contracts/integrating-onchain-stamp-data',
             permanent: true
         },
         {
             source: '/building-with-passport/scorer-api/status-and-error-codes',
-            destination: '/building-with-passport/major-concepts/status-and-error-codes',
+            destination: '/building-with-passport/passport-api/status-and-error-codes',
             permanent: true
         },
         {
             source: '/building-with-passport/scorer-api/reading-passport-stamps',
-            destination: '/building-with-passport/major-concepts/data-dictionary',
+            destination: '/building-with-passport/passport-api/data-dictionary',
             permanent: true
         },
         {
@@ -140,7 +145,96 @@ module.exports = withNextra({
             source: '/case-studies/bankless-academy',
             destination: '/use-cases',
             permanent: true
-        }
+        },
+        {
+            source: '/building-with-passport',
+            destination: '/building-with-passport/introduction',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/getting-access',
+            destination: '/building-with-passport/passport-api/getting-access',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/quick-start-guide',
+            destination: '/building-with-passport/passport-api/quick-start-guide',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/api-reference',
+            destination: '/building-with-passport/passport-api/api-reference',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/major-concepts/data-dictionary',
+            destination: '/building-with-passport/passport-api/data-dictionary',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/data-dictionary',
+            destination: '/building-with-passport/passport-api/data-dictionary',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/major-concepts/status-and-error-codes',
+            destination: '/building-with-passport/passport-api/status-and-error-codes',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/major-concepts/onchain-passports',
+            destination: '/building-with-passport/smart-contracts/overview',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/contract-reference',
+            destination: '/building-with-passport/smart-contracts/contract-reference',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/attestation-schema',
+            destination: '/building-with-passport/smart-contracts/attestation-schema',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/major-concepts/platform-integrator-concepts',
+            destination: '/building-with-passport/major-concepts/educating-users',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/tutorials',
+            destination: '/building-with-passport/passport-api/tutorials',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/tutorial/client-side-scoring',
+            destination: '/building-with-passport/passport-api/tutorials/client-side-scoring',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/tutorials/gating-access-with-passport-scores',
+            destination: '/building-with-passport/passport-api/tutorials/gating-access-with-passport-scores',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/tutorials/integrating-stamps-and-scores',
+            destination: '/building-with-passport/passport-api/tutorials/integrating-stamps-and-scores',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/tutorials/requiring-a-passport-score-for-airdrop-claim',
+            destination: '/building-with-passport/passport-api/tutorials/requiring-a-passport-score-for-airdrop-claim',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/tutorials/working-with-stamp-metadata',
+            destination: '/building-with-passport/passport-api/tutorials/working-with-stamp-metadata',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/tutorials/integrating-onchain-stamp-data',
+            destination: '/building-with-passport/smart-contracts/integrating-onchain-stamp-data',
+            permanent: true
+        },
     ]
 })
-

@@ -1,9 +1,6 @@
 {
-    "data-dictionary": "Data dictionary",
-    "status-and-error-codes": "Status and error codes",
     "scoring-mechanisms": "Scoring mechanisms",
     "scoring-thresholds": "Scoring thresholds",
     "deduplicating-stamps": "Deduplicating Stamps",
-    "onchain-passports": "Onchain Passports",
-    "platform-integrator-concepts": "Platform integrator concepts"
+    "educating-users": "Educating users"
 }
