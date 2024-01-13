@@ -1,0 +1,70 @@
+import { Cards, Card } from 'nextra/components'
+
+# Introduction
+
+If you’re a Gitcoin Passport user interested in setting up a Passport and connecting Stamps to it, head to our [support site](https://support.gitcoin.co/gitcoin-knowledge-base/gitcoin-passport/what-is-gitcoin-passport) for more info.
+
+## What is Passport?
+
+Passport is a tool that allows users to present evidence that they are real, unique humans and signal their trustworthiness to apps. It is a way to collect and present data without exposing it or giving up ownership. 
+
+Under the hood, it is a unique decentralized identifier (a DID) associated with your Ethereum address, stored on the Ceramic network. 
+
+The DID can be used to look up a user's Stamp data, which exists as a collection of Verified Credentials.
+
+**Verified Credentials do not contain any personal identifying information!** They simply demonstrate, using a cryptographic signature, that the user gave access to a specific app and that some criteria were met.
+
+## Use cases
+
+Developers can integrate Passport in a variety of different programs and apps in the web3 ecosystem, as demonstrated by the following use case examples:
+
+- Sybil resistance for faucets, bundlers and airdrops
+- Gating access to content, events, polls, or communities
+- Priority weighting votes
+- Proving trustworthiness
+
+Passport is a versatile and valuable tool for managing access, promoting transparency, and establishing trust within different web3 environments. 
+
+[Learn more about Passport use cases](../overview/use-cases).
+
+
+## Available developer tools
+
+Passport score and Stamp data can be retrieved in two ways:
+
+* **Passport API:** Retrieves data associated with a specific address from the Gitcoin server. 
+* **Passport Smart Contracts:** Interacts with a blockchain to retrieve data associated with a specific address. 
+
+### Passport API
+
+The Passport API serves as a powerful tool for developers, offering access to Passport scores and Stamps via several REST endpoints. 
+
+<Cards>
+  <Card title="Overview" href="building-with-passport/passport-api/overview" />
+  <Card title="Get access" href="building-with-passport/passport-api/getting-access" />
+  <Card title="Quick start" href="building-with-passport/passport-api/quick-start-guide" />
+  <Card title="Tutorials" href="building-with-passport/passport-api/tutorials" />
+  <Card title="API reference" href="building-with-passport/passport-api/api-reference" />
+</Cards>
+
+### Smart contracts
+
+Passport's smart contracts enable you to pull score and Stamp data directly from the blockchain to enable a truly decentralized integration. 
+
+<Cards>
+  <Card title="Overview" href="building-with-passport/smart-contracts/overview" />
+  <Card title="Tutorial" href="building-with-passport/smart-contracts/integrating-onchain-stamp-data" />
+  <Card title="Contract reference" href="building-with-passport/passport-api/contract-reference" />
+</Cards>
+
+
+## Getting Started
+
+To begin your development journey with Passport API, follow these steps:
+
+- [Get access to the API](getting-access)
+- [Use the API playground tool (requires API keys)](https://api.scorer.gitcoin.co/docs)
+- [Get to "Hello World" with the API](quick-start-guide)
+- [Choose a tutorial that best matches your use case. Review the example code and integrate](tutorials)
+
+By following these steps, you'll be well-equipped to start integrating Passport into your platform.

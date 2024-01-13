@@ -1,10 +1,9 @@
 {
     "introduction": "Introduction",
-    "getting-access": "Getting Access",
-    "quick-start-guide": "Quick Start",
-    "tutorials": "Tutorials",
-    "major-concepts": "Major Concepts",
-    "api-reference": "API Reference",
-    "contract-reference": "Contract Reference",
-    "attestation-schema": "Attestation schema"
+    "major-concepts": "Major concepts",
+    "---": {
+        "type": "separator"
+      },    
+    "passport-api": "Passport API",
+    "smart-contracts": "Smart Contracts"
 }
