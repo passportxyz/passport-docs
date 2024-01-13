@@ -27,18 +27,16 @@ You can find the code from this tutorial in this [GitHub repo](https://github.co
 The app will work as follows:
 
 * When the user visits the sample app, they have access to several tabs - one to welcome them and then more where they can check their onchain data. The second tab shows whether there is any onchain data for the connected user. The third shows what Stamps the user has. The final tab shows the user's Passport score.
-* The user will connect their wallet and Gitcoin Passport to the app. Their data will be retrieved from the blockchain and their score will be calculated automatically from their Stamps.
+* The user will connect their wallet and Gitcoin Passport to the app. Their Stamp data and Passport score will be retrieved from the blockchain and displayed in the UI.
 * If the user does not have any Stamps, the tabs contain information about how to create a Passport, add Stamps and migrate them onchain.
 
 This simple example demonstrates the principles you would use to gate a real app using Gitcoin Passport onchain.
-
-The app will be built using [Next.js](https://nextjs.org/).
 
 ### Smart contract logic
 
 The Gitcoin Passport smart contracts build on top of [EAS (Ethereum Attestation Service)](https://attest.sh/), using Attestations as the foundational building blocks. You can read the [contract reference](../contract-reference) page for a primer on how the contracts work.
 
-The `decoder` contract exposes an API that allows you to simply pass in an address and retrieve the decoded data, rather than having to rawAttestations and decode client-side.
+The `decoder` contract exposes an API that allows you to simply pass in an address and retrieve the decoded Stamp and score data, rather than having to retrieve raw `Attestations` and decode client-side.
 
 ### Setting up the app
 
@@ -189,7 +187,7 @@ export default function Passport() {
 
 **Note** that you can swap out the contract addresses if you want to run an app on a different network. You can check all the deployed contract addresses on the [contract reference page](../contract-reference)
 
-There are some parts of this boilerplate code that might look unfamiliar even if you have been through the other [tutorials](/building-with-passport/tutorials) on this site. This is because there is some specific set up required to use smart contracts on the backend.
+There are some parts of this boilerplate code that might look unfamiliar even if you have been through the other [tutorials](/building-with-passport/tutorials) on this site. This is because there is some specific setup required to use smart contracts on the backend.
 
 First, the `provider` field is being assigned as a global variable. The `provider` is a connection to the blockchain. In this app, the connection is made by inheriting network configuration from your wallet. If you are using Metamask with default settings, your connection will be via Infura to whichever network your wallet is connected to. If you have a wallet pointing to your own node's RPC provider, it will use that. The reason `provider` is assigned to a global variable is so that it can be captured during the wallet connection but later it can be passed as an argument when you create instances of the smart contracts.
 
@@ -199,20 +197,10 @@ Second, there are two contract addresses defined immediately below the import st
 
 ```typescript
 const decoderContractAddress = "0xa652BE6A92c7efbBfEEf6b67eEF10A146AAA8ADc";
-const abi = require('./PassportDecoderABI.json')
+const abi = require('./abis.ts')
 ```
 
-This is the addresses on the BaseGoerli blockchain where the `decoder` contract is stored. The `abi` is a formatted set of function signatures that allow the contract bytecode to be decoded and instantiated in your app.
-
-You will also need to load a file containing the weights for individual Stamps so you can calculate a Passport score.
-
-```typescript
-import { GITCOIN_PASSPORT_WEIGHTS } from './stamp-weights';
-```
-
-The elements imported from `./stamp-weights` is a list of weights for each Stamp used to create a Passport score. In the 'web2' model for Gitcoin Passport this is done server-side, but here we will implement our own scoring algorithm using onchain Stamps. Again, create a file in the `src/app` folder called `stamp-weights.ts` and populate it with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/stamp-weights.ts).
-
-**Note** that the information in `stamp-weights.ts` needs to stay consistent with Gitcoin - you can check the up-to-date list of stamp weights[ in this Github file](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin\_passport\_weights.py). 
+The `decoderContractAddress` is the address on the BaseGoerli blockchain where the `decoder` contract is stored. The data in `abis.ts` is a formatted set of function signatures that allow the contract bytecode to be decoded and instantiated in your app (an ABI - Application Binary Interface).
 
 The elements imported from `tab-contents` are components used to build the UI. This file should also be located in the `src/app` folder, called `tab-contents.tsx`, and should be populated with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/tab-contents.tsx).
 
@@ -231,56 +219,49 @@ Getting Passport data requires instantiating the `decoder` contract and calling 
 Once the contract instance exists, you can simply call `getPassport` passing in the user address, which is stored in your app's state. If the function call returns some Stamp data, you can set the `hasStampData` flag to `true` and return the data.
 
 ```ts
+/** get passport info from decoder contract */
 async function getPassportInfo() {
-  const decoderContract: ethers.Contract = new ethers.Contract(decoderContractAddress, new ethers.Interface(abi['0x1a4']), provider)
-  const passportInfo: [] = await decoderContract.getPassport(address)
-  if (passportInfo.length > 1) {
-    setHasStamps(true)
+  console.log(address)
+  const decoderContract: ethers.Contract = new ethers.Contract(decoderContractAddress, new ethers.Interface(abi.DecoderAbi['0x14a33']), provider)
+  try {
+    const passportInfo: [] = await decoderContract.getPassport(address) // test address '0x85fF01cfF157199527528788ec4eA6336615C989'
+    return passportInfo
+  } catch {
+    throw new Error("no passport information available")
   }
-  return passportInfo
 }
 ```
 
 ### Extracting Stamps
 
-The next step is to write a function to extract the Stamp names from `passportData` into an array and then set the values of the state variables `stamps`. The following code snippet contains that function - you can paste it into your app:
+The next step is to write a function to extract the Stamp names from `passportData` into an array. The following code snippet contains that function - you can paste it into your app:
 
 ```typescript
-async function getStamps(passportInfo: []) {
+/** parse out stamps from passport info object*/
+function getStamps(passportInfo: []) {
   var stamps: Stamp[] = [];
   for (var i = 0; i < passportInfo.length; i++) {
     stamps.push({ id: i, stamp: passportInfo[i][0] })
   }
-  setStamps(stamps)
   return stamps
 }
 ```
 
-Well done!  at this point you have implemented all the logic required to retrieve the list of Stamps owned by your connected user! For some apps, this might be all you need - you can simply display the contents of `stamps` to show which Stamps are owned by the user.
+### Retrieving a score
 
-### Calculating a score
+Passport scores are calculated by summing weights assigned to each specific Stamp. Gitcoin have defined a list of Stamp weights that are used when scoring is done by the smart contract. The contract exposes a public function, `getScore()` that returns the Passport score for a given user. You can call the function in the same way as for `getPassportInfo()`.
 
-Passport scores are calculated by summing weights assigned to each specific Stamp. Gitcoin have defined a list of Stamp weights that are used when scoring is done on the Gitcoin server. In this app, you will use the same weights to calculate a score from the onchain Stamps. The weights themselves are defined in the `stamp-weights.ts` file that you are already importing in the boilerplate code.
-
-To create a score, you need to write a function that iterates over your list of Stamp names, looks up each name in the stamp weights data, and adds that weight to a cumulative sum. The sum after you have iterated over all the available Stamps becomes your Passport score. This can be achieved with the following function that you can paste into your app:
 
 ```typescript
-function calculate_score(stampData: Array<Stamp>) {
-  let i = 0
-  var scores: Array<number> = []
-  let names = stampData.map(entry => entry.stamp);
-
-  names.forEach(name => {
-    if (GITCOIN_PASSPORT_WEIGHTS.hasOwnProperty(name)) {
-      let key = name as keyof Object;
-      let value = GITCOIN_PASSPORT_WEIGHTS[key].toString();
-      scores.push(parseFloat(value))
-    }
-  })
-
-  const totalScore = scores.reduce((acc, currentScore) => acc + currentScore, 0)
-
-  return totalScore
+/** get poassport score from decoder contract */
+async function getScore() {
+  const decoderContract: ethers.Contract = new ethers.Contract(decoderContractAddress, new ethers.Interface(abi.DecoderAbi['0x14a33']), provider)
+  try {
+    const score = await decoderContract.getScore(address)
+    return score
+  } catch {
+    throw new Error("no passport info available")
+  }
 }
 ```
 
@@ -288,16 +269,19 @@ Now you have implemented all the logic required to retrieve and decode onchain S
 
 ### Executing the functions
 
-Now you have all your app functions defined, you need to determine when and how they are executed. There is an ordering of functions implied by the return types and arguments of each function - some functions take the outputs of others as inputs.
-
-The following function executed each function in turn, wrapped in some basic error handling:
+Now you have all your app functions defined, you need to determine when and how they are executed. You can write a simple wrapper function that calls `getPassportInfo()` and `getScore()` and uses the returned values to update the appropriate state variables.
 
 ```typescript
+/** call getPassportInfo and getStamps and set state vars */
 async function queryPassport() {
-  const passportInfo = await getPassportInfo()
-  const stamps = await getStamps(passportInfo);
-  const score = calculate_score(stamps)
-  setScore(score)
+  const passportData = await getPassportInfo();
+  const stamps = getStamps(passportData);
+  if (stamps.length > 1) {
+    setHasStamps(true)
+    setStamps(stamps)
+  }
+  const score = await getScore()
+  setScore(parseInt(score) / 10000)
 }
 ```
 
