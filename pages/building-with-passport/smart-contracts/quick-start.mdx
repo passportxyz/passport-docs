@@ -20,7 +20,6 @@ The `getScore` method is also available, along with several lower level function
 
 Here's what a response from `getPassport` function on the BaseScan explorer looks like:
 
-
 ![](public/basescan.png)
 
 
@@ -33,14 +32,13 @@ The steps are:
 - 2. instantiate the decoder contract
 - 3. call the contract functions
 
-
 Here's a minimal example of how to call the `getPassport()` and `getScore()` methods using `Web3js` in a Javascript app:
 
 ## Instantiate a web3 provider
 
 The provider is your entry point to the blockchain. Ultimately it is the address for a node that exposes a set of methods that allows you to interact with the blockchain.
 If you run your own node, you can use it as your provider. It is also common to use third party "RPC" providers. This is equivalent to using someone else's node.
-If you are not sure what to use as youyr provider, your wallet will expose the URLs it is using, and you can copy them into your Javascript application as shown below.
+If you are not sure what to use as your provider, your wallet will expose the URLs it is using, and you can copy them into your Javascript application as shown below.
 
 To use an RPC provider:
 
@@ -55,9 +53,9 @@ To use a local node (in this case, Geth using IPC):
 ```js
 var web3 = new Web3(new Web3.providers.IpcProvider('/Users/myuser/Library/Ethereum/geth.ipc', net))
 ```
-Now you have a variable, `web3` representign your web3 connection. You can use this to interact with contracts on the blockchain. 
+Now you have a variable, `web3` representing your web3 connection. You can use this to interact with contracts on the blockchain. 
 
-**Note** please ensure your web3 provider is connected to the correct network!!
+**Note** please ensure your web3 provider is connected to the correct network.
 
 
 ## Instantiate the decoder contract
@@ -65,7 +63,7 @@ Now you have a variable, `web3` representign your web3 connection. You can use t
 Instantiating a contract allows you to interact with a contract deployed on the blockhain as if it were a Javascript object.
 This requires you to pass the contract ABI (application Binary Interface) and the address on the blockchain where the contract is deployed.
 The contract ABI can usually be found by querying the contract address on a block explorer, or alternatively it is usually available on a project's Github if the project is open source.
-The Gitcoin deployer contract ABI can be found on both block explorers and the Gitcoin Github. 
+The Gitcoin decoder contract ABI can be found on both block explorers and the [Gitcoin Github](https://github.com/gitcoinco/eas-proxy/blob/main/deployments/abi/GitcoinPassportDecoder.json). 
 
 ```js
 var Contract = require('web3-eth-contract');
@@ -97,11 +95,11 @@ var score = contract.getScore("<user-address>")
 
 This quick start guide demonstrated how to grab information from the Gitcoin Passport decoder contract. 
 You have the option to query the contract using the block explorer UI or programatically using a library such as `web3js`. 
-There are equivalent libraries in other languages too, such as [`web3py`](https://web3py.readthedocs.io/en/stable/) for Python, [`web3` for Go](https://pkg.go.dev/github.com/gochain/web3)
+There are equivalent libraries in other languages too, such as [`web3py`](https://web3py.readthedocs.io/en/stable/) for Python, [`web3`](https://pkg.go.dev/github.com/gochain/web3) for Go,
 and `ethers` for [Rust](https://github.com/gakonst/ethers-rs) and [Javascript](https://docs.ethers.org/v5/).
 
 
 ## Next steps
 
-Exlore our [contract reference page](./contract-reference.mdx) to find all the details about the various Gitcoin Passport contract deployments. 
+Explore our [contract reference page](./contract-reference.mdx) to find all the details about the various Gitcoin Passport contract deployments. 
 Then you could try our more advanced [smart contract app tutorial](./integrating-onchain-stamp-data.md).
