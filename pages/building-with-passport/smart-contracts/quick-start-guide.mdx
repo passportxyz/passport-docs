@@ -3,20 +3,21 @@
 The Gitcoin Passport smart contracts are deployed on several chains, covering both testnets and live networks. 
 There are several contracts that interact with each other to provide the Gitcoin Passport backend and API. 
 
-## The blockchain as a backend and API server
-
-The point of the smart contracts is to provide the same functionality as Gitcoin's server. 
-The benefit of moving the service onto the blockchain is that users do not have to rely upon centralized providers to keep a server available and secure.
-You can always audit what is happening by looking at the contracts because the contracts are always publicly available.
-Data is stored in each contract's storage on each blockchain. The smart contracts themselves expose a subset of their functions to the public, providing an API for querying data directly from the blockchain.
-On this page you will see how to use that API to gather Stamp and score data for an address.
+This quick start will illustrate different ways that you can quickly test pulling data from the Gitcoin `decoder` contract.
 
 ## Retrieving data from Block Explorers
 
 You can use a block explorer to find the Passport smart contracts and query their API directly in the browser, without having to write any code at all.
-For example, the `decoder` [contract on the BaseGoerli network](https://goerli.basescan.org/address/0xa652be6a92c7efbbfeef6b67eef10a146aaa8adc#readProxyContract) can be viewed on the BaseScan explorer.
-The `Read as Proxy` tab shows all the methods exposed by the contract. You can provide a user address to, for example, the `getPassport` method and see the Stamps owned by the given address in the browser.
-The `getScore` method is also available, along with several lower level functions that give access to encoded data and intermediate values.
+
+1. Navigate to the `decoder` contract on a [network](../contract-reference#contract-addresses) supported by onchain Passport. In this example, we'll use the [`decoder` deployed to the BaseGoerli network](https://goerli.basescan.org/address/0xa652be6a92c7efbbfeef6b67eef10a146aaa8adc#readProxyContract). 
+2. Make sure the `Read as Proxy` tab is open. This is where you can view the methods exposed by the contract. 
+3. Open the `getPassport()` or `getScore()` method.
+4. Enter a ETH wallet address, click `Query`, and view the results. 
+
+Available methods:
+* The `getPassport` method will provide the Stamps owned by the given address in the browser.
+* The `getScore` method will provide the user's score as a 4 digit number. Divide this by 100 to get the user's unique humanity score. 
+* There are also several lower level functions that give access to encoded data and intermediate values. 
 
 Here's what a response from `getPassport` function on the BaseScan explorer looks like:
 
