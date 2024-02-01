@@ -3,9 +3,9 @@
 Passports onchain functionality enables users to store their verified Stamps and scores onchain, and makes this data available via smart contracts.
 
 We also discuss the onchain use cases in the following resources:
-* [Quick start: Get to "Hello World" with the smart contracts](../quick-start-guide)
-* [Tutorial: Building an app using onchain Passport data](../integrating-onchain-stamp-data)
-* [Reference: Learn about the available smart contracts and typical onchain developer flow](../contract-reference)
+* [Quick start: Get to "Hello World" with the smart contracts](quick-start-guide)
+* [Tutorial: Building an app using onchain Passport data](integrating-onchain-stamp-data)
+* [Reference: Learn about the available smart contracts and typical onchain developer flow](contract-reference)
 
 ## Why onchain?
 
@@ -60,7 +60,7 @@ While onchain Passports are in their infancy, the offchain Passport is useful as
 ## Next steps
 
 Learn more about onchain Passports:
-* [Quick start](/quick-start-guide)
-* [Tutorial](/integrating-onchain-stamp-data)
-* [Contract reference](/contract-reference)
-* [Attestation schema](/attestation-schema)
+* [Quick start](quick-start-guide)
+* [Tutorial](integrating-onchain-stamp-data)
+* [Contract reference](contract-reference)
+* [Attestation schema](attestation-schema)
