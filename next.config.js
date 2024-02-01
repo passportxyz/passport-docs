@@ -14,6 +14,12 @@ module.exports = withNextra({
             basePath: false
         },
         {
+            source: '/overview/creating-your-passport',
+            destination: 'https://support.gitcoin.co/gitcoin-knowledge-base/gitcoin-passport/creating-your-passport',
+            permanent: true,
+            basePath: false
+        },
+        {
             source: '/get-started/collecting-stamps',
             destination: 'https://support.gitcoin.co/gitcoin-knowledge-base/gitcoin-passport/what-are-stamps',
             permanent: true,
@@ -63,6 +69,11 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/how-it-works',
+            destination: '/building-with-passport/introduction',
+            permanent: true
+        },
+        {
+            source: '/get-started/how-it-works',
             destination: '/building-with-passport/introduction',
             permanent: true
         },
@@ -124,6 +135,11 @@ module.exports = withNextra({
         {
             source: '/building-with-passport/scorer-api/reading-passport-stamps',
             destination: '/building-with-passport/passport-api/data-dictionary',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/scorer-api/endpoint-definition',
+            destination: '/building-with-passport/passport-api/api-reference',
             permanent: true
         },
         {
