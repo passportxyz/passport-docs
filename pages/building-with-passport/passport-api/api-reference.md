@@ -434,13 +434,16 @@ curl --request GET \
 
 ### Receive GTC staking amounts
 
-This endpoint returns both self (`stakes`) and community (`xstakeAggregates`) staking amounts for a specified address. It also breaks down staking amounts based on round ID. 
+This endpoint returns both self (`stakes`) and community (`xstakeAggregates`) staking amounts for a specified address and round. It also breaks down staking amounts based on round ID. 
 
-> GET /registry/gtc-stake/{address}
+Our round IDs correspond to the different Gitcoin Grants rounds, and can be found at the following link: 
+[Round IDs](https://github.com/gitcoinco/id-staking/blob/8782b2b7138c2b41644a74384d75bca56316317d/packages/react-app/src/components/RoundSelector.jsx#L4-L10)
+
+> GET /registry/gtc-stake/{address}/{round_id}
 
 ```bash filename="Sample request" copy
 curl --request GET \
-    --url https://api.scorer.gitcoin.co/registry/gtc-stake/{address} \
+    --url https://api.scorer.gitcoin.co/registry/gtc-stake/{address}/{round_id} \
     --header 'X-API-KEY: {API KEY}'
 ```
 
