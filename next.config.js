@@ -223,7 +223,7 @@ module.exports = withNextra({
             permanent: true
         },
         {
-            source: '/building-with-passport/tutorial/client-side-scoring',
+            source: '/building-with-passport/tutorials/client-side-scoring',
             destination: '/building-with-passport/passport-api/tutorials/client-side-scoring',
             permanent: true
         },
