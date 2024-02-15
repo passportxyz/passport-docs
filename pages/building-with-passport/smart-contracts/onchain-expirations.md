@@ -12,6 +12,6 @@ Here's an example of a [Passport attestation](https://optimism.easscan.org/attes
 
 ## Score attestations
 
-Onchain scores do not have an explicit expiry date associated with them. If you are an integrator, you could use the attestation transaction time as a proxy for the issuance date if the age of the score is important for your application. As a rule of thumb, we recommend expiring scores 90 days after it was created.
+Onchain scores do not have an explicit expiry date associated with them. If you are an integrator, you could use the attestation transaction time as a proxy for the issuance date if the age of the score is important for your application. As a rule of thumb, we recommend expiring scores 90 days after it was created. Offchain Stamps also expire after 90 days.
 
 Here's an example of a [score attestation](https://optimism.easscan.org/attestation/view/0x5beb4300ff732dce2bdec86fb97df3a23787c9f1ff90c06bff6bc86dea74aa6c).
