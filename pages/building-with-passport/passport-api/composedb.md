@@ -1,6 +1,6 @@
 # ComposeDB
 
-ComposeDB is a decentralized graph database built on top of ceramic.
+ComposeDB is a decentralized graph database built on top of Ceramic.
 Whereas other databases typically store tables of information, a graph database stores relationships between nodes.
 Instead of just storing keys and values, a graph database allows connectioons between values to exist too. 
 This is very powerful for understanding, for example, user journeys, paths, histories and networks.
@@ -15,7 +15,7 @@ Read more in the [ComposeDB documentation](https://developers.ceramic.network/do
 
 ## Passport on ComposeDB
 
-The data used by Gitcoin passport fits very well into the graph structure. There are two basic elements that Passport considers: user addresses and Stamps. These are nodes. The links between Stamps and users and edges. 
+The data used by Gitcoin Passport fits very well into the graph structure. There are two basic elements that Passport considers: user addresses and Stamps. These are nodes. The links between Stamps and users and edges. 
 
 Let's say you want to know who owns a particular Stamp. You would identify the **node** for that Stamp and then query all the **edges** that connect the Stamp to user addresses.
 
