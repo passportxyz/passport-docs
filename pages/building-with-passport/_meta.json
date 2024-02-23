@@ -1,9 +1,10 @@
 {
-    "introduction": "Introduction",
-    "major-concepts": "Major concepts",
-    "---": {
-        "type": "separator"
-      },    
-    "passport-api": "Passport API",
-    "smart-contracts": "Smart Contracts"
+  "introduction": "Introduction",
+  "major-concepts": "Major concepts",
+  "---": {
+    "type": "separator"
+  },
+  "passport-api": "Passport API",
+  "smart-contracts": "Smart Contracts",
+  "composedb": "ComposeDB"
 }
