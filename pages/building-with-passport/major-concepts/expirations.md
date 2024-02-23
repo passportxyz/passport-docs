@@ -11,7 +11,9 @@ The shorter the time between the issuance date and the expiration date, the more
 
 ## Offchain Stamps
 
-Offchain Stamps expire after 90 days. This is handled by the Gitcoin server. You can bump the expiry date by another 90 days by reverifying your Stamps on the [Passport app](https://passport.gitcoin.co/).
+Offchain Stamps expire after 90 days. This is handled by the Gitcoin server. 
+
+Users can bump the expiry date by another 90 days by reverifying your Stamps on the [Passport app](https://passport.gitcoin.co/).
 
 
 ## Onchain Stamps
