@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: API reference
 description: Reference documentation for the Gitcoin Passport API
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Passport API Overview
+title: Passport API overview
 description: General overview of the Gitcoin Passport API
 ---
 # Passport API
