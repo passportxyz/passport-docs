@@ -1,5 +1,6 @@
 ---
-description: This tutorial introduces Stamp and score management for your app
+title: Integrating Stamps and Scores
+description: Tutorial covering how to use Stamp and Score data in your apps.
 ---
 
 # Integrating Stamps and Scorers

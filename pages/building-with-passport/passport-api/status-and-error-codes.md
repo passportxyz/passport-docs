@@ -1,3 +1,8 @@
+---
+title: Status and error codes
+description: Referene documentation for the status and error codes returned from the Passport API.
+---
+
 # Status and error codes
 
 ## HTTP Status codes

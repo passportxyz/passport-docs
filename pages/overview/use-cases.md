@@ -1,3 +1,8 @@
+---
+title: Use cases
+description: A collection of potential scenarios where Gitcoin passport can solve real business problems.
+---
+
 # Use cases
 
 Gitcoin Passport’s developer platform enables several key use cases:
