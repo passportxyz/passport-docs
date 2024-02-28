@@ -1,4 +1,5 @@
 ---
+title: Working with Stamp metadata
 description: How to retrieve, handle and display Stamp metadata in a simple Nextjs app.
 ---
 
@@ -388,4 +389,3 @@ When you connect your app and click `Show Stamps` your app will look as follows 
 ### Summary
 
 This walk-through guide demonstrated how to retrieve and handle Stamp metadata. You learned how to build a simple app that displays Stamp data to the browser, making use of information in the metadata. Now you understand the basics, you can incorporate Stamp metadata into your own apps!
-

@@ -1,4 +1,5 @@
 ---
+title: Requiring a Passport score to qualify for airdrops
 description: >-
   Explore this detailed guide, demonstrating how you can effectively utilize
   Passport scores to guard against Sybil attacks on an airdrop.

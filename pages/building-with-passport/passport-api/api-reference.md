@@ -1,3 +1,8 @@
+---
+title: API reference
+description: Reference documentation for the Gitcoin Passport API
+---
+
 # API Reference
 
 The Passport API enables developers to retrieve Passport scores and Stamp metadata for users who have created a Gitcoin Passport.

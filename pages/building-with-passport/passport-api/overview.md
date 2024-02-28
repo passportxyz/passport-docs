@@ -1,3 +1,7 @@
+---
+title: Passport API overview
+description: General overview of the Gitcoin Passport API
+---
 # Passport API
 
 The Passport API serves as a powerful tool for developers, offering access to Passport scores and Stamps using REST endpoints. 
@@ -23,15 +27,15 @@ At this point if the user’s score was above your threshold you can provide the
 
 ## Available endpoints
 
-| Endpoint action                              | Endpoint                                    |
-| -------------------------------------------- | ------------------------------------------- |
-| Retrieval of signing messages                | `GET /registry/signing-message`             |
-| Submitting Passports for scoring             | `POST /registry/submit-passport`            |
-| Retrieval of scores for one address          | `GET /registry/score/{scorer_id}/{address}` |
-| Retrieval of scores for multiple addresses   | `GET /registry/score/{scorer_id}`           |
-| Retrieval of Stamps linked to Passports      | `GET /registry/stamps/{address}`            |
-| Retrieval of all available Stamps            | `GET /registry/stamp-metadata`              |
-| Retreival of community staking amounts       | `GET /registry/gtc-stake/{address}`         |
+| Endpoint action                            | Endpoint                                    |
+| ------------------------------------------ | ------------------------------------------- |
+| Retrieval of signing messages              | `GET /registry/signing-message`             |
+| Submitting Passports for scoring           | `POST /registry/submit-passport`            |
+| Retrieval of scores for one address        | `GET /registry/score/{scorer_id}/{address}` |
+| Retrieval of scores for multiple addresses | `GET /registry/score/{scorer_id}`           |
+| Retrieval of Stamps linked to Passports    | `GET /registry/stamps/{address}`            |
+| Retrieval of all available Stamps          | `GET /registry/stamp-metadata`              |
+| Retreival of community staking amounts     | `GET /registry/gtc-stake/{address}`         |
 
 Learn more about each of these endpoints on our [API Reference](api-reference) page, or experiment with them using our [API playground](https://api.scorer.gitcoin.co/docs) (requires [API key and Scorer](getting-access)).
 

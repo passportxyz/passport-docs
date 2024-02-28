@@ -1,3 +1,8 @@
+---
+title: Smart contract overview
+description: A general overview of Gitcoin Passport's onchain technology stack.
+---
+
 # Onchain Passports
 
 Passports onchain functionality enables users to store their verified Stamps and scores onchain, and makes this data available via smart contracts.

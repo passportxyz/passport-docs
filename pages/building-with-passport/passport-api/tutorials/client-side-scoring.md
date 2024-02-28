@@ -1,4 +1,5 @@
 ---
+title: Client-side scoring tutorial
 description: This tutorial introduces client-side scoring 
 ---
 

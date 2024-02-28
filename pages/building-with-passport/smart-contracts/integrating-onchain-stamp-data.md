@@ -1,3 +1,8 @@
+---
+title: Integrating onchain Stamp data
+description: A tutorial demonstrating how to integrate onchain Stamp data into your apps.
+---
+
 # Integrating onchain Stamp data
 
 In this tutorial, you'll learn how to show different content to users depending on their Passport data. Here, the Stamp data will be retrieved from the blockchain.
