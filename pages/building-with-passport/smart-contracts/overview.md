@@ -44,10 +44,9 @@ Mainnet
 
 Testnet
 * Optimism Sepolia
-* Base Goerli
 * Linea Goerli
 
-Please note that you can explore our testnet functionality by visiting https://passport.gitcoin.co/#/dashboard/testing. There, you will be able to add your Passport to one of the supported testnet networks using the "Bring Passport onchain" button at the bottom of the testing app. 
+Please note that you can explore our testnet functionality by visiting https://passport.gitcoin.co/#/dashboard/testing. There, you will be able to add your Passport to one of the supported testnet networks using the "Bring Passport onchain" button at the bottom of the testing app. Learn more via our our [guide on test mode](test-mode).
 
 ## Available registries
 

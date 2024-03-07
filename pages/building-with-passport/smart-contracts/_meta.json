@@ -4,6 +4,6 @@
     "integrating-onchain-stamp-data": "Tutorial",
     "contract-reference": "Contract reference",
     "attestation-schema": "Attestation schema",
-    "onchain-expirations": "Onchain Expirations",
-    "test-mode": "Test Mode"
+    "onchain-expirations": "Onchain expirations",
+    "test-mode": "Onchain testing"
 }
