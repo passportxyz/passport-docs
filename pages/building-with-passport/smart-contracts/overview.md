@@ -39,7 +39,7 @@ Of course, there are some additional complexities to this, including Stamp expir
 This onchain smart contract stack is currently deployed to the following networks:
 
 Mainnet
-* Optimism Mainnet 
+* Optimism
 * Linea
 
 Testnet
@@ -47,7 +47,7 @@ Testnet
 * Base Goerli
 * Linea Goerli
 
-Please note that you can explore our testnet functionality by visiting https://passport.gitcoin.co/#/dashboard/testing. There, you will be able to add your Passport to one of the supported testnet networks using the "Bring Passport onchain" button at the bottom of the testing app. 
+Please note that you can explore our testnet functionality via the app using [Test Mode](test-mode).
 
 ## Available registries
 
