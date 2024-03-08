@@ -482,3 +482,5 @@ curl --request GET \
   ]
 }
 ```
+
+If you have questions about the API you can ask them in our [developer support channel](https://discord.com/channels/562828676480237578/986222591096279040).

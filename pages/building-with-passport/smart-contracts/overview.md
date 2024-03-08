@@ -44,7 +44,6 @@ Mainnet
 
 Testnet
 * Optimism Sepolia
-* Base Goerli
 * Linea Goerli
 
 Please note that you can explore our testnet functionality via the app using [Test Mode](test-mode).
@@ -69,3 +68,5 @@ Learn more about onchain Passports:
 * [Tutorial](integrating-onchain-stamp-data)
 * [Contract reference](contract-reference)
 * [Attestation schema](attestation-schema)
+
+You can also ask questions about onchain Passports in our [developer support channel on Discord](https://discord.com/channels/562828676480237578/986222591096279040)
