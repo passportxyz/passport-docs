@@ -18,9 +18,9 @@ You can learn more about Passport's available smart contracts and the typical de
 
 ### Prerequisites
 
-To follow this tutorial, you'll need [Next.js](https://nextjs.org/), [Node](https://nodejs.org/en), and [Chakra-UI](https://chakra-ui.com/) installed on your machine. You will be using the [BaseGoerli](https://chainlist.org/chain/84531) test network - you will need to import this network into your wallet. Some familiarity with smart contracts is recommended.
+To follow this tutorial, you'll need [Next.js](https://nextjs.org/), [Node](https://nodejs.org/en), and [Chakra-UI](https://chakra-ui.com/) installed on your machine. You will be using the Optimism Sepolia test network - you will need to import this network into your wallet. Some familiarity with smart contracts is recommended.
 
-This app uses a blockchain, rather than Gitcoin's database server, as a backend. This means you **do not need an API key or Scorer ID,** but you do need to have a browser wallet that can connect to the BaseGoerli test network.
+This app uses a blockchain, rather than Gitcoin's database server, as a backend. This means you **do not need an API key or Scorer ID,** but you do need to have a browser wallet that can connect to the Optimism Sepolia test network.
 
 
 ### App outline
@@ -101,7 +101,7 @@ import { ChakraProvider, Flex, Heading, Button } from '@chakra-ui/react'
 import { TabLayout } from './tab-contents'
 import { GITCOIN_PASSPORT_WEIGHTS } from './stamp-weights';
 
-const decoderContractAddress = "0xa652BE6A92c7efbBfEEf6b67eEF10A146AAA8ADc";
+const decoderContractAddress = "0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56";
 const abi = require('./PassportDecoderABI.json')
 
 declare global {
@@ -172,8 +172,8 @@ export default function Passport() {
         </Flex>
         <div>
           {connected && <p>✅ Wallet connected</p>}
-          {connected && network == "84531" && <p>✅ network: BaseGoerli</p>}
-          {connected && network != "84531" && <p>🔴 Please switch to BaseGoerli network</p>}
+          {connected && network == "11155420" && <p>✅ network: Optimism Sepolia</p>}
+          {connected && network != "11155420" && <p>🔴 Please switch to Optimism Sepolia network</p>}
         </div>
         <br />
         <br />
@@ -196,20 +196,20 @@ There are some parts of this boilerplate code that might look unfamiliar even if
 
 First, the `provider` field is being assigned as a global variable. The `provider` is a connection to the blockchain. In this app, the connection is made by inheriting network configuration from your wallet. If you are using Metamask with default settings, your connection will be via Infura to whichever network your wallet is connected to. If you have a wallet pointing to your own node's RPC provider, it will use that. The reason `provider` is assigned to a global variable is so that it can be captured during the wallet connection but later it can be passed as an argument when you create instances of the smart contracts.
 
-The `chainID` for the network you are connected to is requested from the `provider` too and the value is stored in the app's state. This is used in the UI to warn the user if they are connected to a network other than Base Goerli. There are two statuses presented in the UI - one that confirms that the user is connected and one that either confirms the wallet is connected to Base Goerli or warns the user they are connected to the wrong network.
+The `chainID` for the network you are connected to is requested from the `provider` too and the value is stored in the app's state. This is used in the UI to warn the user if they are connected to a network other than  Optimism Sepolia. There are two statuses presented in the UI - one that confirms that the user is connected and one that either confirms the wallet is connected to Optimism Sepolia or warns the user they are connected to the wrong network.
 
 Second, there are two contract addresses defined immediately below the import statements:
 
 ```typescript
-const decoderContractAddress = "0xa652BE6A92c7efbBfEEf6b67eEF10A146AAA8ADc";
+const decoderContractAddress = "0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56";
 const abi = require('./abis.ts')
 ```
 
-The `decoderContractAddress` is the address on the BaseGoerli blockchain where the `decoder` contract is stored. The data in `abis.ts` is a formatted set of function signatures that allow the contract bytecode to be decoded and instantiated in your app (an ABI - Application Binary Interface).
+The `decoderContractAddress` is the address on the Optimism Sepolia blockchain where the `decoder` contract is stored. The data in `abis.ts` is a formatted set of function signatures that allow the contract bytecode to be decoded and instantiated in your app (an ABI - Application Binary Interface).
 
 The elements imported from `tab-contents` are components used to build the UI. This file should also be located in the `src/app` folder, called `tab-contents.tsx`, and should be populated with the code located in [this GitHub file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/tab-contents.tsx).
 
-Otherwise, the `create-next-app` boilerplate code is quite standard. There is a `connect()` function that instantiates the `provider` by grabbing network configuration from your browser wallet (make sure you are connected to BaseGoerli) and a `checkConnection()` function wrapped in `useEffect` that automatically triggers a connection when the page is first loaded.
+Otherwise, the `create-next-app` boilerplate code is quite standard. There is a `connect()` function that instantiates the `provider` by grabbing network configuration from your browser wallet (make sure you are connected to Optimism Sepolia) and a `checkConnection()` function wrapped in `useEffect` that automatically triggers a connection when the page is first loaded.
 
 ### Getting Passport data
 
@@ -227,9 +227,9 @@ Once the contract instance exists, you can simply call `getPassport` passing in 
 /** get passport info from decoder contract */
 async function getPassportInfo() {
   console.log(address)
-  const decoderContract: ethers.Contract = new ethers.Contract(decoderContractAddress, new ethers.Interface(abi.DecoderAbi['0x14a33']), provider)
+  const decoderContract: ethers.Contract = new ethers.Contract(decoderContractAddress, new ethers.Interface(abi.DecoderAbi['0xaa37dc']), provider)
   try {
-    const passportInfo: [] = await decoderContract.getPassport(address) // test address '0x85fF01cfF157199527528788ec4eA6336615C989'
+    const passportInfo: [] = await decoderContract.getPassport(address)
     return passportInfo
   } catch {
     throw new Error("no passport information available")
@@ -260,7 +260,7 @@ Passport scores are calculated by summing weights assigned to each specific Stam
 ```typescript
 /** get poassport score from decoder contract */
 async function getScore() {
-  const decoderContract: ethers.Contract = new ethers.Contract(decoderContractAddress, new ethers.Interface(abi.DecoderAbi['0x14a33']), provider)
+  const decoderContract: ethers.Contract = new ethers.Contract(decoderContractAddress, new ethers.Interface(abi.DecoderAbi['0xaa37dc']), provider)
   try {
     const score = await decoderContract.getScore(address)
     return score
