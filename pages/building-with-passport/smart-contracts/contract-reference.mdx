@@ -17,6 +17,9 @@ This page is broken into two sections:
 * [How to query for onchain Passport data](#how-to-query-for-onchain-passport-data)
 
 
+You can always chat in our [Discord developer support channel](https://discord.com/channels/562828676480237578/986222591096279040) if you have questions about the Passport smart contracts.
+
+
 ## How Gitcoin adds Passport data to the blockchain
 
 We will not cover this in depth, as it is already documented in our [GitHub docs](https://github.com/gitcoinco/eas-proxy/blob/main/docs/00-onchain-data.md).
@@ -62,6 +65,7 @@ The decoder is currently deployed to the following networks:
 | OP Goerli [Testnet]   | 0xa9f07557c2AAf8C9b2FeAA82150C24bA094670e0 | [Etherscan](https://goerli-optimism.etherscan.io/address/0xa9f07557c2AAf8C9b2FeAA82150C24bA094670e0)    |
 | Base Goerli [Testnet] | 0xa652BE6A92c7efbBfEEf6b67eEF10A146AAA8ADc | [Basescan](https://goerli.basescan.org/address/0xa652BE6A92c7efbBfEEf6b67eEF10A146AAA8ADc)              |
 
+You can learn more about working with testnets via our guide on [Test Mode](test-mode).
 
 #### Available methods
 
@@ -127,7 +131,30 @@ EAS Schema
 | score    | 0x6ab5d34260fca0cfcf0e76e96d439cace6aa7c3c019d7c4580ed52c6845e9c89 | [EasScan](https://optimism.easscan.org/schema/view/0x6ab5d34260fca0cfcf0e76e96d439cace6aa7c3c019d7c4580ed52c6845e9c89) |
 
 
-##### Linea
+
+##### Optimism Sepolia
+
+The Optimism Sepolia chain ID is 11155420.
+
+Gitcoin
+
+| contract        | address                                    | link                                                                                                 |
+| --------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| issuer          | 0x4200000000000000000000000000000000000021 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x4200000000000000000000000000000000000021)      |
+| EAS             | 0x4200000000000000000000000000000000000020 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x4200000000000000000000000000000000000020)      |
+| GitcoinResolver | 0x074761E1Dc6E6cF9cdeE67dd180E01E818716Ce0 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x074761E1Dc6E6cF9cdeE67dd180E01E818716Ce0) |
+| GitcoinVerifier | 0x8D21C3360dcE1a9EBD3Da4373c4dAB7F81dd7233 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x8D21C3360dcE1a9EBD3Da4373c4dAB7F81dd7233)      |
+| GitcoinAttester | 0x8B1A76795e3CbadD79C5410d2C4D4827D9C1503a | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x8B1A76795e3CbadD79C5410d2C4D4827D9C1503a)      |
+
+EAS Schema
+
+| schema   | uid                                                                | link                                                                                                                   |
+| -------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| passport | 0x7026a3d524ee3dae5859aa00cfc0f17a3dac05af70eb758b5c0a40692f1e60f3 | [EasScan](https://optimism-sepolia.easscan.org/schema/view/0x7026a3d524ee3dae5859aa00cfc0f17a3dac05af70eb758b5c0a40692f1e60f3) |
+| score    | 0xe9071177c724d1bd712e4b05b4ce5426e60e141d8aaec86e4e03f25901d0cd91 | [EasScan](https://optimism-sepolia.easscan.org/schema/view/0xe9071177c724d1bd712e4b05b4ce5426e60e141d8aaec86e4e03f25901d0cd91) |
+
+
+##### Linea Mainnet
 
 The Linea chain ID is [59144](https://chainlist.org/chain/59144).
 
@@ -155,25 +182,6 @@ Verax schema
 | passport | 0x501e6fcade7e3483d0ae7fcfebb732907ebda12b209f5116e52c02697062a50e |
 | score    | 0x01f031da36192c34057c764239eb77bb6ec8ebfb808f72a7bb172f37a5bec31f |
 
-
-##### Base Goerli
-
-The Base Goerli chain ID is [84531](https://chainlist.org/chain/84531).
-
-| contract        | address                                    | link                                                                                       |
-| --------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| issuer          | 0x5f603Ed913738d9105bAf3BD981AA4750016B167 | [BaseScan](https://goerli.basescan.org/address/0x5f603Ed913738d9105bAf3BD981AA4750016B167) |
-| EAS             | 0xAcfE09Fd03f7812F022FBf636700AdEA18Fd2A7A | [BaseScan](https://goerli.basescan.org/address/0xAcfE09Fd03f7812F022FBf636700AdEA18Fd2A7A) |
-| GitcoinResolver | 0xA10606c17d94a4DBDc4dD804d1B88fF5030aeE94 | [BaseScan](https://goerli.basescan.org/address/0xA10606c17d94a4DBDc4dD804d1B88fF5030aeE94) |
-| GitcoinVerifier | 0x5bC95C6e11520D25BE8c7bDf7AAc3E2eEAbD8564 | [BaseScan](https://goerli.basescan.org/address/0x5bC95C6e11520D25BE8c7bDf7AAc3E2eEAbD8564) |
-| GitcoinAttester | 0x5bbbc733e12f50e6834c40a90066f2f9ffb820e0 | [BaseScan](https://goerli.basescan.org/address/0x5bbbc733e12f50e6834c40a90066f2f9ffb820e0) |
-
-EAS Schema
-
-| schema   | uid                                                                | link                                                                                                                       |
-| -------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| passport | 0x9d43e5c201404b9ab0913bcd6475c78e32d32a4d78233b2c309e9b6828f59e45 | [BaseScan](https://base-goerli.easscan.org/schema/view/0x9d43e5c201404b9ab0913bcd6475c78e32d32a4d78233b2c309e9b6828f59e45) |
-| score    | 0xf72ba57b5fb4c12a5f967574bc44a11efb8be76bcfbf47ced36e1afe226ba702 | [BaseScan](https://base-goerli.easscan.org/schema/view/0xf72ba57b5fb4c12a5f967574bc44a11efb8be76bcfbf47ced36e1afe226ba702) |
 
 
 #### Attestation Schemas
