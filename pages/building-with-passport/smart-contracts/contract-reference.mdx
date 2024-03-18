@@ -17,6 +17,9 @@ This page is broken into two sections:
 * [How to query for onchain Passport data](#how-to-query-for-onchain-passport-data)
 
 
+You can always chat in our [Discord developer support channel](https://discord.com/channels/562828676480237578/986222591096279040) if you have questions about the Passport smart contracts.
+
+
 ## How Gitcoin adds Passport data to the blockchain
 
 We will not cover this in depth, as it is already documented in our [GitHub docs](https://github.com/gitcoinco/eas-proxy/blob/main/docs/00-onchain-data.md).
@@ -60,6 +63,8 @@ The decoder is currently deployed to the following networks:
 | Optimism              | 0x5558D441779Eca04A329BcD6b47830D2C6607769 | [Etherscan](https://optimistic.etherscan.io/address/0x5558D441779Eca04A329BcD6b47830D2C6607769)         |                                                                                                                                                                                     |
 | OP Sepolia [Testnet]  | 0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56)   |
 | Linea                 | 0x423cd60ab053F1b63D6F78c8c0c63e20F009d669 | [Etherscan](https://explorer.linea.build/address/0x423cd60ab053F1b63D6F78c8c0c63e20F009d669)              |
+
+You can learn more about working with testnets via our guide on [Test Mode](test-mode).
 
 #### Available methods
 
@@ -125,7 +130,30 @@ EAS Schema
 | score    | 0x6ab5d34260fca0cfcf0e76e96d439cace6aa7c3c019d7c4580ed52c6845e9c89 | [EasScan](https://optimism.easscan.org/schema/view/0x6ab5d34260fca0cfcf0e76e96d439cace6aa7c3c019d7c4580ed52c6845e9c89) |
 
 
-##### Linea
+
+##### Optimism Sepolia
+
+The Optimism Sepolia chain ID is 11155420.
+
+Gitcoin
+
+| contract        | address                                    | link                                                                                                 |
+| --------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| issuer          | 0x4200000000000000000000000000000000000021 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x4200000000000000000000000000000000000021)      |
+| EAS             | 0x4200000000000000000000000000000000000020 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x4200000000000000000000000000000000000020)      |
+| GitcoinResolver | 0x074761E1Dc6E6cF9cdeE67dd180E01E818716Ce0 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x074761E1Dc6E6cF9cdeE67dd180E01E818716Ce0) |
+| GitcoinVerifier | 0x8D21C3360dcE1a9EBD3Da4373c4dAB7F81dd7233 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x8D21C3360dcE1a9EBD3Da4373c4dAB7F81dd7233)      |
+| GitcoinAttester | 0x8B1A76795e3CbadD79C5410d2C4D4827D9C1503a | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x8B1A76795e3CbadD79C5410d2C4D4827D9C1503a)      |
+
+EAS Schema
+
+| schema   | uid                                                                | link                                                                                                                   |
+| -------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| passport | 0x7026a3d524ee3dae5859aa00cfc0f17a3dac05af70eb758b5c0a40692f1e60f3 | [EasScan](https://optimism-sepolia.easscan.org/schema/view/0x7026a3d524ee3dae5859aa00cfc0f17a3dac05af70eb758b5c0a40692f1e60f3) |
+| score    | 0xe9071177c724d1bd712e4b05b4ce5426e60e141d8aaec86e4e03f25901d0cd91 | [EasScan](https://optimism-sepolia.easscan.org/schema/view/0xe9071177c724d1bd712e4b05b4ce5426e60e141d8aaec86e4e03f25901d0cd91) |
+
+
+##### Linea Mainnet
 
 The Linea chain ID is [59144](https://chainlist.org/chain/59144).
 
