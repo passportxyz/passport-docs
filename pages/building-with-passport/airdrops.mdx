@@ -1,6 +1,6 @@
 ---
-title: Passport for airdrops
-description: How can Passport help optimize airdrops?
+title: Passport for Airdrops
+description: How Passport can help optimize airdrops
 ---
 
 # Passport for Airdrops
@@ -16,9 +16,9 @@ There are also counterarguments that airdrop farmers help by adding visibility a
 
 It is up to each project to decide its own philosophy about airdrop farming and how strictly to restrict access to provable individual human contributors.
 
-However you want to set up your airdrop, it is likely that Gitcoin passport can help.
+However you want to set up your airdrop, it is likely that Passport can help.
 
-This page will outline some of the ways you might want to use Gitcoin Passport to optimize your airdrop.
+This page will outline some of the ways you might want to use Passport to optimize your airdrop.
 
 ## Gate access with Passport scores
 
@@ -44,13 +44,13 @@ On the other hand, the higher the threshold, the more friction exists for your h
 You have to determine the optimum threshold for your project - the higher the threshold the more likely you are to eliminate Sybils. The lower the threshold the less friction for users.
 
 
-### Gitcoin's defaults
+### Passport's score threshold defaults
 
-The Gitcoin Passport app provides a binary Sybil score as well as a numeric score. This works by applying a threshold on the server and simply returning a true/false response depending on whether a user's score exceeds the threshold or not.
+The Passport API provides a [binary Sybil score](https://docs.passport.gitcoin.co/building-with-passport/major-concepts/scoring-mechanisms#unique-humanity-binary) as well as a [numeric score](https://docs.passport.gitcoin.co/building-with-passport/major-concepts/scoring-mechanisms#unique-humanity). This works by applying a threshold on the server and simply returning a true/false response depending on whether a user's score exceeds the threshold or not.
 
-A user who exceeds the threshold is considered "likely honest", a user that does not meet the threshold is considered "likely Sybil". The default threshold value used by Gitcoin is currently 20.
+A user who exceeds the threshold is considered "likely human", while a user that does not meet the threshold is considered "likely Sybil". The default threshold value used by Passport is currently 20.
 
-If you want to use the Gitcoin default setting you can either retrieve a score and impose a threshold score of 20 yourself, or you can use the binary scorer directly to the same effect.
+If you want to use the Passport default setting you can either retrieve a score and impose a threshold score of 20 yourself, or you can use the binary scorer directly to the same effect.
 
 Note that you can also use your own weightings for each criteria if you want to more strongly weight certain actions that are important to your specific use case.
 
@@ -69,7 +69,7 @@ Passport score between 15 - 20 ➡️ base rewards * 2
 Passport score over 20 ➡️ base reward * 3
 ```
 
-## Criteria evaluation
+## Data analysis: criteria evaluation
 
-Gitcoin can also provide criteria evaluation as a service. For example, we can help you to determine the right criteria and thresholds for protecting your airdrop, and evaluate how many users would qualify under different scenarios.
+Passport can also provide criteria evaluation as a service. For example, we can help you to determine the right criteria and thresholds for protecting your airdrop, and evaluate how many users would qualify under different scenarios.
 We can also help with retroactive removal of Sybils from your snapshot or participation list.
