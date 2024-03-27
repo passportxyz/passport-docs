@@ -14,16 +14,14 @@ The API offers a simple integration; one that requires just two requests to subm
 
 An excellent [use case](../../overview/use-cases) for Passport is to gate access to special content. To make this happen, we'll need to:
 
-1. Get access by [creating a Passport Scorer and API key](getting-access)
-2. Visit the API Access page to learn how to set up your Scorer and API key
-3. Submit the user’s address for scoring
-4. Make a `POST` request to `/registry/submit-passport`
-5. Fetch the user’s Passport score
-6. Make a `GET` request to `/registry/score/{scorer_id}/{address}`
-6. Verify that their score is above a certain threshold. The score that is returned from step #3 will vary depending on the type of Scorer you set up (Unique Humanity vs Unique Humanity Binary, etc.)
-7. Provide access to the gated content
+1. [Creating a Passport Scorer and API key](getting-access)
+2. Submit the user’s address for scoring using the [POST /registry/submit-passport](https://docs.passport.gitcoin.co/building-with-passport/passport-api/api-reference#submit-for-scoring) endpoint. Find the user's score in the response. 
+3. Depending on the [type of scorer](https://docs.passport.gitcoin.co/building-with-passport/passport-api/getting-access#types-of-scorers) you set up, you will either compare the unique humanity score against a [threshold](https://docs.passport.gitcoin.co/building-with-passport/major-concepts/scoring-thresholds) that you set, or utilize the binary score. 
 
-At this point if the user’s score was above your threshold you can provide them with access to the gated content.
+At this point, you know whether the user was able to prove their humanity or not, and you can grant access to the protected program. 
+
+If you need to refresh the score, you will resubmit the address to POST /registry/submit-passport.
+If you need to retrieve the score again without refreshing, you can make a request to the GET /registry/score/{scorer_id}/{address} endpoint.
 
 ## Available endpoints
 
