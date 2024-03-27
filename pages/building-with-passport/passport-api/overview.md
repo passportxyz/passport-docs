@@ -20,20 +20,22 @@ An excellent [use case](../../overview/use-cases) for Passport is to gate access
 
 At this point, you know whether the user was able to prove their humanity or not, and you can grant access to the protected program. 
 
-If you need to refresh the score, you will resubmit the address to POST /registry/submit-passport.
-If you need to retrieve the score again without refreshing, you can make a request to the GET /registry/score/{scorer_id}/{address} endpoint.
+If you need to refresh the score, resubmit the address to `POST /registry/submit-passport`.
+
+You can also retrieve the last refreshed score by making a request to the following endpoint:
+`GET /registry/score/{scorer_id}/{address}`
 
 ## Available endpoints
 
-| Endpoint action                            | Endpoint                                    |
-| ------------------------------------------ | ------------------------------------------- |
-| Retrieval of signing messages              | `GET /registry/signing-message`             |
-| Submitting Passports for scoring           | `POST /registry/submit-passport`            |
-| Retrieval of scores for one address        | `GET /registry/score/{scorer_id}/{address}` |
-| Retrieval of scores for multiple addresses | `GET /registry/score/{scorer_id}`           |
-| Retrieval of Stamps linked to Passports    | `GET /registry/stamps/{address}`            |
-| Retrieval of all available Stamps          | `GET /registry/stamp-metadata`              |
-| Retreival of community staking amounts     | `GET /registry/gtc-stake/{address}`         |
+| Endpoint action                             | Endpoint                                    |
+| ------------------------------------------- | ------------------------------------------- |
+| Retrieval of signing messages               | `GET /registry/signing-message`             |
+| Submitting Passports for scoring or refresh | `POST /registry/submit-passport`            |
+| Retrieval of scores for one address         | `GET /registry/score/{scorer_id}/{address}` |
+| Retrieval of scores for multiple addresses  | `GET /registry/score/{scorer_id}`           |
+| Retrieval of Stamps linked to Passports     | `GET /registry/stamps/{address}`            |
+| Retrieval of all available Stamps           | `GET /registry/stamp-metadata`              |
+| Retreival of community staking amounts      | `GET /registry/gtc-stake/{address}`         |
 
 Learn more about each of these endpoints on our [API Reference](api-reference) page, or experiment with them using our [API playground](https://api.scorer.gitcoin.co/docs) (requires [API key and Scorer](getting-access)).
 
