@@ -39,3 +39,10 @@ The available test networks are:
 
 - [Optimism Sepolia](https://sepolia-optimism.etherscan.io/)
 - [Linea Goerli](https://docs.linea.build/)
+
+
+## Testing on mainnet forks
+
+The Gitcoin smart contracts may sometimes be upgraded after being deployed. If you are testing on a mainnet fork, you must make sure you fork the blockchain at a block *after* the latest contract deployment. Otherwise, the contracts stored in your forked blockchains state will be out of date. The block where the latest version of the contract is deployed is known as the `latest stable block` and you can find out what it is by looking at the contract deployment details on the appropriate block explorer for the network you want to fork. Then, fork the blockchain at a block greater to or equal to the `latest stable block`. 
+
+For example, the latest stable block for OP mainnet is 115525426. Your test network must fork off OP mainnet at a block >= 115525426.
