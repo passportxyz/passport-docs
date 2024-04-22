@@ -88,17 +88,17 @@ The fields are as follows:
 
 ### Syncing Passport Data with Your Ceramic Node
 
-If you already have a ComposeDB node and you would like to sync and collaborate on passport data based on the same definitions, you will need to use the same [ComposeDB composite](https://github.com/gitcoinco/passport/blob/main/schemas/composites/gitcoin-passport-stamps-composite.json) already deployed onto the Passport ComposeDB node (in order to ensure the same data model references are synced). 
+If you already have a ComposeDB node and you would like to sync and collaborate on Passport data based on the same definitions, you will need to use the same [ComposeDB composite](https://github.com/gitcoinco/passport/blob/main/schemas/composites/gitcoin-passport-stamps-composite.json) already deployed onto the Passport ComposeDB node (in order to ensure the same data model references are synced). 
 
-We've put together a simple [repository](https://github.com/ceramicstudio/composite-deploy-boilerplate/tree/passport) containing a script that automates this for you. 
+We've put together a simple [repository](https://github.com/Passportxyz/passport-ceramic-deployment) containing a script that automates this for you. 
 
 First, clone the repository and install your dependencies:
 
 ```bash
-git clone https://github.com/passport/eventual-repository-location && cd eventual-repository-location && npm install
+git clone https://github.com/Passportxyz/passport-ceramic-deployment && cd eventual-repository-location && npm install
 ```
 
-This repository has already been pre-loaded with the correct [composite definition](https://github.com/ceramicstudio/composite-deploy-boilerplate/blob/passport/definition.json), so you do not need to edit your definition files.
+This repository has already been pre-loaded with the correct [composite definition](https://github.com/Passportxyz/passport-ceramic-deployment/blob/main/definition.json), so you do not need to edit your definition files.
 
 Next, follow step #2 in the README (which shows how to enter your node endpoint and corresponding admin seed as arguments).
 
