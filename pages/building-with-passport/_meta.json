@@ -2,9 +2,6 @@
   "introduction": "Introduction",
   "major-concepts": "Major concepts",
   "airdrops": "Passport for Airdrops",
-  "---": {
-    "type": "separator"
-  },
   "passport-api": "Passport API",
   "smart-contracts": "Smart Contracts",
   "composedb": "ComposeDB"
