@@ -51,7 +51,7 @@ Each weight is a decimal number associated with a specific Stamp name. The scori
 
 #### The Gitcoin Scorer
 
-You can re-implement the Gitcoin scoring algorithm easily in your app. Start by adding a file containing the Gitcoin Passport Stamp weights to your `app` directory. Copy the contents of [this file](./weights.ts) and paste it into a new file `app/stamp-weights.ts`.
+You can re-implement the Gitcoin scoring algorithm easily in your app. Start by adding a file containing the Gitcoin Passport Stamp weights to your `app` directory. Copy the contents of [this file](https://github.com/gitcoinco/passport-docs/tree/main/utils/data/weights.ts) and paste it into a new file `app/stamp-weights.ts`.
 
 Now, import the data into your app by adding the following import statement to `app.ts`:
 
