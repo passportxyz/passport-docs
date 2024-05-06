@@ -46,12 +46,12 @@ This information is stored in a state variable, `stampArray`. This is all the in
 
 ### Scorers
 
-The Gitcoin Passport scoring algorithm is a simple sum of weights assigned to each Stamp. The weights are provided in a file on the [Gitcoin Github](https://github.com/gitcoinco/passport-scorer/blob/a013ca89ca11a22c72b384da913f73274bb8fa05/api/scorer/settings/gitcoin_passport_weights.py#L3).
+The Gitcoin Passport scoring algorithm is a simple sum of weights assigned to each Stamp. The weights are provided in a file on the [Gitcoin Github](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin_passport_weights.py).
 Each weight is a decimal number associated with a specific Stamp name. The scoring algorithm simply iterates over the Stamp names for the Stamps owned by an address, retrieves the associated weights, and adds them together. The result is the user's Passport score.
 
 #### The Gitcoin Scorer
 
-You can re-implement the Gitcoin scoring algorithm easily in your app. Start by adding a file containing the Gitcoin Passport Stamp weights to your `app` directory. Copy the contents of [this file](https://github.com/jmcook1186/passport-onchain-stamps-app/blob/main/src/app/stamp-weights.ts) and paste it into a new file `app/stamp-weights.ts`.
+You can re-implement the Gitcoin scoring algorithm easily in your app. Start by adding a file containing the Gitcoin Passport Stamp weights to your `app` directory. Copy the contents of [this file](https://github.com/gitcoinco/passport-docs/tree/main/utils/data/weights.ts) and paste it into a new file `app/stamp-weights.ts`.
 
 Now, import the data into your app by adding the following import statement to `app.ts`:
 
