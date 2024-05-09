@@ -103,12 +103,12 @@ const config: DocsThemeConfig = {
     </div>
   ),
   project: {
-    link: "https://github.com/gitcoinco/passport-docs",
+    link: "https://github.com/passportxyz/passport-docs",
   },
   chat: {
     link: "https://discord.gg/gitcoin",
   },
-  docsRepositoryBase: "https://github.com/gitcoinco/passport-docs/tree/main",
+  docsRepositoryBase: "https://github.com/passportxyz/passport-docs/tree/main",
   footer: { component: null },
   useNextSeoProps() {
     return {
@@ -121,7 +121,7 @@ const CustomHead: React.FC = () => {
   const { asPath, defaultLocale, locale } = useRouter();
   const { frontMatter } = useConfig();
   const url =
-    "https://docs.passport.gitcoin.co" +
+    "https://docs.passport.xyz" +
     (defaultLocale === locale ? asPath : `/${locale}${asPath}`);
 
   const router = useRouter();
@@ -158,7 +158,7 @@ const CustomHead: React.FC = () => {
       <meta name="twitter:site" content="@gitcoinpassport" />
       <meta
         name="twitter:image"
-        content="https://docs.passport.gitcoin.co/social-card.png"
+        content="https://docs.passport.xyz/social-card.png"
       />
 
       <meta property="og:url" content={url} />
@@ -172,7 +172,7 @@ const CustomHead: React.FC = () => {
       />
       <meta
         name="og:image"
-        content="https://docs.passport.gitcoin.co/social-card.png"
+        content="https://docs.passport.xyz/social-card.png"
       />
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <link rel="icon" href="/favicon.png" type="image/png" />
