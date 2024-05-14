@@ -3,6 +3,8 @@ title: Test mode
 description: How to test the onchain infrastructure
 ---
 
+# Testing Onchain Passport
+
 As developers, we often want to test our apps and integrations on testnets, where there is nothing of real world value at stake, before we go live on a live public mainnet. You can always deploy the Gitcoin Passport smart contracts to your own local ephemeral blockchain, but it is also recommended to test your integration on a public testnet too, as this more realistically simulates a mainnet environment.
 
 For this reason, the Passport team deployed the Passport smart contracts on public testnets, including OP Sepolia and Linea Goerli.

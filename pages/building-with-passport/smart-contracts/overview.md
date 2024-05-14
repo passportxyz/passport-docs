@@ -29,10 +29,10 @@ Passport data can be converted into onchain attestations that are stored and eng
 A simplified onchain Passport data flow follows this process:
 1. A user decides to [mint their Passport onchain](https://support.gitcoin.co/gitcoin-knowledge-base/gitcoin-passport/moving-your-stamps-onchain) to one of the available networks via the Passport App.
 2. Passport creates a [Stamp (Passport)](https://optimism.easscan.org/schema/view/0xd7b8c4ffa4c9fd1ecb3f6db8201e916a8d7dba11f161c1b0b5ccf44ceb8e2a39) and [score](https://optimism.easscan.org/schema/view/0x6ab5d34260fca0cfcf0e76e96d439cace6aa7c3c019d7c4580ed52c6845e9c89) attestation, and mints them onchain to EAS and other attestation registries, depending on which network they choose.
-3. A developer utilizes our smart contract stack and users’ wallet addresses to request the Passport data from these onchain attestation registries.
+3. A developer utilizes our [smart contract stack](https://docs.passport.xyz/building-with-passport/smart-contracts/contract-reference#how-to-query-for-onchain-passport-data) and users’ wallet addresses to request the Passport data from these onchain attestation registries.
 4. The developer uses this Passport data in their web3 programs to satisfy their [use case](https://docs.passport.gitcoin.co/overview/use-cases).
 
-Of course, there are some additional complexities to this, including Stamp expirations. 
+Of course, there are some additional complexities to this, including [Stamp expirations](onchain-expirations). 
 
 ## Available networks
 
