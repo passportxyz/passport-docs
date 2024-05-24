@@ -1,29 +1,27 @@
 ---
-title: Model based verification
+title: Double Verification with the Model Based Detection and Stamp-based APIs
 description: This tutorial introduces the Ethereum activity model and unique humanity double-scoring method 
 ---
 
-# The Ethereum activity model scorer
+# The Model Based Detection API
 
-The Ethereum activity scorer is a machine learning model trained on known Sybil and non-Sybil Ethereum account data that examines the transaction history for a given Ethereum address and assigns it a trust score.
+The ETH activity model is one of the available machine learning models trained on known Sybil and human EVM account data that examines the transaction history for a given Ethereum address and assigns it a trust score.
 
-Gitcoin passport expose an API endpoint that accepts an Ethereum account as a query parameter and returns the score, having run the model remotely on the Gitcoin server.
+Passport exposes an API endpoint that accepts an Ethereum account as a query parameter and returns a score between 0 (likely Sybil) and 100 (likely human), having run the model remotely on the Passport server.
 
-The model itself is a black box whose outcome is based on ~50 features. Some applications may be happy to rely on this model alone; however, it is advisable to offer the unique humanity model as a fallback to support use cases that require specific reasoning for an accounts acceptance/rejection to be reported.
+The model itself is a black box whose outcome is based on 50+ features. Some applications may be happy to rely on these models alone; however, it is advisable to offer the Stamp-based verification method as a fallback to support those users who might not have had the chance to build up a strong account history, such as crypto beginners or experts who utilize multiple wallets for different activities.
 
-This tutorial will walk you through integrating the Ethereum Activity model and the unique humanity endpoints in your application.
+This tutorial will walk you through verifying with both the ETH Activity model and the Stamp-based method in your application.
 
 
 ## Prerequisites
 
-Before we delve into this, it's important to note that there are a few preliminary steps you need to complete in order to use the Passport API. Please ensure that these prerequisites are met before proceeding with the guide.
+Before we delve into this, it's important to note that there are a few preliminary steps you need to complete in order to use the Model Based Detection and Passport API. Please ensure that these prerequisites are met before proceeding with the guide.
 
-1. You have created a Passport Scorer and received a Scorer ID
-2. You have an API key
+1. You have created a Passport Scorer and received a Scorer ID (for the Passport API)
+2. You have an API key (for both)
 
 If you haven't completed the preliminary steps above please refer to our [getting access guide](../getting-access) first. Once you're done with that, return here and continue with this walkthrough.
-
-**Note** these preliminary steps are **only** required for the Passport API (unique humanity) check and **not** for the Ethereum activity model scorer. 
 
 
 ## The app
@@ -32,9 +30,9 @@ This tutorial will guide you through creating a very simple app using nextjs.
 
 The app will present you with three buttons:
 
-- `Connect`: use this to connect your Ethereum wallet to the app
-- `Check Ethereum Activity`: clicking this button will check your Ethereum activity score. If it is above a threshold then you will see a notice of success - you may proceed to access some gated content! If you do not meet the threshold you will be denied access and directed to check your Passport score instead.
-- `Check passport score`: clicking this button checks your passport score on the passport API. If your score is above a threshold then you will be allowed to proceed to some gated content!
+- `Connect`: use this to connect your Ethereum wallet to the app.
+- `Check Ethereum Activity`: clicking this button will check your Ethereum activity score. If it is above a threshold then you will see a notice of success - you may proceed to access the protected content! If you do not meet the threshold you will be denied access and directed to check your Passport unique humanity score (Stamp-based) instead.
+- `Check Passport score`: clicking this button checks your Passport score on the Passport API. If your score is above a threshold then you will be allowed to proceed to the protected content!
 
 ## Getting started
 
@@ -71,7 +69,7 @@ This tutorial will also use [Chakra-UI](https://chakra-ui.com/) for styling, so 
 npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
 ```
 
-Replace the contents of `app/page.tsx` with the following boilerplate code (this includes all the very basic logic to render a page and connect a wallet to the app and the logic required to check a passport - if you need a refresher on the Passport API logic you can visit our dedicated [tutorials](../../building-with-passport/passport-api/tutorials.mdx)):
+Replace the contents of `app/page.tsx` with the following boilerplate code (this includes all the very basic logic to render a page and connect a wallet to the app and the logic required to check a Passport - if you need a refresher on the Passport API logic you can visit our dedicated [tutorials](../../building-with-passport/passport-api/tutorials.mdx)):
 
 ```tsx
 'use client'
@@ -159,7 +157,7 @@ export default function Passport() {
         console.log("PASSPORT SCORE = ", roundedScore)
       } else {
         // if the user has no score, display a message letting them know to submit thier passporta
-        console.log('No score available, please add stamps to your passport and then resubmit.')
+        console.log('No score available, please add Stamps to your Passport and then resubmit.')
       }
     } catch (err) {
       console.log('error: ', err)
@@ -185,7 +183,7 @@ export default function Passport() {
         </Flex>
         <br />
         <br />
-        <Heading>Welcome to Gitcoin Passport! </Heading>
+        <Heading>Welcome to Passport! </Heading>
         <br />
         <br />
       </ChakraProvider >
@@ -197,7 +195,7 @@ export default function Passport() {
 
 ## Adding the Etheruem Activity scorer
 
-The Ethereum activity scorer is accessed via a public API endpoint passing the user's Ethereum address as a query parameter. To start integrating this into your app, you can add the base URl for the API endpoint as a constant at the top of the script, just below the Passport URI definition.
+The ETH activity scorer is accessed via a public API endpoint passing the user's Ethereum address as a query parameter. To start integrating this into your app, you can add the base URL  for the API endpoint as a constant at the top of the script, just below the Passport URI definition.
 
 ```typescript
 const ETHEREUM_ACTIVITY_SCORE_URI = 'https://api.scorer.gitcoin.co/passport/analysis/'
@@ -205,7 +203,7 @@ const ETHEREUM_SCORE_THRESHOLD = 50;
 ```
 
 
-Next, we will want to track the score, and the status of your API requests in the application state. You can add one state variable to store the score retrieved from the API (a `string`), one to track whether a request has been made to the Ethereum activity API (a `boolean`) and one to track whether the retrieved score exceeds the threshoild (a `boolean`). Add the following state variable definitions beneath the existing state variable definitions in the boilerplate code:
+Next, we will want to track the score, and the status of your API requests in the application state. You can add one state variable to store the score retrieved from the API (a `string`), one to track whether a request has been made to the Model Based Detection API (a `boolean`) and one to track whether the retrieved ETH activity score exceeds the threshoild (a `boolean`). Add the following state variable definitions beneath the existing state variable definitions in the boilerplate code:
 
 ```typescript
   const [ethereumScore, setEthereumScore] = useState<string>('')
@@ -266,7 +264,7 @@ Next we cna write a light wrapper around `getEthereumScore()` called `checkEther
 ```
 
 
-That's it! All the logic required to check the user's Ethereum activity score has been defined in your app. All that is left to do is to call these functions from the app UI.
+That's it! All the logic required to check the user's ETH activity score has been defined in your app. All that is left to do is to call these functions from the app UI.
 
 The following code adds some conditional logic to the UI. The Ethereum activity has to be checked first. If the Ethereum activity score exceeds the threshold the app displays a success message. If the score is below the threshold it prompts the user to check their Passport score using the Passport API. If neither are successful, it displays a failure message.
 
@@ -296,10 +294,10 @@ Add the following code as the final content inside the `<div>` provided in retur
         }
         {isEthereumActivityChecked && isPassportChecked && !isEthereumScoreAboveThreshold && !isPassportScoreAboveThreshold &&
           <div>
-            <p>Your Passport score is {passportScore}.</p>
-            <p> Unfortunately your score is still too low to proceed! </p>
+            <p>Your Passport unique humanity score is {passportScore}.</p>
+            <p> Unfortunately your score is still too low to proceed.</p>
             <br />
-            <p> Please go use Ethereum or add Stamps to your Passport to improve your score. </p>
+            <p> Please go to the Passport app and add Stamps to improve your score. </p>
           </div>
         }
         {isEthereumActivityChecked && isPassportChecked && !isEthereumScoreAboveThreshold && isPassportScoreAboveThreshold &&
@@ -307,13 +305,13 @@ Add the following code as the final content inside the `<div>` provided in retur
             <p>Your Passport score is {passportScore}.</p>
             <p> Unfortunately your score is still too low to proceed! </p>
             <br />
-            <p> Please go use Ethereum or add Stamps to your Passport to improve your score. </p>
+            <p> Please add Stamps to your Passport to improve your score. </p>
           </div>
         }
         {isEthereumActivityChecked && isPassportChecked && !isEthereumScoreAboveThreshold && isPassportScoreAboveThreshold &&
           <div>
             <p> Your Passport score is {passportScore}.</p>
-            <p> This is above the threshold. You may proceed! </p>
+            <p> This is above the threshold. You may proceed!</p>
           </div>
         }
 ```
