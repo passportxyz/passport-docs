@@ -3,7 +3,17 @@ title: Double Verification with the Model Based Detection and Stamp-based APIs
 description: This tutorial introduces the Ethereum activity model and unique humanity double-scoring method 
 ---
 
-# The Model Based Detection API
+# Double Verification with the Model Based Detection and Stamp-based APIs
+
+While the Model Based Detection (MBD) API is in beta, these docs will remain hidden. 
+
+You can access our other MBD API docs here:
+
+* [API Reference](https://docs.passport.xyz/building-with-passport/model-based-detection/api-reference)
+* [Tutorial - Double verification using MBD and Stamp-based verification](https://docs.passport.xyz/building-with-passport/model-based-detection/tutorial/double-verification)
+* [Available models and recommended score thresholds](https://docs.passport.xyz/building-with-passport/model-based-detection/available-models)
+
+---
 
 The ETH activity model is one of the available machine learning models trained on known Sybil and human EVM account data that examines the transaction history for a given Ethereum address and assigns it a trust score.
 
