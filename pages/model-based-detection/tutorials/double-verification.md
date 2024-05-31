@@ -253,7 +253,7 @@ Start with the API request. You can call this function `getEthereumScore()`. Ins
   }
 ```
 
-Next we cna write a light wrapper around `getEthereumScore()` called `checkEthereumActivity`. This wrapper will call `getEthereumScore()` and once it receives a response it will check whether the returned value exceeds the threshold and update the `isEthereumActivityChecked` variable to `true`.
+Next we can write a light wrapper around `getEthereumScore()` called `checkEthereumActivity`. This wrapper will call `getEthereumScore()` and once it receives a response it will check whether the returned value exceeds the threshold and update the `isEthereumActivityChecked` variable to `true`.
 
 ```typescript
   async function checkEthereumActivity() {
