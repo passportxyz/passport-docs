@@ -245,7 +245,7 @@ Start with the API request. You can call this function `getEthereumScore()`. Ins
 
       } else {
         // if the user has no score, display a message letting them know to submit thier passporta
-        console.log('No score available, please add stamps to your passport and then resubmit.')
+        console.log('No score available, please add Stamps to your Passport and then resubmit.')
       }
     } catch (err) {
       console.log('error: ', err)
