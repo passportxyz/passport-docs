@@ -215,11 +215,12 @@ Otherwise, the `create-next-app` boilerplate code is quite standard. There is a 
 
 Getting Passport data requires instantiating the `decoder` contract and calling its `getPassport` function. The `ethers` library provides everything we need to instantiate the contract. Create a contract using `new ethers.Contract()` passing the contract address, ABI and the provider object as arguments. One complication is that the ABI is divided up into sections specific to each chain where the contract has been deployed, so you actually need to pass a specifier with the hex-encoded chain ID too. Here are the hex-encoded chain IDs for each chain: 
 
+- Arbitrum: `0xa4b1`
 - BaseGoerli: `0x1a433`
+- Ethereum: `0x1`
 - Linea: `0xe704`
 - Optimism: `0x1a4`
 - Optimism Sepolia: `0xaa37dc`
-- Ethereum: `0x1`
 
 Once the contract instance exists, you can simply call `getPassport` passing in the user address, which is stored in your app's state. If the function call returns some Stamp data, you can set the `hasStampData` flag to `true` and return the data.
 

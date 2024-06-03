@@ -60,9 +60,10 @@ The decoder is currently deployed to the following networks:
 
 | Network               | Contract address                           | Link                                                                                                                                                                                 |
 | --------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| Arbitrum              | 0x2050256A91cbABD7C42465aA0d5325115C1dEB43 | [Arbiscan](https://arbiscan.io/address/0x2050256A91cbABD7C42465aA0d5325115C1dEB43)                      |
+| Linea                 | 0x423cd60ab053F1b63D6F78c8c0c63e20F009d669 | [Lineascan](https://lineascan.build/address/0x423cd60ab053F1b63D6F78c8c0c63e20F009d669)                 |
 | Optimism              | 0x5558D441779Eca04A329BcD6b47830D2C6607769 | [Etherscan](https://optimistic.etherscan.io/address/0x5558D441779Eca04A329BcD6b47830D2C6607769)         |                                                                                                                                                                                     |
 | OP Sepolia [Testnet]  | 0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56)   |
-| Linea                 | 0x423cd60ab053F1b63D6F78c8c0c63e20F009d669 | [Etherscan](https://explorer.linea.build/address/0x423cd60ab053F1b63D6F78c8c0c63e20F009d669)              |
 
 You can learn more about working with testnets via our guide on [Test Mode](test-mode).
 
@@ -108,6 +109,57 @@ The `EAS` contract is where you can pass the `UID`received from the `GitcoinReso
 
 #### Alternative flow contract addresses
 
+##### Arbitrum Mainnet
+
+The Arbitrum chain ID is [42161](https://chainlist.org/chain/42161).
+
+| contract        | address                                    | link                                                                                                 |
+| --------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| issuer          | 0x804233b96cbd6d81efeb6517347177ef7bD488ED | [Arbiscan](https://arbiscan.io/address/0x804233b96cbd6d81efeb6517347177ef7bD488ED)      |
+| EAS             | 0xbD75f629A22Dc1ceD33dDA0b68c546A1c035c458 | [Arbiscan](https://arbiscan.io/address/0xbD75f629A22Dc1ceD33dDA0b68c546A1c035c458)      |
+| GitcoinResolver | 0x90E2C4472Df225e8D31f44725B75FFaA244d5D33 | [Arbiscan](https://arbiscan.io/address/0x90E2C4472Df225e8D31f44725B75FFaA244d5D33)      |
+| GitcoinVerifier | 0xc4858e4D177Bf0d14571F91401492d62aa608047 | [Arbiscan](https://arbiscan.io/address/0xc4858e4D177Bf0d14571F91401492d62aa608047)      |
+| GitcoinAttester | 0x7848a3578Ff2E1F134659a23f64A404a4D710475 | [Arbiscan](https://arbiscan.io/address/0x7848a3578Ff2E1F134659a23f64A404a4D710475)      |
+
+EAS Schema
+
+| schema   | uid                                                                | link                                                                                                                   |
+| -------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| passport | 0x8ae6ee946bf1c936584cacc969bf7e9d0b274631c818df7e45c246051b364341 | [EasScan](https://arbitrum.easscan.org/schema/view/0x8ae6ee946bf1c936584cacc969bf7e9d0b274631c818df7e45c246051b364341) |
+| score    | 0x24620f482734b3806102678e4b8bb68baafb1adc1ec29e524bcd69c85f15b915 | [EasScan](https://arbitrum.easscan.org/schema/view/0x24620f482734b3806102678e4b8bb68baafb1adc1ec29e524bcd69c85f15b915) |
+
+
+##### Linea Mainnet
+
+The Linea chain ID is [59144](https://chainlist.org/chain/59144).
+
+| contract                   | address                                    | link                                                                                         |
+| -------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| issuer                     | 0x4B70C4308ea49d17FD946dDacD6884e8e1e18B56 | [Lineascan](https://lineascan.build/address/0x4b70c4308ea49d17fd946ddacd6884e8e1e18b56)      |
+| EAS                        | 0xaEF4103A04090071165F78D45D83A0C0782c2B2a | [Lineascan](https://lineascan.build/address/0xaef4103a04090071165f78d45d83a0c0782c2b2a#code) |
+| GitcoinVeraxPortal         | 0xCAa9E817f02486cE076560B77A86235Ef91c5d5D | [Lineascan](https://lineascan.build/address/0xCAa9E817f02486cE076560B77A86235Ef91c5d5D)      |
+| GitcoinResolver            | 0x0a774AECE542a1A819107Eb3a06E9D515C67257a | [Lineascan](https://lineascan.build/address/0x0a774AECE542a1A819107Eb3a06E9D515C67257a)      |
+| GitcoinVerifier            | 0xc94aBf0292Ac04AAC18C251d9C8169a8dd2BBbDC | [Lineascan](https://lineascan.build/address/0xc94aBf0292Ac04AAC18C251d9C8169a8dd2BBbDC)      |
+| GitcoinAttester            | 0xBC778313E52b1184A15D163b5d3a72AEF8d510A2 | [Lineascan](https://lineascan.build/address/0xBC778313E52b1184A15D163b5d3a72AEF8d510A2)      |
+
+Verax schema
+
+| schema   | uid                                                                |
+| -------- | ------------------------------------------------------------------ |
+| passport | 0x501e6fcade7e3483d0ae7fcfebb732907ebda12b209f5116e52c02697062a50e |
+| score    | 0x01f031da36192c34057c764239eb77bb6ec8ebfb808f72a7bb172f37a5bec31f |
+
+EAS Schema
+
+| schema   | uid                                                                | link                                                                                                                |
+| -------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| passport | 0x69b9d63ff6b161097cb4930e197a722bcf423f832d4e4cd3692449d5a1e1319f | [EasScan](https://linea.easscan.org/schema/view/0x69b9d63ff6b161097cb4930e197a722bcf423f832d4e4cd3692449d5a1e1319f) |
+| score    | 0x4da1eaac6346b8b79a705e3898a308062ca607f56c07762ef7b7ff8a7661843c | [EasScan](https://linea.easscan.org/schema/view/0x4da1eaac6346b8b79a705e3898a308062ca607f56c07762ef7b7ff8a7661843c) |
+
+
+
+
+
 ##### Optimism Mainnet
 
 The Optimism chain ID is [10](https://chainlist.org/chain/10).
@@ -151,35 +203,6 @@ EAS Schema
 | -------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
 | passport | 0x7026a3d524ee3dae5859aa00cfc0f17a3dac05af70eb758b5c0a40692f1e60f3 | [EasScan](https://optimism-sepolia.easscan.org/schema/view/0x7026a3d524ee3dae5859aa00cfc0f17a3dac05af70eb758b5c0a40692f1e60f3) |
 | score    | 0xe9071177c724d1bd712e4b05b4ce5426e60e141d8aaec86e4e03f25901d0cd91 | [EasScan](https://optimism-sepolia.easscan.org/schema/view/0xe9071177c724d1bd712e4b05b4ce5426e60e141d8aaec86e4e03f25901d0cd91) |
-
-
-##### Linea Mainnet
-
-The Linea chain ID is [59144](https://chainlist.org/chain/59144).
-
-| contract                   | address                                    | link                                                                                         |
-| -------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| issuer                     | 0x4B70C4308ea49d17FD946dDacD6884e8e1e18B56 | [Lineascan](https://lineascan.build/address/0x4b70c4308ea49d17fd946ddacd6884e8e1e18b56)      |
-| EAS                        | 0xaEF4103A04090071165F78D45D83A0C0782c2B2a | [Lineascan](https://lineascan.build/address/0xaef4103a04090071165f78d45d83a0c0782c2b2a#code) |
-| GitcoinVeraxPortal         | 0xCAa9E817f02486cE076560B77A86235Ef91c5d5D | [Lineascan](https://lineascan.build/address/0xCAa9E817f02486cE076560B77A86235Ef91c5d5D)      |
-| GitcoinResolver            | 0x0a774AECE542a1A819107Eb3a06E9D515C67257a | [Lineascan](https://lineascan.build/address/0x0a774AECE542a1A819107Eb3a06E9D515C67257a)      |
-| GitcoinVerifier            | 0xc94aBf0292Ac04AAC18C251d9C8169a8dd2BBbDC | [Lineascan](https://lineascan.build/address/0xc94aBf0292Ac04AAC18C251d9C8169a8dd2BBbDC)      |
-| GitcoinAttester            | 0xBC778313E52b1184A15D163b5d3a72AEF8d510A2 | [Lineascan](https://lineascan.build/address/0xBC778313E52b1184A15D163b5d3a72AEF8d510A2)      |
-| Verax Attestation registry | 0x3de3893aa4Cdea029e84e75223a152FD08315138 | [Lineascan](https://lineascan.build/address/0x3de3893aa4Cdea029e84e75223a152FD08315138)      |
-
-EAS Schema
-
-| schema   | uid                                                                | link                                                                                                                |
-| -------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| passport | 0x69b9d63ff6b161097cb4930e197a722bcf423f832d4e4cd3692449d5a1e1319f | [EasScan](https://linea.easscan.org/schema/view/0x69b9d63ff6b161097cb4930e197a722bcf423f832d4e4cd3692449d5a1e1319f) |
-| score    | 0x4da1eaac6346b8b79a705e3898a308062ca607f56c07762ef7b7ff8a7661843c | [EasScan](https://linea.easscan.org/schema/view/0x4da1eaac6346b8b79a705e3898a308062ca607f56c07762ef7b7ff8a7661843c) |
-
-Verax schema
-
-| schema   | uid                                                                |
-| -------- | ------------------------------------------------------------------ |
-| passport | 0x501e6fcade7e3483d0ae7fcfebb732907ebda12b209f5116e52c02697062a50e |
-| score    | 0x01f031da36192c34057c764239eb77bb6ec8ebfb808f72a7bb172f37a5bec31f |
 
 
 
