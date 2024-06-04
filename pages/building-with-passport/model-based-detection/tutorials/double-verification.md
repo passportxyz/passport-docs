@@ -333,4 +333,4 @@ You can start this app now by navigating your terminal to the project directory 
 
 Your app should look like this:
 
-![](../../../public/passport-app-ethereum-activity.png)
+![](../../../../public/passport-app-ethereum-activity.png)
