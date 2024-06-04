@@ -1,0 +1,58 @@
+---
+title: Available models and recommended scores
+description: This page describes which models are currently accessible via the Model Based Detection API, and which score thresholds should be used to identify likely Sybils or Humans.
+---
+
+import { Callout } from 'nextra/components'
+
+# Available models and recommended scores
+
+At this time, we have deployed a few different models to help verify humans. We plan to expand this list of models greatly, first by exploring additional Sybil detection models for several L2 partners, and then looking into other web3 verticals and reputation signals.
+
+Each model will assign a score of 0 - 100 to wallet addresses that are checked against it. We likely will make these various scores available via this endpoint.
+
+Before we expand our offering via this endpoint, we need feedback to help us shape this product. Please explore the available score for now and [let us know](https://docs.passport.xyz/building-with-passport/model-based-detection/introduction#feedback) your thoughts.
+
+In each model, we will provide a table that describes the different score thresholds you can use to gate access or classify addresses. We define the columns of those tables here:
+
+* **% of qualifying verified humans** - This metric represents the number of Passport users who qualified for the score threshold and scored a 20 or higher with the Stamp-based verification system.
+* **% of verified Sybil penetration** - This metric represents the number of verified Sybils from our list that were able to qualify for the score threshold.
+
+<Callout type="info">
+Please note that the percentages included in these tables do not necessarily translate to the percentage of participation for each individual partner.
+
+We calculate the percentage of qualifying humans and sybils at various thresholds, derived from a curated list of collected addresses labeled as either Sybils or humans.
+</Callout>
+
+
+## ETH Mainnet Activity Model
+
+The MBD currently delivers the ETH Mainnet Activity Model score.
+
+This model looks at specified wallet addresses ETH mainnet transaction history, compares it against 50+ different features, and assigns it a score of 0 - 100.
+
+A score of 0 represents likely Sybil, while a score of 100 represents likely human.
+
+Refer to the following table to identify which score threshold you might use to protect access or classify wallet addresses in your ecosystem:
+
+| Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
+| --------------- | ------------------------------- | ------------------------------- |
+| 15+             | 97%                             | 14%                             |
+| 25+             | 96%                             | 12%                             |
+| 50+             | 94%                             | 9%                              |
+| 75+             | 89%                             | 5%                              |
+
+If you would like more details on the score or these thresholds, please fill out the following form:
+
+[Model Based Detection interest form](https://forms.gle/HBV21Tcce1WMzQc2A)
+
+
+## Models coming soon
+
+The Passport team is also working on adding several other models to this endpoint, including the following: ● NFTs
+* zkSync
+* Polygon 
+* Optimism 
+* Arbitrum
+
+The team is also developing an aggregate model score to simplify integrations, offering a convenient option for integrators without a preference for any specific ecosystem model.
