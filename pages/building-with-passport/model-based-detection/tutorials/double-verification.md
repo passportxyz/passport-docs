@@ -9,9 +9,9 @@ While the Model Based Detection (MBD) API is in beta, these docs will remain hid
 
 You can access our other MBD API docs here:
 
-* [API Reference](https://docs.passport.xyz/building-with-passport/model-based-detection/api-reference)
-* [Tutorial - Double verification using MBD and Stamp-based verification](https://docs.passport.xyz/building-with-passport/model-based-detection/tutorial/double-verification)
-* [Available models and recommended score thresholds](https://docs.passport.xyz/building-with-passport/model-based-detection/available-models)
+* [API Reference](api-reference)
+* [Tutorial - Double verification using MBD and Stamp-based verification](tutorial/double-verification)
+* [Available models and recommended score thresholds](available-models)
 
 ---
 
@@ -31,7 +31,7 @@ Before we delve into this, it's important to note that there are a few prelimina
 1. You have created a Passport Scorer and received a Scorer ID (for the Passport API)
 2. You have an API key (for both)
 
-If you haven't completed the preliminary steps above please refer to our [getting access guide](../getting-access) first. Once you're done with that, return here and continue with this walkthrough.
+If you haven't completed the preliminary steps above please refer to our [getting access guide](../../passport-api/getting-access) first. Once you're done with that, return here and continue with this walkthrough.
 
 
 ## The app
@@ -79,7 +79,7 @@ This tutorial will also use [Chakra-UI](https://chakra-ui.com/) for styling, so 
 npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
 ```
 
-Replace the contents of `app/page.tsx` with the following boilerplate code (this includes all the very basic logic to render a page and connect a wallet to the app and the logic required to check a Passport - if you need a refresher on the Passport API logic you can visit our dedicated [tutorials](../../building-with-passport/passport-api/tutorials.mdx)):
+Replace the contents of `app/page.tsx` with the following boilerplate code (this includes all the very basic logic to render a page and connect a wallet to the app and the logic required to check a Passport - if you need a refresher on the Passport API logic you can visit our dedicated [tutorials](../../passport-api/tutorials.mdx)):
 
 ```tsx
 'use client'
