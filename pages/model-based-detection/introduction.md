@@ -1,0 +1,130 @@
+---
+title: Model Based Detection API [BETA]
+description: The Model Based Detection API enables partners to utilize Passport-grade supervised machine learning models to identify Sybils vs humans.
+---
+
+# Model Based Detection API [BETA]
+
+While the Model Based Detection (MBD) API is in beta, these docs will remain hidden. 
+
+You can access our other MBD API docs here:
+
+* [API Reference](https://docs.passport.xyz/building-with-passport/model-based-detection/api-reference)
+* [Tutorial - Double verification using MBD and Stamp-based verification](https://docs.passport.xyz/building-with-passport/model-based-detection/tutorial/double-verification)
+* [Available models and recommended score thresholds](https://docs.passport.xyz/building-with-passport/model-based-detection/available-models)
+
+
+## Introduction
+
+The new Model Based Detection (MBD) API [BETA] enables partners to protect access to their programs and analyze their ecosystem’s user base with a Passport-grade supervised machine learning model.
+
+This API is designed to return the results of model-based detection methods. During this initial beta phase, it will score ETH addresses against a single model that analyze ETH mainnet transaction history against 50+ data features to identify if that address is likely Human or Sybil. The [ETH Mainnet Activity Model](https://docs.passport.xyz/building-with-passport/model-based-detection/available-models) is just the start, with many more models in the works. The API also includes a single endpoint at the moment, but this will likely expand as we receive more [feedback](#feedback).
+
+This essentially opens up Sybil defense to all wallet addresses, regardless of whether the user has a Passport with Stamps verified or not.
+
+This new API is the perfect compliment to the existing API suite as it offers the following benefits:
+
+* **Score any address:** Any EVM wallet address can be scored, regardless of whether they have a Passport or not.
+* **Reduced user friction:** Users don’t need to do anything to be scored by this endpoint.
+* **More difficult for Sybils:** When we make adjustments to our Stamp offering and weights, we are essentially providing a roadmap for Sybils, requiring us to make changes periodically which can add friction for users. The model features are hidden from the public, making it more difficult for Sybils to cheat.
+* **Modular verification:** Using the MBD endpoint along with the [Stamp-based verification](https://docs.passport.gitcoin.co/building-with-passport/passport-api/overview) approach made available via the Passport API can enable you to provide multiple verification options that reduce user friction for the majority of users while offering an additional verification tool for users who don’t pass the initial check.
+* **Faster and less impactful iteration cycles:** Sybil behavior changes, and so should Passport. While we know updates to our [Stamp-based verification](https://docs.passport.gitcoin.co/building-with-passport/passport-api/overview) are both required and help improve ease and effectiveness, those changes can cause user friction. The model-based verification enables us to tune our the models more frequently without this friction, allowing us to respond to changes in Sybil behavior more quickly.
+
+
+## Getting Access
+
+This API is generally available to all developers today, but you will need to utilize an API key that is required to access the Stamp-based Passport API.
+
+Please visit our [getting access page](https://docs.passport.gitcoin.co/building-with-passport/passport-api/getting-access) to learn how to generate an API key.
+
+During the initial beta phase, rate limits will be limited. You can read more in our [API Reference](https://docs.passport.xyz/building-with-passport/model-based-detection/api-reference).
+
+
+## Use cases
+
+This new API is designed to complement the existing suite of endpoints to offer a comprehensive approach to protecting and understanding your community's constituents.
+
+Starting with the MBD API, you can quickly determine if a wallet is a suspected human or Sybil actor. If they are a suspected Sybil (or if we don't have enough data to score them), you can have them utilize our [Stamp-based verification](https://docs.passport.gitcoin.co/building-with-passport/passport-api/overview) to prove their humanness.
+
+When thinking about applying this new API, there are two primary use cases that it enables:
+
+1. **[Protecting access](https://docs.passport.gitcoin.co/overview/use-cases#protect-access-rewards):** Preventing Sybils and other malicious bots from being able to participate in a variety of different web3 programs.
+2. **Data analysis:** Analyzing a set of wallet addresses against the Passport Model Based Detection score to identify which wallets are likely Humans or Sybils.
+
+
+## Recommended developer flow: Protect access
+
+Protecting access is Passport’s primary [use case](https://docs.passport.gitcoin.co/overview/use-cases). There are many different types of programs that can be protected with Passport, including rewards, governance, community access, marketplace, and communication programs.
+
+In this section, we will describe a few different developer flows that can be used to protect access to programs:
+
+* Single verification using the ETH Activity Model score
+* Double verification using the ETH Activity Model score and the Unique Humanity Score
+* Double verification using the ETH Activity Model score and other verification methods
+
+### Single verification using MBD
+
+This is the lightest-weight verification tool available with the current Passport developer tooling.
+
+If you’d like to quickly verify if potential participants are likely human or sybil based on the model-based evaluation, this is for you.
+
+However, this verification method does not provide a secondary verification option for users. If this is a concern, we recommend that you explore using one of the double verification methods.
+
+**Technical integration details:**
+
+* Collect the wallet address from the user
+* Pass the wallet address to the `[GET /passport/analysis/{address}](https://docs.passport.xyz/building-with-passport/model-based-detection/api-reference)` endpoint, which will deliver the
+`ethereum_activity` score (0-100).
+* Compare this score against a predetermined [score threshold](https://docs.passport.xyz/building-with-passport/model-based-detection/available-models#eth-mainnet-activity-model), and either grant or deny access depending on that evaluation.
+
+
+### Double verification using MBD and Unique Humanity score
+
+We've developed a tutorial around this offering: [Double Verification with the Model Based Detection and Stamp-based APIs](https://docs.passport.xyz/building-with-passport/model-based-detection/tutorials/double-verification)
+
+This verification method will cause the least amount of user friction for the majority of users, while also providing a secondary verification check to users in case they want to contest an initial check’s rejection.
+
+Many users will be able pass the initial MBD check with no user friction, while a portion of them will need to go through the Stamp-based process (in other words, creating a Passport, verifying Stamps, and building up a unique humanity score).
+
+**Technical integration details:**
+
+* Collect the wallet address from the user
+* Pass the wallet address to the `[GET /passport/analysis/{address}](https://docs.passport.xyz/building-with-passport/model-based-detection/api-reference)` endpoint, which will deliver the
+`ethereum_activity` score (0-100).
+* Compare the ETH activity score against a predetermined [score threshold](https://docs.passport.xyz/building-with-passport/model-based-detection/available-models#eth-mainnet-activity-model), and either grant access to the user or present the secondary verification method to them, depending on that evaluation.
+* Assuming the user didn’t pass primary verification, submit the user’s address to the Passport API `[POST /registry/submit-passport](https://docs.passport.xyz/building-with-passport/passport-api/api-reference#submit-for-scoring)`, which will score (or refresh the score) of the user, and deliver either the user’s [unique humanity or binary score](https://docs.passport.gitcoin.co/building-with-passport/major-concepts/scoring-mechanisms).
+* Evaluate the Unique Humanity Score against a predetermined [score threshold](https://docs.passport.xyz/building-with-passport/major-concepts/scoring-thresholds), and will either grant or deny access based on that evaluation.
+
+
+### Double verification using MBD and other verification methods
+
+This option will look very similar to the previous double verification method, but can utilize a custom Passport scorer and set of Stamps, or a separate 1st or 3rd-party verification system to verify users who weren’t able to pass the initial MBD verification flow.
+
+
+## Feedback
+
+We decided to release this API in beta so we can collect feedback as we continue to evolve this new verification method.
+
+We are specifically interested in hearing your feedback on the following questions: * Is this new verification process useful?
+  
+* How might you use this data?
+* Which other models might be useful to you?
+* If we offered multiple models, would you want us to provide an aggregate score?
+* If we expanded the ways you could submit addresses beyond a single address at a time, how would you prefer to provide
+this input?
+* How important is reducing latency with your use case?
+* How important would it be for you to have access to this data on the blockchain?
+* Which developer flows appeal to you? Did we miss any methods that should have been listed?
+* How did the documentation describe this product?
+
+If you have an opinion on any of the above, please fill out the following form:
+[Model Based Detection feedback form](https://forms.gle/D4e8F31MUa7N4TRY8)
+
+
+## Next steps
+
+You can retrieve a model-based score with a simple API request. We have provided a [walkthrough tutorial](https://docs.passport.xyz/building-with-passport/model-based-detection/tutorials/double-verification) to show you how it's done.
+
+You can also review the [API Reference](https://docs.passport.xyz/building-with-passport/model-based-detection/api-reference) to view endpoint details and an example request and response. 
+
+We've also included a page that describes the [available models and recommended score thresholds](https://docs.passport.xyz/building-with-passport/model-based-detection/available-models).
