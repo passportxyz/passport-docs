@@ -12,12 +12,12 @@
     "type": "git",
     "url": "git+https://github.com/"
   },
-  "author": "Gitcoin passport DevRel",
+  "author": "Gitcoin Passport DevRel",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/"
+    "url": "https://github.com/passportxyz/passport-docs/issues"
   },
-  "homepage": "https://github.com/",
+  "homepage": "https://docs.passport.xyz/",
   "dependencies": {
     "debug": "^4.3.4",
     "fsevents": "^2.3.3",

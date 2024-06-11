@@ -39,12 +39,11 @@ Of course, there are some additional complexities to this, including [Stamp expi
 This onchain smart contract stack is currently deployed to the following networks:
 
 Mainnet
-* Optimism
+* Arbitrum
 * Linea
 * ZkSync
 
 Testnet
-* Optimism Sepolia
 * Linea Goerli
 * ZkSync Sepolia
 
