@@ -15,8 +15,8 @@ The API offers a simple integration; one that requires just two requests to subm
 An excellent [use case](../../overview/use-cases) for Passport is to gate access to special content. To make this happen, we'll need to:
 
 1. [Creating a Passport Scorer and API key](getting-access)
-2. Submit the user’s address for scoring using the [POST /registry/submit-passport](https://docs.passport.gitcoin.co/building-with-passport/passport-api/api-reference#submit-for-scoring) endpoint. Find the user's score in the response. 
-3. Depending on the [type of scorer](https://docs.passport.gitcoin.co/building-with-passport/passport-api/getting-access#types-of-scorers) you set up, you will either compare the unique humanity score against a [threshold](https://docs.passport.gitcoin.co/building-with-passport/major-concepts/scoring-thresholds) that you set, or utilize the binary score. 
+2. Submit the user’s address for scoring using the [POST /registry/submit-passport](api-reference#submit-for-scoring) endpoint. Find the user's score in the response. 
+3. Depending on the [type of scorer](./getting-access#types-of-scorers) you set up, you will either compare the unique humanity score against a [threshold](../../major-concepts/scoring-thresholds) that you set, or utilize the binary score. 
 
 At this point, you know whether the user was able to prove their humanity or not, and you can grant access to the protected program. 
 
