@@ -61,9 +61,12 @@ The decoder is currently deployed to the following networks:
 | Network               | Contract address                           | Link                                                                                                                                                                                 |
 | --------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
 | Arbitrum              | 0x2050256A91cbABD7C42465aA0d5325115C1dEB43 | [Arbiscan](https://arbiscan.io/address/0x2050256A91cbABD7C42465aA0d5325115C1dEB43)                      |
-| Linea                 | 0x423cd60ab053F1b63D6F78c8c0c63e20F009d669 | [Lineascan](https://lineascan.build/address/0x423cd60ab053F1b63D6F78c8c0c63e20F009d669)                 |
+| Linea                 | 0x423cd60ab053F1b63D6F78c8c0c63e20F009d669 | [Explorer](https://explorer.linea.build/address/0x423cd60ab053F1b63D6F78c8c0c63e20F009d669)             |
 | Optimism              | 0x5558D441779Eca04A329BcD6b47830D2C6607769 | [Etherscan](https://optimistic.etherscan.io/address/0x5558D441779Eca04A329BcD6b47830D2C6607769)         |                                                                                                                                                                                     |
-| OP Sepolia [Testnet]  | 0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56)   |
+| Optimism Sepolia      | 0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56)   |
+| ZkSync Era            | 0x1166FCDCA3B04311Ba9E2eD5ad2c660E730e1386 | [Explorer](https://explorer.zksync.io/address/0x1166FCDCA3B04311Ba9E2eD5ad2c660E730e1386)               |
+| ZkSync Sepolia        | 0x23AF92Af3b5D6faAD920C3CAA4F9A3d4352D6834 | [Explorer](https://explorer.zksync.io/address/0x23AF92Af3b5D6faAD920C3CAA4F9A3d4352D6834)               |
+
 
 You can learn more about working with testnets via our guide on [Test Mode](test-mode).
 
@@ -183,7 +186,7 @@ EAS Schema
 
 
 
-##### Optimism Sepolia
+##### Optimism Sepolia (testnet)
 
 The Optimism Sepolia chain ID is 11155420.
 
@@ -203,6 +206,41 @@ EAS Schema
 | -------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
 | passport | 0x7026a3d524ee3dae5859aa00cfc0f17a3dac05af70eb758b5c0a40692f1e60f3 | [EasScan](https://optimism-sepolia.easscan.org/schema/view/0x7026a3d524ee3dae5859aa00cfc0f17a3dac05af70eb758b5c0a40692f1e60f3) |
 | score    | 0xe9071177c724d1bd712e4b05b4ce5426e60e141d8aaec86e4e03f25901d0cd91 | [EasScan](https://optimism-sepolia.easscan.org/schema/view/0xe9071177c724d1bd712e4b05b4ce5426e60e141d8aaec86e4e03f25901d0cd91) |
+
+
+##### ZkSync Era
+
+The ZkSync chain ID is [324](https://chainlist.org/chain/324).
+
+| contract                   | address                                    | link                                                                                         |
+| -------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| issuer                     | 0x804233b96cbd6d81efeb6517347177ef7bD488ED | [Explorer](https://explorer.zksync.io/address/0x804233b96cbd6d81efeb6517347177ef7bD488ED)      |
+| EAS                        | 0x21d8d4eE83b80bc0Cc0f2B7df3117Cf212d02901 | [Explorer](https://explorer.zksync.io/address/0x21d8d4eE83b80bc0Cc0f2B7df3117Cf212d02901) |
+| GitcoinResolver            | 0x8789129C5968EdcA5Cb392C4a9A9D7EFB590A838 | [Explorer](https://explorer.zksync.io/address/0x8789129C5968EdcA5Cb392C4a9A9D7EFB590A838)      |
+| GitcoinVerifier            | 0xfCC2d308FD4De098D08f056c424C969d728912bF | [Explorer](https://explorer.zksync.io/address/0xfCC2d308FD4De098D08f056c424C969d728912bF)      |
+| GitcoinAttester            | 0x2B5D97CBE50eA9bf809CbE18A2003E4Cb4D283cC | [Explorer](https://explorer.zksync.io/address/0x2B5D97CBE50eA9bf809CbE18A2003E4Cb4D283cC)      |
+
+
+EAS Schema
+
+| schema   | uid                                                                | link                                                                                                                |
+| -------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| passport | 0x71b9da9e4a2ecd8c87ad57d29ef64b9e63887d54039c97c294a6ecba8a8dfb4e | [EasScan](https://zksync.easscan.org/schema/view/0x71b9da9e4a2ecd8c87ad57d29ef64b9e63887d54039c97c294a6ecba8a8dfb4e) |
+| score    | 0xfa8f39bf31b38893697a46f2607ef58ef3ec66308840a1e351304d26823a297c | [EasScan](https://zksync.easscan.org/schema/view/0xfa8f39bf31b38893697a46f2607ef58ef3ec66308840a1e351304d26823a297c) |
+
+
+
+##### ZkSync Sepolia (testnet)
+
+The ZkSync chain ID is [300](https://chainlist.org/chain/300).
+
+| contract                   | address                                    | link                                                                                         |
+| -------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| issuer                     | 0x5f603Ed913738d9105bAf3BD981AA4750016B167 | [Explorer](https://explorer.zksync.io/address/0x5f603Ed913738d9105bAf3BD981AA4750016B167)    |
+| EAS                        | 0x21d8d4eE83b80bc0Cc0f2B7df3117Cf212d02901 | [Explorer](https://explorer.zksync.io/address/0x21d8d4eE83b80bc0Cc0f2B7df3117Cf212d02901)    |
+| GitcoinResolver            | 0x8789129C5968EdcA5Cb392C4a9A9D7EFB590A838 | [Explorer](https://explorer.zksync.io/address/0x8789129C5968EdcA5Cb392C4a9A9D7EFB590A838)    |
+| GitcoinVerifier            | 0xfCC2d308FD4De098D08f056c424C969d728912bF | [Explorer](https://explorer.zksync.io/address/0xfCC2d308FD4De098D08f056c424C969d728912bF)    |
+| GitcoinAttester            | 0x2B5D97CBE50eA9bf809CbE18A2003E4Cb4D283cC | [Explorer](https://explorer.zksync.io/address/0x2B5D97CBE50eA9bf809CbE18A2003E4Cb4D283cC)    |
 
 
 
