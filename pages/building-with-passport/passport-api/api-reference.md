@@ -196,7 +196,8 @@ The name in the parenthesis represents what [type of Scorer](/building-with-pass
     "address": "{address}",
     "score": null,
     "status": "PROCESSING",
-    "last_score_timestamp": "2023-02-03T12:08:21.735838+00:00",
+    "last_score_timestamp": "{timestamp}",
+    "expiration_date": "{expiration_time}",
     "evidence": null,
     "error": null,
     "stamp_scores": {
@@ -213,7 +214,8 @@ The name in the parenthesis represents what [type of Scorer](/building-with-pass
     "address": "{address}",
     "score": "{score}",
     "status": "DONE",
-    "last_score_timestamp": "{timestamp}",
+    "last_score_timestamp": "{last_score_time}",
+    "expiration_date": "{expiration_time}",
     "evidence": null,
     "error": null,
     "stamp_scores": {
@@ -231,6 +233,7 @@ The name in the parenthesis represents what [type of Scorer](/building-with-pass
     "score": "{score}",
     "status": "DONE",
     "last_score_timestamp": "{timestamp}",
+    "expiration_date": "{expiration_time}",
     "evidence": {
         "type": "ThresholdScoreCheck",
         "success": true,
@@ -269,6 +272,7 @@ curl --request GET \
           "score": "{score}",
           "status": "DONE",
           "last_score_timestamp": "{timestamp}",
+          "expiration_date": "{expiration_time}",
           "evidence": null,
           "error": null,
           "stamp_scores": {
@@ -317,6 +321,7 @@ curl --request GET \
             "score": "{score}",
             "status": "DONE",
             "last_score_timestamp": "{timestamp}",
+            "expiration_date": "{expiration_time}",
             "evidence": null,
             "error": null,
             "stamp_scores": {
@@ -331,6 +336,7 @@ curl --request GET \
             "score": "{score}",
             "status": "DONE",
             "last_score_timestamp": "{timestamp}",
+            "expiration_date": "{expiration_time}",
             "evidence": null,
             "error": null,
             "stamp_scores": {
