@@ -221,6 +221,8 @@ Getting Passport data requires instantiating the `decoder` contract and calling 
 - Linea: `0xe704`
 - Optimism: `0x1a4`
 - Optimism Sepolia: `0xaa37dc`
+- ZkSync: `0x144`
+- ZkSync Sepolia: `0x12c`
 
 Once the contract instance exists, you can simply call `getPassport` passing in the user address, which is stored in your app's state. If the function call returns some Stamp data, you can set the `hasStampData` flag to `true` and return the data.
 

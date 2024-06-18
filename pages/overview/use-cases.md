@@ -28,7 +28,7 @@ Gitcoin Passport’s developer platform enables several key use cases:
 #### Description
 One of the primary reasons why Sybils exist is to take advantage of community rewards programs. Whether you’re offering NFTs, airdrops, faucets, or other incentives programs, you want to make sure that your rewards are going to just those humans that deserve it. 
 
-By protecting access to Passport holders that have a score over a certain threshold, you are ensuring that your community rewards programs are properly distributed. 
+By protecting access to Passport holders that have a score over a certain [threshold](../major-concepts/scoring-thresholds), you are ensuring that your community rewards programs are properly distributed. 
 
 #### Active integrators
 * [Gitcoin Grants](https://www.gitcoin.co/grants-stack)
