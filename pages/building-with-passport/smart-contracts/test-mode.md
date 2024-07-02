@@ -11,9 +11,9 @@ For this reason, the Passport team deployed the Passport smart contracts on publ
 
 ## Test mode in the Passport app
 
-The Passport app can be run in test mode by appending`/#/?dashboard=testing` to the app URL:
+The Passport app can be run in test mode by visitng URL and following the steps below:
 
-https://passport.gitcoin.co/#/?dashboard=testing
+https://passport.gitcoin.co/#/testing/dashboard
 
 This enables you to write Passport data and scores to the Gitcoin Passport smart contracts on several testnets, meaning you can experiment and get comfortable with the flows before trying it out on Mainnet. 
 
