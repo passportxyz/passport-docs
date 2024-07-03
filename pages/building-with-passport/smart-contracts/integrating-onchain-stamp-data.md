@@ -221,6 +221,8 @@ Getting Passport data requires instantiating the `decoder` contract and calling 
 - Linea: `0xe704`
 - Optimism: `0x1a4`
 - Optimism Sepolia: `0xaa37dc`
+- Scroll: `0x82750`
+- Scroll Sepolia: `0x8274f`
 - ZkSync: `0x144`
 - ZkSync Sepolia: `0x12c`
 
