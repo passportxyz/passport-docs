@@ -1,17 +1,15 @@
 ---
-title: Stamps
+title: Stamps developer overview
 description: Instructions for creating new Stamps
 ---
 
 ## What is a Stamp?
 
-Stamps are the key identity verification mechanism of Gitcoin Passport. A Stamp is a collection of one or more [verifiable credentials](#verifiable-credentials-vcs) from an identity provider that is collected in a Passport. Stamps are provided by a variety of web2 and web3 identity authenticators including Google, Facebook, BrightID, ENS, and Proof of Humanity. Custom Stamps for particular communities are under development. Stamps do not store any personally identifiable information, only the verifiable credentials issued by the identity authenticator.
+Stamps are the key identity verification mechanism of Passport. A Stamp is a collection of one or more [verifiable credentials](#verifiable-credentials-vcs) from an identity provider that is collected in a Passport. Stamps are provided by a variety of web2 and web3 identity authenticators including Google, BrightID, Holonym, Civic, ENS, and more. Stamps do not store any personally identifiable information, only the verifiable credentials issued by the identity authenticator.
 
-Passport aggregates Stamps and assigns each Stamp a different weight according to the needs of a particular community. This weight is used to calculate the cost of forgery of an identity, a score which reflects the credibility of a potential participant’s online identity. For example, a community for developers could assign a greater weight to a Github Stamp, resulting in higher scores for those who have Github Stamps.
+Passport aggregates Stamps and assigns each Stamp a different weight according to the needs of a particular community. This weight is used to calculate the cost of forgery of an identity, a score which reflects the credibility of a potential participant’s online identity. 
 
-Stamps are frequently added to the Passport service - anyone can [propose a Stamp](../stamps/integrating-a-new-stamp)!
-
-However, they can also be removed, for example if the verification stops working.
+The Passport team is highly selective about the new Stamps that are added to the platform. To be considered, you can follow the steps outlined in on this page.
 
 ## Stamp assessment criteria
 
@@ -19,7 +17,7 @@ When new Stamps are proposed we evaluate them according to some key criteria:
 
 - **Strong non-Sybil signal**
 
-  Stampos should represent some strong method for identifying Sybils vs non-Sybils so that we can ensure that each Stamp helps to improve the Sybil-defense that Passport offers. We prioritize new signals that are unique or different to the signals we have already have in Passport. It’s ideal if there’s already data, from internal efforts, indicating the effectiveness of the credentials.
+  Stamps should represent some strong method for identifying Sybils vs non-Sybils so that we can ensure that each Stamp helps to improve the Sybil-defense that Passport offers. We prioritize new signals that are unique or different to the signals we have already have in Passport. It’s ideal if there’s already data, from internal efforts, indicating the effectiveness of the credentials.
 
 - **Free** (or very cheap)
 
@@ -27,7 +25,7 @@ When new Stamps are proposed we evaluate them according to some key criteria:
 
 - **Easy to use**
   
-  Ensuring that a user can quickly get set up and verified is important to the overall Passport and partner platform's success. We’ll prioritize those Stamps and credentials that can be included in the existing ‘1 click’ verification flow.
+  Ensuring that a user can quickly get set up and verified is important to the overall Passport and partner platform's success. We’ll prioritize those Stamps and credentials that can be included in the existing ‘1-click’ verification flow.
 
 - **Strong partnership**
 
@@ -40,14 +38,14 @@ When new Stamps are proposed we evaluate them according to some key criteria:
 
 ## What types of Stamps would we like to see more of?
 
-We are specifically interested in Stamps that are accessible in areas of the world that are currently under-represented, such as Africa and Asia and Latin America. This is so people in those regions don't find it more difficult to prove themselves to be real users than people from other areas.
+We are specifically interested in Stamps that are accessible in areas of the world that are currently under-represented, such as Asia, Africa, and Latin America. This is so people in those regions don't find it more difficult to prove themselves to be real users than people from other areas.
 
-Similarly, we are interested to see more STamps that are accessible to new-comers to Web3, but still match our key criteria. 
+Similarly, we are interested to see more Stamps that are accessible to new-comers to Web3, but still match our key criteria. 
 
 ## Process
 
 If you believe your Stamp meets the criteria described above, then you should submit your Stamp using [this form](https://docs.google.com/forms/d/e/1FAIpQLSdpxAUllQKuPd7ogO7hJMuSUoZzThF0ZRpKVw7MVJg6CD0sPg/viewform?usp=sf_link).
 
-We review form submissions periodically and will get back to partners whoe Stamps we want to integrate as soon as possible.
+We review form submissions periodically and will get back to partners who's Stamps we want to integrate as soon as possible.
 
 If we decide to move forward with your Stamp, the next step is to follow the instructions in [this guide](https://docs.passport.xyz/stamps/integrating-a-new-stamp).
