@@ -1,11 +1,17 @@
 ---
-title: Integrating a new Stamp
-description: Instructions for creating new Stamps
+title: Submitting a Stamp pull request
+description: Instructions for submitting a Stamp pull request for approved partners
 ---
 
 import { Callout } from 'nextra/components'
 
-# Creating a new Stamp
+# Submitting a Stamp pull request
+
+<Callout type="info">
+This guide is reserved for those partners who have been approved by the Passport team to submit a pull request. 
+
+If you haven't been approved yet, please visit the [Stamps overview for developers](overview) page, and follow the steps there. 
+</Callout>
 
 Creating a new Stamp involved defining verification logic and adding configuration details to our existing Stamp infrastructure.
 
@@ -23,7 +29,7 @@ This is the [`platforms` directory](https://github.com/gitcoinco/passport/tree/m
 
 ***
 
-### 2. Create new files\{}
+### 2. Create new files
 
 Adding a Stamp requires you to create some new files inside the `platforms/src` directory. Inside `platforms/src` create a new directory and name it according to your Stamp. In the test here we will use the word `example.`
 
