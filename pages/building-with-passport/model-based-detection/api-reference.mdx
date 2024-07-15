@@ -21,7 +21,19 @@ We have launched this endpoint using this base URL: `https://api.scorer.gitcoin.
 However, we intend to make this data available via a different base URL in the future, as we migrate away from Gitcoin’s infrastructure: `https://api.passport.xyz`
 </Callout>
 
-* **Endpoint name:** Retrieve Model Based Detection scores
+## Rate Limits
+
+|Tier |Rate limit |
+|--|--|
+|Tier 1 | 15 requests per 15 minutes, up to 1440 requests per day. |
+|Tier 2 | 350 requests per 15 minutes, up to 33600 requests per day. |
+|Tier 3 | 2000 requests per 15 minutes, up to 192000 requests per day. |
+
+These rate limits are completely separate from the existing Passport API rate limits.
+
+
+## Retrieve Model Based Detection scores
+
 * **Endpoint:** `GET /passport/analysis/{address}`
 * **Base URL:** `https://api.scorer.gitcoin.co`
 * **Authentication:** API Key – Can be the same API Key that is used with the other Passport API endpoints Parameters:
