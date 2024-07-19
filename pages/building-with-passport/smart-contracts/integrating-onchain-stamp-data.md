@@ -27,7 +27,7 @@ This app uses a blockchain, rather than Gitcoin's database server, as a backend.
 
 The app we will build will be a webpage where users can connect their wallet to check their onchain credentials.
 
-You can find the code from this tutorial in this [GitHub repo](https://github.com/gitcoinco/passport-scorer/tree/main/examples/onchain-stamps-app).
+You can find the code from this tutorial in this [GitHub repo](https://github.com/passportxyz/passport-scorer/tree/main/examples/onchain-stamps-app).
 
 The app will work as follows:
 
@@ -207,7 +207,7 @@ const abi = require('./abis.ts')
 
 The `decoderContractAddress` is the address on the Optimism Sepolia blockchain where the `decoder` contract is stored. The data in `abis.ts` is a formatted set of function signatures that allow the contract bytecode to be decoded and instantiated in your app (an ABI - Application Binary Interface).
 
-The elements imported from `tab-contents` are components used to build the UI. This file should also be located in the `src/app` folder, called `tab-contents.tsx`, and should be populated with the code located in [this GitHub file](https://github.com/gitcoinco/passport-scorer/blob/main/examples/onchain-stamps-app/src/app/tab-contents.tsx).
+The elements imported from `tab-contents` are components used to build the UI. This file should also be located in the `src/app` folder, called `tab-contents.tsx`, and should be populated with the code located in [this GitHub file](https://github.com/passportxyz/passport-scorer/blob/main/examples/onchain-stamps-app/src/app/tab-contents.tsx).
 
 Otherwise, the `create-next-app` boilerplate code is quite standard. There is a `connect()` function that instantiates the `provider` by grabbing network configuration from your browser wallet (make sure you are connected to Optimism Sepolia) and a `checkConnection()` function wrapped in `useEffect` that automatically triggers a connection when the page is first loaded.
 

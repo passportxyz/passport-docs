@@ -71,7 +71,7 @@ type GitcoinPassportStamp implements VerifiableCredential
 }
 ```
 
-You'll notice that the ComposeDB schema definition above uses embedded types and an interface. For brevity we've omitted those above, but you can observe the schema definitions in their entirety in our [passportStamps.graphql](https://github.com/gitcoinco/passport/blob/main/schemas/models/passportStamps.graphql) document.
+You'll notice that the ComposeDB schema definition above uses embedded types and an interface. For brevity we've omitted those above, but you can observe the schema definitions in their entirety in our [passportStamps.graphql](https://github.com/passportxyz/passport/blob/main/schemas/models/passportStamps.graphql) document.
 
 The fields are as follows:
 - `type`: Passport Stamps are always `VerifiableCredentials`
@@ -88,7 +88,7 @@ The fields are as follows:
 
 ### Syncing Passport Data with Your Ceramic Node
 
-If you already have a ComposeDB node and you would like to sync and collaborate on Passport data based on the same definitions, you will need to use the same [ComposeDB composite](https://github.com/gitcoinco/passport/blob/main/schemas/composites/gitcoin-passport-stamps-composite.json) already deployed onto the Passport ComposeDB node (in order to ensure the same data model references are synced). 
+If you already have a ComposeDB node and you would like to sync and collaborate on Passport data based on the same definitions, you will need to use the same [ComposeDB composite](https://github.com/passportxyz/passport/blob/main/schemas/composites/gitcoin-passport-stamps-composite.json) already deployed onto the Passport ComposeDB node (in order to ensure the same data model references are synced). 
 
 We've put together a simple [repository](https://github.com/Passportxyz/passport-ceramic-deployment) containing a script that automates this for you. 
 
@@ -111,7 +111,7 @@ npm run deploy
 
 Congratulations! Your ComposeDB node is now indexing on the same passport data models. 
 
-Finally, in order to run mutations and read queries against your node corresponding to the passport schema, don't forget to use your [JavaScript Runtime Definition](https://github.com/gitcoinco/passport/blob/main/schemas/src/definitions/ts/gitcoin-passport-stamps.ts) when casting these definitions onto your application's ComposeDB client.
+Finally, in order to run mutations and read queries against your node corresponding to the passport schema, don't forget to use your [JavaScript Runtime Definition](https://github.com/passportxyz/passport/blob/main/schemas/src/definitions/ts/gitcoin-passport-stamps.ts) when casting these definitions onto your application's ComposeDB client.
 
 For more information about how this works, visit the [ComposeDB examples](https://developers.ceramic.network/docs/composedb/examples/tutorials-and-examples) documentation, or get in touch with the Ceramic team on their [Official Forum](https://forum.ceramic.network/).
 

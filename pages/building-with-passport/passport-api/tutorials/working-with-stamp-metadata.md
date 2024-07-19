@@ -17,7 +17,7 @@ On this page, you will **learn how to use the Stamp metadata API endpoints** to 
 
 You can follow this walk-through to build a simple app that allows a user to connect their wallet and display their Stamps to the browser, using information provided in the Stamp metadata.
 
-You can find the code from this tutorial in this [GitHub repo](https://github.com/gitcoinco/passport-scorer/tree/main/examples/stamp-collector):
+You can find the code from this tutorial in this [GitHub repo](https://github.com/passportxyz/passport-scorer/tree/main/examples/stamp-collector):
 
 ### Prerequisites
 
