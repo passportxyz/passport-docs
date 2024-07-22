@@ -1,27 +1,17 @@
 ---
 title: Double Verification with the Model Based Detection and Stamp-based APIs
-description: This tutorial introduces the Ethereum activity model and unique humanity double-scoring method 
+description: This tutorial introduces the model-based detection and stamp-based double-verification method 
 ---
 
 # Double Verification with the Model Based Detection and Stamp-based APIs
 
-While the Model Based Detection (MBD) API is in beta, these docs will remain hidden. 
+This tutorial will walk you through verifying an EVM account with both the ETH Activity model (model-based detection) and the [Stamp-based method](../../passport-api/overview) in your application.
 
-You can access our other MBD API docs here:
+The ETH activity model is one of the [available machine learning models](../available-models.mdx) trained on known Sybil and human EVM account data that examines the transaction history for a given Ethereum address and assigns it a trust score. While this tutorial explains how to use the ETH activity model score, you can easily use any of the other available models instead.
 
-* [API Reference](api-reference)
-* [Tutorial - Double verification using MBD and Stamp-based verification](tutorial/double-verification)
-* [Available models and recommended score thresholds](available-models)
-
----
-
-The ETH activity model is one of the available machine learning models trained on known Sybil and human EVM account data that examines the transaction history for a given Ethereum address and assigns it a trust score.
-
-Passport exposes an API endpoint that accepts an Ethereum account as a query parameter and returns a score between 0 (likely Sybil) and 100 (likely human), having run the model remotely on the Passport server.
+Passport exposes an API endpoint that accepts an Ethereum account as a query parameter and returns scores between 0 (likely Sybil) and 100 (likely human), having run one of the model remotely on the Passport server.
 
 The model itself is a black box whose outcome is based on 50+ features. Some applications may be happy to rely on these models alone; however, it is advisable to offer the Stamp-based verification method as a fallback to support those users who might not have had the chance to build up a strong account history, such as crypto beginners or experts who utilize multiple wallets for different activities.
-
-This tutorial will walk you through verifying with both the ETH Activity model and the Stamp-based method in your application.
 
 
 ## Prerequisites
