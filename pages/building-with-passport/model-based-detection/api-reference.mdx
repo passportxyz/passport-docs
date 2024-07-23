@@ -21,28 +21,52 @@ We have launched this endpoint using this base URL: `https://api.scorer.gitcoin.
 However, we intend to make this data available via a different base URL in the future, as we migrate away from Gitcoin’s infrastructure: `https://api.passport.xyz`
 </Callout>
 
-* **Endpoint name:** Retrieve Model Based Detection scores
+## Rate Limits
+
+|Tier |Rate limit |
+|--|--|
+|Tier 1 | *[DEFAULT]* 15 requests per 15 minutes, up to 1440 requests per day. |
+|Tier 2 | 350 requests per 15 minutes, up to 33600 requests per day. |
+|Tier 3 | 2000 requests per 15 minutes, up to 192000 requests per day. |
+
+These rate limits are completely separate from the existing Passport API rate limits.
+
+If you'd like to request elevated rate limits, please fill out our [rate limit elevation form](https://docs.google.com/forms/d/e/1FAIpQLSfL7U22f89lCl8RJXN8O9PGeZzaL1E1iX9mEhvIaMErR587WA/viewform?usp=sf_link).
+
+
+## Retrieve Model Based Detection scores
+
+Use this endpoint to request a model-based score for a specified user. You can find all of the available models and recommended score thresholds via our [available models](available-models) page.
+
 * **Endpoint:** `GET /passport/analysis/{address}`
 * **Base URL:** `https://api.scorer.gitcoin.co`
-* **Authentication:** API Key – Can be the same API Key that is used with the other Passport API endpoints Parameters:
-* **Path parameter:** `address` – Path parameter – **Required** – Single user address 
-* **Example request:**
+* **Authentication:** API Key – Can be the same [API Key](../passport-api/getting-access) that is used with the Passport API
+
+### Parameters
+
+|Parameter |Type |Description |
+|--|--|--|
+|`address` |Path parameter| *[Required]* Pass a single EVM wallet address<br /><br />While we only allow a single address to be scored per request, we are considering expanding this to enable bulk scoring when we graduate this API from beta. If this is important to you, please [let us know](https://forms.gle/D4e8F31MUa7N4TRY8). |
+|`model_list` |Query parameter | Include one of the following model names to request that model's score for the specified wallet address: <br />`ethereum_activity`, `nft`, `arbitrum`, `optimism`, `polygon`, and `zksync`<br /><br />If you don't include this parameter, the API will return the `ethereum_activity` model by default.<br /><br />While we only allow scoring using a single model per request, we are considering enabling requesting multiple models when we graduate this API from beta. If this is important to you, please [let us know](https://forms.gle/D4e8F31MUa7N4TRY8). |
+
+
+### Example request
 
 ```bash
 curl --request GET \
-    --url 'https://api.scorer.gitcoin.co/passport/analysis/{address}' \
+    --url 'https://api.scorer.gitcoin.co/passport/analysis/{address}?model_list=arbitrum' \
     --header 'Content-Type: application/json' \
     --header 'X-API-KEY: {API KEY}'
     ```
 
-**Example response:**
+### Example response
 
 ```json
 {
     "address": "string",
     "details": {
         "models": {
-            "ethereum_activity": {
+            "arbitrum": {
                 "score": 50 
             }
         } 

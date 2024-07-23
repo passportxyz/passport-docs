@@ -122,7 +122,7 @@ Passport is the premier solution for Sybil defense. Help us further our goals by
 
 We’re very interested in unique use cases that utilize the Passport developer products. 
 
-Please feel free to reach out to us on [Discord > #Passport-Dev-Support to bounce new ideas off us! We will also help promote your unique ideas through our marketing channels.
+Please feel free to reach out to us on our [Passport Developer Telegram](https://t.me/+Mcp9RsRV7tVmYjZh) to bounce new ideas off us! We will also help promote your unique ideas through our marketing channels.
 
 ## Use cases by audience
 

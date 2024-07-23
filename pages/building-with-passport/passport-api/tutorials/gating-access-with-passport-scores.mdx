@@ -512,9 +512,9 @@ const ContentAboveThreshold = () => {
             <p>Passport DAO is a fictional DAO for Passport builders.</p>
             <p>Passport DAO does not really exist, it is just an example made up for the purposes of this tutorial!</p>
             <p>However, since you have a Passport with a score > 20 and you have built this demo app, </p>
-            <p>you might enjoy the Gitcoin discord, where other Passport builders hang out.</p>
+            <p>you might enjoy the Gitcoin Developer Telegram, where other Passport builders hang out.</p>
             <br />
-            <p>Join fellow builders on the <Link href="https://discord.gg/gitcoin" color='teal.500' isExternal>Gitcoin Discord</Link></p >
+            <p>Join fellow builders on the <Link href="https://t.me/+Mcp9RsRV7tVmYjZh" color='teal.500' isExternal>Passport Developer Telegram</Link></p >
             <p></p>
             <br />
         </>
@@ -640,7 +640,8 @@ Then you need to pass `score` to `JoinTheDao` so that the first line of the `Joi
 
 ```tsx
 const JoinTheDao = ({ isAboveThreshold, score }) => {
-    ...
+...
+}
 ```
 
 Then update the `ContentBelowThreshold` component so that it takes `score` as an argument. Then you can add some simple Typescript before the return statement that creates a default string that will be used to warn the user that they don't have a Passport yet _if_ the value of `score` is equal to its unset value. However, if `score` has had a value set, it warns the user that their score is not high enough, reporting the actual score in the text. Your final `ContentBelowThreshold` component should look as follows:
@@ -709,4 +710,4 @@ This tutorial walked you through building a basic Passport-gated application. Yo
 
 ### Further Reading
 
-For more on Gitcoin Passport, you can keep browsing this website, or you can join the [Gitcoin Discord](https://discord.gg/gitcoin). Having completed this tutorial, a great next step would be to try our "Integrating Stamps and Scorers" tutorial where you can learn how to handle individual Stamp data as well as Passport scores.
+For more on Gitcoin Passport, you can keep browsing this website, or you can join the [Passport Developer Telegram](https://t.me/+Mcp9RsRV7tVmYjZh). Having completed this tutorial, a great next step would be to try our "Integrating Stamps and Scorers" tutorial where you can learn how to handle individual Stamp data as well as Passport scores.
