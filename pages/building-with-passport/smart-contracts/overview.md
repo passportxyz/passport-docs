@@ -73,4 +73,4 @@ Learn more about onchain Passports:
 * [Contract reference](contract-reference)
 * [Attestation schema](attestation-schema)
 
-You can also ask questions about onchain Passports in our [developer support channel on Discord](https://discord.com/channels/562828676480237578/986222591096279040)
+You can also ask questions about onchain Passports in our [developer support channel on Telegram](https://t.me/+Mcp9RsRV7tVmYjZh)

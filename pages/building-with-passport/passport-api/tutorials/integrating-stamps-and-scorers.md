@@ -17,7 +17,7 @@ A Gitcoin Passport Scorer integration is a solution to this problem. By showing 
 
 Note, however, that it is possible for someone to be an impersonator and _also_ have a high Passport score. This is why a Scorer integration is more about giving additional evidence, or context, to choices than it is about automated, binary decision making.
 
-You can find the code from this tutorial in this [GitHub repo](https://github.com/gitcoinco/passport-scorer/tree/main/examples/check-trusted-user-app):
+You can find the code from this tutorial in this [GitHub repo](https://github.com/passportxyz/passport-scorer/tree/main/examples/check-trusted-user-app):
 
 Let's see how an integration like this is built using the Passport API.
 
@@ -229,7 +229,7 @@ The boilerplate code already provides buttons the users can click to connect the
 
 ### **Retrieving a score**
 
-We want to display a user's trust status in the app's UI. Their trust status will be determined by their Passport score and ownership of specific Stamps. The weights applied to each Stamp can be found in the [Passport Github](https://github.com/gitcoinco/passport-scorer/blob/main/api/scorer/settings/gitcoin_passport_weights.py).
+We want to display a user's trust status in the app's UI. Their trust status will be determined by their Passport score and ownership of specific Stamps. The weights applied to each Stamp can be found in the [Passport Github](https://github.com/passportxyz/passport-scorer/blob/main/api/scorer/settings/gitcoin_passport_weights.py).
 
 The first step is to retrieve their Passport score by calling the `/registry/score/${SCORER_ID}/${address}` API endpoint.&#x20;
 

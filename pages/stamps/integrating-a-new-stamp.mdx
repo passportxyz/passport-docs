@@ -23,9 +23,9 @@ We have a standardized format for Stamps and this page will help you to understa
 
 Whether you want to create an EVM or a non-EVM Stamp, the process begins by forking the Passport GitHub repository. Clone your fork and navigating to the `platforms` directory.
 
-Here is our [GitHub repository](https://github.com/gitcoinco/passport).
+Here is our [GitHub repository](https://github.com/passportxyz/passport).
 
-This is the [`platforms` directory](https://github.com/gitcoinco/passport/tree/main/platforms), located at `passport/platforms.`
+This is the [`platforms` directory](https://github.com/passportxyz/passport/tree/main/platforms), located at `passport/platforms.`
 
 ***
 
@@ -320,7 +320,7 @@ The `getTokenBalance()` function is slightly more complicated because it interac
 
 The ERC-20 token contract includes a function `balanceOf()` that returns the token balance for a given address. This function is common to all contracts that conform to the ERC-20 token standard. It is also necessary to specify which specific token you are interested, by providing the contract address. This is why `getEthBalance()` only takes the user address as an argument, whereas `getTokenBalance()` also takes a contract address (and a decimal number which is used to ensure the correct precision for token balances).&#x20;
 
-Both functions take a [`requestPayload`](https://github.com/gitcoinco/passport/blob/9ece5cd399851ccd5a9b76447ad47667181faf6f/types/src/index.d.ts) argument that is used to pass user-defined values from the client into the verification logic.&#x20;
+Both functions take a [`requestPayload`](https://github.com/passportxyz/passport/blob/9ece5cd399851ccd5a9b76447ad47667181faf6f/types/src/index.d.ts) argument that is used to pass user-defined values from the client into the verification logic.&#x20;
 
 _**Every Stamp has to have a `verify()` function**_ that returns a boolean (true/false) indicating whether or not the verification was successful and some proof details. In this example, the `verify()` function is quite simple. It checks whether a contract address has been provided. If so, it calls `getTokenBalance()` and assigns the return value to `amount`. If no contract address was provided, it calls  `getEthBalance()`instead and assigns that return value to `amount`.  The value of `amount` is then compared to the user-defined threshold. If `amount` exceeds the threshold then the verification is successful, `valid` is set to `true` and `verify()` returns the user address along with some basic details about the verification (name and threshold value). Otherwise, `verify()` returns an empty object.
 
@@ -332,7 +332,7 @@ _**For a new Stamp, you will need to extend the logic explained here to your pre
 
 This is where you will add tests for your verification logic. Precisely how the tests are organized is up to you, as the tests will be specific to the individual Stamp. A standard pattern is to mock endpoints that return a range of responses that could be expected from your real external server and design tests to ensure your verification logic handles them all well. You should mock all possible responses to ensure complete test coverage.
 
-As an example, see the tests for the [ETH transaction credential](https://github.com/gitcoinco/passport/blob/main/platforms/src/ETH/\_\_tests\_\_/ethTransactions.test.ts).
+As an example, see the tests for the [ETH transaction credential](https://github.com/passportxyz/passport/blob/main/platforms/src/ETH/\_\_tests\_\_/ethTransactions.test.ts).
 
 ### 3. Update existing files
 
@@ -568,7 +568,7 @@ When you raise a pull request, it is important to include the following checklis
 
 You can use the code snippet above as a template - copy and paste it into your pull request and tick the boxes to show that each item has been completed.
 
-The following is an example of a pull request that uses a similar checklist: [Integrate Phi Stamp in Passport](https://github.com/gitcoinco/passport/issues/1233#top)
+The following is an example of a pull request that uses a similar checklist: [Integrate Phi Stamp in Passport](https://github.com/passportxyz/passport/issues/1233#top)
 
 
 
@@ -607,9 +607,9 @@ export const getAuthClient = async (sessionKey: string, code: string, context: T
 ### 8. See some examples
 
 It might be helpful to look at some past examples of pull requests that add Stamps to the Passport GitHub repository. Browse the examples below to see exactly how others have gone about it:
-* [Hypercert Stamp](https://github.com/gitcoinco/passport/pull/1298/files)
-* [Guildxyz Stamp](https://github.com/gitcoinco/passport/pull/1224/files)
-* [Coinbase Stamp](https://github.com/gitcoinco/passport/pull/1049/files)
-* [Phi Stamp](https://github.com/gitcoinco/passport/pull/1232/files)
+* [Hypercert Stamp](https://github.com/passportxyz/passport/pull/1298/files)
+* [Guildxyz Stamp](https://github.com/passportxyz/passport/pull/1224/files)
+* [Coinbase Stamp](https://github.com/passportxyz/passport/pull/1049/files)
+* [Phi Stamp](https://github.com/passportxyz/passport/pull/1232/files)
 
-You can also ask questions in our [developer support channel on Discord](https://discord.com/channels/562828676480237578/986222591096279040).
+You can also ask questions in our [developer support channel on Telegram](https://t.me/+Mcp9RsRV7tVmYjZh).

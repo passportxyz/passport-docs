@@ -73,7 +73,7 @@ From a raw attestation, you can extract the data that belongs to each field in t
 
 You then need to apply some logic to the decoded data to extract actionable insights.
 
-For example, you should extract the position indexes of each `1` value in the `providers` bitmap, then look up the `Providers` at those same indexes in the providers mapping, found on the [Gitcoin Github](https://github.com/gitcoinco/eas-proxy/blob/main/deployments/providerBitMapInfo.json).
+For example, you should extract the position indexes of each `1` value in the `providers` bitmap, then look up the `Providers` at those same indexes in the providers mapping, found on the [Gitcoin Github](https://github.com/passportxyz/eas-proxy/blob/main/deployments/providerBitMapInfo.json).
 
 You may also wish to extract each value from `hashes` and find the matching entry in the Stamps mapping to determine which specific Stamps the Attestation contains.
 
@@ -81,4 +81,4 @@ Similarly, you can determine the current time and check whether it is before or 
 
 You can see an example of how to do this in a Nextjs app in our [onchain Passports tutorial](./tutorials/integrating-onchain-stamp-data).
 
-**Note** if you have more questions about the Attestation schema, you can chat in our [developer support channel on Discord](https://discord.com/channels/562828676480237578/986222591096279040).
+**Note** if you have more questions about the Attestation schema, you can chat in our [developer support channel on Telegram](https://t.me/+Mcp9RsRV7tVmYjZh).
