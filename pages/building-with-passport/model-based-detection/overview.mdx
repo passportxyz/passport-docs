@@ -3,13 +3,24 @@ title: Model Based Detection API [BETA]
 description: The Model Based Detection API enables partners to utilize Passport-grade supervised machine learning models to identify Sybils vs humans.
 ---
 
+import { Callout } from 'nextra/components'
+
 # Model Based Detection API [BETA]
 
 ## Introduction
 
-The new Model Based Detection (MBD) API [BETA] enables partners to protect access to their programs and analyze their ecosystem’s user base with Passport-grade supervised machine learning models.
+The new Model Based Detection (MBD) API [BETA] enables partners to protect programs against Sybils in real-time, regardless of whether they have a Passport account or not.
 
-This API is designed to return the results of model-based detection methods. During this initial beta phase, it will score EVM addresses against several different models that analyze transaction history against dozens of different data features to identify if that address is likely Human or Sybil. 
+This API is designed to return the results of model-based detection methods. It can score any EVM addresses against several different models that analyze transaction history against dozens of different data features to identify if that address is likely Human or Sybil. 
+
+<Callout type="info">
+Need more in-depth analysis?
+
+We also offer custom Sybil and reputation data services.
+
+To learn more, please fill out this [quick form](https://docs.google.com/forms/d/e/1FAIpQLSf1iSiKGjKQq5FAI04Gbqxa_7oi1ANRdocFU1fKARj8HnzDww/viewform?usp=sf_link). 
+</Callout>
+
 
 The current [available models](available-models) include the following:
 * Ethereum (L1) unique humanity model
