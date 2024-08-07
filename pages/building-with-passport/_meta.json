@@ -8,8 +8,5 @@
   "passport-api": "Passport API",
   "smart-contracts": "Smart Contracts",
   "composedb": "ComposeDB",
-  "model-based-detection": {
-    "type": "folder",
-    "display": "hidden"
-  }
+  "model-based-detection": "Model Based Detection API"
 }
