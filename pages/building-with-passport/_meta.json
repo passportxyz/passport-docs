@@ -6,7 +6,7 @@
     "type": "separator"
   },
   "passport-api": "Passport API",
+  "model-based-detection": "Model Based Detection API",
   "smart-contracts": "Smart Contracts",
-  "composedb": "ComposeDB",
-  "model-based-detection": "Model Based Detection API"
+  "composedb": "ComposeDB"
 }
