@@ -252,5 +252,10 @@ module.exports = withNextra({
             destination: '/building-with-passport/smart-contracts/integrating-onchain-stamp-data',
             permanent: true
         },
+        {
+            source: '/building-with-passport/model-based-detection',
+            destination: '/building-with-passport/model-based-detection/overview',
+            permanent: true
+        }
     ]
 })

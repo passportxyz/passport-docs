@@ -10,6 +10,7 @@ import { Callout } from 'nextra/components'
 At this time, we have deployed a few different models to help verify unique humans. We plan to expand this list of models greatly, first by exploring additional Sybil detection models for several L2 partners, and then looking into other web3 verticals and reputation signals.
 
 We currently offer the following models via the Model Based Detection API:
+* Aggregate unique humanity score - `aggregate`
 * Ethereum (L1) unique humanity model - `ethereum_activity`
 * NFT (L1) unique humanity model - `nft`
 * Arbitrum unique humanity model - `arbitrum`
@@ -28,7 +29,7 @@ For each model, we will provide a table that describes the different score thres
 <Callout type="info">
 Please note that the percentages included in these tables do not necessarily translate to the percentage of participation for each individual partner.
 
-We calculate the percentage of qualifying humans and sybils at various thresholds, derived from a curated list of collected addresses labeled as either Sybils or humans.
+We calculate the percentage of qualifying humans and Sybils at various thresholds, derived from a curated list of collected addresses labeled as either Sybils or humans.
 </Callout>
 
 If you would like more details on the score or these thresholds, please fill out the following form:
@@ -36,9 +37,23 @@ If you would like more details on the score or these thresholds, please fill out
 [Model Based Detection interest form](https://forms.gle/HBV21Tcce1WMzQc2A)
 
 
-## ETH (L1) unique humanity model
+## Aggregate unique humanity model
 
-The ETH (L1) unique humanity model score is the current default for the Model Based Detection API.
+The aggregate unique humanity model score is the current default for the Model Based Detection API, as it is broadly relevant to a variety of different ecosystems operating within the EVM ecosystem. 
+
+This model integrates individual chain model scores (Ethereum, zkSync, Optimism, Arbitrum, and Polygon) to generate the final aggregate score, assigning a score between 0 - 100, with 0 being likely Sybil or not having enough transaction history, and 100 being confidently human.
+
+Refer to the following table to identify which score threshold you might use to protect access or classify wallet addresses in your ecosystem:
+
+| Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
+| --------------- | ------------------------------- | ------------------------------- |
+| 15+             | 97%                             | 14%                             |
+| 25+             | 96%                             | 12%                             |
+| 50+             | 94%                             | 9%                              |
+| 75+             | 89%                             | 5%                              |
+
+
+## ETH (L1) unique humanity model
 
 This model looks at the specified wallet addresses' ETH mainnet transaction history, compares it against 50+ different features, and assigns it a score of 0 - 100.
 
@@ -52,7 +67,7 @@ Refer to the following table to identify which score threshold you might use to 
 | 75+             | 89%                             | 5%                              |
 
 
-## NFT (L1) unique humanity model
+## NFT (Ethereum L1) unique humanity model
 
 Similarly to the ETH (L1) unique humanity model, this model looks at the specified wallet addresses' NFT transaction history on Ethereum mainnet, compares it against different features, and assigns it a score of 0 - 100.
 

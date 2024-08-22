@@ -13,21 +13,14 @@ This API is currently in beta. If you need a production-ready API, please use th
 
 You can also experiment with the Model Based Detection API using our [API playground tool](https://api.scorer.gitcoin.co/passport/docs#/Passport%20Analysis/passport_api_get_analysis) and adding your API keys via the 'Authorize' button.
 
-<Callout type="info">
-Please note:
-
-We have launched this endpoint using this base URL: `https://api.scorer.gitcoin.co`
-
-However, we intend to make this data available via a different base URL in the future, as we migrate away from Gitcoin’s infrastructure: `https://api.passport.xyz`
-</Callout>
 
 ## Rate Limits
 
 |Tier |Rate limit |
 |--|--|
-|Tier 1 | *[DEFAULT]* 15 requests per 15 minutes, up to 1440 requests per day. |
-|Tier 2 | 350 requests per 15 minutes, up to 33600 requests per day. |
-|Tier 3 | 2000 requests per 15 minutes, up to 192000 requests per day. |
+|Tier 1 | *[DEFAULT]* 15 requests per 15 minutes |
+|Tier 2 | 350 requests per 15 minutes |
+|Tier 3 | 2000 requests per 15 minutes |
 
 These rate limits are completely separate from the existing Passport API rate limits.
 
@@ -47,10 +40,39 @@ Use this endpoint to request a model-based score for a specified user. You can f
 |Parameter |Type |Description |
 |--|--|--|
 |`address` |Path parameter| *[Required]* Pass a single EVM wallet address<br /><br />While we only allow a single address to be scored per request, we are considering expanding this to enable bulk scoring when we graduate this API from beta. If this is important to you, please [let us know](https://forms.gle/D4e8F31MUa7N4TRY8). |
-|`model_list` |Query parameter | Include one of the following model names to request that model's score for the specified wallet address: <br />`ethereum_activity`, `nft`, `arbitrum`, `optimism`, `polygon`, and `zksync`<br /><br />If you don't include this parameter, the API will return the `ethereum_activity` model by default.<br /><br />While we only allow scoring using a single model per request, we are considering enabling requesting multiple models when we graduate this API from beta. If this is important to you, please [let us know](https://forms.gle/D4e8F31MUa7N4TRY8). |
+|`model_list` |Query parameter | Include one of the following [available models](available-models) to request that model's score for the specified wallet address: <br />`aggregate`, `ethereum_activity`, `nft`, `arbitrum`, `optimism`, `polygon`, and `zksync`<br /><br />If you don't include this parameter, the API will return the `aggregate` model by default.<br /><br />While we only allow scoring using a single model per request, we are considering enabling requesting multiple models when we graduate this API from beta. If this is important to you, please [let us know](https://forms.gle/D4e8F31MUa7N4TRY8). |
 
 
-### Example request
+### Default example
+
+#### Request
+
+```bash
+curl --request GET \
+    --url 'https://api.scorer.gitcoin.co/passport/analysis/{address}' \
+    --header 'Content-Type: application/json' \
+    --header 'X-API-KEY: {API KEY}'
+    ```
+
+#### Response
+
+```json
+{
+    "address": "string",
+    "details": {
+        "models": {
+            "aggregate": {
+                "score": 50 
+            }
+        } 
+    }
+}
+```
+
+
+### Arbitrum model example
+
+#### Request
 
 ```bash
 curl --request GET \
@@ -59,7 +81,7 @@ curl --request GET \
     --header 'X-API-KEY: {API KEY}'
     ```
 
-### Example response
+#### Response
 
 ```json
 {
