@@ -13,6 +13,7 @@ The new Model Based Detection (MBD) API [BETA] enables partners to protect progr
 
 This API is designed to return the results of model-based detection methods. It can score any EVM addresses against several different models that analyze transaction history against dozens of different data features to identify if that address is likely Human or Sybil. 
 
+
 <Callout type="info">
 Need more in-depth analysis?
 
@@ -23,6 +24,8 @@ To learn more, please fill out this [quick form](https://docs.google.com/forms/d
 
 
 The current [available models](available-models) include the following:
+
+* Aggregate unique humanity model
 * Ethereum (L1) unique humanity model
 * NFT (L1) unique humanity model
 * Arbitrum unique humanity model
@@ -59,7 +62,7 @@ Starting with the MBD API, you can quickly determine if a wallet is a suspected 
 When thinking about applying this new API, there are two primary use cases that it enables:
 
 1. **[Protecting access](../../overview/use-cases#protect-access-rewards):** Preventing Sybils and other malicious bots from being able to participate in a variety of different web3 programs.
-2. **Data analysis:** Analyzing a set of wallet addresses against the Passport Model Based Detection score to identify which wallets are likely Humans or Sybils.
+2. **Data analysis:** Analyzing a set of wallet addresses against the Passport Model Based Detection score to identify which wallets are likely Humans or Sybils. You can also get in contact with us to have our team perform more in-depth data analysis around a list of wallet addresses by filling out [this form](https://docs.google.com/forms/d/e/1FAIpQLSf1iSiKGjKQq5FAI04Gbqxa_7oi1ANRdocFU1fKARj8HnzDww/viewform?usp=sf_link).
 
 
 ## Recommended developer flow: Protect access
@@ -83,8 +86,7 @@ However, this verification method does not provide a secondary verification opti
 **Technical integration details:**
 
 * Collect the wallet address from the user
-* Pass the wallet address to the [`GET /passport/analysis/{address}`](api-reference) endpoint, which will deliver a
-model-based detection score (0-100).
+* Pass the wallet address to the [`GET /passport/analysis/{address}`](api-reference) endpoint, which will deliver the specified model score (0-100).
 * Compare this score against a predetermined [score threshold](available-models), and either grant or deny access depending on that evaluation.
 
 
@@ -99,8 +101,8 @@ Many users will be able pass the initial MBD check with no user friction, while 
 **Technical integration details:**
 
 * Collect the wallet address from the user
-* Pass the wallet address to the [`GET /passport/analysis/{address}`](api-reference) endpoint, which will deliver a model-based detection score (0-100).
-* Compare the ETH activity score against a predetermined [score threshold](available-models), and either grant access to the user or present the secondary verification method to them, depending on that evaluation.
+* Pass the wallet address to the [`GET /passport/analysis/{address}`](api-reference) endpoint, which will deliver the specified model score (0-100).
+* Compare this model score against a predetermined [score threshold](available-models), and either grant access to the user or present the secondary verification method to them, depending on that evaluation.
 * Assuming the user didn’t pass primary verification, submit the user’s address to the Passport API [`POST /registry/submit-passport`](../passport-api/api-reference#submit-for-scoring), which will score (or refresh the score) of the user, and deliver either the user’s [unique humanity or binary score](../major-concepts/scoring-mechanisms).
 * Evaluate the Unique Humanity Score against a predetermined [score threshold](../major-concepts/scoring-thresholds), and will either grant or deny access based on that evaluation.
 
