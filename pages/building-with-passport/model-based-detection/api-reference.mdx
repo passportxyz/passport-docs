@@ -41,8 +41,8 @@ Use this endpoint to request a model-based score for a specified user. You can f
 
 |Parameter |Type |Description |
 |--|--|--|
-|`address` |Path parameter| *[Required]* Pass a single EVM wallet address<br /><br />While we only allow a single address to be scored per request, we are considering expanding this to enable bulk scoring when we graduate this API from beta. If this is important to you, please [let us know](https://forms.gle/D4e8F31MUa7N4TRY8). |
-|`model_list` |Query parameter | Include one of the following [available models](available-models) to request that model's score for the specified wallet address: <br />`aggregate`, `ethereum_activity`, `nft`, `arbitrum`, `optimism`, `polygon`, and `zksync`<br /><br />If you don't include this parameter, the API will return the `aggregate` model by default.<br /><br />While we only allow scoring using a single model per request, we are considering enabling requesting multiple models when we graduate this API from beta. If this is important to you, please [let us know](https://forms.gle/D4e8F31MUa7N4TRY8). |
+|`address` |Path parameter| *[Required]* Pass a single EVM wallet address<br /><br />While we only allow a single address to be scored per request, we are considering expanding this to enable bulk scoring when we graduate this API from beta. If this is important to you, please [let us know](https://docs.google.com/forms/d/e/1FAIpQLSeKUu1flQfdNSYKLBhUk6gNwdypUk5STMNsufkOZ58vWI_g9w/viewform). |
+|`model_list` |Query parameter | Include one of the following [available models](available-models) to request that model's score for the specified wallet address: <br />`aggregate`, `ethereum_activity`, `nft`, `arbitrum`, `optimism`, `polygon`, and `zksync`<br /><br />If you don't include this parameter, the API will return the `aggregate` model by default.<br /><br />While we only allow scoring using a single model per request, we are considering enabling requesting multiple models when we graduate this API from beta. If this is important to you, please [let us know](https://docs.google.com/forms/d/e/1FAIpQLSeKUu1flQfdNSYKLBhUk6gNwdypUk5STMNsufkOZ58vWI_g9w/viewform). |
 
 
 ### Default example

@@ -30,7 +30,7 @@ curl --request GET 'https://api.scorer.gitcoin.co/registry/signing-message' \
 
 Your API key will allow you to make up to a certain number of requests to any of the endpoints included on this page during a certain period of time.
 
-You will start off with Tier 1, and will need to [request higher rate limits](https://forms.gle/bteHxCAVBdiv5Ttm7) if necessary.
+You will start off with Tier 1, and will need to [request higher rate limits](https://docs.google.com/forms/d/e/1FAIpQLSeUATg0nTE9ws3qESGBktFcOX0brF19iv2L0BLoiub9pbSMeg/viewform) if necessary.
 
 | Tier   | Rate limit                    |
 | ------ | ----------------------------- |
