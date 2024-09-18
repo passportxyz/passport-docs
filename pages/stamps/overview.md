@@ -44,7 +44,7 @@ Similarly, we are interested to see more Stamps that are accessible to new-comer
 
 ## Process
 
-If you believe your Stamp meets the criteria described above, then you should submit your Stamp using [this form](https://docs.google.com/forms/d/e/1FAIpQLSdpxAUllQKuPd7ogO7hJMuSUoZzThF0ZRpKVw7MVJg6CD0sPg/viewform?usp=sf_link).
+If you believe your Stamp meets the criteria described above, then you should submit your Stamp using [this form](https://docs.google.com/forms/d/e/1FAIpQLSffvrP4JJiPnvCvHDz9B7-lpCJFGQVwWoI0nut8w57hmURwMg/viewform).
 
 We review form submissions periodically and will get back to partners who's Stamps we want to integrate as soon as possible.
 
