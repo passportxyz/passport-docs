@@ -43,11 +43,13 @@ Mainnet
 * Linea
 * Optimism
 * Scroll
+* Shape
 * ZkSync
 
 Testnet
 * Optimism Sepolia
 * Scroll Sepolia
+* Shape Sepolia
 * ZkSync Sepolia
 
 Please note that you can explore our testnet functionality via the app using [Test Mode](test-mode).
