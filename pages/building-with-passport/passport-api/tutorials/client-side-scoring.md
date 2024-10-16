@@ -5,7 +5,7 @@ description: This tutorial introduces client-side scoring
 
 # Building a custom, client-side scorer
 
-Gitcoin Passport offers several scoring algorithms that can be executed on the Gitcoin servers, such that a numeric score for a Passport can be requested from the Passport API. However, this means you are restricted to Gitcoin's algorithm and Gitcoin's opinion about the relative weighting assigned to each individual Stamp. This might not be appropriate for all use cases. 
+Passport XYZ offers several scoring algorithms that can be executed on the Passport servers, such that a numeric score for a Passport can be requested from the Passport API. However, this means you are restricted to Passport's algorithm and Passport's opinion about the relative weighting assigned to each individual Stamp. This might not be appropriate for all use cases. 
 
 For example, you might have a string preference for certain Stamps that are particularly relevant to your community that you want to weight more strongly in the scoring, or perhaps you have a great idea for a completely new algorithm that you want to implement to gate your app.
 
@@ -46,12 +46,12 @@ This information is stored in a state variable, `stampArray`. This is all the in
 
 ### Scorers
 
-The Gitcoin Passport scoring algorithm is a simple sum of weights assigned to each Stamp. The weights are provided in a file on the [Gitcoin Github](https://github.com/passportxyz/passport-scorer/blob/main/api/scorer/settings/gitcoin_passport_weights.py).
+The Passport XYZ scoring algorithm is a simple sum of weights assigned to each Stamp. The weights are provided in a file on the [Passport Github](https://github.com/passportxyz/passport-scorer/blob/main/api/scorer/settings/gitcoin_passport_weights.py).
 Each weight is a decimal number associated with a specific Stamp name. The scoring algorithm simply iterates over the Stamp names for the Stamps owned by an address, retrieves the associated weights, and adds them together. The result is the user's Passport score.
 
-#### The Gitcoin Scorer
+#### The Passport Scorer
 
-You can re-implement the Gitcoin scoring algorithm easily in your app. Start by adding a file containing the Gitcoin Passport Stamp weights to your `app` directory. Copy the contents of [this file](https://github.com/passportxyz/passport-docs/tree/main/utils/data/weights.ts) and paste it into a new file `app/stamp-weights.ts`.
+You can re-implement the Passport scoring algorithm easily in your app. Start by adding a file containing the Passport XYZ Stamp weights to your `app` directory. Copy the contents of [this file](https://github.com/passportxyz/passport-docs/tree/main/utils/data/weights.ts) and paste it into a new file `app/stamp-weights.ts`.
 
 Now, import the data into your app by adding the following import statement to `app.ts`:
 
@@ -120,7 +120,7 @@ Finally, conditionally render your `Score` component if `showScore` is toggled O
 {showScore && <Score />}
 ```
 
-Now when you click the `Get Score` button in your UI, the sentence `Your score is X` is displayed under your Stamp collection! You can check this against the score given to you by the Gitcoin Passport app!
+Now when you click the `Get Score` button in your UI, the sentence `Your score is X` is displayed under your Stamp collection! You can check this against the score given to you by the Passport XYZ app!
 
 #### Custom weights
 
@@ -192,13 +192,13 @@ And finally add the conditional rendering to the UI code:
 {showCustomScore && <CustomScore />}
 ```
 
-Now your app has buttons to show the Stamps, get a Gitcoin score and get your custom score. All this information will be displayed in the app's UI.
+Now your app has buttons to show the Stamps, get a Passport score and get your custom score. All this information will be displayed in the app's UI.
 
 ![](../../../../public/custom-scorer.png)
 
 ## Deduplication
 
-Please note that scoring on the Gitcoin server includes Stamp deduplication. This means the server automatically detects when the same instance of a Stamp has been submitted more than once to a specific Scorer instance and ignores any duplicates. 
+Please note that scoring on the Passport server includes Stamp deduplication. This means the server automatically detects when the same instance of a Stamp has been submitted more than once to a specific Scorer instance and ignores any duplicates. 
 
 ***While it is out of scope for this tutorial, you should implement your own deduplication to accompany a custom scorer.***
 
@@ -206,4 +206,4 @@ This requires logging the hashes of Stamps and checking that each hash is unique
 
 ## Next Steps
 
-Now you know how Gitcoin calculates its scores and have seen how to update the logic, you can be creative in implementing algorithms that best serve your community's needs. 
+Now you know how Passport calculates its scores and have seen how to update the logic, you can be creative in implementing algorithms that best serve your community's needs. 

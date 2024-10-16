@@ -7,7 +7,7 @@ description: How to retrieve, handle and display Stamp metadata in a simple Next
 
 ![](public/stamp-logo-examples.png)
 
-Gitcoin Passport Stamps show that a user has achieved certain milestones on-chain or through some web2 service. It is common for these Stamps to be used to generate a score on the Gitcoin server to indicate a user's trustworthiness. It is also possible to retrieve the actual Stamps instead of the score. This enables developers to use their own algorithms to generate scores, or to make decisions based on ownership of specific Stamps or groups of Stamps.
+Passport XYZ Stamps show that a user has achieved certain milestones on-chain or through some web2 service. It is common for these Stamps to be used to generate a score on the Passport server to indicate a user's trustworthiness. It is also possible to retrieve the actual Stamps instead of the score. This enables developers to use their own algorithms to generate scores, or to make decisions based on ownership of specific Stamps or groups of Stamps.
 
 In many cases app developers can serve their users better with additional information about the Stamps outside of just the verifiable credential and Stamp name. A simple example is access to a standardized icon image so that the Stamp can be displayed consistently across many applications.
 
@@ -110,7 +110,7 @@ For the `/registry/stamps/{address}?_include_metadata=true` endpoint, these meta
         "group": "Followers", 
         "platform": {
             "id": "Github", 
-            "icon": "https://passport.gitcoin.co/assets/githubWhiteStampIcon.svg", 
+            "icon": "https://app.passport.xyzassets/githubWhiteStampIcon.svg", 
             "name": "Github", 
             "description": "Connect your existing Github account to verify.", 
             "connectMessage": "Connect Account"
@@ -330,7 +330,7 @@ Start with the simplest part - adding a simple Boolean state variable to toggle 
 const [showStamps, setShowStamps] = useState<boolean>(false)
 ```
 
-We can use this state variable to ensure that nothing is displayed until the user clicks `Show Stamps` and adds Stamp data from the Gitcoin Passport API to the app's state. Add a call to `setShowStamps(true)` to `getStamps()` immediately below `setStampArray`, above the `return` statement.
+We can use this state variable to ensure that nothing is displayed until the user clicks `Show Stamps` and adds Stamp data from the Passport API to the app's state. Add a call to `setShowStamps(true)` to `getStamps()` immediately below `setStampArray`, above the `return` statement.
 
 Now, you an create a component that renders the Stamp data in an aesthetic way. The code snippet below uses a combination of Chakra-UI's `SimpleGrid` and `Image` components to display the icon for each Stamp. The way this is done is using `map` to create an instance of the `Image` component for each Stamp in `stampArray`, passing the URL from the Stamp's `icon` field as the image source. You can also add a fallback image that can be displayed in case a particular image fails to load.
 

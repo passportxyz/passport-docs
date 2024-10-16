@@ -19,21 +19,21 @@ Deduplication ensures that a user can only associate an individual Stamp to one 
 
 ### Do you need to handle deduplication in your app?
 
-If your app uses a Gitcoin Passport default Scorer, then deduplication is already handled server-side. When you request a score through the API, we calculate scores after already deduplicating Stamps, meaning you don't have to implement any deduplication logic yourself.
+If your app uses a Passport default Scorer, then deduplication is already handled server-side. When you request a score through the API, we calculate scores after already deduplicating Stamps, meaning you don't have to implement any deduplication logic yourself.
 
 However, if you are using your own custom scoring mechanism based on Stamp data, you will have to implement deduplication for yourself. Each Stamp has a `hash` field that can be used as a unique identifer. You can store hashes and compare them across all your users' Passports to ensure they are not being used multiple times. Our Scorer uses a Last-In-First-Out mechanism to handle duplicates, but you might want to use your own algorithm in your custom Scorer.
 
 
 
-### How does Gitcoin Passport handle duplicate Stamps?
+### How does Passport XYZ handle duplicate Stamps?
 
-Passport handles the issue of Stamp duplication by automatically identifying and eliminating duplicate Stamps. This prevents users from using the same credentials to verify their Stamps and identity across multiple Gitcoin Passports. This ensures that each user in an application has a unique and consistent digital identity.
+Passport handles the issue of Stamp duplication by automatically identifying and eliminating duplicate Stamps. This prevents users from using the same credentials to verify their Stamps and identity across multiple Passports. This ensures that each user in an application has a unique and consistent digital identity.
 
-By default, the Gitcoin Passport API uses a **Last In, First Out (LIFO)** Stamp deduplication method.
+By default, the Passport API uses a **Last In, First Out (LIFO)** Stamp deduplication method.
 
 This means that, in a given scoring instance, if a Passport holder submits a Stamp that has already been submitted by another user, the _duplicate_ Stamp is ignored and not counted towards the score.
 
-For example, let’s say you build an application that uses the Gitcoin Passport API to verify the unique humanity of your users. Two Passports, “Passport A” and “Passport B,” present the same Stamp based on the same Twitter account. In this scenario, the Last-in-First-out deduplication method would only count the Stamp instance that was submitted earliest, ignoring the one that was submitted later.
+For example, let’s say you build an application that uses the Passport API to verify the unique humanity of your users. Two Passports, “Passport A” and “Passport B,” present the same Stamp based on the same Twitter account. In this scenario, the Last-in-First-out deduplication method would only count the Stamp instance that was submitted earliest, ignoring the one that was submitted later.
 
 For example, if Passport A submitted the Twitter Stamp first, followed by Passport B, your app would only count the instance of the Twitter Stamp submitted by Passport A. The same rule applies to any subsequent instances of the Stamp.
 

@@ -1,25 +1,25 @@
 ---
 title: Scoring mechanisms
-description: Explanation of the various scoring algorithms implemented in Gitcoin Passport.
+description: Explanation of the various scoring algorithms implemented in Passport XYZ.
 ---
 
 
 # Scoring mechanisms
 
 Scoring mechanisms are algorithms that take a set of Stamps and return a numeric score.
-There are Gitcoin built-in scoring mechanisms that can be executed on the Gitcoin server, or you can design and implement your own.
+There are Passport XYZ built-in scoring mechanisms that can be executed on the Passport server, or you can design and implement your own.
 
 ![scoring mechanisms](public/scoring-mechanisms.png)
 
 ## Built-in scoring mechanisms
 
-When you visit [scorer.gitcoin.co](https://scorer.gitcoin.co) and create a Scorer, you are presented with four options: 
+When you visit [developer.passport.xyz](https://developer.passport.xyz) and create a Scorer, you are presented with four options: 
 Unique Humanity, Unique Humanity (binary), Cost of Forgery and Custom. These are algorithms that can be applied to a user's Stamps
-on the Gitcoin server.
+on the Passport server.
 
 ### Unique Humanity
 
-Unique Humanity assigns a weight to each individual Stamp. The score is simply the sum of the Stamp weights. The Stamp weights are set by Gitcoin
+Unique Humanity assigns a weight to each individual Stamp. The score is simply the sum of the Stamp weights. The Stamp weights are set by Passport
 and can be viewed on the [Passport Github](https://github.com/passportxyz/passport-scorer/blob/main/api/scorer/settings/gitcoin_passport_weights.py).
 
 The intended use for this is that an app can set a threshold that can be used to gate access to certain content or functions. For example, you might determine 
@@ -49,16 +49,16 @@ This allows you to configure the Scorer more specifically to your own particular
 
 ## Custom scoring mechanisms
 
-You are also welcome to apply your own scoring mechanism to raw Stamp data. The built-in Scorers are executed on the Gitcoin server. You can also 
+You are also welcome to apply your own scoring mechanism to raw Stamp data. The built-in Scorers are executed on the Passport server. You can also 
 access a user's Stamps directly and implement your own algorithm to determine the Passport value. You can do this with Stamp data retrieved from 
-the Gitcoin server or onchain Stamps. An example of client-side custom scoring is provided in our [onchain Stamps](/building-with-passport/tutorials/integrating-onchain-stamp-data.md) tutorial.
+the Passport server or onchain Stamps. An example of client-side custom scoring is provided in our [onchain Stamps](/building-with-passport/tutorials/integrating-onchain-stamp-data.md) tutorial.
 
 
 
 ## Stamp deduplication
 
 Scoring algorithms have to include some logic to remove multiple copies of the same Stamp being used multiple times on the same Scoring instance. 
-On the Gitcoin server, the Stamp that was seen *first* is treated as valid, and any duplicates that are used in other wallets later are ignored in a process known as '[deduplication](/building-with-passport/major-concepts/deduplicating-stamps)'.
+On the Passport server, the Stamp that was seen *first* is treated as valid, and any duplicates that are used in other wallets later are ignored in a process known as '[deduplication](/building-with-passport/major-concepts/deduplicating-stamps)'.
 
-If you use a built-in Scorer, deduplication is handled for you on the Gitcoin server. However, if you choose to implement some custom algorithm, you should also
+If you use a built-in Scorer, deduplication is handled for you on the Passport server. However, if you choose to implement some custom algorithm, you should also
 implement a custom deduplication algorithm. The `hash` of each Stamp is provided to enable you to identify individual instances of each Stamp. 

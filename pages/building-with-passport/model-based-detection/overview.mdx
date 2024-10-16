@@ -103,7 +103,7 @@ Many users will be able pass the initial MBD check with no user friction, while 
 * Collect the wallet address from the user
 * Pass the wallet address to the [`GET /passport/analysis/{address}`](api-reference) endpoint, which will deliver the specified model score (0-100).
 * Compare this model score against a predetermined [score threshold](available-models), and either grant access to the user or present the secondary verification method to them, depending on that evaluation.
-* Assuming the user didn’t pass primary verification, submit the user’s address to the Passport API [`POST /registry/submit-passport`](../passport-api/api-reference#submit-for-scoring), which will score (or refresh the score) of the user, and deliver either the user’s [unique humanity or binary score](../major-concepts/scoring-mechanisms).
+* Assuming the user didn’t pass primary verification, submit the user’s address to the Passport API [`POST /registry/submit-passport`](../passport-api/api-reference#submit-and-retrieve-latest-score-for-a-single-address), which will score (or refresh the score) of the user, and deliver either the user’s [unique humanity or binary score](../major-concepts/scoring-mechanisms).
 * Evaluate the Unique Humanity Score against a predetermined [score threshold](../major-concepts/scoring-thresholds), and will either grant or deny access based on that evaluation.
 
 

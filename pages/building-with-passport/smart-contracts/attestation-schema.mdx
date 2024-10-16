@@ -81,7 +81,7 @@ From a raw attestation, you can extract the data that belongs to each field in t
 
 You then need to apply some logic to the decoded data to extract actionable insights.
 
-For example, you should extract the position indexes of each `1` value in the `providers` bitmap, then look up the `Providers` at those same indexes in the providers mapping, found on the [Gitcoin Github](https://github.com/passportxyz/eas-proxy/blob/main/deployments/providerBitMapInfo.json).
+For example, you should extract the position indexes of each `1` value in the `providers` bitmap, then look up the `Providers` at those same indexes in the providers mapping, found on the [Passport Github](https://github.com/passportxyz/eas-proxy/blob/main/deployments/providerBitMapInfo.json).
 
 You may also wish to extract each value from `hashes` and find the matching entry in the Stamps mapping to determine which specific Stamps the Attestation contains.
 

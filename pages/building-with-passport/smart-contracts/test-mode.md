@@ -5,7 +5,7 @@ description: How to test the onchain infrastructure
 
 # Testing Onchain Passport
 
-As developers, we often want to test our apps and integrations on testnets, where there is nothing of real world value at stake, before we go live on a live public mainnet. You can always deploy the Gitcoin Passport smart contracts to your own local ephemeral blockchain, but it is also recommended to test your integration on a public testnet too, as this more realistically simulates a mainnet environment.
+As developers, we often want to test our apps and integrations on testnets, where there is nothing of real world value at stake, before we go live on a live public mainnet. You can always deploy the Passport XYZ smart contracts to your own local ephemeral blockchain, but it is also recommended to test your integration on a public testnet too, as this more realistically simulates a mainnet environment.
 
 For this reason, the Passport team deployed the Passport smart contracts on public testnets, including OP Sepolia and Linea Goerli.
 
@@ -13,9 +13,9 @@ For this reason, the Passport team deployed the Passport smart contracts on publ
 
 The Passport app can be run in test mode by visitng URL and following the steps below:
 
-https://passport.gitcoin.co/#/testing/dashboard
+https://app.passport.xyz#/testing/dashboard
 
-This enables you to write Passport data and scores to the Gitcoin Passport smart contracts on several testnets, meaning you can experiment and get comfortable with the flows before trying it out on Mainnet. 
+This enables you to write Passport data and scores to the Passport XYZ smart contracts on several testnets, meaning you can experiment and get comfortable with the flows before trying it out on Mainnet. 
 
 When you sign in to the Passport app, you first have to enable Test Mode. There is a button for this at the top of the page. Enabling Test Mode requires an additional signature from your Ethereum account.
  
@@ -45,6 +45,6 @@ The available test networks are:
 
 ## Testing on mainnet forks
 
-The Gitcoin smart contracts may sometimes be upgraded after being deployed. If you are testing on a mainnet fork, you must make sure you fork the blockchain at a block *after* the latest contract deployment. Otherwise, the contracts stored in your forked blockchains state will be out of date. The block where the latest version of the contract is deployed is known as the `latest stable block` and you can find out what it is by looking at the contract deployment details on the appropriate block explorer for the network you want to fork. Then, fork the blockchain at a block greater to or equal to the `latest stable block`. 
+The Passport smart contracts may sometimes be upgraded after being deployed. If you are testing on a mainnet fork, you must make sure you fork the blockchain at a block *after* the latest contract deployment. Otherwise, the contracts stored in your forked blockchains state will be out of date. The block where the latest version of the contract is deployed is known as the `latest stable block` and you can find out what it is by looking at the contract deployment details on the appropriate block explorer for the network you want to fork. Then, fork the blockchain at a block greater to or equal to the `latest stable block`. 
 
 For example, the latest stable block for OP mainnet is 115525426. Your test network must fork off OP mainnet at a block >= 115525426.
