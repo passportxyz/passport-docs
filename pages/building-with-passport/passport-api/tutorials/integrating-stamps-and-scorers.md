@@ -5,7 +5,7 @@ description: Tutorial covering how to use Stamp and Score data in your apps.
 
 # Integrating Stamps and Scorers
 
-Gitcoin Passport can be used to automatically gate applications, but it can also be used as a powerful tool for supporting human decision makers by providing trust information in the app's UI. Instead of blocking access using a score threshold, Gitcoin Passport can display trust information about users connected to an app to other users, enabling better informed interactions.
+Passport XYZ can be used to automatically gate applications, but it can also be used as a powerful tool for supporting human decision makers by providing trust information in the app's UI. Instead of blocking access using a score threshold, Passport XYZ can display trust information about users connected to an app to other users, enabling better informed interactions.
 
 ## Why would you want a Scorer integration?
 
@@ -13,7 +13,7 @@ There are several apps designed for allocating funding within DAOs. A common mod
 
 However, there have been examples of impersonators joining teams, pretending to be one of the legitimate contributors and getting allocated tokens. This is a way attackers can steal from honest participants. Without some additional information, it is hard to know that you are allocating tokens to a real contributor and not an impersonator.
 
-A Gitcoin Passport Scorer integration is a solution to this problem. By showing the Passport score and Stamps for each user in the app, it is easier to identify the honest participant from their dishonest double. When faced with two instances of one contributor that you want to allocate tokens to, you might check to see which one has a certain community-specific Stamp in their Passport as evidence that they are the real team member.
+A Passport XYZ Scorer integration is a solution to this problem. By showing the Passport score and Stamps for each user in the app, it is easier to identify the honest participant from their dishonest double. When faced with two instances of one contributor that you want to allocate tokens to, you might check to see which one has a certain community-specific Stamp in their Passport as evidence that they are the real team member.
 
 Note, however, that it is possible for someone to be an impersonator and _also_ have a high Passport score. This is why a Scorer integration is more about giving additional evidence, or context, to choices than it is about automated, binary decision making.
 

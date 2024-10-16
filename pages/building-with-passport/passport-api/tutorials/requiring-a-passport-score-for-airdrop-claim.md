@@ -231,7 +231,7 @@ const { signMessage } = useSignMessage({
     
     const submitResponse = await axios.post("/api/submit-passport", {
       address: address, // Required: The user's address you'd like to score.
-      community: process.env.NEXT_PUBLIC_SCORER_ID, // Required: get this from one of your scorers in the Scorer API dashboard https://scorer.gitcoin.co/
+      community: process.env.NEXT_PUBLIC_SCORER_ID, // Required: get this from one of your scorers in the Scorer API dashboard https://developer.passport.xyz/
       signature: data, // Optional: The signature of the message returned in Step #1
       nonce: nonce, // Optional: The nonce returned in Step #1
     });
@@ -300,7 +300,7 @@ const { signMessage } = useSignMessage({
     
     const submitResponse = await axios.post("/api/submit-passport", {
       address: address, // Required: The user's address you'd like to score.
-      community: process.env.NEXT_PUBLIC_SCORER_ID, // Required: get this from one of your Scorers in the Passport API dashboard https://scorer.gitcoin.co/
+      community: process.env.NEXT_PUBLIC_SCORER_ID, // Required: get this from one of your Scorers in the Passport API dashboard https://developer.passport.xyz/
       signature: data, // Optional: The signature of the message returned in Step #1
       nonce: nonce, // Optional: The nonce returned in Step #1
     });

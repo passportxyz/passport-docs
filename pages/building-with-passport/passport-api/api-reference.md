@@ -1,17 +1,17 @@
 ---
 title: API reference
-description: Reference documentation for the Gitcoin Passport API
+description: Reference documentation for the Passport API
 ---
 
 # API Reference
 
-The Passport API enables developers to retrieve Passport scores and Stamp metadata for users who have created a Gitcoin Passport.
+The Passport API enables developers to retrieve Passport XYZ scores and Stamp metadata for users who have created a Passport.
 
 You can also experiment with the Passport API using our [API playground tool](https://api.scorer.gitcoin.co/docs) and adding your API keys via the 'Authorize' button.
 
 ## Authentication
 
-To access the Gitcoin Passport API, you will need a [Scorer ID and an API key](getting-access).
+To access the Passport API, you will need a [Scorer ID and an API key](getting-access).
 
 To make a successful request, you will need to include your API key in the "Authorization" header of each API request. The header should have the following format:
 
@@ -41,11 +41,9 @@ You will start off with Tier 1, and will need to [request higher rate limits](ht
 
 ## Timeouts
 
-The load balancer for all Passport API endpoints has a timeout of 60 seconds. This means that if a request to one of these endpoints does not receive a response within 60 seconds, the request will be aborted.
+The Passport API endpoints have a timeout of 60 seconds. This means that if a request to one of these endpoints does not receive a response within 60 seconds, the request will be aborted.
 
 If your request times out, you should set up retry logic by calling the API again after a short delay, typically increasing the delay for each subsequent retry.
-
-However, it is important to mention that you should not implement retry logic when making requests to the [Submit for scoring](#submit-for-scoring) endpoint. Even if your request times out, the scoring process should still be in progress.
 
 ## Pagination
 
@@ -105,31 +103,31 @@ We have put together a [data dictionary](/building-with-passport/major-concepts/
 
 To get a Passport score from an ETH address, follow these steps:
 
-1. **Optional:** [Retrieve a signing message from the Scorer](#retrieve-a-signing-message)\
+1. **Optional:** [Retrieve a signing message](#retrieve-a-signing-message)\
    `GET /registry/signing-message`
-2. [Submit the Ethereum address to the Scorer](#submit-for-scoring)\
+2. [Submit and retrieve latest score for a single address](#submit-and-retrieve-latest-score-for-a-single-address)\
    `POST /registry/submit-passport`
-3. [Retrieve the Passport score for a single address](#get-score-of-a-single-address)\
+3. [Retrieve previously submitted score for a single address](#retrieve-previously-submitted-score-for-a-single-address)\
    `GET /registry/score/{scorer_id}/{address}`
-4. [Retrieve the Passport scores of all submitted addresses](#get-scores-of-all-submitted-addresses)\
+4. [Retrieve previously submitted scores of all submitted addresses](#retrieve-previously-submitted-scores-of-all-submitted-addresses)\
    `GET /registry/score/{scorer_id}`
 
 Use the following endpoints to receive Stamps data:
 
-* [Receive Stamps connected to one or multiple submitted Passports](#get-stamps)\
+* [Retrieve Stamps verified by a single address](#retrieve-stamps-verified-by-a-single-address)\
    `GET /registry/stamps/{address}`
-* [Receive all Stamps available in Passport](#get-stamps-metadata) \[Beta]\
+* [Retrieve all Stamps available in Passport](#retrieve-all-stamps-available-in-passport)
    `GET /registry/stamp-metadata`
 
 Use the following endpoint to receive staking information
 
-* [Receive GTC staking amounts](#receive-gtc-staking-amounts)
+* [Retrieve GTC staking amounts](#retrieve-gtc-staking-amounts)
    `GET /registry/gtc-stake/{address}`
 
 
 ### Retrieve a signing message
 
-This endpoint returns a message verifying the agreement to submit a wallet address for scoring, and a `nonce` that can be used to verify the authenticity of the signed message.
+This optional endpoint returns a message verifying the agreement to submit a wallet address for scoring, and a `nonce` that can be used to verify the authenticity of the signed message.
 
 You don't need to get a signature from this endpoint, but you do need a signature from the wallet you are scoring that proves that the user owns the wallet.
 
@@ -143,25 +141,16 @@ curl --request GET \
 
 ```json filename="Sample response"
 {
-    "message": "I hereby agree to submit my address in order to score my associated Gitcoin Passport from Ceramic.\n\nNonce: {Nonce}\n",
+    "message": "I hereby agree to submit my address in order to score my associated Passport XYZ from Ceramic.\n\nNonce: {Nonce}\n",
     "nonce": "{Nonce}"
 }
 ```
 
-### Submit for scoring
+### Submit and retrieve latest score for a single address
 
-Before receiving a Passport score, developers need to submit an Ethereum address to their Scorer.
+This is the primary endpoint that integrators should use. 
 
-To do so, developers need to POST the relevant Ethereum address and their Scorer ID to this endpoint.
-
-There are two different values that deliver with the `status` field:
-
-* `PROCESSING` - Continue to poll for the results using the [GET scores](#get-score-of-a-single-address) endpoint until the `DONE` status is returned. `score` field will return as `null`.
-* `DONE` - The Scorer has completed scoring the specified Passport. `score` field will return with Passport score.
-
-#### Refreshing scores
-
-The score displayed in the Passport app is refreshed automatically, whenever the user makes any change to their Passport. However, API users may find the scores returned by the API sometimes differs from the score displayed in the app. If this happens, refresh the Passport score by making a POST request to `submit-passport`.
+This endpoint will submit the Passport to the scorer, and return the latest score and Stamp data for a single address. It will always return the most updated score and Stamp data, so resubmitting a user's address will refresh their score. 
 
 > POST /registry/submit-passport
 
@@ -191,25 +180,7 @@ curl --request POST \
 
 The name in the parenthesis represents what [type of Scorer](/building-with-passport/getting-access#types-of-scorers) you are using.
 
-```json filename="Sample response: PROCESSING"
-{
-    "address": "{address}",
-    "score": null,
-    "status": "PROCESSING",
-    "last_score_timestamp": "{timestamp}",
-    "expiration_date": "{expiration_time}",
-    "evidence": null,
-    "error": null,
-    "stamp_scores": {
-      "Ens": "2.2",
-      "NFT": "0.69",
-      "Google": "2.25"
-      ...
-    }
-}
-```
-
-```json filename="Sample response: DONE (Unique Humanity)"
+```json filename="Sample response: Unique Humanity scorer"
 {
     "address": "{address}",
     "score": "{score}",
@@ -227,7 +198,7 @@ The name in the parenthesis represents what [type of Scorer](/building-with-pass
 }
 ```
 
-```json filename="Sample response: DONE (Unique Humanity: Binary)"
+```json filename="Sample response: Unique Humanity: Binary scorer"
 {
     "address": "{address}",
     "score": "{score}",
@@ -250,11 +221,13 @@ The name in the parenthesis represents what [type of Scorer](/building-with-pass
 }
 ```
 
-### Get score of a single address
+### Retrieve previously submitted score for a single address
 
-You must submit any Passports you'd like to request a score for via the [Submit for scoring](#submit-for-scoring) endpoint before successfully receiving a score via this endpoints.
+You must submit a Passport to be scored via the [Submit for scoring](#submit-and-retrieve-latest-score-for-a-single-address) endpoint before successfully receiving that score via this endpoints.
 
-Use this endpoint to retrieve the score for one Ethereum address. You can use the [multiple address](#get-scores-of-all-submitted-addresses) endpoint if you have more than one address submitted to a Scorer.
+Use this endpoint to retrieve the last submitted score for one Ethereum address. 
+
+You can use the [multiple address](#retrieve-previously-submitted-scores-of-all-submitted-addresses) endpoint if you'd like to retrieve the latest submitted scores for all addresses that have been submitted to the scorer using the POST endpoint.
 
 > GET /registry/score/{scorer\_id}/{address}
 
@@ -286,14 +259,14 @@ curl --request GET \
 }        
 ```
 
-> API users may find the scores returned by `registry/score` sometimes differs from the score displayed in the app. If this happens, simply refresh the Passport score by making a POST request to `submit-passport`.
+> API users may find the scores returned by `registry/score` sometimes differs from the score displayed in the app. If this happens, simply refresh the Passport score by making a POST request to [resubmit/refresh the address's score](#submit-and-retrieve-latest-score-for-a-single-address).
 
 
-### Get scores of all submitted addresses
+### Retrieve previously submitted scores of all submitted addresses
 
-You must submit any Passports you'd like to request a score for via the [Submit for scoring](#submit-for-scoring) endpoint before successfully receiving their scores via this endpoints.
+You must submit a Passport to be scored via the [Submit for scoring](#submit-and-retrieve-latest-score-for-a-single-address) endpoint first.
 
-Use this endpoint to retrieve the score for one Ethereum address. You can use the [single address](#get-score-of-a-single-address) endpoint if you'd like to request a score for one address.
+Use this endpoint to retrieve the last submitted score for all Ethereum addresses that have been submitted (POST endpoint) to your scorer. 
 
 > GET /registry/score/{scorer\_id}
 
@@ -351,11 +324,11 @@ curl --request GET \
 }
 ```
 
-You can also add a query to return all the scores for a given address for a certain time period. This can be useful if you want to filter your responses so that it only returns scores that have been _updated since your last request._
+You can also add a query to return all the last submitted scores for a given address based on the timeperiod that you submitted their address to the scorer.
 
-The two possible query parameters are `last_score_timestamp_gt` and `last_score_timestamp_gte`. The difference between the two is that `_gt` (standing for 'greater than') returns updated scores that were created by your scorer instance strictly _after_ the given time, whereas `_gte` (standing for 'greater than or equal') returns updated scores after or at the same time as the given time.
-
-The argument should be provided in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
+The two possible query parameters are `last_score_timestamp_gt` and `last_score_timestamp_gte`. 
+* `last_score_timestamp_gt` (standing for 'greater than'): This parameter returns the address' last submitted scores that were submitted to your scorer instance _after_ the specified time.
+* `last_score_timestamp_gt` (standing for 'greater than or equal'): This parameter returns the address' last submitted scores that were submitted to your scorer instance _after or at the same time as_ the specified time.
 
 For example:
 
@@ -366,14 +339,11 @@ curl --request GET \
 ```
 
 
-Also note that because Stamp deduplication is achieved using a 'last in, first out' model, it is possible for Passports with identical Stamps to return different scores from different Scorers. The reason is that if the identical passports A and B are submitted to Scorer 1 in the order `A,B`, the returned score could be different to the same Passports submitted to Scorer 2 in the order `B,A`, because different instances of duplicate Stamps would be removed.
+### Retrieve Stamps verified by a single address
 
+Use this endpoint to request all Stamps that have been verified by the specified Ethereum address.
 
-### Get Stamps
-
-Use this endpoint to request all Stamps that have been connected to an Ethereum address.
-
-If you would like to retrieve the metadata for all available Stamps, please use the [Get Stamps metadata](#get-stamps-metadata) endpoint.
+If you would like to retrieve the metadata for all available Stamps, please use the [Get Stamps metadata](#retrieve-all-stamps-available-in-passport) endpoint.
 
 > GET /registry/stamps/{address}
 
@@ -381,7 +351,7 @@ If you would like to retrieve the metadata for all available Stamps, please use 
 
 | Name               | Required | Text                                                                                                                                                               |
 | ------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `include_metadata` | No       | [Beta] Returns optional `metadata` object with additional details about connected Stamps.                                                                          |
+| `include_metadata` | No       | Returns optional `metadata` object with additional details about connected Stamps.                                                                          |
 | `limit`            | No       | Paginates response, providing the given number of Stamps per page (For example, use `limit=3` to request three Stamps) Learn more about [pagination](#pagination). |
 
 
@@ -405,11 +375,11 @@ curl --request GET \
 }
 ```
 
-### Get Stamps metadata \[Beta]
+### Retrieve all Stamps available in Passport
 
 Use this endpoint to request all Stamps available on Passport.
 
-If you would like to retrieve just the Stamps that are connected to a specified Ethereum address, please use the [Get Stamps](#get-stamps) endpoint.
+If you would like to retrieve just the Stamps that are connected to a specified Ethereum address, please use the [Get Stamps](#retrieve-stamps-verified-by-a-single-address) endpoint.
 
 > GET /registry/stamp-metadata
 
@@ -443,7 +413,15 @@ curl --request GET \
 ]
 ```
 
-### Receive GTC staking amounts
+### Retrieve GTC staking amounts
+
+**This endpoint has been deprecated, as it was built around the legacy GTC staking application.**
+
+We are planning on releasing a new version of the GTC staking endpoint. Please fill out the following form to help us prioritize this new endpoint in our roadmap:
+
+https://forms.gle/VbDBNTvb99emaSUV9
+
+---
 
 This endpoint returns both self (`stakes`) and community (`xstakeAggregates`) staking amounts for a specified address and round. It also breaks down staking amounts based on round ID. 
 

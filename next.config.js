@@ -54,7 +54,7 @@ module.exports = withNextra({
         },
         {
             source: '/overview/overview',
-            destination: '/overview/why-gitcoin-passport',
+            destination: '/overview/why-passport-xyz',
             permanent: true
         },
         {

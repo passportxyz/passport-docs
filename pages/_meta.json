@@ -7,13 +7,13 @@
     "passport-app_link": {
         "title": "Passport App",
         "type": "page",
-        "href": "https://passport.gitcoin.co/",
+        "href": "https://app.passport.xyz",
         "newWindow": true
     },
     "developer_portal_link": {
         "title": "Developer Portal",
         "type": "page",
-        "href": "https://scorer.gitcoin.co/",
+        "href": "https://developer.passport.xyz/",
         "newWindow": true
     },
     "blog_link": {

@@ -129,7 +129,7 @@ const config: DocsThemeConfig = {
   footer: { component: null },
   useNextSeoProps() {
     return {
-      titleTemplate: "%s – Gitcoin Passport",
+      titleTemplate: "%s – Passport XYZ",
     };
   },
 };
@@ -166,11 +166,11 @@ const CustomHead: React.FC = () => {
       <meta name="twitter:card" content="summary" />
       <meta
         name="twitter:title"
-        content={frontMatter.title || "Gitcoin Passport"}
+        content={frontMatter.title || "Passport XYZ"}
       />
       <meta
         name="twitter:description"
-        content="Gitcoin Passport — Sybil Defense. Made Simple"
+        content="Passport XYZ — Sybil Defense. Made Simple"
       />
       <meta name="twitter:site" content="@gitcoinpassport" />
       <meta
@@ -181,11 +181,11 @@ const CustomHead: React.FC = () => {
       <meta property="og:url" content={url} />
       <meta
         property="og:title"
-        content={frontMatter.title || "Gitcoin Passport"}
+        content={frontMatter.title || "Passport XYZ"}
       />
       <meta
         property="og:description"
-        content="Gitcoin Passport — Sybil Defense. Made Simple"
+        content="Passport XYZ — Sybil Defense. Made Simple"
       />
       <meta
         name="og:image"

@@ -9,8 +9,8 @@ In this tutorial, you'll learn how to show different content to users depending 
 
 Specifically, you will:
 
-* Fetch user Stamp data from the blockchain using the Gitcoin Passport smart contract stack
-* Use Stamp data to generate your own Passport score, using Gitcoin's Stamp weights.
+* Fetch user Stamp data from the blockchain using the Passport XYZ smart contract stack
+* Use Stamp data to generate your own Passport score, using Passport's Stamp weights.
 * Conditionally display a user's Passport data depending on their onchain data.
 * Redirect users to instructions for improving their Passport scores and getting their Stamps onchain.
 
@@ -20,7 +20,7 @@ You can learn more about Passport's available smart contracts and the typical de
 
 To follow this tutorial, you'll need [Next.js](https://nextjs.org/), [Node](https://nodejs.org/en), and [Chakra-UI](https://chakra-ui.com/) installed on your machine. You will be using the Optimism Sepolia test network - you will need to import this network into your wallet. Some familiarity with smart contracts is recommended.
 
-This app uses a blockchain, rather than Gitcoin's database server, as a backend. This means you **do not need an API key or Scorer ID,** but you do need to have a browser wallet that can connect to the Optimism Sepolia test network.
+This app uses a blockchain, rather than Passport's database server, as a backend. This means you **do not need an API key or Scorer ID,** but you do need to have a browser wallet that can connect to the Optimism Sepolia test network.
 
 
 ### App outline
@@ -32,14 +32,14 @@ You can find the code from this tutorial in this [GitHub repo](https://github.co
 The app will work as follows:
 
 * When the user visits the sample app, they have access to several tabs - one to welcome them and then more where they can check their onchain data. The second tab shows whether there is any onchain data for the connected user. The third shows what Stamps the user has. The final tab shows the user's Passport score.
-* The user will connect their wallet and Gitcoin Passport to the app. Their Stamp data and Passport score will be retrieved from the blockchain and displayed in the UI.
+* The user will connect their wallet and Passport XYZ to the app. Their Stamp data and Passport score will be retrieved from the blockchain and displayed in the UI.
 * If the user does not have any Stamps, the tabs contain information about how to create a Passport, add Stamps and migrate them onchain.
 
-This simple example demonstrates the principles you would use to gate a real app using Gitcoin Passport onchain.
+This simple example demonstrates the principles you would use to gate a real app using Passport XYZ onchain.
 
 ### Smart contract logic
 
-The Gitcoin Passport smart contracts build on top of [EAS (Ethereum Attestation Service)](https://attest.sh/), using Attestations as the foundational building blocks. You can read the [contract reference](../contract-reference) page for a primer on how the contracts work.
+The Passport XYZ smart contracts build on top of [EAS (Ethereum Attestation Service)](https://attest.sh/), using Attestations as the foundational building blocks. You can read the [contract reference](../contract-reference) page for a primer on how the contracts work.
 
 The `decoder` contract exposes an API that allows you to simply pass in an address and retrieve the decoded Stamp and score data, rather than having to retrieve raw `Attestations` and decode client-side.
 
@@ -259,7 +259,7 @@ function getStamps(passportInfo: []) {
 
 ### Retrieving a score
 
-Passport scores are calculated by summing weights assigned to each specific Stamp. Gitcoin have defined a list of Stamp weights that are used when scoring is done by the smart contract. The contract exposes a public function, `getScore()` that returns the Passport score for a given user. You can call the function in the same way as for `getPassportInfo()`.
+Passport scores are calculated by summing weights assigned to each specific Stamp. Passport has defined a list of Stamp weights that are used when scoring is done by the smart contract. The contract exposes a public function, `getScore()` that returns the Passport score for a given user. You can call the function in the same way as for `getPassportInfo()`.
 
 
 ```typescript

@@ -1,6 +1,6 @@
 ---
 title: Passport API overview
-description: General overview of the Gitcoin Passport API
+description: General overview of the Passport API
 ---
 # Passport API
 
@@ -8,14 +8,14 @@ The Passport API serves as a powerful tool for developers, offering access to Pa
 
 ## Why use the API
 
-The API offers a simple integration; one that requires just two requests to submit and request user Passport data. This data is retrieved from the centralized Gitcoin servers, meaning it is the most up-to-date data available for Passport users. 
+The API offers a simple integration; one that requires just two requests to submit and request user Passport XYZ data. This data is retrieved from the centralized Passport XYZ servers, meaning it is the most up-to-date data available for Passport XYZ users. 
 
 ### Example developer journey
 
 An excellent [use case](../../overview/use-cases) for Passport is to gate access to special content. To make this happen, we'll need to:
 
 1. [Creating a Passport Scorer and API key](getting-access)
-2. Submit the user’s address for scoring using the [POST /registry/submit-passport](api-reference#submit-for-scoring) endpoint. Find the user's score in the response. 
+2. Submit the user’s address for scoring using the [POST /registry/submit-passport](api-reference#submit-and-retrieve-latest-score-for-a-single-address) endpoint. Find the user's score in the response. 
 3. Depending on the [type of scorer](./getting-access#types-of-scorers) you set up, you will either compare the unique humanity score against a [threshold](../major-concepts/scoring-thresholds) that you set, or utilize the binary score. 
 
 At this point, you know whether the user was able to prove their humanity or not, and you can grant access to the protected program. 
