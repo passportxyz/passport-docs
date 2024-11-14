@@ -66,14 +66,14 @@ Passport API v2 base URL: https://api.passport.xyz
 
 To get a Passport score from an ETH address, follow these steps:
 
-* [Retrieve latest score for a single address](#retrieve-latest-score-for-a-single-address)\
+* [Retrieve latest score for a single address](#retrieve-latest-score-for-a-single-address)
    `GET /v2/stamps/{scorer_id}/score/{address}`
-* [Retrieve historical score for a single address](#retrieve-historical-score-for-a-single-address)\
+* [Retrieve historical score for a single address](#retrieve-historical-score-for-a-single-address)
    `GET /v2/stamps/{scorer_id}/score/{address}/history`
 
 Use the following endpoints to receive Stamps data:
 
-* [Retrieve Stamps verified by a single address](#retrieve-stamps-verified-by-a-single-address)\
+* [Retrieve Stamps verified by a single address](#retrieve-stamps-verified-by-a-single-address)
    `GET /v2/stamps/{address}`
 * [Retrieve all Stamps available in Passport](#retrieve-all-stamps-available-in-passport)
    `GET /v2/stamps/metadata`
@@ -154,6 +154,10 @@ curl --request GET \
 ```
 
 ### Retrieve Stamps verified by a single address
+
+<Callout type="info">
+**Note:** This endpoint is only available to developers who have been added to an allowlist. If you would like to be added to the allowlist, please [submit a request](https://forms.gle/4GyicBfhtHW29eEu8).
+</Callout>
 
 Use this endpoint to request all Stamps that have been verified by the specified Ethereum address.
 
