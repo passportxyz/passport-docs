@@ -256,6 +256,11 @@ module.exports = withNextra({
             source: '/building-with-passport/model-based-detection',
             destination: '/building-with-passport/model-based-detection/overview',
             permanent: true
+        },
+        {
+            source: '/building-with-passport/passport-api-v2',
+            destination: '/building-with-passport/passport-api-v2/api-reference',
+            permanent: true
         }
     ]
 })
