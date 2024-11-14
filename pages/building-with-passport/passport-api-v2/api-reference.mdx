@@ -114,7 +114,13 @@ curl --request GET \
 
 ### Retrieve historical score for a single address
 
-This endpoint will return the historical score and Stamp data for a single address and a specified time.
+<Callout type="info">
+**Note:** To access this endpoint, you must submit your use case and be approved by the Passport team. To do so, please fill out the following form, making sure to provide a detailed description of your use case. The Passport team typically reviews and responds to form responses within 48 hours.
+
+[Request access](https://forms.gle/4GyicBfhtHW29eEu8)
+</Callout>
+
+This endpoint will return the historical score and Stamp data for a single address at a specified time.
 
 > GET /v2/stamps/\{scorer_id\}/score/\{address\}/history
 
@@ -154,12 +160,6 @@ curl --request GET \
 ```
 
 ### Retrieve Stamps verified by a single address
-
-<Callout type="info">
-**Note:** To access this endpoint, you must submit your use case and be approved by the Passport team. To do so, please fill out the following form, making sure to provide a detailed description of your use case. The Passport team typically reviews and responds to form responses within 48 hours.
-
-[Request access](https://forms.gle/4GyicBfhtHW29eEu8)
-</Callout>
 
 Use this endpoint to request all Stamps that have been verified by the specified Ethereum address.
 
