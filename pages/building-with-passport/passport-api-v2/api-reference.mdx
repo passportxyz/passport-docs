@@ -83,7 +83,7 @@ Use the following endpoints to receive Stamps data:
 
 This is the primary endpoint that integrators should use. 
 
-This endpoint will submit the Passport to the scorer, and return the latest score and Stamp data for a single address. It will always return the most updated score and Stamp data, so resubmitting a user's address will refresh their score. 
+This endpoint will return the latest score and Stamp data for a single address.
 
 > GET /v2/stamps/\{scorer_id\}/score/\{address\}
 
