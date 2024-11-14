@@ -5,7 +5,8 @@
   "---": {
     "type": "separator"
   },
-  "passport-api": "Passport API",
+  "passport-api-v2": "Passport API v2",
+  "passport-api": "Passport API v1",
   "custom-passport": "Custom Passport",
   "model-based-detection": "Model Based Detection API",
   "smart-contracts": "Smart Contracts",

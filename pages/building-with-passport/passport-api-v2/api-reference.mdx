@@ -1,0 +1,234 @@
+---
+title: Passport API v2 -- API reference
+description: Reference documentation for the Passport API v2
+---
+import { Callout } from 'nextra/components'
+
+# Passport API v2 -- API Reference
+
+The Passport API enables developers to retrieve Passport XYZ scores and Stamp metadata for users who have created a Passport.
+
+You can also experiment with the Passport API using our [API playground tool](https://api.scorer.gitcoin.co/docs) and adding your API keys via the 'Authorize' button.
+
+<Callout type="info">
+**Please note:**<br /><br />Passport API v2 both simplifies and adds key functionality that wasn't previously available with [Passport API v1](../passport-api/overview). Because of this, it is recommended for you to use Passport API v2 moving forward.<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but plan to provide more details before the end of 2024.
+</Callout>
+
+In the examples below, replace the following placeholder values with your actual data:
+- `{scorer_id}` - Your Scorer ID from the developer portal
+- `{address}` - The Ethereum address you want to score
+- `{API_key}` - Your API key from the developer portal
+
+
+## Authentication
+
+To access the Passport API, you will need a [Scorer ID and an API key](getting-access).
+
+To make a successful request, you will need to include your API key in the "Authorization" header of each API request. The header should have the following format:
+
+```
+"X-API-KEY: {API_key}"
+```
+
+Replace `{API_key}` with your API key. For example, if you were using cURL, your request might look something like this:
+
+```bash
+curl --request GET 'https://api.passport.xyz/v2/stamps/{scorer_id}/score/{address}' \
+    --header 'X-API-KEY: VwUi___.0yQU1HIAE4hLEMkVs___'
+```
+
+## Rate limits
+
+Your API key will allow you to make up to a certain number of requests to any of the endpoints included on this page during a certain period of time.
+
+Requests made to the Passport API v1 and v2 count towards the same rate limit.
+
+Access starts with Tier 1. If you need an elevation, please [request higher rate limits](https://docs.google.com/forms/d/e/1FAIpQLSeUATg0nTE9ws3qESGBktFcOX0brF19iv2L0BLoiub9pbSMeg/viewform).
+
+| Tier   | Rate limit                    |
+| ------ | ----------------------------- |
+| Tier 1 | 125 requests per 15 minutes   |
+| Tier 2 | 350 requests per 15 minutes   |
+| Tier 3 | 2000 requests per 15 minutes  |
+| Tier 4 | 2000+ requests per 15 minutes |
+
+
+## Key concepts
+
+There are several key concepts you should be aware of when using the Passport API:
+
+* **Timeouts:** The Passport API endpoints have a timeout of 60 seconds. This means that if a request to one of these endpoints does not receive a response within 60 seconds, the request will be aborted. If your request times out, you should set up retry logic by calling the API again after a short delay, typically increasing the delay for each subsequent retry.
+* **Pagination:** Some requests return a large amount of data. To effectively retrieve this data, you will need to paginate the response. For more information, see [API pagination](/building-with-passport/major-concepts/api-pagination).
+
+## Available endpoints
+
+Passport API v2 base URL: https://api.passport.xyz
+
+To get a Passport score from an ETH address, follow these steps:
+
+* [Retrieve latest score for a single address](#retrieve-latest-score-for-a-single-address)\
+   `GET /v2/stamps/{scorer_id}/score/{address}`
+* [Retrieve historical score for a single address](#retrieve-historical-score-for-a-single-address)\
+   `GET /v2/stamps/{scorer_id}/score/{address}/history`
+
+Use the following endpoints to receive Stamps data:
+
+* [Retrieve Stamps verified by a single address](#retrieve-stamps-verified-by-a-single-address)\
+   `GET /v2/stamps/{address}`
+* [Retrieve all Stamps available in Passport](#retrieve-all-stamps-available-in-passport)
+   `GET /v2/stamps/metadata`
+
+
+### Retrieve latest score for a single address
+
+This is the primary endpoint that integrators should use. 
+
+This endpoint will submit the Passport to the scorer, and return the latest score and Stamp data for a single address. It will always return the most updated score and Stamp data, so resubmitting a user's address will refresh their score. 
+
+> GET /v2/stamps/\{scorer_id\}/score/\{address\}
+
+```bash filename="Sample request" copy
+curl --request GET \
+  --url https://api.passport.xyz/v2/stamps/{scorer_id}/score/{address} \
+  --header 'X-API-KEY: {API KEY}'
+``` 
+
+```json filename="Sample response"
+{
+    "address": "{address}",
+    "score": "{score}",
+    "passing_score": true/false,
+    "last_score_timestamp": "{last_score_time ISO 8601}",
+    "expiration_timestamp": "{expiration_time ISO 8601}",
+    "threshold": 20,
+    "error": null,
+    "stamp_scores": {
+      "Ens": "2.2",
+      "NFT": "0.69",
+      "Google": "2.25"
+      ...
+    }
+}
+```
+
+
+### Retrieve historical score for a single address
+
+This endpoint will return the historical score and Stamp data for a single address and a specified time.
+
+> GET /v2/stamps/\{scorer_id\}/score/\{address\}/history
+
+#### Query parameters
+
+| Name               | Required | Description                                                                                                  |
+| ------------------ | -------- | ------------------------------------------------------------------------------------------------------------ |
+| `created_at`       | yes      | Specified time that you want to retrieve the score for. <br /><br /> Format: ISO 8601 (`YYYY-MM-DDTHH:MM:SSZ`)   |
+
+
+```bash filename="Sample request" copy
+curl --request GET \
+    --url https://api.passport.xyz/v2/stamps/{scorer_id}/score/{address}/history \
+    --header 'X-API-KEY: {API KEY}'
+```
+
+```json filename="Sample response"
+{
+  "items": [
+      {
+          "address": "{address}",
+          "score": "{score}",
+          "pass": true/false,
+          "last_score_timestamp": "{last_score_time ISO 8601}",
+          "expiration_timestamp": "{expiration_time ISO 8601}",
+          "threshold": 20,
+          "error": null,
+          "stamp_scores": {
+            "Ens": "2.2",
+            "NFT": "0.69",
+            "Google": "2.25"
+            ...
+          }
+      }
+  ]
+}        
+```
+
+### Retrieve Stamps verified by a single address
+
+Use this endpoint to request all Stamps that have been verified by the specified Ethereum address.
+
+If you would like to retrieve the metadata for all available Stamps, please use the [Get Stamps metadata](#retrieve-all-stamps-available-in-passport) endpoint.
+
+> GET /v2/stamps/\{address\}
+
+#### Query parameters
+
+| Name               | Required | Description                                                                                                                                                                                                      |
+| ------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `include_metadata` | No       | Returns optional `metadata` object with additional details about connected Stamps.<br /><br />Format: `true`/`false`<br />Default: `false`                                                                             |
+| `limit`            | No       | Paginates response, providing the given number of Stamps per page (For example, use `limit=3` to request three Stamps) Learn more about [API pagination](/building-with-passport/major-concepts/api-pagination). |
+| `token`            | No       | Pass the `next` or `prev` value from the previous response to get the next or previous page of results.                                                                                                          |
+
+
+```bash filename="Sample request" copy
+curl --request GET \
+    --url 'https://api.passport.xyz/v2/stamps/{address}?include_metadata=true' \
+    --header 'X-API-KEY: {API KEY}'
+```
+
+```json filename="Sample response"
+{
+  "next": "string",
+  "prev": "string",
+  "items": [
+    {
+      "version": "string",
+      "credential": {},
+      "metadata": {}
+    }
+  ]
+}
+```
+
+### Retrieve all Stamps available in Passport
+
+Use this endpoint to request all Stamps available on Passport.
+
+If you would like to retrieve just the Stamps that are connected to a specified Ethereum address, please use the [Get Stamps](#retrieve-stamps-verified-by-a-single-address) endpoint.
+
+> GET /v2/stamps/metadata
+
+```bash filename="Sample request" copy
+curl --request GET \
+    --url https://api.passport.xyz/v2/stamps/metadata \
+    --header 'X-API-KEY: {API KEY}'
+```
+
+```json filename="Sample request"
+[
+  {
+    "id": "string",
+    "icon": "string",
+    "name": "string",
+    "description": "string",
+    "connectMessage": "string",
+    "groups": [
+      {
+        "name": "string",
+        "stamps": [
+          {
+            "name": "string",
+            "description": "string",
+            "hash": "string"
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
+---
+
+If you have questions about the API you can ask them in our [developer support channel](https://t.me/+Mcp9RsRV7tVmYjZh).
+
