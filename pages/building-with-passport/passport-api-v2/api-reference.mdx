@@ -128,7 +128,7 @@ This endpoint will return the historical score and Stamp data for a single addre
 
 | Name               | Required | Description                                                                                                  |
 | ------------------ | -------- | ------------------------------------------------------------------------------------------------------------ |
-| `created_at`       | yes      | Specified time that you want to retrieve the score for. <br /><br /> Format: ISO 8601 (`YYYY-MM-DDTHH:MM:SSZ`)   |
+| `created_at`       | yes      | Specified time that you want to retrieve the score for. <br /><br />ISO 8601 extended calendar date foramt (`YYYY-MM-DD`)   |
 
 
 ```bash filename="Sample request" copy
@@ -144,8 +144,8 @@ curl --request GET \
           "address": "{address}",
           "score": "{score}",
           "pass": true/false,
-          "last_score_timestamp": "{last_score_time ISO 8601}",
-          "expiration_timestamp": "{expiration_time ISO 8601}",
+          "last_score_timestamp": "{last_score_time}",
+          "expiration_timestamp": "{expiration_time}",
           "threshold": 20,
           "error": null,
           "stamp_scores": {
