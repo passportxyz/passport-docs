@@ -128,12 +128,12 @@ This endpoint will return the historical score and Stamp data for a single addre
 
 | Name               | Required | Description                                                                                                  |
 | ------------------ | -------- | ------------------------------------------------------------------------------------------------------------ |
-| `created_at`       | yes      | Specified time that you want to retrieve the score for. <br /><br />ISO 8601 extended calendar date foramt (`YYYY-MM-DD`)   |
+| `created_at`       | yes      | Specified time that you want to retrieve the score for. <br /><br />ISO 8601 (`YYYY-MM-DDThh:mm:ss.sssZ`)   |
 
 
 ```bash filename="Sample request" copy
 curl --request GET \
-    --url https://api.passport.xyz/v2/stamps/{scorer_id}/score/{address}/history \
+    --url https://api.passport.xyz/v2/stamps/{scorer_id}/score/{address}/history?created_at={created_at} \
     --header 'X-API-KEY: {API KEY}'
 ```
 
@@ -144,8 +144,8 @@ curl --request GET \
           "address": "{address}",
           "score": "{score}",
           "pass": true/false,
-          "last_score_timestamp": "{last_score_time}",
-          "expiration_timestamp": "{expiration_time}",
+          "last_score_timestamp": "{last_score_time ISO 8601}",
+          "expiration_timestamp": "{expiration_time ISO 8601}",
           "threshold": 20,
           "error": null,
           "stamp_scores": {
