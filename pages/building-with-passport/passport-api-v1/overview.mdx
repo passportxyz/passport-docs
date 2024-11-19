@@ -1,0 +1,31 @@
+---
+title: Passport API v1 overview
+description: General overview of the Passport API v1
+---
+import { Callout } from '@theme/Callout';
+
+# Passport API v1
+
+<Callout type="warning">
+**Please note:**<br />In November 2024, we soft-launched [Passport API v2](../passport-api-v2/overview).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.
+</Callout>
+
+## Available v1 endpoints
+
+| Endpoint action                             | Endpoint                                    |
+| ------------------------------------------- | ------------------------------------------- |
+| Retrieval of signing messages               | `GET /registry/signing-message`             |
+| Submitting Passports for scoring or refresh | `POST /registry/submit-passport`            |
+| Retrieval of scores for one address         | `GET /registry/score/{scorer_id}/{address}` |
+| Retrieval of scores for multiple addresses  | `GET /registry/score/{scorer_id}`           |
+| Retrieval of Stamps linked to Passports     | `GET /registry/stamps/{address}`            |
+| Retrieval of all available Stamps           | `GET /registry/stamp-metadata`              |
+| Retreival of community staking amounts      | `GET /registry/gtc-stake/{address}`         |
+
+Learn more about each of these endpoints on our [API Reference](api-reference) page.
+
+## Next steps
+
+Learn more about the Passport API v1:
+* [API reference](api-reference)
+* [Data dictionary](data-dictionary)

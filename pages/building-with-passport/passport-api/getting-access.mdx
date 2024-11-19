@@ -1,6 +1,6 @@
 ---
-title: Getting access to the Passport API
-description: Explainer for how to get access to the Passport API.
+title: Getting access to the Passport API v2
+description: Explainer for how to get access to the Passport API v2.
 ---
 
 # Getting Access: Scorer ID and API Key
@@ -14,8 +14,7 @@ The Passport API provides programmatic access to a wallet's Passport score. Once
 3. **Generate an API key:** Click on the "+ Create a Key" button to generate a unique API key for your account.
 4. **Store your API key securely:** Store your API key in a secure place, as it will be used to access the Passport API.
 
-
-### Scorers and Scorer ID
+### Scorers and Scorer ID (Project)
 
 A Scorer is an individual object with a unique ID that is associated with your account. If you are using the Passport API in multiple applications, you can set up separate communities for each one. This allows you to customize the scoring rules for each application and deduplicate any identical Passport VCs that are submitted to the same application.
 
@@ -31,20 +30,9 @@ By using communities, you can manage specific parameter settings and log traffic
 
 #### Types of Scorers
 
-When you create your Scorer you will be presented with several options for the Scorer type. This is because Passport Stamps can be weighted in different ways depending upon the intended use case. Sybil Prevention is the most commonly used.
-
-There are two options currently active for the Sybil prevention model to run in the Scorer.
-
-* **Unique Humanity** - Returns a score between 0-100 that indicates how likely it is that a Passport is owned by an honest user
-* **Unique Humanity (binary)** - Returns a 0 or 1 depending on whether the Passport is flagged as a likely Sybil. Currently, the [threshold](../major-concepts/scoring-thresholds) for a passing score is set to 20.
-
-![](public/scorer-use-case.png)
-
-![Selecting the Scorer type](https://arweave.net/P6eKM-crq8LVGCtjpVZR9RLuiR35F7Jc-6mBXGxMHJY)
+While Passport API v1 enabled you to pick between two different [types of Scorers](../passport-api-v1/getting-access#types-of-scorers), this concept is no longer important in Passport API v2 since both the numerical and binary scores deliver within the [payload](data-dictionary). 
 
 ### Next step
 
-Review one of the following pages to learn how you can use your Scorer, Scorer ID, and API key.
-- [Get to "Hello World" with the API](quick-start-guide)
-- [Review the API Reference to get to know the available endpoints](api-reference)
-- [Choose a tutorial that best matches your use case. Review the example code and integrate](tutorials)
+* [Make your first API request](quick-start-guide)
+* [Review the API Reference to learn more about the available endpoints](api-reference)

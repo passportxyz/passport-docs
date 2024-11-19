@@ -1,6 +1,6 @@
 ---
 title: Status and error codes
-description: Referene documentation for the status and error codes returned from the Passport API.
+description: Reference documentation for the status and error codes returned from the Passport API.
 ---
 
 # Status and error codes
@@ -39,4 +39,9 @@ All errors are returned in the form of JSON with a detail explaining the error
 | Unauthorized                               | `X-API-Key` was not specified in the header or an invalid API key was provided   |
 | Internal Server Error                      | Something went wrong on our end                                                  |
 
-More detailed information about the API endpoints and error and status codes can be found in the [API reference](../api-reference)
+
+---
+
+If you have questions about the API, please reach out to us in our [developer support channel](https://t.me/+Mcp9RsRV7tVmYjZh).
+
+More detailed information about this API's endpoints can be found in the [API reference](../api-reference).

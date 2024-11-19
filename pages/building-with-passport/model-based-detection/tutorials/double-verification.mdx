@@ -2,8 +2,13 @@
 title: Double Verification with the Model Based Detection and Stamp-based APIs
 description: This tutorial introduces the model-based detection and stamp-based double-verification method 
 ---
+import { Callout } from '@theme/Callout';
 
 # Double Verification with the Model Based Detection and Stamp-based APIs
+
+<Callout type="warning">
+**Please note:**<br />This tutorial uses the Passport API v1. We recommend using [Passport API v2](../../passport-api-v2/overview) for new projects.<br /><br />We plan to update this tutorial to use Passport API v2 shortly.
+</Callout>
 
 This tutorial will walk you through verifying an EVM account with both the ETH Activity model (model-based detection) and the [Stamp-based method](../../passport-api/overview) in your application.
 
@@ -198,7 +203,7 @@ export default function Passport() {
 The ETH activity scorer is accessed via a public API endpoint passing the user's Ethereum address as a query parameter. To start integrating this into your app, you can add the base URL  for the API endpoint as a constant at the top of the script, just below the Passport URI definition.
 
 ```typescript
-const ETHEREUM_ACTIVITY_SCORE_URI = 'https://api.scorer.gitcoin.co/passport/analysis/'
+const ETHEREUM_ACTIVITY_SCORE_URI = 'https://api.passport.xyz/v2/models/score/'
 const ETHEREUM_SCORE_THRESHOLD = 50;
 ```
 

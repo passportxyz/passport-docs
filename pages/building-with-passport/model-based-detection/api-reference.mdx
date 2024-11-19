@@ -10,10 +10,10 @@ import { Callout } from 'nextra/components'
 The Model Based Detection API enables developers to retrieve different [model-based unique humanity scores](available-models) in real-time, enabling you to score any EVM wallet address without requiring the users to create and build up a Passport score. 
 
 This API is currently in beta. 
-* If you need a production-ready API, please use the [Stamp-based detection API](../passport-api/overview).
+* If you need a production-ready API, please use the [Stamp-based API](../passport-api/overview).
 * Need more in-depth Sybil or reputation data analysis? Please fill out this [quick form](https://docs.google.com/forms/d/e/1FAIpQLScDHGifo2IWkBxsMKcGJ2Qr24mnYM6G5hao7oin5f3OOZFkgw/viewform). 
 
-You can also experiment with the Model Based Detection API using our [API playground tool](https://api.scorer.gitcoin.co/passport/docs#/Passport%20Analysis/passport_api_get_analysis) and adding your API keys via the 'Authorize' button.
+You can also experiment with the Model Based Detection API using our [API playground tool](https://api.passport.xyz/v2/docs) and adding your API keys via the 'Authorize' button.
 
 
 ## Rate Limits
@@ -33,8 +33,8 @@ If you'd like to request elevated rate limits, please fill out our [rate limit e
 
 Use this endpoint to request a model-based score for a specified user. You can find all of the available models and recommended score thresholds via our [available models](available-models) page.
 
-* **Endpoint:** `GET /passport/analysis/{address}`
-* **Base URL:** `https://api.scorer.gitcoin.co`
+* **Endpoint:** `GET /v2/models/score/{address}`
+* **Base URL:** `https://api.passport.xyz`
 * **Authentication:** API Key – Can be the same [API Key](../passport-api/getting-access) that is used with the Passport API
 
 ### Parameters
@@ -42,7 +42,7 @@ Use this endpoint to request a model-based score for a specified user. You can f
 |Parameter |Type |Description |
 |--|--|--|
 |`address` |Path parameter| *[Required]* Pass a single EVM wallet address<br /><br />While we only allow a single address to be scored per request, we are considering expanding this to enable bulk scoring when we graduate this API from beta. If this is important to you, please [let us know](https://docs.google.com/forms/d/e/1FAIpQLSeKUu1flQfdNSYKLBhUk6gNwdypUk5STMNsufkOZ58vWI_g9w/viewform). |
-|`model_list` |Query parameter | Include one of the following [available models](available-models) to request that model's score for the specified wallet address: <br />`aggregate`, `ethereum_activity`, `nft`, `arbitrum`, `optimism`, `polygon`, and `zksync`<br /><br />If you don't include this parameter, the API will return the `aggregate` model by default.<br /><br />While we only allow scoring using a single model per request, we are considering enabling requesting multiple models when we graduate this API from beta. If this is important to you, please [let us know](https://docs.google.com/forms/d/e/1FAIpQLSeKUu1flQfdNSYKLBhUk6gNwdypUk5STMNsufkOZ58vWI_g9w/viewform). |
+|`models`  |Query parameter | Include one of the following [available models](available-models) to request that model's score for the specified wallet address: <br />`aggregate`, `ethereum_activity`, `nft`, `arbitrum`, `optimism`, `polygon`, and `zksync`<br /><br />If you don't include this parameter, the API will return the `aggregate` model by default.<br /><br />While we only allow scoring using a single model per request, we are considering enabling requesting multiple models when we graduate this API from beta. If this is important to you, please [let us know](https://docs.google.com/forms/d/e/1FAIpQLSeKUu1flQfdNSYKLBhUk6gNwdypUk5STMNsufkOZ58vWI_g9w/viewform). |
 
 
 ### Default example
@@ -51,7 +51,7 @@ Use this endpoint to request a model-based score for a specified user. You can f
 
 ```bash
 curl --request GET \
-    --url 'https://api.scorer.gitcoin.co/passport/analysis/{address}' \
+    --url 'https://api.passport.xyz/v2/models/score/{address}?models=aggregate' \
     --header 'Content-Type: application/json' \
     --header 'X-API-KEY: {API KEY}'
     ```
@@ -78,7 +78,7 @@ curl --request GET \
 
 ```bash
 curl --request GET \
-    --url 'https://api.scorer.gitcoin.co/passport/analysis/{address}?model_list=arbitrum' \
+    --url 'https://api.passport.xyz/v2/models/score/{address}?models=arbitrum' \
     --header 'Content-Type: application/json' \
     --header 'X-API-KEY: {API KEY}'
     ```

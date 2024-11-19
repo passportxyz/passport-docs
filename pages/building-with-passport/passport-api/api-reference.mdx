@@ -1,18 +1,24 @@
 ---
-title: Passport API v1 -- API reference
-description: Reference documentation for the Passport API v1
+title: Passport API v2 -- API reference
+description: Reference documentation for the Passport API v2
 ---
 import { Callout } from 'nextra/components'
 
-# Passport API v1 -- API Reference
+# Passport API v2 -- API Reference
 
 The Passport API enables developers to retrieve Passport XYZ scores and Stamp metadata for users who have created a Passport.
 
-You can also experiment with the Passport API using our [API playground tool](https://api.passport.xyz/docs) and adding your API keys via the 'Authorize' button.
+You can also experiment with the Passport API using our [API playground tool](https://api.passport.xyz/v2/docs) and adding your API keys via the 'Authorize' button.
 
 <Callout type="info">
-**Please note:**<br /><br />This page includes details on v1 of the Passport API. [Passport API v2](/building-with-passport/passport-api-v2/api-reference). both simplifies and adds key functionality that isn't available with v1 of the API. Because of this, it is recommended for you to use Passport API v2 moving forward.<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but plan to provide more details before the end of 2024.
+**Please note:**<br />Passport API v2 simplifies and adds key functionality that wasn't previously available with [Passport API v1](../passport-api-v1/overview). Because of this, it is recommended for you to use Passport API v2 moving forward.<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, and plan to provide more details before the end of 2024.
 </Callout>
+
+In the examples below, replace the following placeholder values with your actual data:
+- `{scorer_id}` - Your Scorer ID from the developer portal
+- `{address}` - The Ethereum address you want to score
+- `{API_key}` - Your API key from the developer portal
+
 
 ## Authentication
 
@@ -27,7 +33,7 @@ To make a successful request, you will need to include your API key in the "Auth
 Replace `{API_key}` with your API key. For example, if you were using cURL, your request might look something like this:
 
 ```bash
-curl --request GET 'https://api.scorer.gitcoin.co/registry/signing-message' \
+curl --request GET 'https://api.passport.xyz/v2/stamps/{scorer_id}/score/{address}' \
     --header 'X-API-KEY: VwUi___.0yQU1HIAE4hLEMkVs___'
 ```
 
@@ -37,7 +43,7 @@ Your API key will allow you to make up to a certain number of requests to any of
 
 Requests made to the Passport API v1 and v2 count towards the same rate limit.
 
-You will start off with Tier 1, and will need to [request higher rate limits](https://docs.google.com/forms/d/e/1FAIpQLSeUATg0nTE9ws3qESGBktFcOX0brF19iv2L0BLoiub9pbSMeg/viewform) if necessary.
+Access starts with Tier 1. If you need an elevation, please [request higher rate limits](https://docs.google.com/forms/d/e/1FAIpQLSeUATg0nTE9ws3qESGBktFcOX0brF19iv2L0BLoiub9pbSMeg/viewform).
 
 | Tier   | Rate limit                    |
 | ------ | ----------------------------- |
@@ -46,104 +52,49 @@ You will start off with Tier 1, and will need to [request higher rate limits](ht
 | Tier 3 | 2000 requests per 15 minutes  |
 | Tier 4 | 2000+ requests per 15 minutes |
 
+
 ## Key concepts
 
 There are several key concepts you should be aware of when using the Passport API:
 
 * **Timeouts:** The Passport API endpoints have a timeout of 60 seconds. This means that if a request to one of these endpoints does not receive a response within 60 seconds, the request will be aborted. If your request times out, you should set up retry logic by calling the API again after a short delay, typically increasing the delay for each subsequent retry.
 * **Pagination:** Some requests return a large amount of data. To effectively retrieve this data, you will need to paginate the response. For more information, see [API pagination](/building-with-passport/major-concepts/api-pagination).
-* **Data dictionary:** We have put together a [data dictionary](/building-with-passport/major-concepts/data-dictionary) that you can use to better understand each field that delivers with the response payloads from the Passport API endpoints.
-
+* **Data dictionary:** For definitions of the data types used in Passport API v2, see the [Data dictionary](data-dictionary) page.
 
 ## Available endpoints
 
-To get a Passport score from an ETH address, follow these steps:
+Passport API v2 base URL: https://api.passport.xyz
 
-1. **Optional:** [Retrieve a signing message](#retrieve-a-signing-message)\
-   `GET /registry/signing-message`
-2. [Submit and retrieve latest score for a single address](#submit-and-retrieve-latest-score-for-a-single-address)\
-   `POST /registry/submit-passport`
-3. [Retrieve previously submitted score for a single address](#retrieve-previously-submitted-score-for-a-single-address)\
-   `GET /registry/score/{scorer_id}/{address}`
-4. [Retrieve previously submitted scores of all submitted addresses](#retrieve-previously-submitted-scores-of-all-submitted-addresses)\
-   `GET /registry/score/{scorer_id}`
-
-Use the following endpoints to receive Stamps data:
-
-* [Retrieve Stamps verified by a single address](#retrieve-stamps-verified-by-a-single-address)\
-   `GET /registry/stamps/{address}`
-* [Retrieve all Stamps available in Passport](#retrieve-all-stamps-available-in-passport)
-   `GET /registry/stamp-metadata`
-
-Use the following endpoint to receive staking information
-
-* [Retrieve GTC staking amounts](#retrieve-gtc-staking-amounts)
-   `GET /registry/gtc-stake/{address}`
+| Endpoint action                                                                                   | Endpoint                                                    |
+|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
+| [Retrieve latest score for a single address](#retrieve-latest-score-for-a-single-address)         | `GET /v2/stamps/{scorer_id}/score/{address}`                |
+| [Retrieve historical score for a single address](#retrieve-historical-score-for-a-single-address) | `GET /v2/stamps/{scorer_id}/score/{address}/history`        |
+| [Retrieve Stamps verified by a single address](#retrieve-stamps-verified-by-a-single-address)     | `GET /v2/stamps/{address}`                                  |
+| [Retrieve all Stamps available in Passport](#retrieve-all-stamps-available-in-passport)           | `GET /v2/stamps/metadata`                                   |
 
 
-### Retrieve a signing message
+### Retrieve latest score for a single address
 
-This optional endpoint returns a message verifying the agreement to submit a wallet address for scoring, and a `nonce` that can be used to verify the authenticity of the signed message.
+This is the primary endpoint that integrators should use.
 
-You don't need to get a signature from this endpoint, but you do need a signature from the wallet you are scoring that proves that the user owns the wallet.
+This endpoint will return the latest score and Stamp data for a single address.
 
-> GET /registry/signing-message
+> GET /v2/stamps/\{scorer_id\}/score/\{address\}
 
 ```bash filename="Sample request" copy
 curl --request GET \
-    --url https://api.scorer.gitcoin.co/registry/signing-message \
-    --header 'X-API-KEY: {API KEY}'
-```
+  --url https://api.passport.xyz/v2/stamps/{scorer_id}/score/{address} \
+  --header 'X-API-KEY: {API KEY}'
+``` 
 
 ```json filename="Sample response"
 {
-    "message": "I hereby agree to submit my address in order to score my associated Passport XYZ from Ceramic.\n\nNonce: {Nonce}\n",
-    "nonce": "{Nonce}"
-}
-```
-
-### Submit and retrieve latest score for a single address
-
-This is the primary endpoint that integrators should use. 
-
-This endpoint will submit the Passport to the scorer, and return the latest score and Stamp data for a single address. It will always return the most updated score and Stamp data, so resubmitting a user's address will refresh their score. 
-
-> POST /registry/submit-passport
-
-#### JSON body parameters
-
-| Name        | Type | Required | Description                                                                                      |
-| ----------- | ---- | -------- | ------------------------------------------------------------------------------------------------ |
-| `address`   | Text | Yes      | The wallet address                                                                               |
-| `scorer_id` | Text | Yes      | The Scorer ID                                                                                    |
-| `signature` | Text | No       | Signature received from the wallet                                                               |
-| `nonce`     | Text | No       | Nonce generated in the signing message. This is needed for requiring a signature before scoring. |
-
-```bash filename="Sample request" copy
-curl --request POST \
-  --url https://api.scorer.gitcoin.co/registry/submit-passport \
-  --header 'X-API-KEY: {API KEY}' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "address": "{ADDRESS}",
-    "scorer_id": "{SCORER ID}",
-    "signature": "{SIGNATURE - OPTIONAL)",
-    "nonce": "{NONCE - OPTIONAL}"
-  }'
-```
-
-#### Sample responses
-
-The name in the parenthesis represents what [type of Scorer](/building-with-passport/getting-access#types-of-scorers) you are using.
-
-```json filename="Sample response: Unique Humanity scorer"
-{
     "address": "{address}",
     "score": "{score}",
-    "status": "DONE",
-    "last_score_timestamp": "{last_score_time}",
-    "expiration_date": "{expiration_time}",
-    "evidence": null,
+    "passing_score": true/false,
+    "last_score_timestamp": "{last_score_time ISO 8601}",
+    "expiration_timestamp": "{expiration_time ISO 8601}",
+    "threshold": "20",
     "error": null,
     "stamp_scores": {
       "Ens": "2.2",
@@ -154,42 +105,27 @@ The name in the parenthesis represents what [type of Scorer](/building-with-pass
 }
 ```
 
-```json filename="Sample response: Unique Humanity: Binary scorer"
-{
-    "address": "{address}",
-    "score": "{score}",
-    "status": "DONE",
-    "last_score_timestamp": "{timestamp}",
-    "expiration_date": "{expiration_time}",
-    "evidence": {
-        "type": "ThresholdScoreCheck",
-        "success": true,
-        "rawScore": "{score}",
-        "threshold": "15.00000"
-    },
-    "error": null,
-    "stamp_scores": {
-      "Ens": "2.2",
-      "NFT": "0.69",
-      "Google": "2.25"
-      ...
-    }
-}
-```
 
-### Retrieve previously submitted score for a single address
+### Retrieve historical score for a single address
 
-You must submit a Passport to be scored via the [Submit for scoring](#submit-and-retrieve-latest-score-for-a-single-address) endpoint before successfully receiving that score via this endpoints.
+<Callout type="info">
+**Note:**<br />To access this endpoint, you must submit your use case and be approved by the Passport team. To do so, please fill out the following form, making sure to provide a detailed description of your use case. The Passport team typically reviews and responds to form responses within 48 hours.<br /><br />[Request access](https://forms.gle/4GyicBfhtHW29eEu8)
+</Callout>
 
-Use this endpoint to retrieve the last submitted score for one Ethereum address. 
+This endpoint will return the historical score and Stamp data for a single address at a specified time.
 
-You can use the [multiple address](#retrieve-previously-submitted-scores-of-all-submitted-addresses) endpoint if you'd like to retrieve the latest submitted scores for all addresses that have been submitted to the scorer using the POST endpoint.
+> GET /v2/stamps/\{scorer_id\}/score/\{address\}/history
 
-> GET /registry/score/\{scorer_id\}/\{address\}
+#### Query parameters
+
+| Name               | Required | Description                                                                                                  |
+| ------------------ | -------- | ------------------------------------------------------------------------------------------------------------ |
+| `created_at`       | yes      | Specified time that you want to retrieve the score for. <br /><br />ISO 8601 (`YYYY-MM-DDThh:mm:ss.sssZ`)   |
+
 
 ```bash filename="Sample request" copy
 curl --request GET \
-    --url https://api.scorer.gitcoin.co/registry/score/{scorer_id}/{address} \
+    --url https://api.passport.xyz/v2/stamps/{scorer_id}/score/{address}/history?created_at={created_at} \
     --header 'X-API-KEY: {API KEY}'
 ```
 
@@ -197,12 +133,12 @@ curl --request GET \
 {
   "items": [
       {
-          "address": "{wallet}",
+          "address": "{address}",
           "score": "{score}",
-          "status": "DONE",
-          "last_score_timestamp": "{timestamp}",
-          "expiration_date": "{expiration_time}",
-          "evidence": null,
+          "passing_score": true/false,
+          "last_score_timestamp": "{last_score_time ISO 8601}",
+          "expiration_timestamp": "{expiration_time ISO 8601}",
+          "threshold": "20",
           "error": null,
           "stamp_scores": {
             "Ens": "2.2",
@@ -215,105 +151,26 @@ curl --request GET \
 }        
 ```
 
-> API users may find the scores returned by `registry/score` sometimes differs from the score displayed in the app. If this happens, simply refresh the Passport score by making a POST request to [resubmit/refresh the address's score](#submit-and-retrieve-latest-score-for-a-single-address).
-
-
-### Retrieve previously submitted scores of all submitted addresses
-
-You must submit a Passport to be scored via the [Submit for scoring](#submit-and-retrieve-latest-score-for-a-single-address) endpoint first.
-
-Use this endpoint to retrieve the last submitted score for all Ethereum addresses that have been submitted (POST endpoint) to your scorer. 
-
-> GET /registry/score/\{scorer_id\}
-
-#### Query parameters
-
-| Name                       | Required | Text                                                                                                                                                                                         |
-| -------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `last_score_timestamp_gt`  | No       | Filters response to only those scores submitted to the given Scorer instance \*after\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)       |
-| `last_score_timestamp_gte` | No       | Filters response to only those scores submitted to the given Scorer instance \*after or at\* the given timestamp. Format: [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) |
-| `limit`                    | No       | Paginates response, providing the given number of response elements per page. Learn more about [pagination](#pagination).                                                                    |
-| `offset`                   | No       | For a paginated response, `offset` determines the Stamp object at which the response should start. Learn more about [pagination](#pagination).                                               |
-
-
-```bash filename="Sample request" copy
-curl --request GET \
-    --url https://api.scorer.gitcoin.co/registry/score/{scorer_id} \
-    --header 'X-API-KEY: {API KEY}'
-```
-
-```json filename="Sample response"
-{
-    "items": [
-        {
-            "address": "{wallet}",
-            "score": "{score}",
-            "status": "DONE",
-            "last_score_timestamp": "{timestamp}",
-            "expiration_date": "{expiration_time}",
-            "evidence": null,
-            "error": null,
-            "stamp_scores": {
-              "Ens": "2.2",
-              "NFT": "0.69",
-              "Google": "2.25"
-              ...
-            }
-        },
-        {
-            "address": "{wallet}",
-            "score": "{score}",
-            "status": "DONE",
-            "last_score_timestamp": "{timestamp}",
-            "expiration_date": "{expiration_time}",
-            "evidence": null,
-            "error": null,
-            "stamp_scores": {
-              "Ens": "2.2",
-              "NFT": "0.69",
-              "Google": "2.25"
-              ...
-            }
-        }
-    ],
-    "count": 2
-}
-```
-
-You can also add a query to return all the last submitted scores for a given address based on the timeperiod that you submitted their address to the scorer.
-
-The two possible query parameters are `last_score_timestamp_gt` and `last_score_timestamp_gte`. 
-* `last_score_timestamp_gt` (standing for 'greater than'): This parameter returns the address' last submitted scores that were submitted to your scorer instance _after_ the specified time.
-* `last_score_timestamp_gt` (standing for 'greater than or equal'): This parameter returns the address' last submitted scores that were submitted to your scorer instance _after or at the same time as_ the specified time.
-
-For example:
-
-```bash filename="Sample request" copy
-curl --request GET \
-    --url https://api.scorer.gitcoin.co/registry/score/{scorer_id}?address={address}?last_score_timestamp_get=2023-07-20T19%3A54%3A44.463335%2B00%3A00 \
-    --header 'X-API-KEY: {API KEY}'
-```
-
-
 ### Retrieve Stamps verified by a single address
 
 Use this endpoint to request all Stamps that have been verified by the specified Ethereum address.
 
 If you would like to retrieve the metadata for all available Stamps, please use the [Get Stamps metadata](#retrieve-all-stamps-available-in-passport) endpoint.
 
-> GET /registry/stamps/\{address\}
+> GET /v2/stamps/\{address\}
 
 #### Query parameters
 
-| Name               | Required | Text                                                                                                                                                               |
-| ------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `include_metadata` | No       | Returns optional `metadata` object with additional details about connected Stamps.                                                                          |
-| `limit`            | No       | Paginates response, providing the given number of Stamps per page (For example, use `limit=3` to request three Stamps) Learn more about [pagination](#pagination). |
+| Name               | Required | Description                                                                                                                                                                                                      |
+| ------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `include_metadata` | No       | Returns optional `metadata` object with additional details about connected Stamps.<br /><br />Format: `true`/`false`<br />Default: `false`                                                                             |
+| `limit`            | No       | Paginates response, providing the given number of Stamps per page (For example, use `limit=3` to request three Stamps) Learn more about [API pagination](/building-with-passport/major-concepts/api-pagination). |
+| `token`            | No       | Pass the `next` or `prev` value from the previous response to get the next or previous page of results.                                                                                                          |
 
 
 ```bash filename="Sample request" copy
 curl --request GET \
-    --url 'https://api.scorer.gitcoin.co/registry/stamps/{address}?include_metadata=true' \
+    --url 'https://api.passport.xyz/v2/stamps/{address}?include_metadata=true' \
     --header 'X-API-KEY: {API KEY}'
 ```
 
@@ -337,11 +194,11 @@ Use this endpoint to request all Stamps available on Passport.
 
 If you would like to retrieve just the Stamps that are connected to a specified Ethereum address, please use the [Get Stamps](#retrieve-stamps-verified-by-a-single-address) endpoint.
 
-> GET /registry/stamp-metadata
+> GET /v2/stamps/metadata
 
 ```bash filename="Sample request" copy
 curl --request GET \
-    --url https://api.scorer.gitcoin.co/registry/stamp-metadata \
+    --url https://api.passport.xyz/v2/stamps/metadata \
     --header 'X-API-KEY: {API KEY}'
 ```
 
@@ -369,59 +226,6 @@ curl --request GET \
 ]
 ```
 
-### Retrieve GTC staking amounts
-
-**This endpoint has been deprecated, as it was built around the legacy GTC staking application.**
-
-We are planning on releasing a new version of the GTC staking endpoint. Please fill out the following form to help us prioritize this new endpoint in our roadmap:
-
-https://forms.gle/VbDBNTvb99emaSUV9
-
 ---
 
-This endpoint returns both self (`stakes`) and community (`xstakeAggregates`) staking amounts for a specified address and round. It also breaks down staking amounts based on round ID. 
-
-Our round IDs correspond to the different Gitcoin Grants rounds, and can be found at the following link: 
-[Round IDs](https://github.com/passportxyz/id-staking/blob/8782b2b7138c2b41644a74384d75bca56316317d/packages/react-app/src/components/RoundSelector.jsx#L4-L10)
-
-> GET /registry/gtc-stake/\{address\}/\{round_id\}
-
-```bash filename="Sample request" copy
-curl --request GET \
-    --url https://api.scorer.gitcoin.co/registry/gtc-stake/{address}/{round_id} \
-    --header 'X-API-KEY: {API KEY}'
-```
-
-```json filename="Sample response"
-{
-  "users": [
-    {
-      "stakes": [
-        {
-          "stake": "string",
-          "round": {
-            "id": "string"
-          }
-        },
-        {
-          "stake": "string",
-          "round": {
-            "id": "string"
-          }
-        }
-      ],
-      "xstakeAggregates": [
-        {
-          "total": "string",
-          "round": {
-            "id": "string"
-          }
-        }
-      ]
-    }
-  ]
-}
-```
-
-If you have questions about the API you can ask them in our [developer support channel](https://t.me/+Mcp9RsRV7tVmYjZh).
-
+If you have questions about the API, please reach out to us in our [developer support channel](https://t.me/+Mcp9RsRV7tVmYjZh).

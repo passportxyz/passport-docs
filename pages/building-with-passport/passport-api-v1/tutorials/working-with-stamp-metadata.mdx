@@ -4,6 +4,11 @@ description: How to retrieve, handle and display Stamp metadata in a simple Next
 ---
 
 # Working with Stamp metadata
+import { Callout } from '@theme/Callout'
+
+<Callout type="warning">
+**Please note:**<br />In November 2024, we soft-launched [Passport API v2](../passport-api-v2/overview).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />We are actively working on updating the v1 tutorials to use v2.
+</Callout>
 
 ![](public/stamp-logo-examples.png)
 
@@ -44,7 +49,7 @@ You can also retrieve the Stamps owned by a particular address and instruct the 
 /registry/stamps/{address}?_include_metadata=true
 ```
 
-You can test this out using an HTTP tool such as curl. You will need to replace {`your-api-key}` with your API key in the request header, as well as {`your-address}` with your wallet address in order to access these endpoints.
+You can test this out using an HTTP tool such as curl. You will need to replace `{your-api-key}` with your API key in the request header, as well as `{your-address}` with your wallet address in order to access these endpoints.
 
 ```sh
 curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{your-address}?include_metadata=true' \

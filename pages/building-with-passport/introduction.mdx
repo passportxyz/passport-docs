@@ -17,7 +17,7 @@ Under the hood, it is a unique decentralized identifier (a DID) associated with 
 
 The DID can be used to look up a user's Stamp data, which exists as a collection of Verified Credentials.
 
-**Verified Credentials do not contain any personal identifying information!** They simply demonstrate, using a cryptographic signature, that the user gave access to a specific app and that some criteria were met.
+**Verified Credentials do not contain any personal identifying information!** They simply demonstrate, using a cryptographic signature, that the user gave access to a specific app and that some criteria were met. Learn more about how Passport XYZ is [privacy preserving](https://www.passport.xyz/privacy).
 
 ## Use cases
 
@@ -37,19 +37,38 @@ Passport is a versatile and valuable tool for managing access, promoting transpa
 
 Passport score and Stamp data can be retrieved in two ways:
 
-* **Passport API:** Retrieves data associated with a specific address from the Passport XYZ server. 
-* **Passport Smart Contracts:** Interacts with a blockchain to retrieve data associated with a specific address. 
+* **Passport API v2:** Retrieves the Stamp-based Unique Humanity Score and associated metadata for a specified address. 
+* **Model Based Detection API:** This API is currently in beta. Retrieves the Model Based Detection Score for a specified address.
+* **Passport Smart Contracts:** Interacts with a blockchain to retrieve Stamp-based Unique Humanity Scores associated with a specific address. 
 
-### Passport API
+### Passport API v2
 
-The Passport API serves as a powerful tool for developers, offering access to Passport scores and Stamps via several REST endpoints. 
+The Passport API v2 serves as a powerful tool for developers, offering access to Passport scores and Stamps via several REST endpoints. 
 
 <Cards>
   <Card title="Overview" href="/building-with-passport/passport-api/overview" />
   <Card title="Get access" href="/building-with-passport/passport-api/getting-access" />
   <Card title="Quick start" href="/building-with-passport/passport-api/quick-start-guide" />
-  <Card title="Tutorials" href="/building-with-passport/passport-api/tutorials" />
   <Card title="API reference" href="/building-with-passport/passport-api/api-reference" />
+</Cards>
+
+### Custom Passport
+
+Custom Passport enables partners to develop a Passport XYZ dashboard that is customized to the unique needs of their ecosystem. This offering enables several additional features above and beyond what is offered on the standard Passport app, which can enable tailored proof of humanity solutions.
+
+<Cards>
+  <Card title="Custom Passport" href="/building-with-passport/custom-passport" />
+</Cards>
+
+### Model Based Detection API (beta)
+
+The Model Based Detection API enables you to retrieve the Model Based Detection Score for a specified address using a REST endpoint.
+
+<Cards>
+  <Card title="Overview" href="/building-with-passport/model-based-detection/overview" />
+  <Card title="Get access" href="/building-with-passport/model-based-detection/getting-access" />
+  <Card title="Tutorial" href="/building-with-passport/model-based-detection/tutorials/double-verification" />
+  <Card title="API reference" href="/building-with-passport/model-based-detection/api-reference" />
 </Cards>
 
 ### Smart contracts
@@ -76,12 +95,11 @@ Read more on [ComposeDB](composedb.md).
 
 ## Getting Started
 
-To begin your development journey with Passport API, follow these steps:
+To begin your development journey with Passport XYZ, follow these steps:
 
-- [Get access to the API](getting-access)
-- [Use the API playground tool (requires API keys)](https://api.scorer.gitcoin.co/docs)
-- [Get to "Hello World" with the API](quick-start-guide)
-- [Choose a tutorial that best matches your use case. Review the example code and integrate](tutorials)
+- [Get an API key and scorer ID for the APIs](/building-with-passport/passport-api/getting-access)
+- [Use the API playground tool (requires API keys)](https://api.passport.xyz/v2/docs)
+- [Get to "Hello World" with Passport API v2](/building-with-passport/passport-api/quick-start-guide)
 
 By following these steps, you'll be well-equipped to start integrating Passport into your platform.
 

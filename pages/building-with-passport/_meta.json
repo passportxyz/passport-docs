@@ -1,12 +1,11 @@
 {
   "introduction": "Introduction",
   "major-concepts": "Major concepts",
-  "airdrops": "Passport for Airdrops",
   "---": {
     "type": "separator"
   },
-  "passport-api-v2": "Passport API v2",
-  "passport-api": "Passport API v1",
+  "passport-api": "Passport API v2",
+  "passport-api-v1": "Passport API v1",
   "custom-passport": "Custom Passport",
   "model-based-detection": "Model Based Detection API",
   "smart-contracts": "Smart Contracts",
