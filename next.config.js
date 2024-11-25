@@ -276,6 +276,26 @@ module.exports = withNextra({
             source: '/building-with-passport/airdrops',
             destination: '/building-with-passport/introduction',
             permanent: true
+        },
+        {
+            source: '/building-with-passport/passport-api-v2',
+            destination: '/building-with-passport/passport-api',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/passport-api-v2/overview',
+            destination: '/building-with-passport/passport-api/overview',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/passport-api-v2/api-reference',
+            destination: '/building-with-passport/passport-api/api-reference',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/passport-api-v2/getting-access',
+            destination: '/building-with-passport/passport-api/getting-access',
+            permanent: true
         }
     ]
 })
