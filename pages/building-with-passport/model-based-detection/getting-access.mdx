@@ -2,12 +2,17 @@
 title: Getting access to the MBD API
 description: Explainer for how to get access to the MBD API.
 ---
+import { Callout } from 'nextra/components'
 
 # Getting Access: API Key
 
 The Model Based Detection API provides programmatic access to variety of different model-based Sybil detection scores. 
 
 Once you have your API key, you need to include it with each request you make to the API. This allows Passport XYZ to identify your app and verify that you are authorized to access the API.
+
+<Callout type="info">
+Please note:<br /><br />You do not need a Scorer or Scorer ID to use the MBD API.
+</Callout>
 
 ### Getting Your API Key
 
@@ -19,6 +24,6 @@ Once you have your API key, you need to include it with each request you make to
 
 ### Next step
 
-Review one of the following pages to learn how you can use your Scorer, Scorer ID, and API key.
+Review one of the following pages to learn how you can use your API key with the Model Based Detection API.
 - [Review the API Reference](api-reference)
 - [Review the tutorial explaining how to use this score](tutorials/double-verification)
