@@ -10,7 +10,7 @@ Some requests are likely to return a large amount of data. You can paginate it b
 For the Stamps endpoint, `x` refers to the number of Stamp objects to return in each response. The full request to the Stamp endpoint, including the pagination instruction and headers, could look as follows:
 
 ```bash
-curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?limit=3' \
+curl --request GET 'https://api.passport.xyz/v2/stamps/{address}?limit=3' \
   --header 'X-API-KEY: {API-KEY}'
 ```
 
@@ -22,8 +22,8 @@ This is what a response looks like with the `next` and `prev` fields. Notice the
 
 ```json
 {
-  "next": "https://api.scorer.gitcoin.co/registry/stamps/{address}?token=bmVw%4dFNQ9fM3TcxMTcD%3D&limit=3",
-  "prev": "https://api.scorer.gitcoin.co/registry/stamps/{address}?token=c9fMTcHJlTcwdlxMNQ%3D%3D&limit=3",
+  "next": "https://api.passport.xyz/v2/stamps/{address}?token=bmVw%4dFNQ9fM3TcxMTcD%3D&limit=3",
+  "prev": "https://api.passport.xyz/v2/stamps/{address}?token=c9fMTcHJlTcwdlxMNQ%3D%3D&limit=3",
   "items": [
     {
       "version": "1.0.0",
@@ -36,17 +36,6 @@ This is what a response looks like with the `next` and `prev` fields. Notice the
 To retrieve the next page of results you can use the URL provided in the `next` field, in this case:
 
 ```bash
-curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?token=bmVw%4dFNQ9fM3TcxMTcD%3D&limit=3' \
+curl --request GET 'https://api.passport.xyz/v2/stamps/{address}?token=bmVw%4dFNQ9fM3TcxMTcD%3D&limit=3' \
   --header 'X-API-KEY: {API-key}'
-```
-
-You can also use the `offset` parameter to retrieve data from a given location in a paginated API response. The offset value given identifies the first element in the response you want to retrieve. For example, passing `offset=5` means the response will skip the first 5 elements and start at element 6 of the returned data. You can combine this with `limit` to get specific chunks of data, for example to retrieve objects 6 - 10, you could pass `offset=5&limit=5`.
-
-
-
-Here's what that would look like in practice, retrieving the 6th to 10th Stamps for a given address:
-
-```bash
-curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?offset=5&limit=5' \
-  --header 'X-API-KEY: {API-key}' 
 ```

@@ -94,27 +94,27 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/integration-guides',
-            destination: '/building-with-passport/passport-api/tutorials',
+            destination: '/building-with-passport/passport-api-v1/tutorials',
             permanent: true
         },
         {
             source: '/building-with-passport/integration-guides/gating-access-with-passport-scores',
-            destination: '/building-with-passport/passport-api/tutorials/gating-access-with-passport-scores',
+            destination: '/building-with-passport/passport-api-v1/tutorials/gating-access-with-passport-scores',
             permanent: true
         },
         {
             source: '/building-with-passport/integration-guides/integrating-stamps-and-scorers',
-            destination: '/building-with-passport/passport-api/tutorials/integrating-stamps-and-scorers',
+            destination: '/building-with-passport/passport-api-v1/tutorials/integrating-stamps-and-scorers',
             permanent: true
         },
         {
             source: '/building-with-passport/integration-guides/working-with-stamp-metadata',
-            destination: '/building-with-passport/passport-api/tutorials/working-with-stamp-metadata',
+            destination: '/building-with-passport/passport-api-v1/tutorials/working-with-stamp-metadata',
             permanent: true
         },
         {
             source: '/building-with-passport/integration-guides/requiring-a-passport-score-for-airdrop-claim',
-            destination: '/building-with-passport/passport-api/tutorials/requiring-a-passport-score-for-airdrop-claim',
+            destination: '/building-with-passport/passport-api-v1/tutorials/requiring-a-passport-score-for-airdrop-claim',
             permanent: true
         },
         {
@@ -219,32 +219,32 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/tutorials',
-            destination: '/building-with-passport/passport-api/tutorials',
+            destination: '/building-with-passport/passport-api-v1/tutorials',
             permanent: true
         },
         {
             source: '/building-with-passport/tutorials/client-side-scoring',
-            destination: '/building-with-passport/passport-api/tutorials/client-side-scoring',
+            destination: '/building-with-passport/passport-api-v1/tutorials/client-side-scoring',
             permanent: true
         },
         {
             source: '/building-with-passport/tutorials/gating-access-with-passport-scores',
-            destination: '/building-with-passport/passport-api/tutorials/gating-access-with-passport-scores',
+            destination: '/building-with-passport/passport-api-v1/tutorials/gating-access-with-passport-scores',
             permanent: true
         },
         {
             source: '/building-with-passport/tutorials/integrating-stamps-and-scores',
-            destination: '/building-with-passport/passport-api/tutorials/integrating-stamps-and-scores',
+            destination: '/building-with-passport/passport-api-v1/tutorials/integrating-stamps-and-scores',
             permanent: true
         },
         {
             source: '/building-with-passport/tutorials/requiring-a-passport-score-for-airdrop-claim',
-            destination: '/building-with-passport/passport-api/tutorials/requiring-a-passport-score-for-airdrop-claim',
+            destination: '/building-with-passport/passport-api-v1/tutorials/requiring-a-passport-score-for-airdrop-claim',
             permanent: true
         },
         {
             source: '/building-with-passport/tutorials/working-with-stamp-metadata',
-            destination: '/building-with-passport/passport-api/tutorials/working-with-stamp-metadata',
+            destination: '/building-with-passport/passport-api-v1/tutorials/working-with-stamp-metadata',
             permanent: true
         },
         {
@@ -258,8 +258,23 @@ module.exports = withNextra({
             permanent: true
         },
         {
-            source: '/building-with-passport/passport-api-v2',
-            destination: '/building-with-passport/passport-api-v2/api-reference',
+            source: '/building-with-passport/passport-api',
+            destination: '/building-with-passport/passport-api/overview',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/passport-api/tutorials',
+            destination: '/building-with-passport/passport-api-v1/tutorials',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/major-concepts/scoring-mechanisms',
+            destination: '/building-with-passport/introduction',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/airdrops',
+            destination: '/building-with-passport/introduction',
             permanent: true
         }
     ]
