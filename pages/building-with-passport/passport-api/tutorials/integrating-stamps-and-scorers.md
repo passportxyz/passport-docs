@@ -2,13 +2,8 @@
 title: Integrating Stamps and Scores
 description: Tutorial covering how to use Stamp and Score data in your apps.
 ---
-import { Callout } from 'nextra/components'
 
 # Integrating Stamps and Scorers
-
-<Callout type="warning">
-**Please note:**<br />In November 2024, we soft-launched [Passport API v2](../passport-api-v2/overview).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />We are actively working on updating the v1 tutorials to use v2.
-</Callout>
 
 Passport XYZ can be used to automatically gate applications, but it can also be used as a powerful tool for supporting human decision makers by providing trust information in the app's UI. Instead of blocking access using a score threshold, Passport XYZ can display trust information about users connected to an app to other users, enabling better informed interactions.
 
@@ -124,10 +119,9 @@ export default function Passport() {
       try {
         const provider = new ethers.BrowserProvider(window.ethereum)
         const accounts = await provider.listAccounts()
-        // if the user is connected, set their account and fetch their score
+        // if the user is connected, set their account
         if (accounts && accounts[0]) {
           setAddress(accounts[0].address)
-          checkPassport(accounts[0].address)
         }
       } catch (err) {
         console.log('not connected...')
@@ -285,10 +279,8 @@ async function getPassportStamps(currentAddress: string) {
 
 We can invoke the function on the click of a button by adding the following to the UI:
 
-```
 <pre class="language-html"><code class="lang-html"><strong>&#x3C;Button colorScheme='teal' variant='outline' onClick={() => getPassportStamps(address)}>Check Stamps&#x3C;/Button>
 </strong></code></pre>
-```
 
 If we run the app using `npm run dev`, connect a wallet that has some Stamps and click the `Check Stamps` button, the following information will be displayed in the console. In this example there are 33 credentials in the array, with one expanded as an example - the length of the `items` array will depend upon how many verified credentials the Passport holds.
 
@@ -502,7 +494,6 @@ Now, we want to make sure all this logic is executed as soon as a user connects 
 
 The `connect()` and `checkConnection()` functions should end up as follows:
 
-```tsx
 <pre class="language-tsx"><code class="lang-tsx"><strong>useEffect(() => {
 </strong>  checkConnection()
   async function checkConnection() {
@@ -510,7 +501,7 @@ The `connect()` and `checkConnection()` functions should end up as follows:
       const provider = new ethers.BrowserProvider(window.ethereum)
       const accounts = await provider.listAccounts()
       // if the user is connected, set their account and fetch their score
-      if (accounts && accounts[0]) {
+      if (accounts &#x26;&#x26; accounts[0]) {
         setAddress(accounts[0].address)
         checkPassport(accounts[0].address)
       }
@@ -532,7 +523,6 @@ async function connect() {
   }
 }
 </code></pre>
-```
 
 Now, in our UI, we can add a button that calls this function. This button can replace the `Check Stamps` button we created earlier.
 

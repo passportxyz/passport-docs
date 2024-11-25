@@ -2,13 +2,8 @@
 title: Client-side scoring tutorial
 description: This tutorial introduces client-side scoring 
 ---
-import { Callout } from 'nextra/components'
 
 # Building a custom, client-side scorer
-
-<Callout type="warning">
-**Please note:**<br />In November 2024, we soft-launched [Passport API v2](../passport-api-v2/overview).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />We are actively working on updating the v1 tutorials to use v2.
-</Callout>
 
 Passport XYZ offers several scoring algorithms that can be executed on the Passport servers, such that a numeric score for a Passport can be requested from the Passport API. However, this means you are restricted to Passport's algorithm and Passport's opinion about the relative weighting assigned to each individual Stamp. This might not be appropriate for all use cases. 
 
