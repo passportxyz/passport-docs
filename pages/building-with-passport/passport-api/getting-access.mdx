@@ -20,7 +20,7 @@ The Passport API provides programmatic access to a wallet's Passport score. Once
 A Scorer is an developer element that can be used to organize different use cases. You need to create a Scorer and associated Scorer ID to be able to request user data via the Passport API. If you are using the Passport API in multiple use cases, you should set up separate Scorers for each one.
 
 <Callout type="warning">
-For the time being, please make sure you are selecting the Unique Humanity Scorer, and not the Binary Scorer. We will be deprecating these different Scorer types soon.
+For the time being, please make sure you are selecting the Unique Humanity Scorer, and not the Binary Scorer. We will be deprecating these different Scorer types soon.<br /><br />If you have already selected the Binary Scorer, please disregard the v2 `threshold` and `passing_score` fields, as they are currently not correct. We will be updating all Binary Scorers to the new format soon.
 </Callout>
 
 1. **Log in to the Developer Portal:** Go to [developer.passport.xyz](https://developer.passport.xyz) and log in to your account by connecting your wallet.
