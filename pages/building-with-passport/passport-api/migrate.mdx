@@ -1,0 +1,167 @@
+---
+title: Passport API migration guide
+description: This guide explains the differences between v1 and v2 of the Passport API
+---
+import { Callout } from 'nextra/components'
+
+# Passport API v2
+
+Migrating to Passport API V2 is designed to be straightforward. This guide outlines the key changes and provides step-by-step instructions to help you update your integration smoothly.
+
+But first, why should you migrate?
+* Retrieve user scores with a single, intuitive GET request.
+* Utilize new endpoints to access historical scores and Stamp data.
+* Gain access to more data to proactively prevent and resolve misunderstandings.
+* Retrieve both binary and numeric scores within the same payload
+* Benefit from a more unified API endpoint URI structure.
+
+
+## Key changes to address
+1. [The base URL](#the-base-url)
+2. [Simplified score retrieval](#simplified-score-retrieval)
+3. [Updated endpoint URIs](#updated-endpoint-uris)
+4. [Accessing historical data](#accessing-historical-data)
+5. [Unified Scorer types](#unified-scorer-types)
+6. [Additional Stamp data in score payload](#additional-stamp-data-in-the-score-object-payload)
+
+## The base URL
+In August 2024, the Passport workstream spun out of Gitcoin, creating Passport XYZ. 
+
+We have been working on separating our infrastructure from Gitcoin, and the API base URL is finally getting its update. 
+
+* Previous Base URL: https://api.passport.gitcoin.co
+* New Base URL: https://api.passport.xyz
+
+**Action Required:** Update all instances of the base URL in your application to the new URL.
+
+## Simplified score retrieval
+
+### Background
+In V1, retrieving a user's score involved:
+* Submitting the Passport for scoring using a POST request.
+* Retrieving the score using a GET request.
+
+This process was counterintuitive and could lead to confusion and stale scores if only the GET endpoint was used.
+
+### What's new in v2
+* **Single GET Request:** Retrieve the latest score and Stamp data with one GET request.
+* **No POST Required:** Eliminates the need to submit the Passport for scoring.
+
+### Endpoint changes
+* **From V1:** `POST /registry/submit-passport`
+* **To V2:** `GET /v2/stamps/{scorer_id}/score/{address}`
+
+**Action Required:** Replace any `POST /registry/submit-passport` requests with GET requests to the new endpoint.
+
+
+## Updated endpoint URIs
+We've adopted a more consistent, object-oriented design for our API endpoints.
+
+### Endpoint mapping
+
+| From v1                                     | To v2                                                |
+|---------------------------------------------|------------------------------------------------------|
+| `GET /registry/score/{scorer_id}/{address}` | `GET /v2/stamps/{scorer_id}/score/{address}`         |
+| *New to v2*                                 | `GET /v2/stamps/{scorer_id}/score/{address}/history` |
+| `GET /registry/stamps/{address}`            | `GET /v2/stamps/{address}`                           |
+| `GET /registry/stamp-metadata`              | `GET /v2/stamps/metadata`                            |
+| `GET /passport/analysis/{address}`          | `GET /v2/models/score/{address}`                     |
+
+
+## Accessing historical data
+
+### New Feature in V2
+* **Endpoint:** GET /v2/stamps/{scorer_id}/score/{address}/history
+* **Functionality:** Retrieve a user's score and Stamp data from a specific date and time.
+
+Note: Access to this endpoint requires your API key to be allowlisted.
+
+**Action Required for use:**
+* **Request Access:** Fill out the [access request form](https://forms.gle/4GyicBfhtHW29eEu8) to have your API key allowlisted.
+* **Update Implementation:** Incorporate the new endpoint into your application if you need historical data.
+
+
+## Unified Scorer types
+
+### Background
+In V1, you had to choose between two Scorer types:
+* Unique Humanity
+* Unique Humanity: Binary
+
+This differentiation added complexity and could lead to confusion.
+
+### What's New in V2
+* **Unified Scoring:** Both numeric and binary scores are included in all payloads.
+* **Simplified Choices:** No need to choose a Scorer type; you can use the score that best fits your application.
+
+### Example v2 Payload
+```json {3-5} filename="Sample response"
+{
+  "address": "0x9c4de275772297e8fd4c458e6844f4e92ac82b74",
+  "score": "31.885",
+  "passing_score": true,
+  "threshold": "20",
+  "last_score_timestamp": "2024-12-02T22:21:25.723470+00:00",
+  "expiration_timestamp": "2025-01-05T20:29:44.441000+00:00",
+  "error": null,
+  "stamps": { ... }
+}
+```
+
+**Action Required:** Adjust your application's logic to handle the new payload structure and use the appropriate score type.
+
+
+## Additional Stamp data in score payload 
+
+### Deduplication field
+
+To prevent a single Stamp from verifying multiple Passports (enhancing security against Sybil attacks), Stamps are [deduplicated](../major-concepts/deduplicating-stamps) across accounts.
+
+* **New Field:** `dedup`
+* **Purpose:** Indicates whether a Stamp has been deduplicated and thus does not contribute to the score.
+
+#### Example
+
+```json /dedup/
+"stamps": {
+  "Discord": {
+    "score": "0",
+    "dedup": true,
+    "expiration_date": "<date>"
+  },
+  "Ens": {
+    "score": "0.408",
+    "dedup": false,
+    "expiration_date": "<date>"
+  }
+}
+```
+
+In the above example, you'll notice that the Discord stamp is deduplicated, and as a result, the user received a 0 score for that Stamp. 
+
+You will also see that the ENS Stamp was not deduplicated, meaning the 0.408 score was included in the user's overall unique humanity score. 
+
+**Action Required:**
+* **Handle Deduplication:** Update your application to interpret the dedup field and inform users if their Stamps are affected.
+* **User Communication:** Consider displaying warnings to users about deduplicated Stamps.
+
+### Stamp expiration date
+
+* **New Field:** `expiration_date` for each Stamp.
+* **Purpose:** Indicates when each specific Stamp will expire.
+
+**Action required:**
+* **Monitor Expirations:** Use the `expiration_date` to notify users about upcoming Stamp expirations.
+* **Update Logic:** Ensure your application considers Stamp expiration dates in its functionality.
+
+
+## Next Steps Checklist
+
+1. Update Base URL to https://api.passport.xyz.
+2. Modify all API endpoint URIs to the new V2 structure.
+3. Replace POST requests with GET requests for score retrieval.
+4. Update your data models and logic to accommodate new fields (`passing_score`, `dedup`, `expiration_date`).
+5. If needed, submit the access request form for the historical endpoint and build it into your integration. 
+6. Thoroughly test your application to ensure all changes work as expected.
+
+If you have questions or need support, you can chat with us on our [developer support channel on Telegram](https://t.me/+Mcp9RsRV7tVmYjZh).
