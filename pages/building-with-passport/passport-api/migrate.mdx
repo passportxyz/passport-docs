@@ -48,7 +48,7 @@ This process was counterintuitive and could lead to confusion and stale scores i
 
 ### Endpoint changes
 * **From V1:** `POST /registry/submit-passport`
-* **To V2:** `GET /v2/stamps/{scorer_id}/score/{address}`
+* **To V2:** `GET /v2/stamps/\{scorer_id\}/score/\{address\}`
 
 **Action Required:** Replace any `POST /registry/submit-passport` requests with GET requests to the new endpoint.
 
@@ -60,11 +60,11 @@ We've adopted a more consistent, object-oriented design for our API endpoints.
 
 | From v1                                     | To v2                                                |
 |---------------------------------------------|------------------------------------------------------|
-| `GET /registry/score/{scorer_id}/{address}` | `GET /v2/stamps/{scorer_id}/score/{address}`         |
-| *New to v2*                                 | `GET /v2/stamps/{scorer_id}/score/{address}/history` |
-| `GET /registry/stamps/{address}`            | `GET /v2/stamps/{address}`                           |
+| `GET /registry/score/\{scorer_id\}/\{address\}` | `GET /v2/stamps/\{scorer_id\}/score/\{address\}`         |
+| *New to v2*                                 | `GET /v2/stamps/\{scorer_id\}/score/\{address\}/history` |
+| `GET /registry/stamps/\{address\}`            | `GET /v2/stamps/\{address\}`                           |
 | `GET /registry/stamp-metadata`              | `GET /v2/stamps/metadata`                            |
-| `GET /passport/analysis/{address}`          | `GET /v2/models/score/{address}`                     |
+| `GET /passport/analysis/\{address\}`          | `GET /v2/models/score/\{address\}`                     |
 
 
 ## Accessing historical data
