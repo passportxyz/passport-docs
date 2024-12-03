@@ -21,7 +21,7 @@ But first, why should you migrate?
 3. [Updated endpoint URIs](#updated-endpoint-uris)
 4. [Accessing historical data](#accessing-historical-data)
 5. [Unified Scorer types](#unified-scorer-types)
-6. [Additional Stamp data in score payload](#additional-stamp-data-in-the-score-object-payload)
+6. [Additional Stamp data in score payload](#additional-stamp-data-in-score-payload)
 
 ## The base URL
 In August 2024, the Passport workstream spun out of Gitcoin, creating Passport XYZ. 
@@ -48,7 +48,7 @@ This process was counterintuitive and could lead to confusion and stale scores i
 
 ### Endpoint changes
 * **From V1:** `POST /registry/submit-passport`
-* **To V2:** `GET /v2/stamps/\{scorer_id\}/score/\{address\}`
+* **To V2:** `GET /v2/stamps/{scorer_id}/score/{address}`
 
 **Action Required:** Replace any `POST /registry/submit-passport` requests with GET requests to the new endpoint.
 
@@ -58,19 +58,19 @@ We've adopted a more consistent, object-oriented design for our API endpoints.
 
 ### Endpoint mapping
 
-| From v1                                     | To v2                                                |
-|---------------------------------------------|------------------------------------------------------|
-| `GET /registry/score/{scorer_id}/{address}` | `GET /v2/stamps/{scorer_id}/score/{address}`         |
-| *New to v2*                                 | `GET /v2/stamps/{scorer_id}/score/{address}/history` |
-| `GET /registry/stamps/{address}`            | `GET /v2/stamps/{address}`                           |
-| `GET /registry/stamp-metadata`              | `GET /v2/stamps/metadata`                            |
-| `GET /passport/analysis/{address}`          | `GET /v2/models/score/{address}`                     |
+| From v1                                       | To v2                                                  |
+|----------------------------------------------|-------------------------------------------------------|
+| `GET /registry/score/{scorer_id}/{address}`   | `GET /v2/stamps/{scorer_id}/score/{address}`          |
+| *New to v2*                                   | `GET /v2/stamps/{scorer_id}/score/{address}/history`  |
+| `GET /registry/stamps/{address}`              | `GET /v2/stamps/{address}`                            |
+| `GET /registry/stamp-metadata`                | `GET /v2/stamps/metadata`                             |
+| `GET /passport/analysis/{address}`            | `GET /v2/models/score/{address}`                      |
 
 
 ## Accessing historical data
 
 ### New Feature in V2
-* **Endpoint:** GET /v2/stamps/{scorer_id}/score/{address}/history
+* **Endpoint:** GET /v2/stamps/&#123;scorer_id&#125;/score/&#123;address&#125;/history
 * **Functionality:** Retrieve a user's score and Stamp data from a specific date and time.
 
 Note: Access to this endpoint requires your API key to be allowlisted.
