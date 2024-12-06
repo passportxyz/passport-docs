@@ -112,7 +112,12 @@ curl --request GET \
 **Note:**<br />To access this endpoint, you must submit your use case and be approved by the Passport team. To do so, please fill out the following form, making sure to provide a detailed description of your use case. The Passport team typically reviews and responds to form responses within 48 hours.<br /><br />[Request access](https://forms.gle/4GyicBfhtHW29eEu8)
 </Callout>
 
-This endpoint will return the historical score and Stamp data for a single address at a specified time.
+This endpoint will return the last requested historical score and Stamp data for a single address before a specified time. 
+
+For example, if you requested a score on 2024-12-01 using the `GET /v2/stamps/{scorer_id}/score/{address}` endpoint, then use this historical score endpoint to request the score for the same address on 2024-12-05, you will receive the score and Stamp data for 2024-12-01 for that address. If you have not requested a score for a specified address using the `GET /v2/stamps/{scorer_id}/score/{address}` endpoint, you will not be able to receive a historical score for that address. 
+
+The `stamp_scores` struct will include the weight of each verified Stamp at the time of the most recent score previous to the specified `created_at` date. This struct is not available via the historical score endpoint before December 29th, 2023.
+
 
 > GET /v2/stamps/\{scorer_id\}/score/\{address\}/history
 
@@ -120,7 +125,7 @@ This endpoint will return the historical score and Stamp data for a single addre
 
 | Name               | Required | Description                                                                                                  |
 | ------------------ | -------- | ------------------------------------------------------------------------------------------------------------ |
-| `created_at`       | yes      | Specified time that you want to retrieve the score for. <br /><br />ISO 8601 (`YYYY-MM-DD` or `YYYY-MM-DDThh:mm:ss.sssZ`)   |
+| `created_at`       | yes      | Specified time that you want to retrieve the most recently submitted score for. <br /><br />ISO 8601 (`YYYY-MM-DD` or `YYYY-MM-DDThh:mm:ss.sssZ`)   |
 
 
 ```bash filename="Sample request" copy
@@ -150,8 +155,6 @@ curl --request GET \
   ]
 }        
 ```
-
-The `stamp_scores` struct is not available via the historical score endpoint before December 29th, 2023.
 
 ### Retrieve Stamps verified by a single address
 
