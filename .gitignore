@@ -1,3 +1,4 @@
 node_modules
 .next
 settings.json
+package-lock.json
