@@ -106,7 +106,18 @@ This differentiation added complexity and could lead to confusion.
   "last_score_timestamp": "2024-12-02T22:21:25.723470+00:00",
   "expiration_timestamp": "2025-01-05T20:29:44.441000+00:00",
   "error": null,
-  "stamps": { ... }
+  "stamps": {
+    "Discord": {
+      "score": "0",
+      "dedup": true,
+      "expiration_date": "2025-2-05T03:25:24.321000+00:00"
+    },
+    "Ens": {
+      "score": "0.408",
+      "dedup": false,
+      "expiration_date": "2025-01-05T20:29:44.441000+00:00"
+    }
+  }
 }
 ```
 
@@ -117,7 +128,7 @@ This differentiation added complexity and could lead to confusion.
 
 ### Deduplication field
 
-To prevent a single Stamp from verifying multiple Passports (enhancing security against Sybil attacks), Stamps are [deduplicated](../major-concepts/deduplicating-stamps) across accounts.
+To prevent multiple Passports from verifying the same credential (enhancing security against Sybil attacks), Stamps are [deduplicated](../major-concepts/deduplicating-stamps) across addresses.
 
 * **New Field:** `dedup`
 * **Purpose:** Indicates whether a Stamp has been deduplicated and thus does not contribute to the score.
@@ -129,7 +140,7 @@ To prevent a single Stamp from verifying multiple Passports (enhancing security 
   "Discord": {
     "score": "0",
     "dedup": true,
-    "expiration_date": "<date>"
+    "expiration_date": "<alt_date>"
   },
   "Ens": {
     "score": "0.408",
@@ -139,7 +150,7 @@ To prevent a single Stamp from verifying multiple Passports (enhancing security 
 }
 ```
 
-In the above example, you'll notice that the Discord stamp is deduplicated, and as a result, the user received a 0 score for that Stamp. 
+In the above example, you'll notice that the Discord Stamp is [deduplicated](../major-concepts/deduplicating-stamps), meaning another address has also verified this same credential. As a result, the user received a 0 score for that Stamp. You will also note that a different expiration date returns when `dedup=true`. This date represents when the credential verified by the other address will expire, rather than when this credential will expire.
 
 You will also see that the ENS Stamp was not deduplicated, meaning the 0.408 score was included in the user's overall unique humanity score. 
 
@@ -149,7 +160,7 @@ You will also see that the ENS Stamp was not deduplicated, meaning the 0.408 sco
 
 ### Stamp expiration date
 
-* **New Field:** `expiration_date` for each Stamp.
+* **New Field:** `expiration_date` for each credential.
 * **Purpose:** Indicates when each specific Stamp will expire.
 
 **Action required:**
