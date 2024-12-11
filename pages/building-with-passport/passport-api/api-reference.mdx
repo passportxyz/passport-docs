@@ -89,19 +89,31 @@ curl --request GET \
 
 ```json filename="Sample response"
 {
-    "address": "{address}",
-    "score": "{score}",
-    "passing_score": true/false,
-    "last_score_timestamp": "{last_score_time ISO 8601}",
-    "expiration_timestamp": "{expiration_time ISO 8601}",
-    "threshold": "20",
-    "error": null,
-    "stamp_scores": {
-      "Ens": "2.2",
-      "NFT": "0.69",
-      "Google": "2.25"
-      ...
-    }
+  "address": "{address}",
+  "score": "{overall_score}",
+  "passing_score": true/false,
+  "last_score_timestamp": "{last_score_time ISO 8601}",
+  "expiration_timestamp": "{expiration_time ISO 8601}",
+  "threshold": "20",
+  "error": null,
+  "stamps": {
+    "Ens": {
+      "score": "{credential_score}",
+      "dedup": true/false,
+      "expiration_date": "{expiration_time ISO 8601}"
+    },
+    "ETHDaysActive#50": {
+      "score": "{credential_score}",
+      "dedup": true/false,
+      "expiration_date": "{expiration_time ISO 8601}"
+    },
+    "ETHGasSpent#0.25": {
+      "score": "{credential_score}",
+      "dedup": true/false,
+      "expiration_date": "{expiration_time ISO 8601}"
+    },
+    { ... }
+  }
 }
 ```
 
@@ -137,21 +149,33 @@ curl --request GET \
 ```json filename="Sample response"
 {
   "items": [
-      {
-          "address": "{address}",
-          "score": "{score}",
-          "passing_score": true/false,
-          "last_score_timestamp": "{last_score_time ISO 8601}",
-          "expiration_timestamp": "{expiration_time ISO 8601}",
-          "threshold": "20",
-          "error": null,
-          "stamp_scores": {
-            "Ens": "2.2",
-            "NFT": "0.69",
-            "Google": "2.25"
-            ...
-          }
+    {
+      "address": "{address}",
+      "score": "{score}",
+      "passing_score": true/false,
+      "last_score_timestamp": "{last_score_time ISO 8601}",
+      "expiration_timestamp": "{expiration_time ISO 8601}",
+      "threshold": "20",
+      "error": null,
+      "stamps": {
+        "Ens": {
+          "score": "{credential_score}",
+          "dedup": true/false,
+          "expiration_date": "{expiration_time ISO 8601}"
+        },
+        "ETHDaysActive#50": {
+          "score": "{credential_score}",
+          "dedup": true/false,
+          "expiration_date": "{expiration_time ISO 8601}"
+        },
+        "ETHGasSpent#0.25": {
+          "score": "{credential_score}",
+          "dedup": true/false,
+          "expiration_date": "{expiration_time ISO 8601}"
+        },
+        { ... }
       }
+    }
   ]
 }        
 ```
