@@ -40,6 +40,7 @@ This onchain smart contract stack is currently deployed to the following network
 
 Mainnet
 * Arbitrum
+* Base
 * Linea
 * Optimism
 * Scroll
@@ -47,6 +48,7 @@ Mainnet
 * ZkSync
 
 Testnet
+* Base Goerli
 * Optimism Sepolia
 * Scroll Sepolia
 * Shape Sepolia
