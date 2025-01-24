@@ -61,9 +61,11 @@ The decoder is currently deployed to the following networks:
 | Network               | Contract address                           | Link                                                                                                                                                                                 |
 | --------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
 | Arbitrum              | 0x2050256A91cbABD7C42465aA0d5325115C1dEB43 | [Arbiscan](https://arbiscan.io/address/0x2050256A91cbABD7C42465aA0d5325115C1dEB43)                      |
+| Base                  | 0xa652BE6A92c7efbBfEEf6b67eEF10A146AAA8ADc | [Basescan](https://basescan.org/address/0xa652BE6A92c7efbBfEEf6b67eEF10A146AAA8ADc)                 |
+| Base Goerli           | 0xa652BE6A92c7efbBfEEf6b67eEF10A146AAA8ADc | [Basescan](https://goerli.basescan.org/address/0xa652BE6A92c7efbBfEEf6b67eEF10A146AAA8ADc)                 |
 | Linea                 | 0x423cd60ab053F1b63D6F78c8c0c63e20F009d669 | [Explorer](https://explorer.linea.build/address/0x423cd60ab053F1b63D6F78c8c0c63e20F009d669)             |
-| Optimism              | 0x5558D441779Eca04A329BcD6b47830D2C6607769 | [Etherscan](https://optimistic.etherscan.io/address/0x5558D441779Eca04A329BcD6b47830D2C6607769)         |                                                                                                                                                                                     |
-| Optimism Sepolia      | 0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56)   |
+| Optimism              | 0x5558D441779Eca04A329BcD6b47830D2C6607769 | [Optimism Explorer](https://explorer.optimism.io/address/0x5558D441779Eca04A329BcD6b47830D2C6607769)         |
+| Optimism Sepolia      | 0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56 | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56)   |
 | Scroll                | 0x8A5820030188346cC9532a1dD9FD2EF8d8F464de | [Scrollscan](https://scrollscan.com/address/0x8A5820030188346cC9532a1dD9FD2EF8d8F464de)                 |
 | Scroll Sepolia        | 0x2443D22Db6d25D141A1138D80724e3Eee54FD4C2 | [Scrollscan](https://scrollscan.com/address/0x2443D22Db6d25D141A1138D80724e3Eee54FD4C2)                 |
 | Shape                 | 0x2443D22Db6d25D141A1138D80724e3Eee54FD4C2 | [Shapescan](https://shapescan.xyz/address/0x2443D22Db6d25D141A1138D80724e3Eee54FD4C2)                 |
@@ -71,13 +73,12 @@ The decoder is currently deployed to the following networks:
 | ZkSync Era            | 0x1166FCDCA3B04311Ba9E2eD5ad2c660E730e1386 | [Explorer](https://explorer.zksync.io/address/0x1166FCDCA3B04311Ba9E2eD5ad2c660E730e1386)               |
 | ZkSync Sepolia        | 0x23AF92Af3b5D6faAD920C3CAA4F9A3d4352D6834 | [Explorer](https://explorer.zksync.io/address/0x23AF92Af3b5D6faAD920C3CAA4F9A3d4352D6834)               |
 
-
 You can learn more about working with testnets via our guide on [Test Mode](test-mode).
 
 #### Available methods
 
 | Method                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `getPassport(userAddress)` | Returns a list of valid credentials for a given ETH address.<br /><br />Example response:<br />`tuple[] :  [[Ens,0x2479874ec45bdedd5e2cb64169817b494137e9b554cf2bd99792caf90cfab965,1704482571,1712258571][ethPossessionsGte#1,0x55ab3ccca2f571375b683c5a00416e89e121dfdb79b42d9a6b2f1278df52c731,1704482571,1712258571][FirstEthTxnProvider,0x4753373bdcb5b9e61c388e1e8ea273e090673b665ee8e5d20aa1ce6942a64d88,1704482571,1712258571][EthGTEOneTxnProvider,0x373a3919e1db0035bcb3f74d2f7813a3cab60774dfd044828ec049e95211c25e,1704482571,1712258571][EthGasProvider,0x1a280f39044250aea077a8b15b3cbe5777fbd546c91dcd70dfb019b1b334a223,1704482571,1712258571][NFT,0xb7dd9a7654804a77c2361b95d413910f0ba2033e885cc2d9d724b8b876357d77,1704482571,1712258571][GnosisSafe,0x2f659efe4c40e251957b94edeb6797b6023e958b4141b7587d4de1f17d6afb3e,1704482571,1712258571][GuildPassportMember,0xda29097372dff5752bc1b1815daec79eb16a2a680ee48db07a7fb9e275b25b6b,1704482571,1712258571][TrustaLabs,0xb96f090d48dc0285488c1424fc4f319159c0d8c9e824fd42acf32e1af2710191,1704482571,1712258571]]`           |
 | `getScore(userAddress)`    | Returns a user’s valid score as a 4-digit value. Divide the value by 100 to get the user’s score. <br />This function will read the user’s score first from the cache in the `GitcoinResolver` and fall back to reading the score from the EAS [score attestation](../attestation-schema#passport-score-schema). This method will revert with an error is a valid score is not found.<br /><br />Example response:<br />`uint256 :  143890`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `isHuman(userAddress)`     | Returns a single boolean, indicating if the user’s score is below or above the minimum threshold, which is currently set to 20. It uses `getScore()` to retrieve the value that is compared against this threshold.<br /><br />Example responses:<br />`bool :  false`<br />`bool :  true`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
@@ -136,6 +137,40 @@ EAS Schema
 | score    | 0x24620f482734b3806102678e4b8bb68baafb1adc1ec29e524bcd69c85f15b915 | [EasScan](https://arbitrum.easscan.org/schema/view/0x24620f482734b3806102678e4b8bb68baafb1adc1ec29e524bcd69c85f15b915) |
 
 
+##### Base
+
+| Contract | Address | Link |
+| -------- | ------- | ---- |
+| EAS | 0x4200000000000000000000000000000000000021 | [Basescan](https://basescan.org/address/0x4200000000000000000000000000000000000021) |
+| EASSchemaRegistry | 0x4200000000000000000000000000000000000020 | [Basescan](https://basescan.org/address/0x4200000000000000000000000000000000000020) |
+| GitcoinResolver | 0xCB9d40015Feade7f06E7F63e79b19a5dc661C254 | [Basescan](https://basescan.org/address/0xCB9d40015Feade7f06E7F63e79b19a5dc661C254) |
+| GitcoinVerifier | 0x6025449584bd403fdcaC241d854FAB8e07Ed55BE | [Basescan](https://basescan.org/address/0x6025449584bd403fdcaC241d854FAB8e07Ed55BE) |
+| GitcoinAttester | 0x2716d65e8f41C4114182B165Bb0247EEf5F7B1D5 | [Basescan](https://basescan.org/address/0x2716d65e8f41C4114182B165Bb0247EEf5F7B1D5) |
+
+EAS Schema
+
+| schema   | uid                                                                | link                                                                                                                   |
+| -------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| passport | 0x463f7e91cd5a44fe22d4df4b9d6595f0d432c8f6a473eed28b0b8c6bafe4f5a0 | [EasScan](https://base.easscan.org/schema/view/0x463f7e91cd5a44fe22d4df4b9d6595f0d432c8f6a473eed28b0b8c6bafe4f5a0) |
+| score    | 0x9937aea3a59cd2cc008aeaa9ec9dd1d15739d0532809428f755d4d72b94ed916 | [EasScan](https://base.easscan.org/schema/view/0x9937aea3a59cd2cc008aeaa9ec9dd1d15739d0532809428f755d4d72b94ed916) |
+
+##### Base Goerli
+
+| Contract | Address | Link |
+| -------- | ------- | ---- |
+| EAS | 0x4200000000000000000000000000000000000021 | [Basescan](https://goerli.basescan.org/address/0x4200000000000000000000000000000000000021) |
+| EASSchemaRegistry | 0x4200000000000000000000000000000000000020 | [Basescan](https://goerli.basescan.org/address/0x4200000000000000000000000000000000000020) |
+| GitcoinResolver | 0xCB9d40015Feade7f06E7F63e79b19a5dc661C254 | [Basescan](https://goerli.basescan.org/address/0xCB9d40015Feade7f06E7F63e79b19a5dc661C254) |
+| GitcoinVerifier | 0x6025449584bd403fdcaC241d854FAB8e07Ed55BE | [Basescan](https://goerli.basescan.org/address/0x6025449584bd403fdcaC241d854FAB8e07Ed55BE) |
+| GitcoinAttester | 0x2716d65e8f41C4114182B165Bb0247EEf5F7B1D5 | [Basescan](https://goerli.basescan.org/address/0x2716d65e8f41C4114182B165Bb0247EEf5F7B1D5) |
+
+EAS Schema
+
+| schema   | uid                                                                | link                                                                                                                   |
+| -------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| passport | 0x463f7e91cd5a44fe22d4df4b9d6595f0d432c8f6a473eed28b0b8c6bafe4f5a0 | [EasScan](https://base-goerli.easscan.org/schema/view/0x463f7e91cd5a44fe22d4df4b9d6595f0d432c8f6a473eed28b0b8c6bafe4f5a0) |
+| score    | 0x9937aea3a59cd2cc008aeaa9ec9dd1d15739d0532809428f755d4d72b94ed916 | [EasScan](https://base-goerli.easscan.org/schema/view/0x9937aea3a59cd2cc008aeaa9ec9dd1d15739d0532809428f755d4d72b94ed916) |
+
 ##### Linea
 
 The Linea chain ID is [59144](https://chainlist.org/chain/59144).
@@ -171,11 +206,11 @@ Gitcoin
 
 | contract        | address                                    | link                                                                                                 |
 | --------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
-| issuer          | 0x804233b96cbd6d81efeb6517347177ef7bD488ED | [Etherscan](https://optimistic.etherscan.io/address/0x804233b96cbd6d81efeb6517347177ef7bD488ED)      |
-| EAS             | 0x4200000000000000000000000000000000000021 | [Etherscan](https://optimistic.etherscan.io/address/0x4200000000000000000000000000000000000021)      |
-| GitcoinResolver | 0xc94aBf0292Ac04AAC18C251d9C8169a8dd2BBbDC | [Etherscan](https://optimistic.etherscan.io/address/0xc94aBf0292Ac04AAC18C251d9C8169a8dd2BBbDC#code) |
-| GitcoinVerifier | 0xa8eD4d2C3f6f98A55cdDEd97C5aE9B932B0633A4 | [Etherscan](https://optimistic.etherscan.io/address/0xa8eD4d2C3f6f98A55cdDEd97C5aE9B932B0633A4)      |
-| GitcoinAttester | 0x843829986e895facd330486a61Ebee9E1f1adB1a | [Etherscan](https://optimistic.etherscan.io/address/0x843829986e895facd330486a61ebee9e1f1adb1a)      |
+| issuer          | 0x804233b96cbd6d81efeb6517347177ef7bD488ED | [Optimism Explorer](https://explorer.optimism.io/address/0x804233b96cbd6d81efeb6517347177ef7bD488ED)      |
+| EAS             | 0x4200000000000000000000000000000000000021 | [Optimism Explorer](https://explorer.optimism.io/address/0x4200000000000000000000000000000000000021)      |
+| GitcoinResolver | 0xc94aBf0292Ac04AAC18C251d9C8169a8dd2BBbDC | [Optimism Explorer](https://explorer.optimism.io/address/0xc94aBf0292Ac04AAC18C251d9C8169a8dd2BBbDC#code) |
+| GitcoinVerifier | 0xa8eD4d2C3f6f98A55cdDEd97C5aE9B932B0633A4 | [Optimism Explorer](https://explorer.optimism.io/address/0xa8eD4d2C3f6f98A55cdDEd97C5aE9B932B0633A4)      |
+| GitcoinAttester | 0x843829986e895facd330486a61Ebee9E1f1adB1a | [Optimism Explorer](https://explorer.optimism.io/address/0x843829986e895facd330486a61ebee9e1f1adb1a)      |
 
 EAS Schema
 
@@ -194,11 +229,11 @@ Gitcoin
 
 | contract        | address                                    | link                                                                                                 |
 | --------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
-| issuer          | 0x4200000000000000000000000000000000000021 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x4200000000000000000000000000000000000021)      |
-| EAS             | 0x4200000000000000000000000000000000000020 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x4200000000000000000000000000000000000020)      |
-| GitcoinResolver | 0x074761E1Dc6E6cF9cdeE67dd180E01E818716Ce0 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x074761E1Dc6E6cF9cdeE67dd180E01E818716Ce0) |
-| GitcoinVerifier | 0x8D21C3360dcE1a9EBD3Da4373c4dAB7F81dd7233 | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x8D21C3360dcE1a9EBD3Da4373c4dAB7F81dd7233)      |
-| GitcoinAttester | 0x8B1A76795e3CbadD79C5410d2C4D4827D9C1503a | [Etherscan](https://sepolia-optimism.etherscan.io/address/0x8B1A76795e3CbadD79C5410d2C4D4827D9C1503a)      |
+| issuer          | 0x4200000000000000000000000000000000000021 | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0x4200000000000000000000000000000000000021)      |
+| EAS             | 0x4200000000000000000000000000000000000020 | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0x4200000000000000000000000000000000000020)      |
+| GitcoinResolver | 0x074761E1Dc6E6cF9cdeE67dd180E01E818716Ce0 | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0x074761E1Dc6E6cF9cdeE67dd180E01E818716Ce0) |
+| GitcoinVerifier | 0x8D21C3360dcE1a9EBD3Da4373c4dAB7F81dd7233 | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0x8D21C3360dcE1a9EBD3Da4373c4dAB7F81dd7233)      |
+| GitcoinAttester | 0x8B1A76795e3CbadD79C5410d2C4D4827D9C1503a | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0x8B1A76795e3CbadD79C5410d2C4D4827D9C1503a)      |
 
 EAS Schema
 

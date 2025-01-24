@@ -39,6 +39,7 @@ To work in Test Mode, developers simply have to switch their development environ
 
 The available test networks are:
 
+- [Base Goerli](https://goerli.basescan.org/)
 - [Optimism Sepolia](https://sepolia-optimism.etherscan.io/)
 - [Linea Goerli](https://docs.linea.build/)
 
