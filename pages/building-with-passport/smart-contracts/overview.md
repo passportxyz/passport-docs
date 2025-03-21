@@ -1,6 +1,6 @@
 ---
 title: Smart contract overview
-description: A general overview of Passport XYZ's onchain technology stack.
+description: A general overview of Human Passport's onchain technology stack.
 ---
 
 # Onchain Passports
@@ -14,7 +14,7 @@ We also discuss the onchain use cases in the following resources:
 
 ## Why onchain?
 
-In addition to accessing Passport XYZ data offchain using the Passport API, Passport has also released a smart contract stack that enables developers to access Passport score and Stamp data directly from the blockchain. 
+In addition to accessing Human Passport data offchain using the Passport API, Passport has also released a smart contract stack that enables developers to access Passport score and Stamp data directly from the blockchain. 
 
 This onchain Passport data enables partners that want to maintain a decentralized, permissionless backend to engage directly with our smart contracts instead of storing and processing Passport data pulled from our API. 
 
@@ -65,7 +65,7 @@ Attestations will be minted to one or two different registries, depending on whi
 
 ## Why isn't Passport onchain by default?
 
-Onchain Passports are entirely opt-in. Users can still use Passport XYZ without migrating your data onchain. 
+Onchain Passports are entirely opt-in. Users can still use Human Passport without migrating your data onchain. 
 
 While onchain Passports are in their infancy, the offchain Passport is useful as a single source. The offchain infrastructure is also perfectly sufficient for many use cases.
 

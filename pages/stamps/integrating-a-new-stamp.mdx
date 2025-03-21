@@ -8,20 +8,20 @@ import { Callout } from 'nextra/components'
 # Submitting a Stamp pull request
 
 <Callout type="info">
-This guide is reserved for those partners who have been approved by the Passport team to submit a pull request. 
+This guide is reserved for those partners who have been approved by the Human Passport team to submit a pull request. 
 
 If you haven't been approved yet, please visit the [Stamps overview for developers](overview) page, and follow the steps there. 
 </Callout>
 
 Creating a new Stamp involved defining verification logic and adding configuration details to our existing Stamp infrastructure.
 
-We have a standardized format for Stamps and this page will help you to understand all the information you need to provide. The process begins by creating your own copy of our GitHub repository. The instructions on this page will walk you through how to change the codebase to support your Stamp and submit the changes back to the Passport team.&#x20;
+We have a standardized format for Stamps and this page will help you to understand all the information you need to provide. The process begins by creating your own copy of our GitHub repository. The instructions on this page will walk you through how to change the codebase to support your Stamp and submit the changes back to the Human Passport team.&#x20;
 
 ***
 
-### 1. Fork the Passport GitHub repository
+### 1. Fork the Human Passport GitHub repository
 
-Whether you want to create an EVM or a non-EVM Stamp, the process begins by forking the Passport GitHub repository. Clone your fork and navigating to the `platforms` directory.
+Whether you want to create an EVM or a non-EVM Stamp, the process begins by forking the Human Passport GitHub repository. Clone your fork and navigating to the `platforms` directory.
 
 Here is our [GitHub repository](https://github.com/passportxyz/passport).
 
@@ -59,7 +59,7 @@ Each of the files you just created has a distinct purpose, as described in the f
 | ----------------------------- | ----------------------------------------------------------------------------------------- |
 | \_\_tests\_\_/example.test.ts | includes thorough test cases for the Stamp                                                |
 | Providers/example.ts          | includes a `verify()` function that receives a proof and verifies it.                     |
-| App-bindings.ts               | Collects all the Stamp data and formats for communication with the Passport server        |
+| App-bindings.ts               | Collects all the Stamp data and formats for communication with the Human Passport server        |
 | Providers-config.ts           | Collects Stamp metadata. For example, icon image, name and description, provider settings |
 | index.ts                      | Exports the providers, config and app bindings                                            |
 |                               |                                                                                           |
@@ -387,7 +387,7 @@ export type PROVIDER_ID =
 
 In this file you will import the Stamp from `@gitcoin/passport-platforms` again. Then create and add the Stamp to the platforms map by adding it to the bottom of the existing list of platforms.
 
-```
+```typescript
 //ceramicContext.tsx
 ...
 import \{
@@ -522,7 +522,7 @@ You may need additional procedures for your Stamp. You can create a procedures f
 
 You will need to have [Node (v16 LTS)](https://nodejs.org/en/download/), [Yarn](https://classic.yarnpkg.com/en/docs/install/) and [Git](https://git-scm.com/downloads) installed in order to follow these steps.
 
-Now you have updated your local copy of the Passport XYZ repository, you can build and run it. You can do this by navigating to the top level project directory (`passport`) and running:
+Now you have updated your local copy of the Human Passport repository, you can build and run it. You can do this by navigating to the top level project directory (`passport`) and running:
 
 ```bash
 npm install --global lerna
@@ -540,7 +540,7 @@ yarn start
 
 ### 6. Raise a Pull Request
 
-Finally, having seen your app running successfully, you can raise a pull request against the Passport XYZ GitHub repository. This will make the changes you have made to support your app part of the canonical public Stamp repository. However, before this happens your changes will be reviewed by the Passport team who may request changes.
+Finally, having seen your app running successfully, you can raise a pull request against the Human Passport GitHub repository. This will make the changes you have made to support your app part of the canonical public Stamp repository. However, before this happens your changes will be reviewed by the Human Passport team who may request changes.
 
 When you raise a pull request, it is important to include the following checklist. This helps you to verify that all the necessary steps have been taken to create your Stamp, and also helps the reviewers of the pull request check your work and merge it faster.
 
@@ -606,7 +606,7 @@ export const getAuthClient = async (sessionKey: string, code: string, context: T
 
 ### 8. See some examples
 
-It might be helpful to look at some past examples of pull requests that add Stamps to the Passport GitHub repository. Browse the examples below to see exactly how others have gone about it:
+It might be helpful to look at some past examples of pull requests that add Stamps to the Human Passport GitHub repository. Browse the examples below to see exactly how others have gone about it:
 * [Hypercert Stamp](https://github.com/passportxyz/passport/pull/1298/files)
 * [Guildxyz Stamp](https://github.com/passportxyz/passport/pull/1224/files)
 * [Coinbase Stamp](https://github.com/passportxyz/passport/pull/1049/files)

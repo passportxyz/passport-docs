@@ -10,7 +10,7 @@ import { Callout } from 'nextra/components'
 **Please note:**<br />In November 2024, we soft-launched [Passport API v2](../passport-api/overview).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
 </Callout>
 
-The Passport API enables developers to retrieve Passport XYZ scores and Stamp metadata for users who have created a Passport.
+The Passport API enables developers to retrieve Human Passport scores and Stamp metadata for users who have created a Passport.
 
 You can also experiment with the Passport API using our [API playground tool](https://api.passport.xyz/docs) and adding your API keys via the 'Authorize' button.
 
@@ -97,7 +97,7 @@ curl --request GET \
 
 ```json filename="Sample response"
 {
-    "message": "I hereby agree to submit my address in order to score my associated Passport XYZ from Ceramic.\n\nNonce: {Nonce}\n",
+    "message": "I hereby agree to submit my address in order to score my associated Human Passport from Ceramic.\n\nNonce: {Nonce}\n",
     "nonce": "{Nonce}"
 }
 ```
@@ -424,4 +424,3 @@ curl --request GET \
 ```
 
 If you have questions about the API you can ask them in our [developer support channel](https://t.me/+Mcp9RsRV7tVmYjZh).
-

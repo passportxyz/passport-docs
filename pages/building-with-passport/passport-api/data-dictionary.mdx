@@ -5,7 +5,7 @@ description: A table for looking up definitions of data types used in the Passpo
 
 # Data dictionary (v2)
 
-On this page you will find definitions and explanations for the data types used in the Passport XYZ stack. The `Scorer`, `Stamp` , `Credential` and `Stamp-metadata` objects require the most explanation so they are handled separately here.
+On this page you will find definitions and explanations for the data types used in the Human Passport stack. The `Scorer`, `Stamp` , `Credential` and `Stamp-metadata` objects require the most explanation so they are handled separately here.
 
 ### The Scorer object
 
@@ -64,5 +64,3 @@ This object has its own sub-fields as follows:
 | `id`             | `string` | An identifier for a Stamp                                                                                        | Returned in Stamp metadata, can be used to scrape data for a specific Stamp                                                                                                  |
 | `name`           | `string` | Name of the provider issuing a given Stamp                                                                       | Returned as part of the Stamp metadata, can be used to scrape information for specific providers                                                                             |
 | `stamps`         | `array`  | Array containing Stamp objects for each individual Stamp. Each Stamp has `name`, `description` and `hash` fields | Included in Stamp metadata. Used to identify specific instances of individual Stamps                                                                                         |
-
-

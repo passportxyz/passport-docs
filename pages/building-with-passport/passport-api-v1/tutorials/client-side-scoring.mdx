@@ -10,7 +10,7 @@ import { Callout } from 'nextra/components'
 **Please note:**<br />In November 2024, we soft-launched [Passport API v2](../passport-api-v2/overview).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />We are actively working on updating the v1 tutorials to use v2.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
 </Callout>
 
-Passport XYZ offers several scoring algorithms that can be executed on the Passport servers, such that a numeric score for a Passport can be requested from the Passport API. However, this means you are restricted to Passport's algorithm and Passport's opinion about the relative weighting assigned to each individual Stamp. This might not be appropriate for all use cases. 
+Human Passport offers several scoring algorithms that can be executed on the Passport servers, such that a numeric score for a Passport can be requested from the Passport API. However, this means you are restricted to Passport's algorithm and Passport's opinion about the relative weighting assigned to each individual Stamp. This might not be appropriate for all use cases. 
 
 For example, you might have a string preference for certain Stamps that are particularly relevant to your community that you want to weight more strongly in the scoring, or perhaps you have a great idea for a completely new algorithm that you want to implement to gate your app.
 
@@ -51,12 +51,12 @@ This information is stored in a state variable, `stampArray`. This is all the in
 
 ### Scorers
 
-The Passport XYZ scoring algorithm is a simple sum of weights assigned to each Stamp. The weights are provided in a file on the [Passport Github](https://github.com/passportxyz/passport-scorer/blob/main/api/scorer/settings/gitcoin_passport_weights.py).
+The Human Passport scoring algorithm is a simple sum of weights assigned to each Stamp. The weights are provided in a file on the [Passport Github](https://github.com/passportxyz/passport-scorer/blob/main/api/scorer/settings/gitcoin_passport_weights.py).
 Each weight is a decimal number associated with a specific Stamp name. The scoring algorithm simply iterates over the Stamp names for the Stamps owned by an address, retrieves the associated weights, and adds them together. The result is the user's Passport score.
 
 #### The Passport Scorer
 
-You can re-implement the Passport scoring algorithm easily in your app. Start by adding a file containing the Passport XYZ Stamp weights to your `app` directory. Copy the contents of [this file](https://github.com/passportxyz/passport-docs/tree/main/utils/data/weights.ts) and paste it into a new file `app/stamp-weights.ts`.
+You can re-implement the Passport scoring algorithm easily in your app. Start by adding a file containing the Human Passport Stamp weights to your `app` directory. Copy the contents of [this file](https://github.com/passportxyz/passport-docs/tree/main/utils/data/weights.ts) and paste it into a new file `app/stamp-weights.ts`.
 
 Now, import the data into your app by adding the following import statement to `app.ts`:
 
@@ -125,7 +125,7 @@ Finally, conditionally render your `Score` component if `showScore` is toggled O
 {showScore && <Score />}
 ```
 
-Now when you click the `Get Score` button in your UI, the sentence `Your score is X` is displayed under your Stamp collection! You can check this against the score given to you by the Passport XYZ app!
+Now when you click the `Get Score` button in your UI, the sentence `Your score is X` is displayed under your Stamp collection! You can check this against the score given to you by the Human Passport app!
 
 #### Custom weights
 

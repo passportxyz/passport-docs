@@ -10,7 +10,7 @@ import { Callout } from 'nextra/components'
 **Please note:**<br />In November 2024, we soft-launched [Passport API v2](../passport-api/overview).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
 </Callout>
 
-On this page you will find definitions and explanations for the data types used in the Passport XYZ stack. The `Scorer`, `Stamp` , `Credential` and `Stamp-metadata` objects require the most explanation so they are handled separately here. Other types found across the Passport stack are defined in "Other data".
+On this page you will find definitions and explanations for the data types used in the Human Passport stack. The `Scorer`, `Stamp` , `Credential` and `Stamp-metadata` objects require the most explanation so they are handled separately here. Other types found across the Passport stack are defined in "Other data".
 
 ### The Scorer object
 
@@ -86,4 +86,3 @@ A `credential` is a struct returned in the Stamp object. It has its own sub-fiel
 | `nonce`     | `int`    | A transaction counter for an address that is used in signing to prevent certain types of attack                                | This is an optional field that can be provided to `submit-passport` for additional verification. Today access to Scorers is controlled using API keys only by default. |
 | `scorer_id` | `string` | Scorers are instantiated with unique IDs known as `scorer_id`s.                                                                | Create a Scorer in the Scorer app to receive a `scorer_id`. Then this value links your API requests to a specific Scorer instance matching your API key                |
 | `signature` | `string` | Some workflows require a Scorer owner to demonstrate their ownership by signing a message with the Scorer owner's private key. | This is an optional field that can be provided to `submit-passport` for additional verification. Today access to Scorers is controlled using API keys only by default. |
-

@@ -1,27 +1,22 @@
 import { DocsThemeConfig } from "nextra-theme-docs";
-import { useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import { useConfig } from "nextra-theme-docs";
 import TagManager from "react-gtm-module";
 
-const tagManagerArgs = {
-  gtmId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
-};
+declare global {
+  var frontMatter: {
+    title?: string;
+  };
+}
 
-export const initGA = () => {
-  TagManager.initialize(tagManagerArgs);
-};
-
-export const logPageView = () => {
-  TagManager.dataLayer({
-    dataLayer: {
-      event: "pageview",
-      pagePath: window.location.pathname,
-      pageTitle: document.title,
-    },
-  });
-};
-
+if (process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID) {
+  if (typeof window !== "undefined") {
+    TagManager.initialize({
+      gtmId: process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID,
+    });
+  }
+}
 
 const config: DocsThemeConfig = {
   logo: (
@@ -129,9 +124,27 @@ const config: DocsThemeConfig = {
   footer: { component: null },
   useNextSeoProps() {
     return {
-      titleTemplate: "%s – Passport XYZ",
+      titleTemplate: "%s – Human Passport",
     };
   },
+  head: (
+    <>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta property="og:title" content={frontMatter.title || "Human Passport"} />
+      <meta
+        property="og:description"
+        content="Human Passport — Sybil Defense. Made Simple"
+      />
+      <link rel="icon" href="/favicon.ico" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@humnpassport" />
+      <meta name="twitter:title" content={frontMatter.title || "Human Passport"} />
+      <meta
+        name="twitter:description"
+        content="Human Passport — Sybil Defense. Made Simple"
+      />
+    </>
+  ),
 };
 
 const CustomHead: React.FC = () => {
@@ -143,19 +156,25 @@ const CustomHead: React.FC = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    initGA(); // Initialize Google Analytics
-    logPageView();
+  React.useEffect(() => {
+    if (process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID) {
+      TagManager.initialize({
+        gtmId: process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID,
+      });
+    }
 
-    // Function to handle route changes
     const handleRouteChange = (url) => {
-      logPageView();
+      TagManager.dataLayer({
+        dataLayer: {
+          event: "pageview",
+          pagePath: url,
+          pageTitle: document.title,
+        },
+      });
     };
 
-    // Add the event listeners
     router.events.on("routeChangeStart", handleRouteChange);
 
-    // Cleanup the event listeners on component unmount
     return () => {
       router.events.off("routeChangeStart", handleRouteChange);
     };
@@ -166,11 +185,11 @@ const CustomHead: React.FC = () => {
       <meta name="twitter:card" content="summary" />
       <meta
         name="twitter:title"
-        content={frontMatter.title || "Passport XYZ"}
+        content={frontMatter.title || "Human Passport"}
       />
       <meta
         name="twitter:description"
-        content="Passport XYZ — Sybil Defense. Made Simple"
+        content="Human Passport — Sybil Defense. Made Simple"
       />
       <meta name="twitter:site" content="@gitcoinpassport" />
       <meta
@@ -181,11 +200,11 @@ const CustomHead: React.FC = () => {
       <meta property="og:url" content={url} />
       <meta
         property="og:title"
-        content={frontMatter.title || "Passport XYZ"}
+        content={frontMatter.title || "Human Passport"}
       />
       <meta
         property="og:description"
-        content="Passport XYZ — Sybil Defense. Made Simple"
+        content="Human Passport — Sybil Defense. Made Simple"
       />
       <meta
         name="og:image"

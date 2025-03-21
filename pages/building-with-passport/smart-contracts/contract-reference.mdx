@@ -1,36 +1,36 @@
 ---
 title: Smart contract reference
-description: Reference documentation for Passport XYZ's smart contracts.
+description: Reference documentation for Human Passport's smart contracts.
 ---
 
 import { Callout } from 'nextra/components'
 
 # Smart Contract Reference
 
-The Passport smart contract stack allows developers to pull Stamp data directly from the blockchain rather than having to make requests to a centralized server. The smart contract stack is built on top of the Ethereum Attestation Service (EAS).
+The Human Passport smart contract stack allows developers to pull Stamp data directly from the blockchain rather than having to make requests to a centralized server. The smart contract stack is built on top of the Ethereum Attestation Service (EAS).
 
-This page will outline the Passport XYZ smart contract stack and provide all the deployment details you need to integrate onchain Stamp data in your app.
+This page will outline the Human Passport smart contract stack and provide all the deployment details you need to integrate onchain Stamp data in your app.
 
 This page is broken into two sections:
 
-* [How Passport adds metadata to the blockchain](#how-passport-adds-data-to-the-blockchain)
-* [How to query for onchain Passport data](#how-to-query-for-onchain-passport-data)
+* [How Human Passport adds metadata to the blockchain](#how-human-passport-adds-data-to-the-blockchain)
+* [How to query for onchain Human Passport data](#how-to-query-for-onchain-human-passport-data)
 
 
-You can always chat in our [Telegram developer support channel](https://t.me/+Mcp9RsRV7tVmYjZh) if you have questions about the Passport smart contracts.
+You can always chat in our [Telegram developer support channel](https://t.me/+Mcp9RsRV7tVmYjZh) if you have questions about the Human Passport smart contracts.
 
 
-## How Passport adds data to the blockchain
+## How Human Passport adds data to the blockchain
 
 We will not cover this in depth, as it is already documented in our [GitHub docs](https://github.com/passportxyz/eas-proxy/blob/main/docs/00-onchain-data.md).
 
-Passport uses a combination of private Passport smart contracts and EAS contracts to create Passport attestations and mint them to the blockchain. This process is triggered when a user opts-in to minting their Passport’s score and Stamps onchain via the Passport app, and ends with two attestations being minted on EAS that can be accessed by third-party developers. 
+Human Passport uses a combination of private Passport smart contracts and EAS contracts to create Passport attestations and mint them to the blockchain. This process is triggered when a user opts-in to minting their Passport’s score and Stamps onchain via the Passport app, and ends with two attestations being minted on EAS that can be accessed by third-party developers. 
 
-During this process, the user is charged a $2 mint fee to write the attestations onchain. 
+During this process, the user is charged a $3 mint fee to write the attestations onchain. 
 
-## How to query for onchain Passport data
+## How to query for onchain Human Passport data
 
-Passport XYZ, EAS, and Verax have created several smart contracts that can be used to retrieve users’ Passport attestations. There are a couple of different flows you can follow, but we strongly recommend using the GitcoinDecoder contract. 
+Human Passport, EAS, and Verax have created several smart contracts that can be used to retrieve users’ Passport attestations. There are a couple of different flows you can follow, but we strongly recommend using the GitcoinDecoder contract. 
 
 Available flows:
 * **[Recommended]** [GitcoinPassportDecoder flow](#gitcoinpassportdecoder)

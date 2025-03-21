@@ -25,15 +25,15 @@ However, if you are using your own custom scoring mechanism based on Stamp data,
 
 
 
-### How does Passport XYZ handle duplicate Stamps?
+### How does Human Passport handle duplicate Stamps?
 
-Passport handles the issue of Stamp duplication by automatically identifying and eliminating duplicate Stamps. This prevents users from using the same credentials to verify their Stamps and identity across multiple Passports. This ensures that each user in an application has a unique and consistent digital identity.
+Human Passport handles the issue of Stamp duplication by automatically identifying and eliminating duplicate Stamps. This prevents users from using the same credentials to verify their Stamps and identity across multiple Passports. This ensures that each user in an application has a unique and consistent digital identity.
 
-By default, the Passport API uses a **Last In, First Out (LIFO)** Stamp deduplication method.
+By default, the Human Passport API uses a **Last In, First Out (LIFO)** Stamp deduplication method.
 
 This means that, in a given scoring instance, if a Passport holder submits a Stamp that has already been submitted by another user, the _duplicate_ Stamp is ignored and not counted towards the score.
 
-For example, let’s say you build an application that uses the Passport API to verify the unique humanity of your users. Two Passports, “Passport A” and “Passport B,” present the same Stamp based on the same Twitter account. In this scenario, the Last-in-First-out deduplication method would only count the Stamp instance that was submitted earliest, ignoring the one that was submitted later.
+For example, let’s say you build an application that uses the Human Passport API to verify the unique humanity of your users. Two Passports, “Passport A” and “Passport B,” present the same Stamp based on the same Twitter account. In this scenario, the Last-in-First-out deduplication method would only count the Stamp instance that was submitted earliest, ignoring the one that was submitted later.
 
 For example, if Passport A submitted the Twitter Stamp first, followed by Passport B, your app would only count the instance of the Twitter Stamp submitted by Passport A. The same rule applies to any subsequent instances of the Stamp.
 
@@ -50,4 +50,4 @@ Also note that because Stamp deduplication is achieved using a 'last in, first o
 
 ### Summary
 
-The LIFO deduplication strategy has several benefits for Passport holders and developers. It ensures that each Passport holder (in other words, Ethereum address) is assessed based on their unique set of Stamps, and that no one receives an unfair advantage due to having the same Stamp as another Passport holder within a given scoring instance. This means that for applications using the Passport API, there will be no double-counting of Stamps within the app, ensuring a fair and accurate assessment of each user’s unique identity.
+The LIFO deduplication strategy has several benefits for Passport holders and developers. It ensures that each Passport holder (in other words, Ethereum address) is assessed based on their unique set of Stamps, and that no one receives an unfair advantage due to having the same Stamp as another Passport holder within a given scoring instance. This means that for applications using the Human Passport API, there will be no double-counting of Stamps within the app, ensuring a fair and accurate assessment of each user’s unique identity.

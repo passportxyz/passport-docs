@@ -1,3 +1,8 @@
+---
+title: Onchain expirations
+description: Learn more about how to handle onchain Passport expirations
+---
+
 # Onchain expirations
 
 Passport Stamps do not stay valid forever. There is an expiration date after which a Stamp must be reverified in order to keep it valid. This is true for onchain and offchain Stamps.

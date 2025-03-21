@@ -1,7 +1,7 @@
 ---
 title: Educating end users
 description: >-
-  Learn what types of attacks Passport can protect against. This page is aimed at platform integrators.
+  Learn what types of attacks Human Passport can protect against. This page is aimed at platform integrators.
 ---
 
 import { Cards, Card } from 'nextra/components'
@@ -9,9 +9,9 @@ import { Callout } from 'nextra/components'
 
 # Platform Integrator concepts
 
-This page is for platforms who integrate with Passport XYZ and make its sybil-resisting functionality available to their ecosystem partners.
+This page is for platforms who integrate with Human Passport and make its sybil-resisting functionality available to their ecosystem partners.
 
-On this page, you will learn what types of attacks Passport XYZ can protect against, see examples of existing platform integrations, understand integration best-practices and identify the key information your users need to know.
+On this page, you will learn what types of attacks Human Passport can protect against, see examples of existing platform integrations, understand integration best-practices and identify the key information your users need to know.
 
 ### Audience definitions
 
@@ -25,9 +25,9 @@ We'll use [Snapshot](https://snapshot.org/#/) as an example. Snapshot is an offc
 
 In this situation, Snapshot would be a platform integrator, Optimism Collective would be an ecosystem partner, and the users submitting and voting on proposals are end-users.
 
-Here are some examples and their Passport use cases:
+Here are some examples and their Human Passport use cases:
 
-| Platform Integrator | Ecosystem Partner                                            | End user                                                      | Why the Platform integrating Passport XYZ is a win for everyone                       |
+| Platform Integrator | Ecosystem Partner                                            | End user                                                      | Why the Platform integrating Human Passport is a win for everyone                       |
 | ------------------- | ------------------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | Snapshot            | DAOs and other groups that need a proposal and voting system | DAO contributors and other voters                             | Voting outcomes that bias towards real democracy and less so algorithmic manipulation |
 | Guild               | Guild admins                                                 | Guild members                                                 | Rewards going to unique humans instead of bots and Sybils                             |
@@ -44,31 +44,31 @@ Sybil attacks describe the abuse of a digital network by creating many illegitim
 
 Sybil defense is a catch-all term for any actions that minimize the effect of Sybils. Typically, Sybil defense involves filtering out users that can't provide sufficient evidence that they are real human individuals. The more effective the Sybil defense, the more confident you can be that your users are real, and the more effectively you can distribute rewards, votes and other forms of capital and agency to your community.
 
-Passport XYZ is a Sybil defense tool. It provides everything you need to check the personhood of your users without invading their privacy.
+Human Passport is a Sybil defense tool. It provides everything you need to check the personhood of your users without invading their privacy.
 
 Read more about Sybil defense on the [blog](https://www.gitcoin.co/blog/tag/gitcoin-passport).
 
 
 
-### Why Passport XYZ?
+### Why Human Passport?
 
-Passport XYZ aggregates evidence of personhood from across web2 and web3, makes it available via a simple API, and does so while preserving user's privacy. Application developers and platform owners benefit from easy integration and flexibility to choose what evidence is most important to them, and how high their threshold for evidence should be. Users benefit from a simple UI that guides them along a simple path to collecting Passport Stamps and presenting them to apps, requiring only an Ethereum account to get started.
+Human Passport aggregates evidence of personhood from across web2 and web3, makes it available via a simple API, and does so while preserving user's privacy. Application developers and platform owners benefit from easy integration and flexibility to choose what evidence is most important to them, and how high their threshold for evidence should be. Users benefit from a simple UI that guides them along a simple path to collecting Passport Stamps and presenting them to apps, requiring only an Ethereum account to get started.
 
-Integrating Passport XYZ into an application is a powerful and flexible way to add Sybil defense to your application that is straightforward for developers and users alike. Importantly, Passport XYZ is flexible so you can configure your own Sybil defenses to your own specification, ensuring you get the best protection for your particular use case.
+Integrating Human Passport into an application is a powerful and flexible way to add Sybil defense to your application that is straightforward for developers and users alike. Importantly, Human Passport is flexible so you can configure your own Sybil defenses to your own specification, ensuring you get the best protection for your particular use case.
 
 Read more on [why you should use Passport](platform-integrator-concepts.md#why-passport-xyz).
 
 
 
-### How to integrate Passport XYZ into your platform
+### How to integrate Human Passport into your platform
 
-The most common way platforms use Passport XYZ is to use Passport scores or specific combinations of Stamps to control access to some content or function. This can be handled in just a few simple functions in your app.
+The most common way platforms use Human Passport is to use Passport scores or specific combinations of Stamps to control access to some content or function. This can be handled in just a few simple functions in your app.
 
 We have detailed guides demonstrating various Passport integrations. After you have integrated Passport into your app, your users can connect their Ethereum wallet, and the app can make an API call to the Passport server to retrieve the user's Stamps and Passport score.
 
 The score is the sum of weights assigned to the user's Stamps. It is possible to create custom algorithms for scoring Passports from raw Stamp data, but using Passport's server is considered best practice for several reasons:
 
-1. You benefit from [Stamp weights](https://github.com/passportxyz/passport-scorer/blob/main/api/scorer/settings/gitcoin_passport_weights.py) that have been assigned by Passport XYZ data scientists.
+1. You benefit from [Stamp weights](https://github.com/passportxyz/passport-scorer/blob/main/api/scorer/settings/gitcoin_passport_weights.py) that have been assigned by Human Passport data scientists.
 2. You do not have to handle complications such as [Stamp deduplication](deduplicating-stamps) - the server does this for you.
 3. You can follow our simple [tutorials](../tutorials/) to quickly and easily start defending your app from Sybils!
 
@@ -86,11 +86,11 @@ Start building using our [Integration guides](../tutorials).
 
 It would be helpful to understand the [audience definitions](#audience-definitions) in the introduction of this page when reading this section.
 
-If integrated properly, ecosystem partners utilizing a platform's services will be able to utilize Passport functionality to ensure that their content or programs are minimally affected by Sybils.
+If integrated properly, ecosystem partners utilizing a platform's services will be able to utilize Human Passport functionality to ensure that their content or programs are minimally affected by Sybils.
 
-For example, an ecosystem partner runs a forum and voting platform in addition to their main application. Integrating Passport across all these platforms gives them confidence that your whole organization is protected to the same standard, with the same configuration.
+For example, an ecosystem partner runs a forum and voting platform in addition to their main application. Integrating Human Passport across all these platforms gives them confidence that your whole organization is protected to the same standard, with the same configuration.
 
-A Passport integration is straightforward, flexible and configurable to ecosystem partners' needs depending on how a platform integrator builds the integration. You can easily set global configurations that are standard across all platforms and partners, or you could tailor your Sybil defences to each platform, so that you can have stricter controls for more sensitive services.
+A Human Passport integration is straightforward, flexible and configurable to ecosystem partners' needs depending on how a platform integrator builds the integration. You can easily set global configurations that are standard across all platforms and partners, or you could tailor your Sybil defences to each platform, so that you can have stricter controls for more sensitive services.
 
 You can learn more about these benefits by reading our [blog post about our partnership with Guild.xyz](https://www.gitcoin.co/blog/guild-xyz-and-gitcoin-passport-partner).
 
@@ -98,7 +98,7 @@ You can learn more about these benefits by reading our [blog post about our part
 
 ### What does this look like for end users?
 
-End users benefit from a very straightforward verification process and proof of personhood they can use across web3. Passport XYZ is a very widely used Sybil defense tool that your users can set up once and then use to identify themselves to all kinds of apps and services.
+End users benefit from a very straightforward verification process and proof of personhood they can use across web3. Human Passport is a very widely used Sybil defense tool that your users can set up once and then use to identify themselves to all kinds of apps and services.
 
 Your end users can follow this simple guide to set up their Passport:
 
@@ -122,7 +122,7 @@ The weights assigned to individual Stamps in the Passport scoring app are also l
 
 ### Use cases
 
-Passport XYZ is already protecting many real world applications! There are several use case articles on the [Gitcoin blog](https://www.gitcoin.co/blog/tag/case-studies) where you can read about how various apps have integrated Passport.
+Human Passport is already protecting many real world applications! There are several use case articles on the [Gitcoin blog](https://www.gitcoin.co/blog/tag/case-studies) where you can read about how various apps have integrated Passport.
 
 Some examples include:
 
@@ -136,7 +136,7 @@ Some examples include:
 ### Where to go from here?
 
 * You can explore this site!
-  * Learn more about the [major concepts](../major-concepts.md) underpinning Passport XYZ
+  * Learn more about the [major concepts](../major-concepts.md) underpinning Passport
   * Read more about [how Passport works](../how-it-works.md) and [why you should use it](../../overview/)
   * Start building by following our [integration guides](../integration-guides/)
 * Get you own Passport at [https://app.passport.xyz](https://app.passport.xyz)

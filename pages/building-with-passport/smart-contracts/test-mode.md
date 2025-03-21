@@ -5,9 +5,9 @@ description: How to test the onchain infrastructure
 
 # Testing Onchain Passport
 
-As developers, we often want to test our apps and integrations on testnets, where there is nothing of real world value at stake, before we go live on a live public mainnet. You can always deploy the Passport XYZ smart contracts to your own local ephemeral blockchain, but it is also recommended to test your integration on a public testnet too, as this more realistically simulates a mainnet environment.
+As developers, we often want to test our apps and integrations on testnets, where there is nothing of real world value at stake, before we go live on a live public mainnet. You can always deploy the Passport smart contracts to your own local ephemeral blockchain, but it is also recommended to test your integration on a public testnet too, as this more realistically simulates a mainnet environment.
 
-For this reason, the Passport team deployed the Passport smart contracts on public testnets, including OP Sepolia and Linea Goerli.
+For this reason, the Passport team deployed the Human Passport smart contracts on public testnets, including OP Sepolia and Linea Goerli.
 
 ## Test mode in the Passport app
 
@@ -15,7 +15,7 @@ The Passport app can be run in test mode by visitng URL and following the steps 
 
 https://app.passport.xyz#/testing/dashboard
 
-This enables you to write Passport data and scores to the Passport XYZ smart contracts on several testnets, meaning you can experiment and get comfortable with the flows before trying it out on Mainnet. 
+This enables you to write Passport data and scores to the Human Passport smart contracts on several testnets, meaning you can experiment and get comfortable with the flows before trying it out on Mainnet. 
 
 When you sign in to the Passport app, you first have to enable Test Mode. There is a button for this at the top of the page. Enabling Test Mode requires an additional signature from your Ethereum account.
  

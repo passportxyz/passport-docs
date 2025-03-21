@@ -2,12 +2,12 @@
 
 ComposeDB is a decentralized graph database built on top of Ceramic.
 Whereas other databases typically store tables of information, a graph database stores relationships between nodes.
-Instead of just storing keys and values, a graph database allows connectioons between values to exist too. 
+Instead of just storing keys and values, a graph database allows connections between values to exist too. 
 This is very powerful for understanding, for example, user journeys, paths, histories and networks.
 
-In Compose DB, the nodes of the graph are acounts or documents with a globally unique ID. The relationships between these nodes are known as "edges". You can query nodes and edges.
+In Compose DB, the nodes of the graph are accounts or documents with a globally unique ID. The relationships between these nodes are known as "edges". You can query nodes and edges.
 
-Being a product built on top of Ceramic, ComposeDB provides many benefits for web3 native applications including strong Ethereum integrations. There is also a rich, Graph-QL style API that helps developers to construct complex queries. These are very useful features for Passport XYZ.
+Being a product built on top of Ceramic, ComposeDB provides many benefits for web3 native applications including strong Ethereum integrations. There is also a rich, Graph-QL style API that helps developers to construct complex queries. These are very useful features for Human Passport.
 
 Perhaps more importantly, ComposeDB allows us to create and publish data schemas that work across different tech-stacks, meaning we can deploy apps that work identically across multiple layer-1 blockchains and their layer-2's. Data on ComposeDB is updateable allowing, for example, Stamp expiry and reverification.
 
@@ -15,7 +15,7 @@ Read more in the [ComposeDB documentation](https://developers.ceramic.network/do
 
 ## Passport on ComposeDB
 
-The data used by Passport XYZ fits very well into the graph structure. There are two basic elements that Passport considers: user addresses and Stamps. These are nodes. The links between Stamps and users and edges. 
+The data used by Human Passport fits very well into the graph structure. There are two basic elements that Passport considers: user addresses and Stamps. These are nodes. The links between Stamps and users and edges. 
 
 Let's say you want to know who owns a particular Stamp. You would identify the **node** for that Stamp and then query all the **edges** that connect the Stamp to user addresses.
 
@@ -54,7 +54,7 @@ and here is what it looks like to create this object in a ComposeDB database:
 type GitcoinPassportStamp implements VerifiableCredential
   @createModel(
     accountRelation: LIST
-    description: "A Passport XYZ stamp with a provider and hash"
+    description: "A Human Passport Stamp with a provider and hash"
   )
   @createIndex(fields: [{ path: "issuer" }])
   @createIndex(fields: [{ path: "issuanceDate" }])
@@ -83,8 +83,8 @@ The fields are as follows:
   - `id`: A `did` unique identifier for this credential.
   - `hash`: A hash of this Stamp object
   - `provider`: A hash corresponding to the Stamp provider
-  - `context`: A string of lenghth 1 - to 1024 bytes for storing additional information about the Stamp.
-- `proof`: A hash demonstrating that the Stampo was really attested by a provider.
+  - `context`: A string of length 1 - to 1024 bytes for storing additional information about the Stamp.
+- `proof`: A hash demonstrating that the Stamp was really attested by a provider.
 
 ### Syncing Passport Data with Your Ceramic Node
 
