@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   "why-passport-xyz": {
     title: "Why Human Passport?",
     type: "page"

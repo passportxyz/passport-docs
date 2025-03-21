@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   introduction: {
     title: "Introduction",
     type: "page"

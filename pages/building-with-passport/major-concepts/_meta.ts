@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   "scoring-thresholds": {
     title: "Scoring thresholds",
     type: "page"

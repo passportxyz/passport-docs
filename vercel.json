@@ -17,7 +17,13 @@
       "destination": "/building-with-passport/passport-api-v1/tutorials/integrating-stamps-and-scorers"
     }
   ],
-  "buildCommand": "pnpm run build",
+  "buildCommand": "NEXT_TELEMETRY_DISABLED=1 NEXT_SKIP_TRACE=1 NODE_OPTIONS='--max-old-space-size=4096 --no-warnings' pnpm run build",
   "installCommand": "pnpm install",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "buildEnvironment": {
+    "NODE_VERSION": "18.x",
+    "NEXT_TELEMETRY_DISABLED": "1",
+    "NEXT_SKIP_TRACE": "1",
+    "NEXT_SKIP_TYPE_CHECK": "1"
+  }
 }

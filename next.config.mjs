@@ -7,33 +7,40 @@ const withNextra = nextra({
     defaultShowCopyCode: true
 })
 
-export default withNextra({
+/** @type {import('next').NextConfig} */
+const nextConfig = {
     output: 'export',
     images: {
         unoptimized: true
     },
-    onDemandEntries: {
-        maxInactiveAge: 60 * 60 * 1000,
-        pagesBufferLength: 2
+    // Disable all tracing and optimization
+    productionBrowserSourceMaps: false,
+    optimizeFonts: false,
+    swcMinify: false,
+    compiler: {
+        removeConsole: false
     },
-    webpack: (config, { dev, isServer }) => {
-        // Reduce the number of files webpack needs to track
-        if (!dev && !isServer) {
-            config.watchOptions = {
-                ignored: ['**/.git/**', '**/node_modules/**', '**/.next/**']
-            }
-            config.optimization.moduleIds = 'deterministic'
-        }
-        return config
+    experimental: {
+        // Disable all experimental features
+        turbotrace: false,
+        optimizeCss: false,
+        optimizePackageImports: false,
+        serverActions: false,
+        webpackBuildWorker: false,
+        swcTraceProfiling: false,
+        forceSwcTransforms: false,
+        esmExternals: false
     },
-    eslint: {
-        // Don't run eslint during builds
-        ignoreDuringBuilds: true
-    },
-    typescript: {
-        // Don't run type checks during builds
-        ignoreBuildErrors: true
-    },
-    staticPageGenerationTimeout: 300,
-    compress: false // Disable compression to reduce build complexity
-})
+    // Increase timeouts
+    staticPageGenerationTimeout: 1000,
+    distDir: '.next',
+    cleanDistDir: true,
+    generateEtags: false,
+    keepAlive: false,
+    reactStrictMode: false,
+    compress: false,
+    poweredByHeader: false,
+    generateBuildId: () => 'build'
+}
+
+export default withNextra(nextConfig)

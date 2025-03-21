@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   "gating-access-with-passport-scores": {
     title: "Protecting access with Passport scores",
     type: "page"

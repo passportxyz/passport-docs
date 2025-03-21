@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   "getting-involved": {
     title: "How to Contribute",
     type: "page"

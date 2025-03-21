@@ -4,7 +4,7 @@
   "description": "Documentation for Human Passport",
   "scripts": {
     "dev": "next dev",
-    "build": "NODE_ENV=production next build",
+    "build": "NODE_ENV=production node scripts/build.js",
     "start": "next start"
   },
   "repository": {
