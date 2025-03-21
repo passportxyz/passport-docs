@@ -11,5 +11,11 @@ export default withNextra({
     output: 'export',
     images: {
         unoptimized: true
+    },
+    experimental: {
+        // Disable build tracing to avoid micromatch issues
+        webpackBuildWorker: false,
+        isrMemoryCacheSize: 0,
+        turbotrace: false
     }
 })

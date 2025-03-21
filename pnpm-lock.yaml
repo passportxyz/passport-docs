@@ -6,46 +6,46 @@ settings:
 
 dependencies:
   '@chakra-ui/react':
-    specifier: ^2.8.2
+    specifier: 2.8.2
     version: 2.8.2(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.0)(framer-motion@11.0.3)(react-dom@18.2.0)(react@18.2.0)
   '@emotion/react':
-    specifier: ^11.11.3
+    specifier: 11.11.3
     version: 11.11.3(@types/react@18.2.0)(react@18.2.0)
   '@emotion/styled':
-    specifier: ^11.11.0
+    specifier: 11.11.0
     version: 11.11.0(@emotion/react@11.11.3)(@types/react@18.2.0)(react@18.2.0)
   '@mdx-js/react':
-    specifier: ^3.0.0
+    specifier: 3.0.0
     version: 3.0.0(@types/react@18.2.0)(react@18.2.0)
   debug:
-    specifier: ^4.3.4
+    specifier: 4.3.4
     version: 4.3.4
   framer-motion:
-    specifier: ^11.0.3
+    specifier: 11.0.3
     version: 11.0.3(react-dom@18.2.0)(react@18.2.0)
   next:
-    specifier: ^14.0.0
+    specifier: 14.0.0
     version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
   next-sitemap:
-    specifier: ^4.2.3
+    specifier: 4.2.3
     version: 4.2.3(next@14.0.0)
   nextra:
-    specifier: ^3.2.3
+    specifier: 3.2.3
     version: 3.2.3(@types/react@18.2.0)(acorn@8.14.1)(next@14.0.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.2)
   nextra-theme-docs:
-    specifier: ^3.2.3
+    specifier: 3.2.3
     version: 3.2.3(next@14.0.0)(nextra@3.2.3)(react-dom@18.2.0)(react@18.2.0)
   react:
-    specifier: ^18.2.0
+    specifier: 18.2.0
     version: 18.2.0
   react-dom:
-    specifier: ^18.2.0
+    specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
   react-gtm-module:
-    specifier: ^2.0.11
+    specifier: 2.0.11
     version: 2.0.11
   uuid:
-    specifier: ^9.0.1
+    specifier: 9.0.1
     version: 9.0.1
 
 devDependencies:
@@ -3002,7 +3002,7 @@ packages:
     peerDependencies:
       typescript: '*'
     dependencies:
-      debug: 4.4.0
+      debug: 4.3.4
       typescript: 5.0.2
     transitivePeerDependencies:
       - supports-color
@@ -5323,7 +5323,7 @@ packages:
     resolution: {integrity: sha512-zpe98Q6kvavpCr1NPVSCMebCKfD7CA2NqZ+rykeNhONIJBpc1tFKt9hucLGwha3jNTNI8lHpctWJWoimVF4PfA==}
     dependencies:
       '@types/debug': 4.1.12
-      debug: 4.4.0
+      debug: 4.3.4
       decode-named-character-reference: 1.1.0
       devlop: 1.1.0
       micromark-core-commonmark: 2.0.3
