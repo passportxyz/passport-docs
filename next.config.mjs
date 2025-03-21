@@ -1,11 +1,12 @@
-const withNextra = require('nextra')({
+import nextra from 'nextra'
+
+const withNextra = nextra({
     theme: 'nextra-theme-docs',
     themeConfig: './theme.config.tsx',
     staticImage: true,
-}
-)
+})
 
-module.exports = withNextra({
+export default withNextra({
     redirects: () => [
         {
             source: '/get-started/creating-your-passport',
