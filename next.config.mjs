@@ -4,9 +4,15 @@ const withNextra = nextra({
     theme: 'nextra-theme-docs',
     themeConfig: './theme.config.tsx',
     staticImage: true,
+    defaultShowCopyCode: true
 })
 
 export default withNextra({
+    reactStrictMode: true,
+    swcMinify: true,
+    images: {
+        unoptimized: true
+    },
     redirects: () => [
         {
             source: '/get-started/creating-your-passport',

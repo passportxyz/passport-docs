@@ -64,7 +64,6 @@ npx create-next-app passport-onchain-app
 ✔ Would you like to use ESLint? …  Yes
 ✔ Would you like to use Tailwind CSS? … No 
 ✔ Would you like to use `src/` directory? …  Yes
-✔ Would you like to use App Router? (recommended)  Yes
 ✔ Would you like to customize the default import alias? … No 
 ```
 
@@ -323,11 +322,11 @@ You can navigate to `localhost:3000` to try it out!
 
 The app looks as follows:
 
-![](public/onchain-stamp-explorer-1.png)
+![](/onchain-stamp-explorer-1.png)
 
-![](public/onchain-stamp-explorer-2.png)
+![](/onchain-stamp-explorer-2.png)
 
-![](public/onchain-stamp-explorer-3.png)
+![](/onchain-stamp-explorer-3.png)
 
 
 ### Summary

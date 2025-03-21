@@ -1,22 +1,22 @@
 ---
-title: Gating acces with Human Passport
-description: Tutorial covering how to gate access to your app using Human Passport.
+title: Protecting access with Passport scores
+description: Learn how to use Passport scores to protect access to your app.
 ---
 
-import { Cards, Card } from 'nextra/components'
+import { Cards, Card } from '../../../../components/Card'
 import { Callout } from 'nextra/components'
 
-# Gating access with Passport scores
+# Protecting access with Passport scores
 
 <Callout type="warning">
 **Please note:**<br />In November 2024, we soft-launched [Passport API v2](../passport-api-v2/overview).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />We are actively working on updating the v1 tutorials to use v2.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
 </Callout>
 
-In this guide, you'll learn how to gate an application using Human Passport. Specifically, you will:
+In this guide, you'll learn how to protect access to an application using Human Passport. Specifically, you will:
 
 * Fetch a score using the Passport API
 * Examine best practices for retrieving Passport scores
-* Implement gating so that some content is only available to users with scores above a threshold
+* Implement protection so that some content is only available to users with scores above a threshold
 * Redirect users to instructions for improving their Passport scores
 
 
@@ -55,7 +55,7 @@ The app will work as follows:
 * If their score meets a threshold, the fourth tab will contain instructions and links that will enable them to join the DAO.
 * If the score does not meet the threshold, we'll withold the instructions and instead the tab will contain instructions for increasing their Passport score.
 
-This simple example demonstrates the principles you would use to gate a real app using Human Passport.
+This simple example demonstrates the principles you would use to protect a real app using Human Passport.
 
 The app will be built using [Next.js](https://nextjs.org/) and will make use of several of the Scorer API endpoints.
 
@@ -299,7 +299,7 @@ The `provider` is injected at `window.ethereum`. API requests can be sent to thi
 const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
 ```
 
-This is all that is required to connect a wallet to the app, because a lot of complexity is abstracted away behind the `provider` API call. To turn this into a `connect()` function suitable for your app, you can wrap the `provider` API call in `try/catch` so you can handle any errors. You also want to pull the returned data into your app's state. The API method returns the address in an `array`. You can pull the address out of the array as a `string` by specifying `accounts[0]` and then pass it to the `setAddress` function you defined earlier. Add the following function to `page.tsx` immediately below your state variable (`const [address, setAddress]`...) definition.
+This is all that is required to connect a wallet to the app, because a lot of complexity is abstracted away behind the `provider` API call. To turn this into a `connect()` function suitable for your app, you can wrap the `provider` API call in `try/catch` so you can handle any errors. You also want to pull the returned data into your app's state. The API method returns the address in an `array`. You can pull the address out of the array as a `string` by specifying `accounts[0]` and then pass it to the `setAddress` function you defined earlier. Add the following function to `page.tsx` immediately below your state variable (`const [address, setAddress]`) definition.
 
 ```tsx
   async function connect() {
@@ -493,7 +493,7 @@ const JoinTheDao = ({ isAboveThreshold }) => {
         )
     }
     else {
-        return (
+      return (
             <ContentBelowThreshold />
 
         )
@@ -527,7 +527,7 @@ const ContentAboveThreshold = () => {
 }
 
 const ContentBelowThreshold = () => {
-    return (
+  return (
         <>
             <br />
             <p>😭😭😭</p>
@@ -695,12 +695,12 @@ Time to test out your app - start the app using `npm run dev` and click to conne
 
 Here's what your user sees if their Passport score is greater than 20:
 
-["The app giving access to secret content to users that pass your eligibility gate"](public/app-success.png)
+![The app giving access to secret content to users that pass your eligibility gate](/app-success.png)
 
 
 Here is what your user sees if their Passport Score is lower than 20:
 
-![](public/app-failure.png)
+![](/app-failure.png)
 
 ### Summary
 

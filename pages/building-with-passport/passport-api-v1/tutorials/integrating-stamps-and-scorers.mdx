@@ -224,7 +224,7 @@ You can start this app now by navigating your terminal to the project directory 
 
 Your app should look like this:
 
-![](public/trusted-user-app-pt1.png)
+![](/trusted-user-app-pt1.png)
 
 The rest of the tutorial will build upon this basic app by adding functions and UI code to `app/page.tsx`.
 
@@ -263,6 +263,7 @@ async function getPassportScore(currentAddress: string) {
     console.log('error: ', err)
   }
 }
+
 ```
 
 ### **Retrieving Stamps**
@@ -282,6 +283,7 @@ async function getPassportStamps(currentAddress: string) {
     console.log('error: ', err)
   }
 }
+
 ```
 
 We can invoke the function on the click of a button by adding the following to the UI:
@@ -345,6 +347,7 @@ async function getPassportStamps(currentAddress: string) {
     console.log('error: ', err)
   }
 }
+
 ```
 
 Clicking the `Check Stamps` button will now display the following in the console:
@@ -381,6 +384,7 @@ We can start by wrapping the two functions in an outer `checkPassport()` functio
     let score: number = await getPassportScore(currentAddress) as number
     let stampProviders = await getPassportStamps(currentAddress) as Array<string>
   }
+
 ```
 
 Instead of creating lots of state variables for each user, we can define an interface that can hold all the relevant information we want to track about each user. Add the following interface to the boilerplate code outside of the `Passport()` component:
@@ -392,6 +396,7 @@ interface UserStruct {
   score: number;
   stampProviders: Array<Stamp>;
 }
+
 ```
 
 The `UserStruct` interface has fields for the user's address, score and Stamp providers as well as a unique identifier. Notice that we also defined the type of the `stampProviders` field to be an array of `Stamp` - this is a new struct we haven't defined yet. We need instances of `Stamp` to contain the name of each Stamp provider with a unique identifier. Add the following interface to the code just above the `UserStruct`:
@@ -401,12 +406,14 @@ interface Stamp {
   id: number
   stamp: string
 }
+
 ```
 
 In our `checkPassport()` function, we can pass the responses from `getPassportScore()` and `getPassportStamps()` into a new instance of `UserStruct`. We can then add each instance to a state variable array. First, add a state variable `userInfo` as an array that will take instances of `UserStruct`.
 
 ```tsx
 const [userInfo, setUserInfo] = useState<Array<UserStruct>>([])
+
 ```
 
 Now, we can update `checkPassport()` to create a new `UserStruct` from the values returned from the Passport API calls, plus the user address and a unique ID calculated by adding 1 to the current length of the `userInfo` array. This new `UserStruct` is added to the `userInfo` array using the `setUserInfo` method.
@@ -436,6 +443,7 @@ async function checkPassport(currentAddress = address) {
   }
   console.log("userInfo", userInfo)
 }
+
 ```
 
 Now each user's Stamps and score are tracked in custom structs in our application's state.
@@ -456,12 +464,14 @@ function checkTrustedUsers() {
   )
   ).filter(user => user.score > 20)
 }
+
 ```
 
 We can now keep track of this filtered array in our app's state too. Create a new state variable, `TrustedUsers`. Its type should be an array of `UserStruct`s.
 
 ```tsx
 const [trustedUsers, setTrustedUsers] = useState<Array<UserStruct>>([])
+
 ```
 
 Now we can update the app's state by passing `checkTrustedUsers()` to `setTrustedUsers()`. 
@@ -480,6 +490,7 @@ Add the new state variable, initialized to `false`:
 
 ```tsx
 const [showTrusted, setShowTrusted] = useState<boolean>(false)
+
 ```
 
 Now add `updateShowTrusted` that resets `TrustedUsers` and sets `ShowTrusted` to `true`. This is where we want to call the `setTrustedUsers()` function.
@@ -493,6 +504,7 @@ const updateShowTrusted = () => {
     setShowTrusted(false)
   }
 }
+
 ```
 
 Now, we want to make sure all this logic is executed as soon as a user connects their wallet. The API calls, data handling, and state management is all handled by a single call to our `checkPassport()` function. So, to make this happen automatically on connection, we can simply invoke the `checkPassport()` function inside our `connect()` and `checkConnection()` functions.
@@ -535,6 +547,7 @@ Now, in our UI, we can add a button that calls this function. This button can re
 
 ```tsx
 <Button colorScheme='teal' variant='outline' onClick={updateShowTrusted}>Check Users</Button>
+
 ```
 
 Let's also add a way to show which specific Stamps the connected user owns. We might not always need to know this, so we'll hide it behind a checkbox - this way a user can see at a glance whether the user is trusted but also get more granular information if they need it.
@@ -551,18 +564,21 @@ const updateShowStamps = () => {
     console.log("stamps = false")
   }
 }
+
 ```
 
 And, again, we need to add a new state variable to track the state of this switch:
 
 ```tsx
 const [showStamps, setShowStamps] = useState<boolean>(false)
+
 ```
 
 And add a checkbox to the UI that calls `updateShowStamp` when it is checked (you can add this after the `Button` elements inside the`<Stack> </Stack>` tags):
 
 ```tsx
 <Checkbox colorScheme='telegram' onChange={updateShowStamps}>Show Stamps</Checkbox>
+
 ```
 
 The final step is to update the UI code so that the data is actually displayed when the appropriate buttons and checkbox are activated.
@@ -576,6 +592,7 @@ Immediately below the block of UI code wrapped in `Stack` tags, we can add the f
   <br />
   {showTrusted && trustedUsers.map(user => <ul key={user.id}> {user.address} </ul>)}
 </div>
+
 ```
 
 This element contains two conditional rendering statements. They check whether `showTrusted` is `true` and if so, they render a title and the contents of `trustedUsers` (our filtered list of users that pass the trust criteria) to the browser.
@@ -591,7 +608,7 @@ Immediately after that `div` element, we can add the following code which displa
 
 Now, if you run your app locally using `npm run dev` you will be able to connect your wallet, submit your Passport and check whether you pass the trust criteria. If you do, your address will be rendered to the screen. If you check the `Show Stamps` box, all your Stamps will be shown in the browser.
 
-![](public/trusted-user-app.png)
+![](/trusted-user-app.png)
 
 
 
