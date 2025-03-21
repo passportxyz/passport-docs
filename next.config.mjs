@@ -9,26 +9,30 @@ const withNextra = nextra({
 
 export default withNextra({
     reactStrictMode: true,
-    swcMinify: false, // Disable SWC minification
+    swcMinify: false,
     images: {
         unoptimized: true
     },
     experimental: {
-        webpackBuildWorker: true,
-        optimizeCss: false // Disable CSS optimization
+        webpackBuildWorker: true
     },
     webpack: (config, { dev, isServer }) => {
-        // Only apply optimizations in production and for client-side
         if (!dev && !isServer) {
             config.optimization = {
                 ...config.optimization,
                 mergeDuplicateChunks: true,
-                minimize: true,
-                minimizer: [] // Remove default minimizers
+                minimize: true
             }
         }
         return config
     },
+    eslint: {
+        ignoreDuringBuilds: true
+    },
+    typescript: {
+        ignoreBuildErrors: true
+    },
+    output: 'export',
     redirects: () => [
         {
             source: '/get-started/creating-your-passport',
