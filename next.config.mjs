@@ -9,9 +9,25 @@ const withNextra = nextra({
 
 export default withNextra({
     reactStrictMode: true,
-    swcMinify: true,
+    swcMinify: false, // Disable SWC minification
     images: {
         unoptimized: true
+    },
+    experimental: {
+        webpackBuildWorker: true,
+        optimizeCss: false // Disable CSS optimization
+    },
+    webpack: (config, { dev, isServer }) => {
+        // Only apply optimizations in production and for client-side
+        if (!dev && !isServer) {
+            config.optimization = {
+                ...config.optimization,
+                mergeDuplicateChunks: true,
+                minimize: true,
+                minimizer: [] // Remove default minimizers
+            }
+        }
+        return config
     },
     redirects: () => [
         {

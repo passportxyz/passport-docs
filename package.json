@@ -4,7 +4,7 @@
   "description": "Documentation for Human Passport",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "NODE_ENV=production next build",
     "start": "next start"
   },
   "repository": {
@@ -38,6 +38,7 @@
     "@types/react": "^18.2.0",
     "@types/react-gtm-module": "^2.0.3",
     "autoprefixer": "10.4.16",
+    "critters": "^0.0.25",
     "postcss": "8.4.31",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^16.1.0",
