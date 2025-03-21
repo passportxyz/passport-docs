@@ -1,0 +1,23 @@
+{
+  "redirects": [
+    {
+      "source": "/get-started/creating-your-passport",
+      "destination": "/building-with-passport/introduction"
+    },
+    {
+      "source": "/get-started/scoring-passport",
+      "destination": "/building-with-passport/passport-api-v1/tutorials/client-side-scoring"
+    },
+    {
+      "source": "/get-started/verifying-passport",
+      "destination": "/building-with-passport/passport-api-v1/tutorials/gating-access-with-passport-scores"
+    },
+    {
+      "source": "/get-started/integrating-stamps",
+      "destination": "/building-with-passport/passport-api-v1/tutorials/integrating-stamps-and-scorers"
+    }
+  ],
+  "buildCommand": "pnpm run build",
+  "installCommand": "pnpm install",
+  "framework": "nextjs"
+}
