@@ -82,3 +82,8 @@ Once you identify that you’d like to take advantage of the Custom Passport off
 
 As you provide these, we will build out your branded dashboard for you, and will provide you review sessions along the way. We can adjust and optimize your dashboard for you before your campaign goes live. 
 
+## Requesting Custom Passport data
+
+If you are just checking scores from your Custom Passport offchain, you can use the [Passport API v2](../passport-api/overview) to access your users' data.
+
+If, instead, you're enabling your users to push their Passport onchain and you are using a [custom scorer](#custom-scorer), you will need to use the [Decoder contract](/building-with-passport/smart-contracts/contract-reference#decoder-contract), and more specifically, the `getScore` (0xdaadd662) method, making sure to pass both the specified wallet address and your [scorer ID](/building-with-passport/passport-api/getting-access) to pull users' custom scores. 
