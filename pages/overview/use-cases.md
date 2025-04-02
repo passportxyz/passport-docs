@@ -1,11 +1,11 @@
 ---
 title: Use cases
-description: A collection of potential scenarios where Passport XYZ can solve real business problems.
+description: A collection of potential scenarios where Human Passport can solve real business problems.
 ---
 
 # Use cases
 
-Passport XYZ's developer platform enables several key use cases:
+Human Passport's developer platform enables several key use cases:
 * *Protect access* to rewards, governance, communication channels, marketplaces, and developer tools.
 * *Demonstrate trustworthiness* to enable users to make better decisions about their online interaction
 * *Weigh user activities based on Passport score*

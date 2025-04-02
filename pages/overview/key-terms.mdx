@@ -1,6 +1,6 @@
 ---
 title: Key terms
-description: A glossary of key terms related to Passport XYZ
+description: A glossary of key terms related to Human Passport
 ---
 
 import { Callout } from 'nextra/components'
@@ -9,7 +9,7 @@ import { Callout } from 'nextra/components'
 
 ### Passports
 
-The example below shows the JSON data format for a Passport XYZ. This is an example of a Decentralized Identifier (DID), as defined in the [W3c documentation](https://w3c.github.io/did-core/#a-simple-example). Each passport contains a field named `stamps`. This is a array where your Stamps are stored.
+The example below shows the JSON data format for a Human Passport. This is an example of a Decentralized Identifier (DID), as defined in the [W3c documentation](https://w3c.github.io/did-core/#a-simple-example). Each passport contains a field named `stamps`. This is a array where your Stamps are stored.
 
 To see what each Stamp looks like, scroll down to the Stamps section. When you add Stamps to your Passport, they are pushed into this array. The entire Passport (DID) object is stored on the Ceramic network and associated with your Ethereum address.
 
@@ -27,7 +27,7 @@ To see what each Stamp looks like, scroll down to the Stamps section. When you a
 
 The "Passport Protocol" refers to the infrastructure that enables web3 citizens to create their own Passport, prove their decentralized identity and access Passport-gated projects. It is all the tooling that enables developers to build Passport gating into their apps.
 
-Web3 citizens interface with the Passport Protocol through the Passport holder dApp at [app.passport.xyz](https://app.passport.xyz). Developers can use the [Passport API](../building-with-passport/introduction) to easily integrate Passport XYZ into their apps.
+Web3 citizens interface with the Passport Protocol through the Passport holder dApp at [app.passport.xyz](https://app.passport.xyz). Developers can use the [Passport API](../building-with-passport/introduction) to easily integrate Human Passport into their apps.
 
 
 
@@ -37,9 +37,9 @@ Web3 citizens interface with the Passport Protocol through the Passport holder d
 
 **Usage:**
 
-* "I like how this project gated its community with Passport XYZ. I'm going to ask the project owner for their gating algorithm, so I can use it for inspiration."
+* "I like how this project gated its community with Human Passport. I'm going to ask the project owner for their gating algorithm, so I can use it for inspiration."
 * "Some examples of Passport-gated dApps include: Snapshot, Bankless Academy, and Gitcoin Grants."
-* "Because this community is gated with Passport XYZ, it is able to ask for pieces of proof of not just identity via services like BrightID, but also reputation via services like POAP."
+* "Because this community is gated with Human Passport, it is able to ask for pieces of proof of not just identity via services like BrightID, but also reputation via services like POAP."
 
 See our [tutorials](../building-with-passport/tutorials) to learn how to gate your project.
 
@@ -47,11 +47,11 @@ See our [tutorials](../building-with-passport/tutorials) to learn how to gate yo
 
 ### Stamps
 
-Stamps are the key identity verification mechanism of Passport XYZ. A Stamp is a collection of one or more [verifiable credentials](#verifiable-credentials-vcs) from an identity provider that is collected in a Passport. Stamps are provided by a variety of web2 and web3 identity authenticators including Google, Facebook, BrightID, ENS, and Proof of Humanity. Custom Stamps for particular communities are under development. Stamps do not store any personally identifiable information, only the verifiable credentials issued by the identity authenticator.
+Stamps are the key identity verification mechanism of Human Passport. A Stamp is a collection of one or more [verifiable credentials](#verifiable-credentials-vcs) from an identity provider that is collected in a Passport. Stamps are provided by a variety of web2 and web3 identity authenticators including Google, Facebook, BrightID, ENS, and Proof of Humanity. Custom Stamps for particular communities are under development. Stamps do not store any personally identifiable information, only the verifiable credentials issued by the identity authenticator.
 
-Passport aggregates Stamps and assigns each Stamp a different weight according to the needs of a particular community. This weight is used to calculate the cost of forgery of an identity, a score which reflects the credibility of a potential participant’s online identity. For example, a community for developers could assign a greater weight to a Github Stamp, resulting in higher scores for those who have Github Stamps.
+Human Passport aggregates Stamps and assigns each Stamp a different weight according to the needs of a particular community. This weight is used to calculate the cost of forgery of an identity, a score which reflects the credibility of a potential participant’s online identity. For example, a community for developers could assign a greater weight to a Github Stamp, resulting in higher scores for those who have Github Stamps.
 
-The code snippet below shows a single Stamp. This particular Stamp proves ownership of a Discord account. The Stamps array in the Passport XYZ object contains multiple instances of this data structure representing each different passport Stamp. All the Stamps conform to this specific format inherited from [https://www.w3.org/2018/credentials/v1](https://www.w3.org/2018/credentials/v1).
+The code snippet below shows a single Stamp. This particular Stamp proves ownership of a Discord account. The Stamps array in the Human Passport object contains multiple instances of this data structure representing each different passport Stamp. All the Stamps conform to this specific format inherited from [https://www.w3.org/2018/credentials/v1](https://www.w3.org/2018/credentials/v1).
 
 ```json
 {
@@ -109,7 +109,7 @@ Ethereum is a blockchain network. It is secured using a proof-of-stake based con
 
 ### Ethereum address
 
-Ethereum users interact with the network using an account. An account is really a pair of keys. One key is known as the 'private key' which is used to sign and send transactions. The other is the 'public key', which is used to create a unique address used to identify a particular user. In Passport XYZ, users' Ethereum addresses are used to identify which Stamps they own. Their private keys are used to demonstrate ownership of that address.
+Ethereum users interact with the network using an account. An account is really a pair of keys. One key is known as the 'private key' which is used to sign and send transactions. The other is the 'public key', which is used to create a unique address used to identify a particular user. In Human Passport, users' Ethereum addresses are used to identify which Stamps they own. Their private keys are used to demonstrate ownership of that address.
 
 
 
@@ -146,21 +146,6 @@ A Scorer is an instance of a scoring algorithm. The Passport API that offers a s
 The Scorer assigns a score to a Passport by summing weights assigned to individual Stamps. Please note that the weights assigned to individual Stamps can change over time in order to provide the best Sybil defence. You can also implement your own scoring algorithm using Stamp data.
 
 
-
-### Scoring Mechanisms
-
-To evaluate the unique humanity of users in web3 applications, Passport XYZ has devised two scoring mechanisms - Gradual Unique Humanity Verification and Boolean Unique Humanity Verification. These mechanisms consider multiple Stamps connected to a Passport holder, such as verified Twitter and Google accounts, possession of GTC or ETH, and previous participation in Gitcoin Grants. Each Stamp is assigned a weight based on its significance in assessing the unique humanity of the Passport holder. These weights are used as inputs to an algorithm that calculates a Passport score for the holder. The weights are defined in the [Passport Github](https://github.com/passportxyz/passport-scorer/blob/main/api/scorer/settings/gitcoin_passport_weights.py).
-
-The approach for scoring is designed to focus on interactions across a wide range of technology platforms, where the global maxima for a Passport score is quite high, making it unrealistic for real humans to achieve a perfect score. Nevertheless, these scores can still be used to grant access to partial rights, features, and other benefits to Passport holders based on their score. For instance, developers may offer access to a web app to users with a score above a particular [threshold](../major-concepts/scoring-thresholds), or provide special features to power users with scores above a certain level.
-
-The Gradual Unique Humanity Verification mechanism allows developers to assign partial rights to users based on their unique humanity score. For example, a user with a score of 30/100 may receive 30% of a full testnet ETH faucet payment, while a user with a score of 45/100 may have their votes multiplied by 45/100. Developers can customize the gradual weights in various ways to tailor their application.
-
-The Boolean Unique Humanity Verification mechanism is aimed at preventing bot/sybil attacks and safeguarding user privacy. It involves asking users to verify a particular set of Stamps, each with a specific significance in assessing their unique humanity. Users are deemed unique humans if they meet or exceed the predetermined threshold of verified Stamps that reach a combined score above a certain threshold.
-
-The algorithm used to calculate Passport scores is transparent and easily auditable. The exact formula used to calculate the score is available in the Passport Scorer code base, and the scoring weight of each Stamp is determined by Passport XYZ's data scientists based on the identities of users in previous Gitcoin Grants rounds and other Passport XYZ use cases. By using these scoring mechanisms, developers can ensure that only unique humans are able to participate in their applications while still preserving the privacy of users.
-
-
-
 ### Pagination (API)
 
 Some API requests might return large amounts of data. For example, the data returned from `/registry/stamps` returns information about every individual Stamp owned by a given address, possibly including all the associated metadata too. It can be convenient to break this data up into more manageable pieces. The way to do this is using API pagination.
@@ -179,4 +164,4 @@ More detail, including an explanation of how to navigate paginated responses, is
 
 ### Sybil
 
-A Sybil is a fake user. Many applications require confidence that each of their users represents a real human individual rather than a bot or an impersonator. However, users can try to create multiple personas that they use to access a service, gaining more than their fair share or reward or influence. Each of these dishonest personas is known as a Sybil. Take voting for example; if a user can create ten accounts and convince a platform that they are all valid, then they have multiplied their influence over the outcome of the vote by 10x. Passport XYZ is an anti-Sybil tool because it makes it harder for attackers to convince platforms that these Sybil accounts represent genuine users.
+A Sybil is a fake user. Many applications require confidence that each of their users represents a real human individual rather than a bot or an impersonator. However, users can try to create multiple personas that they use to access a service, gaining more than their fair share or reward or influence. Each of these dishonest personas is known as a Sybil. Take voting for example; if a user can create ten accounts and convince a platform that they are all valid, then they have multiplied their influence over the outcome of the vote by 10x. Human Passport is an anti-Sybil tool because it makes it harder for attackers to convince platforms that these Sybil accounts represent genuine users.

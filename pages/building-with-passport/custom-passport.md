@@ -5,7 +5,7 @@ description: Build a custom Passport dashboard around your ecosystem's unique ne
 
 # Custom Passport
 
-Custom Passport enables partners to develop a Passport XYZ dashboard that is customized to the unique needs of their ecosystem. This offering enables several additional features above and beyond what is offered on the standard Passport app, which can enable tailored proof of humanity solutions.
+Custom Passport enables partners to develop a Human Passport dashboard that is customized to the unique needs of their ecosystem. This offering enables several additional features above and beyond what is offered on the standard Passport app, which can enable tailored proof of humanity solutions.
 
 If you’re interested in building with Custom Passport, please reach out to our team:
 

@@ -9,7 +9,7 @@ In this tutorial, you'll learn how to show different content to users depending 
 
 Specifically, you will:
 
-* Fetch user Stamp data from the blockchain using the Passport XYZ smart contract stack
+* Fetch user Stamp data from the blockchain using the Human Passport smart contract stack
 * Use Stamp data to generate your own Passport score, using Passport's Stamp weights.
 * Conditionally display a user's Passport data depending on their onchain data.
 * Redirect users to instructions for improving their Passport scores and getting their Stamps onchain.
@@ -32,14 +32,14 @@ You can find the code from this tutorial in this [GitHub repo](https://github.co
 The app will work as follows:
 
 * When the user visits the sample app, they have access to several tabs - one to welcome them and then more where they can check their onchain data. The second tab shows whether there is any onchain data for the connected user. The third shows what Stamps the user has. The final tab shows the user's Passport score.
-* The user will connect their wallet and Passport XYZ to the app. Their Stamp data and Passport score will be retrieved from the blockchain and displayed in the UI.
+* The user will connect their wallet and Human Passport to the app. Their Stamp data and Passport score will be retrieved from the blockchain and displayed in the UI.
 * If the user does not have any Stamps, the tabs contain information about how to create a Passport, add Stamps and migrate them onchain.
 
-This simple example demonstrates the principles you would use to gate a real app using Passport XYZ onchain.
+This simple example demonstrates the principles you would use to gate a real app using Human Passport onchain.
 
 ### Smart contract logic
 
-The Passport XYZ smart contracts build on top of [EAS (Ethereum Attestation Service)](https://attest.sh/), using Attestations as the foundational building blocks. You can read the [contract reference](../contract-reference) page for a primer on how the contracts work.
+The Human Passport smart contracts build on top of [EAS (Ethereum Attestation Service)](https://attest.sh/), using Attestations as the foundational building blocks. You can read the [contract reference](../contract-reference) page for a primer on how the contracts work.
 
 The `decoder` contract exposes an API that allows you to simply pass in an address and retrieve the decoded Stamp and score data, rather than having to retrieve raw `Attestations` and decode client-side.
 

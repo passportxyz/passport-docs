@@ -1,11 +1,11 @@
 ---
 title: Smart contract overview
-description: A general overview of Passport XYZ's onchain technology stack.
+description: A general overview of Human Passport's onchain technology stack.
 ---
 
 # Onchain Passports
 
-Passports onchain functionality enables users to store their verified Stamps and scores onchain, and makes this data available via smart contracts.
+Human Passport's onchain functionality enables users to store their verified Stamps and scores onchain, and makes this data available via smart contracts.
 
 We also discuss the onchain use cases in the following resources:
 * [Quick start: Get to "Hello World" with the smart contracts](quick-start-guide)
@@ -14,7 +14,7 @@ We also discuss the onchain use cases in the following resources:
 
 ## Why onchain?
 
-In addition to accessing Passport XYZ data offchain using the Passport API, Passport has also released a smart contract stack that enables developers to access Passport score and Stamp data directly from the blockchain. 
+In addition to accessing Human Passport data offchain using the Passport API, Human Passport has also released a smart contract stack that enables developers to access Passport score and Stamp data directly from the blockchain. 
 
 This onchain Passport data enables partners that want to maintain a decentralized, permissionless backend to engage directly with our smart contracts instead of storing and processing Passport data pulled from our API. 
 
@@ -63,9 +63,9 @@ Attestations will be minted to one or two different registries, depending on whi
 * All onchain Passports will be minted to EAS, regardless of which network the user selects. 
 * If the user selects Linea or Linea Goerli, the full attestation will be written to EAS, and a partial attestation will be written to Verax. 
 
-## Why isn't Passport onchain by default?
+## Why isn't Human Passport onchain by default?
 
-Onchain Passports are entirely opt-in. Users can still use Passport XYZ without migrating your data onchain. 
+Human Passport is entirely opt-in. Users can still use Human Passport without migrating your data onchain. 
 
 While onchain Passports are in their infancy, the offchain Passport is useful as a single source. The offchain infrastructure is also perfectly sufficient for many use cases.
 
