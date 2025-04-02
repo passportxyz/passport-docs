@@ -41,23 +41,25 @@ If you would like more details on the score or these thresholds, please fill out
 
 The aggregate unique humanity model score is the current default for the Model Based Detection API, as it is broadly relevant to a variety of different ecosystems operating within the EVM ecosystem. 
 
-This model integrates individual chain model scores (Ethereum, zkSync, Optimism, Arbitrum, and Polygon) to generate the final aggregate score, assigning a score between 0 - 100, with 0 being likely Sybil or not having enough transaction history, and 100 being confidently human.
+This model integrates individual chain model scores (Ethereum, zkSync, Optimism, Arbitrum, and Polygon) to generate the final aggregate score.
 
-Refer to the following table to identify which score threshold you might use to protect access or classify wallet addresses in your ecosystem:
+Model version: 2.0
+Recommended score threshold: 50+
 
 | Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
 | --------------- | ------------------------------- | ------------------------------- |
-| 15+             | 97%                             | 14%                             |
-| 25+             | 96%                             | 12%                             |
-| 50+             | 94%                             | 9%                              |
-| 75+             | 89%                             | 5%                              |
+| 15+             | 98%                             | 6%                              |
+| 25+             | 98%                             | 4%                              |
+| 50+             | 96%                             | 3%                              |
+| 75+             | 94%                             | 2%                              |
 
 
 ## ETH (L1) unique humanity model
 
 This model looks at the specified wallet addresses' ETH mainnet transaction history, compares it against 50+ different features, and assigns it a score of 0 - 100.
 
-Refer to the following table to identify which score threshold you might use to protect access or classify wallet addresses in your ecosystem:
+Model version: 1.0
+Recommended score threshold: 50+
 
 | Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
 | --------------- | ------------------------------- | ------------------------------- |
@@ -71,7 +73,8 @@ Refer to the following table to identify which score threshold you might use to 
 
 Similarly to the ETH (L1) unique humanity model, this model looks at the specified wallet addresses' NFT transaction history on Ethereum mainnet, compares it against different features, and assigns it a score of 0 - 100.
 
-Refer to the following table to identify which score threshold you might use to protect access or classify wallet addresses in your ecosystem:
+Model version: 1.0
+Recommended score threshold: 50+
 
 | Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
 | --------------- | ------------------------------- | ------------------------------- |
@@ -85,7 +88,8 @@ Refer to the following table to identify which score threshold you might use to 
 
 This model looks at the specified wallet addresses' Arbitrum transaction history, compares it against different features, and assigns it a score of 0 - 100.
 
-Refer to the following table to identify which score threshold you might use to protect access or classify wallet addresses in your ecosystem:
+Model version: 1.0
+Recommended score threshold: 50+
 
 | Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
 | --------------- | ------------------------------- | ------------------------------- |
@@ -99,7 +103,8 @@ Refer to the following table to identify which score threshold you might use to 
 
 This model looks at the specified wallet addresses' Optimism transaction history, compares it against different features, and assigns it a score of 0 - 100.
 
-Refer to the following table to identify which score threshold you might use to protect access or classify wallet addresses in your ecosystem:
+Model version: 1.0
+Recommended score threshold: 50+
 
 | Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
 | --------------- | ------------------------------- | ------------------------------- |
@@ -113,7 +118,8 @@ Refer to the following table to identify which score threshold you might use to 
 
 This model looks at the specified wallet addresses' Polygon transaction history, compares it against different features, and assigns it a score of 0 - 100.
 
-Refer to the following table to identify which score threshold you might use to protect access or classify wallet addresses in your ecosystem:
+Model version: 1.0
+Recommended score threshold: 50+
 
 | Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
 | --------------- | ------------------------------- | ------------------------------- |
@@ -127,7 +133,8 @@ Refer to the following table to identify which score threshold you might use to 
 
 This model looks at the specified wallet addresses' zkSync Era transaction history, compares it against different features, and assigns it a score of 0 - 100.
 
-Refer to the following table to identify which score threshold you might use to protect access or classify wallet addresses in your ecosystem:
+Model version: 1.0
+Recommended score threshold: 50+
 
 | Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
 | --------------- | ------------------------------- | ------------------------------- |
