@@ -26,9 +26,6 @@ The raw schema looks as follows:
 bool passing_score, uint8 score_decimals, uint128 scorer_id, uint32 score, uint32 threshold, tuple(string provider, uint256 score)[] stamps
 ```
 
-Notice that the types for all these fields are numerical types or raw bytes. 
-This is because the human-readable information is compressed and encoded before being added to the attestation.
-
 You can see an example Human Passport attestation on the Optimism network by visiting the following link:
 
 [Example Human Passport attestation on Optimism](https://optimism.easscan.org/attestation/view/0xb6612e9191aaf5741420f4933a509c60f558b6fd2ee769befe3cc07805690a68)
@@ -41,7 +38,7 @@ The fields in the Human Passport attestation are as follows:
 - `score_decimals` (uint8): The number of decimal places used for score precision. Set to `4`
 - `scorer_id` (uint128): A unique identifier for the scoring algorithm instance. 
 - `score` (uint32): The raw numerical score calculated for the address. 
-- `threshold` (uint32): The minimum score required to achieve a passing grade. Set to `200000`, the recommendation from the Passport team.
+- `threshold` (uint32): The minimum score required to achieve a passing grade. Default is set to `200000`, the recommendation from the Passport team. However, this can be updated by partners who have set a custom threshold using Custom Passport.
 - `stamps` (tuple[]): An array of tuples containing verified credentials and their weights, where each tuple contains:
   - A string representing the stamp provider/type (e.g., "CoinbaseDualVerification2", "HolonymGovIdProvider")
   - A uint256 representing the weight/score contribution to the overall score
