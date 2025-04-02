@@ -14,13 +14,60 @@ knows what they are signing, and provides a uniform data layout that enables use
 The schema is *the layout of information being attested*. 
 The signature is the proof that a known, trusted verifier has seen the data and attested that it is truthful.
 
-There are two attestations that are issued when users mint their Passports onchain, both of which are described below:
-* Passport (Stamp) attestation
-* Score attestation
+There is currently a single attestation written when users mint their Passports onchain, the Human Passport attestation.
 
-## Passport (Stamp) attestation schema
+## Human Passport attestation schema
 
-### Overview
+[Human Attestation Schema on EAS](https://optimism.easscan.org/schema/view/0xda0257756063c891659fed52fd36ef7557f7b45d66f59645fd3c3b263b747254)
+
+The raw schema looks as follows:
+
+```
+bool passing_score, uint8 score_decimals, uint128 scorer_id, uint32 score, uint32 threshold, tuple(string provider, uint256 score)[] stamps
+```
+
+You can see an example Human Passport attestation on the Optimism network by visiting the following link:
+
+[Example Human Passport attestation on Optimism](https://optimism.easscan.org/attestation/view/0xb6612e9191aaf5741420f4933a509c60f558b6fd2ee769befe3cc07805690a68)
+
+### Fields
+
+The fields in the Human Passport attestation are as follows:
+
+- `passing_score` (bool): A boolean flag indicating whether the address's score meets or exceeds the threshold value. 
+- `score_decimals` (uint8): The number of decimal places used for score precision. Set to `4`
+- `scorer_id` (uint128): A unique identifier for the scoring algorithm instance. 
+- `score` (uint32): The raw numerical score calculated for the address. 
+- `threshold` (uint32): The minimum score required to achieve a passing grade. Default is set to `200000`, the recommendation from the Passport team. However, this can be updated by partners who have set a custom threshold using Custom Passport.
+- `stamps` (tuple[]): An array of tuples containing verified credentials and their weights, where each tuple contains:
+  - A string representing the stamp provider/type (e.g., "CoinbaseDualVerification2", "HolonymGovIdProvider")
+  - A uint256 representing the weight/score contribution to the overall score
+
+Example raw data:
+```solidity
+{
+    passing_score: true,
+    score_decimals: 4,
+    scorer_id: 335,
+    score: 922910,
+    threshold: 200000,
+    stamps: [
+        ["CoinbaseDualVerification2", 100420],
+        ["HolonymGovIdProvider", 160260],
+        ["githubContributionActivityGte#60", 18880]
+        // ... additional stamps
+    ]
+}
+```
+
+## Accessing User Attestation Data
+
+To access a user's attestation data, please use the decoder contract, which is documented via the [contract reference](/building-with-passport/smart-contracts/contract-reference#decoder-contract)
+
+
+## Deprecated attestations (as of March 12th, 2025)
+
+### Passport (Stamp) attestation schema
 
 The raw schema looks as follows:
 
@@ -35,7 +82,7 @@ You can see an example of a Stamp attestation on the Optimism network by visitin
 
 [Example Passport (Stamp) attestation on Optimism](https://optimism.easscan.org/attestation/view/0xd53526d72b9e9283a70894ddfba32513b722a939d85c1a6be402416d29cdc0b9)
 
-### Fields
+#### Fields
 
 The fields are as follows:
 
@@ -46,7 +93,7 @@ The fields are as follows:
 - `providerMapVersion`: an unsigned integer specifying which version of the `providers` mapping the Attestation conforms to. This allows updates as providers are added and removed from the canonical set.
 
 
-## Score attestation schema
+### Score attestation schema
 
 The raw schema looks as follows:
 
@@ -58,35 +105,10 @@ You can see an example of a score attestation on the Optimism network by visitin
 
 [Example score attestation on Optimism](https://optimism.easscan.org/attestation/view/0x1d7832d2f4e5e71da3d8b0ceee72faf4cd44990057b21a26d9f775b911fe1bfe)
 
-### Fields
+#### Fields
 
 The fields are as follows:
 
 - `score`: the user's Passport score as an unsigned integer
 - `scorer_id`: the ID number for the specific Scorer instance that issued the `score`
 - `score_decimals`: number of decimals in `score`, similar to how ETH is divided into 1e18 Wei. 
-
-## Decoding Attestations
-
-The schema is used to encode and decode Attestations. 
-From a raw attestation, you can extract the data that belongs to each field in the schema using an ABI decode method (such as `abi.decode` in Solidity, `abiCoder.decode()` in Ethers, etc) as follows:
-
-```
-// Decode the attestion output
-(providers, hashes, issuanceDates, expirationDates, providerMapVersion) = abi.decode(
-  attestation.data,
-  (uint256[], bytes32[], uint64[], uint64[], uint16)
-);
-```
-
-You then need to apply some logic to the decoded data to extract actionable insights.
-
-For example, you should extract the position indexes of each `1` value in the `providers` bitmap, then look up the `Providers` at those same indexes in the providers mapping, found on the [Passport Github](https://github.com/passportxyz/eas-proxy/blob/main/deployments/providerBitMapInfo.json).
-
-You may also wish to extract each value from `hashes` and find the matching entry in the Stamps mapping to determine which specific Stamps the Attestation contains.
-
-Similarly, you can determine the current time and check whether it is before or after the `expirationDates` for each Stamp.
-
-You can see an example of how to do this in a Nextjs app in our [onchain Passports tutorial](./tutorials/integrating-onchain-stamp-data).
-
-**Note** if you have more questions about the Attestation schema, you can chat in our [developer support channel on Telegram](https://t.me/+Mcp9RsRV7tVmYjZh).

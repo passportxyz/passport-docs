@@ -1,0 +1,14 @@
+# Changelog
+
+## March 12th, 2025
+
+We made several updates to Onchain Passport based on developer feedback.
+
+- We have reduced the number of onchain attestations that we write for users from two to just one. 
+- We have updated the [Onchain Passport attestation schema](/building-with-passport/smart-contracts/attestation-schema) to be more developer-friendly.
+- We have deprecated the hash that was returned with the decoder contract's `getPassport` method.
+- We've introduced a new method, `getScore` (0xdaadd662), which accepts a scorer ID (communityID) and user address, and returns the current score of a user for that scorer. This can be used by partners who are using [custom scores](./building-with-passport/custom-passport.md). At this time, there is no way to request Stamp-specific Custom Passport data from onchain. 
+
+## Context
+
+We produced the Changelog as part of the March 12th, 2025 release of Passport. We may backfill several product updates in the future. 
