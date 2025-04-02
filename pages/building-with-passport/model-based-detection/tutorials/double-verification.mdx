@@ -208,7 +208,7 @@ const ETHEREUM_SCORE_THRESHOLD = 50;
 ```
 
 
-Next, we will want to track the score, and the status of your API requests in the application state. You can add one state variable to store the score retrieved from the API (a `string`), one to track whether a request has been made to the Model Based Detection API (a `boolean`) and one to track whether the retrieved ETH activity score exceeds the threshoild (a `boolean`). Add the following state variable definitions beneath the existing state variable definitions in the boilerplate code:
+Next, we will want to track the score, and the status of your API requests in the application state. You can add one state variable to store the score retrieved from the API (a `string`), one to track whether a request has been made to the Models API (a `boolean`) and one to track whether the retrieved ETH activity score exceeds the threshoild (a `boolean`). Add the following state variable definitions beneath the existing state variable definitions in the boilerplate code:
 
 ```typescript
   const [ethereumScore, setEthereumScore] = useState<string>('')

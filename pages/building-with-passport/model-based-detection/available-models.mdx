@@ -1,6 +1,6 @@
 ---
 title: Available models and recommended scores
-description: This page describes which models are currently accessible via the Model Based Detection API, and which score thresholds should be used to identify likely Sybils or Humans.
+description: This page describes which models are currently accessible via the Models API, and which score thresholds should be used to identify likely Sybils or Humans.
 ---
 
 import { Callout } from 'nextra/components'
@@ -9,11 +9,12 @@ import { Callout } from 'nextra/components'
 
 At this time, we have deployed a few different models to help verify unique humans. We plan to expand this list of models greatly, first by exploring additional Sybil detection models for several L2 partners, and then looking into other web3 verticals and reputation signals.
 
-We currently offer the following models via the Model Based Detection API:
+We currently offer the following models via the Models API:
 * Aggregate unique humanity score - `aggregate`
 * Ethereum (L1) unique humanity model - `ethereum_activity`
 * NFT (L1) unique humanity model - `nft`
 * Arbitrum unique humanity model - `arbitrum`
+* Base unique humanity model - `base`
 * Optimism unique humanity model - `optimism`
 * Polygon unique humanity model - `polygon`
 * zkSync unique humanity model - `zksync`
@@ -34,14 +35,14 @@ We calculate the percentage of qualifying humans and Sybils at various threshold
 
 If you would like more details on the score or these thresholds, please fill out the following form:
 
-[Model Based Detection interest form](https://docs.google.com/forms/d/e/1FAIpQLScDHGifo2IWkBxsMKcGJ2Qr24mnYM6G5hao7oin5f3OOZFkgw/viewform)
+[Models API interest form](https://docs.google.com/forms/d/e/1FAIpQLScDHGifo2IWkBxsMKcGJ2Qr24mnYM6G5hao7oin5f3OOZFkgw/viewform)
 
 
 ## Aggregate unique humanity model
 
-The aggregate unique humanity model score is the current default for the Model Based Detection API, as it is broadly relevant to a variety of different ecosystems operating within the EVM ecosystem. 
+The aggregate unique humanity model score is the current default for the Models API, as it is broadly relevant to a variety of different ecosystems operating within the EVM ecosystem. 
 
-This model integrates individual chain model scores (Ethereum, zkSync, Optimism, Arbitrum, and Polygon) to generate the final aggregate score.
+This model integrates individual chain model scores (Ethereum, Arbitrum, Base, Optimism, Polygon, and zkSync) to generate the final aggregate score.
 
 Model version: 2.0
 Recommended score threshold: 50+
@@ -58,7 +59,6 @@ Recommended score threshold: 50+
 
 This model looks at the specified wallet addresses' ETH mainnet transaction history, compares it against 50+ different features, and assigns it a score of 0 - 100.
 
-Model version: 1.0
 Recommended score threshold: 50+
 
 | Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
@@ -73,7 +73,6 @@ Recommended score threshold: 50+
 
 Similarly to the ETH (L1) unique humanity model, this model looks at the specified wallet addresses' NFT transaction history on Ethereum mainnet, compares it against different features, and assigns it a score of 0 - 100.
 
-Model version: 1.0
 Recommended score threshold: 50+
 
 | Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
@@ -88,7 +87,19 @@ Recommended score threshold: 50+
 
 This model looks at the specified wallet addresses' Arbitrum transaction history, compares it against different features, and assigns it a score of 0 - 100.
 
-Model version: 1.0
+Recommended score threshold: 50+
+
+| Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
+| --------------- | ------------------------------- | ------------------------------- |
+| 15+             | 99%                             | 21%                             |
+| 25+             | 98%                             | 14%                             |
+| 50+             | 94%                             | 7%                              |
+| 75+             | 92%                             | 6%                              |
+
+## Base unique humanity model
+
+This model looks at the specified wallet addresses' Base transaction history, compares it against different features, and assigns it a score of 0 - 100.
+
 Recommended score threshold: 50+
 
 | Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
@@ -103,7 +114,6 @@ Recommended score threshold: 50+
 
 This model looks at the specified wallet addresses' Optimism transaction history, compares it against different features, and assigns it a score of 0 - 100.
 
-Model version: 1.0
 Recommended score threshold: 50+
 
 | Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
@@ -118,7 +128,6 @@ Recommended score threshold: 50+
 
 This model looks at the specified wallet addresses' Polygon transaction history, compares it against different features, and assigns it a score of 0 - 100.
 
-Model version: 1.0
 Recommended score threshold: 50+
 
 | Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
@@ -133,7 +142,6 @@ Recommended score threshold: 50+
 
 This model looks at the specified wallet addresses' zkSync Era transaction history, compares it against different features, and assigns it a score of 0 - 100.
 
-Model version: 1.0
 Recommended score threshold: 50+
 
 | Score threshold | % of qualifying verified humans | % of verified Sybil penetration |
@@ -146,9 +154,9 @@ Recommended score threshold: 50+
 
 ## Models coming soon
 
-The Passport team is also working on adding an aggregate model to this endpoint, and is considering several other models that look at unique humanity and reputation signals for different ecosystems. 
+The Passport team currently doesn't have any new models in development. 
 
-To request a new model, please fill out this form:
+If you would like to see a new model added, please fill out this form:
 [Model Based Detection feedback form](https://docs.google.com/forms/d/e/1FAIpQLSeKUu1flQfdNSYKLBhUk6gNwdypUk5STMNsufkOZ58vWI_g9w/viewform)
 
 
