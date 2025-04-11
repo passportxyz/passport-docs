@@ -7,7 +7,7 @@
   "passport-api": "Passport API v2",
   "passport-api-v1": "Passport API v1",
   "custom-passport": "Custom Passport",
-  "model-based-detection": "Model Based Detection API",
+  "model-based-detection": "Models API",
   "smart-contracts": "Smart Contracts",
   "composedb": "ComposeDB - Deprecated"
 }
