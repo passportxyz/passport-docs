@@ -1,0 +1,93 @@
+---
+Title: Passport Embed - Component Reference
+Description: This section provides a detailed reference for the Passport Embed component.
+---
+
+# Passport Embed -- Component Reference
+
+This section is a technical reference for the PassportScoreWidget React component. It covers all configurable props, their types and meanings, as well as notes on component behavior and usage. Use this as a guide when integrating or troubleshooting the Passport Embeds component in your codebase.
+
+You will need to have a valid API key, Scorer ID, and to be granted access to Passport Embeds by the [Passport team](https://tally.so/r/3X81KL) before you can use the component. You can get these by following the steps in our [getting access guide](getting-access).
+
+## Component Import
+
+Make sure you have imported the component from the library:
+
+```jsx
+import { PassportScoreWidget, DarkTheme, LightTheme } from "@passportxyz/passport-embed";
+```
+
+## Props Overview
+
+The PassportScoreWidget accepts the following props:
+
+| Prop Name                     | Type / Values                              | Description and Usage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ----------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **apiKey** (required)         | `string`                                   | **API key** provided by Passport for your project. This is required to authorize requests to the Passport scoring API. Example: `apiKey="abc123..."`. Without a valid API key, the widget will not be able to retrieve scores (you may receive an authorization error).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **scorerId** (required)       | `string` or `number`                       | The identifier of the **Scorer** configuration to use. This tells the widget _which scoring model_ to apply to the user. For example, `scorerId="5"` might correspond to the “Unique Humanity (binary)” scorer which returns a yes/no based on threshold​. Ensure this ID matches one configured in your Passport dashboard.                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **address**                   | `string` (Ethereum address) or `undefined` | The user’s wallet address to check. If you already have the user’s address (e.g., they logged in via wallet), pass it here. If not provided, the widget can prompt the user to connect their wallet (see `connectWalletCallback`). When `address` is set/updated, the widget will automatically fetch and display the Passport score for that address.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **connectWalletCallback**     | `() => Promise<string>`                    | _Optional._ A callback function that the widget can call to initiate wallet connection. If provided, and no `address` is yet available, the widget will render a “Connect Wallet” UI element. When the user triggers it, this callback is executed. It should handle connecting to the user’s Ethereum wallet (e.g., via MetaMask) and resolve with the wallet address. Once resolved, the widget will use the returned address and proceed to fetch the score. If this prop is omitted, you should manage wallet connection outside the widget and then pass the `address`.                                                                                                                                                                                                                                                                                            |
+| **generateSignatureCallback** | `(message: string) => Promise<string>`     | _Required for scoring._ A callback to sign a message for the Passport API. After the user’s address is known, the widget will request a signature to prove ownership of that address. Passport will supply a challenge `message` (string) which needs to be signed by the user’s wallet. Provide a function that takes the message and returns a signed message (signature string). The example implementation uses `personal_sign` via `window.ethereum`​[github.com](https://github.com/passportxyz/passport-embed/blob/main/example/src/index.tsx#:~:text=%2F%2F%20Sign%20the%20message). The widget will use this signature to securely retrieve the user’s Passport score from the API. If this callback is missing, the widget cannot complete the score retrieval flow.                                                                                          |
+| **collapseMode**              | `"shift"`, `"overlay"`, or `"off"`         | Controls the widget’s **collapsible behavior** and how it is displayed relative to your page layout. **`"shift"`** (default): the widget is embedded in the flow and expanding it will push/shift surrounding content (useful if placing at top of a page, for example). **`"overlay"`**: the widget will overlay on top of content when expanded (using CSS `position:absolute` or similar, on top of the page, with an overlay background perhaps – the `overlayZIndex` theme can be used to adjust stacking). **`"off"`**: collapse functionality is disabled; the widget is always fully expanded (use this if you want the full widget visible at all times in a particular spot). You can experiment with these modes to see which best fits your UI. For instance, a banner at the top might use `shift`, whereas an icon fixed in a corner might use `overlay`. |
+| **theme**                     | `PassportWidgetTheme` object               | Customizes the widget’s look and feel. You can pass your own theme object or import and extend the default `LightTheme` or `DarkTheme` from the package. If your app supports dark mode, you can dynamically choose which to use based on a `prefers-color-scheme` check or similar logic.                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| **className**                 | `string`                                   | _Optional._ Additional CSS class name to apply to the widget’s container. Use this if you want to target the widget with your own CSS (for example, to adjust its width, margin, or to apply custom styles beyond what the theme covers). The widget’s root element always has a default class (.passport-widget-container), but className lets you add your own custom styles (e.g. for spacing or layout overrides).    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+
+### Themes
+
+💡 Note: There are no `darkTheme` or `LightTheme` props. Instead, the package exports predefined `DarkTheme` and `LightTheme` objects that you can apply to the `theme` prop manually based on your app’s mode:
+
+```jsx
+import { PassportScoreWidget, DarkTheme, LightTheme } from "@passportxyz/passport-embed";
+
+const isDarkMode = useDarkMode();
+
+<PassportScoreWidget
+  apiKey="..."
+  scorerId="..."
+  theme={isDarkMode ? DarkTheme : LightTheme}
+  ...
+/>
+```
+
+You can also extend the theme object to customize specific properties:
+
+```jsx
+const customDarkTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    primary: "255, 0, 100"
+  }
+};
+```
+
+Learn more about [Passport Embeds customization](/building-with-passport/stamps/passport-embed/customization).
+
+
+## Usage Example
+
+Suppose we want to embed the widget in a page and allow it to handle wallet connection. We also want it to appear as a small badge that the user can expand. We might use the following props:
+
+```jsx
+<PassportScoreWidget
+  apiKey={API_KEY}
+  scorerId={SCORER_ID}
+  collapseMode="overlay"
+  connectWalletCallback={connectWallet}       // our custom function to connect wallet
+  generateSignatureCallback={signMessage}     // our custom function to sign messages
+  theme={DarkTheme}  // Can also use LightTheme, or pass a custom theme object
+/>
+```
+
+In this snippet, the widget will initially render a collapsed badge (since we used `overlay`, it might show as an icon or small bar). When the user clicks it, it will call `connectWalletCallback` if no address is present – our `connectWallet` function should trigger the wallet provider. After obtaining the address, the widget calls `generateSignatureCallback` (here `signMessage`) to sign the challenge, then displays the score. We also overrode the primary color to a green to match our site. The rest of the styling, like success/failure colors and fonts, will use defaults unless we specify them. 
+
+## Component Behavior
+
+* **Initial State:** The widget will detect if an `address` is provided. If not, it typically shows a prompt or button to connect a wallet (assuming `connectWalletCallback` is given). If an address is already provided, it will immediately attempt to fetch the Passport score for that address (calling `generateSignatureCallback` internally when needed).
+* **Loading & Error Handling:** While the score is being fetched, the widget may show a loading indicator. If an error occurs (e.g., network issues or invalid API key), the widget will handle it by showing an error message in the UI (and you might see errors in the console for debugging). You don’t need to manually catch errors from the callbacks – the widget will display a user-friendly message (“Failed to load score,” etc.) if something goes wrong.
+* **Display of Score:** Once retrieved, the widget will display the score and possibly a status. For example, if the scorer is binary (pass/fail), it might simply show a “Verified” checkmark if the user’s score meets the threshold or an alert if not. If the scorer provides an actual numeric score, it might show the number (out of 100) and perhaps a progress indicator. These values are set during your conversation with the Passport team and determine what qualifies a user as “verified.”
+* **User Actions:** If the user’s score is below the requirement, the widget may guide them on next steps (for instance, a message like “Your score is below the required threshold. Click here to improve your Passport.”). In the current version, improving the Passport typically means visiting the Passport web app to add more credentials (stamps). The widget might include a link or button to do this (for example, opening the Passport app in a new tab). After the user updates their Passport, you can call a method or simply re-render the widget to refresh the score.
+* **Collapsing/Expanding:** With `collapseMode` set to `"shift"` or `"overlay"`, the widget will start in a minimized state – often an icon or small bar. When clicked, it expands to show the full details (score, message, etc.). If "off" is used, it’s always expanded. The expanded widget could be a panel that either pushes content (shift) or overlays above it. The user can likely collapse it back after viewing. This behavior allows the verification UI to stay out of the way until needed, which is especially useful on content-heavy pages.
+
+**Tip:** You can also use the Passport Embeds package’s lower-level hooks if needed. For example, there is a `usePassportScore` hook​ that returns the raw score data (score, threshold, passing boolean, and stamp details). This is useful if you want to build a completely custom UI around the data instead of using the default widget UI. Most developers, however, will find that PassportScoreWidget covers their needs with minimal effort.
+

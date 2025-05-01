@@ -19,7 +19,7 @@ Need more in-depth analysis?
 
 We also offer custom Sybil and reputation data services.
 
-To learn more, please fill out this [quick form](https://docs.google.com/forms/d/e/1FAIpQLScDHGifo2IWkBxsMKcGJ2Qr24mnYM6G5hao7oin5f3OOZFkgw/viewform). 
+To learn more, please fill out our [contact form](https://tally.so/r/3X81KL). 
 </Callout>
 
 
@@ -87,7 +87,7 @@ However, this verification method does not provide a secondary verification opti
 **Technical integration details:**
 
 * Collect the wallet address from the user
-* Pass the wallet address to the [`GET /passport/analysis/{address}`](api-reference) endpoint, which will deliver the specified model score (0-100).
+* Pass the wallet address to the [`GET /v2/models/score/{address}`](api-reference) endpoint, which will deliver the specified model score (0-100).
 * Compare this score against a predetermined [score threshold](available-models), and either grant or deny access depending on that evaluation.
 
 
@@ -102,7 +102,7 @@ Many users will be able pass the initial MBD check with no user friction, while 
 **Technical integration details:**
 
 * Collect the wallet address from the user
-* Pass the wallet address to the [`GET /passport/analysis/{address}`](api-reference) endpoint, which will deliver the specified model score (0-100).
+* Pass the wallet address to the [`GET /v2/models/score/{address}`](api-reference) endpoint, which will deliver the specified model score (0-100).
 * Compare this model score against a predetermined [score threshold](available-models), and either grant access to the user or present the secondary verification method to them, depending on that evaluation.
 * Assuming the user didn’t pass primary verification, retrieve the user’s Stamp-based Unique Humanity Score from the Passport API v2 using the [`GET /v2/stamps/{scorer_id}/score/{address}`](../passport-api/api-reference#retrieve-latest-score-for-a-single-address) endpoint.
 * Evaluate the Unique Humanity Score against a predetermined [score threshold](../major-concepts/scoring-thresholds), and will either grant or deny access based on that evaluation.
@@ -111,26 +111,6 @@ Many users will be able pass the initial MBD check with no user friction, while 
 ### Double verification using MBD and other verification methods
 
 This option will look very similar to the previous double verification method, but can utilize a custom Passport scorer and set of Stamps, or a separate 1st or 3rd-party verification system to verify users who weren’t able to pass the initial MBD verification flow.
-
-
-## Feedback
-
-We decided to release this API in beta so we can collect feedback as we continue to evolve this new verification method.
-
-We are specifically interested in hearing your feedback on the following questions: 
-* Is this new verification process useful?  
-* How might you use this data?
-* Which other models might be useful to you?
-* If we offered multiple models, would you want us to provide an aggregate score?
-* If we expanded the ways you could submit addresses beyond a single address at a time, how would you prefer to provide
-this input?
-* How important is reducing latency with your use case?
-* How important would it be for you to have access to this data on the blockchain?
-* Which developer flows appeal to you? Did we miss any methods that should have been listed?
-* How did the documentation describe this product?
-
-If you have an opinion on any of the above, please fill out the following form:
-[Model Based Detection feedback form](https://docs.google.com/forms/d/e/1FAIpQLSeKUu1flQfdNSYKLBhUk6gNwdypUk5STMNsufkOZ58vWI_g9w/viewform)
 
 
 ## Next steps

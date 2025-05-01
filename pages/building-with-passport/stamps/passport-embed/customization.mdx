@@ -1,0 +1,119 @@
+---
+title: Passport Embed - Customization
+description: A guide to customizing Passport Embed.
+---
+
+import { Callout } from 'nextra/components'
+
+# Passport Embed - Customization
+
+The Passport Embed widget is fully themeable, allowing you to match its appearance to your application’s design system. You can customize colors, fonts, border radius, padding, transition timing, and z-index positioning.
+
+## Using Built-in Themes
+
+Passport Embed provides two built-in themes: `DarkTheme` and `LightTheme`. You can import them from the package and pass them directly to the widget’s theme prop.
+
+```jsx
+import { PassportScoreWidget, DarkTheme, LightTheme } from "@passportxyz/passport-embed";
+
+<PassportScoreWidget
+  apiKey="<YOUR_API_KEY>"
+  scorerId="<YOUR_SCORER_ID>"
+  generateSignatureCallback={generateSignature}
+  theme={DarkTheme} // or LightTheme
+/>
+```
+
+If your app supports dynamic theming, you can toggle between these based on the user’s preference:
+
+```jsx
+const theme = isDarkMode ? DarkTheme : LightTheme;
+```
+
+These built-in themes provide a solid foundation and follow best practices for accessibility and contrast.
+
+### Extending or Overriding Theme Properties
+
+You can also override specific theme values by spreading one of the defaults and replacing the properties you’d like to change:
+
+```jsx
+const customTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    primary: "255, 255, 0"
+  }
+};
+```
+
+## Full Theme Schema
+
+Here are the available fields in the PassportWidgetTheme object:
+
+```jsx
+export type PassportWidgetTheme = {
+  colors?: {
+    primary?: string;
+    secondary?: string;
+    background?: string;
+    success?: string;
+    failure?: string;
+  };
+  padding?: {
+    widget?: {
+      x?: string;
+      y?: string;
+    };
+  };
+  radius?: {
+    widget?: string;
+    button?: string;
+  };
+  transition?: {
+    speed?: string;
+  };
+  font?: {
+    family?: {
+      body?: string;
+      heading?: string;
+      alt?: string;
+    };
+  };
+  position?: {
+    overlayZIndex?: string;
+  };
+};
+```
+
+All values are optional. If a field is not specified, the default from the base theme (Dark or Light) will be used.
+
+### Tips
+
+Tips
+
+* Theme values such as colors.primary must be in RGB format: for example, `"255, 255, 0"`.
+* Font families must match fonts already loaded on the page.
+* `overlayZIndex` is only used in `collapseMode="overlay"`.
+* Use `transition.speed` to adjust animation timing (for example, `"0.3s"`).
+
+
+### Example
+
+```jsx
+<PassportScoreWidget
+  apiKey="<YOUR_API_KEY>"
+  scorerId="<YOUR_SCORER_ID>"
+  generateSignatureCallback={generateSignature}
+  theme={{
+    colors: { primary: "34, 197, 94", background: "255, 255, 255" },
+    font: { family: { body: "Inter, sans-serif" } },
+    radius: { widget: "12px", button: "8px" },
+    transition: { speed: "0.2s" }
+  }}
+/>
+```
+
+## Next Step
+
+Once your theme is set, head over to the [Component Reference](component-reference) to see all other available props.
+
