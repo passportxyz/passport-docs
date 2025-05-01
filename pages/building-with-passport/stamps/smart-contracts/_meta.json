@@ -2,8 +2,8 @@
     "overview": "Overview",
     "quick-start-guide": "Quick start",
     "integrating-onchain-stamp-data": "Tutorial",
-    "contract-reference": "Contract reference",
     "attestation-schema": "Attestation schema",
     "onchain-expirations": "Onchain expirations",
-    "test-mode": "Onchain testing"
+    "test-mode": "Onchain testing",
+    "contract-reference": "Contract reference"
 }

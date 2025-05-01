@@ -258,11 +258,6 @@ module.exports = withNextra({
             permanent: true
         },
         {
-            source: '/building-with-passport/model-based-detection',
-            destination: '/building-with-passport/models/introduction',
-            permanent: true
-        },
-        {
             source: '/building-with-passport/passport-api',
             destination: '/building-with-passport/stamps/passport-api/overview',
             permanent: true
@@ -303,13 +298,8 @@ module.exports = withNextra({
             permanent: true
         },
         {
-            source: '/building-with-passport/model-based-detection/*',
-            destination: '/building-with-passport/models/*',
-            permanent: true
-        },
-        {
-            source: '/building-with-passport/models',
-            destination: '/building-with-passport/models/introduction',
+            source: '/building-with-passport/model-based-detection/:path*',
+            destination: '/building-with-passport/models/:path*',
             permanent: true
         },
         {
@@ -323,23 +313,28 @@ module.exports = withNextra({
             permanent: true
         },
         {
-            source: '/building-with-passport/major-concepts/*',
-            destination: '/building-with-passport/stamps/major-concepts/*',
+            source: '/building-with-passport/major-concepts/:path*',
+            destination: '/building-with-passport/stamps/major-concepts/:path*',
             permanent: true
         },
         {
-            source: '/building-with-passport/passport-api/*',
-            destination: '/building-with-passport/stamps/passport-api/*',
+            source: '/building-with-passport/passport-api/:path*',
+            destination: '/building-with-passport/stamps/passport-api/:path*',
             permanent: true
         },
         {
-            source: '/building-with-passport/passport-api-v1/*',
-            destination: '/building-with-passport/stamps/passport-api-v1/*',
+            source: '/building-with-passport/passport-api-v1/:path*',
+            destination: '/building-with-passport/stamps/passport-api-v1/:path*',
             permanent: true
         },
         {
-            source: '/building-with-passport/smart-contracts/*',
-            destination: '/building-with-passport/stamps/smart-contracts/*',
+            source: '/building-with-passport/smart-contracts/:path*',
+            destination: '/building-with-passport/stamps/smart-contracts/:path*',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/composedb',
+            destination: '/',
             permanent: true
         },
         {
