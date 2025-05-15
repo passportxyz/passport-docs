@@ -1,0 +1,51 @@
+---
+title: Passport Embed
+description: Passport Embeds is a premium offering that lets websites integrate Human Passport's Stamps-based verification directly on their website or app, eliminating the need for users to be redirected elsewhere.
+---
+
+import { Callout } from 'nextra/components'
+
+# Passport Embed
+
+## Introduction
+
+Passport Embeds is a premium offering that lets websites integrate Human Passport's [Stamps-based verification](/building-with-passport/stamps/introduction) directly on their website or app, eliminating the need for users to be redirected elsewhere​. In essence, Passport Embeds provides an on-site widget for proof of humanity, ensuring that communities and applications remain Sybil-resistant (protected from fake or duplicate accounts) without adding user friction.
+
+Core Benefits:
+* **Frictionless User Experience:** Users can verify their identity within your app or site (no external redirects), leading to higher conversion and less drop-off​. The verification process is quick and preserves privacy, requiring only a crypto wallet and approved credentials rather than personal data.
+* **Powerful Sybil Protection:** Backed by the Human Passport scoring system, it effectively distinguishes real users from bots. You can gate content or features based on Passport scores (for example, only users above a certain score can access an airdrop) to keep out malicious actors​.
+* **Targeted for Web3 Communities:** Ideal for dApps, DAOs, forums, or any platform where one-person-one-account is vital. It enables ecosystems to protect and grow their communities organically by ensuring each participant is unique​.
+* **Key Differentiators:** Passport Embeds is a privacy-preserving alternative to traditional KYC or CAPTCHA. It uses verifiable credentials (“Stamps”) to calculate a trust score, so site owners never receive sensitive personal info – only a score or pass/fail status. Unlike other solutions, Passport Embeds is decentralized and user-first​, meaning users maintain control over their data and can prove their humanity without sacrificing anonymity.
+
+Overall, the Passport Embeds widget brings the power of Human Passport’s identity verification directly into your application. It’s designed for both developers and decision-makers who want to boost security and trust in their platform while keeping the user experience seamless and on-brand.
+
+## User flow
+
+The user flow for Passport Embeds is as follows:
+
+1. The user visits your website or app and encounters a program that's protected by the Passport Embed widget.
+2. If the user is not connected to a wallet, the widget will prompt them to connect their wallet.
+3. Once connected, the widget will fetch the user's Passport score if they have one.
+4. If the user's score is above a specified threshold (20 by default), the widget will show a success state and inform you that the user is verified. If not, the widget will automatically verify any web3 Stamps that the user qualifies for. 
+5. If the user's score is still below the threshold, the widget will walk users through pages of different Stamps that they can verify to build up their score. Once they build up a high enough score, they will be notified that the program is unlocked and they can participate.
+6. [Future optional feature] Once a user builds up a high enough score, they can mint their Passport onchain to one of Passport's supported networks. Once done, they will be notified that the program is unlocked and they can participate.
+
+## Customizations
+
+The widget can be [customized](customization) in a number of ways, including:
+
+* You can set the theme to dark or light.
+* You can additionally adjust several color, font, and spacing options.
+* You can set the widget to collapse to a smaller size, and the behavior of surrounding content when it expands.
+* [Future customization] You will be able to choose which Stamps display, which order those Stamps are displayed, and what each Stamp's weighting is.
+* [Future customization] You will be able to require users to mint their Passport onchain to one of Passport's supported networks.
+
+## Pricing and Access
+
+To learn more about accessing the Passport Embeds product, please [contact the Human Passport team](https://tally.so/r/3X81KL).
+
+## Next Steps
+
+* [Getting access to Passport Embed](getting-access)
+* [Quick start guide](quick-start-guide)
+* [Component reference](component-reference)
