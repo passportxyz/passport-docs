@@ -7,14 +7,25 @@ import { Callout } from 'nextra/components'
 
 # Passport Embed - Customization
 
-The Passport Embed widget is fully themeable, allowing you to match its appearance to your application’s design system. You can customize colors, fonts, border radius, padding, transition timing, and z-index positioning.
+The Passport Embed widget is fully themeable, allowing you to match its appearance to your application's design system. You can customize colors, fonts, border radius, padding, transition timing, and z-index positioning.
+
+## Collapse Mode
+
+With Passport Embed, you can control the widget’s **collapsible behavior** and how it is displayed relative to your page layout. 
+
+There are three options for collapse mode:
+* **`"shift"`** (default): the widget is embedded in the flow and expanding it will push/shift surrounding content (useful if placing at top of a page, for example).
+* **`"overlay"`**: the widget will overlay on top of content when expanded (using CSS `position:absolute` or similar, on top of the page, with an overlay background perhaps – the `overlayZIndex` theme can be used to adjust stacking).
+* **`"off"`**: collapse functionality is disabled; the widget is always fully expanded (use this if you want the full widget visible at all times in a particular spot).
+
+You can experiment with these modes to see which best fits your UI. 
 
 ## Using Built-in Themes
 
-Passport Embed provides two built-in themes: `DarkTheme` and `LightTheme`. You can import them from the package and pass them directly to the widget’s theme prop.
+Passport Embed provides two built-in themes: `DarkTheme` and `LightTheme`. You can import them from the package and pass them directly to the widget’s theme prop. By default, the widget will use `DarkTheme`.
 
 ```jsx
-import { PassportScoreWidget, DarkTheme, LightTheme } from "@passportxyz/passport-embed";
+import { PassportScoreWidget, DarkTheme, LightTheme } from "@human-tech/passport-embed";
 
 <PassportScoreWidget
   apiKey="<YOUR_API_KEY>"
@@ -24,7 +35,7 @@ import { PassportScoreWidget, DarkTheme, LightTheme } from "@passportxyz/passpor
 />
 ```
 
-If your app supports dynamic theming, you can toggle between these based on the user’s preference:
+If your app supports dynamic theming, you can toggle between these based on the user's preference:
 
 ```jsx
 const theme = isDarkMode ? DarkTheme : LightTheme;
@@ -34,7 +45,7 @@ These built-in themes provide a solid foundation and follow best practices for a
 
 ### Extending or Overriding Theme Properties
 
-You can also override specific theme values by spreading one of the defaults and replacing the properties you’d like to change:
+You can also override specific theme values by spreading one of the defaults and replacing the properties you'd like to change:
 
 ```jsx
 const customTheme = {
@@ -46,9 +57,11 @@ const customTheme = {
 };
 ```
 
-## Full Theme Schema
+### Full Theme Schema
 
-Here are the available fields in the PassportWidgetTheme object:
+The PassportWidgetTheme object lets you customize the look and feel of the widget.
+
+All fields are optional — if a value is not specified, the defaults from the selected base theme (DarkTheme or LightTheme) will be used.
 
 ```jsx
 export type PassportWidgetTheme = {
@@ -85,16 +98,12 @@ export type PassportWidgetTheme = {
 };
 ```
 
-All values are optional. If a field is not specified, the default from the base theme (Dark or Light) will be used.
-
-### Tips
-
-Tips
-
-* Theme values such as colors.primary must be in RGB format: for example, `"255, 255, 0"`.
-* Font families must match fonts already loaded on the page.
-* `overlayZIndex` is only used in `collapseMode="overlay"`.
-* Use `transition.speed` to adjust animation timing (for example, `"0.3s"`).
+### Tips & Requirements
+* `colors.*` must be defined using RGB format — for example: "255, 255, 0" (Hex codes and named colors are not supported)
+* Font families must reference fonts that are already loaded on the page
+* `overlayZIndex` is only applied when `collapseMode` is set to `overlay`
+* Use `transition.speed` to fine-tune widget animation timing (e.g. `0.2s`, `0.5s`)
+* All values are optional — anything you omit will fall back to the base theme
 
 
 ### Example

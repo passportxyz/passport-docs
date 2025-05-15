@@ -7,51 +7,81 @@ import { Callout } from 'nextra/components'
 
 # Passport Embed - Quick Start
 
-Get up and running with Passport Embeds in just a few minutes. This section provides a beginner-friendly setup for both React and non-React environments, covering the essential configuration and a simple integration example.
+Get up and running with Passport Embed in just a few minutes. This section provides a beginner-friendly setup for both React and non-React environments, covering the essential configuration and a simple integration example.
 
 ## Obtain Your Credentials
 
-If you haven't already, please generate an API key and a Scorer ID by following the steps in our [getting access guide](getting-access).
+If you haven't already, please generate an API key and a Scorer ID by following the steps in our [getting access guide](getting-access). You will also need to [reach out to the Passport team](https://tally.so/r/3X81KL) to gain access to the Passport Embed product.
 
 ## Installing and Importing
 
-### React (Recommended)
+Here's the simplest way to render the widget in a React app. 
 
-Here’s the simplest way to render the widget in a React app. If a wallet address is already available (e.g. the user connected their wallet earlier in your app), the widget can use it automatically. The `connectWalletCallback` is only needed if you want the widget to prompt users to connect. If omitted, the widget will still detect if the wallet is already connected (e.g., via MetaMask) and proceed using the available address.
+**Step 1. Install the NPM package:** 
 
-1. Install the NPM package: Add the Passport Embeds React package to your project:
+Add the Passport Embed React package to your project:
 
 ```bash
-npm install @passportxyz/passport-embed
+npm install @human-tech/passport-embed
 # or
-yarn add @passportxyz/passport-embed
+yarn add @human-tech/passport-embed
 ```
 
-2. Import the component in your React code and render it where appropriate. For example, in a React component or page:
+**Step 2. Import the component in your React code and render it where appropriate.** 
+
+First we'll provide you a code example, then we'll break down each prop.
 
 ```jsx
-import { PassportScoreWidget, DarkTheme, LightTheme } from "@passportxyz/passport-embed";
+import { PassportScoreWidget, DarkTheme, LightTheme, usePassportScore } from "@passportxyz/passport-embed";
+
+const PASSPORT_API_KEY = "<YOUR_API_KEY>";
+const PASSPORT_SCORER_ID="<YOUR_SCORER_ID>";
 
 function MyPage() {
+  const { passingScore } = usePassportScore({
+    apiKey: PASSPORT_API_KEY,
+    scorerId: PASSPORT_SCORER_ID,
+    address: userAddress
+  });
+  
+const signMessage = async (message: string): Promise<string> => {
+  const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+  return await window.ethereum.request({
+    method: "personal_sign",
+    params: [message, accounts[0]]
+  });
+};
+
   return (
     <PassportScoreWidget 
-      apiKey="<YOUR_API_KEY>" 
-      scorerId="<YOUR_SCORER_ID>" 
+      apiKey={PASSPORT_API_KEY}
+      scorerId={PASSPORT_SCORER_ID}
       address={userAddress} 
-      generateSignatureCallback={generateSignature} 
+      generateSignatureCallback={signMessage} 
       theme={isDarkMode ? DarkTheme : LightTheme}
     />
   );
 }
 ```
 
-This minimal example renders the Passport widget. At a minimum you should pass your `apiKey`, the `scorerId` for your use case, the user’s address (if already known), and a `generateSignatureCallback` function that will be called to sign any required messages. In a real app, you might initially leave address undefined and, if you’ve passed `connectWalletCallback`, the widget will prompt the user to connect their wallet when needed.
+This minimal example renders the Passport widget. 
 
-You can also set a `theme` prop to apply a dark or light theme.
+At a minimum, you should pass your `apiKey`, the `scorerId`, the user's `address` (if already known), and a `generateSignatureCallback` function (described below) that will be called to sign any required messages. 
 
-#### Example signature callback
+If you don't already have the user's address, you can optionally pass a `connectWalletCallback` function (described below) to prompt the user to connect their wallet via your connection flow.
 
-This function signs a message using the user’s wallet (typically MetaMask) to authorize the Passport score request.
+You can optionally set a `theme` prop to apply a dark or light theme.
+
+A final note that we provide a React hook called `usePassportScore()` that fetches the user's score and tells you whether they've passed the threshold — so you can reactively show or hide content in your app. But — frontend values can be spoofed, so don’t trust it for sensitive program protection. Instead, use `passingScore` as a signal to trigger a backend verification request via the [Passport API](/building-with-passport/stamps/passport-api/overview). The Passport API will actually confirm the score server-side, meaning you can confidently unlock protected features based on the user's score.
+
+
+#### Example signature callback for OAuth Stamps
+
+The Passport Stamps product includes several OAuth-based Stamps (e.g. GitHub, Twitter, Discord) that users can verify to build up their score.
+
+These Stamps require a signature to confirm that the user completing the OAuth verification also controls the wallet address they’re associating with the Stamp.
+
+The following function can be included in your code to prompt the user to sign a challenge message with their wallet, proving wallet ownership and allowing the Passport backend to bind the OAuth identity to the correct address. This function should then be passed to the `generateSignatureCallback` prop:
 
 ```jsx
 const signMessage = async (message: string): Promise<string> => {
@@ -65,7 +95,13 @@ const signMessage = async (message: string): Promise<string> => {
 
 #### Example connect wallet callback
 
-This function prompts the user to connect their wallet and returns the selected address.
+If you don't already have the user's wallet address, you can pass a `connectWalletCallback` function to prompt the user to connect their wallet. 
+
+This is only necessary if:
+* You aren't already managing wallet connection elsewhere in your app, and
+* You're not using a wallet abstraction like Reown AppKit, which automatically provides the connected wallet address via a hook (e.g. `account?.address`).
+
+Here's an example of a simple function that could be passed to the `connectWalletCallback` prop:
 
 ```jsx
 const connectWallet = async () => {
@@ -74,90 +110,10 @@ const connectWallet = async () => {
 };
 ```
 
-### Non-React (Vanilla JS or Others)
-
-If you are not using React, you can still embed Passport by including a pre-built script and initializing the widget:
-
-1. Include the Embed script on your page (for example, via a CDN or hosted file).
-
-```html
-<!-- Include Passport Embeds script (hypothetical URL) -->
-<script src="https://cdn.passport.xyz/passport-embed.min.js" async></script>
-```
-
-This script will expose a global `PassportEmbed` object once loaded.
-
-2. Add an element container in your HTML where the widget should appear.
-
-```html
-<div id="passport-widget"></div>
-```
-
-3. Initialize the widget with configuration.
-
-```html
-<script>
-  PassportEmbed.render({
-    containerId: "passport-widget",
-    apiKey: "<YOUR_API_KEY>",
-    scorerId: "<YOUR_SCORER_ID>",
-    address: null, // or user's address if known
-    connectWalletCallback: async function() {
-      // Implement wallet connection (e.g., using window.ethereum)
-      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-      return accounts[0]; // return selected address
-    },
-    generateSignatureCallback: async function(message) {
-      // Implement signing (personal_sign)
-      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-      const from = accounts[0];
-      const hexMessage = "0x" + Buffer.from(message, "utf8").toString("hex");
-      return await window.ethereum.request({ method: "personal_sign", params: [hexMessage, from] });
-    }
-  });
-</script>
-```
-
-In the above snippet, we call a hypothetical `PassportEmbed.render` function with similar parameters. You provide the containerId of the placeholder `div`, your `apiKey` and `scorerId`, and define how to connect the wallet and sign messages. The widget will then handle rendering and displaying the Passport score UI inside the specified container.
-
-<Callout type="info">
-**Note:** The exact non-React integration API may vary. Typically, Passport will offer a script or web component for easy embedding. The core idea is the same – include a script and initialize the widget with your keys and callbacks.
-</Callout>
-
-## Basic Usage Example
-
-Let’s walk through a simple React integration example step by step, including typical user interaction:
-
-**Step 1: Render the widget.** Place `<PassportScoreWidget>` in your app, for example in a dashboard or gated content page. Initially, you might not have an **address** (if the user hasn't connected their wallet yet).
-
-**Step 2: Handle wallet connection.** You can pass a `connectWalletCallback` prop to the widget. If provided, the widget will display a “Connect Wallet” prompt for the user and call this callback when the user initiates connection. In the callback, you can use libraries like web3.js, ethers, or directly `window.ethereum` to request the user’s address (as shown in the examples above). Once you get the address, update your state and pass it back into the widget’s `address` prop. The widget will then automatically proceed to fetch the Passport score for that address.
-
-**Step 3: Signature for score retrieval.** When ready to fetch the score, Passport’s API will require a signature. The widget will call the provided `generateSignatureCallback`, passing in a challenge message (usually a random string). Your implementation should sign this message with the user’s wallet (for example, using `personal_sign` as in the example) and return the signature string. The widget will use this signature to securely retrieve the user’s Passport score data.
-
-**Step 4: Display results.** The `PassportScoreWidget` will then display the user’s Passport score and whether they meet the required threshold (the threshold is defined by the scorer – 20 by default for unique-human check​). If the user qualifies, the widget will show a success state. If not, it will walk users through steps to improve their score by verifying additional Stamps. The exact UI and messaging is handled by the widget.
-
-At this point, you have a functioning Passport Embed integrated. Users can connect their wallet, see their trust score, and your application can use that information (via the widget’s UI or via callback data) to decide if the user gets access to certain features. Example (React JSX): Below is a code excerpt demonstrating a typical integration, including a connect callback, signature callback, and use of the widget with all key props:
-
-```jsx
-import { PassportScoreWidget, DarkTheme } from "@passportxyz/passport-embed";
-
-<PassportScoreWidget
-  {...passportEmbedParams}                // contains apiKey and scorerId
-  address={address}                       // user's wallet address, if connected
-  collapseMode="shift"                    // how the widget expands/collapses
-  connectWalletCallback={async () => {
-    const addr = await connectWallet();   // your custom function to prompt MetaMask
-    setAddress(addr);                     // save address to state
-  }}
-  generateSignatureCallback={generateSignature}  // function to sign API challenge
-  theme={DarkTheme}
-/>
-```
-
-In the above example, `passportEmbedParams` would be an object containing your `apiKey` and `scorerId` (to avoid hardcoding them in JSX). The `connectWalletCallback` uses a `connectWallet()` helper (which likely calls `window.ethereum.request({ method: "eth_requestAccounts" })` as shown earlier) and then updates the component state with the returned address. The `generateSignatureCallback` uses a `generateSignature` helper (as shown earlier, using `personal_sign` to sign the message). We also pass a `collapseMode` (in this case `"shift"`) and apply the default `DarkTheme` for styling. To explore additional theme customizations, check out our customization guide.
 
 ## Next step
 
+* [Tutorial: Protecting Sensitive Programs with Passport Embed](tutorial/protecting-sensitive-programs-with-passport-embed)
 * Learn how to [customize Passport Embed](customization)
 * Review the [component reference guide](component-reference)
 * [Get support via our Telegram channel](https://t.me/+Mcp9RsRV7tVmYjZh)
