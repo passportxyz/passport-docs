@@ -391,6 +391,16 @@ module.exports = withNextra({
             source: '/building-with-passport/stamps/smart-contracts/overview',
             destination: '/building-with-passport/stamps/smart-contracts',
             permanent: true
+        },
+        {
+            source: '/building-with-passport/stamps/passport-embed/overview',
+            destination: '/building-with-passport/stamps/passport-embed',
+            permanent: true
+        },
+        {
+            source: '/overview/why-passport-xyz',
+            destination: '/overview/why-human-passport',
+            permanent: true
         }
     ]
 })
