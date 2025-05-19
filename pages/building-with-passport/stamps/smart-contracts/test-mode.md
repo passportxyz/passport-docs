@@ -21,8 +21,6 @@ When you sign in to the Passport app, you first have to enable Test Mode. There 
  
 Once Test Mode is enabled, you can click on `Bring Passport onchain` towards the bottom of the Passport app to view the supported testnets in a panel that pops out from the right-hand side of the page. The app switches over to whichever network you select by clicking on the preferred network in the panel in the app's UI.
 
-![Test mode UI](../../../public/test-mode-app.png)
-
 Other than the network selection panel, the behavior of the test app is identical to the real, "live" Passport app.
 
 

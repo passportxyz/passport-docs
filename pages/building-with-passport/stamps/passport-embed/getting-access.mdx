@@ -1,0 +1,47 @@
+---
+title: Getting access to Passport Embed
+description: Explainer for how to get access to Passport Embed.
+---
+
+import { Callout } from 'nextra/components'
+
+
+# Getting Access: Scorer ID and API Key
+
+Once you have your API key, you need to include it in your integration with Passport Embed. This allows Human Passport to identify your app and verify that you are authorized to access the API.
+
+<Callout type="info">
+You will need to [reach out to the Passport team](https://tally.so/r/3X81KL) to gain access to the Passport Embed product. 
+</Callout>
+
+<Callout type="info">
+**Please Note:**<br />
+You will need to create two API keys to use the Passport Embed product. One will be used for the actual Embed component, while the other will be used to make requests to the Passport API.
+
+You should only use a single Scorer for both the Embed and the Passport API requests.
+</Callout>
+
+### Getting Your API Key
+
+1. **Log in to the developer portal:** Go to [developer.passport.xyz](https://developer.passport.xyz) and log in to your account by connecting your wallet.
+2. **Navigate to the API Keys section:** After logging in, go to the "API Keys" section.
+3. **Generate an API key:** Click on the "+ Create a Key" button to generate a unique API key for your account. Make sure to create one for the embed component and another for the Passport API requests.
+4. **Store your API key securely:** Store your API key in a secure place.
+
+
+### Getting your Scorer ID
+A Scorer is an developer element that can be used to organize different use cases. You need to create a Scorer and associated Scorer ID to be able to set up Passport Embed and your Passport API requests.
+
+1. **Log in to the Developer Portal:** Go to [developer.passport.xyz](https://developer.passport.xyz) and log in to your account by connecting your wallet.
+2. **Navigate to the Scorer section:** After logging in, go to the "Scorer" section
+3. **Create a Scorer:** Click on the "+ Create a Scorer" button and input a Scorer name, description, and [score threshold](/building-with-passport/stamps/major-concepts/scoring-thresholds) (recommended 20). You will *only need one* for both the embed component and the Passport API. 
+4. **Find your Scorer ID:** Once created, you can find your Scorer ID from the main Scorers page in the Developer Portal.
+
+## Pricing and Access
+
+To learn more about accessing the Passport Embed product, please [contact the Human Passport team](https://tally.so/r/3X81KL).
+
+### Next step
+
+* [Quick start guide to Passport Embed](quick-start-guide)
+* [Review the Component Reference guide](component-reference)
