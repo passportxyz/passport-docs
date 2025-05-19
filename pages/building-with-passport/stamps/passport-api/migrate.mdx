@@ -150,7 +150,7 @@ To prevent multiple Passports from verifying the same credential (enhancing secu
 }
 ```
 
-In the above example, you'll notice that the Discord Stamp is [deduplicated](../major-concepts/deduplicating-stamps), meaning another address has also verified this same credential. As a result, the user received a 0 score for that Stamp. You will also note that a different expiration date returns when `dedup=true`. This date represents when the credential verified by the other address will expire, rather than when this credential will expire.
+In the above example, you'll notice that the Discord Stamp is [deduplicated](/building-with-passport/stamps/major-concepts/deduplicating-stamps), meaning another address has also verified this same credential. As a result, the user received a 0 score for that Stamp. You will also note that a different expiration date returns when `dedup=true`. This date represents when the credential verified by the other address will expire, rather than when this credential will expire.
 
 You will also see that the ENS Stamp was not deduplicated, meaning the 0.408 score was included in the user's overall unique humanity score. 
 

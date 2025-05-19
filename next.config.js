@@ -349,7 +349,7 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/models/introduction',
-            destination: '/building-with-passport/stamps/models',
+            destination: '/building-with-passport/models',
             permanent: true
         },
         {
@@ -380,6 +380,16 @@ module.exports = withNextra({
         {
             source: '/building-with-passport/overview/use-cases',
             destination: '/overview/use-cases',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/stamps/passport-api/overview',
+            destination: '/building-with-passport/stamps/passport-api',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/stamps/smart-contracts/overview',
+            destination: '/building-with-passport/stamps/smart-contracts',
             permanent: true
         }
     ]

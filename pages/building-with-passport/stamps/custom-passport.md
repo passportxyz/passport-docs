@@ -49,7 +49,7 @@ If you decide that you’d like to remove any Stamps or reweight their credentia
 
 You can find the current Passport Stamp and credentialweights in the following link:
 
-[Credential Map and Weights](../major-concepts/credential-map-and-weights.mdx)
+[Credential Map and Weights](/building-with-passport/stamps/major-concepts/credential-map-and-weights)
 
 Please let us know the following if you’d like to customize the score:
 * Which Stamps and credentials would you like to remove
@@ -84,6 +84,6 @@ As you provide these, we will build out your branded dashboard for you, and will
 
 ## Requesting Custom Passport data
 
-If you are just checking scores from your Custom Passport offchain, you can use the [Passport API v2](../passport-api/overview) to access your users' data.
+If you are just checking scores from your Custom Passport offchain, you can use the [Passport API v2](/building-with-passport/stamps/passport-api) to access your users' data.
 
-If, instead, you're enabling your users to push their Passport onchain and you are using a [custom scorer](#custom-scorer), you will need to use the [Decoder contract](/building-with-passport/smart-contracts/contract-reference#decoder-contract), and more specifically, the `getScore` (0xdaadd662) method, making sure to pass both your [scorer ID](/building-with-passport/passport-api/getting-access) and the specified wallet address to pull users' custom scores. 
+If, instead, you're enabling your users to push their Passport onchain and you are using a [custom scorer](#custom-scorer), you will need to use the [Decoder contract](/building-with-passport/stamps/smart-contracts/contract-reference#decoder-contract), and more specifically, the `getScore` (0xdaadd662) method, making sure to pass both your [scorer ID](/building-with-passport/stamps/passport-api/getting-access) and the specified wallet address to pull users' custom scores. 
