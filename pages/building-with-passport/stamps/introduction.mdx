@@ -38,23 +38,28 @@ Passport is a versatile and valuable tool for managing access, promoting transpa
 
 Passport score and Stamp data can be retrieved in two ways:
 
-* **Passport API v2:** Retrieves the Stamp-based Unique Humanity Score and associated metadata for a specified address. 
-* **Models API:** This API is currently in beta. Retrieves the Model Based Detection Score for a specified address.
-* **Passport Smart Contracts:** Interacts with a blockchain to retrieve Stamp-based Unique Humanity Scores associated with a specific address. 
+* **[Passport API v2](/building-with-passport/stamps/passport-api/overview):** Retrieves the Stamp-based Unique Humanity Score and associated metadata for a specified address. 
+* **[Passport Smart Contracts](/building-with-passport/stamps/smart-contracts/overview):** Interacts with a blockchain to retrieve Stamp-based Unique Humanity Scores associated with a specific address. 
+
+Passport's Stamps-based product can also be delivered to users in a few different ways:
+
+* **[Passport App](https://app.passport.xyz):** The standard Passport app that allows users to manage their Stamps and view their Passport score.
+* **[Passport Embed](/building-with-passport/stamps/passport-embed/overview):** A widget that can be embedded on a website or app to allow users to verify their identity.
+* **[Custom Passport](/building-with-passport/custom-passport):** A dashboard that can be customized to the unique needs of your ecosystem.
 
 ### Passport API v2
 
 The Passport API v2 serves as a powerful tool for developers, offering access to Passport scores and Stamps via several REST endpoints. 
 
 <Cards>
-  <Card title="Overview" href="/building-with-passport/passport-api/overview" />
-  <Card title="Get access" href="/building-with-passport/passport-api/getting-access" />
-  <Card title="Quick start" href="/building-with-passport/passport-api/quick-start-guide" />
-  <Card title="API reference" href="/building-with-passport/passport-api/api-reference" />
+  <Card title="Overview" href="/building-with-passport/stamps/passport-api/overview" />
+  <Card title="Get access" href="/building-with-passport/stamps/passport-api/getting-access" />
+  <Card title="Quick start" href="/building-with-passport/stamps/passport-api/quick-start-guide" />
+  <Card title="API reference" href="/building-with-passport/stamps/passport-api/api-reference" />
 </Cards>
 
 <Callout type="warning">
-**Please note:**<br />In November 2024, we soft-launched [Passport API v2](../passport-api/overview).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
+**Please note:**<br />In November 2024, we soft-launched [Passport API v2](building-with-passport/stamps/passport-api/overview).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](building-with-passport/stamps/passport-api/migrate).
 </Callout>
 
 ### Custom Passport
@@ -70,10 +75,10 @@ Custom Passport enables partners to develop a Human Passport dashboard that is c
 The Models API enables you to retrieve the Model Based Detection Score for a specified address using a REST endpoint.
 
 <Cards>
-  <Card title="Overview" href="/building-with-passport/model-based-detection/overview" />
-  <Card title="Get access" href="/building-with-passport/model-based-detection/getting-access" />
-  <Card title="Tutorial" href="/building-with-passport/model-based-detection/tutorials/double-verification" />
-  <Card title="API reference" href="/building-with-passport/model-based-detection/api-reference" />
+  <Card title="Overview" href="/building-with-passport/models" />
+  <Card title="Get access" href="/building-with-passport/models/getting-access" />
+  <Card title="Tutorial" href="/building-with-passport/models/tutorials/double-verification" />
+  <Card title="API reference" href="/building-with-passport/models/api-reference" />
 </Cards>
 
 ### Smart contracts
@@ -81,9 +86,9 @@ The Models API enables you to retrieve the Model Based Detection Score for a spe
 Passport's smart contracts enable you to pull score and Stamp data directly from the blockchain to enable a truly decentralized integration. 
 
 <Cards>
-  <Card title="Overview" href="/building-with-passport/smart-contracts/overview" />
-  <Card title="Tutorial" href="/building-with-passport/smart-contracts/integrating-onchain-stamp-data" />
-  <Card title="Contract reference" href="/building-with-passport/passport-api/contract-reference" />
+  <Card title="Overview" href="/building-with-passport/stamps/smart-contracts/overview" />
+  <Card title="Tutorial" href="/building-with-passport/stamps/smart-contracts/integrating-onchain-stamp-data" />
+  <Card title="Contract reference" href="/building-with-passport/stamps/smart-contracts/contract-reference" />
 </Cards>
 
 ### ComposeDB
@@ -102,9 +107,9 @@ Read more on [ComposeDB](composedb.md).
 
 To begin your development journey with Human Passport, follow these steps:
 
-- [Get an API key and scorer ID for the APIs](/building-with-passport/passport-api/getting-access)
+- [Get an API key and scorer ID for the APIs](/building-with-passport/stamps/passport-api/getting-access)
 - [Use the API playground tool (requires API keys)](https://api.passport.xyz/v2/docs)
-- [Get to "Hello World" with Passport API v2](/building-with-passport/passport-api/quick-start-guide)
+- [Get to "Hello World" with Passport API v2](/building-with-passport/stamps/passport-api/quick-start-guide)
 
 By following these steps, you'll be well-equipped to start integrating Passport into your platform.
 

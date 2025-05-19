@@ -303,6 +303,16 @@ module.exports = withNextra({
             permanent: true
         },
         {
+            source: '/building-with-passport/model-based-detection/overview',
+            destination: '/building-with-passport/models/index',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/model-based-detection/introduction',
+            destination: '/building-with-passport/models/index',
+            permanent: true
+        },
+        {
             source: '/building-with-passport/stamps/overview',
             destination: '/building-with-passport/stamps/create-a-stamp/overview',
             permanent: true
