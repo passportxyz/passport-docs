@@ -204,7 +204,7 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/major-concepts/onchain-passports',
-            destination: '/building-with-passport/stamps/smart-contracts/overview',
+            destination: '/building-with-passport/stamps/smart-contracts',
             permanent: true
         },
         {
@@ -259,17 +259,12 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/passport-api',
-            destination: '/building-with-passport/stamps/passport-api/overview',
+            destination: '/building-with-passport/stamps/passport-api',
             permanent: true
         },
         {
             source: '/building-with-passport/passport-api/tutorials',
             destination: '/building-with-passport/stamps/passport-api-v1/tutorials',
-            permanent: true
-        },
-        {
-            source: '/building-with-passport/major-concepts/scoring-mechanisms',
-            destination: '/building-with-passport/stamps/introduction',
             permanent: true
         },
         {
@@ -284,7 +279,7 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/passport-api-v2/overview',
-            destination: '/building-with-passport/stamps/passport-api/overview',
+            destination: '/building-with-passport/stamps/passport-api',
             permanent: true
         },
         {
@@ -304,27 +299,22 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/model-based-detection/overview',
-            destination: '/building-with-passport/models/index',
+            destination: '/building-with-passport/models',
             permanent: true
         },
         {
             source: '/building-with-passport/model-based-detection/introduction',
-            destination: '/building-with-passport/models/index',
+            destination: '/building-with-passport/models',
             permanent: true
         },
         {
             source: '/building-with-passport/stamps/overview',
-            destination: '/building-with-passport/stamps/create-a-stamp/overview',
+            destination: '/building-with-passport/stamps/create-a-stamp',
             permanent: true
         },
         {
             source: '/building-with-passport/stamps/integrating-a-new-stamp',
             destination: '/building-with-passport/stamps/create-a-stamp/integrating-a-new-stamp',
-            permanent: true
-        },
-        {
-            source: '/building-with-passport/major-concepts/:path*',
-            destination: '/building-with-passport/stamps/major-concepts/:path*',
             permanent: true
         },
         {
@@ -350,6 +340,46 @@ module.exports = withNextra({
         {
             source: '/building-with-passport/custom-passport',
             destination: '/building-with-passport/stamps/custom-passport',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/passport-embed/overview',
+            destination: '/building-with-passport/stamps/passport-embed',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/models/introduction',
+            destination: '/building-with-passport/stamps/models',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/major-concepts/scoring-thresholds',
+            destination: '/building-with-passport/stamps/major-concepts/scoring-thresholds',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/tutorials/integrating-stamps-and-scorers',
+            destination: '/building-with-passport/stamps/passport-api-v1/tutorials/integrating-stamps-and-scorers',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/tutorials/working-with-stamp-metadata',
+            destination: '/building-with-passport/stamps/passport-api-v1/tutorials/working-with-stamp-metadata',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/introduction',
+            destination: '/building-with-passport/stamps/passport-api',
+            permanent: true
+        },
+        {
+            source: '/stamps/overview',
+            destination: '/building-with-passport/stamps/create-a-stamp',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/overview/use-cases',
+            destination: '/overview/use-cases',
             permanent: true
         }
     ]
