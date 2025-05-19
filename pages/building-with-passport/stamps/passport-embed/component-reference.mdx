@@ -74,7 +74,7 @@ Fetches the user's Passport score and verification status for a given wallet add
 
 <Callout type="info">
 **Please note:**<br />
-If you are simply displaying a user's score, relying on the data returned by the `usePassportScore` should suffice.<br /><br />However, since frontend values can be spoofed, don’t trust it for sensitive program protection. Instead, use `isPassing` as a signal to trigger a backend verification request via the [Passport API](/building-with-passport/stamps/passport-api/overview). The Passport API will actually confirm the score server-side, meaning you can confidently unlock protected features based on the user's score.
+If you are simply displaying a user's score, relying on the data returned by the `usePassportScore` should suffice.<br /><br />However, since frontend values can be spoofed, don’t trust it for sensitive program protection. Instead, use `isPassing` as a signal to trigger a backend verification request via the [Passport API](/building-with-passport/stamps/passport-api). The Passport API will actually confirm the score server-side, meaning you can confidently unlock protected features based on the user's score.
 </Callout>
 
 #### Returns

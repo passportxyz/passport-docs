@@ -7,7 +7,7 @@ import { Callout } from 'nextra/components'
 # Passport API v2 -- API Reference
 
 <Callout type="info">
-**Please note:**<br />Passport API v2 simplifies and adds key functionality that wasn't previously available with [Passport API v1](../passport-api-v1/overview). Because of this, it is recommended for you to use Passport API v2 moving forward.<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, and plan to provide more details before the end of 2024.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
+**Please note:**<br />Passport API v2 simplifies and adds key functionality that wasn't previously available with [Passport API v1](/building-with-passport/stamps/passport-api-v1). Because of this, it is recommended for you to use Passport API v2 moving forward.<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, and plan to provide more details before the end of 2024.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
 </Callout>
 
 The Passport API enables developers to retrieve Human Passport scores and Stamp metadata for users who have created a Passport.
@@ -58,8 +58,8 @@ Access starts with Tier 1. If you need an elevation, please [request higher rate
 There are several key concepts you should be aware of when using the Passport API:
 
 * **Timeouts:** The Passport API endpoints have a timeout of 60 seconds. This means that if a request to one of these endpoints does not receive a response within 60 seconds, the request will be aborted. If your request times out, you should set up retry logic by calling the API again after a short delay, typically increasing the delay for each subsequent retry.
-* **Pagination:** Some requests return a large amount of data. To effectively retrieve this data, you will need to paginate the response. For more information, see [API pagination](/building-with-passport/major-concepts/api-pagination).
-* **Data dictionary:** For definitions of the data types used in Passport API v2, see the [Data dictionary](data-dictionary) page.
+* **Pagination:** Some requests return a large amount of data. To effectively retrieve this data, you will need to paginate the response. For more information, see [API pagination](/building-with-passport/stamps/major-concepts/api-pagination).
+* **Data dictionary:** For definitions of the data types used in Passport API v2, see the [Data dictionary](/building-with-passport/stamps/major-concepts/data-dictionary) page.
 
 ## Available endpoints
 
@@ -117,7 +117,7 @@ curl --request GET \
 }
 ```
 
-Learn more about the [data dictionary](data-dictionary).
+Learn more about the [data dictionary](/building-with-passport/stamps/major-concepts/data-dictionary).
 
 
 ### Retrieve historical score for a single address

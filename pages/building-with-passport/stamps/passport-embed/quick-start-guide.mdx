@@ -72,7 +72,7 @@ If you don't already have the user's address, you can optionally pass a `connect
 
 You can optionally set a `theme` prop to apply a dark or light theme.
 
-A final note that we provide a React hook called `usePassportScore()` that fetches the user's score and tells you whether they've passed the threshold — so you can reactively show or hide content in your app. But — frontend values can be spoofed, so don’t trust it for sensitive program protection. Instead, use `passingScore` as a signal to trigger a backend verification request via the [Passport API](/building-with-passport/stamps/passport-api/overview). The Passport API will actually confirm the score server-side, meaning you can confidently unlock protected features based on the user's score.
+A final note that we provide a React hook called `usePassportScore()` that fetches the user's score and tells you whether they've passed the threshold — so you can reactively show or hide content in your app. But — frontend values can be spoofed, so don’t trust it for sensitive program protection. Instead, use `passingScore` as a signal to trigger a backend verification request via the [Passport API](/building-with-passport/stamps/passport-api). The Passport API will actually confirm the score server-side, meaning you can confidently unlock protected features based on the user's score.
 
 
 #### Example signature callback for OAuth Stamps
