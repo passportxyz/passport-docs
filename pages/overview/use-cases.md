@@ -51,9 +51,8 @@ By protecting access to Passport holders that have a score over a certain [thres
 Running a DAO is hard enough without Sybils submitting proposals and influencing a vote in their favor. You can prevent this by protecting access to your governance platforms using Passport. 
 
 #### Active integrators
-* [Discourse](https://www.gitcoin.co/blog/protect-discourse-forum-from-bots-sybils-with-gitcoin-passport)
+* [Discourse](https://passport.human.tech/blog/how-to-protect-your-discourse-forum-from-bots-and-sybils-with-human-passport)
 * Snapshot
-
 
 ![protecting communications](../../public/protect-communication.png)
 
@@ -67,7 +66,7 @@ Running a DAO is hard enough without Sybils submitting proposals and influencing
 Tired of low-quality inbounds or contributions to a communication channel? Protect access to certain channels, roles, or actions within your communications platform to ensure your users have high-quality interactions.
 
 #### Active integrators
-* [Discourse](https://www.gitcoin.co/blog/protect-discourse-forum-from-bots-sybils-with-gitcoin-passport)
+* [Discourse](https://passport.human.tech/blog/how-to-protect-your-discourse-forum-from-bots-and-sybils-with-human-passport)
 * [Guild](https://www.gitcoin.co/blog/guild-xyz-and-gitcoin-passport-partner)
 * Collab.land
 * Metaforo
