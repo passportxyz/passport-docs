@@ -1,22 +1,22 @@
 ---
-title: Passport API v1 -- API reference
-description: Reference documentation for the Passport API v1
+title: Stamps API v1 -- API reference
+description: Reference documentation for the Stamps API v1
 ---
 import { Callout } from 'nextra/components'
 
-# Passport API v1 -- API Reference
+# Stamps API v1 -- API Reference
 
 <Callout type="warning">
-**Please note:**<br />In November 2024, we soft-launched [Passport API v2](/building-with-passport/stamps/passport-api).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
+**Please note:**<br />In November 2024, we soft-launched [Stamps API v2](/building-with-passport/stamps/passport-api).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
 </Callout>
 
-The Passport API enables developers to retrieve Human Passport scores and Stamp metadata for users who have created a Human Passport.
+The Stamps API enables developers to retrieve Human Passport scores and Stamp metadata for users who have created a Human Passport.
 
-You can also experiment with the Passport API using our [API playground tool](https://api.passport.xyz/docs) and adding your API keys via the 'Authorize' button.
+You can also experiment with the Stamps API using our [API playground tool](https://api.passport.xyz/docs) and adding your API keys via the 'Authorize' button.
 
 ## Authentication
 
-To access the Passport API, you will need a [Scorer ID and an API key](getting-access).
+To access the Stamps API, you will need a [Scorer ID and an API key](getting-access).
 
 To make a successful request, you will need to include your API key in the "Authorization" header of each API request. The header should have the following format:
 
@@ -35,7 +35,7 @@ curl --request GET 'https://api.scorer.gitcoin.co/registry/signing-message' \
 
 Your API key will allow you to make up to a certain number of requests to any of the endpoints included on this page during a certain period of time.
 
-Requests made to the Passport API v1 and v2 count towards the same rate limit.
+Requests made to the Stamps API v1 and v2 count towards the same rate limit.
 
 You will start off with Tier 1, and will need to [request higher rate limits](https://docs.google.com/forms/d/e/1FAIpQLSeUATg0nTE9ws3qESGBktFcOX0brF19iv2L0BLoiub9pbSMeg/viewform) if necessary.
 
@@ -48,11 +48,11 @@ You will start off with Tier 1, and will need to [request higher rate limits](ht
 
 ## Key concepts
 
-There are several key concepts you should be aware of when using the Passport API:
+There are several key concepts you should be aware of when using the Stamps API:
 
-* **Timeouts:** The Passport API endpoints have a timeout of 60 seconds. This means that if a request to one of these endpoints does not receive a response within 60 seconds, the request will be aborted. If your request times out, you should set up retry logic by calling the API again after a short delay, typically increasing the delay for each subsequent retry.
+* **Timeouts:** The Stamps API endpoints have a timeout of 60 seconds. This means that if a request to one of these endpoints does not receive a response within 60 seconds, the request will be aborted. If your request times out, you should set up retry logic by calling the API again after a short delay, typically increasing the delay for each subsequent retry.
 * **Pagination:** Some requests return a large amount of data. To effectively retrieve this data, you will need to paginate the response. For more information, see [API pagination](/building-with-passport/major-concepts/api-pagination).
-* **Data dictionary:** We have put together a [data dictionary](/building-with-passport/major-concepts/data-dictionary) that you can use to better understand each field that delivers with the response payloads from the Passport API endpoints.
+* **Data dictionary:** We have put together a [data dictionary](/building-with-passport/major-concepts/data-dictionary) that you can use to better understand each field that delivers with the response payloads from the Stamps API endpoints.
 
 
 ## Available endpoints

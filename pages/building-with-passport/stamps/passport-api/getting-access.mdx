@@ -1,27 +1,27 @@
 ---
-title: Getting access to the Passport API v2
-description: Explainer for how to get access to the Passport API v2.
+title: Getting access to the Stamps API v2
+description: Explainer for how to get access to the Stamps API v2.
 ---
 import { Callout } from 'nextra/components'
 
 # Getting Access: Scorer ID and API Key
 
-The Passport API provides programmatic access to a wallet's Passport score. Once you have your API key, you need to include it with each request you make to the API. This allows Human Passport to identify your app and verify that you are authorized to access the API.
+The Stamps API provides programmatic access to a wallet's Passport score. Once you have your API key, you need to include it with each request you make to the API. This allows Human Passport to identify your app and verify that you are authorized to access the API.
 
 ### Getting Your API Key
 
 1. **Log in to the developer portal:** Go to [developer.passport.xyz](https://developer.passport.xyz) and log in to your account by connecting your wallet.
 2. **Navigate to the API Keys section:** After logging in, go to the "API Keys" section.
 3. **Generate an API key:** Click on the "+ Create a Key" button to generate a unique API key for your account.
-4. **Store your API key securely:** Store your API key in a secure place, as it will be used to access the Passport API.
+4. **Store your API key securely:** Store your API key in a secure place, as it will be used to access the Stamps API.
 
 
 ### Getting your Scorer ID
-A Scorer is an developer element that can be used to organize different use cases. You need to create a Scorer and associated Scorer ID to be able to request user data via the Passport API. If you are using the Passport API in multiple use cases, you should set up separate Scorers for each one.
+A Scorer is an developer element that can be used to organize different use cases. You need to create a Scorer and associated Scorer ID to be able to request user data via the Stamps API. If you are using the Stamps API in multiple use cases, you should set up separate Scorers for each one.
 
 1. **Log in to the Developer Portal:** Go to [developer.passport.xyz](https://developer.passport.xyz) and log in to your account by connecting your wallet.
 2. **Navigate to the Scorer section:** After logging in, go to the "Scorer" section
-3. **Create a Scorer:** Click on the "+ Create a Scorer" button and input a Scorer name, description, and [score threshold](/building-with-passport/stamps/major-concepts/scoring-thresholds) (recommended 20). You only need to add a score threshold if you plan to use the Passport Embed product, or plan to use the `passing_score` field in the Passport API response.  
+3. **Create a Scorer:** Click on the "+ Create a Scorer" button and input a Scorer name, description, and [score threshold](/building-with-passport/stamps/major-concepts/scoring-thresholds) (recommended 20). You only need to add a score threshold if you plan to use the Passport Embed product, or plan to use the `passing_score` field in the Stamps API response.  
 4. **Find your Scorer ID:** Once created, you can find your Scorer ID from the main Scorers page in the Developer Portal.
 
 ### Next step

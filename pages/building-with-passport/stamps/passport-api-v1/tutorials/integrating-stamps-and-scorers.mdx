@@ -7,7 +7,7 @@ import { Callout } from 'nextra/components'
 # Integrating Stamps and Scorers
 
 <Callout type="warning">
-**Please note:**<br />In November 2024, we soft-launched [Passport API v2](/building-with-passport/stamps/passport-api).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />We are actively working on updating the v1 tutorials to use v2.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
+**Please note:**<br />In November 2024, we soft-launched [Stamps API v2](/building-with-passport/stamps/passport-api).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />We are actively working on updating the v1 tutorials to use v2.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
 </Callout>
 
 Passport XYZ can be used to automatically gate applications, but it can also be used as a powerful tool for supporting human decision makers by providing trust information in the app's UI. Instead of blocking access using a score threshold, Passport XYZ can display trust information about users connected to an app to other users, enabling better informed interactions.
@@ -24,7 +24,7 @@ Note, however, that it is possible for someone to be an impersonator and _also_ 
 
 You can find the code from this tutorial in this [GitHub repo](https://github.com/passportxyz/passport-scorer/tree/main/examples/check-trusted-user-app):
 
-Let's see how an integration like this is built using the Passport API.
+Let's see how an integration like this is built using the Stamps API.
 
 ### Prerequisites
 
@@ -74,7 +74,7 @@ This tutorial will also use [Chakra-UI](https://chakra-ui.com/) for styling, so 
 npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
 ```
 
-Now, create a new file in `passport-app`/ and add the following to set the Passport API Key and Scorer ID values (if you need a reminder of how to get the API key and Scorer values, revisit the Quick Start guide):
+Now, create a new file in `passport-app`/ and add the following to set the Stamps API Key and Scorer ID values (if you need a reminder of how to get the API key and Scorer values, revisit the Quick Start guide):
 
 ```sh
 NEXT_PUBLIC_GC_API_KEY=<your-api-key>
@@ -408,7 +408,7 @@ In our `checkPassport()` function, we can pass the responses from `getPassportSc
 const [userInfo, setUserInfo] = useState<Array<UserStruct>>([])
 ```
 
-Now, we can update `checkPassport()` to create a new `UserStruct` from the values returned from the Passport API calls, plus the user address and a unique ID calculated by adding 1 to the current length of the `userInfo` array. This new `UserStruct` is added to the `userInfo` array using the `setUserInfo` method.
+Now, we can update `checkPassport()` to create a new `UserStruct` from the values returned from the Stamps API calls, plus the user address and a unique ID calculated by adding 1 to the current length of the `userInfo` array. This new `UserStruct` is added to the `userInfo` array using the `setUserInfo` method.
 
 Remember, before constructing the `UserStruct` we have to parse the Stamp providers into an array of `Stamps` that can be passed to the `UserStruct`'s `stampProviders` field.
 

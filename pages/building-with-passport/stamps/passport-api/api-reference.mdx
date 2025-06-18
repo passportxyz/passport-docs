@@ -1,14 +1,14 @@
 ---
-title: Passport API v2 -- API reference
-description: Reference documentation for the Passport API v2
+title: Stamps API v2 -- API reference
+description: Reference documentation for the Stamps API v2
 ---
 import { Callout } from 'nextra/components'
 
-# Passport API v2 -- API Reference
+# Stamps API v2 -- API Reference
 
-The Passport API enables developers to retrieve Human Passport scores and Stamp metadata for users who have created a Passport.
+The Stamps API enables developers to retrieve Human Passport scores and Stamp metadata for users who have created a Passport.
 
-You can also experiment with the Passport API using our [API playground tool](https://api.passport.xyz/v2/docs) and adding your API keys via the 'Authorize' button.
+You can also experiment with the Stamps API using our [API playground tool](https://api.passport.xyz/v2/docs) and adding your API keys via the 'Authorize' button.
 
 In the examples below, replace the following placeholder values with your actual data:
 - `{scorer_id}` - Your Scorer ID from the developer portal
@@ -18,7 +18,7 @@ In the examples below, replace the following placeholder values with your actual
 
 ## Authentication
 
-To access the Passport API, you will need a [Scorer ID and an API key](getting-access).
+To access the Stamps API, you will need a [Scorer ID and an API key](getting-access).
 
 To make a successful request, you will need to include your API key in the "Authorization" header of each API request. The header should have the following format:
 
@@ -37,7 +37,7 @@ curl --request GET 'https://api.passport.xyz/v2/stamps/{scorer_id}/score/{addres
 
 Your API key will allow you to make up to a certain number of requests to any of the endpoints included on this page during a certain period of time.
 
-Requests made to the Passport API v1 and v2 count towards the same rate limit.
+Requests made to the Stamps API v1 and v2 count towards the same rate limit.
 
 Access starts with Tier 1. If you need an elevation, please [request higher rate limits](https://docs.google.com/forms/d/e/1FAIpQLSeUATg0nTE9ws3qESGBktFcOX0brF19iv2L0BLoiub9pbSMeg/viewform).
 
@@ -51,15 +51,15 @@ Access starts with Tier 1. If you need an elevation, please [request higher rate
 
 ## Key concepts
 
-There are several key concepts you should be aware of when using the Passport API:
+There are several key concepts you should be aware of when using the Stamps API:
 
-* **Timeouts:** The Passport API endpoints have a timeout of 60 seconds. This means that if a request to one of these endpoints does not receive a response within 60 seconds, the request will be aborted. If your request times out, you should set up retry logic by calling the API again after a short delay, typically increasing the delay for each subsequent retry.
+* **Timeouts:** The Stamps API endpoints have a timeout of 60 seconds. This means that if a request to one of these endpoints does not receive a response within 60 seconds, the request will be aborted. If your request times out, you should set up retry logic by calling the API again after a short delay, typically increasing the delay for each subsequent retry.
 * **Pagination:** Some requests return a large amount of data. To effectively retrieve this data, you will need to paginate the response. For more information, see [API pagination](/building-with-passport/stamps/major-concepts/api-pagination).
-* **Data dictionary:** For definitions of the data types used in Passport API v2, see the [Data dictionary](/building-with-passport/stamps/major-concepts/data-dictionary) page.
+* **Data dictionary:** For definitions of the data types used in Stamps API v2, see the [Data dictionary](/building-with-passport/stamps/major-concepts/data-dictionary) page.
 
 ## Available endpoints
 
-Passport API v2 base URL: https://api.passport.xyz
+Stamps API v2 base URL: https://api.passport.xyz
 
 | Endpoint action                                                                                   | Endpoint                                                    |
 |---------------------------------------------------------------------------------------------------|-------------------------------------------------------------|

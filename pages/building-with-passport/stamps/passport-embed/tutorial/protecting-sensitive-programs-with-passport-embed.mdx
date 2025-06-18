@@ -54,7 +54,7 @@ This installs:
 Create a file named .env in the project root and add the following variables (replace placeholders with your values):
 
 ```bash
-# Passport API credentials (for Gitcoin Passport API)
+# Stamps API credentials (for Gitcoin Stamps API)
 VITE_PASSPORT_API_KEY=<YOUR_PASSPORT_API_KEY>
 VITE_EMBED_API_KEY=<YOUR_EMBED_API_KEY>
 VITE_PASSPORT_SCORER_ID=<YOUR_PASSPORT_SCORER_ID>
@@ -66,7 +66,7 @@ VITE_REOWN_PROJECT_ID=<YOUR_REOWN_PROJECT_ID>   # Project ID from Reown (WalletC
 VITE_RPC_URL=https://rpc.ankr.com/eth   # Public Mainnet RPC (or use your own Infura/Alchemy URL)
 ```
 
-* `VITE_PASSPORT_API_KEY`: Your API key for the Passport API (get this from [Passport Developer Portal](https://developer.passport.xyz/)). This is used via the backend to verify that the user's Passport scores is above the passing threshold.
+* `VITE_PASSPORT_API_KEY`: Your API key for the Stamps API (get this from [Passport Developer Portal](https://developer.passport.xyz/)). This is used via the backend to verify that the user's Passport scores is above the passing threshold.
 * `VITE_EMBED_API_KEY`: Your API key for the Passport Embed component (get this from [Passport Developer Portal](https://developer.passport.xyz/)). This is used on the frontend by the Passport Embed component.
 * `VITE_PASSPORT_SCORER_ID`: The ID of the Passport Scorer to use, which you can generate via the [Passport Developer Portal](https://developer.passport.xyz/). You will set up your [score threshold](/building-with-passport/stamps/major-concepts/scoring-thresholds) during the Scorer creation process.
 * `VITE_REOWN_PROJECT_ID`: A Project ID from Reown’s cloud dashboard for WalletConnect. You can obtain one at cloud.reown.com (Reown provides a demo projectId for localhost testing if needed).
@@ -238,12 +238,12 @@ export default App;
 
 Notes on the frontend:
 - We use Reown’s `useAccount` (via wagmi) to get the currently connected wallet address. If no address is connected, we render a Connect Wallet prompt. The `<appkit-button />` is a built-in Reown AppKit web component that triggers the wallet connection modal – when clicked, it allows the user to select a wallet (MetaMask, WalletConnect, etc.) and connect. Once connected, the `useAccount` hook will populate the `address`.
-- The Passport Embeds hook `usePassportScore` is initialized with the API key, scorer ID, and the user’s address. This hook automatically fetches the user’s latest Passport score from the Passport API and provides:
+- The Passport Embeds hook `usePassportScore` is initialized with the API key, scorer ID, and the user’s address. This hook automatically fetches the user’s latest Passport score from the Stamps API and provides:
   - `score`: the numeric Passport score (sum of all stamp points).
   - `isPassing`: boolean indicating if the score meets the scorer’s threshold (e.g., >= 20 points).
   - `loading` and `error`: state for the fetch operation.
 - We also render a `<PassportScoreWidget>` component from the Passport SDK. This is an embeddable widget that visually displays the user’s Passport stamps and overall score. It uses the same `apiKey`, `scorerId`, and `address`. We pass a `theme` prop to it, choosing `DarkTheme` or `LightTheme` from the library based on the user’s system prefers-color-scheme. This means the widget will automatically style itself to match the user’s light or dark mode preference.
-- When the user’s score becomes passing (`isPassing === true`), a `useEffect` hook triggers a call to our backend (`/verify-passport`). We send the user’s address in the POST request. The backend will independently fetch the score from the Passport API (using a secure API key) and respond with a status. We store this status in state (`backendStatus`):
+- When the user’s score becomes passing (`isPassing === true`), a `useEffect` hook triggers a call to our backend (`/verify-passport`). We send the user’s address in the POST request. The backend will independently fetch the score from the Stamps API (using a secure API key) and respond with a status. We store this status in state (`backendStatus`):
   - If `data.status === "passed"`, it means the backend confirmed the score is high enough. We then display the protected image/content.
   - If not, we show a failure message.
 - The protected image is requested from a special endpoint `/protected-image?address=....` Notice that we include the user’s address as a query parameter – our backend will use this to double-check the score on each image request as an extra security measure (so someone cannot just guess the image URL without passing the check).
@@ -271,7 +271,7 @@ const app = express();
 
 app.use(express.json());
 
-// POST /verify-passport – Verify user's Passport score via Passport API
+// POST /verify-passport – Verify user's Passport score via Stamps API
 app.post('/verify-passport', async (req, res) => {
   const { address } = req.body;
   if (!address) {
@@ -283,7 +283,7 @@ app.post('/verify-passport', async (req, res) => {
     const scorerId = process.env.PASSPORT_SCORER_ID || process.env.VITE_PASSPORT_SCORER_ID;
     const url = `https://api.passport.xyz/v2/stamps/${scorerId}/score/${address}`;
     
-    // Call Passport API to get the latest score for this address【9†】
+    // Call Stamps API to get the latest score for this address【9†】
     const response = await fetch(url, { headers: { 'X-API-KEY': apiKey } });
     const data = await response.json();
     
@@ -384,12 +384,12 @@ You now have a fully functional local demo that uses a wallet login and Gitcoin 
 
 - **Passport Integration:** Using `usePassportScore` (client-side) allows you to easily retrieve a user’s Passport score and passing status in React. The Passport Embeds package also provides pre-built UI (PassportScoreWidget) to display the user’s verification status and guide them to add more credentials if needed.
 - **Reown AppKit (WalletConnect):** This demo uses Reown to simplify wallet connections. In a real app, you can also leverage Reown for one-click social logins or session management. The `<appkit-button>` and ReOwnProvider make it trivial to add a wallet login that works with many providers.
-- **Backend Verification:** Never trust the front-end alone for gating critical content or actions. We use an Express backend to call the Passport API directly (using our secret API key) and verify the score server-side【9†】. Only after this check do we send down the protected asset. This ensures that users (or attackers) cannot simply bypass the gate by manipulating browser code or responses.
+- **Backend Verification:** Never trust the front-end alone for gating critical content or actions. We use an Express backend to call the Stamps API directly (using our secret API key) and verify the score server-side【9†】. Only after this check do we send down the protected asset. This ensures that users (or attackers) cannot simply bypass the gate by manipulating browser code or responses.
 - **Dynamic Theming:** By respecting the user’s `prefers-color-scheme` and using Passport’s theming options, we provide a better user experience. Passport’s `DarkTheme` and `LightTheme` keep the embed consistent with the app’s look and feel without additional work.
 - **Extensibility:** While this demo protects an image, you can similarly protect routes, components, or on-chain actions (e.g., only allow minting an NFT if `backendStatus === 'passed'`). Just ensure the final action always goes through a server or contract check. Gitcoin Passport can also be combined with other identity signals or zero-knowledge proofs for enhanced security.
 
 ## Next steps
 
 - Learn how to [customize your Passport Embed](../customization)
-- Learn how to [use the Passport API](/building-with-passport/stamps/passport-api)
+- Learn how to [use the Stamps API](/building-with-passport/stamps/passport-api)
 - Review the Embed [component reference](component-reference)

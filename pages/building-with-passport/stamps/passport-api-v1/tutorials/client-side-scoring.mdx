@@ -7,10 +7,10 @@ import { Callout } from 'nextra/components'
 # Building a custom, client-side scorer
 
 <Callout type="warning">
-**Please note:**<br />In November 2024, we soft-launched [Passport API v2](/building-with-passport/stamps/passport-api).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />We are actively working on updating the v1 tutorials to use v2.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
+**Please note:**<br />In November 2024, we soft-launched [Stamps API v2](/building-with-passport/stamps/passport-api).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />We are actively working on updating the v1 tutorials to use v2.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
 </Callout>
 
-Passport XYZ offers several scoring algorithms that can be executed on the Passport servers, such that a numeric score for a Passport can be requested from the Passport API. However, this means you are restricted to Passport's algorithm and Passport's opinion about the relative weighting assigned to each individual Stamp. This might not be appropriate for all use cases. 
+Passport XYZ offers several scoring algorithms that can be executed on the Passport servers, such that a numeric score for a Passport can be requested from the Stamps API. However, this means you are restricted to Passport's algorithm and Passport's opinion about the relative weighting assigned to each individual Stamp. This might not be appropriate for all use cases. 
 
 For example, you might have a string preference for certain Stamps that are particularly relevant to your community that you want to weight more strongly in the scoring, or perhaps you have a great idea for a completely new algorithm that you want to implement to gate your app.
 
@@ -37,7 +37,7 @@ The rest of the tutorial will build upon this basic app by adding functions and 
 
 ### Stamps
 
-The app queries the Passport APIs `registry/stamps` endpoint to retrieve all the Stamps owned by the connected user. The `getStamps()` function parses the full response and extracts the `icon`, `id`, and `stamp` data into a `Stamp` object with the following structure:
+The app queries the Stamps APIs `registry/stamps` endpoint to retrieve all the Stamps owned by the connected user. The `getStamps()` function parses the full response and extracts the `icon`, `id`, and `stamp` data into a `Stamp` object with the following structure:
 
 ```ts
 interface Stamp {
@@ -47,7 +47,7 @@ interface Stamp {
 }
 ```
 
-This information is stored in a state variable, `stampArray`. This is all the information you need from the Passport API.
+This information is stored in a state variable, `stampArray`. This is all the information you need from the Stamps API.
 
 ### Scorers
 
