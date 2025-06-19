@@ -1,12 +1,12 @@
 ---
-title: Passport API v2 overview
-description: General overview of the Passport API v2
+title: Stamps API v2 overview
+description: General overview of the Stamps API v2
 ---
 import { Callout } from 'nextra/components'
 
-# Passport API v2
+# Stamps API v2
 
-The Passport API serves as a powerful tool for developers, offering access to Passport's Stamp-based score metadata using REST endpoints.
+The Stamps API serves as a powerful tool for developers, offering access to Passport's Stamp-based score metadata using REST endpoints.
 
 ## Why use the API
 
@@ -16,8 +16,8 @@ The API offers a simple integration; one that requires just two requests to subm
 
 An excellent [use case](/overview/use-cases) for Human Passport is to protect access to a reward or governance program. To make this happen, follow these steps:
 
-1. [Creating a Passport Project/Scorer and API key](getting-access)
-2. Retrieve a user's Passport score and Stamp data using the [GET /v2/stamps/\{scorer_id\}/score/\{address\}](api-reference#retrieve-latest-score-for-a-single-address) endpoint. 
+1. [Creating a Passport Project/Scorer and API key](/building-with-passport/stamps/passport-api/getting-access)
+2. Retrieve a user's Passport score and Stamp data using the [GET /v2/stamps/\{scorer_id\}/score/\{address\}](/building-with-passport/stamps/passport-api/api-reference#retrieve-latest-score-for-a-single-address) endpoint. 
 3. Find the user's Unique Humanity Score or `passing_score` within the returned data. 
 3. Compare the Unique Humanity Score against a [threshold](../major-concepts/scoring-thresholds) that you set, or utilize the binary `passing_score` field that uses our recommended threshold of 20. 
 
@@ -25,18 +25,20 @@ If a user was able to build up a score greater than this threshold, they've effe
 
 ## Available endpoints
 
+Stamps API v2 base URL: https://api.passport.xyz
+
 | Endpoint action                                 | Endpoint                                    |
 | ----------------------------------------------- | ------------------------------------------- |
-| [Retrieve latest score for a single address](#retrieve-latest-score-for-a-single-address) | `GET /v2/stamps/{scorer_id}/score/{address}` |
-| [Retrieve historical score for a single address](#retrieve-historical-score-for-a-single-address) | `GET /v2/stamps/{scorer_id}/score/{address}/history`           |
-| [Retrieve Stamps verified by a single address](#retrieve-stamps-verified-by-a-single-address) | `GET /v2/stamps/{address}`            |
-| [Retrieve all Stamps available in Passport](#retrieve-all-stamps-available-in-passport) | `GET /registry/stamp-metadata`              |
+| [Retrieve latest score for a single address](/building-with-passport/stamps/passport-api/api-reference#retrieve-latest-score-for-a-single-address) | `GET /v2/stamps/{scorer_id}/score/{address}` |
+| [Retrieve historical score for a single address](/building-with-passport/stamps/passport-api/api-reference#retrieve-historical-score-for-a-single-address) | `GET /v2/stamps/{scorer_id}/score/{address}/history`           |
+| [Retrieve Stamps verified by a single address](/building-with-passport/stamps/passport-api/api-reference#retrieve-stamps-verified-by-a-single-address) | `GET /v2/stamps/{address}`            |
+| [Retrieve all Stamps available in Passport](/building-with-passport/stamps/passport-api/api-reference#retrieve-all-stamps-available-in-passport) | `GET /registry/stamp-metadata`              |
 
-Learn more about each of these endpoints on our [API Reference](api-reference) page, or experiment with them using our [API playground](https://api.passport.xyz/v2/docs) (requires [API key and Scorer/Project](getting-access)).
+Learn more about each of these endpoints on our [API Reference](/building-with-passport/stamps/passport-api/api-reference) page, or experiment with them using our [API playground](https://api.passport.xyz/v2/docs) (requires [API key and Scorer/Project](/building-with-passport/stamps/passport-api/getting-access)).
 
 ## Next steps
 
-* [Set up an API key and Scorer/Project](getting-access)
-* [Make your first API request](quick-start-guide)
-* [Review the API Reference to get to know the available endpoints](api-reference)
+* [Set up an API key and Scorer/Project](/building-with-passport/stamps/passport-api/getting-access)
+* [Make your first API request](/building-with-passport/stamps/passport-api/quick-start-guide)
+* [Review the API Reference to get to know the available endpoints](/building-with-passport/stamps/passport-api/api-reference)
 * [Get support via our Telegram channel](https://t.me/+Mcp9RsRV7tVmYjZh)
