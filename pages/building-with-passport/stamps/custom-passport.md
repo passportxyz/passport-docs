@@ -21,7 +21,7 @@ The custom Passport experience offers lots of customization options related to t
 | Curate Stamps and weights                | Remove any Stamps or credentials that don’t make sense for your ecosystem, and adjust the remaining [credential weights](../major-concepts/credential-map-and-weights.mdx) to better reflect your ecosystem’s needs.                                                                                                                                                                                                                                   |
 | Create your own Stamps:<br>GuestList     | Enable your known humans to easily obtain a passing score based on their inclusion on a pre-vetted list.  This list could be based on POAP ownership, in-person event attendance, your own KYC, or other high-human or reputation signals.                                                                                                                                     |
 | Create your own Stamps:<br>DeveloperList | Reward developers who have contributed to the development of specified GitHub repositories with points.  This Stamp could be built around a set of company-owned repositories, or around different important programming languages or tools.                                                                                                                                   |
-| Elevated rate limits                     | Access the custom score and Stamp data via the Passport API with elevated rate limits.                                                                                                                                                                                                                                                                                         |
+| Elevated rate limits                     | Access the custom score and Stamp data via the Stamps API with elevated rate limits.                                                                                                                                                                                                                                                                                         |
 
 ## Custom Passport Requirements
 
@@ -84,6 +84,6 @@ As you provide these, we will build out your branded dashboard for you, and will
 
 ## Requesting Custom Passport data
 
-If you are just checking scores from your Custom Passport offchain, you can use the [Passport API v2](/building-with-passport/stamps/passport-api) to access your users' data.
+If you are just checking scores from your Custom Passport offchain, you can use the [Stamps API v2](/building-with-passport/stamps/passport-api) to access your users' data.
 
 If, instead, you're enabling your users to push their Passport onchain and you are using a [custom scorer](#custom-scorer), you will need to use the [Decoder contract](/building-with-passport/stamps/smart-contracts/contract-reference#decoder-contract), and more specifically, the `getScore` (0xdaadd662) method, making sure to pass both your [scorer ID](/building-with-passport/stamps/passport-api/getting-access) and the specified wallet address to pull users' custom scores. 

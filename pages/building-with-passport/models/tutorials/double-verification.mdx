@@ -7,7 +7,7 @@ import { Callout } from 'nextra/components';
 # Double Verification with the Model Based Detection and Stamp-based APIs
 
 <Callout type="warning">
-**Please note:**<br />This tutorial uses the Passport API v1. We recommend using [Passport API v2](/building-with-passport/stamps/passport-api) for new projects.<br /><br />We plan to update this tutorial to use Passport API v2 shortly.
+**Please note:**<br />This tutorial uses the Stamps API v1. We recommend using [Stamps API v2](/building-with-passport/stamps/passport-api) for new projects.<br /><br />We plan to update this tutorial to use Stamps API v2 shortly.
 </Callout>
 
 This tutorial will walk you through verifying an EVM account with both the ETH Activity model (model-based detection) and the [Stamp-based method](/building-with-passport/stamps/passport-api) in your application.
@@ -21,9 +21,9 @@ The model itself is a black box whose outcome is based on 50+ features. Some app
 
 ## Prerequisites
 
-Before we delve into this, it's important to note that there are a few preliminary steps you need to complete in order to use the Model Based Detection and Passport API. Please ensure that these prerequisites are met before proceeding with the guide.
+Before we delve into this, it's important to note that there are a few preliminary steps you need to complete in order to use the Model Based Detection and Stamps API. Please ensure that these prerequisites are met before proceeding with the guide.
 
-1. You have created a Passport Scorer and received a Scorer ID (for the Passport API)
+1. You have created a Passport Scorer and received a Scorer ID (for the Stamps API)
 2. You have an API key (for both)
 
 If you haven't completed the preliminary steps above please refer to our [getting access guide](/building-with-passport/stamps/passport-api/getting-access) first. Once you're done with that, return here and continue with this walkthrough.
@@ -37,7 +37,7 @@ The app will present you with three buttons:
 
 - `Connect`: use this to connect your Ethereum wallet to the app.
 - `Check Ethereum Activity`: clicking this button will check your Ethereum activity score. If it is above a threshold then you will see a notice of success - you may proceed to access the protected content! If you do not meet the threshold you will be denied access and directed to check your Passport unique humanity score (Stamp-based) instead.
-- `Check Passport score`: clicking this button checks your Passport score on the Passport API. If your score is above a threshold then you will be allowed to proceed to the protected content!
+- `Check Passport score`: clicking this button checks your Passport score on the Stamps API. If your score is above a threshold then you will be allowed to proceed to the protected content!
 
 ## Getting started
 
@@ -74,7 +74,7 @@ This tutorial will also use [Chakra-UI](https://chakra-ui.com/) for styling, so 
 npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
 ```
 
-Replace the contents of `app/page.tsx` with the following boilerplate code (this includes all the very basic logic to render a page and connect a wallet to the app and the logic required to check a Passport - if you need a refresher on the Passport API logic you can visit our dedicated [tutorials](../../passport-api/tutorials.mdx)):
+Replace the contents of `app/page.tsx` with the following boilerplate code (this includes all the very basic logic to render a page and connect a wallet to the app and the logic required to check a Passport - if you need a refresher on the Stamps API logic you can visit our dedicated [tutorials](../../passport-api/tutorials.mdx)):
 
 ```tsx
 'use client'
@@ -271,7 +271,7 @@ Next we can write a light wrapper around `getEthereumScore()` called `checkEther
 
 That's it! All the logic required to check the user's ETH activity score has been defined in your app. All that is left to do is to call these functions from the app UI.
 
-The following code adds some conditional logic to the UI. The Ethereum activity has to be checked first. If the Ethereum activity score exceeds the threshold the app displays a success message. If the score is below the threshold it prompts the user to check their Passport score using the Passport API. If neither are successful, it displays a failure message.
+The following code adds some conditional logic to the UI. The Ethereum activity has to be checked first. If the Ethereum activity score exceeds the threshold the app displays a success message. If the score is below the threshold it prompts the user to check their Passport score using the Stamps API. If neither are successful, it displays a failure message.
 
 Add the following code as the final content inside the `<div>` provided in return statement in the boilerplate code. 
 

@@ -9,12 +9,12 @@ import { Callout } from 'nextra/components'
 # Gating access with Passport scores
 
 <Callout type="warning">
-**Please note:**<br />In November 2024, we soft-launched [Passport API v2](/building-with-passport/stamps/passport-api).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />We are actively working on updating the v1 tutorials to use v2.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
+**Please note:**<br />In November 2024, we soft-launched [Stamps API v2](/building-with-passport/stamps/passport-api).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />We are actively working on updating the v1 tutorials to use v2.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
 </Callout>
 
 In this guide, you'll learn how to gate an application using Passport XYZ. Specifically, you will:
 
-* Fetch a score using the Passport API
+* Fetch a score using the Stamps API
 * Examine best practices for retrieving Passport scores
 * Implement gating so that some content is only available to users with scores above a threshold
 * Redirect users to instructions for improving their Passport scores
@@ -31,7 +31,7 @@ Check out his video and related sample code at the following links:
 
 ### Prerequisites
 
-To follow this tutorial, you'll need [Next.js](https://nextjs.org/), [Node](https://nodejs.org/en), and [Chakra-UI](https://chakra-ui.com/) installed on your machine. We will also be using the [Passport API](../scorer-api/).
+To follow this tutorial, you'll need [Next.js](https://nextjs.org/), [Node](https://nodejs.org/en), and [Chakra-UI](https://chakra-ui.com/) installed on your machine. We will also be using the [Stamps API](../scorer-api/).
 
 
 Before we delve into this, it's important to note that there are a few preliminary steps you need to complete. Please ensure that these prerequisites are met before proceeding with the guide.
@@ -96,7 +96,7 @@ This tutorial will also use [Chakra-UI](https://chakra-ui.com/) for styling, so 
 npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
 ```
 
-Now, create a new file in `my-passport-app` and add the following to set the Passport API Key and Scorer ID values (if you need a reminder of how to get the API key and Scorer ID, revisit the [Quick Start guide](../quick-start-guide.md)):
+Now, create a new file in `my-passport-app` and add the following to set the Stamps API Key and Scorer ID values (if you need a reminder of how to get the API key and Scorer ID, revisit the [Quick Start guide](../quick-start-guide.md)):
 
 ```sh
 NEXT_PUBLIC_GC_API_KEY=<your-api-key>
@@ -279,9 +279,9 @@ Navigate your browser to `localhost:3000` to see the app up and running. You sho
 
 ### Connecting a Wallet
 
-Ethereum wallet connections are handled using `ethers`. In this section you will call some functions from `ethers` that allow your users to connect to the app using their Ethereum wallet. This is essential because this allows users to sign messages to approve the use of their address in Passport API requests.
+Ethereum wallet connections are handled using `ethers`. In this section you will call some functions from `ethers` that allow your users to connect to the app using their Ethereum wallet. This is essential because this allows users to sign messages to approve the use of their address in Stamps API requests.
 
-First, you already know that the user address is going to be an important piece of data that will be passed in several requests using the Passport API. This means you probably want to keep track of it in the app's state. To do this, you can add the following state variable definition immediately below `export default function Passport () {`
+First, you already know that the user address is going to be an important piece of data that will be passed in several requests using the Stamps API. This means you probably want to keep track of it in the app's state. To do this, you can add the following state variable definition immediately below `export default function Passport () {`
 
 ```tsx
 const [address, setAddress] = useState<string>('')
@@ -359,7 +359,7 @@ To use Passport XYZ, a user has to submit their Passport to the registry. This i
 
 You can skip the Passport submission and retrieve the raw Stamp data to apply your own scoring algorithm.
 
-The way Passport submission works is to first retrieve a message using the Passport API's `signing-message` method. The user then signs this message using their Ethereum wallet, and sends the signed message back to the server using the Passport API's `submit-passport` method.
+The way Passport submission works is to first retrieve a message using the Stamps API's `signing-message` method. The user then signs this message using their Ethereum wallet, and sends the signed message back to the server using the Stamps API's `submit-passport` method.
 
 The boilerplate code already assigns the necessary API endpoints to the variables `SIGNING_MESSAGE_URI` and `SUBMIT_PASSPORT_URI`. The following code snippet shows how to write two functions: one to grab the message to sign (`getSigningMessage`), and one to take that message, sign it, and return it (`submitPassport`). Successfully executing this logic adds the user's address to the Passport registry and triggers the server to calculate a score based on the Stamps present in the owner's Passport. A step-by-step explanation of each function is provided in comments in the code snippet.
 
@@ -383,7 +383,7 @@ try {
 
 async function submitPassport() {
 try {
-    // GET request to the Passport API to get the signing message and the nonce
+    // GET request to the Stamps API to get the signing message and the nonce
     const { message, nonce } = await getSigningMessage()
     // instantiate a new provider instance
     const provider = new ethers.BrowserProvider(window.ethereum)
@@ -391,7 +391,7 @@ try {
     const signer = await provider.getSigner()
     // ask the user to sign the message
     const signature = await signer.signMessage(message)
-    // POST request to the Passport API, sending the signing message, the signature, and the nonce
+    // POST request to the Stamps API, sending the signing message, the signature, and the nonce
     const response = await fetch(SUBMIT_PASSPORT_URI, {
     method: 'POST',
     headers,
@@ -706,11 +706,11 @@ Here is what your user sees if their Passport Score is lower than 20:
 
 This tutorial walked you through building a basic Passport-gated application. You used Next.js to create a simple educational page about Web3 and DAOs, with a special section that invited users to join a secret Passport DAO - but only if their Passport score is above your threshold! By following this tutorial you learned:
 
-* How to create a Scorer instance and a Passport API key
+* How to create a Scorer instance and a Stamps API key
 * How to use instantiate a `provider` and call its API
 * How to connect a user's Ethereum wallet to your application and store their address in your app's state
-* How to submit a Passport to the Passport XYZ registry using the Passport API
-* How to retrieve a user's Passport score using the Passport API
+* How to submit a Passport to the Passport XYZ registry using the Stamps API
+* How to retrieve a user's Passport score using the Stamps API
 * How to use the score to conditionally render some content ("Passport gating")
 
 ### Further Reading

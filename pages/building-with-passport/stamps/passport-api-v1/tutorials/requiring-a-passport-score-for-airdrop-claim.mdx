@@ -9,14 +9,14 @@ import { Callout } from 'nextra/components'
 # Requiring a Passport score for airdrop claim
 
 <Callout type="warning">
-**Please note:**<br />In November 2024, we soft-launched [Passport API v2](/building-with-passport/stamps/passport-api).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />We are actively working on updating the v1 tutorials to use v2.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
+**Please note:**<br />In November 2024, we soft-launched [Stamps API v2](/building-with-passport/stamps/passport-api).<br /><br />We have not announced any deprecation or retirement timelines for v1 yet, but do strongly recommend using v2 moving forward.<br /><br />We are actively working on updating the v1 tutorials to use v2.<br /><br />You can learn more about the differences between v1 and v2 via our [migration guide](migrate).
 </Callout>
 
 Airdrops are a prevalent token distribution method, attracting 'airdrop farmers' who generate numerous accounts to amass tokens. This guide demonstrates using Passport scores to shield your airdrop from such harmful practices.
 
 This guide will cover the following topics:
 
-* Fetching Passport scores from the Passport API
+* Fetching Passport scores from the Stamps API
 * Using Passport scores to regulate access to an airdrop
 
 You can find the code from this tutorial in this [GitHub repo](https://github.com/passportxyz/passport-scorer/tree/main/examples/airdrop):
@@ -37,7 +37,7 @@ If you haven't completed the preliminary steps above please refer to our [gettin
 
 We will be rebuilding many of the components and API endpoints of the [airdrop example app](https://github.com/passportxyz/passport-scorer/tree/main/examples/airdrop).
 
-Below is a diagram showing a high-level overview of how the app functions and interacts with the Passport API.
+Below is a diagram showing a high-level overview of how the app functions and interacts with the Stamps API.
 
 ![](public/Passport Airdrop.png)
 
@@ -192,7 +192,7 @@ async function submitPassport(address, scorerId, signature, nonce) {
     },
   };
 
-  // This is the body that will be sent to the Passport API for scoring
+  // This is the body that will be sent to the Stamps API for scoring
   const submitPassportData = {
     address: address,
     scorer_id: scorerId
@@ -305,7 +305,7 @@ const { signMessage } = useSignMessage({
     
     const submitResponse = await axios.post("/api/submit-passport", {
       address: address, // Required: The user's address you'd like to score.
-      community: process.env.NEXT_PUBLIC_SCORER_ID, // Required: get this from one of your Scorers in the Passport API dashboard https://developer.passport.xyz/
+      community: process.env.NEXT_PUBLIC_SCORER_ID, // Required: get this from one of your Scorers in the Stamps API dashboard https://developer.passport.xyz/
       signature: data, // Optional: The signature of the message returned in Step #1
       nonce: nonce, // Optional: The nonce returned in Step #1
     });
@@ -399,7 +399,7 @@ Now we can set this root on our Merkle Distributor smart contract and eligible u
 
 In this guide we've done the following:
 
-1. Submitted a user's address to the Passport API for scoring
+1. Submitted a user's address to the Stamps API for scoring
 2. Fetched their Passport score
 3. Used their score to determine if they are eligible for the airdrop
 4. Stored this information for later use in a Merkle distributor or other airdrop distribution method
