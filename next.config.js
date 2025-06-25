@@ -401,6 +401,26 @@ module.exports = withNextra({
             source: '/overview/why-passport-xyz',
             destination: '/overview/why-human-passport',
             permanent: true
+        },
+        {
+            source: '/building-with-passport/major-concepts/credential-map-and-weights',
+            destination: '/building-with-passport/stamps/major-concepts/credential-map-and-weights',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/major-concepts/api-pagination',
+            destination: '/building-with-passport/stamps/major-concepts/api-pagination',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/major-concepts/deduplicating-stamps',
+            destination: '/building-with-passport/stamps/major-concepts/deduplicating-stamps',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/major-concepts/expirations',
+            destination: '/building-with-passport/stamps/major-concepts/expirations',
+            permanent: true
         }
     ]
 })
