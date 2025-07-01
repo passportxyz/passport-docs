@@ -27,13 +27,13 @@ To see what each Stamp looks like, scroll down to the Stamps section. When you a
 
 The "Passport Protocol" refers to the infrastructure that enables web3 citizens to create their own Passport, prove their decentralized identity and access Passport-gated projects. It is all the tooling that enables developers to build Passport gating into their apps.
 
-Web3 citizens interface with the Passport Protocol through the Passport holder dApp at [app.passport.xyz](https://app.passport.xyz). Developers can use the [Stamps API](../building-with-passport/introduction) to easily integrate Human Passport into their apps.
+Web3 citizens interface with the Passport Protocol through the Passport holder dApp at [app.passport.xyz](https://app.passport.xyz). Developers can use the [Stamps API](/building-with-passport/stamps/passport-api) to easily integrate Human Passport into their apps.
 
 
 
 ### Passport-Gating
 
-"Passport gating" means integrating the Passport Protocol into an app for the purpose of screening accounts to keep out bots, bad actors, or simply real people who don't meet a certain [threshold](../major-concepts/scoring-thresholds) of trustworthiness.
+"Passport gating" means integrating the Passport Protocol into an app for the purpose of screening accounts to keep out bots, bad actors, or simply real people who don't meet a certain [threshold](/building-with-passport/stamps/major-concepts/scoring-thresholds) of trustworthiness.
 
 **Usage:**
 
@@ -41,7 +41,7 @@ Web3 citizens interface with the Passport Protocol through the Passport holder d
 * "Some examples of Passport-gated dApps include: Snapshot, Bankless Academy, and Gitcoin Grants."
 * "Because this community is gated with Human Passport, it is able to ask for pieces of proof of not just identity via services like BrightID, but also reputation via services like POAP."
 
-See our [tutorials](../building-with-passport/tutorials) to learn how to gate your project.
+See our [tutorials](/building-with-passport/stamps/passport-api-v1/tutorials/) to learn how to gate your project.
 
 
 
@@ -49,7 +49,7 @@ See our [tutorials](../building-with-passport/tutorials) to learn how to gate yo
 
 Stamps are the key identity verification mechanism of Human Passport. A Stamp is a collection of one or more [verifiable credentials](#verifiable-credentials-vcs) from an identity provider that is collected in a Passport. Stamps are provided by a variety of web2 and web3 identity authenticators including Google, Facebook, BrightID, ENS, and Proof of Humanity. Custom Stamps for particular communities are under development. Stamps do not store any personally identifiable information, only the verifiable credentials issued by the identity authenticator.
 
-Human Passport aggregates Stamps and assigns each Stamp a different weight according to the needs of a particular community. This weight is used to calculate the cost of forgery of an identity, a score which reflects the credibility of a potential participant’s online identity. For example, a community for developers could assign a greater weight to a Github Stamp, resulting in higher scores for those who have Github Stamps.
+Human Passport aggregates Stamps and assigns each Stamp a different weight according to the needs of a particular community. This weight is used to calculate the cost of forgery of an identity, a score which reflects the credibility of a potential participant's online identity. For example, a community for developers could assign a greater weight to a Github Stamp, resulting in higher scores for those who have Github Stamps.
 
 The code snippet below shows a single Stamp. This particular Stamp proves ownership of a Discord account. The Stamps array in the Human Passport object contains multiple instances of this data structure representing each different passport Stamp. All the Stamps conform to this specific format inherited from [https://www.w3.org/2018/credentials/v1](https://www.w3.org/2018/credentials/v1).
 
@@ -129,7 +129,7 @@ This `hash` is a unique identifier that is generated for all VCs issued by the P
 
 As a developer, you don't need to implement any logic for deduplicating Stamps if you use the default scorer. The deduplication is done server-side. However, if you are building a custom scorer you may want to store the hashes and deduplicate Stamps yourself to prevent users from submitting the same set of Stamps in multiple Passports.
 
-More details about Passport deduplication can be found on our [Deduplicating Stamps](../building-with-passport/major-concepts/deduplicating-stamps) page.
+More details about Passport deduplication can be found on our [Deduplicating Stamps](/building-with-passport/stamps/major-concepts/deduplicating-stamps) page.
 
 
 
@@ -158,7 +158,7 @@ curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?incl
 
 This request could return a large amount of data if the given address owns a lot of Stamps. In this case, it could be useful to paginate the response, which means the API will return a subset of the total data. You can do this by adding `&limit=x` to the API request, where `x` is the number of elements (in this example, Stamp objects) to return in each response.
 
-More detail, including an explanation of how to navigate paginated responses, is provided in the [API reference](../building-with-passport/api-reference).
+More detail, including an explanation of how to navigate paginated responses, is provided in the [API reference](/building-with-passport/stamps/passport-api/api-reference).
 
 
 

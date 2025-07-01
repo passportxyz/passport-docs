@@ -69,7 +69,7 @@ VITE_RPC_URL=https://rpc.ankr.com/eth   # Public Mainnet RPC (or use your own In
 * `VITE_PASSPORT_API_KEY`: Your API key for the Stamps API (get this from [Passport Developer Portal](https://developer.passport.xyz/)). This is used via the backend to verify that the user's Passport scores is above the passing threshold.
 * `VITE_EMBED_API_KEY`: Your API key for the Passport Embed component (get this from [Passport Developer Portal](https://developer.passport.xyz/)). This is used on the frontend by the Passport Embed component.
 * `VITE_PASSPORT_SCORER_ID`: The ID of the Passport Scorer to use, which you can generate via the [Passport Developer Portal](https://developer.passport.xyz/). You will set up your [score threshold](/building-with-passport/stamps/major-concepts/scoring-thresholds) during the Scorer creation process.
-* `VITE_REOWN_PROJECT_ID`: A Project ID from Reown’s cloud dashboard for WalletConnect. You can obtain one at cloud.reown.com (Reown provides a demo projectId for localhost testing if needed).
+* `VITE_REOWN_PROJECT_ID`: A Project ID from Reown's cloud dashboard for WalletConnect. You can obtain one at cloud.reown.com (Reown provides a demo projectId for localhost testing if needed).
 * `VITE_RPC_URL`: An Ethereum RPC endpoint for wagmi (used to initialize the provider). A default public RPC is provided, but you can replace it with your own.
 
 **Please Note:** The `VITE_` prefix on variables makes them available to the Vite frontend. The backend will also read these (or you can duplicate them without `VITE_` prefix for clarity). Ensure not to expose your API key in production – in this demo we use it on the frontend for simplicity, but the secure verification happens on the backend.
@@ -121,7 +121,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 ```
 
 Key points:
-- We use `WagmiAdapter` from Reown to automatically configure Ethereum wallet connectors (MetaMask, WalletConnect, Coinbase, etc.) using the provided `projectId` and network. The adapter’s `wagmiConfig` is passed into Wagmi.
+- We use `WagmiAdapter` from Reown to automatically configure Ethereum wallet connectors (MetaMask, WalletConnect, Coinbase, etc.) using the provided `projectId` and network. The adapter's `wagmiConfig` is passed into Wagmi.
 - `ReOwnProvider` wraps our app to handle the WalletConnect modal and any Reown-specific context. By including `ReOwnProvider`, we can use the `<appkit-button>` web component (or hooks) to trigger the wallet connection modal.
 - We configure one network (Ethereum mainnet, id 1) with an RPC URL. You could add others or use testnets as needed.
 - The `QueryClientProvider` is included because Reown/Wagmi uses React Query for managing async state.
@@ -129,7 +129,7 @@ Key points:
 ### frontend/src/App.jsx – Main App Component
 
 This component handles the UI logic:
-- Connect wallet button (via Reown’s `<appkit-button>`).
+- Connect wallet button (via Reown's `<appkit-button>`).
 - Display of Passport score using the Passport Embed widget.
 - Client-side check of Passport score using the `usePassportScore` hook.
 - Triggering the backend verification once the score is passing.
@@ -390,6 +390,6 @@ You now have a fully functional local demo that uses a wallet login and Gitcoin 
 
 ## Next steps
 
-- Learn how to [customize your Passport Embed](../customization)
+- Learn how to [customize your Passport Embed](/building-with-passport/stamps/passport-embed/customization)
 - Learn how to [use the Stamps API](/building-with-passport/stamps/passport-api)
 - Review the Embed [component reference](component-reference)
