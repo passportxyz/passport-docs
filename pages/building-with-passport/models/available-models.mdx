@@ -20,7 +20,7 @@ We currently offer the following models via the Models API:
 * zkSync unique humanity model - `zksync`
 
 
-Each model will assign a score of 0 - 100 to wallet addresses that are checked against it. A score of 0 represents likely Sybil, while a score of 100 represents likely human.
+Each model will assign a score of -1 for addresses without enough transaction data, and 0 - 100 for those that do. A score of 0 represents likely Sybil, while a score of 100 represents likely human.
 
 For each model, we will provide a table that describes the different score thresholds you can use to gate access or classify addresses. We define the columns of those tables here:
 
@@ -53,7 +53,7 @@ Recommended score threshold: 50+
 
 ## ETH (L1) unique humanity model
 
-This model looks at the specified wallet addresses' ETH mainnet transaction history, compares it against 50+ different features, and assigns it a score of 0 - 100.
+This model looks at the specified wallet addresses' ETH mainnet transaction history, compares it against 50+ different features, and assigns it a score of -1 for addresses without enough transaction data, and 0 - 100 for those that do.
 
 Recommended score threshold: 50+
 
@@ -67,7 +67,7 @@ Recommended score threshold: 50+
 
 ## NFT (Ethereum L1) unique humanity model
 
-Similarly to the ETH (L1) unique humanity model, this model looks at the specified wallet addresses' NFT transaction history on Ethereum mainnet, compares it against different features, and assigns it a score of 0 - 100.
+Similarly to the ETH (L1) unique humanity model, this model looks at the specified wallet addresses' NFT transaction history on Ethereum mainnet, compares it against different features, and assigns it a score of -1 for addresses without enough transaction data, and 0 - 100 for those that do.
 
 Recommended score threshold: 50+
 
@@ -81,7 +81,7 @@ Recommended score threshold: 50+
 
 ## Arbitrum unique humanity model
 
-This model looks at the specified wallet addresses' Arbitrum transaction history, compares it against different features, and assigns it a score of 0 - 100.
+This model looks at the specified wallet addresses' Arbitrum transaction history, compares it against different features, and assigns it a score of -1 for addresses without enough transaction data, and 0 - 100 for those that do.
 
 Recommended score threshold: 50+
 
@@ -94,7 +94,7 @@ Recommended score threshold: 50+
 
 ## Base unique humanity model
 
-This model looks at the specified wallet addresses' Base transaction history, compares it against different features, and assigns it a score of 0 - 100.
+This model looks at the specified wallet addresses' Base transaction history, compares it against different features, and assigns it a score of -1 for addresses without enough transaction data, and 0 - 100 for those that do.
 
 Recommended score threshold: 50+
 
@@ -108,7 +108,7 @@ Recommended score threshold: 50+
 
 ## Optimism unique humanity model
 
-This model looks at the specified wallet addresses' Optimism transaction history, compares it against different features, and assigns it a score of 0 - 100.
+This model looks at the specified wallet addresses' Optimism transaction history, compares it against different features, and assigns it a score of -1 for addresses without enough transaction data, and 0 - 100 for those that do.
 
 Recommended score threshold: 50+
 
@@ -122,7 +122,7 @@ Recommended score threshold: 50+
 
 ## Polygon unique humanity model
 
-This model looks at the specified wallet addresses' Polygon transaction history, compares it against different features, and assigns it a score of 0 - 100.
+This model looks at the specified wallet addresses' Polygon transaction history, compares it against different features, and assigns it a score of -1 for addresses without enough transaction data, and 0 - 100 for those that do.
 
 Recommended score threshold: 50+
 
@@ -136,7 +136,7 @@ Recommended score threshold: 50+
 
 ## zkSync unique humanity model
 
-This model looks at the specified wallet addresses' zkSync Era transaction history, compares it against different features, and assigns it a score of 0 - 100.
+This model looks at the specified wallet addresses' zkSync Era transaction history, compares it against different features, and assigns it a score of -1 for addresses without enough transaction data, and 0 - 100 for those that do.
 
 Recommended score threshold: 50+
 

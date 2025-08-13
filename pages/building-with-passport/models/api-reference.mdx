@@ -41,6 +41,18 @@ Use this endpoint to request a model-based score for a specified user. You can f
 |`model`  |Query parameter | Include one of the following [available models](available-models) to request that model's score for the specified wallet address: <br />`aggregate`, `ethereum_activity`, `nft`, `arbitrum`, `base`, `optimism`, `polygon`, and `zksync`<br /><br />If you don't include this parameter, the API will return the `aggregate` model by default. |
 
 
+### Score Range and Methodology
+
+The Models API returns scores in the range of -1 to 100:
+
+- **-1**: Indicates insufficient data available to generate a score
+- **0-100**: Represents the score range where:
+  - Lower scores indicate higher likelihood of being a Sybil account
+  - Higher scores indicate higher likelihood of being a legitimate human account
+  - The exact interpretation of scores depends on the [specific model](available-models) being used
+
+Scores are calculated based on various on-chain and off-chain data points specific to each model. The aggregate model combines multiple model scores to provide a comprehensive assessment.
+
 ### Default example
 
 #### Request

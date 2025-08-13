@@ -107,7 +107,7 @@ Many users will be able pass the initial Models API check with no user friction,
 **Technical integration details:**
 
 * Collect the wallet address from the user
-* Pass the wallet address to the [`GET /v2/models/score/{address}`](/building-with-passport/models/api-reference) endpoint, which will deliver the specified model score (0-100).
+* Pass the wallet address to the [`GET /v2/models/score/{address}`](/building-with-passport/models/api-reference) endpoint, which will deliver the specified model score (-1 for addresses without enough transaction data, 0-100 for those that do).
 * Compare this model score against a predetermined [score threshold](/building-with-passport/stamps/major-concepts/scoring-thresholds), and will either grant or deny access based on that evaluation.
 * Assuming the user didn't pass primary verification, retrieve the user's Stamp-based Unique Humanity Score from the Stamps API v2 using the [`GET /v2/stamps/{scorer_id}/score/{address}`](/building-with-passport/stamps/passport-api/api-reference#retrieve-latest-score-for-a-single-address) endpoint.
 * Evaluate the Unique Humanity Score against a predetermined [score threshold](/building-with-passport/stamps/major-concepts/scoring-thresholds), and will either grant or deny access based on that evaluation.

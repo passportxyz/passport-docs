@@ -14,9 +14,14 @@ This tutorial will walk you through verifying an EVM account with both the ETH A
 
 The ETH activity model is one of the [available machine learning models](/building-with-passport/models/available-models) trained on known Sybil and human EVM account data that examines the transaction history for a given Ethereum address and assigns it a trust score. While this tutorial explains how to use the ETH activity model score, you can easily use any of the other available models instead.
 
-Passport exposes an API endpoint that accepts an Ethereum account as a query parameter and returns scores between 0 (likely Sybil) and 100 (likely human), having run one of the model remotely on the Passport server.
+Passport exposes an API endpoint that accepts an Ethereum account as a query parameter and returns scores in the range of -1 to 100:
 
-The model itself is a black box whose outcome is based on 50+ features. Some applications may be happy to rely on these models alone; however, it is advisable to offer the Stamp-based verification method as a fallback to support those users who might not have had the chance to build up a strong account history, such as crypto beginners or experts who utilize multiple wallets for different activities.
+- **-1**: Indicates insufficient data available to generate a score (e.g., new wallet with no transaction history)
+- **0-100**: Represents the score range where:
+  - Lower scores indicate higher likelihood of being a Sybil account
+  - Higher scores indicate higher likelihood of being a legitimate human account
+
+The model itself is a black box whose outcome is based on 50+ features. Some applications may be happy to rely on these models alone; however, it is advisable to offer the Stamp-based verification method as a fallback to support those users who might not have had the chance to build up a strong account history, such as crypto beginners or experts who utilize multiple wallets for different activities, or in cases where the model returns a -1 score due to insufficient data.
 
 
 ## Prerequisites
