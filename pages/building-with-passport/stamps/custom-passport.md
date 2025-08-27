@@ -9,7 +9,7 @@ Custom Passport enables partners to develop a Human Passport dashboard that is c
 
 If you’re interested in building with Custom Passport, please reach out to our team:
 
-[Contact the Passport team](https://docs.google.com/forms/d/e/1FAIpQLSdTSjRV6NjyTBZEwZxlD2j7EyG0LwU1spoc48BO-xNLiq1s7w/viewform)
+[Contact the Passport team](https://tally.so/r/3X81KL)
 
 ## What’s possible
 
