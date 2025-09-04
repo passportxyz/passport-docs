@@ -421,11 +421,6 @@ module.exports = withNextra({
             source: '/building-with-passport/major-concepts/expirations',
             destination: '/building-with-passport/stamps/major-concepts/expirations',
             permanent: true
-        },
-        {
-            source: '/building-with-passport/stamps/introduction',
-            destination: '/building-with-passport/stamps',
-            permanent: true
         }
     ]
 })
