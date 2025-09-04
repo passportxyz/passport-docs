@@ -303,6 +303,11 @@ module.exports = withNextra({
             permanent: true
         },
         {
+            source: '/building-with-passport/stamps/introduction',
+            destination: '/building-with-passport/stamps',
+            permanent: true
+        },
+        {
             source: '/building-with-passport/stamps/overview',
             destination: '/building-with-passport/stamps/create-a-stamp',
             permanent: true
@@ -364,7 +369,7 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/introduction',
-            destination: '/building-with-passport/stamps/passport-api',
+            destination: '/building-with-passport/stamps',
             permanent: true
         },
         {
@@ -415,6 +420,11 @@ module.exports = withNextra({
         {
             source: '/building-with-passport/major-concepts/expirations',
             destination: '/building-with-passport/stamps/major-concepts/expirations',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/stamps/introduction',
+            destination: '/building-with-passport/stamps',
             permanent: true
         }
     ]
