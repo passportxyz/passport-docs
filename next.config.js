@@ -168,11 +168,6 @@ module.exports = withNextra({
             permanent: true
         },
         {
-            source: '/building-with-passport/stamps',
-            destination: '/building-with-passport/stamps',
-            permanent: true
-        },
-        {
             source: '/building-with-passport/getting-access',
             destination: '/building-with-passport/stamps/passport-api/getting-access',
             permanent: true
