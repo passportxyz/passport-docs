@@ -1,0 +1,480 @@
+---
+title: Gating Access with Passport Embed and Stamps API v2
+description: A comprehensive tutorial on using Passport Embed and Stamps API v2 to gate access to exclusive content based on user verification scores.
+---
+
+import { Callout } from 'nextra/components'
+
+# Gating Access with Passport Embed and Stamps API v2
+
+This tutorial demonstrates how to create a robust application that uses Passport Embed and the Stamps API v2 to gate access to exclusive content—in this case, a Developer Telegram community. Users must achieve a Passport score of 20 or higher to unlock access.
+
+<Callout type="info">
+**What you'll learn:**<br />
+- How to integrate Passport Embed for real-time score verification
+- Different Embed configuration options and their use cases
+- Best practices for backend verification using Stamps API v2
+- Customization options for themes, behavior, and user experience
+</Callout>
+
+## Overview
+
+Rather than diving deep into application setup, this tutorial focuses on the key Passport integration points that partners need to understand. We'll explore the various configuration options available in Passport Embed and how they can be customized for different use cases.
+
+You can find the complete sample application in the [sample-apps/telegram-gating-demo folder](https://github.com/gitcoinco/passport-docs/tree/main/sample-apps/telegram-gating-demo) of this repository.
+
+## Core Integration: The Passport Embed Widget
+
+The heart of any Passport integration is the `PassportScoreWidget` component. This embeddable widget handles the entire user verification flow within your application.
+
+### Basic Integration
+
+The minimal setup for integrating Passport Embed into your application. This section covers the essential props and configuration needed to get the widget running.
+
+```jsx
+import { PassportScoreWidget, DarkTheme } from "@human.tech/passport-embed";
+
+<PassportScoreWidget
+  apiKey={PASSPORT_API_KEY}
+  scorerId={PASSPORT_SCORER_ID}
+  address={userAddress}
+  generateSignatureCallback={signMessage}
+  theme={DarkTheme}
+/>
+```
+
+### Configuration Deep Dive
+
+Let's explore each configuration option and when to use them:
+
+#### API Credentials
+
+How to properly configure and secure your API keys and scorer IDs for both development and production environments.
+
+```jsx
+// Required: Your Stamps API credentials
+apiKey={process.env.VITE_PASSPORT_API_KEY}  // Frontend Embed API key
+scorerId={process.env.PASSPORT_SCORER_ID}   // Scorer ID (shared)
+```
+
+<Callout type="warning">
+**Security Note:**<br />
+Use separate API keys for frontend (Embed) and backend (Stamps API) when possible. Frontend keys are visible in the client bundle, while backend keys should remain secure.
+</Callout>
+
+#### Address Management
+
+Different approaches for handling wallet addresses - whether to manage wallet connection yourself or let the Passport widget handle it.
+
+```jsx
+// Option 1: Provide address directly (if already connected)
+address={userAddress}
+
+// Option 2: Let the widget handle wallet connection
+address={undefined}
+connectWalletCallback={connectWallet}
+```
+
+**When to use each approach:**
+- **Direct address**: When you already manage wallet connection elsewhere in your app
+- **Connect callback**: When you want the widget to handle the entire flow
+
+#### Signature Generation
+
+Implementing wallet signature functionality to prove ownership during OAuth-based stamp verification (GitHub, Twitter, Discord, etc.).
+
+```jsx
+generateSignatureCallback={async (message) => {
+  const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+  return await window.ethereum.request({
+    method: "personal_sign",
+    params: [message, accounts[0]]
+  });
+}}
+```
+
+This callback is crucial for OAuth-based stamps (GitHub, Twitter, Discord) as it proves wallet ownership during the verification process.
+
+## Theme Customization Options
+
+Passport Embed provides flexible theming to match your application's design system.
+
+### Built-in Themes
+
+Using Passport's pre-designed themes that provide professional styling out-of-the-box with proper accessibility and contrast ratios.
+
+```jsx
+import { DarkTheme, LightTheme } from "@human.tech/passport-embed";
+
+// Dynamic theme switching
+const theme = isDarkMode ? DarkTheme : LightTheme;
+
+<PassportScoreWidget theme={theme} />
+```
+
+### Custom Theme Creation
+
+Creating your own theme object to match your brand colors, typography, and design system requirements.
+
+```jsx
+const CustomTheme = {
+  background: '#1a1b23',
+  text: '#ffffff',
+  primary: '#00d4ff',
+  secondary: '#6b7280',
+  border: '#374151',
+  // Additional customization options...
+};
+
+<PassportScoreWidget theme={CustomTheme} />
+```
+
+**Theme customization allows you to:**
+- Match your brand colors and typography
+- Ensure consistent user experience across your app
+- Support multiple themes (dark/light/brand-specific)
+
+### Responsive Theme Selection
+
+Automatically detecting user preferences and implementing dynamic theme switching based on system settings or user controls.
+
+```jsx
+// Automatically detect user's system preference
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const theme = prefersDark ? DarkTheme : LightTheme;
+
+// Or use a state management solution for dynamic switching
+const [isDarkMode, setIsDarkMode] = useState(false);
+```
+
+## Collapse Mode Configurations
+
+The widget's collapse behavior significantly impacts user experience and page layout.
+
+### Collapse Mode Options
+
+```jsx
+// Option 1: Shift mode (default)
+collapseMode="shift"  // Widget pushes surrounding content when expanded
+
+// Option 2: Overlay mode  
+collapseMode="overlay"  // Widget overlays on top of existing content
+
+// Option 3: Always expanded
+collapseMode="off"  // Widget is always fully visible
+```
+
+### When to Use Each Mode
+
+**Shift Mode (`"shift"`)**
+- Best for: Top of page, dedicated verification sections
+- Behavior: Pushes content down when expanded
+- Use case: When you have space and want to maintain page flow
+
+**Overlay Mode (`"overlay"`)**
+- Best for: Sidebars, floating verification, space-constrained layouts
+- Behavior: Appears over existing content
+- Use case: When preserving existing layout is critical
+
+**Always Expanded (`"off"`)**
+- Best for: Dedicated verification pages, modal dialogs
+- Behavior: Widget is always fully visible
+- Use case: When verification is the primary page purpose
+
+### Layout Integration Examples
+
+```jsx
+// For a hero section (shift mode)
+<div className="hero-section">
+  <h1>Welcome to Our Platform</h1>
+  <PassportScoreWidget collapseMode="shift" />
+  <div className="content">...</div>
+</div>
+
+// For a sidebar (overlay mode)
+<div className="layout">
+  <aside className="sidebar">
+    <PassportScoreWidget collapseMode="overlay" />
+  </aside>
+  <main className="content">...</main>
+</div>
+
+// For a dedicated verification page (always expanded)
+<div className="verification-page">
+  <PassportScoreWidget collapseMode="off" />
+</div>
+```
+
+## Real-time Score Monitoring
+
+Use the `usePassportScore` hook for reactive UI updates based on score changes.
+
+### Basic Score Monitoring
+
+Using the `usePassportScore` hook to reactively monitor user scores and update your UI in real-time as users verify new stamps.
+
+```jsx
+import { usePassportScore } from "@human.tech/passport-embed";
+
+const { score, isPassing, loading, error } = usePassportScore({
+  apiKey: process.env.VITE_PASSPORT_API_KEY,  // Frontend API key
+  scorerId: process.env.PASSPORT_SCORER_ID,   // Shared scorer ID
+  address: userAddress
+});
+
+// Reactive UI based on score
+{isPassing ? (
+  <TelegramAccessButton />
+) : (
+  <ScoreImprovementGuidance currentScore={score} />
+)}
+```
+
+## Backend Verification with Stamps API v2
+
+While the frontend provides immediate feedback, backend verification ensures security for sensitive operations.
+
+### Secure Score Verification
+
+Server-side verification using the Stamps API v2 to ensure scores cannot be spoofed by malicious clients - essential for protecting sensitive operations.
+
+```javascript
+// Backend endpoint for secure verification
+app.post('/verify-passport', async (req, res) => {
+  const { address } = req.body;
+  
+  const response = await fetch(
+    `https://api.passport.xyz/v2/stamps/${scorerId}/score/${address}`,
+    { headers: { 'X-API-KEY': apiKey } }
+  );
+  
+  const data = await response.json();
+  
+  if (data.passing_score === true || data.score >= 20) {
+    return res.json({ 
+      status: 'passed',
+      telegramLink: 'https://t.me/+axtkaeHda-I3MTJh'
+    });
+  }
+  
+  return res.json({ status: 'failed', currentScore: data.score });
+});
+```
+
+### API Response Structure
+
+The Stamps API v2 returns comprehensive score data:
+
+```json
+{
+  "address": "0x...",
+  "score": "25.5",
+  "passing_score": true,
+  "last_score_timestamp": "2024-01-15T10:30:00Z",
+  "expiration_timestamp": "2024-02-15T10:30:00Z",
+  "threshold": "20",
+  "error": null,
+  "stamps": {
+    "GitHub": {
+      "score": "5.0",
+      "dedup": true,
+      "expiration_date": "2024-02-15T10:30:00Z"
+    },
+    "Google": {
+      "score": "3.5",
+      "dedup": true,
+      "expiration_date": "2024-02-15T10:30:00Z"
+    }
+    // ... additional stamps
+  }
+}
+```
+
+**Key fields for integration:**
+- `score`: Total numerical score
+- `passing_score`: Boolean indicating if threshold is met
+- `stamps`: Individual stamp contributions and metadata
+- `expiration_timestamp`: When the score expires
+
+## Advanced Configuration Patterns
+
+### Conditional Widget Display
+
+Smart widget rendering based on user state - showing different UI components depending on verification status, connection state, and application context.
+
+```jsx
+const ConditionalPassport = ({ showWidget, address }) => {
+  const { score, isPassing } = usePassportScore({ address, ... });
+  
+  // Only show widget if user needs verification
+  if (isPassing) {
+    return <SuccessMessage score={score} />;
+  }
+  
+  if (showWidget) {
+    return <PassportScoreWidget address={address} />;
+  }
+  
+  return <ConnectWalletPrompt />;
+};
+```
+
+## Error Handling and Edge Cases
+
+### Comprehensive Error Handling
+
+Implementing robust error handling for various failure scenarios including network issues, API errors, and authentication problems.
+
+```jsx
+const RobustPassportIntegration = () => {
+  const { score, isPassing, loading, error } = usePassportScore({...});
+  const [backendError, setBackendError] = useState(null);
+  
+  // Handle different error states
+  if (error) {
+    return (
+      <ErrorState
+        title="Passport Verification Error"
+        message={error.message}
+        onRetry={() => window.location.reload()}
+      />
+    );
+  }
+  
+  if (backendError) {
+    return (
+      <ErrorState
+        title="Backend Verification Failed"
+        message="Please try again or contact support"
+        onRetry={() => setBackendError(null)}
+      />
+    );
+  }
+  
+  // ... rest of component
+};
+```
+
+### Network and API Resilience
+
+Building retry logic and exponential backoff to handle temporary network failures and API rate limiting gracefully.
+
+```jsx
+const resilientApiCall = async (address, retries = 3) => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch('/verify-passport', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ address })
+      });
+      
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.json();
+      
+    } catch (error) {
+      if (i === retries - 1) throw error;
+      await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+    }
+  }
+};
+```
+
+## Performance Optimization
+
+### Efficient Score Polling
+
+Implementing smart caching and polling strategies to minimize API calls while keeping scores fresh and responsive.
+
+```jsx
+const useOptimizedPassportScore = (address) => {
+  const [score, setScore] = useState(null);
+  const [lastFetch, setLastFetch] = useState(0);
+  
+  useEffect(() => {
+    // Only fetch if address changed or cache is stale (5 minutes)
+    const now = Date.now();
+    if (!address || (now - lastFetch < 5 * 60 * 1000)) return;
+    
+    fetchScore(address).then(data => {
+      setScore(data);
+      setLastFetch(now);
+    });
+  }, [address, lastFetch]);
+  
+  return score;
+};
+```
+
+### Lazy Loading Patterns
+
+Deferring widget initialization until needed to improve initial page load times and reduce resource consumption.
+
+It is worthwhile to mention that once Embed loads with the proper wallet context, it will automatically start to verify the user's onchain history and verify web3 Stamps in the background. If you set up lazy loading, this automatic verification might be delayed until the widget is loaded.
+
+```jsx
+const LazyPassportWidget = ({ shouldLoad, ...props }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  useEffect(() => {
+    if (shouldLoad && !isLoaded) {
+      setIsLoaded(true);
+    }
+  }, [shouldLoad, isLoaded]);
+  
+  if (!isLoaded) return <PlaceholderWidget />;
+  
+  return <PassportScoreWidget {...props} />;
+};
+```
+
+
+## Production Considerations
+
+### Rate Limiting and Caching
+
+If you need a rate limit elevation, please fill out our [rate limit elevation form](https://docs.google.com/forms/d/e/1FAIpQLSeUATg0nTE9ws3qESGBktFcOX0brF19iv2L0BLoiub9pbSMeg/viewform).
+
+### Monitoring and Analytics
+
+Adding telemetry and analytics to track user verification patterns, success rates, and system performance for continuous improvement.
+
+```jsx
+const AnalyticsPassportWidget = (props) => {
+  const { score, isPassing } = usePassportScore(props);
+  
+  useEffect(() => {
+    // Track score verification attempts
+    analytics.track('passport_score_checked', {
+      address: props.address,
+      score,
+      isPassing,
+      timestamp: new Date().toISOString()
+    });
+  }, [score, isPassing]);
+  
+  return <PassportScoreWidget {...props} />;
+};
+```
+
+## Next Steps
+
+Now that you understand the core Passport Embed integration patterns, you can:
+
+1. **Explore the complete sample application** in the `sample-apps/telegram-gating-demo` folder
+2. **Customize the themes and behavior** to match your application's needs
+3. **Implement backend verification** using the Stamps API v2 patterns shown
+4. **Test different scorer configurations** in the Developer Portal
+5. **Deploy your integration** following the production considerations
+
+<Callout type="info">
+**Ready to implement?**<br />
+Check out the [complete sample application](https://github.com/gitcoinco/passport-docs/tree/main/sample-apps/telegram-gating-demo) that demonstrates all these concepts in a working application. The README includes step-by-step setup instructions and troubleshooting guides.
+</Callout>
+
+## Additional Resources
+
+- [Passport Embed Component Reference](/building-with-passport/stamps/passport-embed/component-reference)
+- [Stamps API v2 Documentation](/building-with-passport/stamps/passport-api)
+- [Developer Portal](https://developer.passport.xyz/) for API keys and scorer configuration
+- [Sample Application Repository](https://github.com/gitcoinco/passport-docs/tree/main/sample-apps/telegram-gating-demo)

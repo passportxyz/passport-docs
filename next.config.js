@@ -421,6 +421,16 @@ module.exports = withNextra({
             source: '/building-with-passport/major-concepts/expirations',
             destination: '/building-with-passport/stamps/major-concepts/expirations',
             permanent: true
+        },
+        {
+            source: '/building-with-passport/stamps/passport-embed/tutorial/protecting-sensitive-programs-with-passport-embed',
+            destination: '/building-with-passport/stamps/passport-embed/tutorials/protecting-sensitive-programs-with-passport-embed',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/stamps/passport-embed/tutorial/gating-telegram-access-with-passport',
+            destination: '/building-with-passport/stamps/passport-embed/tutorials/gating-telegram-access-with-passport',
+            permanent: true
         }
     ]
 })

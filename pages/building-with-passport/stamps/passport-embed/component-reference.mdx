@@ -16,13 +16,13 @@ You will need to have a valid API key, Scorer ID, and to be granted access to Pa
 You can install the package using npm or yarn:
 
 ```bash
-npm install @human-tech/passport-embed
+npm install @human.tech/passport-embed
 ```
 
 or
 
 ```bash
-yarn add @human-tech/passport-embed
+yarn add @human.tech/passport-embed
 ```
 
 ## Component Import
@@ -30,7 +30,7 @@ yarn add @human-tech/passport-embed
 Make sure you have imported the component from the library:
 
 ```jsx
-import { PassportScoreWidget, DarkTheme, LightTheme } from "@human-tech/passport-embed";
+import { PassportScoreWidget, DarkTheme, LightTheme } from "@human.tech/passport-embed";
 ```
 
 ## Rendering the component
@@ -55,7 +55,7 @@ The PassportScoreWidget accepts the following props:
 
 | Prop Name                     | Type / Values                              | Description and Usage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | ----------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **apiKey** (required)         | `string`                                   | _Required._ Learn how to [get an API key](getting-access) for your project. This is required to authorize requests to the Passport scoring API. Example: `apiKey="abc123..."`. Without a valid API key, the widget will not be able to retrieve scores (you may receive an authorization error). Note that you should have two API keys: one for the actual Embed component, and one for the Stamps API request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **apiKey** (required)         | `string`                                   | _Required._ Learn how to [get an API key](getting-access) for your project. This is required to authorize requests to the Stamps scoring API. Example: `apiKey="abc123..."`. Without a valid API key, the widget will not be able to retrieve scores (you may receive an authorization error). Note that you should have two API keys: one for the actual Embed component, and one for the Stamps API request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | **scorerId** (required)       | `string` or `number`                       | _Required._ Learn how to [get a Scorer ID](getting-access) for your project. The identifier of the **Scorer** configuration to use. This tells the widget _which scoring model_ to apply to the user. For example, `scorerId="5"` might correspond to the “Unique Humanity (binary)” scorer which returns a yes/no based on threshold​. Ensure this ID matches one configured in your Passport dashboard.                                                                                                                                                                                                                                                                                                                                                                                                     |
 | **address**                   | `string` (Ethereum address) or `undefined` | _Optional._ The user’s wallet address to check. If you already have the user’s address (e.g., they logged in via wallet), pass it here. If not provided, the widget can prompt the user to connect their wallet (see `connectWalletCallback`). When `address` is set/updated, the widget will automatically fetch and display the Passport score for that address.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | **connectWalletCallback**     | `() => Promise<string>`                    | _Optional._ If you don't already have the user's wallet address (`address` prop is undefined), you can provide this callback function to prompt the user to connect their wallet. The widget will render a "Connect Wallet" button. When clicked, this function is executed and should handle connecting the user’s wallet (e.g., via MetaMask), then set the wallet address externally in your component's state. The widget will then detect the updated address prop and proceed to fetch the score. If omitted, manage the wallet connection entirely outside the widget. |
@@ -92,7 +92,7 @@ If you are simply displaying a user's score, relying on the data returned by the
 Here is an example of how to use the hook without making a request to the Stamps API to confirm the score server-side (not recommended for protecting sensitive programs):
 
 ```jsx
-import { usePassportScore } from "@human-tech/passport-embed";
+import { usePassportScore } from "@human.tech/passport-embed";
 
 const { score, isPassing, loading, error } = usePassportScore({
   apiKey: PASSPORT_API_KEY,
@@ -123,7 +123,7 @@ Please refer to our [tutorial](/building-with-passport/stamps/passport-embed/tut
 Suppose we want to embed the widget in a page and allow it to handle wallet connection. We also want it to appear as a small badge that the user can expand. We might use the following props:
 
 ```jsx
-import { PassportScoreWidget, DarkTheme } from "@human-tech/passport-embed";
+import { PassportScoreWidget, DarkTheme } from "@human.tech/passport-embed";
 
 <PassportScoreWidget
   apiKey={API_KEY}

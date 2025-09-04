@@ -1,0 +1,448 @@
+/* Global styles and CSS variables */
+:root {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+  --info-color: #3b82f6;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --border-color: #e5e7eb;
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --border-color: #374151;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+/* App container */
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+/* Header styles */
+.app-header {
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.app-header p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 1rem;
+}
+
+.wallet-info {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  display: inline-block;
+  font-family: 'Monaco', 'Consolas', monospace;
+  font-size: 0.9rem;
+}
+
+.wallet-info code {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Main content */
+.main-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Connect section */
+.connect-section {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.connect-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.connect-section p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+/* Passport section */
+.passport-section {
+  margin-bottom: 2rem;
+}
+
+/* Results section */
+.results-section {
+  margin-bottom: 2rem;
+}
+
+/* Status boxes */
+.status-box {
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  border: 1px solid;
+}
+
+.status-box h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.status-box p {
+  margin-bottom: 0.75rem;
+}
+
+.status-box ul, .status-box ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.status-box li {
+  margin-bottom: 0.5rem;
+}
+
+/* Status box variants */
+.status-box.success {
+  background-color: #ecfdf5;
+  border-color: #10b981;
+  color: #065f46;
+}
+
+.status-box.error {
+  background-color: #fef2f2;
+  border-color: #ef4444;
+  color: #991b1b;
+}
+
+.status-box.warning {
+  background-color: #fffbeb;
+  border-color: #f59e0b;
+  color: #92400e;
+}
+
+.status-box.info {
+  background-color: #eff6ff;
+  border-color: #3b82f6;
+  color: #1e40af;
+}
+
+.status-box.loading {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Dark mode adjustments for status boxes */
+@media (prefers-color-scheme: dark) {
+  .status-box.success {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #6ee7b7;
+  }
+  
+  .status-box.error {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #fca5a5;
+  }
+  
+  .status-box.warning {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #fcd34d;
+  }
+  
+  .status-box.info {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #93c5fd;
+  }
+}
+
+/* Score summary */
+.score-summary {
+  text-align: center;
+  padding: 2rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.score-summary h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.score-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.score-number {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.score-status {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.score-display.passing .score-number {
+  color: var(--success-color);
+}
+
+.score-display.passing .score-status {
+  color: var(--success-color);
+}
+
+.score-display.failing .score-number {
+  color: var(--error-color);
+}
+
+.score-display.failing .score-status {
+  color: var(--error-color);
+}
+
+.threshold-info {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Telegram access */
+.telegram-access {
+  margin-top: 1.5rem;
+}
+
+.telegram-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #0088cc 0%, #005999 100%);
+  color: white;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+
+.telegram-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, #0099dd 0%, #0066aa 100%);
+}
+
+.telegram-info {
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.telegram-access ul {
+  text-align: left;
+  margin-left: 1.5rem;
+}
+
+/* Info box */
+.info-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.info-box h3 {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.info-box ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.info-box li {
+  margin-bottom: 0.5rem;
+}
+
+.info-box a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.info-box a:hover {
+  text-decoration: underline;
+}
+
+/* Improvement tips */
+.improvement-tips {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.improvement-tips h4 {
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.improvement-tips ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.improvement-tips a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.improvement-tips a:hover {
+  text-decoration: underline;
+}
+
+/* Info section */
+.info-section {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.info-section h3 {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.info-section p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.tech-stack h4 {
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.tech-stack ul {
+  margin-left: 1.5rem;
+}
+
+.tech-stack li {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.tech-stack strong {
+  color: var(--primary-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 2rem;
+  }
+  
+  .app-header p {
+    font-size: 1rem;
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .status-box {
+    padding: 1rem;
+  }
+  
+  .score-number {
+    font-size: 2.5rem;
+  }
+  
+  .connect-section {
+    padding: 2rem 1rem;
+  }
+  
+  .connect-section h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* AppKit button styling */
+appkit-button {
+  display: inline-block;
+  margin: 1rem 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
