@@ -79,7 +79,7 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/scorer-api',
-            destination: '/building-with-passport/stamps/introduction',
+            destination: '/building-with-passport/stamps',
             permanent: true
         },
         {
@@ -144,17 +144,17 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/passport-sdk-deprecated',
-            destination: '/building-with-passport/stamps/introduction',
+            destination: '/building-with-passport/stamps',
             permanent: true
         },
         {
             source: '/building-with-passport/passport-sdk-deprecated/getting-started',
-            destination: '/building-with-passport/stamps/introduction',
+            destination: '/building-with-passport/stamps',
             permanent: true
         },
         {
             source: '/building-with-passport/passport-sdk-deprecated/integrating-passport-in-your-dapp',
-            destination: '/building-with-passport/stamps/introduction',
+            destination: '/building-with-passport/stamps',
             permanent: true
         },
         {
@@ -164,12 +164,12 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport',
-            destination: '/building-with-passport/stamps/introduction',
+            destination: '/building-with-passport/stamps',
             permanent: true
         },
         {
             source: '/building-with-passport/stamps',
-            destination: '/building-with-passport/stamps/introduction',
+            destination: '/building-with-passport/stamps',
             permanent: true
         },
         {
@@ -269,7 +269,7 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/airdrops',
-            destination: '/building-with-passport/stamps/introduction',
+            destination: '/building-with-passport/stamps',
             permanent: true
         },
         {
