@@ -79,7 +79,7 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/scorer-api',
-            destination: '/building-with-passport/stamps',
+            destination: '/building-with-passport/stamps/introduction',
             permanent: true
         },
         {
@@ -144,17 +144,17 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/passport-sdk-deprecated',
-            destination: '/building-with-passport/stamps',
+            destination: '/building-with-passport/stamps/introduction',
             permanent: true
         },
         {
             source: '/building-with-passport/passport-sdk-deprecated/getting-started',
-            destination: '/building-with-passport/stamps',
+            destination: '/building-with-passport/stamps/introduction',
             permanent: true
         },
         {
             source: '/building-with-passport/passport-sdk-deprecated/integrating-passport-in-your-dapp',
-            destination: '/building-with-passport/stamps',
+            destination: '/building-with-passport/stamps/introduction',
             permanent: true
         },
         {
@@ -164,7 +164,7 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport',
-            destination: '/building-with-passport/stamps',
+            destination: '/building-with-passport/stamps/introduction',
             permanent: true
         },
         {
@@ -199,7 +199,7 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/major-concepts/onchain-passports',
-            destination: '/building-with-passport/stamps/smart-contracts',
+            destination: '/building-with-passport/stamps/smart-contracts/introduction',
             permanent: true
         },
         {
@@ -254,7 +254,7 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/passport-api',
-            destination: '/building-with-passport/stamps/passport-api',
+            destination: '/building-with-passport/stamps/passport-api/introduction',
             permanent: true
         },
         {
@@ -264,17 +264,17 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/airdrops',
-            destination: '/building-with-passport/stamps',
+            destination: '/building-with-passport/stamps/introduction',
             permanent: true
         },
         {
             source: '/building-with-passport/passport-api-v2',
-            destination: '/building-with-passport/stamps/passport-api',
+            destination: '/building-with-passport/stamps/passport-api/introduction',
             permanent: true
         },
         {
             source: '/building-with-passport/passport-api-v2/overview',
-            destination: '/building-with-passport/stamps/passport-api',
+            destination: '/building-with-passport/stamps/passport-api/introduction',
             permanent: true
         },
         {
@@ -294,22 +294,12 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/model-based-detection/overview',
-            destination: '/building-with-passport/models',
+            destination: '/building-with-passport/models/introduction',
             permanent: true
         },
         {
             source: '/building-with-passport/model-based-detection/introduction',
-            destination: '/building-with-passport/models',
-            permanent: true
-        },
-        {
-            source: '/building-with-passport/stamps/introduction',
-            destination: '/building-with-passport/stamps',
-            permanent: true
-        },
-        {
-            source: '/building-with-passport/stamps/overview',
-            destination: '/building-with-passport/stamps/create-a-stamp',
+            destination: '/building-with-passport/models/introduction',
             permanent: true
         },
         {
@@ -344,12 +334,12 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/passport-embed/overview',
-            destination: '/building-with-passport/stamps/passport-embed',
+            destination: '/building-with-passport/stamps/passport-embed/introduction',
             permanent: true
         },
         {
             source: '/building-with-passport/models/introduction',
-            destination: '/building-with-passport/models',
+            destination: '/building-with-passport/models/introduction',
             permanent: true
         },
         {
@@ -368,8 +358,8 @@ module.exports = withNextra({
             permanent: true
         },
         {
-            source: '/building-with-passport/introduction',
-            destination: '/building-with-passport/stamps',
+            source: '/building-with-passport',
+            destination: '/building-with-passport/stamps/introduction',
             permanent: true
         },
         {
@@ -384,17 +374,17 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/stamps/passport-api/overview',
-            destination: '/building-with-passport/stamps/passport-api',
+            destination: '/building-with-passport/stamps/passport-api/introduction',
             permanent: true
         },
         {
             source: '/building-with-passport/stamps/smart-contracts/overview',
-            destination: '/building-with-passport/stamps/smart-contracts',
+            destination: '/building-with-passport/stamps/smart-contracts/introduction',
             permanent: true
         },
         {
             source: '/building-with-passport/stamps/passport-embed/overview',
-            destination: '/building-with-passport/stamps/passport-embed',
+            destination: '/building-with-passport/stamps/passport-embed/introduction',
             permanent: true
         },
         {
