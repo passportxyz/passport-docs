@@ -338,8 +338,28 @@ module.exports = withNextra({
             permanent: true
         },
         {
-            source: '/building-with-passport/models/introduction',
+            source: '/building-with-passport/models',
             destination: '/building-with-passport/models/introduction',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/stamps',
+            destination: '/building-with-passport/stamps/introduction',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/stamps/passport-api',
+            destination: '/building-with-passport/stamps/passport-api/introduction',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/stamps/smart-contracts',
+            destination: '/building-with-passport/stamps/smart-contracts/introduction',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/stamps/passport-embed',
+            destination: '/building-with-passport/stamps/passport-embed/introduction',
             permanent: true
         },
         {
