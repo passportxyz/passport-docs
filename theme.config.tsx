@@ -1,4 +1,4 @@
-import { DocsThemeConfig } from "nextra-theme-docs";
+// import { DocsThemeConfig } from "nextra-theme-docs"; // Removed - not available in this version
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useConfig } from "nextra-theme-docs";
@@ -23,7 +23,7 @@ export const logPageView = () => {
 };
 
 
-const config: DocsThemeConfig = {
+const config = {
   logo: (
     <div style={{ height: 40, display: "flex", gap: 8, alignItems: "end" }}>
   <svg
