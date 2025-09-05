@@ -88,7 +88,8 @@ const config = {
 
 const CustomHead: React.FC = () => {
   const { asPath, defaultLocale, locale } = useRouter();
-  const { frontMatter } = useConfig();
+  const { normalizePagesResult } = useConfig();
+  const frontMatter = normalizePagesResult.activeMetadata;
   const url =
     "https://docs.passport.xyz" +
     (defaultLocale === locale ? asPath : `/${locale}${asPath}`);
@@ -118,7 +119,7 @@ const CustomHead: React.FC = () => {
       <meta name="twitter:card" content="summary" />
       <meta
         name="twitter:title"
-        content={frontMatter.title || "Human Passport"}
+        content={frontMatter?.title || "Human Passport"}
       />
       <meta
         name="twitter:description"
@@ -133,7 +134,7 @@ const CustomHead: React.FC = () => {
       <meta property="og:url" content={url} />
       <meta
         property="og:title"
-        content={frontMatter.title || "Human Passport"}
+        content={frontMatter?.title || "Human Passport"}
       />
       <meta
         property="og:description"
