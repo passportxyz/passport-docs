@@ -304,7 +304,7 @@ module.exports = withNextra({
         },
         {
             source: '/building-with-passport/stamps/integrating-a-new-stamp',
-            destination: '/building-with-passport/stamps/create-a-stamp/integrating-a-new-stamp',
+            destination: '/building-with-passport/stamps/create-a-stamp/introduction',
             permanent: true
         },
         {
@@ -343,26 +343,6 @@ module.exports = withNextra({
             permanent: true
         },
         {
-            source: '/building-with-passport/stamps',
-            destination: '/building-with-passport/stamps/introduction',
-            permanent: true
-        },
-        {
-            source: '/building-with-passport/stamps/passport-api',
-            destination: '/building-with-passport/stamps/passport-api/introduction',
-            permanent: true
-        },
-        {
-            source: '/building-with-passport/stamps/smart-contracts',
-            destination: '/building-with-passport/stamps/smart-contracts/introduction',
-            permanent: true
-        },
-        {
-            source: '/building-with-passport/stamps/passport-embed',
-            destination: '/building-with-passport/stamps/passport-embed/introduction',
-            permanent: true
-        },
-        {
             source: '/building-with-passport/major-concepts/scoring-thresholds',
             destination: '/building-with-passport/stamps/major-concepts/scoring-thresholds',
             permanent: true
@@ -384,7 +364,7 @@ module.exports = withNextra({
         },
         {
             source: '/stamps/overview',
-            destination: '/building-with-passport/stamps/create-a-stamp',
+            destination: '/building-with-passport/stamps/create-a-stamp/introduction',
             permanent: true
         },
         {
@@ -430,6 +410,36 @@ module.exports = withNextra({
         {
             source: '/building-with-passport/major-concepts/expirations',
             destination: '/building-with-passport/stamps/major-concepts/expirations',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/passport-embed',
+            destination: '/building-with-passport/stamps/passport-embed/introduction',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/stamps/create-a-stamp',
+            destination: '/building-with-passport/stamps/create-a-stamp/introduction',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/smart-contracts',
+            destination: '/building-with-passport/stamps/smart-contracts/introduction',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/stamps/smart-contracts',
+            destination: '/building-with-passport/stamps/smart-contracts/introduction',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/stamps/passport-api',
+            destination: '/building-with-passport/stamps/passport-api/introduction',
+            permanent: true
+        },
+        {
+            source: '/building-with-passport/stamps/passport-embed',
+            destination: '/building-with-passport/stamps/passport-embed/introduction',
             permanent: true
         }
     ]
