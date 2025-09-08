@@ -1,0 +1,52 @@
+name: Link Checker
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run weekly on Sundays at 2 AM UTC
+    - cron: '0 2 * * 0'
+
+jobs:
+  link-checker:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build site
+      run: npm run build
+      
+    - name: Start server
+      run: |
+        npm start &
+        sleep 10  # Wait for server to start
+      
+    - name: Check internal links
+      uses: lycheeverse/lychee-action@v1.8.0
+      with:
+        args: --verbose --no-progress --exclude-mail 'http://localhost:3000'
+        fail: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Check external links (non-blocking)
+      uses: lycheeverse/lychee-action@v1.8.0
+      with:
+        args: --verbose --no-progress --exclude-mail --include-verbatim 'pages/**/*.{md,mdx}'
+        fail: false  # Don't fail on external links
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      continue-on-error: true

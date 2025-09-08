@@ -13,7 +13,7 @@ Human Passport's developer platform enables several key use cases:
 
 ## Passport use cases
 
-![protecting assets](../../public/protect-rewardspng.png)
+![Protecting assets](/protect-rewardspng.png)
 
 ### Protect access: Rewards
 
@@ -39,7 +39,7 @@ By protecting access to Passport holders that have a score over a certain [thres
 * [Linea](https://www.gitcoin.co/blog/lineas-human-first-campaign-using-gitcoin-passport)
 
 
-![protecting governance](../../public/protect-governance.png)
+![Protecting governance](/protect-governance.png)
 
 ### Protect access: Governance
 
@@ -54,7 +54,7 @@ Running a DAO is hard enough without Sybils submitting proposals and influencing
 * [Discourse](https://passport.human.tech/blog/how-to-protect-your-discourse-forum-from-bots-and-sybils-with-human-passport)
 * Snapshot
 
-![protecting communications](../../public/protect-communication.png)
+![Protecting communications](/protect-communication.png)
 
 ### Protect access: Communications
 
@@ -72,7 +72,7 @@ Tired of low-quality inbounds or contributions to a communication channel? Prote
 * Metaforo
 
 
-![protecting a marketplace](../../public/protect-marketplace.png)
+![Protecting a marketplace](/protect-marketplace.png)
 
 ### Protect access: Marketplace
 
@@ -85,7 +85,7 @@ Tired of low-quality inbounds or contributions to a communication channel? Prote
 You’ve got a marketplace that is free and open for users to create and sell content. However, you’ve recently had a string of Sybils creating low-quality projects, or trying to unfairly buy all of the inventory for high-quality projects. Let Passport help to protect these. #PassportCanFixThat
 
 
-![proving reputation](../../public/prove-reputation.png)
+![Proving reputation](/prove-reputation.png)
 
 ### Prove reputation
 
@@ -100,7 +100,7 @@ There are many situations where a user would benefit from being able to judge fo
 * Rarimo
 * Sismo
 
-![weighing activities](../../public/weigh-activities.png)
+![Weighing activities](/weigh-activities.png)
 
 ### Weigh user activities according to score
 
@@ -110,7 +110,7 @@ You have functionality where users help to select which content or ideas are pri
 #### Active integrators
 * Gitcoin Grants
 
-![improving UX](../../public/improve%20experience.png)
+![Improving UX](/improve%20experience.png)
 
 ### Improve the Passport experience
 

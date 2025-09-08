@@ -1,0 +1,39 @@
+# Lychee configuration for link checking
+# See: https://lychee.cli.rs/
+
+# Include patterns
+include = ["pages/**/*.md", "pages/**/*.mdx"]
+
+# Exclude patterns
+exclude = [
+    "mailto:*",
+    "tel:*",
+    "file://*"
+]
+
+# User agent string
+user_agent = "lychee/link-checker"
+
+# Maximum number of redirects to follow
+max_redirects = 10
+
+# Request timeout in seconds
+timeout = 30
+
+# Accept invalid certificates (not recommended for production)
+insecure = false
+
+# Check external links
+include_verbatim = true
+
+# Exclude localhost and example domains
+exclude_all_private = true
+exclude_loopback = true
+
+# Rate limiting
+max_concurrency = 8
+
+# Headers to include in requests
+headers = [
+    "accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+]
