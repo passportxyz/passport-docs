@@ -184,6 +184,20 @@ Add console logs to see API responses:
 - Add analytics and monitoring
 - Consider implementing SIWE (Sign-In with Ethereum) for additional security
 
+## Deploying to Vercel
+
+This sample app is ready for Vercel deployment. See the [Vercel Deployment Guide](../../VERCEL_DEPLOYMENT.md) for detailed instructions.
+
+**Quick deploy:**
+```bash
+# From this directory
+vercel --prod
+```
+
+Make sure to configure the environment variables in your Vercel dashboard.
+
+**Live demo:** [https://passport-embed-demo.vercel.app](https://passport-embed-demo.vercel.app)
+
 ## Support
 
 - [Passport Documentation](https://docs.passport.xyz/)
