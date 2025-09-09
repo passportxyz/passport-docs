@@ -1,0 +1,580 @@
+---
+title: Tutorial - Protecting Sensitive Programs with Passport Embed
+description: A step-by-step tutorial for building a gated application using Passport Embed with wallet connection and score verification.
+---
+
+import { Callout } from 'nextra/components'
+
+# Tutorial: Protecting Sensitive Programs with Passport Embed
+
+This tutorial walks you through building a complete application that uses Passport Embed to protect sensitive content behind a Unique Humanity Score threshold. You&apos;ll learn how to implement wallet connection, display the Passport verification widget, and conditionally unlock protected content.
+
+<Callout type="info">
+**Want to see the complete implementation?**  
+Check out our [full sample app](PLACEHOLDER_SAMPLE_APP_LINK) to see all these concepts working together in a production-ready application.
+</Callout>
+
+## What You&apos;ll Build
+
+By the end of this tutorial, you&apos;ll have a Next.js application featuring:
+
+- **Wallet Connection**: Users can connect their Ethereum wallet using Reown AppKit
+- **Passport Embed Widget**: Display the user&apos;s Unique Humanity Score and verification interface  
+- **Protected Content**: Content that&apos;s only accessible when the user meets your score threshold
+- **Secure Verification**: Both client-side and server-side score validation for security
+
+## Prerequisites
+
+Before starting, make sure you have:
+
+- Node.js 18+ installed
+- Basic familiarity with React and Next.js
+- A Passport API key and Scorer ID ([get access here](../getting-access))
+- A Reown Project ID ([create one here](https://cloud.reown.com))
+
+## Project Setup
+
+Let&apos;s start by creating a new Next.js project and installing the required dependencies.
+
+### Step 1: Initialize the Project
+
+We&apos;re using Next.js 14 for its excellent TypeScript support and API routes, which we&apos;ll need for secure server-side score verification. The configuration ensures compatibility with our wallet connection and Passport integration libraries.
+
+```bash
+npx create-next-app@14 passport-embed-tutorial --typescript --tailwind --eslint --app=false --src-dir=false --import-alias="@/*"
+cd passport-embed-tutorial
+```
+
+**Key choices explained:**
+- `--typescript`: Essential for type safety with web3 libraries
+- `--tailwind`: For utility-first styling that matches Passport&apos;s design system
+- `--app=false`: Using Pages Router for simpler API routes
+- `--eslint`: Code quality enforcement for production readiness
+
+### Step 2: Install Dependencies
+
+These packages provide the core functionality for wallet connection, Passport integration, and secure state management:
+
+```bash
+npm install @human.tech/passport-embed @reown/appkit @reown/appkit-adapter-wagmi @tanstack/react-query wagmi
+```
+
+**Package breakdown:**
+- `@human.tech/passport-embed`: Passport Embed widget and hooks
+- `@reown/appkit`: Multi-wallet connection UI and management
+- `@reown/appkit-adapter-wagmi`: Bridge between Reown and Wagmi React hooks
+- `@tanstack/react-query`: Server state management for async blockchain data
+- `wagmi`: React hooks for Ethereum, handles caching and synchronization
+
+### Step 3: Environment Configuration
+
+Environment variables keep your API keys secure and allow different configurations for development vs. production. 
+
+Quick reminder that you can create your API keys and Scorer ID in the [Passport Developer Portal](https://developer.passport.xyz/). You shoul dhave oen API key for the Embed component, and another for the Stamps API. You can use the same Scorer ID for both. 
+
+You can also generate your reown project ID in the [Reown Cloud](https://cloud.reown.com/).
+
+Create a `.env.local` file in your project root:
+
+```env
+# Passport Configuration
+NEXT_PUBLIC_PASSPORT_API_KEY=your_embed_api_key_here
+NEXT_PUBLIC_PASSPORT_SCORER_ID=your_scorer_id_here
+
+# Server-side API Key for Stamps API verification (keep secret!)
+PASSPORT_API_KEY=your_stamps_api_key_here
+
+# Reown Configuration  
+NEXT_PUBLIC_REOWN_PROJECT_ID=your_reown_project_id_here
+```
+
+**Environment variables explained:**
+- **Different API keys**: You may have separate API keys for Embed vs. Stamps API access
+- **Same scorer ID**: Use the same `NEXT_PUBLIC_PASSPORT_SCORER_ID` for both client and server
+- `NEXT_PUBLIC_*` variables are accessible in the browser for the Passport Embed widget
+- Non-prefixed `PASSPORT_API_KEY` is server-only for secure API route validation
+
+## Building the Application
+
+Now let&apos;s build our application step by step, starting with wallet configuration and moving through each component.
+
+### Step 4: Configure Wallet Connection
+
+Modern web3 applications need to support various wallet providers (MetaMask, WalletConnect, Coinbase Wallet, etc.) while maintaining a consistent user experience. Reown AppKit provides this abstraction layer and automatically handles wallet state management.
+
+Create `config/wallet.ts` to set up Reown AppKit:
+
+```typescript
+import { createAppKit } from '@reown/appkit'
+import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
+import { mainnet } from '@reown/appkit/networks'
+import type { AppKitNetwork } from '@reown/appkit/networks'
+
+// Get projectId from environment
+export const projectId = process.env.NEXT_PUBLIC_REOWN_PROJECT_ID
+
+if (!projectId) {
+  throw new Error('NEXT_PUBLIC_REOWN_PROJECT_ID is not set')
+}
+
+// Create networks array
+const networks: [AppKitNetwork, ...AppKitNetwork[]] = [mainnet]
+
+// Create Wagmi Adapter
+export const wagmiAdapter = new WagmiAdapter({
+  networks,
+  projectId,
+  ssr: true
+})
+
+// Create modal
+export const modal = createAppKit({
+  adapters: [wagmiAdapter],
+  networks,
+  projectId,
+  metadata: {
+    name: 'Passport Embed Tutorial',
+    description: 'Learn how to integrate Passport Embed',
+    url: 'https://docs.passport.xyz',
+    icons: ['https://docs.passport.xyz/favicon.ico']
+  },
+  features: {
+    analytics: false
+  }
+})
+
+export const config = wagmiAdapter.wagmiConfig
+```
+
+**Key concepts explained:**
+- **WagmiAdapter**: Creates a bridge between Reown AppKit&apos;s UI components and Wagmi&apos;s React hooks for blockchain interaction
+- **Networks array**: Defines which blockchains your app supports (we&apos;re using Ethereum mainnet)
+- **Metadata**: Shows in wallet connection prompts to build user trust
+- **SSR: true**: Enables server-side rendering compatibility
+
+### Step 5: Set Up App Configuration
+
+Web3 applications have unique state management needs. Blockchain data is asynchronous, can change frequently, and needs efficient caching. React Query handles the caching and synchronization, while Wagmi provides the blockchain-specific hooks.
+
+Update `pages/_app.tsx` to configure React Query and Wagmi:
+
+```typescript
+import type { AppProps } from 'next/app'
+import { WagmiProvider } from 'wagmi'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { config } from '../config/wallet'
+import '../styles/globals.css'
+
+// Create React Query client
+const queryClient = new QueryClient()
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
+    </WagmiProvider>
+  )
+}
+```
+
+**Critical setup notes:**
+- **Provider order matters**: `WagmiProvider` must wrap `QueryClientProvider` because Wagmi hooks depend on React Query internally
+- **QueryClient**: Handles caching and synchronization of blockchain state across your entire application
+- **Config import**: Uses the wallet configuration we set up in Step 4
+
+### Step 6: Create the Main Page Component
+
+This is where the magic happens. We&apos;re creating a dual-verification system that provides immediate user feedback through client-side hooks while maintaining security through server-side validation. The UI handles multiple states: disconnected, connecting, verifying, and different score levels.
+
+Replace `pages/index.tsx` with our main application:
+
+```typescript
+import { useState, useEffect } from 'react'
+import { useAccount } from 'wagmi'
+import { PassportScoreWidget, DarkTheme, usePassportScore } from '@human.tech/passport-embed'
+
+const PASSPORT_API_KEY = process.env.NEXT_PUBLIC_PASSPORT_API_KEY!
+const PASSPORT_SCORER_ID = process.env.NEXT_PUBLIC_PASSPORT_SCORER_ID!
+
+interface VerifiedScore {
+  score: number
+  isPassing: boolean
+}
+
+export default function Home() {
+  const { address, isConnected } = useAccount()
+  const [verifiedScore, setVerifiedScore] = useState<VerifiedScore | null>(null)
+
+  // Client-side score fetching
+  const { score, isPassing, loading } = usePassportScore({
+    apiKey: PASSPORT_API_KEY,
+    scorerId: PASSPORT_SCORER_ID,
+    address: address
+  })
+
+  // Server-side score verification
+  useEffect(() => {
+    if (address && isConnected) {
+      fetch('/api/verify-score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ address })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.verified) {
+          const numericScore = parseFloat(data.score)
+          setVerifiedScore({
+            score: numericScore,
+            isPassing: numericScore >= 20
+          })
+        }
+      })
+      .catch(error => console.error('Score verification failed:', error))
+    } else {
+      setVerifiedScore(null)
+    }
+  }, [address, isConnected])
+
+  // Signature callback for OAuth-based Stamps
+  const signMessage = async (message: string): Promise<string> => {
+    if (!window.ethereum) throw new Error('No wallet found')
+    
+    const accounts = await window.ethereum.request({ 
+      method: 'eth_requestAccounts' 
+    })
+    
+    return await window.ethereum.request({
+      method: 'personal_sign',
+      params: [message, accounts[0]]
+    })
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-900 text-white">
+      {/* Header */}
+      <header className="bg-gray-800 border-b border-gray-700">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold">P</span>
+            </div>
+            <h1 className="text-xl font-semibold">Passport Embed Tutorial</h1>
+          </div>
+          <div className="fixed top-4 right-4 z-50">
+            <appkit-button />
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-6xl mx-auto px-6 py-12">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4">
+            Build Your Unique Humanity Score to Unlock Exclusive Access
+          </h1>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Connect your wallet and verify your humanity through our decentralized 
+            identity verification system to access protected content.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* Passport Embed Widget */}
+          <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+            <h2 className="text-xl font-semibold mb-4">Verify Your Humanity</h2>
+            
+            {isConnected && address ? (
+              <PassportScoreWidget
+                apiKey={PASSPORT_API_KEY}
+                scorerId={PASSPORT_SCORER_ID}
+                address={address}
+                generateSignatureCallback={signMessage}
+                theme={DarkTheme}
+                className="w-full"
+              />
+            ) : (
+              <div className="text-center py-8">
+                <p className="text-gray-400 mb-4">
+                  Connect your wallet to start building your Unique Humanity Score
+                </p>
+                <appkit-button />
+              </div>
+            )}
+          </div>
+
+          {/* Access Status Panel */}
+          <div className={`rounded-xl p-6 border transition-all ${
+            verifiedScore?.isPassing 
+              ? 'bg-gradient-to-br from-emerald-900/50 to-emerald-800/30 border-emerald-500/50' 
+              : 'bg-gradient-to-br from-red-900/50 to-red-800/30 border-red-500/50'
+          }`}>
+            <div className="text-center">
+              <div className={`w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center ${
+                verifiedScore?.isPassing ? 'bg-emerald-500' : 'bg-red-500'
+              }`}>
+                {verifiedScore?.isPassing ? (
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                ) : (
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m0 0v2m0-2h2m-2 0H10m2-8V7" />
+                  </svg>
+                )}
+              </div>
+
+              <h2 className="text-2xl font-bold mb-2">
+                {verifiedScore?.isPassing ? 'Access Unlocked!' : 'Access Locked'}
+              </h2>
+
+              {verifiedScore ? (
+                <div className="space-y-4">
+                  <p className="text-lg">
+                    Your Unique Humanity Score: <strong>{verifiedScore.score.toFixed(2)}</strong>
+                  </p>
+                  
+                  {verifiedScore.isPassing ? (
+                    <div className="space-y-4">
+                      <p className="text-emerald-300">
+                        Congratulations! You&apos;ve met the minimum score requirement of 20.
+                      </p>
+                      <div className="bg-emerald-800/30 rounded-lg p-4 border border-emerald-600/30">
+                        <h3 className="font-semibold mb-2">🎉 Exclusive Access Granted</h3>
+                        <p className="text-sm text-emerald-200">
+                          You now have access to our exclusive Telegram community!
+                        </p>
+                        <a
+                          href="https://t.me/+Mcp9RsRV7tVmYjZh"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-block mt-3 bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                        >
+                          Join Exclusive Telegram →
+                        </a>
+                      </div>
+                    </div>
+                  ) : (
+                    <p className="text-red-300">
+                      You need a score of 20 or higher to unlock exclusive access. 
+                      Keep verifying more Stamps to increase your score!
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <p className="text-gray-400">
+                  Connect your wallet and complete verification to see your access status.
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  )
+}
+```
+
+### Step 7: Create Server-Side Verification API
+
+Create `pages/api/verify-score.ts` for secure score validation:
+
+```typescript
+import type { NextApiRequest, NextApiResponse } from 'next'
+
+const API_KEY = process.env.PASSPORT_API_KEY!
+const SCORER_ID = process.env.PASSPORT_SCORER_ID!
+
+interface VerifyScoreRequest {
+  address: string
+}
+
+interface VerifyScoreResponse {
+  verified: boolean
+  score?: string
+  isPassing?: boolean
+  error?: string
+}
+
+interface StampsApiResponse {
+  score: number
+  passing_score: number
+  threshold: number
+  last_score_timestamp: string
+  expiration_timestamp: string
+  error?: string
+}
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<VerifyScoreResponse>
+) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ verified: false, error: 'Method not allowed' })
+  }
+
+  const { address }: VerifyScoreRequest = req.body
+
+  if (!address) {
+    return res.status(400).json({ verified: false, error: 'Address is required' })
+  }
+
+  if (!API_KEY || !SCORER_ID) {
+    return res.status(500).json({ verified: false, error: 'Server configuration error' })
+  }
+
+  try {
+    const url = `https://api.passport.xyz/v2/stamps/${SCORER_ID}/score/${address}`
+    
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'X-API-KEY': API_KEY,
+        'Content-Type': 'application/json'
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error(`API responded with status: ${response.status}`)
+    }
+
+    const data: StampsApiResponse = await response.json()
+
+    if (data.error) {
+      throw new Error(data.error)
+    }
+
+    const meetsThreshold = data.score >= 20
+
+    return res.status(200).json({
+      verified: true,
+      score: data.score.toString(),
+      isPassing: meetsThreshold
+    })
+
+  } catch (error) {
+    console.error('Error verifying score:', error)
+    return res.status(500).json({ 
+      verified: false, 
+      error: 'Failed to verify score' 
+    })
+  }
+}
+```
+
+### Step 8: Add Styling
+
+Create `styles/globals.css`:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 17, 24, 39;
+  --background-end-rgb: 17, 24, 39;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Passport Embed Widget Styling */
+.passport-widget-container {
+  border-radius: 0.75rem !important;
+  border: 1px solid rgb(55 65 81) !important;
+}
+
+/* Reown AppKit Button Styling */
+appkit-button {
+  --w3m-font-family: 'Inter', sans-serif !important;
+  --w3m-border-radius-master: 0.5rem !important;
+}
+```
+
+## Testing Your Application
+
+Now you can test your application:
+
+```bash
+npm run dev
+```
+
+Visit `http://localhost:3000` and you should see:
+
+1. **Header** with wallet connection button
+2. **Main title** explaining the verification process  
+3. **Passport Embed Widget** (after wallet connection)
+4. **Access panel** showing lock/unlock status based on score
+
+<Callout type="warning">
+**Security Note**  
+This tutorial uses both client-side (`usePassportScore`) and server-side (`/api/verify-score`) verification. The client-side hook provides immediate feedback, while the server-side API ensures security against score tampering. Always use server-side verification for protecting sensitive resources.
+</Callout>
+
+## Key Concepts Explained
+
+### Hybrid Verification Approach
+
+This tutorial demonstrates a security-first approach:
+
+- **Client-side hook** (`usePassportScore`) provides immediate UI feedback
+- **Server-side API** (`/api/verify-score`) validates scores securely via Stamps API v2
+- **Conditional rendering** shows different states based on verified scores
+
+### Wallet Integration
+
+The Reown AppKit integration provides:
+
+- **Multiple wallet support** (MetaMask, WalletConnect, etc.)
+- **ENS name resolution** for better UX
+- **Ethereum address management** with automatic updates
+
+### Score Threshold Logic
+
+The application checks for a minimum score of 20:
+
+- Scores below 20 show locked state with encouragement to verify more Stamps
+- Scores 20+ unlock exclusive content (Telegram access in this example)
+- Real-time updates as users complete additional verifications
+
+## Next Steps
+
+Congratulations! You&apos;ve built a complete Passport Embed integration. To extend this further, consider:
+
+- Adding more sophisticated protected content
+- Implementing different score thresholds for various access levels  
+- Creating custom themes to match your brand
+- Adding analytics to track user verification patterns
+
+<Callout type="info">
+**Explore More**  
+- [Component Reference](../component-reference) - Detailed component documentation
+- [Customization Guide](../customization) - Theming and styling options
+- [Complete Sample App](PLACEHOLDER_SAMPLE_APP_LINK) - Production-ready reference implementation
+</Callout>
