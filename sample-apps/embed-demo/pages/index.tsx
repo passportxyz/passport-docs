@@ -146,7 +146,7 @@ export default function Home() {
             </div>
             <div className="passport-widget-container">
               <PassportScoreWidget
-                apiKey={process.env.NEXT_PUBLIC_EMBED_API_KEY!}
+                apiKey={process.env.NEXT_PUBLIC_PASSPORT_API_KEY!}
                 scorerId={process.env.NEXT_PUBLIC_PASSPORT_SCORER_ID!}
                 address={address}
                 theme={DarkTheme}
