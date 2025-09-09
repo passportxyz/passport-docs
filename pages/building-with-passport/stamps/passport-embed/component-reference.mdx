@@ -16,13 +16,13 @@ You will need to have a valid API key, Scorer ID, and to be granted access to Pa
 You can install the package using npm or yarn:
 
 ```bash
-npm install @human-tech/passport-embed
+npm install @human.tech/passport-embed
 ```
 
 or
 
 ```bash
-yarn add @human-tech/passport-embed
+yarn add @human.tech/passport-embed
 ```
 
 ## Component Import
@@ -30,7 +30,7 @@ yarn add @human-tech/passport-embed
 Make sure you have imported the component from the library:
 
 ```jsx
-import { PassportScoreWidget, DarkTheme, LightTheme } from "@human-tech/passport-embed";
+import { PassportScoreWidget, DarkTheme, LightTheme } from "@human.tech/passport-embed";
 ```
 
 ## Rendering the component
@@ -92,7 +92,7 @@ If you are simply displaying a user's score, relying on the data returned by the
 Here is an example of how to use the hook without making a request to the Stamps API to confirm the score server-side (not recommended for protecting sensitive programs):
 
 ```jsx
-import { usePassportScore } from "@human-tech/passport-embed";
+import { usePassportScore } from "@human.tech/passport-embed";
 
 const { score, isPassing, loading, error } = usePassportScore({
   apiKey: PASSPORT_API_KEY,
@@ -123,7 +123,7 @@ Please refer to our [tutorial](/building-with-passport/stamps/passport-embed/tut
 Suppose we want to embed the widget in a page and allow it to handle wallet connection. We also want it to appear as a small badge that the user can expand. We might use the following props:
 
 ```jsx
-import { PassportScoreWidget, DarkTheme } from "@human-tech/passport-embed";
+import { PassportScoreWidget, DarkTheme } from "@human.tech/passport-embed";
 
 <PassportScoreWidget
   apiKey={API_KEY}
