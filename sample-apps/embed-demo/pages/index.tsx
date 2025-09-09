@@ -124,19 +124,19 @@ export default function Home() {
             <div className="step-number">3</div>
             <div className="step-content">
               <h3>Build Up Your Score</h3>
-              <p>If the user's score is still below the threshold, the widget will walk users through pages of different Stamps that they can verify to build up their score.</p>
+              <p>If the user&apos;s score is still below the threshold, the widget will walk users through pages of different Stamps that they can verify to build up their score.</p>
             </div>
           </div>
           <div className="explanation-section">
             <div className="step-number">4</div>
             <div className="step-content">
               <h3>Unlock Access</h3>
-              <p>Once your score meets your defined threshold (20+ recommended), they'll be granted access to the protected program..</p>
+              <p>Once your score meets your defined threshold (20+ recommended), they&apos;ll be granted access to the protected program.</p>
             </div>
           </div>
           <div className="explanation-note">
             <h4>Security First</h4>
-            <p>Your score should be verified both client-side for display and server-side using Passport's Stamps API to prevent tampering.</p>
+            <p>Your score should be verified both client-side for display and server-side using Passport&apos;s Stamps API to prevent tampering.</p>
           </div>
         </div>
         <div className="widget-column">
