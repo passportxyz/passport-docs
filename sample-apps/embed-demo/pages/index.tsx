@@ -6,6 +6,20 @@ import { PassportScoreWidget, usePassportScore, DarkTheme, LightTheme } from '@h
 export default function Home() {
   const { address, isConnected } = useAccount()
   const [verifiedScore, setVerifiedScore] = useState<{ score: number; isPassing: boolean } | null>(null)
+
+  // Signature callback for OAuth-based Stamps
+  const signMessage = async (message: string): Promise<string> => {
+    if (!window.ethereum) throw new Error('No wallet found')
+    
+    const accounts = await window.ethereum.request({ 
+      method: 'eth_requestAccounts' 
+    })
+    
+    return await window.ethereum.request({
+      method: 'personal_sign',
+      params: [message, accounts[0]]
+    })
+  }
   
   useEffect(() => {
     if (address && isConnected) {
@@ -149,6 +163,7 @@ export default function Home() {
                 apiKey={process.env.NEXT_PUBLIC_PASSPORT_API_KEY!}
                 scorerId={process.env.NEXT_PUBLIC_PASSPORT_SCORER_ID!}
                 address={address}
+                generateSignatureCallback={signMessage}
                 theme={DarkTheme}
               />
             </div>
