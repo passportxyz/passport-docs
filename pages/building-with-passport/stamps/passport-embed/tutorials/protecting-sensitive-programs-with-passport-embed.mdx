@@ -70,9 +70,9 @@ npm install @human.tech/passport-embed @reown/appkit @reown/appkit-adapter-wagmi
 
 Environment variables keep your API keys secure and allow different configurations for development vs. production. 
 
-Quick reminder that you can create your API keys and Scorer ID in the [Passport Developer Portal](https://developer.passport.xyz/). You shoul dhave oen API key for the Embed component, and another for the Stamps API. You can use the same Scorer ID for both. 
+Quick reminder that you can create your API keys and Scorer ID in the [Passport Developer Portal](https://developer.passport.xyz/). You should have **two separate API keys**: one for the Embed component (client-side) and another for the Stamps API (server-side). You can use the **same Scorer ID** for both. 
 
-You can also generate your reown project ID in the [Reown Cloud](https://cloud.reown.com/).
+You can also generate your Reown project ID in the [Reown Cloud](https://cloud.reown.com/).
 
 Create a `.env.local` file in your project root:
 
@@ -89,10 +89,12 @@ NEXT_PUBLIC_REOWN_PROJECT_ID=your_reown_project_id_here
 ```
 
 **Environment variables explained:**
-- **Different API keys**: You may have separate API keys for Embed vs. Stamps API access
-- **Same scorer ID**: Use the same `NEXT_PUBLIC_PASSPORT_SCORER_ID` for both client and server
-- `NEXT_PUBLIC_*` variables are accessible in the browser for the Passport Embed widget
-- Non-prefixed `PASSPORT_API_KEY` is server-only for secure API route validation
+- **NEXT_PUBLIC_PASSPORT_API_KEY**: Client-side Embed API key (accessible in browser)
+- **PASSPORT_API_KEY**: Server-side Stamps API key (secure, server-only)
+- **NEXT_PUBLIC_PASSPORT_SCORER_ID**: Your scorer configuration ID (same for both client and server)
+- **NEXT_PUBLIC_REOWN_PROJECT_ID**: Wallet connection configuration
+- Variables with `NEXT_PUBLIC_` prefix are accessible in the browser
+- Non-prefixed variables like `PASSPORT_API_KEY` remain server-only for security
 
 ## Building the Application
 
@@ -379,13 +381,15 @@ export default function Home() {
 
 ### Step 7: Create Server-Side Verification API
 
+While the Passport Embed widget provides immediate client-side feedback, you should never trust client-side data for protecting sensitive resources. This API route provides secure server-side verification using the [Stamps API](https://docs.passport.xyz/building-with-passport/stamps/passport-api/api-reference) to ensure scores can't be tampered with.
+
 Create `pages/api/verify-score.ts` for secure score validation:
 
 ```typescript
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const API_KEY = process.env.PASSPORT_API_KEY!
-const SCORER_ID = process.env.PASSPORT_SCORER_ID!
+const SCORER_ID = process.env.NEXT_PUBLIC_PASSPORT_SCORER_ID!
 
 interface VerifyScoreRequest {
   address: string
@@ -466,6 +470,8 @@ export default async function handler(
 
 ### Step 8: Add Styling
 
+This step creates a cohesive design system that works well with the Passport Embed widget and provides a professional dark theme that matches modern web3 applications. The styling includes specific optimizations for the Passport widget and Reown AppKit components.
+
 Create `styles/globals.css`:
 
 ```css
@@ -517,6 +523,14 @@ appkit-button {
 }
 ```
 
+**Key styling features:**
+- **Dark theme**: Professional gray-900 background matching web3 conventions
+- **Inter font**: Clean, readable font that works well for wallet addresses and technical content
+- **Widget integration**: Specific overrides ensure the Passport Embed widget fits seamlessly
+- **Component consistency**: Unified styling between Reown AppKit and custom components
+
+For advanced customization, see the [Passport Embed Customization Guide](../customization).
+
 ## Testing Your Application
 
 Now you can test your application:
@@ -544,7 +558,7 @@ This tutorial uses both client-side (`usePassportScore`) and server-side (`/api/
 This tutorial demonstrates a security-first approach:
 
 - **Client-side hook** (`usePassportScore`) provides immediate UI feedback
-- **Server-side API** (`/api/verify-score`) validates scores securely via Stamps API v2
+- **Server-side API** (`/api/verify-score`) validates scores securely via the Stamps API
 - **Conditional rendering** shows different states based on verified scores
 
 ### Wallet Integration
@@ -568,14 +582,15 @@ The application checks for a minimum score of 20:
 Congratulations! You&apos;ve built a complete Passport Embed integration. To extend this further, consider:
 
 - Adding more sophisticated protected content
-- Implementing different score thresholds for various access levels  
-- Creating custom themes to match your brand
-- Adding analytics to track user verification patterns
+- Creating custom themes to match your brand using the [Customization Guide](../customization)
+- Integrating with your existing authentication system
+- Implementing SIWE (Sign-In with Ethereum) for additional security
 
 <Callout type="info">
 **Explore More**  
 - [Component Reference](../component-reference) - Detailed component documentation
 - [Customization Guide](../customization) - Theming and styling options
+- [Stamps API Reference](https://docs.passport.xyz/building-with-passport/stamps/passport-api/api-reference) - Server-side verification endpoints
 - [Live Demo](https://passport-sample-embed-demo.vercel.app) - Production-ready reference implementation
 - [Source Code](https://github.com/passportxyz/passport-sample-embed-demo) - Complete example repository
 </Callout>
