@@ -7,7 +7,7 @@ import { Callout } from 'nextra/components'
 
 # Tutorial: Protecting Sensitive Programs with Passport Embed
 
-This tutorial walks you through building a complete application that uses Passport Embed to protect sensitive content behind a Unique Humanity Score threshold. You&apos;ll learn how to implement wallet connection, display the Passport verification widget, and conditionally unlock protected content.
+This tutorial walks you through building a complete application that uses Passport Embed to protect sensitive content behind a Unique Humanity Score threshold. You&apos;ll learn how to implement wallet connection, display the Passport verification component, and conditionally unlock protected content.
 
 <Callout type="info">
 **Want to see the complete implementation?**  
@@ -19,7 +19,7 @@ Check out our [live demo](https://passport-sample-embed-demo.vercel.app) and [so
 By the end of this tutorial, you&apos;ll have a Next.js application featuring:
 
 - **Wallet Connection**: Users can connect their Ethereum wallet using Reown AppKit
-- **Passport Embed Widget**: Display the user&apos;s Unique Humanity Score and verification interface  
+- **Passport Embed Component**: Display the user&apos;s Unique Humanity Score and verification interface  
 - **Protected Content**: Content that&apos;s only accessible when the user meets your score threshold
 - **Secure Verification**: Both client-side and server-side score validation for security
 
@@ -60,7 +60,7 @@ npm install @human.tech/passport-embed @reown/appkit @reown/appkit-adapter-wagmi
 ```
 
 **Package breakdown:**
-- `@human.tech/passport-embed`: Passport Embed widget and hooks
+- `@human.tech/passport-embed`: Passport Embed component and hooks
 - `@reown/appkit`: Multi-wallet connection UI and management
 - `@reown/appkit-adapter-wagmi`: Bridge between Reown and Wagmi React hooks
 - `@tanstack/react-query`: Server state management for async blockchain data
@@ -284,7 +284,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {/* Passport Embed Widget */}
+          {/* Passport Embed Component */}
           <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
             <h2 className="text-xl font-semibold mb-4">Verify Your Humanity</h2>
             
@@ -381,7 +381,7 @@ export default function Home() {
 
 ### Step 7: Create Server-Side Verification API
 
-While the Passport Embed widget provides immediate client-side feedback, you should never trust client-side data for protecting sensitive resources. This API route provides secure server-side verification using the [Stamps API](https://docs.passport.xyz/building-with-passport/stamps/passport-api/api-reference) to ensure scores can't be tampered with.
+While the Passport Embed component provides immediate client-side feedback, you should never trust client-side data for protecting sensitive resources. This API route provides secure server-side verification using the [Stamps API](https://docs.passport.xyz/building-with-passport/stamps/passport-api/api-reference) to ensure scores can't be tampered with.
 
 Create `pages/api/verify-score.ts` for secure score validation:
 
@@ -470,7 +470,7 @@ export default async function handler(
 
 ### Step 8: Add Styling
 
-This step creates a cohesive design system that works well with the Passport Embed widget and provides a professional dark theme that matches modern web3 applications. The styling includes specific optimizations for the Passport widget and Reown AppKit components.
+This step creates a cohesive design system that works well with the Passport Embed component and provides a professional dark theme that matches modern web3 applications. The styling includes specific optimizations for the Passport component and Reown AppKit components.
 
 Create `styles/globals.css`:
 
@@ -510,7 +510,7 @@ a {
   text-decoration: none;
 }
 
-/* Passport Embed Widget Styling */
+/* Passport Embed Component Styling */
 .passport-widget-container {
   border-radius: 0.75rem !important;
   border: 1px solid rgb(55 65 81) !important;
@@ -526,7 +526,7 @@ appkit-button {
 **Key styling features:**
 - **Dark theme**: Professional gray-900 background matching web3 conventions
 - **Inter font**: Clean, readable font that works well for wallet addresses and technical content
-- **Widget integration**: Specific overrides ensure the Passport Embed widget fits seamlessly
+- **Component integration**: Specific overrides ensure the Passport Embed component fits seamlessly
 - **Component consistency**: Unified styling between Reown AppKit and custom components
 
 For advanced customization, see the [Passport Embed Customization Guide](../customization).
@@ -543,7 +543,7 @@ Visit `http://localhost:3000` and you should see:
 
 1. **Header** with wallet connection button
 2. **Main title** explaining the verification process  
-3. **Passport Embed Widget** (after wallet connection)
+3. **Passport Embed component** (after wallet connection)
 4. **Access panel** showing lock/unlock status based on score
 
 <Callout type="warning">

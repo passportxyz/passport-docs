@@ -7,27 +7,27 @@ import { Callout } from 'nextra/components'
 
 # Passport Embed - Customization
 
-The Passport Embed widget is fully themeable, allowing you to match its appearance to your application's design system. You can customize colors, fonts, border radius, padding, transition timing, and z-index positioning.
+The Passport Embed component is fully themeable, allowing you to match its appearance to your application's design system. You can customize colors, fonts, border radius, padding, transition timing, and z-index positioning.
 
 ## Collapse Mode
 
-With Passport Embed, you can control the widget’s **collapsible behavior** and how it is displayed relative to your page layout. 
+With Passport Embed, you can control the component’s **collapsible behavior** and how it is displayed relative to your page layout. 
 
 There are three options for collapse mode:
-* **`"shift"`** (default): the widget is embedded in the flow and expanding it will push/shift surrounding content (useful if placing at top of a page, for example).
-* **`"overlay"`**: the widget will overlay on top of content when expanded (using CSS `position:absolute` or similar, on top of the page, with an overlay background perhaps – the `overlayZIndex` theme can be used to adjust stacking).
-* **`"off"`**: collapse functionality is disabled; the widget is always fully expanded (use this if you want the full widget visible at all times in a particular spot).
+* **`"shift"`** (default): the component is embedded in the flow and expanding it will push/shift surrounding content (useful if placing at top of a page, for example).
+* **`"overlay"`**: the component will overlay on top of content when expanded (using CSS `position:absolute` or similar, on top of the page, with an overlay background perhaps – the `overlayZIndex` theme can be used to adjust stacking).
+* **`"off"`**: collapse functionality is disabled; the component is always fully expanded (use this if you want the full component visible at all times in a particular spot).
 
 You can experiment with these modes to see which best fits your UI. 
 
 ## Using Built-in Themes
 
-Passport Embed provides two built-in themes: `DarkTheme` and `LightTheme`. You can import them from the package and pass them directly to the widget’s theme prop. By default, the widget will use `DarkTheme`.
+Passport Embed provides two built-in themes: `DarkTheme` and `LightTheme`. You can import them from the package and pass them directly to the component’s theme prop. By default, the component will use `DarkTheme`.
 
 ```jsx
-import { PassportScoreWidget, DarkTheme, LightTheme } from "@human.tech/passport-embed";
+import { PassportScorecomponent, DarkTheme, LightTheme } from "@human.tech/passport-embed";
 
-<PassportScoreWidget
+<PassportScorecomponent
   apiKey="<YOUR_API_KEY>"
   scorerId="<YOUR_SCORER_ID>"
   generateSignatureCallback={generateSignature}
@@ -59,12 +59,12 @@ const customTheme = {
 
 ### Full Theme Schema
 
-The PassportWidgetTheme object lets you customize the look and feel of the widget.
+The PassportcomponentTheme object lets you customize the look and feel of the component.
 
 All fields are optional — if a value is not specified, the defaults from the selected base theme (DarkTheme or LightTheme) will be used.
 
 ```jsx
-export type PassportWidgetTheme = {
+export type PassportcomponentTheme = {
   colors?: {
     primary?: string;
     secondary?: string;
@@ -73,13 +73,13 @@ export type PassportWidgetTheme = {
     failure?: string;
   };
   padding?: {
-    widget?: {
+    component?: {
       x?: string;
       y?: string;
     };
   };
   radius?: {
-    widget?: string;
+    component?: string;
     button?: string;
   };
   transition?: {
@@ -100,23 +100,23 @@ export type PassportWidgetTheme = {
 
 ### Tips & Requirements
 * `colors.*` must be defined using RGB format — for example: "255, 255, 0" (Hex codes and named colors are not supported)
-* Font families must reference fonts that are already loaded on the page, except for the widget defaults
+* Font families must reference fonts that are already loaded on the page, except for the component defaults
 * `overlayZIndex` is only applied when `collapseMode` is set to `overlay`
-* Use `transition.speed` to fine-tune widget animation timing (e.g. `0.2s`, `0.5s`)
+* Use `transition.speed` to fine-tune component animation timing (e.g. `0.2s`, `0.5s`)
 * All values are optional — anything you omit will fall back to the base theme
 
 
 ### Example
 
 ```jsx
-<PassportScoreWidget
+<PassportScorecomponent
   apiKey="<YOUR_API_KEY>"
   scorerId="<YOUR_SCORER_ID>"
   generateSignatureCallback={generateSignature}
   theme={{
     colors: { primary: "34, 197, 94", background: "255, 255, 255" },
     font: { family: { body: "Inter, sans-serif" } },
-    radius: { widget: "12px", button: "8px" },
+    radius: { component: "12px", button: "8px" },
     transition: { speed: "0.2s" }
   }}
 />
