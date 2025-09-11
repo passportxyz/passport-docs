@@ -15,7 +15,7 @@ If you haven't already, please generate an API key and a Scorer ID by following 
 
 ## Installing and Importing
 
-Here's the simplest way to render the widget in a React app. 
+Here's the simplest way to render the component in a React app. 
 
 **Step 1. Install the NPM package:** 
 
@@ -32,7 +32,7 @@ yarn add @human.tech/passport-embed
 First we'll provide you a code example, then we'll break down each prop.
 
 ```jsx
-import { PassportScoreWidget, DarkTheme, LightTheme, usePassportScore } from "@human.tech/passport-embed";
+import { PassportScorecomponent, DarkTheme, LightTheme, usePassportScore } from "@human.tech/passport-embed";
 
 const PASSPORT_API_KEY = "<YOUR_API_KEY>";
 const PASSPORT_SCORER_ID="<YOUR_SCORER_ID>";
@@ -53,7 +53,7 @@ const signMessage = async (message: string): Promise<string> => {
 };
 
   return (
-    <PassportScoreWidget 
+    <PassportScorecomponent 
       apiKey={PASSPORT_API_KEY}
       scorerId={PASSPORT_SCORER_ID}
       address={userAddress} 
@@ -64,7 +64,7 @@ const signMessage = async (message: string): Promise<string> => {
 }
 ```
 
-This minimal example renders the Passport widget. 
+This minimal example renders the Passport component. 
 
 At a minimum, you should pass your `apiKey`, the `scorerId`, the user's `address` (if already known), and a `generateSignatureCallback` function (described below) that will be called to sign any required messages. 
 
