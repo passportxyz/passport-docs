@@ -1,0 +1,521 @@
+---
+title: Implementation Patterns
+description: Detailed implementation guides for different Stamp patterns
+---
+
+import { Callout, Tabs, Tab } from 'nextra/components'
+
+# Implementation Patterns
+
+This guide covers the four main implementation patterns for Human Passport Stamps, with detailed code examples and best practices.
+
+## Pattern Selection Guide
+
+| Pattern | Best For | Examples | Complexity |
+|---------|----------|----------|------------|
+| **OAuth** | Social platforms, web services | Discord, GitHub, LinkedIn | Medium |
+| **On-Chain** | Blockchain verification, token ownership | Binance BABT, ETH balance | High |
+| **Custom API** | Proprietary systems, complex workflows | Civic, TrustaLabs | High |
+| **Wallet Signature** | Address ownership, simple verification | Message signing | Low |
+
+---
+
+## OAuth Integration Pattern
+
+<Callout type="info">
+**Use Case:** Verifying ownership of accounts on platforms that support OAuth 2.0 authorization.
+</Callout>
+
+### Frontend Implementation (App-Bindings.tsx)
+
+```typescript
+import { AppContext, PlatformOptions, ProviderPayload } from "../types.js";
+import { Platform } from "../utils/platform.js";
+
+export class YourPlatformPlatform extends Platform {
+  path = "yourplatform";           // URL path for routing
+  platformId = "YourPlatform";     // Unique platform identifier
+  
+  clientId: string;
+  redirectUri: string;
+
+  constructor(options: PlatformOptions = {}) {
+    super();
+    this.clientId = options.clientId as string;
+    this.redirectUri = options.redirectUri as string;
+    
+    // Optional: User guidance banner
+    this.banner = {
+      heading: "Connect Your YourPlatform Account",
+      content: (
+        <div>
+          <p>This Stamp verifies your YourPlatform account and activity.</p>
+          <strong>Requirements:</strong>
+          <ul>
+            <li>Verified email address</li>
+            <li>Account at least 30 days old</li>
+            <li>Minimum reputation score</li>
+          </ul>
+        </div>
+      ),
+      cta: {
+        label: "Learn More",
+        url: "https://docs.yourplatform.com/passport",
+      },
+    };
+  }
+
+  // Generate OAuth authorization URL
+  async getOAuthUrl(state: string): Promise<string> {
+    const params = new URLSearchParams({
+      response_type: "code",
+      client_id: this.clientId,
+      state: state,
+      redirect_uri: this.redirectUri,
+      scope: "read:user read:email", // Platform-specific scopes
+    });
+    
+    return `https://api.yourplatform.com/oauth2/authorize?${params.toString()}`;
+  }
+
+  // For OAuth, wait for redirect with authorization code
+  async getProviderPayload(appContext: AppContext): Promise<ProviderPayload> {
+    return await appContext.waitForRedirect(this);
+  }
+}
+```
+
+### Backend Implementation (Providers/yourProvider.ts)
+
+```typescript
+import type { RequestPayload, VerifiedPayload } from "@gitcoin/passport-types";
+import { ProviderExternalVerificationError, type Provider } from "../../types.js";
+import axios from "axios";
+import { handleProviderAxiosError } from "../../utils/handleProviderAxiosError.js";
+
+interface YourPlatformUser {
+  id: string;
+  username: string;
+  email_verified: boolean;
+  reputation: number;
+  account_created: string;
+  status: 'active' | 'suspended' | 'banned';
+}
+
+export class YourProvider implements Provider {
+  type = "YourProviderName"; // Must match PROVIDER_ID in types
+
+  async verify(payload: RequestPayload): Promise<VerifiedPayload> {
+    try {
+      // 1. Exchange OAuth code for access token
+      const accessToken = await this.getAccessToken(payload.proofs.code);
+      
+      // 2. Fetch user data using access token
+      const userData = await this.getUserData(accessToken);
+      
+      // 3. Apply validation logic
+      const validation = this.validateUser(userData);
+      
+      if (!validation.valid) {
+        return {
+          valid: false,
+          errors: validation.errors,
+        };
+      }
+
+      return {
+        valid: true,
+        record: {
+          id: userData.id,
+          username: userData.username,
+          reputation: userData.reputation,
+          verifiedAt: Date.now(),
+        },
+      };
+    } catch (error) {
+      throw new ProviderExternalVerificationError(`YourPlatform error: ${error}`);
+    }
+  }
+
+  private async getAccessToken(code: string): Promise<string> {
+    try {
+      const response = await axios.post("https://api.yourplatform.com/oauth2/token", {
+        grant_type: "authorization_code",
+        code: code,
+        client_id: process.env.YOURPLATFORM_CLIENT_ID,
+        client_secret: process.env.YOURPLATFORM_CLIENT_SECRET,
+        redirect_uri: process.env.YOURPLATFORM_CALLBACK,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'User-Agent': 'HumanPassport/1.0',
+        },
+      });
+
+      return response.data.access_token;
+    } catch (e) {
+      handleProviderAxiosError(e, "error requesting YourPlatform access token", [code]);
+      throw e;
+    }
+  }
+
+  private async getUserData(accessToken: string): Promise<YourPlatformUser> {
+    try {
+      const response = await axios.get("https://api.yourplatform.com/user/profile", {
+        headers: { 
+          Authorization: `Bearer ${accessToken}`,
+          'User-Agent': 'HumanPassport/1.0',
+        },
+      });
+
+      return response.data as YourPlatformUser;
+    } catch (error) {
+      handleProviderAxiosError(error, "error fetching YourPlatform user data", []);
+      throw error;
+    }
+  }
+
+  private validateUser(userData: YourPlatformUser): { valid: boolean; errors?: string[] } {
+    const errors: string[] = [];
+
+    // Check email verification
+    if (!userData.email_verified) {
+      errors.push("Email address must be verified");
+    }
+
+    // Check reputation requirement  
+    if (userData.reputation < 100) {
+      errors.push("Must have at least 100 reputation points");
+    }
+
+    // Check account age (30 days)
+    const accountAge = Date.now() - new Date(userData.account_created).getTime();
+    const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+    if (accountAge < thirtyDays) {
+      errors.push("Account must be at least 30 days old");
+    }
+
+    // Check account status
+    if (userData.status !== 'active') {
+      errors.push("Account must be in good standing");
+    }
+
+    return {
+      valid: errors.length === 0,
+      errors: errors.length > 0 ? errors : undefined,
+    };
+  }
+}
+```
+
+---
+
+## On-Chain Verification Pattern
+
+<Callout type="info">
+**Use Case:** Verifying blockchain-based credentials, token ownership, or on-chain activity.
+</Callout>
+
+### Frontend Implementation (App-Bindings.tsx)
+
+```typescript
+import { AppContext, PlatformOptions, ProviderPayload } from "../types.js";
+import { Platform } from "../utils/platform.js";
+
+export class YourOnChainPlatform extends Platform {
+  platformId = "YourOnChain";
+  path = "youronchain";
+  isEVM = true; // Requires wallet connection
+
+  banner = {
+    heading: "Verify Your On-Chain Activity",
+    content: (
+      <div>
+        <p>This Stamp verifies your on-chain verification status.</p>
+        <strong>Requirements:</strong>
+        <ul>
+          <li>Must hold at least 1000 EXAMPLE tokens</li>
+          <li>Tokens must be in the connected wallet</li>
+          <li>Wallet must have transaction history</li>
+        </ul>
+        <br />
+        <strong>How it works:</strong>
+        <ol>
+          <li>Connect your wallet containing the required tokens</li>
+          <li>Click "Verify" to check your on-chain status</li>
+          <li>Stamp is awarded if you meet requirements</li>
+        </ol>
+      </div>
+    ),
+    cta: {
+      label: "Get EXAMPLE Tokens",
+      url: "https://app.example.com/swap",
+    },
+  };
+
+  // For on-chain verification, payload comes from wallet context
+  async getProviderPayload(_appContext: AppContext): Promise<ProviderPayload> {
+    return {};
+  }
+}
+```
+
+### Backend Implementation (Providers/yourOnChainProvider.ts)
+
+```typescript
+import type { RequestPayload, VerifiedPayload } from "@gitcoin/passport-types";
+import { Provider } from "../../types.js";
+import { getRPCProvider } from "../../utils/signer.js";
+import { Contract, formatUnits } from "ethers";
+
+// ERC-20 token ABI (minimal)
+const ERC20_ABI = [
+  {
+    inputs: [{ name: "account", type: "address" }],
+    name: "balanceOf",
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "decimals",
+    outputs: [{ name: "", type: "uint8" }],
+    stateMutability: "view",
+    type: "function",
+  },
+];
+
+export class YourOnChainProvider implements Provider {
+  type = "YourOnChainToken";
+  
+  private tokenAddress = "0x1234567890123456789012345678901234567890"; // Your token
+  private rpcUrl = "https://mainnet.infura.io/v3/YOUR_PROJECT_ID";
+  private minTokenBalance = 1000; // Minimum required tokens
+
+  async verify(payload: RequestPayload): Promise<VerifiedPayload> {
+    const address = payload.address;
+
+    try {
+      // 1. Check token balance
+      const { balance, formattedBalance } = await this.getTokenBalance(address);
+      
+      // 2. Check transaction history (anti-sybil measure)
+      const hasTransactionHistory = await this.checkTransactionHistory(address);
+      
+      const meetsBalanceRequirement = parseFloat(formattedBalance) >= this.minTokenBalance;
+      
+      if (!meetsBalanceRequirement) {
+        return {
+          valid: false,
+          errors: [`Must hold at least ${this.minTokenBalance} EXAMPLE tokens. Current: ${formattedBalance}`],
+        };
+      }
+
+      if (!hasTransactionHistory) {
+        return {
+          valid: false,
+          errors: ["Wallet must have transaction history (cannot be a fresh wallet)"],
+        };
+      }
+
+      return {
+        valid: true,
+        record: {
+          address: address,
+          tokenBalance: formattedBalance,
+          rawBalance: balance.toString(),
+          verifiedAt: Date.now(),
+        },
+      };
+    } catch (error) {
+      return {
+        valid: false,
+        errors: [`Unable to verify on-chain status: ${error.message}`],
+      };
+    }
+  }
+
+  private async getTokenBalance(address: string) {
+    const provider = getRPCProvider(this.rpcUrl);
+    const tokenContract = new Contract(this.tokenAddress, ERC20_ABI, provider);
+    
+    try {
+      const [balance, decimals] = await Promise.all([
+        tokenContract.balanceOf(address),
+        tokenContract.decimals(),
+      ]);
+
+      const formattedBalance = formatUnits(balance, decimals);
+      
+      return {
+        balance: balance,
+        formattedBalance: formattedBalance,
+        decimals: decimals,
+      };
+    } catch (error) {
+      throw new Error(`Token contract call failed: ${error.message}`);
+    }
+  }
+
+  private async checkTransactionHistory(address: string): Promise<boolean> {
+    const provider = getRPCProvider(this.rpcUrl);
+    
+    try {
+      const transactionCount = await provider.getTransactionCount(address);
+      return transactionCount > 0; // Must have sent at least one transaction
+    } catch (error) {
+      throw new Error(`Failed to check transaction history: ${error.message}`);
+    }
+  }
+}
+```
+
+---
+
+## Configuration Template
+
+All patterns use the same `Providers-config.ts` structure:
+
+<Tabs items={['Basic Configuration', 'Advanced Configuration']}>
+<Tab>
+```typescript
+import { PlatformSpec, PlatformGroupSpec, Provider } from "../types.js";
+import { YourProvider } from "./Providers/yourProvider.js";
+
+export const PlatformDetails: PlatformSpec = {
+  icon: "./assets/yourPlatformIcon.svg",
+  platform: "YourPlatform",
+  name: "Your Platform Name",
+  description: "Brief description of verification",
+  connectMessage: "Verify Account",
+  website: "https://www.yourplatform.com",
+  timeToGet: "5 minutes",
+  price: "Free",
+  isEVM: false, // Set true for wallet-based patterns
+};
+
+export const ProviderConfig: PlatformGroupSpec[] = [
+  {
+    platformGroup: "Identity Verification",
+    providers: [
+      {
+        title: "Verified Account",
+        description: "Proves account ownership and verification status",
+        name: "YourProviderName", // Must match provider.type
+      },
+    ],
+  },
+];
+
+export const providers: Provider[] = [new YourProvider()];
+```
+</Tab>
+<Tab>
+```typescript
+export const PlatformDetails: PlatformSpec = {
+  icon: "./assets/yourPlatformIcon.svg",
+  platform: "YourPlatform",
+  name: "Your Platform Name", 
+  description: "Verify your identity and activity on YourPlatform",
+  connectMessage: "Verify Account",
+  website: "https://www.yourplatform.com",
+  timeToGet: "5-10 minutes",
+  price: "Free",
+  isEVM: false,
+  
+  // Post-reskin: Detailed user guidance
+  guide: [
+    {
+      type: "steps",
+      title: "How to Verify",
+      items: [
+        {
+          title: "Step 1: Create Account",
+          description: "Sign up at YourPlatform and verify your email",
+          actions: [
+            {
+              label: "Sign Up Now",
+              href: "https://www.yourplatform.com/signup",
+            },
+          ],
+        },
+        {
+          title: "Step 2: Build Reputation",
+          description: "Participate to earn at least 100 reputation points",
+        },
+        {
+          title: "Step 3: Connect to Passport",
+          description: "Return here and click 'Verify' to add your Stamp",
+        },
+      ],
+    },
+    {
+      type: "list",
+      title: "Requirements",
+      items: [
+        "Verified email address required",
+        "Account must be at least 30 days old",
+        "Minimum 100 reputation points",
+        "Account must be in good standing",
+      ],
+    },
+  ],
+};
+
+export const ProviderConfig: PlatformGroupSpec[] = [
+  {
+    platformGroup: "Community Reputation",
+    providers: [
+      {
+        title: "Active Community Member",
+        description: "Demonstrates active participation with verified account and reputation",
+        name: "YourProviderName",
+      },
+      // Multiple tiers if applicable
+      {
+        title: "Premium Member",
+        description: "Enhanced verification for premium account holders",
+        name: "YourProviderPremium",
+      },
+    ],
+  },
+];
+```
+</Tab>
+</Tabs>
+
+---
+
+## Next Steps
+
+1. Choose your implementation pattern based on your verification method
+2. Review complete [Code Examples](/building-with-passport/stamps/create-a-stamp/examples) for your pattern
+3. Learn about [Testing & Security](/building-with-passport/stamps/create-a-stamp/testing-and-security) requirements
+4. Follow the [Submission Checklist](/building-with-passport/stamps/create-a-stamp/integrating-a-new-stamp) when ready
+
+## Pattern-Specific Considerations
+
+### OAuth Pattern
+- **Security**: Never log access tokens or user data
+- **Rate Limiting**: Implement exponential backoff for API calls
+- **Token Validation**: Always validate token scopes and expiration
+- **Error Handling**: Provide clear error messages for OAuth failures
+
+### On-Chain Pattern  
+- **RPC Reliability**: Use multiple RPC endpoints for redundancy
+- **Gas Optimization**: Batch multiple contract calls when possible
+- **Network Support**: Consider multi-chain support if applicable
+- **Anti-Sybil**: Implement transaction history checks to prevent fresh wallet attacks
+
+### Custom API Pattern
+- **Authentication**: Use secure authentication methods (API keys, JWT, etc.)
+- **Data Validation**: Validate all external API responses
+- **Caching**: Cache API responses when appropriate to reduce load
+- **Monitoring**: Implement comprehensive error logging and monitoring
+
+### Wallet Signature Pattern
+- **Message Format**: Use standardized message formats for consistency  
+- **Signature Validation**: Properly validate signature format and recovery
+- **Replay Protection**: Include nonces or timestamps to prevent replay attacks
+- **User Experience**: Provide clear explanation of what users are signing

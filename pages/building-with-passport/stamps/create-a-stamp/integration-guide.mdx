@@ -1,0 +1,225 @@
+---
+title: Developer Integration Guide
+description: Complete technical guide for building Human Passport Stamps
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Developer Integration Guide
+
+<Callout type="info">
+This guide is for approved partners who are ready to build their Stamp integration. If you haven't been approved yet, start with the [Introduction](/building-with-passport/stamps/create-a-stamp/introduction).
+</Callout>
+
+## What is a Stamp?
+
+A Human Passport Stamp is a verifiable credential that proves a user has completed identity verification or demonstrated specific on-chain/off-chain activity. Each Stamp consists of:
+
+- **Platform**: The service/protocol providing verification (e.g., Discord, GitHub, Binance)
+- **Provider(s)**: Specific verification types within a platform (e.g., "Discord Account", "GitHub >30 commits")
+- **Verification Logic**: Backend code that validates user claims
+- **UI Integration**: Frontend components for user interaction
+
+## Architecture Overview
+
+```
+┌─────────────────┬─────────────────┬─────────────────┐
+│   Frontend      │    Backend      │   Integration   │
+│   (App)         │    (IAM)        │   (Platforms)   │
+├─────────────────┼─────────────────┼─────────────────┤
+│ • User Interface│ • Verification  │ • Platform Impl │
+│ • OAuth Popups  │ • Credential    │ • Provider Impl │
+│ • Wallet Connect│   Issuance      │ • Configuration │
+│ • Form Handling │ • Error Handling│ • Tests         │
+└─────────────────┴─────────────────┴─────────────────┘
+```
+
+**Key Components:**
+- **App-Bindings**: Frontend platform implementation (user flows, OAuth, wallet connection)
+- **Providers**: Backend verification logic (API calls, on-chain checks, credential issuance)
+- **Providers-config**: UI metadata, user guidance, display configuration
+- **Integration**: Registration with core system (platforms.ts, types, app config)
+
+## Integration Patterns
+
+Human Passport supports four main integration patterns:
+
+### 1. OAuth Integration
+**Best for:** Social platforms, web services with OAuth APIs  
+**Examples:** Discord, Google, GitHub, LinkedIn  
+**Flow:** User clicks → OAuth popup → Authorization → Token exchange → API verification → Credential issued
+
+### 2. On-Chain Verification  
+**Best for:** Blockchain-based verification, token ownership, on-chain activity  
+**Examples:** Binance BABT, ETH balance, NFT ownership  
+**Flow:** User connects wallet → Query blockchain/contract → Verify conditions → Credential issued
+
+### 3. Custom API Integration
+**Best for:** Proprietary verification systems, complex workflows  
+**Examples:** Civic, TrustaLabs, custom KYC providers  
+**Flow:** Custom authentication → API calls to your service → Verification logic → Credential issued
+
+### 4. Wallet Signature
+**Best for:** Proof of address ownership, simple on-chain verification  
+**Examples:** Message signing, proof of control  
+**Flow:** User connects wallet → Sign message → Verify signature → Credential issued
+
+## File Structure Requirements
+
+Every Stamp integration requires the following directory structure:
+
+```
+platforms/src/YourPlatform/
+├── index.ts                    # Main exports (REQUIRED)
+├── App-Bindings.tsx           # Frontend platform class (REQUIRED)
+├── Providers-config.ts        # UI config & metadata (REQUIRED)
+├── Providers/                 
+│   ├── index.ts              # Provider exports (REQUIRED)
+│   └── yourProvider.ts       # Verification logic (REQUIRED)
+└── __tests__/                
+    └── yourProvider.test.ts  # Test suite (REQUIRED)
+```
+
+### Required Assets
+```
+app/public/assets/
+└── yourPlatformIcon.svg       # Platform icon (REQUIRED)
+```
+
+## Core Development Steps
+
+<Steps>
+### Fork and Setup Repository
+
+1. Fork the [Human Passport repository](https://github.com/passportxyz/passport)
+2. Clone your fork locally
+3. Install dependencies: `yarn install`
+4. Create your platform directory: `mkdir platforms/src/YourPlatform`
+
+### Choose Your Integration Pattern
+
+Select the pattern that best fits your verification method:
+- **OAuth**: For social platforms and web services
+- **On-Chain**: For blockchain-based verification
+- **Custom API**: For proprietary systems
+- **Wallet Signature**: For address ownership proof
+
+### Implement Core Files
+
+Create all required files following the pattern-specific templates:
+- `index.ts` - Main exports
+- `App-Bindings.tsx` - Frontend implementation  
+- `Providers-config.ts` - UI configuration
+- `Providers/yourProvider.ts` - Verification logic
+- `__tests__/yourProvider.test.ts` - Test suite
+
+### Integrate with Core System
+
+Update system files to register your platform:
+- Add to `platforms/src/platforms.ts`
+- Add provider ID to `types/src/index.d.ts`
+- Add app config to `app/config/platformMap.ts`
+
+### Test and Validate
+
+- Write comprehensive tests
+- Test with real API endpoints
+- Validate error handling
+- Test all user scenarios
+
+### Submit Pull Request
+
+Follow the [Submission Checklist](/building-with-passport/stamps/create-a-stamp/integrating-a-new-stamp) for PR requirements.
+</Steps>
+
+## Environment Configuration
+
+### Required Environment Variables
+
+All Stamp integrations need appropriate environment variables:
+
+```bash
+# OAuth Configuration (for OAuth patterns)
+NEXT_PUBLIC_YOURPLATFORM_CLIENT_ID=your_client_id
+YOURPLATFORM_CLIENT_SECRET=your_client_secret  
+NEXT_PUBLIC_YOURPLATFORM_CALLBACK=callback_url
+
+# Feature Flag (optional, for gradual rollout)
+NEXT_PUBLIC_FF_YOURPLATFORM_STAMP=on
+```
+
+### OAuth Setup
+
+For OAuth integrations, configure your application with these redirect URIs:
+- Development: `http://localhost:3000/auth/yourplatform/callback`
+- Staging: `https://staging.passport.xyz/auth/yourplatform/callback` 
+- Production: `https://passport.xyz/auth/yourplatform/callback`
+
+## UI Configuration (Post-Reskin)
+
+The July 2024 reskin introduced new required metadata fields in `PlatformDetails`:
+
+### Required Fields
+- `timeToGet`: Estimated completion time (e.g., "5 minutes", "10 minutes")
+- `price`: Cost information (e.g., "Free", "$5 + gas fees")
+- `guide`: Structured user guidance with two types:
+  - `steps`: Sequential instructions with optional action buttons
+  - `list`: Requirements, warnings, or considerations
+
+### Example Configuration
+```typescript
+export const PlatformDetails: PlatformSpec = {
+  icon: "./assets/yourPlatformIcon.svg",
+  platform: "YourPlatform",
+  name: "Your Platform Name",
+  description: "Brief description of verification type",
+  connectMessage: "Verify Account",
+  website: "https://www.yourplatform.com",
+  timeToGet: "5 minutes", // NEW REQUIRED FIELD
+  price: "Free",         // NEW REQUIRED FIELD
+  
+  // NEW REQUIRED FIELD: Detailed user guidance
+  guide: [
+    {
+      type: "steps",
+      title: "How to Verify",
+      items: [
+        {
+          title: "Step 1: Create Account",
+          description: "Sign up and verify your email",
+          actions: [
+            {
+              label: "Sign Up Now",
+              href: "https://www.yourplatform.com/signup",
+            },
+          ],
+        },
+        // ... more steps
+      ],
+    },
+    {
+      type: "list", 
+      title: "Requirements",
+      items: [
+        "Valid email address required",
+        "Account must be at least 30 days old",
+        "Some regions may be restricted",
+      ],
+    },
+  ],
+};
+```
+
+## Next Steps
+
+- Review specific [Implementation Patterns](/building-with-passport/stamps/create-a-stamp/implementation-patterns) for your use case
+- Check out complete [Code Examples](/building-with-passport/stamps/create-a-stamp/examples) 
+- Learn about [Testing & Security](/building-with-passport/stamps/create-a-stamp/testing-and-security) requirements
+- Use the [Submission Checklist](/building-with-passport/stamps/create-a-stamp/integrating-a-new-stamp) when ready to submit
+
+## Support
+
+For technical questions during development:
+- Review the [troubleshooting guide](/building-with-passport/stamps/create-a-stamp/testing-and-security#troubleshooting)
+- Check existing implementations in the repository
+- Contact the Human Passport team for complex integration questions
