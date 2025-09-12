@@ -210,15 +210,19 @@ export default function Home() {
   const [verifiedScore, setVerifiedScore] = useState<VerifiedScore | null>(null)
 
   // Client-side score fetching
-  const { score, isPassing, loading } = usePassportScore({
+  const passportData = usePassportScore({
     apiKey: PASSPORT_API_KEY,
     scorerId: PASSPORT_SCORER_ID,
     address: address
   })
 
-  // Server-side score verification
+  const { score, isPassing, loading } = passportData
+
+  // Server-side score verification - only when client-side shows passing score
   useEffect(() => {
-    if (address && isConnected) {
+    if (address && isConnected && passportData?.passingScore && !verifiedScore) {
+      console.log('🔍 Client-side shows passing score, starting server-side verification')
+      
       fetch('/api/verify-score', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -232,13 +236,18 @@ export default function Home() {
             score: numericScore,
             isPassing: numericScore >= 20
           })
+        } else {
+          setVerifiedScore(null)
         }
       })
-      .catch(error => console.error('Score verification failed:', error))
-    } else {
+      .catch(err => {
+        console.error('🚨 Server-side score verification error')
+        setVerifiedScore(null)
+      })
+    } else if (!address || !isConnected) {
       setVerifiedScore(null)
     }
-  }, [address, isConnected])
+  }, [address, isConnected, passportData?.passingScore, verifiedScore])
 
   // Signature callback for OAuth-based Stamps
   const signMessage = async (message: string): Promise<string> => {
@@ -404,7 +413,7 @@ interface VerifyScoreResponse {
 
 interface StampsApiResponse {
   score: number
-  passing_score: number
+  passing_score: boolean
   threshold: number
   last_score_timestamp: string
   expiration_timestamp: string
@@ -452,11 +461,19 @@ export default async function handler(
 
     const meetsThreshold = data.score >= 20
 
-    return res.status(200).json({
-      verified: true,
-      score: data.score.toString(),
-      isPassing: meetsThreshold
-    })
+    if (meetsThreshold && data.passing_score) {
+      return res.status(200).json({ 
+        verified: true, 
+        score: data.score.toString(),
+        isPassing: true
+      })
+    } else {
+      return res.status(200).json({ 
+        verified: false, 
+        score: data.score.toString(),
+        isPassing: false
+      })
+    }
 
   } catch (error) {
     console.error('Error verifying score:', error)
@@ -555,11 +572,34 @@ This tutorial uses both client-side (`usePassportScore`) and server-side (`/api/
 
 ### Hybrid Verification Approach
 
-This tutorial demonstrates a security-first approach:
+This tutorial demonstrates a security-first approach with smart monitoring:
 
-- **Client-side hook** (`usePassportScore`) provides immediate UI feedback
-- **Server-side API** (`/api/verify-score`) validates scores securely via the Stamps API
+- **Client-side hook** (`usePassportScore`) provides immediate UI feedback and monitors score changes
+- **Smart triggering** - Server-side verification only occurs when client-side shows a passing score
+- **Server-side API** (`/api/verify-score`) validates scores securely via the Stamps API v2
 - **Conditional rendering** shows different states based on verified scores
+- **Guard conditions** prevent redundant API calls with `!verifiedScore` check
+
+### Score Monitoring Pattern
+
+The implementation uses an intelligent monitoring approach:
+
+```typescript
+// Only trigger server verification when:
+// 1. Wallet is connected
+// 2. Client-side shows passing score 
+// 3. No verified score exists yet (prevents redundant calls)
+useEffect(() => {
+  if (address && isConnected && passportData?.passingScore && !verifiedScore) {
+    // Trigger server-side verification
+  }
+}, [address, isConnected, passportData?.passingScore, verifiedScore])
+```
+
+This pattern ensures:
+- **Efficient API usage** - No unnecessary server calls
+- **Real-time updates** - Responds immediately when users reach threshold
+- **Security validation** - Server confirms client-side results
 
 ### Wallet Integration
 
