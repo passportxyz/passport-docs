@@ -13,7 +13,7 @@ This guide is for approved partners who are ready to build their Stamp integrati
 
 ## What is a Stamp?
 
-A Human Passport Stamp is a verifiable credential that proves a user has completed identity verification or demonstrated specific on-chain/off-chain activity. Each Stamp consists of:
+A Human Passport Stamp is a verifiable credential that proves a user has completed identity verification or demonstrated specific onchain/offchain activity. Each Stamp consists of:
 
 - **Platform**: The service/protocol providing verification (e.g., Discord, GitHub, Binance)
 - **Provider(s)**: Specific verification types within a platform (e.g., "Discord Account", "GitHub >30 commits")
@@ -36,7 +36,7 @@ A Human Passport Stamp is a verifiable credential that proves a user has complet
 
 **Key Components:**
 - **App-Bindings**: Frontend platform implementation (user flows, OAuth, wallet connection)
-- **Providers**: Backend verification logic (API calls, on-chain checks, credential issuance)
+- **Providers**: Backend verification logic (API calls, onchain checks, credential issuance)
 - **Providers-config**: UI metadata, user guidance, display configuration
 - **Integration**: Registration with core system (platforms.ts, types, app config)
 
@@ -49,18 +49,18 @@ Human Passport supports four main integration patterns:
 **Examples:** Discord, Google, GitHub, LinkedIn  
 **Flow:** User clicks → OAuth popup → Authorization → Token exchange → API verification → Credential issued
 
-### 2. On-Chain Verification  
-**Best for:** Blockchain-based verification, token ownership, on-chain activity  
+### 2. Onchain Verification  
+**Best for:** Blockchain-based verification, token ownership, onchain activity  
 **Examples:** Binance BABT, ETH balance, NFT ownership  
 **Flow:** User connects wallet → Query blockchain/contract → Verify conditions → Credential issued
 
 ### 3. Custom API Integration
 **Best for:** Proprietary verification systems, complex workflows  
-**Examples:** Civic, TrustaLabs, custom KYC providers  
+**Examples:** Guild.xyz, custom KYC providers  
 **Flow:** Custom authentication → API calls to your service → Verification logic → Credential issued
 
 ### 4. Wallet Signature
-**Best for:** Proof of address ownership, simple on-chain verification  
+**Best for:** Proof of address ownership, simple onchain verification  
 **Examples:** Message signing, proof of control  
 **Flow:** User connects wallet → Sign message → Verify signature → Credential issued
 
@@ -100,7 +100,7 @@ app/public/assets/
 
 Select the pattern that best fits your verification method:
 - **OAuth**: For social platforms and web services
-- **On-Chain**: For blockchain-based verification
+- **Onchain**: For blockchain-based verification
 - **Custom API**: For proprietary systems
 - **Wallet Signature**: For address ownership proof
 
