@@ -14,8 +14,8 @@ This guide covers the four main implementation patterns for Human Passport Stamp
 | Pattern | Best For | Examples | Complexity |
 |---------|----------|----------|------------|
 | **OAuth** | Social platforms, web services | Discord, GitHub, LinkedIn | Medium |
-| **On-Chain** | Blockchain verification, token ownership | Binance BABT, ETH balance | High |
-| **Custom API** | Proprietary systems, complex workflows | Civic, TrustaLabs | High |
+| **Onchain** | Blockchain verification, token ownership | Binance BABT, ETH balance | High |
+| **Custom API** | Proprietary systems, complex workflows | Guild.xyz, custom KYC | High |
 | **Wallet Signature** | Address ownership, simple verification | Message signing | Low |
 
 ---
@@ -210,10 +210,10 @@ export class YourProvider implements Provider {
 
 ---
 
-## On-Chain Verification Pattern
+## Onchain Verification Pattern
 
 <Callout type="info">
-**Use Case:** Verifying blockchain-based credentials, token ownership, or on-chain activity.
+**Use Case:** Verifying blockchain-based credentials, token ownership, or onchain activity.
 </Callout>
 
 ### Frontend Implementation (App-Bindings.tsx)
@@ -228,10 +228,10 @@ export class YourOnChainPlatform extends Platform {
   isEVM = true; // Requires wallet connection
 
   banner = {
-    heading: "Verify Your On-Chain Activity",
+    heading: "Verify Your Onchain Activity",
     content: (
       <div>
-        <p>This Stamp verifies your on-chain verification status.</p>
+        <p>This Stamp verifies your onchain verification status.</p>
         <strong>Requirements:</strong>
         <ul>
           <li>Must hold at least 1000 EXAMPLE tokens</li>
@@ -242,7 +242,7 @@ export class YourOnChainPlatform extends Platform {
         <strong>How it works:</strong>
         <ol>
           <li>Connect your wallet containing the required tokens</li>
-          <li>Click "Verify" to check your on-chain status</li>
+          <li>Click "Verify" to check your onchain status</li>
           <li>Stamp is awarded if you meet requirements</li>
         </ol>
       </div>
@@ -253,7 +253,7 @@ export class YourOnChainPlatform extends Platform {
     },
   };
 
-  // For on-chain verification, payload comes from wallet context
+  // For onchain verification, payload comes from wallet context
   async getProviderPayload(_appContext: AppContext): Promise<ProviderPayload> {
     return {};
   }
@@ -331,7 +331,7 @@ export class YourOnChainProvider implements Provider {
     } catch (error) {
       return {
         valid: false,
-        errors: [`Unable to verify on-chain status: ${error.message}`],
+        errors: [`Unable to verify onchain status: ${error.message}`],
       };
     }
   }
@@ -402,7 +402,7 @@ export const ProviderConfig: PlatformGroupSpec[] = [
       {
         title: "Verified Account",
         description: "Proves account ownership and verification status",
-        name: "YourProviderName", // Must match provider.type
+        name: "YourProviderName_verified",
       },
     ],
   },
@@ -470,13 +470,13 @@ export const ProviderConfig: PlatformGroupSpec[] = [
       {
         title: "Active Community Member",
         description: "Demonstrates active participation with verified account and reputation",
-        name: "YourProviderName",
+        name: "YourProviderName_active",
       },
       // Multiple tiers if applicable
       {
         title: "Premium Member",
         description: "Enhanced verification for premium account holders",
-        name: "YourProviderPremium",
+        name: "YourProviderName_premium",
       },
     ],
   },
@@ -502,7 +502,7 @@ export const ProviderConfig: PlatformGroupSpec[] = [
 - **Token Validation**: Always validate token scopes and expiration
 - **Error Handling**: Provide clear error messages for OAuth failures
 
-### On-Chain Pattern  
+### Onchain Pattern  
 - **RPC Reliability**: Use multiple RPC endpoints for redundancy
 - **Gas Optimization**: Batch multiple contract calls when possible
 - **Network Support**: Consider multi-chain support if applicable
