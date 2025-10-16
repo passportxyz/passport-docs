@@ -451,6 +451,11 @@ module.exports = withNextra({
             source: '/building-with-passport/passport-embed/:path*',
             destination: '/building-with-passport/embed/:path*',
             permanent: true
+        },
+        {
+            source: '/building-with-passport/embed',
+            destination: '/building-with-passport/embed/introduction',
+            permanent: true
         }
     ]
 })
