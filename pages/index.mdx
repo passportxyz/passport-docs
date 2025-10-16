@@ -4,6 +4,7 @@ description: An overview of the developer tools made available by Human Passport
 ---
 
 import { Cards, Card } from 'nextra/components'
+import { Callout } from 'nextra/components'
 
 # Human Passport Docs
 
@@ -13,21 +14,14 @@ Developers can utilize the different Human Passport products and services to bui
 
 These developer docs describe the different Human Passport developer products and services that you can use to protect your community.
 
-## Who are you?
+<Callout type="info">
+**Passport Users:**<br />
+If you are a Passport user, please refer to the [Passport Support Center](https://support.passport.xyz) for help with your Passport account. If you are a developer building with Human Passport, please continue below to learn more about the different developer products and services.
+</Callout>
 
-### Passport user
+## Developer Products and Services
 
-<Cards>
-  <Card title="What is Passport?" href="https://support.passport.xyz/passport-knowledge-base" />
-  <Card title="How to create a Passport" href="https://support.passport.xyz/passport-knowledge-base/using-passport/creating-a-passport" />
-  <Card title="FAQ" href="https://support.passport.xyz/passport-knowledge-base/common-questions" />
-</Cards>
-
----
-
-### Developer building with Human Passport
-
-#### Passport Stamps
+### Passport Stamps
 
 Passport Stamps is the core product of Human Passport, and the primary way to verify a user's identity and trustworthiness. 
 
@@ -35,13 +29,13 @@ With Passport Stamps, users can choose how they prove their unique humanity by v
 
 Passport Stamps data is made available via the [Stamps API](./building-with-passport/stamps/passport-api). Users can optionally push their Passport Stamps data onchain, which can be accessed by developers using our [smart contracts](./building-with-passport/stamps/smart-contracts).
 
-The core Passport Stamps offering is free, but additional premium add-ons ([Custom Passport](./building-with-passport/stamps/custom-passport.mdx) and [Passport Embed](./building-with-passport/stamps/passport-embed)) can be added to your integration to reduce user friction and customize your unique human verification experience.
+The core Passport Stamps and Passport Embed offerings are free, but additional [customizations](./building-with-passport/stamps/custom-passport.mdx) can be added to your integration to reduce user friction and brand the unique human verification experience.
 
 <Cards>
   <Card title="Verify with Passport Stamps" href="building-with-passport/passport-api" />
   <Card title="Customize the Passport Stamps experience" href="building-with-passport/custom-passport" />
   <Card title="Build with the onchain Passport" href="building-with-passport/smart-contracts" />
-  <Card title="Embed Passport Stamps in your website or app" href="building-with-passport/passport-embed" />
+  <Card title="Embed Passport Stamps in your website or app" href="building-with-passport/embed" />
   <Card title="Getting access to the API" href="/building-with-passport/stamps/passport-api/getting-access" />
 </Cards>
 
@@ -49,7 +43,16 @@ You can also apply to [become a Stamp provider](/building-with-passport/stamps/c
 
 ---
 
-#### Passport Models
+### Passport Embed
+
+Passport Embed is an embeddable React component that enables you to add Passport's Stamps-based verification directly on your website or dApp, ensuring that users can verify their identity without having to leave the protected user flow.
+
+<Cards>
+  <Card title="Passport Embed" href="/building-with-passport/embed/introduction" />
+</Cards>
+
+---
+### Passport Models
 
 Passport Models is a real-time verification product that enables you to classify any EVM address as Sybil or human, without requiring users to have a Passport Stamps account. It offers reduced user friction and provides a quick way to verify addresses. 
 
@@ -64,7 +67,7 @@ Passport Models can be used as a quick primary verification method for your comm
 
 ---
 
-#### Data services
+### Data services
 
 Human Passport also offers data services to partners who need to better understand whether a list of addresses is Sybil or human. 
 
