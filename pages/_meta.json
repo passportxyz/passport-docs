@@ -15,6 +15,12 @@
         "href": "https://developer.passport.xyz/",
         "newWindow": true
     },
+    "api_playground_link": {
+        "title": "API Playground",
+        "type": "page",
+        "href": "https://passport-api-playground.vercel.app",
+        "newWindow": true
+    },
     "blog_link": {
         "title": "Blog",
         "type": "page",
