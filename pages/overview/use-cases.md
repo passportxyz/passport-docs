@@ -117,9 +117,30 @@ You have functionality where users help to select which content or ideas are pri
 #### Description
 Passport is the premier solution for Sybil defense. Help us further our goals by building solutions that help to improve the user experience for people using or building on top of Passport. 
 
+### Regulatory compliance
+
+#### Sub use cases
+* KYC (Know Your Customer) verification
+* AML (Anti-Money Laundering) checks
+* Accredited investor verification
+* Age verification
+
+#### Description
+Some programs require stronger identity verification for regulatory compliance. [Individual Verifications](/building-with-passport/individual-verifications) provide privacy-preserving KYC, phone, biometrics, and Proof of Clean Hands (sanctions/PEP list) checks using zero-knowledge proofs. Users verify once and receive a non-transferable SoulBound Token (SBT) that proves their verification status without exposing personal data.
+
+Individual Verifications are ideal for:
+* DeFi protocols requiring KYC for certain features
+* Token sales with accredited investor requirements
+* Platforms operating in regulated jurisdictions
+* Any program needing AML compliance
+
+[Learn more about Individual Verifications](/building-with-passport/individual-verifications/introduction)
+
+---
+
 ### Other community programs
 
-We’re very interested in unique use cases that utilize the Passport developer products. 
+We're very interested in unique use cases that utilize the Passport developer products.
 
 Please feel free to reach out to us on our [Passport Developer Telegram](https://t.me/+Mcp9RsRV7tVmYjZh) to bounce new ideas off us! We will also help promote your unique ideas through our marketing channels.
 
@@ -133,3 +154,5 @@ Please feel free to reach out to us on our [Passport Developer Telegram](https:/
 | Developer of an online marketplace     | Use Passport to gate their marketplace and only allow access to or distribute funds to trusted users, aiming to reduce fraud on the platform. <br/><br/>[Tutorial](../building-with-passport/tutorials/gating-access-with-passport-scores)                                                                                                                                                                                                                                               |
 | Airdrop experience manager             | Require users to have certain Stamps or a score above a threshold to exclude airdrop farmers. <br/><br/>[Tutorial](../building-with-passport/tutorials/requiring-a-passport-score-for-airdrop-claim)                                                                                                                                                                                                                                                                                     |
 | Developer of an online polling service | Use Passport to gate polls by requiring participants to have a score over a certain threshold to prevent bot manipulation and increase the trustworthiness of your results. <br/><br/>[Tutorial](../building-with-passport/tutorials/gating-access-with-passport-scores)                                                                                                                                                                                                                 |
+| DeFi protocol developer                | Use [Individual Verifications](/building-with-passport/individual-verifications) to implement privacy-preserving KYC or AML checks for regulatory compliance without storing user PII.                                                                                                                                                                                                                                                                                                   |
+| Token sale organizer                   | Verify accredited investors or perform KYC checks using [Individual Verifications](/building-with-passport/individual-verifications) while preserving user privacy through zero-knowledge proofs.                                                                                                                                                                                                                                                                                        |

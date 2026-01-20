@@ -1,0 +1,234 @@
+---
+title: Supported Chains
+description: Individual Verifications support multiple blockchain networks for issuing SoulBound Tokens (SBTs).
+---
+
+import { Callout } from 'nextra/components'
+import { Cards, Card } from 'nextra/components'
+
+# Supported Chains
+
+Individual Verifications issue SoulBound Tokens (SBTs) on multiple blockchain networks, allowing users to verify once and prove their identity across different ecosystems.
+
+## Overview
+
+| Chain | Gov ID | Phone | Biometrics | Clean Hands | US Residency |
+|-------|--------|-------|------------|-------------|--------------|
+| **Optimism** | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **NEAR** | ✅ | ✅ | ✅ | - | - |
+| **Stellar** | ✅ | ✅ | - | - | - |
+
+### Contract Addresses (Optimism Mainnet)
+
+| Contract | Address |
+|----------|---------|
+| SybilResistance (Gov ID) | `0xdD748977BAb5782625AF1466F4C5F02Eb92Fce31` |
+| SybilResistancePhone | `0xA40C8AAF7F47B18c1eDdBe7855b580f828eD9711` |
+| IsUSResident | `0x7497636F5E657e1E7Ea2e851cDc8649487dF3aab` |
+| Hub | `0x87b6e03b0D57771940D7cC9E92531B6217364B3E` |
+
+### Contract Address (Stellar)
+
+| Contract | Address |
+|----------|---------|
+| SBT Contract | `CCNTHEVSWNDOQAMXXHFOLQIXWUINUPTJIM6AXFSKODNVXWA4N7XV3AI5` |
+
+## How Multi-Chain SBTs Work
+
+1. **Single Verification**: User completes identity verification once (KYC, phone, biometrics, etc.)
+2. **Chain Selection**: User chooses which blockchain to receive their SBT
+3. **SBT Issuance**: A non-transferable SoulBound Token is minted on the selected chain
+4. **Cross-dApp Usage**: The SBT can be verified by any application on that chain
+
+<Callout type="tip">
+For enhanced privacy, users can pay verification fees from a different wallet than the one receiving the SBT. This prevents timing correlation attacks.
+</Callout>
+
+---
+
+## Optimism
+
+Optimism is the primary chain for Individual Verification SBTs, with full support for all verification types.
+
+**Supported Verifications:**
+- Government ID (KYC)
+- Phone
+- Biometrics
+- Proof of Clean Hands
+
+For Optimism integration details, see the [Developer Documentation](https://zeronym-docs.holonym.id/for-developers/start-here).
+
+---
+
+## Stellar
+
+Individual Verifications support SBT issuance on Stellar via Soroban smart contracts.
+
+<Callout type="info">
+Stellar SBT Contract: `CCNTHEVSWNDOQAMXXHFOLQIXWUINUPTJIM6AXFSKODNVXWA4N7XV3AI5`
+</Callout>
+
+**Supported Verifications:**
+- Government ID (KYC)
+- Phone
+
+### User Flow
+
+1. Visit the verification page for the desired verification type
+2. Complete the verification process
+3. Enter a Stellar address to receive the SBT
+4. The SBT is minted on Stellar
+
+### Off-Chain Verification (TypeScript)
+
+Use the Stellar SDK to query a user's SBT status:
+
+```typescript
+import {
+  rpc,
+  TransactionBuilder,
+  Networks,
+  Contract,
+  scValToNative,
+  nativeToScVal,
+} from '@stellar/stellar-sdk'
+
+type StellarSbt = {
+  action_nullifier: bigint
+  circuit_id: bigint
+  expiry: bigint
+  id: bigint
+  minter: string
+  public_values: Array<bigint>
+  recipient: string
+  revoked: boolean
+}
+
+type StellarSbtStatus = 'valid' | 'expired' | 'revoked' | 'none'
+
+const sorobanRpcUrl = 'https://mainnet.sorobanrpc.com'
+const sbtContractAddress = 'CCNTHEVSWNDOQAMXXHFOLQIXWUINUPTJIM6AXFSKODNVXWA4N7XV3AI5'
+
+async function getStellarSBT(
+  address: string,
+  circuitId: string
+): Promise<{ sbt?: StellarSbt; status: StellarSbtStatus }> {
+  const sorobanServer = new rpc.Server(sorobanRpcUrl)
+  const userAccount = await sorobanServer.getAccount(address)
+  const contract = new Contract(sbtContractAddress)
+
+  const operation = contract.call(
+    'get_sbt',
+    nativeToScVal(address, { type: 'address' }),
+    nativeToScVal(circuitId, { type: 'u256' })
+  )
+
+  const transaction = new TransactionBuilder(userAccount, {
+    networkPassphrase: Networks.PUBLIC,
+    fee: '100',
+  })
+    .addOperation(operation)
+    .setTimeout(60)
+    .build()
+
+  const response = await sorobanServer.simulateTransaction(transaction)
+
+  if (rpc.Api.isSimulationSuccess(response)) {
+    const parsed = rpc.parseRawSimulation(response)
+    const sbt = scValToNative(parsed.result?.retval)
+    return { sbt, status: 'valid' }
+  }
+
+  const error = response.error
+  if (error?.includes('Error(Contract, #1)')) return { status: 'none' }
+  if (error?.includes('Error(Contract, #5)')) return { status: 'revoked' }
+  if (error?.includes('Error(Contract, #6)')) return { status: 'expired' }
+
+  throw new Error(`SBT query failed: ${error}`)
+}
+```
+
+### On-Chain Verification (Soroban)
+
+**1. Fetch the SBT contract WASM:**
+
+```bash
+soroban contract fetch \
+  --id CCNTHEVSWNDOQAMXXHFOLQIXWUINUPTJIM6AXFSKODNVXWA4N7XV3AI5 \
+  -o ./passport_sbt_contract.wasm \
+  --network mainnet \
+  --network-passphrase "Public Global Stellar Network ; September 2015" \
+  --rpc-url https://mainnet.sorobanrpc.com
+```
+
+**2. Import and use in your contract:**
+
+```rust
+#![no_std]
+use soroban_sdk::{contract, contractimpl, Env, Address, U256};
+
+mod passport_sbt_contract {
+    soroban_sdk::contractimport!(
+        file = "../../passport_sbt_contract.wasm"
+    );
+}
+
+#[contract]
+pub struct MyContract;
+
+#[contractimpl]
+impl MyContract {
+    pub fn get_sbt(
+        env: Env,
+        recipient: Address,
+        circuit_id: U256
+    ) -> passport_sbt_contract::SBT {
+        let contract_addr = Address::from_str(
+            &env,
+            "CCNTHEVSWNDOQAMXXHFOLQIXWUINUPTJIM6AXFSKODNVXWA4N7XV3AI5"
+        );
+        let client = passport_sbt_contract::Client::new(&env, &contract_addr);
+        client.get_sbt(&recipient, &circuit_id)
+    }
+}
+```
+
+### Stellar Resources
+
+<Cards>
+  <Card title="Stellar Documentation" href="https://zeronym-docs.holonym.id/stellar" />
+  <Card title="User Guide" href="https://zeronym-docs.holonym.id/for-users/using-with-stellar" />
+</Cards>
+
+---
+
+## NEAR
+
+Individual Verifications also support SBT issuance on the NEAR blockchain.
+
+For NEAR integration details, see the [NEAR User Guide](https://zeronym-docs.holonym.id/for-users/using-with-near).
+
+---
+
+## SBT Status Codes
+
+All chains use consistent status codes when querying SBTs:
+
+| Status | Description |
+|--------|-------------|
+| `valid` | SBT exists and is active |
+| `expired` | SBT has passed its expiration date (1 year from issuance) |
+| `revoked` | SBT has been revoked |
+| `none` | No SBT found for this address |
+
+## Circuit IDs
+
+Different verification types use different circuit IDs. See the [API Reference](https://zeronym-docs.holonym.id/for-developers/api-reference) for details.
+
+## Additional Resources
+
+<Cards>
+  <Card title="Developer Quick Start" href="https://zeronym-docs.holonym.id/for-developers/start-here" />
+  <Card title="API Reference" href="https://zeronym-docs.holonym.id/for-developers/api-reference" />
+  <Card title="Architecture Overview" href="https://zeronym-docs.holonym.id/architecture/overview" />
+</Cards>

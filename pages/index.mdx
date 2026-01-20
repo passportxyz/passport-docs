@@ -69,6 +69,26 @@ Passport Models can be used as a quick primary verification method for your comm
 
 ---
 
+### Individual Verifications
+
+Individual Verifications provide privacy-preserving identity checks using zero-knowledge proofs. Unlike Stamps-based verification which aggregates multiple signals into a composite score, Individual Verifications offer specific, targeted proofs for use cases requiring stronger identity guarantees.
+
+Available verification types include:
+- **Government ID (KYC)** - Verify identity via government-issued ID
+- **Phone** - Verify a unique phone number
+- **Biometrics** - Face uniqueness and liveness check
+- **Proof of Clean Hands** - Sanctions and PEP list verification (AML compliance)
+
+Individual Verifications issue non-transferable SoulBound Tokens (SBTs) on Optimism, Stellar, and NEAR.
+
+<Cards>
+  <Card title="Individual Verifications overview" href="/building-with-passport/individual-verifications/introduction" />
+  <Card title="Supported chains" href="/building-with-passport/individual-verifications/supported-chains" />
+  <Card title="API reference" href="/building-with-passport/individual-verifications/api-reference" />
+</Cards>
+
+---
+
 ### Data services
 
 Human Passport also offers data services to partners who need to better understand whether a list of addresses is Sybil or human. 

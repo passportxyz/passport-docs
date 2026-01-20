@@ -165,3 +165,29 @@ More detail, including an explanation of how to navigate paginated responses, is
 ### Sybil
 
 A Sybil is a fake user. Many applications require confidence that each of their users represents a real human individual rather than a bot or an impersonator. However, users can try to create multiple personas that they use to access a service, gaining more than their fair share or reward or influence. Each of these dishonest personas is known as a Sybil. Take voting for example; if a user can create ten accounts and convince a platform that they are all valid, then they have multiplied their influence over the outcome of the vote by 10x. Human Passport is an anti-Sybil tool because it makes it harder for attackers to convince platforms that these Sybil accounts represent genuine users.
+
+
+
+### Individual Verifications
+
+[Individual Verifications](/building-with-passport/individual-verifications) are privacy-preserving identity checks that use zero-knowledge proofs to verify specific attributes about a user without exposing personal data. Unlike Stamps which aggregate multiple signals into a composite score, Individual Verifications provide targeted proofs for use cases requiring stronger identity guarantees or regulatory compliance.
+
+Available verification types include:
+- **Government ID (KYC)** - Verify identity via government-issued ID
+- **Phone** - Verify a unique phone number
+- **Biometrics** - Face uniqueness and liveness check
+- **Proof of Clean Hands** - Sanctions and PEP list verification for AML compliance
+
+Upon successful verification, users receive a non-transferable SoulBound Token (SBT) that proves their verification status.
+
+
+
+### Zero-Knowledge Proofs (ZKP)
+
+A zero-knowledge proof is a cryptographic method that allows one party to prove to another that a statement is true without revealing any additional information beyond the validity of the statement itself. In the context of Human Passport, zero-knowledge proofs enable users to prove they have passed identity verification (such as KYC or sanctions checks) without exposing their personal data to applications. This technology powers [Individual Verifications](/building-with-passport/individual-verifications), allowing privacy-preserving identity checks.
+
+
+
+### SoulBound Tokens (SBT)
+
+SoulBound Tokens are non-transferable blockchain tokens that represent identity credentials or achievements. Unlike regular tokens or NFTs, SBTs cannot be transferred or sold - they are permanently bound to the wallet that received them. Human Passport uses SBTs to represent completed [Individual Verifications](/building-with-passport/individual-verifications). When a user completes a verification (such as government ID or biometrics), they receive an SBT on their chosen blockchain (Optimism, Stellar, or NEAR) that proves their verification status. SBTs expire after one year and can be renewed by completing the verification process again.
