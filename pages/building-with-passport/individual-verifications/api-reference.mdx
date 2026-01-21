@@ -38,7 +38,6 @@ With a custom action ID, a user who has verified with another application can st
 | [Check government ID verification](#check-government-id-verification) | `GET /sybil-resistance/gov-id/{network}` |
 | [Check phone verification](#check-phone-verification) | `GET /sybil-resistance/phone/{network}` |
 | [Check biometrics verification](#check-biometrics-verification) | `GET /sybil-resistance/biometrics/{network}` |
-| [Check US residency](#check-us-residency) | `GET /residence/country/us/{network}` |
 | [Query Proof of Clean Hands attestations](#query-proof-of-clean-hands-attestations-via-sign-protocol) | Sign Protocol API |
 | [Proof of Clean Hands SBTs (Sui)](#proof-of-clean-hands-sbts-sui) | `GET /attestation/sbts/clean-hands` |
 
@@ -138,31 +137,6 @@ curl --request GET \
 
 ---
 
-### Check US Residency
-
-Returns whether a user has proven US residency.
-
-> GET /residence/country/us/\{network\}
-
-#### Query Parameters
-
-| Name | Required | Description |
-|------|----------|-------------|
-| `user` | Yes | The user's blockchain address |
-
-```bash filename="Sample request" copy
-curl --request GET \
-  'https://api.holonym.io/residence/country/us/optimism?user={address}'
-```
-
-```json filename="Sample response"
-{
-  "result": true
-}
-```
-
----
-
 ## Snapshot Strategy Endpoints
 
 These endpoints are designed for integration with Snapshot governance voting.
@@ -188,15 +162,6 @@ To use Individual Verifications with Snapshot, configure the ["api" strategy](ht
   "decimals": 0,
   "strategy": "snapshot-strategies/sybil-resistance/phone",
   "additionalParameters": "action-id=123456789"
-}
-```
-
-```json filename="US Residency"
-{
-  "api": "https://api.holonym.io",
-  "symbol": "",
-  "decimals": 0,
-  "strategy": "snapshot-strategies/residence/country/us"
 }
 ```
 
@@ -244,27 +209,6 @@ Uses the same parameters and response format as the Government ID Snapshot endpo
 > GET /snapshot-strategies/sybil-resistance/biometrics
 
 Uses the same parameters and response format as the Government ID Snapshot endpoint.
-
-### Snapshot: US Residency
-
-> GET /snapshot-strategies/residence/country/us
-
-#### Query Parameters
-
-| Name | Required | Description |
-|------|----------|-------------|
-| `network` | Yes | Chain ID |
-| `snapshot` | Yes | Block height |
-| `addresses` | Yes | Comma-separated list of blockchain addresses |
-
-```json filename="Sample response"
-{
-  "score": [
-    { "address": "0x123...", "score": 1 },
-    { "address": "0x456...", "score": 0 }
-  ]
-}
-```
 
 ---
 
@@ -377,7 +321,7 @@ Proof of Clean Hands verification combines KYC data with AML (Anti-Money Launder
 |---------|------------|---------------------|
 | Optimism (Mainnet) | `optimism` | All endpoints |
 | Base Sepolia (Testnet) | `base-sepolia` | All endpoints |
-| NEAR | `near` | Gov-id, phone, biometrics (not US residency) |
+| NEAR | `near` | Gov-id, phone, biometrics |
 
 ---
 

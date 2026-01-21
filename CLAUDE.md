@@ -109,7 +109,4 @@ https://api.holonym.io/snapshot-strategies/sybil-resistance/gov-id?network=10&sn
 
 # Phone
 https://api.holonym.io/snapshot-strategies/sybil-resistance/phone?network=10&snapshot=12345678&addresses={addr}&action-id=123456789
-
-# US Residency (no action-id needed)
-https://api.holonym.io/snapshot-strategies/residence/country/us?network=10&snapshot=12345678&addresses={addr}
 ```
