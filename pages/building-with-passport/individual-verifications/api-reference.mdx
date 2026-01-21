@@ -167,6 +167,45 @@ curl --request GET \
 
 These endpoints are designed for integration with Snapshot governance voting.
 
+### Configuring Snapshot
+
+To use Individual Verifications with Snapshot, configure the ["api" strategy](https://github.com/snapshot-labs/snapshot-strategies/tree/master/src/strategies/api) with the following parameters:
+
+```json filename="Government ID Sybil Resistance"
+{
+  "api": "https://api.holonym.io",
+  "symbol": "",
+  "decimals": 0,
+  "strategy": "snapshot-strategies/sybil-resistance/gov-id",
+  "additionalParameters": "action-id=123456789"
+}
+```
+
+```json filename="Phone Sybil Resistance"
+{
+  "api": "https://api.holonym.io",
+  "symbol": "",
+  "decimals": 0,
+  "strategy": "snapshot-strategies/sybil-resistance/phone",
+  "additionalParameters": "action-id=123456789"
+}
+```
+
+```json filename="US Residency"
+{
+  "api": "https://api.holonym.io",
+  "symbol": "",
+  "decimals": 0,
+  "strategy": "snapshot-strategies/residence/country/us"
+}
+```
+
+<Callout type="info">
+We recommend using the default action ID `123456789`. See [Custom Action IDs](/building-with-passport/individual-verifications/major-concepts/action-ids) for information on using custom action IDs.
+</Callout>
+
+---
+
 ### Snapshot: Government ID Sybil Resistance
 
 > GET /snapshot-strategies/sybil-resistance/gov-id
