@@ -117,3 +117,9 @@ https://api.holonym.io/snapshot-strategies/sybil-resistance/gov-id?network=10&sn
 # Phone
 https://api.holonym.io/snapshot-strategies/sybil-resistance/phone?network=10&snapshot=12345678&addresses={addr}&action-id=123456789
 ```
+
+## 📚 Mim Knowledge System
+
+@.claude/knowledge/INSTRUCTIONS.md
+
+@.claude/knowledge/KNOWLEDGE_MAP_CLAUDE.md
