@@ -1,0 +1,100 @@
+---
+title: Testing
+description: Test Individual Verifications integration using testnet
+---
+
+import { Callout } from 'nextra/components'
+
+# Testing
+
+Individual Verifications provides testnet support for developers to test their integration before going to production. Use the Base Sepolia testnet to complete verification flows and receive mock SBTs.
+
+## Testnet Environment
+
+| Environment | Network | Use Case |
+|-------------|---------|----------|
+| Production | Optimism | Live user verifications |
+| Testnet | Base Sepolia | Development and testing |
+
+## Testing Workflow
+
+### Step 1: Get a Mock SBT
+
+Direct users to the sandbox verification flow to receive a mock SBT on Base Sepolia:
+
+**Government ID (KYC):**
+```
+https://id.human.tech/gov-id?sandbox=true
+```
+
+**Phone:**
+```
+https://id.human.tech/phone?sandbox=true
+```
+
+**Biometrics:**
+```
+https://id.human.tech/biometrics?sandbox=true
+```
+
+<Callout type="info">
+Sandbox verifications issue SBTs on Base Sepolia testnet. These are for testing purposes only and do not represent real identity verification.
+</Callout>
+
+### Step 2: Query the Testnet API
+
+Use the same API endpoints, but specify `base-sepolia` as the network:
+
+```bash
+curl --request GET \
+  'https://api.holonym.io/sybil-resistance/gov-id/base-sepolia?user={address}&action-id=123456789'
+```
+
+```json
+{
+  "result": true,
+  "expirationDate": 1770922106
+}
+```
+
+### Step 3: Verify Integration
+
+Test your integration logic with the mock SBT before deploying to production.
+
+## API Endpoints for Testing
+
+All standard API endpoints support the `base-sepolia` network parameter:
+
+| Endpoint | Testnet URL |
+|----------|-------------|
+| Government ID | `https://api.holonym.io/sybil-resistance/gov-id/base-sepolia?user={address}&action-id={action-id}` |
+| Phone | `https://api.holonym.io/sybil-resistance/phone/base-sepolia?user={address}&action-id={action-id}` |
+| Biometrics | `https://api.holonym.io/sybil-resistance/biometrics/base-sepolia?user={address}&action-id={action-id}` |
+
+## Best Practices
+
+1. **Always test on Base Sepolia first** - Verify your integration works correctly before handling real user verifications
+
+2. **Test error handling** - Ensure your application gracefully handles cases where users haven't verified
+
+3. **Test with multiple addresses** - Verify your uniqueness logic works correctly across different addresses
+
+4. **Validate response handling** - Make sure your application correctly interprets `result: true` vs `result: false` responses
+
+## Moving to Production
+
+When you're ready to go live:
+
+1. Update your API calls to use `optimism` instead of `base-sepolia`
+2. Update verification links to remove the `?sandbox=true` parameter
+3. Ensure your production environment is configured correctly
+
+```javascript
+// Development
+const network = 'base-sepolia';
+const verifyUrl = 'https://id.human.tech/gov-id?sandbox=true';
+
+// Production
+const network = 'optimism';
+const verifyUrl = 'https://id.human.tech/gov-id';
+```
