@@ -66,3 +66,50 @@ When migrating content from Zeronym docs:
 These addresses have verified Individual Verifications and can be used for API testing:
 - `0x8dABc053C7Fda425826d913a58C0DC4C2a0B36d7`
 - `0x078Ea87Bd0B773DFdF674c3a31B9A785845c4503`
+
+## Validation Workflow
+
+**Always validate BEFORE documenting, not after.**
+
+### For NPM Packages/SDKs
+1. Check package exists: `npm show <package-name>`
+2. Check last updated: `npm show <package-name> time --json`
+3. Verify exports via type definitions: `curl https://unpkg.com/<package>@version/dist/index.d.ts`
+4. Document only functions that actually exist in exports
+
+Example for Human ID SDK:
+```bash
+npm show @holonym-foundation/human-id-sdk
+curl -s 'https://unpkg.com/@holonym-foundation/human-id-sdk@0.2.0/dist/index.d.ts' | head -30
+```
+
+### For API Endpoints
+1. Test with curl before documenting
+2. Use real verified addresses for testing
+3. Verify response format matches what you document
+
+Example:
+```bash
+curl -s 'https://api.holonym.io/sybil-resistance/gov-id/optimism?user=0x8dABc053C7Fda425826d913a58C0DC4C2a0B36d7&action-id=123456789' | jq .
+```
+
+### For Third-Party Integrations (e.g., Snapshot)
+1. Check the source code of the integration to verify config format
+2. Don't just copy from old docs - verify against actual implementation
+
+Example for Snapshot strategy:
+```bash
+curl -s 'https://raw.githubusercontent.com/snapshot-labs/snapshot-strategies/master/src/strategies/api/index.ts' | head -40
+```
+
+### Working Snapshot Endpoints (verified)
+```bash
+# Gov ID - returns {"score": [{"address": "...", "score": 1}]}
+https://api.holonym.io/snapshot-strategies/sybil-resistance/gov-id?network=10&snapshot=12345678&addresses={addr}&action-id=123456789
+
+# Phone
+https://api.holonym.io/snapshot-strategies/sybil-resistance/phone?network=10&snapshot=12345678&addresses={addr}&action-id=123456789
+
+# US Residency (no action-id needed)
+https://api.holonym.io/snapshot-strategies/residence/country/us?network=10&snapshot=12345678&addresses={addr}
+```
