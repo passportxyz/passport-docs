@@ -1,4 +1,5 @@
 export default {
+  index: { display: 'hidden' },
   introduction: 'Introduction',
   'major-concepts': 'Major concepts',
   '---': {

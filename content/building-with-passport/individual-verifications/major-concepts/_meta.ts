@@ -1,4 +1,5 @@
 export default {
+  index: { display: 'hidden' },
   'action-ids': 'Custom Action IDs',
   sdk: 'SDK Integration',
   'attestation-protocols': 'Attestation Protocols',
