@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:turbo": "next dev --turbopack",
+    "prebuild": "echo '=== BUILD ENV ===' && node --version && echo 'Platform:' && uname -a",
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
