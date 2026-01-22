@@ -10,7 +10,7 @@ export default withNextra({
   generateBuildId: async () => {
     return `build-${Date.now()}`
   },
-  // Add cache control headers to prevent stale CSS
+  // Add cache control headers
   async headers() {
     return [
       {
@@ -19,15 +19,6 @@ export default withNextra({
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
           },
         ],
       },

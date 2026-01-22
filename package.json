@@ -2,6 +2,9 @@
   "name": "passport-docs",
   "version": "0.0.1",
   "description": "Passport documentation",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "dev:turbo": "next dev --turbopack",
