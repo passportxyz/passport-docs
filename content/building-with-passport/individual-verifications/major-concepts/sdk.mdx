@@ -7,7 +7,7 @@ import { Callout } from 'nextra/components'
 
 # SDK Integration
 
-The Human ID SDK allows you to embed Individual Verifications directly into your website or dApp, providing a seamless verification experience without redirecting users away from your application.
+The Human ID SDK allows you to embed Individual Verifications directly into your website or dApp, providing a seamless verification experience without redirecting users.
 
 ## Installation
 
@@ -20,144 +20,33 @@ npm install @holonym-foundation/human-id-sdk
 ```typescript
 import { initHumanID } from '@holonym-foundation/human-id-sdk'
 
-// Initialize the SDK (must be client-side, requires window object)
+// Initialize the SDK (client-side only, requires window)
 const humanID = initHumanID()
 
-// Request a KYC SBT
-const result = await humanID.requestSBT('kyc')
-console.log('SBT recipient:', result?.recipient)
-```
+// Request verification and mint SBT
+const result = await humanID.requestSBT('kyc')        // Government ID
+// or: humanID.requestSBT('phone')                    // Phone
+// or: humanID.requestSBT('biometrics')               // Biometrics
+// or: humanID.requestSBT('clean-hands')              // Proof of Clean Hands
 
-## Requesting Verification
-
-Use `requestSBT()` to prompt users to complete verification and mint their SBT:
-
-```typescript
-const humanID = initHumanID()
-
-// Request different verification types
-const kycResult = await humanID.requestSBT('kyc')           // Government ID
-const phoneResult = await humanID.requestSBT('phone')       // Phone number
-const bioResult = await humanID.requestSBT('biometrics')    // Biometrics
-const cleanHandsResult = await humanID.requestSBT('clean-hands') // Proof of Clean Hands
-```
-
-The function returns an object with the `recipient` address when successful, or `null` if the user cancels.
-
-## Querying SBTs
-
-To query existing SBTs, first configure the Optimism RPC URL:
-
-```typescript
-import {
-  setOptimismRpcUrl,
-  getKycSBTByAddress,
-  getPhoneSBTByAddress,
-  getBiometricsSBTByAddress,
-  getCleanHandsSPAttestationByAddress
-} from '@holonym-foundation/human-id-sdk'
-
-// Configure RPC (required for queries)
-setOptimismRpcUrl('YOUR_OPTIMISM_RPC_URL')
-
-// Query SBTs by address
-const kycSbt = await getKycSBTByAddress(userAddress)
-const phoneSbt = await getPhoneSBTByAddress(userAddress)
-const biometricsSbt = await getBiometricsSBTByAddress(userAddress)
-const cleanHandsAttestation = await getCleanHandsSPAttestationByAddress(userAddress)
-
-if (kycSbt) {
-  console.log('User has KYC verification')
-}
-```
-
-### Minimal Queries
-
-For faster queries that skip some validation:
-
-```typescript
-import {
-  uncheckedGetMinimalKycSBTByAddress,
-  uncheckedGetMinimalPhoneSBTByAddress,
-  uncheckedGetMinimalBiometricsSBTByAddress
-} from '@holonym-foundation/human-id-sdk'
-
-const minimalKycSbt = await uncheckedGetMinimalKycSBTByAddress(address)
-const minimalPhoneSbt = await uncheckedGetMinimalPhoneSBTByAddress(address)
-const minimalBiometricsSbt = await uncheckedGetMinimalBiometricsSBTByAddress(address)
-```
-
-## Prepaid Verification Credits
-
-If your organization has prepaid for verification credits, you can pass a payment secret to cover the user's verification cost:
-
-```typescript
-const humanID = initHumanID()
-
-const result = await humanID.requestSBT('kyc', {
-  paymentConfig: {
-    paymentSecret: 'your-64-character-hex-payment-secret',
-    paymentSecretChainId: 10 // Optimism
-  }
-})
-```
-
-<Callout type="info">
-Contact the [Human Passport team](https://t.me/+Mcp9RsRV7tVmYjZh) to set up prepaid verification credits for your organization.
-</Callout>
-
-## CLI Utilities
-
-The SDK includes a CLI for managing payment secrets:
-
-```bash
-npx humanid --help
-```
-
-## React Example
-
-```tsx
-import { useState } from 'react'
-import { initHumanID } from '@holonym-foundation/human-id-sdk'
-
-function VerifyButton() {
-  const [verified, setVerified] = useState(false)
-  const [loading, setLoading] = useState(false)
-
-  const handleVerify = async () => {
-    setLoading(true)
-    try {
-      const humanID = initHumanID()
-      const result = await humanID.requestSBT('kyc')
-      if (result?.recipient) {
-        setVerified(true)
-      }
-    } catch (error) {
-      console.error('Verification failed:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  if (verified) {
-    return <p>Verified!</p>
-  }
-
-  return (
-    <button onClick={handleVerify} disabled={loading}>
-      {loading ? 'Verifying...' : 'Verify Identity'}
-    </button>
-  )
+if (result?.recipient) {
+  console.log('Verified! SBT minted to:', result.recipient)
 }
 ```
 
 ## SDK vs API
 
-| Feature | SDK | API |
-|---------|-----|-----|
-| Embed verification flow | Yes | No (redirect required) |
-| Query SBT status | Yes | Yes |
-| Prepaid credits | Yes | No |
-| Server-side usage | No (requires `window`) | Yes |
+| Use Case | Recommendation |
+|----------|----------------|
+| Client-side dApps | SDK - embeds verification flow directly |
+| Server-side checks | [API](/building-with-passport/individual-verifications/api-reference) - query verification status |
 
-Use the SDK for client-side dApps. Use the [API](/building-with-passport/individual-verifications/api-reference) for server-side verification checks.
+## Documentation
+
+For complete documentation including querying SBTs, prepaid verification credits, and React examples, see the SDK repository:
+
+<Callout type="info">
+**[View full SDK documentation on GitHub](https://github.com/holonym-foundation/human-id-sdk)**
+
+The README is actively maintained with the latest API reference and examples.
+</Callout>
