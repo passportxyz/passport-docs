@@ -1,0 +1,9 @@
+export default {
+  introduction: 'Introduction',
+  'quick-start-guide': 'Quick start',
+  'integrating-onchain-stamp-data': 'Tutorial',
+  'attestation-schema': 'Attestation schema',
+  'onchain-expirations': 'Onchain expirations',
+  'test-mode': 'Onchain testing',
+  'contract-reference': 'Contract reference',
+}

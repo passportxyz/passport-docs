@@ -1,0 +1,332 @@
+---
+title: Individual Verifications -- API Reference
+description: Reference documentation for the Individual Verifications API
+---
+
+import { Callout } from 'nextra/components'
+
+# Individual Verifications -- API Reference
+
+The Individual Verifications API enables developers to check whether users have completed specific identity verifications (government ID, phone, biometrics) and query their verification status.
+
+<Callout type="info">
+Try out these endpoints interactively in the [API Reference Playground](https://passport-api-playground.vercel.app).
+</Callout>
+
+In the examples below, replace the following placeholder values with your actual data:
+- `{network}` - The blockchain network (`optimism` or `base-sepolia`)
+- `{address}` - The user's blockchain address
+- `{action-id}` - Your action ID for sybil resistance (default: `123456789`)
+
+## Base URL
+
+```
+https://api.holonym.io
+```
+
+## Action IDs
+
+Action IDs enable custom sybil resistance for specific use cases. Action IDs must be numeric values.
+
+- **Default Action ID (`123456789`)**: Provides general uniqueness verification across all applications using the default.
+- **Custom Action ID**: Use a unique numeric value to ensure users are unique within your specific context.
+
+<Callout type="info">
+With a custom action ID, a user who has verified with another application can still verify as unique within your application, while preventing the same user from verifying twice within your application.
+</Callout>
+
+## Available Endpoints
+
+| Endpoint Action | Endpoint |
+|-----------------|----------|
+| [Check government ID verification](#check-government-id-verification) | `GET /sybil-resistance/gov-id/{network}` |
+| [Check phone verification](#check-phone-verification) | `GET /sybil-resistance/phone/{network}` |
+| [Check biometrics verification](#check-biometrics-verification) | `GET /sybil-resistance/biometrics/{network}` |
+| [Query Proof of Clean Hands attestations](#query-proof-of-clean-hands-attestations-via-sign-protocol) | Sign Protocol API |
+| [Proof of Clean Hands SBTs (Sui)](#proof-of-clean-hands-sbts-sui) | `GET /attestation/sbts/clean-hands` |
+
+---
+
+### Check Government ID Verification
+
+Returns whether a user has completed government ID (KYC) verification and has a unique proof for the specified action.
+
+> GET /sybil-resistance/gov-id/\{network\}
+
+#### Query Parameters
+
+| Name | Required | Description |
+|------|----------|-------------|
+| `user` | Yes | The user's blockchain address |
+| `action-id` | Yes | Your action ID for sybil resistance. Use `123456789` for the default action ID, or a custom value for app-specific uniqueness. |
+
+```bash filename="Sample request" copy
+curl --request GET \
+  'https://api.holonym.io/sybil-resistance/gov-id/optimism?user={address}&action-id=123456789'
+```
+
+```json filename="Sample response (verified)"
+{
+  "result": true,
+  "expirationDate": 1770922106
+}
+```
+
+```json filename="Sample response (not verified)"
+{
+  "result": false
+}
+```
+
+#### Response
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `result` | boolean | `true` if the user has a valid verification, `false` otherwise |
+| `expirationDate` | number | Unix timestamp when the verification expires (only present when `result` is `true`) |
+
+---
+
+### Check Phone Verification
+
+Returns whether a user has completed phone verification and has a unique proof for the specified action.
+
+> GET /sybil-resistance/phone/\{network\}
+
+#### Query Parameters
+
+| Name | Required | Description |
+|------|----------|-------------|
+| `user` | Yes | The user's blockchain address |
+| `action-id` | Yes | Your action ID for sybil resistance |
+
+```bash filename="Sample request" copy
+curl --request GET \
+  'https://api.holonym.io/sybil-resistance/phone/optimism?user={address}&action-id=123456789'
+```
+
+```json filename="Sample response (verified)"
+{
+  "result": true,
+  "expirationDate": 1770922106
+}
+```
+
+---
+
+### Check Biometrics Verification
+
+Returns whether a user has completed biometric verification (face uniqueness and liveness check).
+
+> GET /sybil-resistance/biometrics/\{network\}
+
+#### Query Parameters
+
+| Name | Required | Description |
+|------|----------|-------------|
+| `user` | Yes | The user's blockchain address |
+| `action-id` | Yes | Your action ID for sybil resistance |
+
+```bash filename="Sample request" copy
+curl --request GET \
+  'https://api.holonym.io/sybil-resistance/biometrics/optimism?user={address}&action-id=123456789'
+```
+
+```json filename="Sample response (verified)"
+{
+  "result": true,
+  "expirationDate": 1780661994
+}
+```
+
+---
+
+## Snapshot Strategy Endpoints
+
+These endpoints are designed for integration with Snapshot governance voting.
+
+### Configuring Snapshot
+
+To use Individual Verifications with Snapshot, configure the ["api" strategy](https://github.com/snapshot-labs/snapshot-strategies/tree/master/src/strategies/api) with the following parameters:
+
+```json filename="Government ID Sybil Resistance"
+{
+  "api": "https://api.holonym.io",
+  "symbol": "",
+  "decimals": 0,
+  "strategy": "snapshot-strategies/sybil-resistance/gov-id",
+  "additionalParameters": "action-id=123456789"
+}
+```
+
+```json filename="Phone Sybil Resistance"
+{
+  "api": "https://api.holonym.io",
+  "symbol": "",
+  "decimals": 0,
+  "strategy": "snapshot-strategies/sybil-resistance/phone",
+  "additionalParameters": "action-id=123456789"
+}
+```
+
+<Callout type="info">
+We recommend using the default action ID `123456789`. See [Custom Action IDs](/building-with-passport/individual-verifications/major-concepts/action-ids) for information on using custom action IDs.
+</Callout>
+
+---
+
+### Snapshot: Government ID Sybil Resistance
+
+> GET /snapshot-strategies/sybil-resistance/gov-id
+
+#### Query Parameters
+
+| Name | Required | Description |
+|------|----------|-------------|
+| `network` | Yes | Chain ID |
+| `snapshot` | Yes | Block height |
+| `addresses` | Yes | Comma-separated list of blockchain addresses |
+| `action-id` | Yes | Your action ID for sybil resistance |
+
+```bash filename="Sample request" copy
+curl --request GET \
+  'https://api.holonym.io/snapshot-strategies/sybil-resistance/gov-id?network=10&snapshot=12345678&addresses={address1},{address2}&action-id=123456789'
+```
+
+```json filename="Sample response"
+{
+  "score": [
+    { "address": "0x123...", "score": 1 },
+    { "address": "0x456...", "score": 0 }
+  ]
+}
+```
+
+### Snapshot: Phone Sybil Resistance
+
+> GET /snapshot-strategies/sybil-resistance/phone
+
+Uses the same parameters and response format as the Government ID Snapshot endpoint.
+
+### Snapshot: Biometrics Sybil Resistance
+
+> GET /snapshot-strategies/sybil-resistance/biometrics
+
+Uses the same parameters and response format as the Government ID Snapshot endpoint.
+
+---
+
+## Proof of Clean Hands (PoCH)
+
+Proof of Clean Hands verification proves that a user is not on sanctions or PEP (Politically Exposed Persons) lists. This enables regulatory compliance while preserving user privacy.
+
+### Query Proof of Clean Hands Attestations via Sign Protocol
+
+Proof of Clean Hands attestations are issued through Sign Protocol. Query a user's attestation status using the Sign Protocol API.
+
+> GET https://mainnet-rpc.sign.global/api/scan/addresses/\{address\}/attestations
+
+```bash filename="Sample request" copy
+curl --request GET \
+  'https://mainnet-rpc.sign.global/api/scan/addresses/{address}/attestations'
+```
+
+```json filename="Sample response"
+{
+  "data": {
+    "rows": [
+      {
+        "fullSchemaId": "onchain_evm_10_0x8",
+        "attester": "0xB1f50c6C34C72346b1229e5C80587D0D659556Fd",
+        "isReceiver": true,
+        "revoked": false,
+        "validUntil": 1735689600
+      }
+    ]
+  }
+}
+```
+
+#### Validating a Proof of Clean Hands Attestation
+
+To confirm a user has a valid Proof of Clean Hands attestation, verify all of the following conditions:
+
+| Field | Required Value | Description |
+|-------|----------------|-------------|
+| `fullSchemaId` | `onchain_evm_10_0x8` | The schema ID for Proof of Clean Hands attestations on Optimism |
+| `attester` | `0xB1f50c6C34C72346b1229e5C80587D0D659556Fd` | The authorized attester address |
+| `isReceiver` | `true` | Confirms the queried address is the attestation recipient |
+| `revoked` | `false` | Attestation has not been revoked |
+| `validUntil` | Greater than current timestamp | Attestation has not expired |
+
+```typescript filename="Validation example"
+function hasValidCleanHandsAttestation(attestations: any[]): boolean {
+  const now = Math.floor(Date.now() / 1000);
+
+  return attestations.some(att =>
+    att.fullSchemaId === 'onchain_evm_10_0x8' &&
+    att.attester === '0xB1f50c6C34C72346b1229e5C80587D0D659556Fd' &&
+    att.isReceiver === true &&
+    att.revoked === false &&
+    att.validUntil > now
+  );
+}
+```
+
+### Proof of Clean Hands SBTs (Sui)
+
+For Sui blockchain integration, query Proof of Clean Hands SBT status directly.
+
+> GET /attestation/sbts/clean-hands
+
+#### Query Parameters
+
+| Name | Required | Description |
+|------|----------|-------------|
+| `address` | Yes | The user's Sui address |
+| `action-id` | Yes | Your action ID |
+
+```bash filename="Sample request" copy
+curl --request GET \
+  'https://api.holonym.io/attestation/sbts/clean-hands?address={sui_address}&action-id=123456789'
+```
+
+```json filename="Sample response (verified user)"
+{
+  "isUnique": true,
+  "signature": "0x...",
+  "circuitId": 12345
+}
+```
+
+```json filename="Sample response (non-verified user)"
+{
+  "isUnique": false
+}
+```
+
+#### Response
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `isUnique` | boolean | `true` if the user has a valid Proof of Clean Hands attestation, `false` otherwise |
+| `signature` | string | Cryptographic signature for on-chain verification (only present when `isUnique` is `true`) |
+| `circuitId` | number | The circuit identifier used for the attestation (only present when `isUnique` is `true`) |
+
+<Callout type="info">
+Proof of Clean Hands verification combines KYC data with AML (Anti-Money Laundering) checks. The user's identity information is encrypted and can only be decrypted by authorized parties in case of regulatory requirements.
+</Callout>
+
+---
+
+## Supported Networks
+
+| Network | Path Value | Supported Endpoints |
+|---------|------------|---------------------|
+| Optimism (Mainnet) | `optimism` | All endpoints |
+| Base Sepolia (Testnet) | `base-sepolia` | All endpoints |
+| NEAR | `near` | Gov-id, phone, biometrics |
+
+---
+
+For more details on integration patterns, see the [Developer Quick Start](https://zeronym-docs.holonym.id/for-developers/start-here).

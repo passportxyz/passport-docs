@@ -1,0 +1,116 @@
+---
+title: Human Passport Developer Platform
+description: An overview of the developer tools made available by Human Passport.
+---
+
+import { Cards } from 'nextra/components'
+import { Callout } from 'nextra/components'
+
+# Human Passport Docs
+
+Human Passport is an identity verification application and Sybil resistance protocol. 
+
+Developers can utilize the different Human Passport products and services to build a unique humanity solution for their app or project, enabling more trustworthy and fair participation in their community. Less Sybils and bad actors means higher quality engagements and long-term success.
+
+These developer docs describe the different Human Passport developer products and services that you can use to protect your community.
+
+<Callout type="info">
+**Passport Users:**<br />
+If you are a Passport user, please refer to the [Passport Support Center](https://support.passport.xyz) for help with your Passport account. If you are a developer building with Human Passport, please continue below to learn more about the different developer products and services.
+</Callout>
+
+## Developer Products and Services
+
+### Passport Stamps
+
+Passport Stamps is the core product of Human Passport, and the primary way to verify a user's identity and trustworthiness. 
+
+With Passport Stamps, users can choose how they prove their unique humanity by verifying different Stamps, or verifiable credentials, which represent high human signal activities throughout web3 and web2. Users can choose to verify with KYC, biometrics, web3 activity, web of trust, and web2 activity Stamps to build up a score, which can then be used by builders to protect access or classify addresses.
+
+Passport Stamps data is made available via the [Stamps API](./building-with-passport/stamps/passport-api). Users can optionally push their Passport Stamps data onchain, which can be accessed by developers using our [smart contracts](./building-with-passport/stamps/smart-contracts).
+
+The core Passport Stamps and Passport Embed offerings are free, but additional [customizations](./building-with-passport/stamps/custom-passport.mdx) can be added to your integration to reduce user friction and brand the unique human verification experience.
+
+<Cards>
+  <Cards.Card title="Verify with Passport Stamps" href="building-with-passport/passport-api" />
+  <Cards.Card title="Try the API playground" href="https://passport-api-playground.vercel.app" />
+  <Cards.Card title="Customize the Passport Stamps experience" href="building-with-passport/custom-passport" />
+  <Cards.Card title="Build with the onchain Passport" href="building-with-passport/smart-contracts" />
+  <Cards.Card title="Embed Passport Stamps in your website or app" href="building-with-passport/embed" />
+  <Cards.Card title="Getting access to the API" href="/building-with-passport/stamps/passport-api/getting-access" />
+</Cards>
+
+You can also apply to [become a Stamp provider](/building-with-passport/stamps/create-a-stamp).
+
+---
+
+### Passport Embed
+
+Passport Embed is an embeddable React component that enables you to add Passport's Stamps-based verification directly on your website or dApp, ensuring that users can verify their identity without having to leave the protected user flow.
+
+<Cards>
+  <Cards.Card title="Passport Embed" href="/building-with-passport/embed/introduction" />
+</Cards>
+
+---
+### Passport Models
+
+Passport Models is a real-time verification product that enables you to classify any EVM address as Sybil or human, without requiring users to have a Passport Stamps account. It offers reduced user friction and provides a quick way to verify addresses. 
+
+The model scores made available by the [Models API](/building-with-passport/models) are generated using Human Passport's machine learning models that analyze address onchain activity on ETH L1 and several L2s, and compares that activity against the activity of massive lists of known Sybils and humans. 
+
+Passport Models can be used as a quick primary verification method for your community to pass high-quality users. It can also be used alongside Passport Stamps, enabling an frictionless experience to those that pass the Models check, and a secondary verification option with the Stamp-based verification system.
+
+<Cards>
+  <Cards.Card title="Verify with Passport Models" href="/building-with-passport/models" />
+  <Cards.Card title="Try the API playground" href="https://passport-api-playground.vercel.app" />
+  <Cards.Card title="Getting access to the API" href="/building-with-passport/models/getting-access" />
+</Cards>
+
+---
+
+### Individual Verifications
+
+Individual Verifications provide privacy-preserving identity checks using zero-knowledge proofs. Unlike Stamps-based verification which aggregates multiple signals into a composite score, Individual Verifications offer specific, targeted proofs for use cases requiring stronger identity guarantees.
+
+Available verification types include:
+- **Government ID (KYC)** - Verify identity via government-issued ID
+- **Phone** - Verify a unique phone number
+- **Biometrics** - Face uniqueness and liveness check
+- **Proof of Clean Hands** - Sanctions and PEP list verification (AML compliance)
+
+Individual Verifications issue non-transferable SoulBound Tokens (SBTs) on Optimism, Stellar, and NEAR.
+
+<Cards>
+  <Cards.Card title="Individual Verifications overview" href="/building-with-passport/individual-verifications/introduction" />
+  <Cards.Card title="Supported chains" href="/building-with-passport/individual-verifications/supported-chains" />
+  <Cards.Card title="API reference" href="/building-with-passport/individual-verifications/api-reference" />
+</Cards>
+
+---
+
+### Data services
+
+Human Passport also offers data services to partners who need to better understand whether a list of addresses is Sybil or human. 
+
+These data services include the following types of analyses for each address provided:
+* Sybil classification using Passport Models
+* Sybil clustering analysis
+* Diamond hands analysis
+* Custom analysis requested by specific partners
+
+As part of these engagements, the Passport data team will provide actionable recommendations, as well as embed with your team to make sure you know how to use the data services effectively.
+
+<Cards>
+  <Cards.Card title="Learn more about data services" href="/building-with-passport/data-services" />
+</Cards>
+
+---
+
+## Get involved
+
+<Cards>
+  <Cards.Card title="Join the community on Telegram" href="https://t.me/+Mcp9RsRV7tVmYjZh" />
+  <Cards.Card title="Blog" href="https://www.gitcoin.co/blog/tag/gitcoin-passport" />
+  <Cards.Card title="Contribute to the docs" href="/community/getting-involved" />
+</Cards>
