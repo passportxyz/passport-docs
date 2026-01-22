@@ -1,99 +1,32 @@
 ---
-title: Custom Action IDs
-description: Use custom action IDs to enable app-specific uniqueness proofs
+title: Action IDs
+description: Understanding action IDs for sybil resistance
 ---
 
 import { Callout } from 'nextra/components'
 
-# Custom Action IDs
+# Action IDs
 
-Action IDs enable custom sybil resistance for specific use cases. By default, Individual Verifications use a global action ID (`123456789`) that provides universal uniqueness across all applications. Custom action IDs allow you to create app-specific uniqueness proofs.
+Action IDs enable sybil resistance by enforcing the principle of "1 person = 1 action" - whether that's one vote, one airdrop claim, or one account per verified individual.
 
-## Understanding Sybil Resistance
+## Default Action ID
 
-Sybil resistance enforces the principle of "1 person = 1 x", where x represents any scarce resource or action:
+By default, Individual Verifications use a global action ID (`123456789`) that provides universal uniqueness across all applications. This means:
 
-- 1 person = 1 vote (governance)
-- 1 person = 1 airdrop allocation (token distribution)
-- 1 person = 1 account (spam prevention)
-- 1 person = 1 player (gaming fairness)
-- 1 person = 1 matching contribution (quadratic funding)
-
-## Default vs Custom Action IDs
-
-### Default Action ID (`123456789`)
-
-The default action ID provides **global uniqueness**. When a user verifies with the default action ID:
-
-- They can only verify one address as unique across **all** applications using the default ID
+- A user can only verify one address as unique across **all** applications using the default ID
 - This provides the strongest sybil resistance
-- Recommended for most use cases
+- **Recommended for most use cases**
 
-### Custom Action IDs
-
-Custom action IDs provide **app-specific uniqueness**. A user who has verified with another application can still verify as unique within your application, while being prevented from verifying twice within your application.
-
-**Use cases for custom action IDs:**
-
-- Multiple elections where users should vote from different addresses to preserve voting privacy
-- Separate airdrops or campaigns that should allow the same user to participate from different addresses
-- Multi-tenant platforms where each tenant needs independent uniqueness
-
-## Security Considerations
-
-<Callout type="warning">
-Custom action IDs reduce the cost of bribery attacks. Consider these tradeoffs carefully before implementation.
-</Callout>
-
-**With the default action ID:** Bribery is expensive because giving up your uniqueness means giving up access to all future airdrops, governance participation, and other benefits across all applications.
-
-**With custom action IDs:** A user who doesn't care about a specific vote outcome could provide a new address for that particular action ID. A malicious actor could:
-1. Create many new addresses
-2. Bribe users to register those addresses for the specific action ID
-3. Since users don't care about that particular outcome, they accept the bribe
-
-For most applications, we recommend using the default action ID unless you have a specific need for app-specific uniqueness.
-
-## Implementation
-
-### Step 1: Generate an Action ID
-
-Create a unique numeric action ID for your application. Use a large random number less than the bn254 scalar field order:
-
-```
-21888242871839275222246405745257275088548364400416034343698204186575808495617
-```
-
-For example, your action ID might be `11223344556677889900`.
-
-### Step 2: Verify User Uniqueness
-
-Query the API with your custom action ID to check if a user is unique for your specific application:
+When querying the API, use the default action ID:
 
 ```bash
-curl --request GET \
-  'https://api.holonym.io/sybil-resistance/gov-id/optimism?user={address}&action-id={your-action-id}'
+curl 'https://api.holonym.io/sybil-resistance/gov-id/optimism?user={address}&action-id=123456789'
 ```
 
-```json
-{
-  "result": true,
-  "expirationDate": 1770922106
-}
-```
+## Custom Action IDs
 
-- If `result` is `true`, the user has verified uniqueness for your custom action ID
-- If `result` is `false`, the user has not yet verified for this specific action ID
-
-See the [API Reference](/building-with-passport/individual-verifications/api-reference) for complete endpoint documentation.
+For specific use cases requiring app-specific uniqueness (e.g., multiple elections where users need different addresses for privacy), custom action IDs are available.
 
 <Callout type="info">
-Custom action ID verification requires users to complete a separate verification flow. Contact the [Human Passport team](https://t.me/+Mcp9RsRV7tVmYjZh) for guidance on implementing custom action ID verification flows for your application.
+Custom action IDs are available on request. [Contact us](https://tally.so/r/3X81KL) to discuss your use case and we'll help you set up a custom action ID for your application.
 </Callout>
-
-## Best Practices
-
-1. **Default to the global action ID** - Use `123456789` unless you have a specific need for custom uniqueness
-2. **Document your action ID** - Store your action ID securely and consistently across your application
-3. **Consider the threat model** - Evaluate whether the reduced bribery resistance is acceptable for your use case
-4. **Combine with other signals** - For high-stakes applications, consider combining Individual Verifications with [Passport Stamps](/building-with-passport/stamps) for additional sybil resistance

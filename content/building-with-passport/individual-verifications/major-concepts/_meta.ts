@@ -1,6 +1,6 @@
 export default {
   index: { display: 'hidden' },
-  'action-ids': 'Custom Action IDs',
+  'action-ids': 'Action IDs',
   sdk: 'SDK Integration',
   'attestation-protocols': 'Attestation Protocols',
   testing: 'Testing',
