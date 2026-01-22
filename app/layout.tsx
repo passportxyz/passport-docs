@@ -3,6 +3,7 @@ import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import { GoogleTagManager } from '@next/third-parties/google'
 import 'nextra-theme-docs/style.css'
+import './globals.css'
 import type { Metadata } from 'next'
 
 const GTM_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID

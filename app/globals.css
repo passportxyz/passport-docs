@@ -1,0 +1,45 @@
+/*
+ * CSS Override for Nextra 4 + Tailwind v4 rotation bug
+ *
+ * The .x:ltr:rotate-180 class incorrectly applies rotate: 180deg to ALL
+ * descendants of [dir=ltr] elements, instead of just the target element.
+ * This resets the rotation for all elements except where explicitly needed.
+ */
+
+/* Reset rotation for all elements - the overly broad selector applies it everywhere */
+*:where(:dir(ltr), [dir=ltr], [dir=ltr] *) {
+  rotate: initial !important;
+}
+
+/* Re-apply rotation only where Nextra actually needs it (pagination arrows, etc.) */
+/* These are intentional 180deg rotations for RTL/LTR icon flipping */
+.x\:ltr\:rotate-180:where(:dir(ltr), [dir=ltr], [dir=ltr] *) {
+  rotate: 180deg !important;
+}
+
+.x\:rtl\:rotate-180:where(:dir(rtl), [dir=rtl], [dir=rtl] *) {
+  rotate: 180deg !important;
+}
+
+/* Sidebar expand icons */
+.x\:\*\:first\:rotate-180 > *:first-child {
+  rotate: 180deg !important;
+}
+
+/* Arrow rotations for navigation */
+.x\:\*\:ltr\:rotate-90:where(:dir(ltr), [dir=ltr], [dir=ltr] *) > * {
+  rotate: 90deg !important;
+}
+
+.x\:\*\:rtl\:-rotate-180:where(:dir(rtl), [dir=rtl], [dir=rtl] *) > * {
+  rotate: calc(180deg * -1) !important;
+}
+
+.x\:\*\:rtl\:-rotate-270:where(:dir(rtl), [dir=rtl], [dir=rtl] *) > * {
+  rotate: calc(270deg * -1) !important;
+}
+
+/* Summary/details expand arrow */
+.x\:\[\[data-expanded\]\>summary\:first-child\>\&\]\:rotate-90 {
+  rotate: 90deg !important;
+}
