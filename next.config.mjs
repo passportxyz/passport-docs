@@ -6,6 +6,33 @@ const withNextra = nextra({
 
 export default withNextra({
   reactStrictMode: true,
+  // Force consistent builds
+  generateBuildId: async () => {
+    return `build-${Date.now()}`
+  },
+  // Add cache control headers to prevent stale CSS
+  async headers() {
+    return [
+      {
+        source: '/_next/static/css/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+        ],
+      },
+    ]
+  },
   async redirects() {
     return [
       {
