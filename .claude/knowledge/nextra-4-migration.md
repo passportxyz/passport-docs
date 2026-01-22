@@ -282,3 +282,32 @@ export default {
   '---': { type: 'separator' },
 }
 ```
+
+## Debugging Strategies (Lessons Learned)
+
+### When CSS behaves differently on Vercel vs localhost
+
+1. **Ask for DevTools screenshot early** - Don't theorize about caching or build differences. Have the user inspect the actual computed styles on the broken element.
+
+2. **Filter styles in DevTools** - User can type "rotate" or "transform" in the Styles filter to quickly find the offending rule.
+
+3. **Check the selector specificity** - The rotation bug was caused by `[dir=ltr] *` matching everything. Look for overly broad selectors.
+
+4. **Don't assume caching** - Spent time investigating "cached CSS from previous deployment" when the issue was in the current build's CSS. Verify cache theory with evidence before pursuing.
+
+### Merge conflict resolution for major migrations
+
+When merging a migration branch (new framework) with main (old framework):
+
+```bash
+# DON'T do a regular merge - it tries to combine incompatible file structures
+git merge origin/main  # BAD - brings back old files
+
+# DO use 'ours' strategy to keep migration changes
+git merge -s ours origin/main -m "Merge main (keeping migration)"
+```
+
+### Communication clarity
+
+- When user reports "X is working, Y is broken" - confirm exactly which elements before investigating
+- Ask clarifying questions early rather than assuming
