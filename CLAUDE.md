@@ -19,17 +19,19 @@ pnpm build      # Production build (required for search to work)
 ## Documentation Structure
 
 - `content/` - All documentation content (NOT `pages/`)
-- `content/_meta.json` - Top-level navigation order
-- Each folder has a `_meta.json` to control navigation order within that section
+- `content/_meta.ts` - Top-level navigation order (TypeScript, NOT JSON)
+- Each folder has a `_meta.ts` to control navigation order within that section
 - Files use `.mdx` extension (Markdown + JSX)
 - `app/layout.tsx` - Theme configuration (navbar, footer, metadata)
+- `app/globals.css` - CSS overrides for Tailwind v4 rotation bug fix
 
 ## Patterns to Follow
 
 ### Navigation
-- Every new folder needs a `_meta.json` file
-- Update parent `_meta.json` when adding new sections
-- Navigation order is determined by key order in `_meta.json`
+- Every new folder needs a `_meta.ts` file (TypeScript export default)
+- Update parent `_meta.ts` when adding new sections
+- Navigation order is determined by key order in `_meta.ts`
+- If folder has `index.mdx` redirect, add `index: { display: 'hidden' }` to `_meta.ts`
 
 ### Content Style
 - Use Nextra components: `import { Callout, Cards, Card, Tabs, Tab } from 'nextra/components'`

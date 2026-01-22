@@ -178,3 +178,107 @@ export default function RootLayout({ children }) {
 ### Git timestamp warnings
 - Normal for newly created/moved files not yet committed
 - Warnings disappear after committing
+
+## Vercel Deployment Issues (CRITICAL)
+
+### CSS Rotation Bug (Tailwind v4)
+
+**Symptom**: Page content renders upside down (180° rotated) on Vercel but works locally.
+
+**Root Cause**: Nextra 4 uses Tailwind CSS v4 which has an overly broad CSS selector:
+```css
+.x\:ltr\:rotate-180, ... {
+  &:where(:dir(ltr),[dir=ltr],[dir=ltr] *) {
+    rotate: 180deg;
+  }
+}
+```
+
+The `[dir=ltr] *` matches ALL descendants of `<html dir="ltr">`, rotating everything.
+
+**Fix**: Create `app/globals.css` with overrides:
+```css
+/* Reset rotation for all elements */
+*:where(:dir(ltr), [dir=ltr], [dir=ltr] *) {
+  rotate: initial !important;
+}
+
+/* Re-apply rotation only where Nextra needs it */
+.x\:ltr\:rotate-180:where(:dir(ltr), [dir=ltr], [dir=ltr] *) {
+  rotate: 180deg !important;
+}
+
+.x\:rtl\:rotate-180:where(:dir(rtl), [dir=rtl], [dir=rtl] *) {
+  rotate: 180deg !important;
+}
+```
+
+Then import in `app/layout.tsx` AFTER the theme CSS:
+```tsx
+import 'nextra-theme-docs/style.css'
+import './globals.css'  // Override must come after
+```
+
+### Vercel Cache Issues
+
+**Symptom**: Stale CSS files from previous deployments interfering with new builds.
+
+**Fix**:
+1. Vercel Dashboard → Settings → General → Build Cache → Purge Everything
+2. Redeploy with "Use existing Build Cache" UNCHECKED
+
+## Navigation/Sidebar Issues
+
+### Duplicate Folder Entries in Sidebar
+
+**Symptom**: Each folder shows a duplicate entry with the folder name that 404s.
+
+**Root Cause**: Folders have `index.mdx` redirect files, but `_meta.ts` doesn't include `index`, so Nextra auto-generates an entry.
+
+**Fix**: Add `index: { display: 'hidden' }` to each `_meta.ts`:
+```ts
+export default {
+  index: { display: 'hidden' },  // Hide the auto-generated index link
+  'first-page': 'First Page',
+  'second-page': 'Second Page',
+}
+```
+
+### _meta.ts Pattern for Folders with Redirects
+
+If a folder has `index.mdx` that redirects to the first content page:
+```tsx
+// content/section/index.mdx
+import { redirect } from 'next/navigation'
+
+export default function Page() {
+  redirect('./first-page')
+}
+```
+
+The `_meta.ts` MUST hide it:
+```ts
+// content/section/_meta.ts
+export default {
+  index: { display: 'hidden' },
+  'first-page': 'First Page',
+}
+```
+
+## File Format Changes
+
+### _meta files
+- Nextra 4 uses `_meta.ts` (TypeScript) not `_meta.json`
+- Export default object pattern:
+```ts
+export default {
+  'page-name': 'Display Title',
+  folder: 'Folder Title',
+  externalLink: {
+    title: 'External',
+    type: 'page',
+    href: 'https://example.com'
+  },
+  '---': { type: 'separator' },
+}
+```
