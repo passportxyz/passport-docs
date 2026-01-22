@@ -1,0 +1,8 @@
+export default {
+  introduction: 'Introduction',
+  'integration-guide': 'Developer Integration Guide',
+  'implementation-patterns': 'Implementation Patterns',
+  'testing-and-security': 'Testing & Security',
+  examples: 'Code Examples',
+  'integrating-a-new-stamp': 'Submission Checklist',
+}
