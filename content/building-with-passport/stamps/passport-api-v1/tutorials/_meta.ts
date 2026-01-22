@@ -1,7 +1,0 @@
-export default {
-  'gating-access-with-passport-scores': 'Protecting access with Passport scores',
-  'integrating-stamps-and-scorers': 'Integrating Stamps and Scorers',
-  'working-with-stamp-metadata': 'Working with Stamp metadata',
-  'requiring-a-passport-score-for-airdrop-claim': 'Requiring a Passport score for airdrop claim',
-  'client-side-scoring': 'Custom client-side Passport scoring',
-}

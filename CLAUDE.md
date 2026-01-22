@@ -2,27 +2,23 @@
 
 This file contains guidance for Claude Code when working on this repository.
 
-**Important**: Read `.claude/knowledge.md` for detailed project knowledge and lessons learned.
-
 ## Project Overview
 
-This is the Human Passport documentation site built with **Nextra 4** on **Next.js 14** (App Router).
+This is the Human Passport documentation site built with Nextra (Next.js-based documentation framework).
 
 ## Key Commands
 
 ```bash
 pnpm install    # Install dependencies (NOT npm install)
 pnpm dev        # Run dev server (usually localhost:3000)
-pnpm build      # Production build (required for search to work)
 ```
 
 ## Documentation Structure
 
-- `content/` - All documentation content (NOT `pages/`)
-- `content/_meta.json` - Top-level navigation order
-- Each folder has a `_meta.json` to control navigation order within that section
+- `pages/` - All documentation content
+- `pages/_meta.json` - Top-level navigation order
+- Each folder can have a `_meta.json` to control navigation order within that section
 - Files use `.mdx` extension (Markdown + JSX)
-- `app/layout.tsx` - Theme configuration (navbar, footer, metadata)
 
 ## Patterns to Follow
 
@@ -32,9 +28,8 @@ pnpm build      # Production build (required for search to work)
 - Navigation order is determined by key order in `_meta.json`
 
 ### Content Style
-- Use Nextra components: `import { Callout, Cards, Card, Tabs, Tab } from 'nextra/components'`
+- Use Nextra components: `import { Callout } from 'nextra/components'`
 - Use `<Cards>` and `<Card>` for link grids
-- Use `<Tabs>` and `<Tab>` for tabbed content
 - Keep descriptions concise
 
 ## Individual Verifications Section

@@ -1,8 +1,0 @@
-export default {
-  introduction: 'Introduction',
-  'getting-access': 'Getting access',
-  'quick-start-guide': 'Quick start',
-  tutorials: 'Tutorials',
-  customization: 'Customization',
-  'component-reference': 'Component reference',
-}
