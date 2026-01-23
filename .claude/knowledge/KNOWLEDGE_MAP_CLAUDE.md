@@ -31,4 +31,5 @@
 
 ## Workflows
 
+@workflows/pr-workflow.md - Always use PRs, never push directly to main
 @workflows/redirect-management.md - Legacy URL redirects in next.config.mjs
