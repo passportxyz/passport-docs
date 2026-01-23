@@ -1,0 +1,98 @@
+---
+title: Installation
+description: Install and configure Passport Embed in your React application.
+---
+
+import { Callout } from 'nextra/components'
+
+# Installation
+
+This guide covers installing the Passport Embed package and rendering the widget in your React application.
+
+## Prerequisites
+
+Before installing, make sure you have:
+- A React application (v18+)
+- Your **Embed API key** and **Scorer ID** from the [Developer Portal](https://developer.passport.xyz)
+
+If you don't have credentials yet, follow the [getting access guide](getting-access) to generate them.
+
+## Install the Package
+
+Add the Passport Embed package to your project:
+
+```bash
+npm install @human.tech/passport-embed@latest
+```
+
+or
+
+```bash
+yarn add @human.tech/passport-embed@latest
+```
+
+## Basic Setup
+
+Import and render the `PassportScoreWidget` component:
+
+```jsx
+import { PassportScoreWidget, DarkTheme } from "@human.tech/passport-embed";
+
+const EMBED_API_KEY = "<YOUR_EMBED_API_KEY>";
+const SCORER_ID = "<YOUR_SCORER_ID>";
+
+function MyPage() {
+  // Your wallet connection logic provides userAddress
+  const userAddress = "0x...";
+
+  const signMessage = async (message: string): Promise<string> => {
+    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+    return await window.ethereum.request({
+      method: "personal_sign",
+      params: [message, accounts[0]]
+    });
+  };
+
+  return (
+    <PassportScoreWidget
+      apiKey={EMBED_API_KEY}
+      scorerId={SCORER_ID}
+      address={userAddress}
+      generateSignatureCallback={signMessage}
+      theme={DarkTheme}
+    />
+  );
+}
+```
+
+### Required Props
+
+| Prop | Description |
+| --- | --- |
+| `apiKey` | Your Embed API key from the Developer Portal |
+| `scorerId` | Your Scorer ID from the Developer Portal |
+| `generateSignatureCallback` | Function to sign messages for OAuth-based stamps (see example above) |
+
+### Optional Props
+
+| Prop | Description |
+| --- | --- |
+| `address` | User's wallet address (if already known) |
+| `connectWalletCallback` | Function to prompt wallet connection if address isn't provided |
+| `theme` | `DarkTheme` or `LightTheme` (defaults to `DarkTheme`) |
+| `collapseMode` | `"shift"`, `"overlay"`, or `"off"` |
+
+For the complete props reference, see the [Component Reference](component-reference).
+
+## Next Steps
+
+- [Pulling user data](pulling-user-data) — Retrieve scores and stamps from your application
+- [Customization](customization) — Theme and style the widget
+- [Component Reference](component-reference) — Full props and hooks documentation
+
+## Sample Application
+
+See a complete working example:
+
+- **[Live Demo](https://passport-sample-embed-demo.vercel.app)** — Interactive example you can test with your wallet
+- **[Source Code](https://github.com/passportxyz/passport-sample-embed-demo)** — Complete implementation with detailed README

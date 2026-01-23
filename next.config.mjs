@@ -470,6 +470,11 @@ export default withNextra({
         source: '/building-with-passport/embed',
         destination: '/building-with-passport/embed/introduction',
         permanent: true
+      },
+      {
+        source: '/building-with-passport/embed/quick-start-guide',
+        destination: '/building-with-passport/embed/installation',
+        permanent: true
       }
     ]
   }
