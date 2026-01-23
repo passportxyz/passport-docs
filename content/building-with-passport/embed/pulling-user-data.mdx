@@ -1,0 +1,200 @@
+---
+title: Pulling User Data
+description: Learn how to retrieve a user's Passport score and stamps data when using Passport Embed.
+---
+
+import { Callout } from 'nextra/components'
+
+# Pulling User Data
+
+Once you've integrated Passport Embed, you'll likely want to access the user's Passport score and stamps data to make decisions in your application. This guide covers how to retrieve this data using the provided React hook and the Stamps API.
+
+## Prerequisites: Two API Keys Required
+
+<Callout type="warning">
+**Secure integrations require two separate API keys:**
+
+1. **Embed API Key** — Used with the `PassportScoreWidget` component and `usePassportScore` hook on your frontend.
+2. **Stamps API Key** — Used on your backend to verify scores server-side via the Stamps API.
+
+This separation is essential because frontend data can be spoofed. The Embed API key powers the user-facing widget, while the Stamps API key allows your backend to independently verify a user's score before granting access to protected features.
+</Callout>
+
+You can generate both API keys in the [Developer Portal](https://developer.passport.xyz). See the [getting access guide](getting-access) for detailed instructions.
+
+## Using the usePassportScore Hook
+
+The `usePassportScore` hook is the simplest way to access a user's score in your React application. It returns the score and verification status for a given wallet address.
+
+### Installation
+
+```bash
+npm install @human.tech/passport-embed@latest
+```
+
+### Usage
+
+```jsx
+import { usePassportScore } from "@human.tech/passport-embed";
+
+// Use your Embed API key here (frontend)
+const EMBED_API_KEY = "YOUR_EMBED_API_KEY";
+const SCORER_ID = "YOUR_SCORER_ID";
+
+function MyComponent() {
+  const { score, isPassing, loading, error } = usePassportScore({
+    apiKey: EMBED_API_KEY,
+    scorerId: SCORER_ID,
+    address: userAddress
+  });
+
+  if (loading) return <p>Loading score...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return (
+    <div>
+      <p>Score: {score}</p>
+      <p>Status: {isPassing ? "Passing" : "Not passing"}</p>
+    </div>
+  );
+}
+```
+
+### Return Values
+
+| Property | Type | Description |
+| --- | --- | --- |
+| **score** | `number` | The user's Passport score for the configured scorer. |
+| **isPassing** | `boolean` | `true` if the score meets the threshold, `false` otherwise. |
+| **loading** | `boolean` | `true` while the score is being fetched. |
+| **error** | `Error` | Any error that occurred during the fetch. |
+
+<Callout type="warning">
+**Security note:** Frontend values can be spoofed. Do not use `isPassing` or `score` from this hook to gate access to sensitive features. Instead, use these values as a signal to trigger a backend verification request via the Stamps API.
+</Callout>
+
+## Retrieving Stamps Data via Backend
+
+To get detailed information about which stamps a user has verified, you need to call the Stamps API directly from your backend. This is the only secure way to verify a user's score before granting access to protected features.
+
+<Callout type="info">
+Use your **Stamps API key** (not your Embed API key) for these backend requests. This key should be kept secret and never exposed in frontend code.
+</Callout>
+
+### API Endpoint
+
+```
+GET https://api.passport.xyz/v2/stamps/{scorer_id}/score/{address}
+```
+
+### Example Request
+
+```bash
+# Use your Stamps API key here (backend only - keep secret)
+curl -H "X-API-KEY: YOUR_STAMPS_API_KEY" \
+  "https://api.passport.xyz/v2/stamps/YOUR_SCORER_ID/score/0x..."
+```
+
+### Example Response
+
+```json
+{
+  "address": "0x...",
+  "score": "25.5",
+  "passing_score": true,
+  "last_score_timestamp": "2024-01-15T10:30:00Z",
+  "expiration_timestamp": "2024-04-15T10:30:00Z",
+  "threshold": "20",
+  "error": null,
+  "stamps": {
+    "Google": {
+      "score": "2.25",
+      "expiration_date": "2024-04-15T10:30:00Z"
+    },
+    "Github": {
+      "score": "3.75",
+      "expiration_date": "2024-04-15T10:30:00Z"
+    }
+  }
+}
+```
+
+For complete API documentation, see the [Stamps API reference](/building-with-passport/stamps/passport-api).
+
+## Recommended Pattern: Frontend + Backend Verification
+
+For secure applications, combine the frontend hook with backend verification:
+
+1. **Frontend:** Use `usePassportScore` with your **Embed API key** to show the user their score and provide immediate UI feedback.
+2. **Backend:** When the user attempts to access a protected feature, verify their score server-side using the Stamps API with your **Stamps API key**.
+
+### Frontend Component
+
+```jsx
+import { usePassportScore } from "@human.tech/passport-embed";
+
+// Embed API key is safe to use in frontend code
+const EMBED_API_KEY = "YOUR_EMBED_API_KEY";
+const SCORER_ID = "YOUR_SCORER_ID";
+
+function ProtectedFeature() {
+  const { isPassing, loading } = usePassportScore({
+    apiKey: EMBED_API_KEY,
+    scorerId: SCORER_ID,
+    address: userAddress
+  });
+
+  const handleAccess = async () => {
+    // Verify server-side before granting access
+    const response = await fetch("/api/verify-passport", {
+      method: "POST",
+      body: JSON.stringify({ address: userAddress })
+    });
+
+    const { verified } = await response.json();
+    if (verified) {
+      // Grant access to protected feature
+    }
+  };
+
+  if (loading) return <p>Checking eligibility...</p>;
+
+  return (
+    <div>
+      {isPassing ? (
+        <button onClick={handleAccess}>Access Feature</button>
+      ) : (
+        <p>You need a higher score to access this feature.</p>
+      )}
+    </div>
+  );
+}
+```
+
+### Backend Verification Endpoint
+
+```js
+// Example Node.js/Express endpoint
+// Stamps API key must be kept secret on the backend
+const STAMPS_API_KEY = process.env.STAMPS_API_KEY;
+const SCORER_ID = process.env.SCORER_ID;
+
+app.post("/api/verify-passport", async (req, res) => {
+  const { address } = req.body;
+
+  const response = await fetch(
+    `https://api.passport.xyz/v2/stamps/${SCORER_ID}/score/${address}`,
+    { headers: { "X-API-KEY": STAMPS_API_KEY } }
+  );
+
+  const data = await response.json();
+
+  res.json({ verified: data.passing_score === true });
+});
+```
+
+## Next Steps
+
+- [Tutorial: Protecting Sensitive Programs](/building-with-passport/embed/tutorials/protecting-sensitive-programs-with-passport-embed) - Complete walkthrough with backend verification
+- [Stamps API Reference](/building-with-passport/stamps/passport-api) - Full API documentation for server-side verification
+- [Component Reference](component-reference) - All available props and hooks
