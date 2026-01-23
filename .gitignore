@@ -10,3 +10,6 @@ package-lock.json
 .env.production.local
 *.log
 .DS_Store
+
+# Pagefind search index (generated at build time)
+public/_pagefind
