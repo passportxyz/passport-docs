@@ -1,7 +1,7 @@
 export default {
   index: { display: 'hidden' },
-  introduction: 'Introduction',
-  'api-reference': 'API reference',
-  'data-dictionary': 'Data dictionary',
-  tutorials: 'Tutorials (v1)',
+  introduction: 'Introduction (Retired)',
+  'api-reference': 'API reference (Retired)',
+  'data-dictionary': 'Data dictionary (Retired)',
+  tutorials: 'Tutorials (Retired)',
 }
