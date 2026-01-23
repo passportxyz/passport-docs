@@ -1,8 +1,11 @@
 ---
-title: Data dictionary (v1)
-description: A table for looking up definitions of data types used in the Stamps API v1
+title: Data dictionary (Retired)
+description: A table for looking up definitions of data types used in the Stamps API v1 - This API version is retired
+noindex: true
 ---
 import { Callout } from 'nextra/components'
+
+<div data-pagefind-ignore="all">
 
 # Data dictionary
 
@@ -86,4 +89,6 @@ A `credential` is a struct returned in the Stamp object. It has its own sub-fiel
 | `nonce`     | `int`    | A transaction counter for an address that is used in signing to prevent certain types of attack                                | This is an optional field that can be provided to `submit-passport` for additional verification. Today access to Scorers is controlled using API keys only by default. |
 | `scorer_id` | `string` | Scorers are instantiated with unique IDs known as `scorer_id`s.                                                                | Create a Scorer in the Scorer app to receive a `scorer_id`. Then this value links your API requests to a specific Scorer instance matching your API key                |
 | `signature` | `string` | Some workflows require a Scorer owner to demonstrate their ownership by signing a message with the Scorer owner's private key. | This is an optional field that can be provided to `submit-passport` for additional verification. Today access to Scorers is controlled using API keys only by default. |
+
+</div>
 
