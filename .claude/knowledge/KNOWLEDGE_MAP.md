@@ -1,10 +1,10 @@
 # Knowledge Map
 
-> Project knowledge organized by category. Last updated: 2025-01-20
+> Project knowledge organized by category. Last updated: 2026-01-22
 
 ## Architecture
 
-- [Documentation Framework](architecture/documentation-framework.md) - Nextra-based site structure, content organization
+- [Documentation Framework](architecture/documentation-framework.md) - Nextra 4 site structure, App Router, content organization
 
 ## API
 
@@ -12,7 +12,7 @@
 
 ## Config
 
-- [Theme Configuration](config/theme-configuration.md) - theme.config.tsx setup, branding, analytics
+- [Theme Configuration](config/theme-configuration.md) - app/layout.tsx setup, branding, analytics
 
 ## Conventions
 
@@ -25,9 +25,10 @@
 
 ## Gotchas
 
-- [Nextra Version Outdated](gotchas/nextra-version-outdated.md) - Current 2.x needs migration to 4.x
-- [Individual Verifications Validation](gotchas/individual-verifications-validation.md) - Must validate Zeronym docs before migrating
+- [Nextra 4 Migration Complete](gotchas/nextra-version-outdated.md) - Migration done, deployment notes
+- [Individual Verifications](gotchas/individual-verifications-validation.md) - Current state, removed features, contract addresses
+- [Fork vs Origin PRs](gotchas/fork-vs-origin-prs.md) - Must push to fork remote for external PRs
 
 ## Workflows
 
-- [Redirect Management](workflows/redirect-management.md) - 60+ legacy URL redirects in next.config.js
+- [Redirect Management](workflows/redirect-management.md) - Legacy URL redirects in next.config.mjs

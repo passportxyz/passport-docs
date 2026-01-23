@@ -1,26 +1,29 @@
-# Nextra Version Outdated
+# Nextra 4 Migration Complete
 
-**Date discovered:** 2025-01-20
+**Date completed:** 2026-01-22
 
-## Issue
+## Status
 
-Current setup uses Nextra 2.13.2 which is significantly outdated. Nextra 4.x (current: 4.6.1) is available.
+✅ **Migration complete.** Site now runs on Nextra 4 with Next.js 14 App Router.
 
-## Migration Requirements for Nextra 4.x
+## What Changed
 
-- Pages Router (`pages/`) must become App Router (`app/` + `content/`)
-- `theme.config.tsx` must be converted to Layout component props in `app/layout.tsx`
-- `_meta.json` files must become `_meta.js` (ES modules)
-- Search engine changes from FlexSearch to Pagefind (Rust-based)
-- Requires Next.js 14+
+- `pages/` → `content/` (all MDX files moved)
+- `_meta.json` → `_meta.ts` (ES modules)
+- `theme.config.tsx` → `app/layout.tsx`
+- `next.config.js` → `next.config.mjs`
+- Search: FlexSearch → Pagefind
 
-## Impact
+## Deployment Notes
 
-- Missing newer Nextra features
-- Eventually may need migration for security updates
+Vercel deployment required cache-busting due to aggressive caching:
+- Added `vercel.json` with `cleanUrls`
+- Added `.npmrc` for build scripts
+- Pinned Node.js to 20+
 
 ## Related Files
 
-- package.json
-- theme.config.tsx
-- next.config.js
+- app/layout.tsx
+- content/_meta.ts
+- next.config.mjs
+- vercel.json

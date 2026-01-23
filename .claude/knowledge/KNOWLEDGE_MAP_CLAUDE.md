@@ -4,7 +4,7 @@
 
 ## Architecture
 
-@architecture/documentation-framework.md - Nextra-based site structure, content organization
+@architecture/documentation-framework.md - Nextra 4 site structure, App Router, content organization
 
 ## API
 
@@ -12,7 +12,7 @@
 
 ## Config
 
-@config/theme-configuration.md - theme.config.tsx setup, branding, analytics
+@config/theme-configuration.md - app/layout.tsx setup, branding, analytics
 
 ## Conventions
 
@@ -25,9 +25,10 @@
 
 ## Gotchas
 
-@gotchas/nextra-version-outdated.md - Current 2.x needs migration to 4.x
-@gotchas/individual-verifications-validation.md - Must validate Zeronym docs before migrating
+@gotchas/nextra-version-outdated.md - Nextra 4 migration complete, deployment notes
+@gotchas/individual-verifications-validation.md - Current state, removed features, contract addresses
+@gotchas/fork-vs-origin-prs.md - Must push to fork remote for external PRs
 
 ## Workflows
 
-@workflows/redirect-management.md - 60+ legacy URL redirects in next.config.js
+@workflows/redirect-management.md - Legacy URL redirects in next.config.mjs
