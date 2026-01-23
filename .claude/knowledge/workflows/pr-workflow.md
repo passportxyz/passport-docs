@@ -32,7 +32,9 @@ git push origin fix/search-setup
 gh pr create --title "Fix search setup" --body "Description of changes"
 ```
 
-## Exceptions
+## Exceptions (can push directly to main)
 
-- Urgent hotfixes may be discussed with team lead first
-- CLAUDE.md and .claude/ knowledge updates may be direct if trivial
+- `.claude/` directory (Mim knowledge, agents, scripts)
+- `CLAUDE.md` updates
+- Internal documentation that doesn't affect the live site
+- Urgent hotfixes (discuss with team lead first)
