@@ -1,34 +1,128 @@
 ---
 title: Attestation Protocols
-description: Query Individual Verification attestations via Sign Protocol and Verax
+description: Query Individual Verification attestations directly via Sign Protocol
 ---
 
 import { Callout } from 'nextra/components'
 
 # Attestation Protocols
 
-Individual Verifications issue attestations through multiple protocols, allowing you to query and validate verification status in different ways. This page covers how to read attestations from Sign Protocol and Verax.
+<Callout type="info">
+For a simpler integration, use the [Individual Verifications API](/building-with-passport/individual-verifications/api-reference) which provides convenient endpoints that handle attestation queries for you.
+</Callout>
 
-## Sign Protocol
+Individual Verifications issue attestations through [Sign Protocol](https://sign.global/), allowing you to query and validate verification status directly on-chain. This page covers the attestation schemas, how to query them, and how to validate the data.
 
-Individual Verifications issue a Sign Protocol attestation for every SBT minted. You can query these attestations to verify a user's identity status.
+## Sign Protocol Overview
 
-### Query Attestations
+Every Individual Verification (Government ID, Phone, Biometrics, Clean Hands) issues a Sign Protocol attestation when a user completes verification. These attestations are stored on-chain and can be queried by any application.
 
-Use the Sign Protocol API to query attestations. Filter by the schema ID and attester address to get attestations issued by Individual Verifications.
+### Key Addresses
+
+| Component | Address |
+|-----------|---------|
+| **Attester (Relayer)** | `0xB1f50c6C34C72346b1229e5C80587D0D659556Fd` |
+
+### Schema IDs by Network
+
+| Environment | Schema ID | Network | Chain ID |
+|-------------|-----------|---------|----------|
+| Production | `onchain_evm_10_0x1` | Optimism | 10 |
+| Production | `onchain_evm_10_0x8` | Base | 8453 |
+| Sandbox | `onchain_evm_11155420_0xc41` | Optimism Sepolia | 11155420 |
+
+### API Endpoints
+
+| Environment | Endpoint |
+|-------------|----------|
+| Production | `https://mainnet-rpc.sign.global/api/index/attestations` |
+| Sandbox | `https://testnet-rpc.sign.global/api/index/attestations` |
+
+---
+
+## Attestation Schema
+
+Individual Verification attestations contain a ZK proof that encodes the verification type, action ID, and issuer information.
+
+### Raw Schema
+
+```
+string circuitId, uint256[] publicValues
+```
+
+### Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `circuitId` | string | Identifies the verification type (see Circuit IDs below) |
+| `publicValues` | uint256[] | Array of public values from the ZK proof |
+
+### Public Values Array
+
+The `publicValues` array contains the following elements:
+
+| Index | Field | Description |
+|-------|-------|-------------|
+| 0 | `nullifierHash` | Unique identifier preventing duplicate verifications |
+| 1 | `signedCredentialHash` | Hash of the signed credential |
+| 2 | `actionId` | The action ID used for sybil resistance |
+| 3 | `expiresAt` | Unix timestamp when the verification expires |
+| 4 | `issuer` | Address of the credential issuer |
+| 5 | `recipient` | Address that received the attestation |
+
+---
+
+## Circuit IDs
+
+Each verification type has a unique circuit ID that identifies what kind of verification the attestation represents.
+
+| Verification Type | Circuit ID |
+|-------------------|-----------|
+| **Government ID (KYC)** | `0x729d660e1c02e4e419745e617d643f897a538673ccf1051e093bbfa58b0a120b` |
+| **Phone** | `0xbce052cf723dca06a21bd3cf838bc518931730fb3db7859fc9cc86f0d5483495` |
+| **Biometrics** | `0x0b5121226395e3b6c76eb8ddfb0bf2f2075e7f2c6956567e84b38a223c3a3d15` |
+| **ePassport** | `0xf2ce248b529343e105f7b3c16459da619281c5f81cf716d28f7df9f87667364d` |
+
+---
+
+## Issuer Addresses
+
+Each verification type has an associated issuer address that must be validated.
+
+### Production Issuers
+
+| Verification Type | Issuer Address |
+|-------------------|----------------|
+| **Government ID (KYC)** | `0x03fae82f38bf01d9799d57fdda64fad4ac44e4c2c2f16c5bf8e1873d0a3e1993` |
+| **Phone** | `0x40b8810cbaed9647b54d18cc98b720e1e8876be5d8e7089d3c079fc61c30a4` |
+| **Biometrics** | `0x0d4f849df782fb9e68d525fbda10b73e59180e59cb2a21ce5d70ccc45dbfd922` |
+
+### Sandbox Issuers
+
+| Verification Type | Issuer Address |
+|-------------------|----------------|
+| **Government ID (KYC)** | `0x2332221496ffef62c0075ce833b54c5c0b78419be2571e8d1715f7990fc5279a` |
+| **Phone** | `0x1c0288e0fbbab4e1dda4732a72b391e9616d88c5d1fcfb97124584f2506645c3` |
+
+---
+
+## Querying Attestations
+
+### Query by Schema and Attester
+
+Use the Sign Protocol API to query all attestations for a specific schema.
 
 ```bash
 curl 'https://mainnet-rpc.sign.global/api/index/attestations?schemaId=onchain_evm_10_0x1&attester=0xB1f50c6C34C72346b1229e5C80587D0D659556Fd'
 ```
 
-**Query Parameters:**
+### Query by Recipient Address
 
-| Parameter | Value | Description |
-|-----------|-------|-------------|
-| `schemaId` | `onchain_evm_10_0x1` | Sign Protocol schema for Individual Verifications |
-| `attester` | `0xB1f50c6C34C72346b1229e5C80587D0D659556Fd` | Individual Verifications attester address |
+To find attestations for a specific user:
 
-To query for a specific recipient, add the `recipient` parameter with the user's address.
+```bash
+curl 'https://mainnet-rpc.sign.global/api/scan/addresses/{address}/attestations'
+```
 
 ### Response Format
 
@@ -47,8 +141,9 @@ To query for a specific recipient, add the `recipient` parameter with the user's
         "revoked": false,
         "schema": {
           "name": "HolonymV3",
-          "description": "Holonym V3 SBT"
-        }
+          "description": "Holonym V3"
+        },
+        "validUntil": 1770922106
       }
     ],
     "size": 100,
@@ -57,57 +152,126 @@ To query for a specific recipient, add the `recipient` parameter with the user's
 }
 ```
 
-### Validate Attestation
+---
 
-When validating an attestation, verify the circuit ID, action ID, and issuer match your expected values.
+## Validating Attestations
 
-**Reference Values:**
+When validating an attestation, verify the circuit ID, action ID, issuer, and expiration.
 
-| Field | Description | Where to Find |
-|-------|-------------|---------------|
-| Circuit ID | Identifies the verification type (KYC, phone, etc.) | [Constants file](https://github.com/holonym-foundation/holonym-api/blob/main/src/constants/misc.js#L6) |
-| Action ID | Default is `123456789` | [Action IDs](/building-with-passport/individual-verifications/major-concepts/action-ids) |
-| Issuer | Identifies the credential issuer | [Constants file](https://github.com/holonym-foundation/holonym-api/blob/main/src/constants/misc.js#L6) |
+### TypeScript Example
 
-```javascript
-const { ethers } = require("ethers");
+```typescript
+import { ethers } from "ethers";
 
-// Extract attestation data from API response (data.rows[0].data)
-const data = "0x000000..."; // attestation data hex string
+// Expected values for Government ID verification
+const EXPECTED_CIRCUIT_ID = "0x729d660e1c02e4e419745e617d643f897a538673ccf1051e093bbfa58b0a120b";
+const EXPECTED_ISSUER = "0x03fae82f38bf01d9799d57fdda64fad4ac44e4c2c2f16c5bf8e1873d0a3e1993";
+const EXPECTED_ACTION_ID = "123456789";
+const ATTESTER = "0xB1f50c6C34C72346b1229e5C80587D0D659556Fd";
 
-const decoded = ethers.utils.defaultAbiCoder.decode(
-  ["string", "uint256[]"],
-  data
-);
-
-const circuitId = decoded[0];
-const publicValues = decoded[1];
-const actionId = publicValues[2];
-const issuer = publicValues[4];
-
-// Validate circuit ID matches KYC
-if (circuitId !== "0x729d660e1c02e4e419745e617d643f897a538673ccf1051e093bbfa58b0a120b") {
-  throw new Error("Invalid circuit ID");
+interface AttestationValidation {
+  isValid: boolean;
+  error?: string;
 }
 
-// Validate action ID
-if (actionId.toString() !== "123456789") {
-  throw new Error("Invalid action ID");
-}
+function validateGovIdAttestation(attestation: any): AttestationValidation {
+  // Check attester
+  if (attestation.attester.toLowerCase() !== ATTESTER.toLowerCase()) {
+    return { isValid: false, error: "Invalid attester" };
+  }
 
-// Validate issuer matches KYC issuer
-if (issuer.toHexString() !== "0x03fae82f38bf01d9799d57fdda64fad4ac44e4c2c2f16c5bf8e1873d0a3e1993") {
-  throw new Error("Invalid issuer");
+  // Check not revoked
+  if (attestation.revoked) {
+    return { isValid: false, error: "Attestation revoked" };
+  }
+
+  // Check expiration
+  const now = Math.floor(Date.now() / 1000);
+  if (attestation.validUntil && attestation.validUntil < now) {
+    return { isValid: false, error: "Attestation expired" };
+  }
+
+  // Decode and validate attestation data
+  const decoded = ethers.utils.defaultAbiCoder.decode(
+    ["string", "uint256[]"],
+    attestation.data
+  );
+
+  const circuitId = decoded[0];
+  const publicValues = decoded[1];
+  const actionId = publicValues[2];
+  const issuer = publicValues[4];
+
+  // Validate circuit ID
+  if (circuitId !== EXPECTED_CIRCUIT_ID) {
+    return { isValid: false, error: "Invalid circuit ID" };
+  }
+
+  // Validate action ID
+  if (actionId.toString() !== EXPECTED_ACTION_ID) {
+    return { isValid: false, error: "Invalid action ID" };
+  }
+
+  // Validate issuer
+  if (issuer.toHexString() !== EXPECTED_ISSUER) {
+    return { isValid: false, error: "Invalid issuer" };
+  }
+
+  return { isValid: true };
 }
 ```
 
 ---
 
-<Callout type="tip">
-For most use cases, we recommend using the [Individual Verifications API](/building-with-passport/individual-verifications/api-reference) directly rather than querying attestation protocols. The API provides a simpler interface and handles validation automatically.
-</Callout>
+## Proof of Clean Hands Attestations
+
+Proof of Clean Hands uses a different schema on Base (chain ID 8453).
+
+### Query Clean Hands Attestations
+
+```bash
+curl 'https://mainnet-rpc.sign.global/api/scan/addresses/{address}/attestations'
+```
+
+### Validation
+
+```typescript
+function hasValidCleanHandsAttestation(attestations: any[]): boolean {
+  const now = Math.floor(Date.now() / 1000);
+  const CLEAN_HANDS_SCHEMA = 'onchain_evm_10_0x8';
+  const ATTESTER = '0xB1f50c6C34C72346b1229e5C80587D0D659556Fd';
+
+  return attestations.some(att =>
+    att.fullSchemaId === CLEAN_HANDS_SCHEMA &&
+    att.attester.toLowerCase() === ATTESTER.toLowerCase() &&
+    att.isReceiver === true &&
+    att.revoked === false &&
+    att.validUntil > now
+  );
+}
+```
+
+---
+
+## Sign Protocol Explorer
+
+You can view attestations on the Sign Protocol explorer:
+
+- **Production**: [https://scan.sign.global](https://scan.sign.global)
+- **View specific attestation**: `https://scan.sign.global/attestation/{attestationId}`
+
+---
+
+## Action IDs
+
+Action IDs enable sybil resistance by enforcing "1 person = 1 action". The default action ID is `123456789`.
+
+For more information on action IDs and custom action IDs, see [Action IDs](/building-with-passport/individual-verifications/major-concepts/action-ids).
+
+---
 
 ## Additional Resources
 
 - [Sign Protocol Documentation](https://docs.sign.global/)
-- [Circuit IDs and Issuer Constants](https://github.com/holonym-foundation/holonym-api/blob/main/src/constants/misc.js#L6)
+- [Individual Verifications API](/building-with-passport/individual-verifications/api-reference) - Simpler API for verification checks
+- [Testing](/building-with-passport/individual-verifications/major-concepts/testing) - Test your integration on Base Sepolia
