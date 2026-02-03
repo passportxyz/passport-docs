@@ -7,7 +7,7 @@ import { Callout } from 'nextra/components'
 
 # Testing
 
-Individual Verifications provides testnet support for developers to test their integration before going to production. Use the Base Sepolia testnet to complete verification flows and receive mock SBTs.
+Individual Verifications provides testnet support for developers to test their integration before going to production. Use the Base Sepolia testnet to complete verification flows and receive test attestations.
 
 ## Testnet Environment
 
@@ -18,9 +18,9 @@ Individual Verifications provides testnet support for developers to test their i
 
 ## Testing Workflow
 
-### Step 1: Get a Mock SBT
+### Step 1: Get a Test Verification
 
-Direct users to the sandbox verification flow to receive a mock SBT on Base Sepolia:
+Direct users to the sandbox verification flow to receive a test attestation on Base Sepolia:
 
 **Government ID (KYC):**
 ```
@@ -38,7 +38,7 @@ https://id.human.tech/biometrics?sandbox=true
 ```
 
 <Callout type="info">
-Sandbox verifications issue SBTs on Base Sepolia testnet. These are for testing purposes only and do not represent real identity verification.
+Sandbox verifications issue test attestations on Base Sepolia testnet. These are for testing purposes only and do not represent real identity verification.
 </Callout>
 
 ### Step 2: Query the Testnet API
@@ -59,7 +59,7 @@ curl --request GET \
 
 ### Step 3: Verify Integration
 
-Test your integration logic with the mock SBT before deploying to production.
+Test your integration logic with the test attestation before deploying to production.
 
 ## API Endpoints for Testing
 
@@ -98,3 +98,15 @@ const verifyUrl = 'https://id.human.tech/gov-id?sandbox=true';
 const network = 'optimism';
 const verifyUrl = 'https://id.human.tech/gov-id';
 ```
+
+---
+
+## Production Integration
+
+Once you've tested your integration, choose your production integration method:
+
+| Use Case | Method |
+|----------|--------|
+| Simple verification checks | [API Reference](/building-with-passport/individual-verifications/api-reference) |
+| On-chain contracts | [Attestation Protocols](/building-with-passport/individual-verifications/major-concepts/attestation-protocols) |
+| Client-side dApps | [SDK Integration](/building-with-passport/individual-verifications/major-concepts/sdk) |

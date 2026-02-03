@@ -23,27 +23,28 @@ import { initHumanID } from '@holonym-foundation/human-id-sdk'
 // Initialize the SDK (client-side only, requires window)
 const humanID = initHumanID()
 
-// Request verification and mint SBT
+// Request verification
 const result = await humanID.requestSBT('kyc')        // Government ID
 // or: humanID.requestSBT('phone')                    // Phone
 // or: humanID.requestSBT('biometrics')               // Biometrics
 // or: humanID.requestSBT('clean-hands')              // Proof of Clean Hands
 
 if (result?.recipient) {
-  console.log('Verified! SBT minted to:', result.recipient)
+  console.log('Verified! Attestation issued to:', result.recipient)
 }
 ```
 
-## SDK vs API
+## Integration Options
 
 | Use Case | Recommendation |
 |----------|----------------|
 | Client-side dApps | SDK - embeds verification flow directly |
-| Server-side checks | [API](/building-with-passport/individual-verifications/api-reference) - query verification status |
+| Server-side checks | [API](/building-with-passport/individual-verifications/api-reference) - simple true/false queries |
+| On-chain contracts | [Attestation Protocols](/building-with-passport/individual-verifications/major-concepts/attestation-protocols) - query Sign Protocol directly |
 
 ## Documentation
 
-For complete documentation including querying SBTs, prepaid verification credits, and React examples, see the SDK repository:
+For complete documentation including querying verification status, prepaid verification credits, and React examples, see the SDK repository:
 
 <Callout type="info">
 **[View full SDK documentation on GitHub](https://github.com/holonym-foundation/human-id-sdk)**

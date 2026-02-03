@@ -31,17 +31,18 @@ For testing and development, sandbox versions are available:
 
 ## Supported Chains
 
-Individual Verifications issue SoulBound Tokens (SBTs) on multiple chains:
+Individual Verifications issue attestations via [Sign Protocol](https://sign.global/) on multiple chains:
 
 - **Optimism** - Primary chain with full verification support
+- **Base** - Clean Hands and Biometrics attestations
 - **Stellar** - Soroban smart contract integration
 
-See the [Supported Chains](/building-with-passport/individual-verifications/supported-chains) page for integration details.
+See the [Supported Chains](/building-with-passport/individual-verifications/supported-chains) page for chain-specific details.
 
 ## Key Benefits
 
 - **Privacy-Preserving**: Zero-knowledge proofs allow users to prove facts without revealing underlying data
-- **Sybil Resistant**: SBTs are non-transferable and tied to verified individuals
+- **Sybil Resistant**: Attestations are tied to verified individuals, preventing duplicate verifications
 - **Regulatory Compliant**: Built-in KYC/AML capabilities for compliance requirements
 - **Cross-Chain**: Verify once, prove across multiple blockchain networks
 
@@ -50,12 +51,22 @@ See the [Supported Chains](/building-with-passport/individual-verifications/supp
 1. **Issuance**: User completes verification (e.g., government ID scan) with an identity verification provider
 2. **Credential Creation**: A privacy-preserving credential is created and stored client-side
 3. **Proof Generation**: User generates zero-knowledge proofs to prove specific facts
-4. **On-Chain Verification**: Proofs can be verified on-chain via SBT contracts
-5. **Renewal**: SBTs expire after 1 year and must be renewed to maintain valid verification status
+4. **Attestation Issuance**: An on-chain attestation is issued via Sign Protocol
+5. **Renewal**: Attestations expire after 1 year and must be renewed to maintain valid verification status
+
+## Integration Options
+
+Choose the integration method that best fits your use case:
+
+| Use Case | Method | Description |
+|----------|--------|-------------|
+| **Simple verification checks** | [API Reference](/building-with-passport/individual-verifications/api-reference) | Query verification status with simple true/false responses |
+| **On-chain contracts** | [Attestation Protocols](/building-with-passport/individual-verifications/major-concepts/attestation-protocols) | Query Sign Protocol attestations directly |
+| **Client-side dApps** | [SDK Integration](/building-with-passport/individual-verifications/major-concepts/sdk) | Embed verification flows in your application |
 
 ## Next Steps
 
-- [API Reference Playground](https://passport-api-playground.vercel.app) - Try out the API endpoints interactively
-- [Supported Chains](/building-with-passport/individual-verifications/supported-chains) - Integration guides for Optimism and Stellar
-- [API Reference](/building-with-passport/individual-verifications/api-reference) - Complete API endpoint documentation
-- [Additional Documentation](https://zeronym-docs.holonym.id/) - Architecture and advanced integration guides
+- [API Reference](/building-with-passport/individual-verifications/api-reference) - Query verification status via REST API
+- [Attestation Protocols](/building-with-passport/individual-verifications/major-concepts/attestation-protocols) - Query attestations directly from Sign Protocol
+- [Testing](/building-with-passport/individual-verifications/major-concepts/testing) - Test your integration on Base Sepolia
+- [API Playground](https://passport-api-playground.vercel.app) - Try out API endpoints interactively

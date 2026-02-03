@@ -1,7 +1,8 @@
 export default {
   index: { display: 'hidden' },
+  'attestation-protocols': 'Attestation Protocols',
   'action-ids': 'Action IDs',
   sdk: 'SDK Integration',
-  'attestation-protocols': 'Attestation Protocols',
   testing: 'Testing',
+  sbts: 'SoulBound Tokens (Legacy)',
 }
