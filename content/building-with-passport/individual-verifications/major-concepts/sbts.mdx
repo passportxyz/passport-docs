@@ -8,7 +8,9 @@ import { Callout } from 'nextra/components'
 # SoulBound Tokens (Legacy)
 
 <Callout type="warning">
-SBTs are being phased out in favor of attestations. For new integrations, use the [API Reference](/building-with-passport/individual-verifications/api-reference) or [Attestation Protocols](/building-with-passport/individual-verifications/major-concepts/attestation-protocols).
+**EVM SBTs are legacy.** On EVM chains, SBTs have been replaced by attestations via Sign Protocol. For new EVM integrations, use the [API Reference](/building-with-passport/individual-verifications/api-reference) or [Attestation Protocols](/building-with-passport/individual-verifications/major-concepts/attestation-protocols).
+
+**Stellar SBTs are current.** On Stellar, SBTs via Soroban are the active integration method. See the [Stellar Integration](/building-with-passport/individual-verifications/supported-chains/stellar) page for complete details.
 </Callout>
 
 SoulBound Tokens (SBTs) are non-transferable tokens that were the original method for recording Individual Verifications on-chain. While SBTs are still issued for backward compatibility, attestations are now the primary verification record.
@@ -67,119 +69,7 @@ All chains use consistent status codes when querying SBTs:
 
 ## Querying SBTs on Stellar
 
-### Off-Chain Verification (TypeScript)
-
-Use the Stellar SDK to query a user's SBT status:
-
-```typescript
-import {
-  rpc,
-  TransactionBuilder,
-  Networks,
-  Contract,
-  scValToNative,
-  nativeToScVal,
-} from '@stellar/stellar-sdk'
-
-type StellarSbt = {
-  action_nullifier: bigint
-  circuit_id: bigint
-  expiry: bigint
-  id: bigint
-  minter: string
-  public_values: Array<bigint>
-  recipient: string
-  revoked: boolean
-}
-
-type StellarSbtStatus = 'valid' | 'expired' | 'revoked' | 'none'
-
-const sorobanRpcUrl = 'https://mainnet.sorobanrpc.com'
-const sbtContractAddress = 'CCNTHEVSWNDOQAMXXHFOLQIXWUINUPTJIM6AXFSKODNVXWA4N7XV3AI5'
-
-async function getStellarSBT(
-  address: string,
-  circuitId: string
-): Promise<{ sbt?: StellarSbt; status: StellarSbtStatus }> {
-  const sorobanServer = new rpc.Server(sorobanRpcUrl)
-  const userAccount = await sorobanServer.getAccount(address)
-  const contract = new Contract(sbtContractAddress)
-
-  const operation = contract.call(
-    'get_sbt',
-    nativeToScVal(address, { type: 'address' }),
-    nativeToScVal(circuitId, { type: 'u256' })
-  )
-
-  const transaction = new TransactionBuilder(userAccount, {
-    networkPassphrase: Networks.PUBLIC,
-    fee: '100',
-  })
-    .addOperation(operation)
-    .setTimeout(60)
-    .build()
-
-  const response = await sorobanServer.simulateTransaction(transaction)
-
-  if (rpc.Api.isSimulationSuccess(response)) {
-    const parsed = rpc.parseRawSimulation(response)
-    const sbt = scValToNative(parsed.result?.retval)
-    return { sbt, status: 'valid' }
-  }
-
-  const error = response.error
-  if (error?.includes('Error(Contract, #1)')) return { status: 'none' }
-  if (error?.includes('Error(Contract, #5)')) return { status: 'revoked' }
-  if (error?.includes('Error(Contract, #6)')) return { status: 'expired' }
-
-  throw new Error(`SBT query failed: ${error}`)
-}
-```
-
-### On-Chain Verification (Soroban)
-
-**1. Fetch the SBT contract WASM:**
-
-```bash
-soroban contract fetch \
-  --id CCNTHEVSWNDOQAMXXHFOLQIXWUINUPTJIM6AXFSKODNVXWA4N7XV3AI5 \
-  -o ./passport_sbt_contract.wasm \
-  --network mainnet \
-  --network-passphrase "Public Global Stellar Network ; September 2015" \
-  --rpc-url https://mainnet.sorobanrpc.com
-```
-
-**2. Import and use in your contract:**
-
-```rust
-#![no_std]
-use soroban_sdk::{contract, contractimpl, Env, Address, U256};
-
-mod passport_sbt_contract {
-    soroban_sdk::contractimport!(
-        file = "../../passport_sbt_contract.wasm"
-    );
-}
-
-#[contract]
-pub struct MyContract;
-
-#[contractimpl]
-impl MyContract {
-    pub fn get_sbt(
-        env: Env,
-        recipient: Address,
-        circuit_id: U256
-    ) -> passport_sbt_contract::SBT {
-        let contract_addr = Address::from_str(
-            &env,
-            "CCNTHEVSWNDOQAMXXHFOLQIXWUINUPTJIM6AXFSKODNVXWA4N7XV3AI5"
-        );
-        let client = passport_sbt_contract::Client::new(&env, &contract_addr);
-        client.get_sbt(&recipient, &circuit_id)
-    }
-}
-```
+For complete Stellar SBT querying examples (TypeScript and Soroban/Rust), see the [Stellar Integration](/building-with-passport/individual-verifications/supported-chains/stellar#querying-sbts) page.
 
 ---
 
@@ -211,4 +101,4 @@ For migration assistance, [contact us](https://tally.so/r/3X81KL).
 
 - [Attestation Protocols](/building-with-passport/individual-verifications/major-concepts/attestation-protocols) - Recommended integration method
 - [API Reference](/building-with-passport/individual-verifications/api-reference) - Simple verification status checks
-- [Stellar Documentation](https://zeronym-docs.holonym.id/stellar) - Stellar-specific guides
+- [Stellar Integration](/building-with-passport/individual-verifications/supported-chains/stellar) - Stellar-specific integration guide

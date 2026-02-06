@@ -17,6 +17,7 @@ Unlike [Stamps-based verification](/building-with-passport/stamps), which aggreg
 | **Phone** | Verify a unique phone number | [id.human.tech/phone](https://id.human.tech/phone) |
 | **Biometrics** | Non-identifying face uniqueness and liveness check | [id.human.tech/biometrics](https://id.human.tech/biometrics) |
 | **Proof of Clean Hands** | Sanctions and PEP list verification (AML compliance) | [id.human.tech/clean-hands](https://id.human.tech/clean-hands) |
+| **ePassport** | NFC-based passport verification (Stellar only) | [id.human.tech/epassport](https://id.human.tech/epassport) |
 
 ### Sandbox Environment
 
@@ -35,7 +36,7 @@ Individual Verifications issue attestations via [Sign Protocol](https://sign.glo
 
 - **Optimism** - Primary chain with full verification support
 - **Base** - Clean Hands and Biometrics attestations
-- **Stellar** - Soroban smart contract integration
+- **Stellar** - Soroban smart contract integration (Gov ID, Phone, ePassport) — [Stellar Integration](/building-with-passport/individual-verifications/supported-chains/stellar)
 
 See the [Supported Chains](/building-with-passport/individual-verifications/supported-chains) page for chain-specific details.
 
@@ -63,10 +64,12 @@ Choose the integration method that best fits your use case:
 | **Simple verification checks** | [API Reference](/building-with-passport/individual-verifications/api-reference) | Query verification status with simple true/false responses |
 | **On-chain contracts** | [Attestation Protocols](/building-with-passport/individual-verifications/major-concepts/attestation-protocols) | Query Sign Protocol attestations directly |
 | **Client-side dApps** | [SDK Integration](/building-with-passport/individual-verifications/major-concepts/sdk) | Embed verification flows in your application |
+| **Stellar integration** | [Stellar Integration](/building-with-passport/individual-verifications/supported-chains/stellar) | Query SBTs on Stellar via Soroban |
 
 ## Next Steps
 
 - [API Reference](/building-with-passport/individual-verifications/api-reference) - Query verification status via REST API
 - [Attestation Protocols](/building-with-passport/individual-verifications/major-concepts/attestation-protocols) - Query attestations directly from Sign Protocol
 - [Testing](/building-with-passport/individual-verifications/major-concepts/testing) - Test your integration on Base Sepolia
+- [Stellar Integration](/building-with-passport/individual-verifications/supported-chains/stellar) - Integrate on Stellar via Soroban SBTs
 - [API Playground](https://passport-api-playground.vercel.app) - Try out API endpoints interactively

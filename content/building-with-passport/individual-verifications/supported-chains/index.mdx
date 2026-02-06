@@ -12,11 +12,11 @@ Individual Verifications issue attestations on multiple blockchain networks, all
 
 ## Overview
 
-| Chain | Gov ID | Phone | Biometrics | Clean Hands |
-|-------|--------|-------|------------|-------------|
-| **Optimism** | ✅ | ✅ | ✅ | ✅ |
-| **Base** | - | - | ✅ | ✅ |
-| **Stellar** | ✅ | ✅ | - | - |
+| Chain | Gov ID | Phone | Biometrics | Clean Hands | ePassport |
+|-------|--------|-------|------------|-------------|-----------|
+| **Optimism** | ✅ | ✅ | ✅ | ✅ | - |
+| **Base** | - | - | ✅ | ✅ | - |
+| **Stellar** | ✅ | ✅ | - | - | ✅ |
 
 ## How Multi-Chain Verification Works
 
@@ -79,22 +79,29 @@ Base supports Biometrics and Proof of Clean Hands attestations.
 
 ## Stellar
 
-Individual Verifications support Stellar via Soroban smart contracts for Government ID and Phone verifications.
+Individual Verifications support Stellar via Soroban smart contracts for Government ID, Phone, and ePassport verifications.
 
 **Supported Verifications:**
 - Government ID (KYC)
 - Phone
+- ePassport
+
+### SBT Contract
+
+| Component | Value |
+|-----------|-------|
+| SBT Contract | `CCNTHEVSWNDOQAMXXHFOLQIXWUINUPTJIM6AXFSKODNVXWA4N7XV3AI5` |
+
+<Callout type="info">
+On EVM chains (Optimism, Base), attestations via Sign Protocol are the recommended integration. On Stellar, SBTs via Soroban are the current method. See the [Stellar Integration](/building-with-passport/individual-verifications/supported-chains/stellar) page for complete code examples and integration details.
+</Callout>
 
 ### User Flow
 
 1. Visit the verification page for the desired verification type
 2. Complete the verification process
 3. Enter a Stellar address to receive the verification
-4. The verification is recorded on Stellar
-
-<Callout type="info">
-For Stellar-specific integration details and code examples, see the [Stellar Documentation](https://zeronym-docs.holonym.id/stellar).
-</Callout>
+4. The verification is recorded on Stellar as an SBT
 
 ---
 
@@ -131,12 +138,14 @@ Choose the integration method that best fits your use case:
 | Simple verification checks | [API Reference](/building-with-passport/individual-verifications/api-reference) |
 | On-chain contracts / Custom integrations | [Attestation Protocols](/building-with-passport/individual-verifications/major-concepts/attestation-protocols) |
 | Client-side dApps | [SDK Integration](/building-with-passport/individual-verifications/major-concepts/sdk) |
+| Stellar integration | [Stellar Integration](/building-with-passport/individual-verifications/supported-chains/stellar) |
 
 ---
 
 ## Additional Resources
 
 <Cards>
+  <Cards.Card title="Stellar Integration" href="/building-with-passport/individual-verifications/supported-chains/stellar" />
   <Cards.Card title="API Reference" href="/building-with-passport/individual-verifications/api-reference" />
   <Cards.Card title="Attestation Protocols" href="/building-with-passport/individual-verifications/major-concepts/attestation-protocols" />
   <Cards.Card title="Testing" href="/building-with-passport/individual-verifications/major-concepts/testing" />
