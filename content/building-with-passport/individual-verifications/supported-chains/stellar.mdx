@@ -1,0 +1,196 @@
+---
+title: Stellar Integration
+description: Integrate Individual Verifications on Stellar using Soroban smart contracts
+---
+
+import { Callout, Tabs } from 'nextra/components'
+import { Cards } from 'nextra/components'
+
+# Stellar Integration
+
+Individual Verifications on Stellar are recorded as SoulBound Tokens (SBTs) via Soroban smart contracts. This page covers everything you need to integrate Stellar-based verifications into your application.
+
+## Supported Verification Types
+
+| Verification | Circuit ID | Verification URL |
+|--------------|-----------|------------------|
+| **Government ID (KYC)** | `0x729d660e1c02e4e419745e617d643f897a538673ccf1051e093bbfa58b0a120b` | [id.human.tech/gov-id](https://id.human.tech/gov-id) |
+| **Phone** | `0xbce052cf723dca06a21bd3cf838bc518931730fb3db7859fc9cc86f0d5483495` | [id.human.tech/phone](https://id.human.tech/phone) |
+| **ePassport** | `0xf2ce248b529343e105f7b3c16459da619281c5f81cf716d28f7df9f87667364d` | [id.human.tech/epassport](https://id.human.tech/epassport) |
+
+<Callout type="info">
+On EVM chains (Optimism, Base), attestations via Sign Protocol are the recommended integration. On Stellar, SBTs via Soroban are the current method.
+</Callout>
+
+## SBT Contract
+
+| Component | Value |
+|-----------|-------|
+| Contract Address | `CCNTHEVSWNDOQAMXXHFOLQIXWUINUPTJIM6AXFSKODNVXWA4N7XV3AI5` |
+| Network | Stellar Mainnet (Public) |
+| RPC URL | `https://mainnet.sorobanrpc.com` |
+
+Source code: [GitHub](https://github.com/nicktomlin/holonym-passport-sbt-contract)
+
+## Querying SBTs
+
+<Tabs items={['TypeScript (Off-chain)', 'Rust (On-chain)']}>
+  <Tabs.Tab>
+
+Use the Stellar SDK to query a user's SBT status off-chain:
+
+```typescript
+import {
+  rpc,
+  TransactionBuilder,
+  Networks,
+  Contract,
+  scValToNative,
+  nativeToScVal,
+} from '@stellar/stellar-sdk'
+
+type StellarSbt = {
+  action_nullifier: bigint
+  circuit_id: bigint
+  expiry: bigint
+  id: bigint
+  minter: string
+  public_values: Array<bigint>
+  recipient: string
+  revoked: boolean
+}
+
+type StellarSbtStatus = 'valid' | 'expired' | 'revoked' | 'none'
+
+const sorobanRpcUrl = 'https://mainnet.sorobanrpc.com'
+const sbtContractAddress = 'CCNTHEVSWNDOQAMXXHFOLQIXWUINUPTJIM6AXFSKODNVXWA4N7XV3AI5'
+
+async function getStellarSBT(
+  address: string,
+  circuitId: string
+): Promise<{ sbt?: StellarSbt; status: StellarSbtStatus }> {
+  const sorobanServer = new rpc.Server(sorobanRpcUrl)
+  const userAccount = await sorobanServer.getAccount(address)
+  const contract = new Contract(sbtContractAddress)
+
+  const operation = contract.call(
+    'get_sbt',
+    nativeToScVal(address, { type: 'address' }),
+    nativeToScVal(circuitId, { type: 'u256' })
+  )
+
+  const transaction = new TransactionBuilder(userAccount, {
+    networkPassphrase: Networks.PUBLIC,
+    fee: '100',
+  })
+    .addOperation(operation)
+    .setTimeout(60)
+    .build()
+
+  const response = await sorobanServer.simulateTransaction(transaction)
+
+  if (rpc.Api.isSimulationSuccess(response)) {
+    const parsed = rpc.parseRawSimulation(response)
+    const sbt = scValToNative(parsed.result?.retval)
+    return { sbt, status: 'valid' }
+  }
+
+  const error = response.error
+  if (error?.includes('Error(Contract, #1)')) return { status: 'none' }
+  if (error?.includes('Error(Contract, #5)')) return { status: 'revoked' }
+  if (error?.includes('Error(Contract, #6)')) return { status: 'expired' }
+
+  throw new Error(`SBT query failed: ${error}`)
+}
+```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+
+For on-chain verification from another Soroban contract:
+
+**1. Fetch the SBT contract WASM:**
+
+```bash
+soroban contract fetch \
+  --id CCNTHEVSWNDOQAMXXHFOLQIXWUINUPTJIM6AXFSKODNVXWA4N7XV3AI5 \
+  -o ./passport_sbt_contract.wasm \
+  --network mainnet \
+  --network-passphrase "Public Global Stellar Network ; September 2015" \
+  --rpc-url https://mainnet.sorobanrpc.com
+```
+
+**2. Import and use in your contract:**
+
+```rust
+#![no_std]
+use soroban_sdk::{contract, contractimpl, Env, Address, U256};
+
+mod passport_sbt_contract {
+    soroban_sdk::contractimport!(
+        file = "../../passport_sbt_contract.wasm"
+    );
+}
+
+#[contract]
+pub struct MyContract;
+
+#[contractimpl]
+impl MyContract {
+    pub fn get_sbt(
+        env: Env,
+        recipient: Address,
+        circuit_id: U256
+    ) -> passport_sbt_contract::SBT {
+        let contract_addr = Address::from_str(
+            &env,
+            "CCNTHEVSWNDOQAMXXHFOLQIXWUINUPTJIM6AXFSKODNVXWA4N7XV3AI5"
+        );
+        let client = passport_sbt_contract::Client::new(&env, &contract_addr);
+        client.get_sbt(&recipient, &circuit_id)
+    }
+}
+```
+
+  </Tabs.Tab>
+</Tabs>
+
+## SBT Status Codes
+
+| Status | Description |
+|--------|-------------|
+| `valid` | SBT exists and is active |
+| `expired` | SBT has passed its expiration date (1 year from issuance) |
+| `revoked` | SBT has been revoked |
+| `none` | No SBT found for this address |
+
+## Circuit IDs
+
+Use the appropriate circuit ID when querying SBTs for a specific verification type:
+
+| Verification Type | Circuit ID |
+|-------------------|-----------|
+| **Government ID (KYC)** | `0x729d660e1c02e4e419745e617d643f897a538673ccf1051e093bbfa58b0a120b` |
+| **Phone** | `0xbce052cf723dca06a21bd3cf838bc518931730fb3db7859fc9cc86f0d5483495` |
+| **ePassport** | `0xf2ce248b529343e105f7b3c16459da619281c5f81cf716d28f7df9f87667364d` |
+
+## ePassport
+
+ePassport is a distinct verification type available on Stellar. It uses the NFC chip in modern passports for cryptographic identity verification.
+
+- **Distinct circuit ID**: ePassport has its own circuit ID (`0xf2ce...364d`), separate from Government ID
+- **Free verification**: No fee required for ePassport verification
+- **NFC-based**: Reads the passport's NFC chip for cryptographic proof
+- **One SBT per passport**: Each passport can only mint one SBT
+
+<Callout type="tip">
+Privacy: users can pay from a different wallet than the SBT recipient. This prevents linking the funding wallet to the verified identity.
+</Callout>
+
+## Additional Resources
+
+<Cards>
+  <Cards.Card title="API Reference" href="/building-with-passport/individual-verifications/api-reference" />
+  <Cards.Card title="Attestation Protocols" href="/building-with-passport/individual-verifications/major-concepts/attestation-protocols" />
+  <Cards.Card title="SBTs (Legacy)" href="/building-with-passport/individual-verifications/major-concepts/sbts" />
+</Cards>
