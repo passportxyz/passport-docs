@@ -1,13 +1,47 @@
 ---
 title: Individual Verifications
-description: Privacy-preserving identity verifications including KYC, phone, biometrics, and more.
+description: Privacy-preserving, reusable identity verifications powered by zero-knowledge proofs.
 ---
+
+import { Callout } from 'nextra/components'
 
 # Individual Verifications
 
-Individual Verifications are privacy-preserving identity checks that use zero-knowledge proofs, allowing users to prove facts about themselves without revealing their full identity.
+Individual Verifications let users complete identity checks once and reuse them across any integrated application. Powered by zero-knowledge proofs, verifications are privacy-preserving — apps learn that a user passed KYC, not their name or ID number.
 
 Unlike [Stamps-based verification](/building-with-passport/stamps), which aggregates multiple signals into a composite score, Individual Verifications provide specific, targeted proofs such as government ID verification, phone number uniqueness, or biometric liveness checks.
+
+<Callout type="info">
+**Choosing the right verification approach**
+
+Human Passport offers multiple verification methods:
+- **[Stamps](/building-with-passport/stamps)** - Aggregate multiple signals into a composite score. Best for general Sybil resistance.
+- **[Models](/building-with-passport/models)** - ML-powered scoring with zero user friction. Best for frictionless verification.
+- **[Individual Verifications](/building-with-passport/individual-verifications)** - Privacy-preserving KYC, phone, biometrics, and AML checks. Best for regulatory compliance or stronger identity guarantees.
+</Callout>
+
+## Why Individual Verifications?
+
+|  | Traditional KYC | Individual Verifications |
+|--|-----------------|--------------------------|
+| **Data shared** | Full PII (name, ID number, address) | Only pass/fail — zero personal data |
+| **Reusability** | Verify separately per app | Verify once, reuse everywhere |
+| **Compliance** | Varies by provider | Built-in KYC and AML (Clean Hands) |
+| **User experience** | Minutes of forms per app | One-time verification + instant reuse |
+| **Sybil resistance** | Depends on implementation | Built-in — attestations are tied to verified individuals |
+
+## How Zero-Knowledge Proofs Work
+
+1. **Verification**: The user completes an identity check (e.g., government ID scan) with an identity verification provider.
+2. **Credential creation**: A cryptographic credential is created and stored client-side. Personal data never leaves the user's device.
+3. **Proof generation**: When an app needs proof, the user generates a ZK proof — a compact cryptographic certificate that proves "I passed KYC" without revealing any underlying data.
+4. **On-chain attestation**: The proof is verified and recorded on-chain as an attestation via [Sign Protocol](https://sign.global/) (on Optimism/Base) or as an SBT on Stellar.
+
+<Callout type="tip">
+Think of it like a bouncer checking your ID at a bar. The bouncer confirms you're over 21, but the bar never sees your name, address, or birthdate. ZKPs work the same way — cryptographic proof of a fact, with zero personal data disclosed.
+</Callout>
+
+Each verification type (Gov ID, Phone, Biometrics, Clean Hands) uses a different ZK circuit — a specific proof program. See [Attestation Protocols](/building-with-passport/individual-verifications/major-concepts/attestation-protocols) for circuit and schema IDs.
 
 ## Available Verification Types
 
@@ -40,20 +74,25 @@ Individual Verifications issue attestations via [Sign Protocol](https://sign.glo
 
 See the [Supported Chains](/building-with-passport/individual-verifications/supported-chains) page for chain-specific details.
 
-## Key Benefits
+## Basic Integration Flow
 
-- **Privacy-Preserving**: Zero-knowledge proofs allow users to prove facts without revealing underlying data
-- **Sybil Resistant**: Attestations are tied to verified individuals, preventing duplicate verifications
-- **Regulatory Compliant**: Built-in KYC/AML capabilities for compliance requirements
-- **Cross-Chain**: Verify once, prove across multiple blockchain networks
+### Quickstart: Check if a user is KYC-verified
 
-## How It Works
+A single API call checks whether an address has a valid verification:
 
-1. **Issuance**: User completes verification (e.g., government ID scan) with an identity verification provider
-2. **Credential Creation**: A privacy-preserving credential is created and stored client-side
-3. **Proof Generation**: User generates zero-knowledge proofs to prove specific facts
-4. **Attestation Issuance**: An on-chain attestation is issued via Sign Protocol
-5. **Renewal**: Attestations expire after 1 year and must be renewed to maintain valid verification status
+```bash
+curl 'https://api.holonym.io/sybil-resistance/gov-id/optimism?user=USER_ADDRESS&action-id=123456789'
+```
+
+```json
+// Verified user
+{ "result": true, "expirationDate": 1770922106 }
+
+// Not verified
+{ "result": false }
+```
+
+That's it — one API call. For on-chain verification, query Sign Protocol attestations directly. See [API Reference](/building-with-passport/individual-verifications/api-reference) for all endpoints or [Attestation Protocols](/building-with-passport/individual-verifications/major-concepts/attestation-protocols) for on-chain queries.
 
 ## Integration Options
 
