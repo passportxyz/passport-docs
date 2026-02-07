@@ -6,6 +6,9 @@ module.exports = {
     // Retired v1 API pages - excluded from search engines and AI crawlers
     '/building-with-passport/stamps/passport-api-v1',
     '/building-with-passport/stamps/passport-api-v1/*',
+    // LLM-friendly docs (utility files, not doc pages)
+    '/llms.txt',
+    '/llms-full.txt',
   ],
   robotsTxtOptions: {
     additionalSitemaps: [],
