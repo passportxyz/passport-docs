@@ -44,7 +44,3 @@
   rotate: 90deg !important;
 }
 
-/* Hide hamburger menu in navbar */
-.nextra-hamburger {
-  display: none !important;
-}
