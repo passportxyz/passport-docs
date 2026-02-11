@@ -64,8 +64,10 @@
   }
 }
 
-/* Hide GitHub and Telegram icons on mobile to give the logo room */
+/* Hide nav links, search, and icon links on mobile — logo + hamburger only */
 @media (max-width: 767.98px) {
+  nav .nextra-scrollbar,
+  nav .nextra-search,
   nav a[href*="github.com"],
   nav a[href*="t.me/"] {
     display: none !important;
