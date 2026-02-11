@@ -44,8 +44,27 @@
   rotate: 90deg !important;
 }
 
-/* Tailwind v4 bug: x:md:hidden doesn't apply on the hamburger button.
-   Hide it on desktop (≥768px) so it only shows on mobile. */
+/*
+ * Tailwind v4 bug: responsive x:*:hidden utility classes don't apply.
+ * These media queries manually enforce the breakpoint behavior that
+ * Nextra's classes (x:md:hidden, x:max-md:hidden, x:max-xl:hidden) expect.
+ */
+
+/* Hide desktop sidebar on mobile — x:max-md:hidden not applying */
+@media (max-width: 767.98px) {
+  .nextra-sidebar {
+    display: none !important;
+  }
+}
+
+/* Hide TOC on smaller screens — x:max-xl:hidden not applying */
+@media (max-width: 1279.98px) {
+  .nextra-toc {
+    display: none !important;
+  }
+}
+
+/* Hide hamburger on desktop — x:md:hidden not applying */
 @media (min-width: 768px) {
   .nextra-hamburger {
     display: none !important;
