@@ -44,3 +44,11 @@
   rotate: 90deg !important;
 }
 
+/* Tailwind v4 bug: x:md:hidden doesn't apply on the hamburger button.
+   Hide it on desktop (≥768px) so it only shows on mobile. */
+@media (min-width: 768px) {
+  .nextra-hamburger {
+    display: none !important;
+  }
+}
+
