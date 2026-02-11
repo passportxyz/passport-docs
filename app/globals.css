@@ -64,6 +64,14 @@
   }
 }
 
+/* Hide GitHub and Telegram icons on mobile to give the logo room */
+@media (max-width: 767.98px) {
+  nav a[href*="github.com"],
+  nav a[href*="t.me/"] {
+    display: none !important;
+  }
+}
+
 /* Hide hamburger on desktop — x:md:hidden not applying */
 @media (min-width: 768px) {
   .nextra-hamburger {
