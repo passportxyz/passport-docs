@@ -24,7 +24,7 @@ import { initHumanID } from '@holonym-foundation/human-id-sdk'
 const humanID = initHumanID()
 
 // Request verification
-const result = await humanID.requestSBT('kyc')        // Government ID
+const result = await humanID.requestSBT('kyc')        // Government ID (shows selector: KYC or NFC Passport)
 // or: humanID.requestSBT('phone')                    // Phone
 // or: humanID.requestSBT('biometrics')               // Biometrics
 // or: humanID.requestSBT('clean-hands')              // Proof of Clean Hands
@@ -33,6 +33,10 @@ if (result?.recipient) {
   console.log('Verified! Attestation issued to:', result.recipient)
 }
 ```
+
+<Callout type="info">
+**Government ID method selector**: Calling `requestSBT('kyc')` now presents users with a choice between traditional KYC (~$5, any government ID) and NFC Passport verification (free, requires biometric passport with NFC chip). Both methods share the same sybil resistance — a user verified via either method will be recognized by the `gov-id` API endpoint.
+</Callout>
 
 ## Integration Options
 
