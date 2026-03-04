@@ -32,7 +32,7 @@ Human Passport offers multiple verification methods:
 
 ## How Zero-Knowledge Proofs Work
 
-1. **Verification**: The user completes an identity check (e.g., government ID scan) with an identity verification provider.
+1. **Verification**: The user completes an identity check — either through a traditional KYC provider (document scan) or by scanning their NFC biometric passport with the ZK Passport app, which generates ZK proofs entirely on the user's device.
 2. **Credential creation**: A cryptographic credential is created and stored client-side. Personal data never leaves the user's device.
 3. **Proof generation**: When an app needs proof, the user generates a ZK proof — a compact cryptographic certificate that proves "I passed KYC" without revealing any underlying data.
 4. **On-chain attestation**: The proof is verified and recorded on-chain as an attestation via [Sign Protocol](https://sign.global/) (on Optimism/Base) or as an SBT on Stellar.
@@ -47,7 +47,7 @@ Each verification type (Gov ID, Phone, Biometrics, Clean Hands) uses a different
 
 | Verification | Description | Link |
 |--------------|-------------|------|
-| **Government ID (KYC)** | Verify identity via government-issued ID (passport, driver's license, national ID) | [id.human.tech/gov-id](https://id.human.tech/gov-id) |
+| **Government ID (KYC)** | Verify identity via government-issued ID. Two methods: traditional KYC (~$5, any ID document) or NFC Passport (free, requires biometric passport with NFC chip). Both share the same sybil resistance pool. | [id.human.tech/gov-id](https://id.human.tech/gov-id) |
 | **Phone** | Verify a unique phone number | [id.human.tech/phone](https://id.human.tech/phone) |
 | **Biometrics** | Non-identifying face uniqueness and liveness check | [id.human.tech/biometrics](https://id.human.tech/biometrics) |
 | **Proof of Clean Hands** | Sanctions and PEP list verification (AML compliance) | [id.human.tech/clean-hands](https://id.human.tech/clean-hands) |
@@ -60,6 +60,7 @@ For testing and development, sandbox versions are available:
 | Verification | Sandbox Link |
 |--------------|--------------|
 | Government ID (KYC) | [id.human.tech/sandbox/gov-id](https://id.human.tech/sandbox/gov-id) |
+| Government ID (NFC Passport) | [id.human.tech/gov-id?sandbox=true](https://id.human.tech/gov-id?sandbox=true) |
 | Phone | [id.human.tech/sandbox/phone](https://id.human.tech/sandbox/phone) |
 | Proof of Clean Hands | [id.human.tech/sandbox/clean-hands](https://id.human.tech/sandbox/clean-hands) |
 | Biometrics | Coming soon |
