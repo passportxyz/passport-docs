@@ -31,12 +31,12 @@ One of the primary reasons why Sybils exist is to take advantage of community re
 By protecting access to Passport holders that have a score over a certain [threshold](../major-concepts/scoring-thresholds), you are ensuring that your community rewards programs are properly distributed. 
 
 #### Active integrators
-* [Gitcoin Grants](https://www.gitcoin.co/grants-stack)
-* [Bankless Academy](https://www.gitcoin.co/blog/bankless-academy-a-gitcoin-passport-case-study)
-* [CyberConnect](https://www.gitcoin.co/blog/gitcoin-passoort-cyberconnect-case-study)
-* [Galxe](https://www.gitcoin.co/blog/gitcoin-passport-galxe)
-* [Shapeshift](https://www.gitcoin.co/blog/protecting-shapeshifts-op-rewards-program-a-case-study)
-* [Linea](https://www.gitcoin.co/blog/lineas-human-first-campaign-using-gitcoin-passport)
+* Gitcoin Grants
+* Bankless Academy
+* CyberConnect
+* Galxe
+* Shapeshift
+* Linea
 
 
 ![Protecting governance](/protect-governance.png)
@@ -67,7 +67,7 @@ Tired of low-quality inbounds or contributions to a communication channel? Prote
 
 #### Active integrators
 * [Discourse](https://passport.human.tech/blog/how-to-protect-your-discourse-forum-from-bots-and-sybils-with-human-passport)
-* [Guild](https://www.gitcoin.co/blog/guild-xyz-and-gitcoin-passport-partner)
+* Guild
 * Collab.land
 * Metaforo
 
@@ -96,7 +96,7 @@ You’ve got a marketplace that is free and open for users to create and sell co
 There are many situations where a user would benefit from being able to judge for themselves whether another user is trustworthy or not. By displaying Passport scores and verified Stamps, you can help your users make better decisions about who they interact with on the web. 
 
 #### Active integrators
-* [{R}elinked](https://www.gitcoin.co/blog/building-reputation-on-r-elinkd)
+* {R}elinked
 * Rarimo
 * Sismo
 
