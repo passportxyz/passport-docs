@@ -21,6 +21,7 @@ The custom Passport experience offers lots of customization options related to t
 | Curate Stamps and weights                | Remove any Stamps or credentials that don’t make sense for your ecosystem, and adjust the remaining [credential weights](../major-concepts/credential-map-and-weights.mdx) to better reflect your ecosystem’s needs.                                                                                                                                                                                                                                   |
 | Create your own Stamps:<br />GuestList     | Enable your known humans to easily obtain a passing score based on their inclusion on a pre-vetted list.  This list could be based on POAP ownership, in-person event attendance, your own KYC, or other high-human or reputation signals.                                                                                                                                     |
 | Create your own Stamps:<br />DeveloperList | Reward developers who have contributed to the development of specified GitHub repositories with points.  This Stamp could be built around a set of company-owned repositories, or around different important programming languages or tools.                                                                                                                                   |
+| Create your own Stamps:<br />NFTHolder     | Verify on-chain token ownership across multiple contracts and chains. Partners define which smart contracts qualify — including NFTs, POAPs, OATs, or any ERC-721/ERC-1155 token. Users who hold at least one matching token receive points. Supports 20 chains including Ethereum, Optimism, Base, Arbitrum, Polygon, Linea, Scroll, and more. |
 | Elevated rate limits                     | Access the custom score and Stamp data via the Stamps API with elevated rate limits.                                                                                                                                                                                                                                                                                         |
 
 ## Custom Passport Requirements
@@ -71,6 +72,16 @@ For example, you can build a Stamp that awards developers for having made the fo
 * 1 commit – 1 point
 * 5 commits – 2 points (additional, on top of the earlier tier)
 * 10 commits – 3 points (same as the above)
+
+### NFTHolder Stamp
+
+If you would like to create a Stamp that verifies on-chain token ownership, please provide us with the smart contract addresses and chain IDs for the tokens you want to verify. This can include NFTs, POAPs, OATs, or any ERC-721/ERC-1155 token.
+
+A user qualifies if they hold at least one token across any of the listed contracts. You can specify up to 20 contracts per Stamp, spanning any of the supported chains:
+
+Ethereum, Optimism, BNB Chain, Gnosis, Polygon, Fantom, zkSync, Polygon zkEVM, Sei, Mantle, ZetaChain, Base, Arbitrum One, Arbitrum Nova, Celo, Avalanche, Linea, Blast, Scroll.
+
+We will also need you to provide the points that you would like to be awarded with this Stamp.
 
 ### Elevated Rate Limits
 
