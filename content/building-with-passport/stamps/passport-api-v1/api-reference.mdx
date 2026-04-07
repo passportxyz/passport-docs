@@ -52,8 +52,8 @@ You will start off with Tier 1, and will need to [request higher rate limits](ht
 There are several key concepts you should be aware of when using the Stamps API:
 
 * **Timeouts:** The Stamps API endpoints have a timeout of 60 seconds. This means that if a request to one of these endpoints does not receive a response within 60 seconds, the request will be aborted. If your request times out, you should set up retry logic by calling the API again after a short delay, typically increasing the delay for each subsequent retry.
-* **Pagination:** Some requests return a large amount of data. To effectively retrieve this data, you will need to paginate the response. For more information, see [API pagination](/building-with-passport/major-concepts/api-pagination).
-* **Data dictionary:** We have put together a [data dictionary](/building-with-passport/major-concepts/data-dictionary) that you can use to better understand each field that delivers with the response payloads from the Stamps API endpoints.
+* **Pagination:** Some requests return a large amount of data. To effectively retrieve this data, you will need to paginate the response. For more information, see [API pagination](/building-with-passport/stamps/major-concepts/api-pagination).
+* **Data dictionary:** We have put together a [data dictionary](/building-with-passport/stamps/major-concepts/data-dictionary) that you can use to better understand each field that delivers with the response payloads from the Stamps API endpoints.
 
 
 ## Available endpoints
@@ -135,7 +135,7 @@ curl --request POST \
 
 #### Sample responses
 
-The name in the parenthesis represents what [type of Scorer](/building-with-passport/getting-access#types-of-scorers) you are using.
+The name in the parenthesis represents what [type of Scorer](/building-with-passport/stamps/passport-api/getting-access#types-of-scorers) you are using.
 
 ```json filename="Sample response: Unique Humanity scorer"
 {
