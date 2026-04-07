@@ -192,7 +192,7 @@ export default function Passport() {
 
 **Note** that you can swap out the contract addresses if you want to run an app on a different network. You can check all the deployed contract addresses on the [contract reference page](./contract-reference)
 
-There are some parts of this boilerplate code that might look unfamiliar even if you have been through the other [tutorials](/building-with-passport/tutorials) on this site. This is because there is some specific setup required to use smart contracts on the backend.
+There are some parts of this boilerplate code that might look unfamiliar even if you have been through the other [tutorials](/building-with-passport/stamps/passport-api-v1/tutorials) on this site. This is because there is some specific setup required to use smart contracts on the backend.
 
 First, the `provider` field is being assigned as a global variable. The `provider` is a connection to the blockchain. In this app, the connection is made by inheriting network configuration from your wallet. If you are using Metamask with default settings, your connection will be via Infura to whichever network your wallet is connected to. If you have a wallet pointing to your own node's RPC provider, it will use that. The reason `provider` is assigned to a global variable is so that it can be captured during the wallet connection but later it can be passed as an argument when you create instances of the smart contracts.
 
