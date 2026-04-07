@@ -13,7 +13,7 @@ Human Passport's developer platform enables several key use cases:
 
 ## Passport use cases
 
-![Protecting assets](/protect-rewardspng.png)
+![Protecting assets](/protect-rewards.png)
 
 ### Protect access: Rewards
 
@@ -110,7 +110,7 @@ You have functionality where users help to select which content or ideas are pri
 #### Active integrators
 * Gitcoin Grants
 
-![Improving UX](/improve%20experience.png)
+![Improving UX](/improve-experience.png)
 
 ### Improve the Passport experience
 
