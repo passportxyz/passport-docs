@@ -92,6 +92,7 @@ export default async function RootLayout({
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head faviconGlyph="🛂" />
+      <link rel="help" type="text/plain" href="/llms.txt" />
       {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
       <body>
         <Layout
@@ -108,7 +109,7 @@ export default async function RootLayout({
           sidebar={{
             defaultMenuCollapseLevel: 2
           }}
-          footer={<Footer />}
+          footer={<Footer><a href="/llms.txt" style={{ opacity: 0.6, fontSize: '0.8rem' }}>For AI Agents (llms.txt)</a></Footer>}
         >
           {children}
         </Layout>

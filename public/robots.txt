@@ -7,3 +7,6 @@ Host: https://docs.passport.xyz
 
 # Sitemaps
 Sitemap: https://docs.passport.xyz/sitemap.xml
+
+# LLM-readable site index
+Sitemap: https://docs.passport.xyz/llms.txt
