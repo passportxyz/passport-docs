@@ -92,6 +92,9 @@ curl --request GET \
   "expiration_timestamp": "{expiration_time ISO 8601}",
   "threshold": "20",
   "error": null,
+  "canonical_address": "{canonical_waap_address}",
+  "linked_addresses": ["{address}", "{linked_address_2}", "..."],
+  "eligible_for_campaign": true/false,
   "stamps": {
     "Ens": {
       "score": "{credential_score}",
@@ -112,6 +115,10 @@ curl --request GET \
   }
 }
 ```
+
+<Callout type="info">
+**Linked accounts:** If the queried address is part of a linked account set, the response includes `canonical_address` (the primary WaaP address), `linked_addresses` (all addresses in the set), and `eligible_for_campaign` (whether this address is eligible for campaign participation). Scores and Stamps are unified across all linked addresses. Learn more about [account linking](/building-with-passport/stamps/major-concepts/account-linking).
+</Callout>
 
 Learn more about the [data dictionary](/building-with-passport/stamps/major-concepts/data-dictionary).
 
@@ -153,6 +160,9 @@ curl --request GET \
       "expiration_timestamp": "{expiration_time ISO 8601}",
       "threshold": "20",
       "error": null,
+      "canonical_address": "{canonical_waap_address}",
+      "linked_addresses": ["{address}", "{linked_address_2}", "..."],
+      "eligible_for_campaign": true/false,
       "stamps": {
         "Ens": {
           "score": "{credential_score}",
@@ -173,8 +183,12 @@ curl --request GET \
       }
     }
   ]
-}        
+}
 ```
+
+<Callout type="info">
+**Linked accounts:** Historical score responses also include the `canonical_address`, `linked_addresses`, and `eligible_for_campaign` fields when the queried address is part of a linked account set. Learn more about [account linking](/building-with-passport/stamps/major-concepts/account-linking).
+</Callout>
 
 ### Retrieve Stamps verified by a single address
 
@@ -211,6 +225,11 @@ curl --request GET \
     }
   ]
 }
+```
+
+<Callout type="info">
+**Linked accounts:** When querying Stamps for an address that is part of a linked account set, the response includes Stamps verified by any address in the set. Learn more about [account linking](/building-with-passport/stamps/major-concepts/account-linking).
+</Callout>
 ```
 
 ### Retrieve all Stamps available in Passport
