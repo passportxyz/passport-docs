@@ -1,0 +1,55 @@
+---
+title: Account linking
+description: >-
+  Linked accounts allow multiple wallet addresses to share a single canonical
+  identity, unifying Stamps and scores across all linked addresses.
+---
+
+import { Callout } from 'nextra/components'
+
+# Account linking
+
+## What are linked accounts?
+
+Linked accounts let a user associate multiple wallet addresses with a single canonical identity. When addresses are linked, they share one unified set of Stamps and one Unique Humanity Score, regardless of which address is queried.
+
+The canonical address is always the user's primary WaaP (Wallet-as-a-Protocol) address. All other wallets in the set are referred to as linked addresses.
+
+## How linking works
+
+Linking is signature-based. A user proves ownership of each wallet by signing a message, and the system records the association. The WaaP address serves as the canonical anchor for the linked set. Once linked, any address in the set can be used to look up the unified Passport data.
+
+## Stamps and scoring across linked accounts
+
+When addresses are linked, Stamps verified by any address in the set contribute to a single combined score. This means:
+
+- A user does not need to re-verify Stamps on every wallet they own.
+- Querying any linked address returns the same score and Stamp data.
+- The response always includes the `canonical_address` field, identifying the primary WaaP address.
+
+## Sybil deduplication
+
+Linked accounts include built-in sybil deduplication for campaigns and reward programs. When a campaign checks eligibility:
+
+- The first address in a linked set to participate is marked as eligible.
+- All other addresses in the same linked set are marked as ineligible via the `eligible_for_campaign` field (set to `false`).
+
+This prevents a single user from claiming rewards multiple times across their linked wallets.
+
+## API behavior
+
+When you query any address in a linked set using the Stamps API, the response includes three additional fields:
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `canonical_address` | String | The primary WaaP address for the linked set. If the address is not linked to any others, this matches the queried address. |
+| `linked_addresses` | Array of strings | All addresses in the linked set, including the canonical address. If the address is not linked, this contains only the queried address. |
+| `eligible_for_campaign` | Boolean | `true` if this address is eligible to participate in a campaign. `false` if another address in the linked set has already participated. |
+
+<Callout type="info">
+You do not need to change your integration to support linked accounts. Existing API calls continue to work. The new fields are additive and appear automatically in responses for addresses that are part of a linked set.
+</Callout>
+
+## Campaign eligibility
+
+If you are running a reward program, airdrop, or other campaign where each user should only participate once, use the `eligible_for_campaign` field to gate access. This field is `false` when another address in the same linked set has already been recorded as a participant, preventing duplicate claims without requiring you to build your own deduplication logic.

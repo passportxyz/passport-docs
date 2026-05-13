@@ -5,5 +5,6 @@ export default {
   'deduplicating-stamps': 'Deduplicating Stamps',
   expirations: 'Stamp and score expiry',
   'api-pagination': 'API pagination',
+  'account-linking': 'Account linking',
   'educating-users': 'Educating users',
 }

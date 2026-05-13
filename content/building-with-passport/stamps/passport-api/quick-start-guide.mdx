@@ -45,6 +45,9 @@ An example response might look as follows:
     "expiration_timestamp": "2025-02-06T14:28:06.879000+00:00",
     "threshold": "20",
     "error": null,
+    "canonical_address": "0x2C1E111d7C3adc823B5fA3af3f07EB62831C3c5",
+    "linked_addresses": ["0x2C1E111d7C3adc823B5fA3af3f07EB62831C3c5"],
+    "eligible_for_campaign": true,
     "stamp_scores": {
       "Discord": "0.516",
       "Google": "0.525",
@@ -63,6 +66,10 @@ An example response might look as follows:
     }
 }
 ```
+
+<Callout type="info">
+**Linked accounts:** The response includes `canonical_address`, `linked_addresses`, and `eligible_for_campaign` fields. If the queried address is part of a linked account set, the score and Stamps reflect the unified data across all linked addresses. The `eligible_for_campaign` field indicates whether this address can participate in a campaign, or whether another linked address has already claimed access. Learn more about [account linking](/building-with-passport/stamps/major-concepts/account-linking).
+</Callout>
 
 This response indicates that the address was successfully able to prove their humanity with Passport since their score is above the recommended threshold of 20.
 

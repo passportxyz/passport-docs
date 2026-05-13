@@ -119,6 +119,10 @@ curl -H "X-API-KEY: YOUR_STAMPS_API_KEY" \
 }
 ```
 
+<Callout type="info">
+**Linked accounts:** API responses include `canonical_address`, `linked_addresses`, and `eligible_for_campaign` fields. If the queried address is part of a linked account set, the returned score and Stamps reflect the unified data across all linked wallets. Learn more about [account linking](/building-with-passport/stamps/major-concepts/account-linking).
+</Callout>
+
 For complete API documentation, see the [Stamps API reference](/building-with-passport/stamps/passport-api).
 
 ## Recommended Pattern: Frontend + Backend Verification
