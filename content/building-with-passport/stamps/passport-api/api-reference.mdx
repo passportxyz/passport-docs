@@ -64,7 +64,6 @@ Stamps API v2 base URL: https://api.passport.xyz
 | Endpoint action                                                                                   | Endpoint                                                    |
 |---------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
 | [Retrieve latest score for a single address](#retrieve-latest-score-for-a-single-address)         | `GET /v2/stamps/{scorer_id}/score/{address}`                |
-| [Retrieve historical score for a single address](#retrieve-historical-score-for-a-single-address) | `GET /v2/stamps/{scorer_id}/score/{address}/history`        |
 | [Retrieve Stamps verified by a single address](#retrieve-stamps-verified-by-a-single-address)     | `GET /v2/stamps/{address}`                                  |
 | [Retrieve all Stamps available in Passport](#retrieve-all-stamps-available-in-passport)           | `GET /v2/stamps/metadata`                                   |
 
@@ -115,66 +114,6 @@ curl --request GET \
 
 Learn more about the [data dictionary](/building-with-passport/stamps/major-concepts/data-dictionary).
 
-
-### Retrieve historical score for a single address
-
-<Callout type="info">
-**Note:**<br />To access this endpoint, you must submit your use case and be approved by the Passport team. To do so, please fill out the following form, making sure to provide a detailed description of your use case. The Passport team typically reviews and responds to form responses within 48 hours.<br /><br />[Request access](https://forms.gle/4GyicBfhtHW29eEu8)
-</Callout>
-
-This endpoint will return the last requested historical score and Stamp data for a single address before a specified time. 
-
-For example, if you requested a score on 2024-12-01 using the `GET /v2/stamps/{scorer_id}/score/{address}` endpoint, then use this historical score endpoint to request the score for the same address on 2024-12-05, you will receive the score and Stamp data for 2024-12-01 for that address. If you have not requested a score for a specified address using the `GET /v2/stamps/{scorer_id}/score/{address}` endpoint, you will not be able to receive a historical score for that address. 
-
-
-> GET /v2/stamps/\{scorer_id\}/score/\{address\}/history
-
-#### Query parameters
-
-| Name               | Required | Description                                                                                                  |
-| ------------------ | -------- | ------------------------------------------------------------------------------------------------------------ |
-| `created_at`       | yes      | Specified time that you want to retrieve the most recently submitted score for. <br /><br />ISO 8601 (`YYYY-MM-DD` or `YYYY-MM-DDThh:mm:ss.sssZ`)   |
-
-
-```bash filename="Sample request" copy
-curl --request GET \
-    --url https://api.passport.xyz/v2/stamps/{scorer_id}/score/{address}/history?created_at={created_at} \
-    --header 'X-API-KEY: {API KEY}'
-```
-
-```json filename="Sample response"
-{
-  "items": [
-    {
-      "address": "{address}",
-      "score": "{score}",
-      "passing_score": true/false,
-      "last_score_timestamp": "{last_score_time ISO 8601}",
-      "expiration_timestamp": "{expiration_time ISO 8601}",
-      "threshold": "20",
-      "error": null,
-      "stamps": {
-        "Ens": {
-          "score": "{credential_score}",
-          "dedup": true/false,
-          "expiration_date": "{expiration_time ISO 8601}"
-        },
-        "ETHDaysActive#50": {
-          "score": "{credential_score}",
-          "dedup": true/false,
-          "expiration_date": "{expiration_time ISO 8601}"
-        },
-        "ETHGasSpent#0.25": {
-          "score": "{credential_score}",
-          "dedup": true/false,
-          "expiration_date": "{expiration_time ISO 8601}"
-        },
-        { ... }
-      }
-    }
-  ]
-}        
-```
 
 ### Retrieve Stamps verified by a single address
 
