@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || "https://docs.passport.xyz",
+  siteUrl: process.env.SITE_URL || "https://docs.passport.human.tech",
   generateRobotsTxt: true,
   exclude: [
     // Retired v1 API pages - excluded from search engines and AI crawlers
