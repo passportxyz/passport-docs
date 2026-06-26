@@ -2,6 +2,7 @@ import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import { GoogleTagManager } from '@next/third-parties/google'
+import { PostHogProvider } from './posthog-provider'
 import 'nextra-theme-docs/style.css'
 import './globals.css'
 import type { Metadata } from 'next'
@@ -95,24 +96,26 @@ export default async function RootLayout({
       <link rel="help" type="text/plain" href="/llms.txt" />
       {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
       <body>
-        <Layout
-          navbar={
-            <Navbar
-              logo={logo}
-              projectLink="https://github.com/passportxyz/passport-docs"
-              chatLink="https://t.me/+Mcp9RsRV7tVmYjZh"
-              chatIcon={telegramIcon}
-            />
-          }
-          pageMap={pageMap}
-          docsRepositoryBase="https://github.com/passportxyz/passport-docs/tree/main"
-          sidebar={{
-            defaultMenuCollapseLevel: 2
-          }}
-          footer={<Footer><a href="/llms.txt" style={{ opacity: 0.6, fontSize: '0.8rem' }}>For AI Agents (llms.txt)</a></Footer>}
-        >
-          {children}
-        </Layout>
+        <PostHogProvider>
+          <Layout
+            navbar={
+              <Navbar
+                logo={logo}
+                projectLink="https://github.com/passportxyz/passport-docs"
+                chatLink="https://t.me/+Mcp9RsRV7tVmYjZh"
+                chatIcon={telegramIcon}
+              />
+            }
+            pageMap={pageMap}
+            docsRepositoryBase="https://github.com/passportxyz/passport-docs/tree/main"
+            sidebar={{
+              defaultMenuCollapseLevel: 2
+            }}
+            footer={<Footer><a href="/llms.txt" style={{ opacity: 0.6, fontSize: '0.8rem' }}>For AI Agents (llms.txt)</a></Footer>}
+          >
+            {children}
+          </Layout>
+        </PostHogProvider>
       </body>
     </html>
   )
