@@ -33,7 +33,7 @@ Human Passport offers multiple verification methods:
 ## How Zero-Knowledge Proofs Work
 
 1. **Verification**: The user completes an identity check (e.g., government ID scan) with an identity verification provider.
-2. **Credential creation**: A cryptographic credential is created and stored client-side. Personal data never leaves the user's device.
+2. **Credential creation**: A cryptographic credential is created and stored client-side. From this point on, the credential is what proofs are generated from — the underlying personal data stays with the verification provider and is never passed to the apps the user verifies with.
 3. **Proof generation**: When an app needs proof, the user generates a ZK proof — a compact cryptographic certificate that proves "I passed KYC" without revealing any underlying data.
 4. **On-chain attestation**: The proof is verified and recorded on-chain as an attestation via [Sign Protocol](https://sign.global/) (on Optimism/Base) or as an SBT on Stellar.
 
