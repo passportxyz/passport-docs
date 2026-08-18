@@ -153,7 +153,7 @@ Some API requests might return large amounts of data. For example, the data retu
 By adding a query to the API request, you can receive chunks of the data. Take, for example, the following request to the Stamp registry:
 
 ```bash
-curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{address}?include_metadata=true'
+curl --request GET 'https://api.passport.xyz/registry/stamps/{address}?include_metadata=true'
 ```
 
 This request could return a large amount of data if the given address owns a lot of Stamps. In this case, it could be useful to paginate the response, which means the API will return a subset of the total data. You can do this by adding `&limit=x` to the API request, where `x` is the number of elements (in this example, Stamp objects) to return in each response.
