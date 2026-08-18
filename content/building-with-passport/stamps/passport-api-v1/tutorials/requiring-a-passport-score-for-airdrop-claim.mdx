@@ -104,7 +104,7 @@ async function fetchMessageAndNonce() {
     },
   };
   const { data } = await axios.get(
-    "https://api.scorer.gitcoin.co/registry/signing-message",
+    "https://api.passport.xyz/registry/signing-message",
     axiosSigningMessageConfig
   );
   return data;
@@ -204,7 +204,7 @@ async function submitPassport(address, scorerId, signature, nonce) {
   };
   
   const { data } = await axios.post(
-    "https://api.scorer.gitcoin.co/registry/submit-passport",
+    "https://api.passport.xyz/registry/submit-passport",
     submitPassportData,
     submitPassportConfig
   );
@@ -276,7 +276,7 @@ async function fetchScore(address, scorerId) {
     },
   };
   const { data } = await axios.get(
-    `https://api.scorer.gitcoin.co/registry/score/${scorerId}/${address}`,
+    `https://api.passport.xyz/registry/score/${scorerId}/${address}`,
     getScoreConfig
   );
   

@@ -55,7 +55,7 @@ You can also retrieve the Stamps owned by a particular address and instruct the 
 You can test this out using an HTTP tool such as curl. You will need to replace `{your-api-key}` with your API key in the request header, as well as `{your-address}` with your wallet address in order to access these endpoints.
 
 ```sh
-curl --request GET 'https://api.scorer.gitcoin.co/registry/stamps/{your-address}?include_metadata=true' \
+curl --request GET 'https://api.passport.xyz/registry/stamps/{your-address}?include_metadata=true' \
   --header 'X-API-KEY: {your-api-key}'
 ```
 
@@ -267,7 +267,7 @@ This `Stamp` type had fields for the Stamp `id` (a unique number used to make ar
 Next, you can make a request to the `registry/stamps/{address}` endpoint, remembering to include the `include_metadata=true` qualifier. In Typescript, this can be achieved as follows:
 
 ```tsx
-const GET_PASSPORT_STAMPS_URI = `https://api.scorer.gitcoin.co/registry/stamps/${address}?include_metadata=true`
+const GET_PASSPORT_STAMPS_URI = `https://api.passport.xyz/registry/stamps/${address}?include_metadata=true`
 const response: Response = await fetch(GET_PASSPORT_STAMPS_URI, { headers })
 const data = await response.json()
 ```
@@ -297,7 +297,7 @@ You should also wrap this in `try/catch` to handle any errors. Put all this toge
 ```tsx
 async function getStamps() {
     const stampProviderArray = []
-    const GET_PASSPORT_STAMPS_URI = `https://api.scorer.gitcoin.co/registry/stamps/${address}?include_metadata=true`
+    const GET_PASSPORT_STAMPS_URI = `https://api.passport.xyz/registry/stamps/${address}?include_metadata=true`
     try {
         const response: Response = await fetch(GET_PASSPORT_STAMPS_URI, { headers })
         const data = await response.json()

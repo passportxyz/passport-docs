@@ -28,7 +28,7 @@ To make a successful request, you will need to include your API key in the "Auth
 Replace `{API_key}` with your API key. For example, if you were using cURL, your request might look something like this:
 
 ```bash
-curl --request GET 'https://api.scorer.gitcoin.co/registry/signing-message' \
+curl --request GET 'https://api.passport.xyz/registry/signing-message' \
     --header 'X-API-KEY: VwUi___.0yQU1HIAE4hLEMkVs___'
 ```
 
@@ -92,7 +92,7 @@ You don't need to get a signature from this endpoint, but you do need a signatur
 
 ```bash filename="Sample request" copy
 curl --request GET \
-    --url https://api.scorer.gitcoin.co/registry/signing-message \
+    --url https://api.passport.xyz/registry/signing-message \
     --header 'X-API-KEY: {API KEY}'
 ```
 
@@ -122,7 +122,7 @@ This endpoint will submit the Passport to the scorer, and return the latest scor
 
 ```bash filename="Sample request" copy
 curl --request POST \
-  --url https://api.scorer.gitcoin.co/registry/submit-passport \
+  --url https://api.passport.xyz/registry/submit-passport \
   --header 'X-API-KEY: {API KEY}' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -190,7 +190,7 @@ You can use the [multiple address](#retrieve-previously-submitted-scores-of-all-
 
 ```bash filename="Sample request" copy
 curl --request GET \
-    --url https://api.scorer.gitcoin.co/registry/score/{scorer_id}/{address} \
+    --url https://api.passport.xyz/registry/score/{scorer_id}/{address} \
     --header 'X-API-KEY: {API KEY}'
 ```
 
@@ -239,7 +239,7 @@ Use this endpoint to retrieve the last submitted score for all Ethereum addresse
 
 ```bash filename="Sample request" copy
 curl --request GET \
-    --url https://api.scorer.gitcoin.co/registry/score/{scorer_id} \
+    --url https://api.passport.xyz/registry/score/{scorer_id} \
     --header 'X-API-KEY: {API KEY}'
 ```
 
@@ -291,7 +291,7 @@ For example:
 
 ```bash filename="Sample request" copy
 curl --request GET \
-    --url https://api.scorer.gitcoin.co/registry/score/{scorer_id}?address={address}?last_score_timestamp_get=2023-07-20T19%3A54%3A44.463335%2B00%3A00 \
+    --url https://api.passport.xyz/registry/score/{scorer_id}?address={address}?last_score_timestamp_get=2023-07-20T19%3A54%3A44.463335%2B00%3A00 \
     --header 'X-API-KEY: {API KEY}'
 ```
 
@@ -314,7 +314,7 @@ If you would like to retrieve the metadata for all available Stamps, please use 
 
 ```bash filename="Sample request" copy
 curl --request GET \
-    --url 'https://api.scorer.gitcoin.co/registry/stamps/{address}?include_metadata=true' \
+    --url 'https://api.passport.xyz/registry/stamps/{address}?include_metadata=true' \
     --header 'X-API-KEY: {API KEY}'
 ```
 
@@ -342,7 +342,7 @@ If you would like to retrieve just the Stamps that are connected to a specified 
 
 ```bash filename="Sample request" copy
 curl --request GET \
-    --url https://api.scorer.gitcoin.co/registry/stamp-metadata \
+    --url https://api.passport.xyz/registry/stamp-metadata \
     --header 'X-API-KEY: {API KEY}'
 ```
 
@@ -389,7 +389,7 @@ Our round IDs correspond to the different Gitcoin Grants rounds, and can be foun
 
 ```bash filename="Sample request" copy
 curl --request GET \
-    --url https://api.scorer.gitcoin.co/registry/gtc-stake/{address}/{round_id} \
+    --url https://api.passport.xyz/registry/gtc-stake/{address}/{round_id} \
     --header 'X-API-KEY: {API KEY}'
 ```
 
