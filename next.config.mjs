@@ -27,6 +27,11 @@ export default withNextra({
   async redirects() {
     return [
       {
+        source: '/overview/active-integrations',
+        destination: '/overview/integration-partners',
+        permanent: true
+      },
+      {
         source: '/get-started/creating-your-passport',
         destination: 'https://support.gitcoin.co/gitcoin-knowledge-base/gitcoin-passport/creating-your-passport',
         permanent: true,

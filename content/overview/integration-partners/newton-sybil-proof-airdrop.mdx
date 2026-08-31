@@ -1,0 +1,333 @@
+---
+title: "Sybil-Proof Airdrops with Newton Protocol"
+description: "Use Human Passport scores and Newton Protocol policies to automatically block Sybil wallets from claiming airdrop tokens — before the transaction executes."
+---
+
+import { Callout } from 'nextra/components'
+
+# Sybil-Proof Airdrops with Newton Protocol
+
+Your airdrop contract has no way to know whether a wallet belongs to a real person or is one of ten thousand Sybil accounts. This recipe shows you how to enforce humanity verification **before** a token claim executes — automatically, at the transaction layer — using Human Passport data and a Newton Protocol policy.
+
+Instead of manually reviewing thousands of suspicious wallets after the fact, you'll set up pre-transaction rules that block ineligible claims before they ever touch your contract.
+
+This guide will cover:
+
+* Setting up the Human Passport Data Oracle to fetch verification signals for any wallet
+* Writing a Newton Protocol policy that requires a passing Passport Stamps score **and** a minimum Models API score before allowing a claim
+* Testing the policy locally against sample wallets
+* Deploying the policy to Newton's network
+
+<Callout type="info">
+This recipe focuses on the Passport oracle and Newton policy setup. It assumes you already have (or are building) a token claim contract that will be protected by the Newton policy.
+</Callout>
+
+You can find the complete Human Passport Data Oracle implementation in the [quickstart-policies repo on GitHub](https://github.com/newt-foundation/quickstart-policies/tree/main/human.tech).
+
+## Prerequisites
+
+1. A [Human Passport API key and Scorer ID](/building-with-passport/stamps/passport-api/getting-access) from the Developer Portal
+2. The [Newton CLI](https://docs.newton.xyz) installed
+3. Node.js 18+
+4. Basic familiarity with [Open Policy Agent (Rego)](https://www.openpolicyagent.org/docs/latest/policy-language/) syntax
+
+## How it works
+
+When a user attempts to claim tokens, Newton Protocol intercepts the transaction and evaluates it against your policy **before** it executes. The policy calls the Human Passport Data Oracle, which fetches two independent verification signals for the claiming wallet:
+
+**Passport Stamps Score** — A points total earned from user-verified credentials (Stamps) that prove unique personhood. Each credential (Google, Discord, ENS, onchain activity, etc.) contributes a weighted score. The default passing threshold is 20, configured in your Passport Scorer. The policy receives a boolean `passing_score` indicating whether the wallet meets this threshold.
+
+**Models API Score** — An ML-based behavioral analysis that passively detects Sybil-like transaction patterns by reading how a wallet has transacted over time. No action required from the user. A score of 0–100 where higher means more likely human; -1 means insufficient data.
+
+Because these signals are independent — one is user-initiated, the other is passive behavioral analysis — satisfying one does not help you fake the other. This is defense-in-depth by design.
+
+```
+User calls claim() → Newton intercepts → Passport Oracle fetches scores
+                                            ├─ Stamps passing_score == true?
+                                            └─ Models Score ≥ threshold?
+                                          Both pass → transaction executes
+                                          Either fails → transaction denied
+```
+
+## 1. Clone and configure the Data Oracle
+
+Start by cloning the quickstart-policies repo, which contains the Human Passport Data Oracle implementation:
+
+```bash
+git clone https://github.com/newt-foundation/quickstart-policies.git
+cd quickstart-policies/human.tech
+```
+
+The key files in this directory:
+
+| File | Purpose |
+|------|---------|
+| `human.tech.js` | JavaScript oracle that fetches Passport data from the API |
+| `policy.rego` | Rego policy defining the allow/deny rules |
+| `params_schema.json` | Schema for configurable policy parameters |
+| `policy_params_data.json` | Your parameter values (thresholds) |
+| `intent.json` | Example transaction intent for testing |
+| `sample_data.json` | Sample Passport data for offline testing |
+
+### Configure your API credentials
+
+The oracle in `human.tech.js` calls two Human Passport API endpoints for each wallet:
+
+```
+GET https://api.passport.xyz/v2/stamps/{scorer_id}/score/{address}
+GET https://api.passport.xyz/v2/models/score/{address}
+```
+
+Both endpoints authenticate with your API key via the `X-API-KEY` header. The quickstart repo includes a demo API key and Scorer ID (11910) for testing. For production, replace them in `human.tech.js` with your own API key and Scorer ID from the [Developer Portal](https://developer.passport.xyz).
+
+<Callout type="warning">
+**Rate limits apply.** The Stamps API allows 125 requests per 15 minutes on the default tier. The Models API allows 15 requests per 15 minutes. If your airdrop expects high claim volume, [request a tier upgrade](https://developer.passport.xyz) before launch.
+</Callout>
+
+### Understand the data shape
+
+The oracle aggregates data from both APIs and returns a structure the policy can evaluate. Here's what the policy receives (from `sample_data.json`):
+
+```json
+{
+  "stamps_score": {
+    "address": "0x39e7c1330e83a429f7cf2a367a4c6e6ec6e86f1e",
+    "score": "0.00000",
+    "passing_score": false,
+    "last_score_timestamp": "2026-01-16T07:05:54.994673+00:00",
+    "expiration_timestamp": null,
+    "threshold": "20.00000",
+    "error": null,
+    "stamps": {}
+  },
+  "models_score": {
+    "address": "0x39E7c1330E83a429f7cF2a367A4c6E6eC6E86f1E",
+    "details": { "models": { "aggregate": { "score": 91 } } }
+  },
+  "proof_of_clean_hands": { "total": 0, "rows": [], "page": 1, "size": 10 }
+}
+```
+
+The key fields for the policy are `stamps_score.passing_score` (a boolean — the threshold is configured in your Passport Scorer, defaulting to 20) and `models_score.details.models.aggregate.score` (a number from -1 to 100).
+
+## 2. Write the Newton policy
+
+The policy uses Open Policy Agent's Rego language. Newton evaluates it before every transaction — if `allow` resolves to `false`, the transaction is denied.
+
+Open `policy.rego`. The core logic follows a "default allow, conditional deny" pattern:
+
+```rego
+package human_tech_demo
+
+default allow := true
+
+allow := false if {
+    deny
+}
+```
+
+The policy first extracts the relevant fields from the oracle data and policy parameters, then defines independent deny conditions. Here's the full policy:
+
+```rego
+# From Intent
+to_address := input.to
+
+# Policy Params
+check_stamps_score = data.params.chech_stamps_score
+check_models_score = data.params.check_models_score
+check_poch = data.params.check_poch
+
+models_score_threshold = data.params.model_score_threshold
+poch_total_threshold = data.params.poch_total_threshold
+
+# Policy Data (from the Passport oracle)
+checked_address := data.data.stamps_score.address
+is_stamps_score_passing := data.data.stamps_score.passing_score
+models_score := data.data.models_score.details.models.aggregate.score
+poch_total := data.data.proof_of_clean_hands.total
+
+# Deny if the checked address doesn't match the transaction destination
+deny if {
+    lower(checked_address) != lower(to_address)
+}
+
+# Deny if Stamps check is enabled and the score isn't passing
+deny if {
+    check_stamps_score
+    not is_stamps_score_passing
+}
+
+# Deny if Models check is enabled and the score is below threshold
+deny if {
+    check_models_score
+    models_score < models_score_threshold
+}
+
+# Deny if Proof of Clean Hands is enabled and total is below threshold
+deny if {
+    check_poch
+    poch_total < poch_total_threshold
+}
+```
+
+Each `deny` block is evaluated independently. If **any** deny condition is true, the transaction is blocked. Note that the Stamps check uses the boolean `passing_score` from the Passport API — the score threshold (default 20) is configured in your [Passport Scorer](/building-with-passport/stamps/passport-api/getting-access), not in the Rego policy.
+
+### Configure the policy parameters
+
+The thresholds are configurable via `policy_params_data.json`, so you can tune them without rewriting the policy. The repo ships with these defaults:
+
+```json
+{
+  "check_stamps_score": true,
+  "check_models_score": true,
+  "check_poch": true,
+  "models_score_threshold": 80,
+  "poch_total_threshold": 2
+}
+```
+
+For our airdrop recipe, we'll adjust these values:
+
+```json
+{
+  "check_stamps_score": true,
+  "check_models_score": true,
+  "check_poch": false,
+  "models_score_threshold": 50,
+  "poch_total_threshold": 0
+}
+```
+
+- **`check_stamps_score: true`** — Require the wallet to have a passing Passport score (threshold configured in your Scorer, default 20)
+- **`check_models_score: true`** — Require the wallet to pass ML-based behavioral analysis
+- **`models_score_threshold: 50`** — Wallets scoring below 50 are flagged as likely Sybil (the repo default of 80 is aggressive — 50 is a good starting point)
+- **`check_poch: false`** — Proof of Clean Hands is disabled for this recipe (see [Next steps](#next-steps)). Note: the oracle in `human.tech.js` still fetches POCH data from Sign Protocol on every call — the policy simply ignores it when `check_poch` is false.
+
+## 3. Test the policy locally
+
+Newton CLI lets you test the full policy pipeline locally before deploying.
+
+### Test with sample data
+
+First, validate the oracle's data output against the policy using the included sample data:
+
+```bash
+newton-cli policy-data simulate \
+  --wasm policy.wasm \
+  --data sample_data.json \
+  --params policy_params_data.json
+```
+
+### Test the complete policy
+
+Run a full end-to-end test that combines the oracle, the Rego policy, and a sample transaction intent:
+
+```bash
+newton-cli policy test
+```
+
+This uses `intent.json`, which describes a sample transaction on Sepolia testnet:
+
+```json
+{
+  "from": "0xd232c8d0Dc8069eBA108954A5f2307752547Df1a",
+  "to": "0x8dABc053C7Fda425826d913a58C0DC4C2a0B36d7",
+  "data": "0x28dca9f7...",
+  "value": "0",
+  "chain_id": "11155111",
+  "decoded_function_signature": "buy(address,uint256,uint32)"
+}
+```
+
+### Test pass and fail scenarios
+
+To verify the policy works correctly, test with wallets you know should pass and fail:
+
+**Expected pass** — A wallet with `passing_score: true` and a Models score ≥ 50 should result in `allow: true`.
+
+**Expected fail (low Stamps)** — A wallet with few or no verified credentials will have `passing_score: false` and should be denied.
+
+**Expected fail (Sybil-like behavior)** — A wallet exhibiting bot-like transaction patterns will have a low Models score and should be denied.
+
+**Expected fail (address mismatch)** — If the oracle checks a different address than the transaction's `to` field, the policy denies automatically.
+
+Modify the address in `intent.json` to test different wallets. You can look up any wallet's Passport score on [passport.human.tech](https://passport.human.tech) or query the API directly:
+
+```bash
+# Check a wallet's Stamps score
+curl -s -H "X-API-KEY: $PASSPORT_API_KEY" \
+  "https://api.passport.xyz/v2/stamps/YOUR_SCORER_ID/score/0xWALLET_ADDRESS"
+
+# Check a wallet's Models score
+curl -s -H "X-API-KEY: $PASSPORT_API_KEY" \
+  "https://api.passport.xyz/v2/models/score/0xWALLET_ADDRESS"
+```
+
+## 4. Deploy the policy
+
+Once your tests pass, compile and deploy the policy to Newton's network.
+
+### Compile the oracle to WebAssembly
+
+The JavaScript oracle is compiled to a WebAssembly component for execution within Newton's runtime:
+
+```bash
+newton-cli policy-files build
+```
+
+This recompiles `policy.wasm` from your customized `human.tech.js` with the necessary capabilities (HTTP fetch, stdio, clocks). The repo ships a pre-compiled `policy.wasm`, but you'll need to rebuild it after updating API credentials or modifying the oracle logic.
+
+### Generate content identifiers
+
+Newton uses content-addressed storage. Generate CIDs for all policy files:
+
+```bash
+newton-cli policy-files generate-cids --directory policy-files
+```
+
+### Deploy to Newton's network
+
+Push the compiled policy data and register the policy on-chain:
+
+```bash
+newton-cli policy-data deploy
+newton-cli policy deploy
+```
+
+Your policy is now live on Sepolia testnet. Any transaction routed through Newton to your protected contract will be evaluated against the Passport humanity checks before execution.
+
+## Choosing the right thresholds
+
+**Stamps threshold** is configured in your [Passport Scorer](/building-with-passport/stamps/passport-api/getting-access) on the Developer Portal — the policy only sees the resulting `passing_score` boolean. The default threshold is 20. You can adjust it in the Scorer settings:
+
+| Scorer Threshold | Trade-off |
+|------------------|-----------|
+| **15** | More inclusive — lets in newer Passport users, but slightly higher Sybil risk |
+| **20** | Balanced default — filters most Sybil accounts while remaining accessible |
+| **30** | Stricter — significantly reduces Sybil risk but may exclude legitimate users with fewer verified credentials |
+
+**Models threshold** is configured directly in `policy_params_data.json` and enforced in the Rego policy:
+
+| `model_score_threshold` | Trade-off |
+|-------------------------|-----------|
+| **25** | Permissive — only blocks the most obvious bot patterns |
+| **50** | Balanced — flags wallets with suspicious transaction behavior |
+| **80** | Aggressive (repo default) — high confidence of humanity, but may exclude low-activity legitimate wallets |
+
+Because the Models threshold lives in the policy parameter layer rather than in your smart contract, you can adjust it after deployment without redeploying contracts or rewriting application code.
+
+## Next steps
+
+**Add Proof of Clean Hands for token sales.** If your token distribution involves a sale (not just a free claim), consider enabling the third verification signal: Proof of Clean Hands. This adds zero-knowledge KYC and sanctions screening attestations — useful for regulatory compliance without exposing personal data onchain. Set `check_poch: true` in your policy parameters and configure an appropriate `poch_total_threshold`.
+
+**Combine with other Newton data oracles.** Human Passport data is just one input into a Newton policy. You can layer it with other Newton-compatible oracles — for example, [Neynar for Farcaster identity signals](https://blog.newton.xyz/newton-protocol-integrates-neynar-data-to-power-onchain-farcaster-identity-guardrails/) or [Etherscan for transaction pattern analysis](https://blog.newton.xyz/newton-protocol-integrates-etherscan-data-to-power-real-time-transaction-guardrails/) — to create multi-signal verification policies.
+
+**Implement graduated access tiers.** Instead of a single pass/fail gate, you can build tiered access into your distribution:
+- **Tier 1** (Models ≥ 25): Standard claim limits
+- **Tier 2** (Stamps ≥ 20): Elevated claim amounts
+- **Tier 3** (Clean Hands attestation): Full access including bonus allocations
+
+Learn more about the Human Passport APIs:
+- [Passport Stamps API reference](/building-with-passport/stamps/passport-api/api-reference)
+- [Models API reference](/building-with-passport/models/api-reference)
+- [Individual Verifications (Proof of Clean Hands)](/building-with-passport/individual-verifications/introduction)
