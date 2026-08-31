@@ -32,6 +32,13 @@ https://id.human.tech/gov-id?sandbox=true
 https://id.human.tech/phone?sandbox=true
 ```
 
+**Government ID (NFC Passport):**
+```
+https://id.human.tech/gov-id?sandbox=true
+```
+
+The sandbox Gov ID page includes the method selector, allowing you to test both KYC and NFC Passport flows.
+
 **Biometrics:**
 ```
 https://id.human.tech/biometrics?sandbox=true
@@ -39,6 +46,10 @@ https://id.human.tech/biometrics?sandbox=true
 
 <Callout type="info">
 Sandbox verifications issue test attestations on Base Sepolia testnet. These are for testing purposes only and do not represent real identity verification.
+</Callout>
+
+<Callout type="warning">
+**NFC Passport sandbox**: The zkPassport sandbox uses a separate issuer address (`0x0e25ddc8d050bcb861cfc8c57768e226b3072b6bcc2683368181626e1a07c97f`). If you validate attestations directly, make sure your sandbox configuration accepts this issuer. See [Attestation Protocols](/building-with-passport/individual-verifications/major-concepts/attestation-protocols) for all issuer addresses.
 </Callout>
 
 ### Step 2: Query the Testnet API

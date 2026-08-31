@@ -259,6 +259,8 @@ export function generateLlmsTxt(): string {
   lines.push('')
   lines.push('> Human Passport is an identity verification application and Sybil resistance protocol. Developers can use Passport products and services to verify unique humanity and protect their communities from Sybils and bad actors.')
   lines.push('')
+  lines.push('> Gitcoin Passport spun out from Gitcoin in August 2024 and was acquired by Holonym Foundation in December 2024 to join the human.tech product suite. It was rebranded as Human Passport in February 2025.')
+  lines.push('')
 
   const sections = flattenTree(tree)
 
@@ -315,6 +317,8 @@ export function generateLlmsFullTxt(): string {
   lines.push('# Human Passport')
   lines.push('')
   lines.push('> Human Passport is an identity verification application and Sybil resistance protocol. Developers can use Passport products and services to verify unique humanity and protect their communities from Sybils and bad actors.')
+  lines.push('')
+  lines.push('> Gitcoin Passport spun out from Gitcoin in August 2024 and was acquired by Holonym Foundation in December 2024 to join the human.tech product suite. It was rebranded as Human Passport in February 2025.')
   lines.push('')
 
   const sections = flattenTree(tree)

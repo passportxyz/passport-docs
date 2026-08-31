@@ -2,6 +2,16 @@
 
 We are also maintaining a separate [Stamp changelog](/building-with-passport/stamps/major-concepts/credential-map-and-weights#stamp-changelog), which tracks updates to our Stamps and credentials within the Passport Stamps product.
 
+## March 11th, 2026
+
+We added NFC Passport verification (via zkPassport) as a new method for obtaining a Government ID credential within [Individual Verifications](/building-with-passport/individual-verifications/introduction).
+
+- **NFC Passport** is a free, privacy-preserving alternative to traditional KYC. Users scan their NFC biometric passport with the ZK Passport mobile app to generate zero-knowledge proofs entirely on-device.
+- Both KYC and NFC Passport share the same sybil resistance pool — a user can only verify via one method within the 11-month credential window.
+- NFC Passport is currently available on **Optimism only**.
+- The existing `gov-id` [API endpoint](/building-with-passport/individual-verifications/api-reference) returns results for both KYC and NFC Passport verifications — no integration changes needed for developers already using the API.
+- A new circuit ID and issuer address have been added for zkPassport attestations. See [Attestation Protocols](/building-with-passport/individual-verifications/major-concepts/attestation-protocols) for details.
+
 ## September 9th, 2025
 
 We launched a new product called Passport Embed in beta, which enables partners to integrate Human Passport's Stamps-based verification directly on their website or dApp, ensuring that users can verify their identity without having to leave the protected user flow.
