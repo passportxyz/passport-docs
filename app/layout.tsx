@@ -57,6 +57,10 @@ const telegramIcon = (
 )
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://docs.passport.human.tech'),
+  alternates: {
+    canonical: './'
+  },
   title: {
     default: 'Human Passport',
     template: '%s – Human Passport'
@@ -67,13 +71,13 @@ export const metadata: Metadata = {
     title: 'Human Passport',
     description: 'Human Passport — Sybil Defense. Made Simple',
     site: '@humnpassport',
-    images: ['https://docs.passport.xyz/social-card.png']
+    images: ['https://docs.passport.human.tech/social-card.png']
   },
   openGraph: {
     title: 'Human Passport',
     description: 'Human Passport — Sybil Defense. Made Simple',
-    images: ['https://docs.passport.xyz/social-card.png'],
-    url: 'https://docs.passport.xyz'
+    images: ['https://docs.passport.human.tech/social-card.png'],
+    url: 'https://docs.passport.human.tech'
   },
   icons: {
     icon: [
