@@ -64,7 +64,7 @@ The decoder is currently deployed to the following networks:
 | Base                  | 0xaa24a127d10C68C8F9Ac06199AA606953cD82eE7 | [Basescan](https://basescan.org/address/0xaa24a127d10C68C8F9Ac06199AA606953cD82eE7)                 |
 | Linea                 | 0x423cd60ab053F1b63D6F78c8c0c63e20F009d669 | [Explorer](https://explorer.linea.build/address/0x423cd60ab053F1b63D6F78c8c0c63e20F009d669)             |
 | Optimism              | 0x5558D441779Eca04A329BcD6b47830D2C6607769 | [Optimism Explorer](https://explorer.optimism.io/address/0x5558D441779Eca04A329BcD6b47830D2C6607769)         |
-| Optimism Sepolia      | 0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56 | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56)   |
+| Optimism Sepolia      | 0x5e9AA91850Fa444E99dEaA6c521a01639f6e6236 | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0x5e9AA91850Fa444E99dEaA6c521a01639f6e6236)   |
 | Scroll                | 0x8A5820030188346cC9532a1dD9FD2EF8d8F464de | [Scrollscan](https://scrollscan.com/address/0x8A5820030188346cC9532a1dD9FD2EF8d8F464de)                 |
 | Scroll Sepolia        | 0x2443D22Db6d25D141A1138D80724e3Eee54FD4C2 | [Scrollscan](https://scrollscan.com/address/0x2443D22Db6d25D141A1138D80724e3Eee54FD4C2)                 |
 | Shape                 | 0x2443D22Db6d25D141A1138D80724e3Eee54FD4C2 | [Shapescan](https://shapescan.xyz/address/0x2443D22Db6d25D141A1138D80724e3Eee54FD4C2)                 |
@@ -119,6 +119,8 @@ The `EAS` contract is where you can pass the `UID`received from the `GitcoinReso
 
 #### Alternative flow contract addresses
 
+The `GitcoinVerifier` addresses below are the verifiers deployed with automatic fee collection ([eas-proxy #74](https://github.com/passportxyz/eas-proxy/pull/74), merged 2025-09-02). They replaced the earlier verifiers and processed their first mints on 2025-09-08. The addresses on this page match [`deployments/onchainInfo.json`](https://github.com/passportxyz/eas-proxy/blob/main/deployments/onchainInfo.json) as of 2026-09-23. That file is the source of truth and changes over time.
+
 ##### Arbitrum
 
 The Arbitrum chain ID is [42161](https://chainlist.org/chain/42161).
@@ -128,7 +130,7 @@ The Arbitrum chain ID is [42161](https://chainlist.org/chain/42161).
 | issuer          | 0x804233b96cbd6d81efeb6517347177ef7bD488ED | [Arbiscan](https://arbiscan.io/address/0x804233b96cbd6d81efeb6517347177ef7bD488ED)      |
 | EAS             | 0xbD75f629A22Dc1ceD33dDA0b68c546A1c035c458 | [Arbiscan](https://arbiscan.io/address/0xbD75f629A22Dc1ceD33dDA0b68c546A1c035c458)      |
 | GitcoinResolver | 0x90E2C4472Df225e8D31f44725B75FFaA244d5D33 | [Arbiscan](https://arbiscan.io/address/0x90E2C4472Df225e8D31f44725B75FFaA244d5D33)      |
-| GitcoinVerifier | 0xc4858e4D177Bf0d14571F91401492d62aa608047 | [Arbiscan](https://arbiscan.io/address/0xc4858e4D177Bf0d14571F91401492d62aa608047)      |
+| GitcoinVerifier | 0x62E6BE350d7b7116936EeD5DeB7951ed3AAfC3c4 | [Arbiscan](https://arbiscan.io/address/0x62E6BE350d7b7116936EeD5DeB7951ed3AAfC3c4)      |
 | GitcoinAttester | 0x7848a3578Ff2E1F134659a23f64A404a4D710475 | [Arbiscan](https://arbiscan.io/address/0x7848a3578Ff2E1F134659a23f64A404a4D710475)      |
 
 EAS Schema
@@ -146,7 +148,7 @@ EAS Schema
 | EAS | 0x4200000000000000000000000000000000000021 | [Basescan](https://basescan.org/address/0x4200000000000000000000000000000000000021) |
 | EASSchemaRegistry | 0x4200000000000000000000000000000000000020 | [Basescan](https://basescan.org/address/0x4200000000000000000000000000000000000020) |
 | GitcoinResolver | 0x90E2C4472Df225e8D31f44725B75FFaA244d5D33 | [Basescan](https://basescan.org/address/0x90E2C4472Df225e8D31f44725B75FFaA244d5D33) |
-| GitcoinVerifier | 0x16db23c4b99bbC9A6Bf55dF7a787C9AEFD261185 | [Basescan](https://basescan.org/address/0x16db23c4b99bbC9A6Bf55dF7a787C9AEFD261185) |
+| GitcoinVerifier | 0x45fA2E93d79Fc44d44b697A94330031b8ccbF68e | [Basescan](https://basescan.org/address/0x45fA2E93d79Fc44d44b697A94330031b8ccbF68e) |
 | GitcoinAttester | 0xCc90105D4A2aa067ee768120AdA19886021dF422 | [Basescan](https://basescan.org/address/0xCc90105D4A2aa067ee768120AdA19886021dF422) |
 
 EAS Schema
@@ -163,11 +165,11 @@ The Linea chain ID is [59144](https://chainlist.org/chain/59144).
 
 | contract                   | address                                    | link                                                                                         |
 | -------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| issuer                     | 0x4B70C4308ea49d17FD946dDacD6884e8e1e18B56 | [Lineascan](https://lineascan.build/address/0x4b70c4308ea49d17fd946ddacd6884e8e1e18b56)      |
+| issuer                     | 0x804233b96cbd6d81efeb6517347177ef7bD488ED | [Lineascan](https://lineascan.build/address/0x804233b96cbd6d81efeb6517347177ef7bD488ED)      |
 | EAS                        | 0xaEF4103A04090071165F78D45D83A0C0782c2B2a | [Lineascan](https://lineascan.build/address/0xaef4103a04090071165f78d45d83a0c0782c2b2a#code) |
 | GitcoinVeraxPortal         | 0xCAa9E817f02486cE076560B77A86235Ef91c5d5D | [Lineascan](https://lineascan.build/address/0xCAa9E817f02486cE076560B77A86235Ef91c5d5D)      |
 | GitcoinResolver            | 0x0a774AECE542a1A819107Eb3a06E9D515C67257a | [Lineascan](https://lineascan.build/address/0x0a774AECE542a1A819107Eb3a06E9D515C67257a)      |
-| GitcoinVerifier            | 0xc94aBf0292Ac04AAC18C251d9C8169a8dd2BBbDC | [Lineascan](https://lineascan.build/address/0xc94aBf0292Ac04AAC18C251d9C8169a8dd2BBbDC)      |
+| GitcoinVerifier            | 0xEd551a95f76E96D60e6fE2bD2D845C3b4A6F8cA8 | [Lineascan](https://lineascan.build/address/0xEd551a95f76E96D60e6fE2bD2D845C3b4A6F8cA8)      |
 | GitcoinAttester            | 0xBC778313E52b1184A15D163b5d3a72AEF8d510A2 | [Lineascan](https://lineascan.build/address/0xBC778313E52b1184A15D163b5d3a72AEF8d510A2)      |
 
 Verax schema
@@ -195,7 +197,7 @@ Gitcoin
 | issuer          | 0x804233b96cbd6d81efeb6517347177ef7bD488ED | [Optimism Explorer](https://explorer.optimism.io/address/0x804233b96cbd6d81efeb6517347177ef7bD488ED)      |
 | EAS             | 0x4200000000000000000000000000000000000021 | [Optimism Explorer](https://explorer.optimism.io/address/0x4200000000000000000000000000000000000021)      |
 | GitcoinResolver | 0xc94aBf0292Ac04AAC18C251d9C8169a8dd2BBbDC | [Optimism Explorer](https://explorer.optimism.io/address/0xc94aBf0292Ac04AAC18C251d9C8169a8dd2BBbDC#code) |
-| GitcoinVerifier | 0xa8eD4d2C3f6f98A55cdDEd97C5aE9B932B0633A4 | [Optimism Explorer](https://explorer.optimism.io/address/0xa8eD4d2C3f6f98A55cdDEd97C5aE9B932B0633A4)      |
+| GitcoinVerifier | 0x5e3fDCbCEB58104E8547D5810EB2ED0Fb42eADf4 | [Optimism Explorer](https://explorer.optimism.io/address/0x5e3fDCbCEB58104E8547D5810EB2ED0Fb42eADf4)      |
 | GitcoinAttester | 0x843829986e895facd330486a61Ebee9E1f1adB1a | [Optimism Explorer](https://explorer.optimism.io/address/0x843829986e895facd330486a61ebee9e1f1adb1a)      |
 
 EAS Schema
@@ -215,18 +217,18 @@ Gitcoin
 
 | contract        | address                                    | link                                                                                                 |
 | --------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
-| issuer          | 0x4200000000000000000000000000000000000021 | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0x4200000000000000000000000000000000000021)      |
-| EAS             | 0x4200000000000000000000000000000000000020 | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0x4200000000000000000000000000000000000020)      |
-| GitcoinResolver | 0x074761E1Dc6E6cF9cdeE67dd180E01E818716Ce0 | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0x074761E1Dc6E6cF9cdeE67dd180E01E818716Ce0) |
-| GitcoinVerifier | 0x8D21C3360dcE1a9EBD3Da4373c4dAB7F81dd7233 | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0x8D21C3360dcE1a9EBD3Da4373c4dAB7F81dd7233)      |
+| issuer          | 0x5f603Ed913738d9105bAf3BD981AA4750016B167 | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0x5f603Ed913738d9105bAf3BD981AA4750016B167)      |
+| EAS             | 0x4200000000000000000000000000000000000021 | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0x4200000000000000000000000000000000000021)      |
+| GitcoinResolver | 0xa2c832b63A20C06CCc2Ca31c12b8248452729a4D | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0xa2c832b63A20C06CCc2Ca31c12b8248452729a4D) |
+| GitcoinVerifier | 0x102f1b991E9B0fEe6d95617B4f1A42208562a9Ff | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0x102f1b991E9B0fEe6d95617B4f1A42208562a9Ff)      |
 | GitcoinAttester | 0x8B1A76795e3CbadD79C5410d2C4D4827D9C1503a | [Optimism Explorer](https://sepolia-explorer.optimism.io/address/0x8B1A76795e3CbadD79C5410d2C4D4827D9C1503a)      |
 
 EAS Schema
 
 | schema   | uid                                                                | link                                                                                                                   |
 | -------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
-| passport | 0x7026a3d524ee3dae5859aa00cfc0f17a3dac05af70eb758b5c0a40692f1e60f3 | [EasScan](https://optimism-sepolia.easscan.org/schema/view/0x7026a3d524ee3dae5859aa00cfc0f17a3dac05af70eb758b5c0a40692f1e60f3) |
-| score    | 0xe9071177c724d1bd712e4b05b4ce5426e60e141d8aaec86e4e03f25901d0cd91 | [EasScan](https://optimism-sepolia.easscan.org/schema/view/0xe9071177c724d1bd712e4b05b4ce5426e60e141d8aaec86e4e03f25901d0cd91) |
+| passport | 0x838ceca409bb6b6d1423f9f31b439ecba38b9c89b917408624614216e0be70ba | [EasScan](https://optimism-sepolia.easscan.org/schema/view/0x838ceca409bb6b6d1423f9f31b439ecba38b9c89b917408624614216e0be70ba) |
+| score    | 0x2e8b2534361637d20d91ad4de4d373d9418a2f8db1fcd5de66280d4249f3a161 | [EasScan](https://optimism-sepolia.easscan.org/schema/view/0x2e8b2534361637d20d91ad4de4d373d9418a2f8db1fcd5de66280d4249f3a161) |
 
 
 ##### Scroll
@@ -240,7 +242,7 @@ Gitcoin
 | issuer          | 0x804233b96cbd6d81efeb6517347177ef7bD488ED | [Scrollscan](https://scrollscan.com/address/0x804233b96cbd6d81efeb6517347177ef7bD488ED)      |
 | EAS             | 0xC47300428b6AD2c7D03BB76D05A176058b47E6B0 | [Scrollscan](https://scrollscan.com/address/0xC47300428b6AD2c7D03BB76D05A176058b47E6B0)      |
 | GitcoinResolver | 0x90E2C4472Df225e8D31f44725B75FFaA244d5D33 | [Scrollscan](https://scrollscan.com/address/0x90E2C4472Df225e8D31f44725B75FFaA244d5D33)      |
-| GitcoinVerifier | 0x16db23c4b99bbC9A6Bf55dF7a787C9AEFD261185 | [Scrollscan](https://scrollscan.com/address/0x16db23c4b99bbC9A6Bf55dF7a787C9AEFD261185)      |
+| GitcoinVerifier | 0x0EDEBAEaE920a6BFCFe7115566ceF5120ED2ff4C | [Scrollscan](https://scrollscan.com/address/0x0EDEBAEaE920a6BFCFe7115566ceF5120ED2ff4C)      |
 | GitcoinAttester | 0xCc90105D4A2aa067ee768120AdA19886021dF422 | [Scrollscan](https://scrollscan.com/address/0xCc90105D4A2aa067ee768120AdA19886021dF422)      |
 
 EAS Schema
@@ -284,7 +286,7 @@ Gitcoin
 | issuer          | 0x804233b96cbd6d81efeb6517347177ef7bD488ED | [Shapescan](https://shapescan.xyz/address/0x804233b96cbd6d81efeb6517347177ef7bD488ED)      |
 | EAS             | 0x4200000000000000000000000000000000000021 | [Shapescan](https://shapescan.xyz/address/0x4200000000000000000000000000000000000021)      |
 | GitcoinResolver | 0x90E2C4472Df225e8D31f44725B75FFaA244d5D33 | [Shapescan](https://shapescan.xyz/address/0x90E2C4472Df225e8D31f44725B75FFaA244d5D33)      |
-| GitcoinVerifier | 0x16db23c4b99bbC9A6Bf55dF7a787C9AEFD261185 | [Shapescan](https://shapescan.xyz/address/0x16db23c4b99bbC9A6Bf55dF7a787C9AEFD261185)      |
+| GitcoinVerifier | 0xB2cE7d0470c55be6212e197FF812B8dAE44EFD86 | [Shapescan](https://shapescan.xyz/address/0xB2cE7d0470c55be6212e197FF812B8dAE44EFD86)      |
 | GitcoinAttester | 0xCc90105D4A2aa067ee768120AdA19886021dF422 | [Shapescan](https://shapescan.xyz/address/0xCc90105D4A2aa067ee768120AdA19886021dF422)      |
 
 EAS Schema
@@ -326,7 +328,7 @@ The ZkSync chain ID is [324](https://chainlist.org/chain/324).
 | issuer                     | 0x804233b96cbd6d81efeb6517347177ef7bD488ED | [Explorer](https://explorer.zksync.io/address/0x804233b96cbd6d81efeb6517347177ef7bD488ED)      |
 | EAS                        | 0x21d8d4eE83b80bc0Cc0f2B7df3117Cf212d02901 | [Explorer](https://explorer.zksync.io/address/0x21d8d4eE83b80bc0Cc0f2B7df3117Cf212d02901) |
 | GitcoinResolver            | 0x8789129C5968EdcA5Cb392C4a9A9D7EFB590A838 | [Explorer](https://explorer.zksync.io/address/0x8789129C5968EdcA5Cb392C4a9A9D7EFB590A838)      |
-| GitcoinVerifier            | 0xfCC2d308FD4De098D08f056c424C969d728912bF | [Explorer](https://explorer.zksync.io/address/0xfCC2d308FD4De098D08f056c424C969d728912bF)      |
+| GitcoinVerifier            | 0xcC3eab33A77135A09770AcAF7D911E5FEf6622F2 | [Explorer](https://explorer.zksync.io/address/0xcC3eab33A77135A09770AcAF7D911E5FEf6622F2)      |
 | GitcoinAttester            | 0x2B5D97CBE50eA9bf809CbE18A2003E4Cb4D283cC | [Explorer](https://explorer.zksync.io/address/0x2B5D97CBE50eA9bf809CbE18A2003E4Cb4D283cC)      |
 
 
@@ -348,7 +350,7 @@ The ZkSync chain ID is [300](https://chainlist.org/chain/300).
 | issuer                     | 0x5f603Ed913738d9105bAf3BD981AA4750016B167 | [Explorer](https://explorer.zksync.io/address/0x5f603Ed913738d9105bAf3BD981AA4750016B167)    |
 | EAS                        | 0x21d8d4eE83b80bc0Cc0f2B7df3117Cf212d02901 | [Explorer](https://explorer.zksync.io/address/0x21d8d4eE83b80bc0Cc0f2B7df3117Cf212d02901)    |
 | GitcoinResolver            | 0x8789129C5968EdcA5Cb392C4a9A9D7EFB590A838 | [Explorer](https://explorer.zksync.io/address/0x8789129C5968EdcA5Cb392C4a9A9D7EFB590A838)    |
-| GitcoinVerifier            | 0xfCC2d308FD4De098D08f056c424C969d728912bF | [Explorer](https://explorer.zksync.io/address/0xfCC2d308FD4De098D08f056c424C969d728912bF)    |
+| GitcoinVerifier            | 0x5332585ef953904e78b38a740Fc026f8bE9B9850 | [Explorer](https://explorer.zksync.io/address/0x5332585ef953904e78b38a740Fc026f8bE9B9850)    |
 | GitcoinAttester            | 0x2B5D97CBE50eA9bf809CbE18A2003E4Cb4D283cC | [Explorer](https://explorer.zksync.io/address/0x2B5D97CBE50eA9bf809CbE18A2003E4Cb4D283cC)    |
 
 
