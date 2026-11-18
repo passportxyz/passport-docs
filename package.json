@@ -12,7 +12,8 @@
     "build": "next build",
     "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind && next-sitemap",
     "start": "next start",
-    "check-links": "echo 'Link checking configured in CI pipeline'"
+    "check-links": "echo 'Link checking configured in CI pipeline'",
+    "check-weights": "node scripts/check-weights.mjs"
   },
   "repository": {
     "type": "git",
