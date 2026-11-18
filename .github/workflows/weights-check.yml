@@ -1,0 +1,21 @@
+name: Weights Check
+
+# Fails when the Credential Map and Weights table disagrees with production.
+on:
+  pull_request:
+    paths:
+      - "content/building-with-passport/stamps/major-concepts/credential-map-and-weights.mdx"
+      - "scripts/check-weights.mjs"
+  schedule:
+    - cron: "0 3 * * 1" # Mondays 03:00 UTC
+  workflow_dispatch:
+
+jobs:
+  weights-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+      - run: node scripts/check-weights.mjs
